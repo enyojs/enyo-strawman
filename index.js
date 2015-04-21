@@ -11,7 +11,8 @@ var
 var
 	samples = {
 		Enyo: require('enyo-samples'),
-		Layout: require('layout-samples')
+		Layout: require('layout-samples'),
+		Onyx: require('onyx-samples')
 	};
 
 var 
