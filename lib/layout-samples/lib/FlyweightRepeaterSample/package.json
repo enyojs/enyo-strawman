@@ -1,0 +1,6 @@
+{
+  "main": "FlyweightRepeaterSample.js",
+  "style": [
+    "FlyweightRepeaterSample.css"
+  ]
+}

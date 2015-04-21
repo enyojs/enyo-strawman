@@ -1,3 +1,6 @@
 [submodule "lib/enyo"]
 	path = lib/enyo
 	url = git@github.com:enyojs/enyo2.git
+[submodule "lib/layout"]
+	path = lib/layout
+	url = git@github.com:enyojs/layout2.git

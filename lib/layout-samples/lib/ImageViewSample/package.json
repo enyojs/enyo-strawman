@@ -1,0 +1,6 @@
+{
+  "main": "ImageViewSample.js",
+  "style": [
+    "ImageViewSample.css"
+  ]
+}

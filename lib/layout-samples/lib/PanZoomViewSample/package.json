@@ -1,0 +1,6 @@
+{
+  "main": "PanZoomViewSample.js",
+  "style": [
+    "PanZoomViewSample.css"
+  ]
+}

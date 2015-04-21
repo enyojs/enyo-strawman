@@ -1,0 +1,6 @@
+{
+  "main": "ListContactsSample.js",
+  "style": [
+    "ListContactsSample.css"
+  ]
+}

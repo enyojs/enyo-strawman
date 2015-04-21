@@ -10,7 +10,8 @@ var
 
 var
 	samples = {
-		Enyo: require('enyo-samples')
+		Enyo: require('enyo-samples'),
+		Layout: require('layout-samples')
 	};
 
 var 

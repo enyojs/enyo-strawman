@@ -1,0 +1,14 @@
+{
+  "main": "index.js",
+  "libPath": "../../../",
+  "outdir": "../",
+  "outCssFile": "samples.css",
+  "outJsFile": "samples.js",
+  "title": "Layout Samples",
+  "style": [
+    "*.css"
+  ],
+  "assets": [
+    "assets/**/*.*"
+  ]
+}

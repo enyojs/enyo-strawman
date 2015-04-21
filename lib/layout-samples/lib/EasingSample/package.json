@@ -1,0 +1,6 @@
+{
+  "main": "EasingSample.js",
+  "style": [
+    "EasingSample.css"
+  ]
+}
