@@ -12,7 +12,8 @@ var
 	samples = {
 		Enyo: require('enyo-samples'),
 		Layout: require('layout-samples'),
-		Onyx: require('onyx-samples')
+		Onyx: require('onyx-samples'),
+		Moonstone: require('moonstone-samples')
 	};
 
 var 

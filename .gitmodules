@@ -10,3 +10,9 @@
 [submodule "lib/enyo-ilib"]
 	path = lib/enyo-ilib
 	url = git@github.com:enyojs/enyo-ilib.git
+[submodule "lib/moonstone"]
+	path = lib/moonstone
+	url = git@github.com:enyojs/moonstone2.git
+[submodule "lib/spotlight"]
+	path = lib/spotlight
+	url = git@github.com:enyojs/spotlight2.git
