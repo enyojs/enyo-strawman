@@ -1,0 +1,6 @@
+{
+  "main": "VideoSample.js",
+  "style": [
+    "VideoSample.css"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "main": "DragAvatarSample.js",
+  "style": [
+    "DragAvatarSample.css"
+  ]
+}

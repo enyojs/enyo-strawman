@@ -1,0 +1,6 @@
+{
+  "main": "PlatformSample.js",
+  "style": [
+    "PlatformSample.css"
+  ]
+}

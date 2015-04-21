@@ -1,0 +1,6 @@
+{
+  "main": "TextAreaSample.js",
+  "style": [
+    "TextAreaSample.css"
+  ]
+}

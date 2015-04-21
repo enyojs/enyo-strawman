@@ -1,0 +1,3 @@
+[submodule "lib/enyo"]
+	path = lib/enyo
+	url = git@github.com:enyojs/enyo2.git

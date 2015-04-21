@@ -1,0 +1,6 @@
+{
+  "main": "DrawerSample.js",
+  "style": [
+    "DrawerSample.css"
+  ]
+}

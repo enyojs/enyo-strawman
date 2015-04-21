@@ -1,0 +1,6 @@
+{
+  "main": "ButtonSample.js",
+  "style": [
+    "ButtonSample.css"
+  ]
+}

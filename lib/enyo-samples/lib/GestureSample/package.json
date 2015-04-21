@@ -1,0 +1,6 @@
+{
+  "main": "GestureSample.js",
+  "style": [
+    "GestureSample.css"
+  ]
+}
