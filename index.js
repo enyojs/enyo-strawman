@@ -13,7 +13,8 @@ var
 		Enyo: require('enyo-samples'),
 		Layout: require('layout-samples'),
 		Onyx: require('onyx-samples'),
-		Moonstone: require('moonstone-samples')
+		//Moonstone: require('moonstone-samples'),
+		Spotlight: require('spotlight-samples')
 	};
 
 var 
