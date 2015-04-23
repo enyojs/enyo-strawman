@@ -1,6 +1,6 @@
 {
-  "main": "CanvasBallSample.js",
+  "main": "CanvasBallsSample.js",
   "style": [
-    "CanvasBallSample.css"
+    "CanvasBallsSample.css"
   ]
 }
