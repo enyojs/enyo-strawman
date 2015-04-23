@@ -1,0 +1,6 @@
+{
+  "main": "NameParsing.js",
+  "style": [
+    "NameParsing.css"
+  ]
+}

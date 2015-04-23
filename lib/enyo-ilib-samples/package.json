@@ -1,0 +1,20 @@
+{
+  "main": "index.js",
+  "libPath": "../../../",
+  "outdir": "../",
+  "outCssFile": "samples.css",
+  "outJsFile": "samples.js",
+  "title": "iLib Samples",
+  "style": [
+    "*.css"
+  ],
+  "assets": [
+    "assets/**/*.*"
+  ],
+  "fonts": [
+	"fonts/**/*.*"  
+  ],
+  "images": [
+	"images/**/*.*"  
+  ]
+}
