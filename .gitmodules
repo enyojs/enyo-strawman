@@ -16,3 +16,6 @@
 [submodule "lib/spotlight"]
 	path = lib/spotlight
 	url = git@github.com:enyojs/spotlight2.git
+[submodule "lib/canvas"]
+	path = lib/canvas
+	url = https://github.com/enyojs/canvas.git

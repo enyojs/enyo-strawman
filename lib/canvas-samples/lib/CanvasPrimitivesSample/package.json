@@ -1,0 +1,6 @@
+{
+  "main": "CanvasPrimitivesSample.js",
+  "style": [
+    "CanvasPrimitivesSample.css"
+  ]
+}
