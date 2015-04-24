@@ -17,8 +17,8 @@ var
 	samples = {
 		AddressFormatting	: require('./lib/AddressFormatting'),
 		AddressParsing		: require('./lib/AddressParsing'),
-		AdvDateFormatting	: require('./lib/AdvDateFormatting'), //still has onyx timepicker
-		DateFormatting: require('./lib/DateFormatting'),
+		// AdvDateFormatting	: require('./lib/AdvDateFormatting'), //still has onyx timepicker
+		// DateFormatting: require('./lib/DateFormatting'),
 		LocaleInfo: require('./lib/LocaleInfo'),
 		NameFormatting: require('./lib/NameFormatting'),
 		NameParsing: require('./lib/NameParsing'),
