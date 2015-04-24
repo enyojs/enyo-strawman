@@ -8,7 +8,8 @@ var
 	Scroller = require('enyo/Scroller');
 
 var
-	ChooseLocale = require('../ChooseLocale');
+	ChooseLocale = require('../ChooseLocale'),
+    rb = require('../ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.NameParsing",

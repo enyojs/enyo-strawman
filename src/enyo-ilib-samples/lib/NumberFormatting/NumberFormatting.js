@@ -10,7 +10,8 @@ var
 
 var
 	ChooseLocale = require('../ChooseLocale'),
-	ChooseCurrency = require('../ChooseCurrency');
+	ChooseCurrency = require('../ChooseCurrency'),
+    rb = require('../ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.NumberFormatting",

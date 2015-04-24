@@ -1,8 +1,9 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+    Select = require('enyo/Select');
 
 var
-	Select = require('enyo/Select');
+    rb = require('./ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.ChooseCurrency",

@@ -1,21 +1,20 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+    Button = require('enyo/Button'),
+    Group = require('enyo/Group'),
+    Input = require('enyo/Input'),
+    Scroller = require('enyo/Scroller'),
+    Select = require('enyo/Select');
+
+var
+    TimePicker = require('onyx/TimePicker');
 
 var
     ilib = require('enyo-ilib');
 
-var 
-	Button = require('enyo/Button'),
-	Group = require('enyo/Group'),
-	Input = require('enyo/Input'),
-	Scroller = require('enyo/Scroller'),
-	Select = require('enyo/Select'),
-	TimePicker = require('onyx/TimePicker');
-
 var
-	ChooseTimeZone = require('../ChooseTimeZone');
-
-rb = new ilib.ResBundle();
+	ChooseTimeZone = require('../ChooseTimeZone'),
+    rb = require('../ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.AdvDateFormatting",

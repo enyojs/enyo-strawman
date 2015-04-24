@@ -1,8 +1,5 @@
 var
-	kind = require('enyo/kind');
-
-
-var
+	kind = require('enyo/kind'),
 	Button = require('enyo/Button'),
 	Checkbox = require('enyo/Checkbox'),
 	Group = require('enyo/Group'),
@@ -12,7 +9,8 @@ var
 	ilib = require('enyo-ilib');
 
 var
-	ChooseLocale = require('../ChooseLocale');
+	ChooseLocale = require('../ChooseLocale'),
+    rb = require('../ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.NameFormatting",

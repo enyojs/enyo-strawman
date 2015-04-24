@@ -1,12 +1,11 @@
 var
-	kind = require('enyo/kind');
-
-var
+	kind = require('enyo/kind'),
 	Group = require('enyo/Group'),
 	Scroller = require('enyo/Scroller');
 
 var
-	ChooseLocale = require('../ChooseLocale');
+	ChooseLocale = require('../ChooseLocale'),
+    rb = require('../ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.LocaleInfo",

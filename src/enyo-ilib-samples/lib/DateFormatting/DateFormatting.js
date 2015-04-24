@@ -1,18 +1,17 @@
 var
-	kind = require('enyo/kind');
-
-
-var
-	Button = require('enyo/Button'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind'),
+    Button = require('enyo/Button'),
+    Group = require('enyo/Group'),
+    Scroller = require('enyo/Scroller');
 
 var
-	Button = require('enyo/Button'),
 	DatePicker = require('onyx/DatePicker'),
+    TimePicker = require('onyx/TimePicker');
+
+var
+    ChooseTimeZone = require('../ChooseTimeZone'),
 	ChooseLocale = require('../ChooseLocale'),
-	ChooseTimeZone = require('../ChooseTimeZone'),
-	Group = require('enyo/Group'),
-	TimePicker = require('onyx/TimePicker');
+    rb = require('../ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.DateFormatting",

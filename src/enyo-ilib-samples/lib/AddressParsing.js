@@ -9,7 +9,7 @@ var
 
 var
     ChooseLocale = require('./ChooseLocale'),
-    rb = new ilib.ResBundle();
+    rb = require('./ResBundle');
 
 module.exports = kind({
     name: 'ilib.sample.AddressParsing',

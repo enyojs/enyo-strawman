@@ -1,14 +1,12 @@
 var
-	kind = require('enyo/kind');
-
-var 
-	Select = require('enyo/Select');
+	kind = require('enyo/kind'),
+    Select = require('enyo/Select');
 
 var 
 	ilib = require('enyo-ilib');
 
 var
-	rb = new ilib.ResBundle();
+    rb = require('./ResBundle');
 
 module.exports = kind({
     name: "ilib.sample.ChooseTimeZone",
