@@ -1,0 +1,17 @@
+{
+	"main": "index.js",
+	"libPath": "../../lib",
+	"title": "Moonstone Samples",
+	"style": [
+		"*.css"
+	],
+	"assets": [
+		"assets/**/*.*"
+	],
+	"fonts": [
+		"fonts/**/*.*"
+	],
+	"images": [
+		"images/**/*.*"
+	]
+}
