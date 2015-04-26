@@ -167,6 +167,7 @@ module.exports = kind({
 	create: kind.inherit(function (sup) {
 		return function () {
 			this.locales = new Collection(locales);
+			this.samples = this.samples || this.ctor.samples;
 			sup.apply(this, arguments);
 
 			this.initializeThemes();

@@ -71,6 +71,6 @@ var
 		VideoPlayerSample					: require('./lib/VideoPlayerSample')
 	};
 
-ready(function () {
-	new Sampler({samples: samples}).renderInto(document.body);
-});
+Sampler.samples = samples;
+
+module.exports = Sampler;
