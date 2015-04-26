@@ -10,5 +10,6 @@
     "enyo-webos": "git@github.com:enyojs/enyo-webos.git#2.6.0-dev",
     "onyx": "git@github.com:enyojs/onyx.git#2.6.0-dev",
     "canvas": "git@github.com:enyojs/canvas.git#2.6.0-dev"
-  }
+  },
+  "private": true
 }
