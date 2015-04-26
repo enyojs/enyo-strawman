@@ -1,13 +1,12 @@
 {
-  "name": "enyojs",
+  "name": "enyo-strawman",
   "filename": "index.js",
   "version": "0.0.1",
   "description": "Collection of Enyo lib samples for Quality Assurance",
   "homepage": "http://enyojs.com/",
   "bugs": "http://jira.enyojs.com/",
   "main": "index.js",
-  "keywords": [
-  ],
+  "keywords": [],
   "maintainers": [
     {
       "name": "Enyo JS Framework Team",
@@ -20,19 +19,16 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   ],
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "http://github.com/enyojs/enyo-strawman"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "style": [
     "*.css"
   ],
   "assets": [
     "assets/*"
-  ],
-  "libPath": "../"
+  ]
 }
