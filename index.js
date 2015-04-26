@@ -6,7 +6,8 @@ var
 	Anchor = require('enyo/Anchor'),
 	Collection = require('enyo/Collection'),
 	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater');
+	DataRepeater = require('enyo/DataRepeater'),
+	History = require('moonstone/History');
 
 var
 	samples = {
@@ -38,6 +39,8 @@ var
 			})));
 		}
 	});
+
+History.set('enableBackHistoryAPI', false);
 
 ready(function(){
 	var names = window.document.location.search.substring(1).split('&');
