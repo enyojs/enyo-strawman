@@ -48,7 +48,7 @@ module.exports = kind({
 						kind: VideoPlayer,
 						inline:true,
 						classes: 'moon-8h',
-						poster: '$lib/moonstone/samples/assets/video-poster.png',
+						poster: 'assets/video-poster.png',
 						infoComponents: [{
 							kind: VideoInfoBackground,
 							orient: 'left',
