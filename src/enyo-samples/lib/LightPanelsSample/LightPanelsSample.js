@@ -1,10 +1,10 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control'),
-	LightPanels = require('enyo/Lightpanels');
+	LightPanels = require('enyo/LightPanels');
 
 module.exports = kind({
 	name: 'enyo.sample.LightPanelsSample',
