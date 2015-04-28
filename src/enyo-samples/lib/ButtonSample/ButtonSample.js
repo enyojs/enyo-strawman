@@ -1,8 +1,8 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Button = require('enyo/button'),
+var
+	Button = require('enyo/Button'),
 	Group = require('enyo/Group'),
 	Image = require('enyo/Image');
 
