@@ -5,7 +5,7 @@
   "title": "Onyx Samples",
   "outCssFile": "samples.css",
   "outJsFile": "samples.js",
-  "style": [
+  "styles": [
     "*.css",
     "*.less"
   ],

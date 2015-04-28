@@ -1,6 +1,6 @@
 {
   "main": "ListHorizontalFlickrSample.js",
-  "style": [
+  "styles": [
     "ListHorizontalFlickrSample.css"
   ]
 }

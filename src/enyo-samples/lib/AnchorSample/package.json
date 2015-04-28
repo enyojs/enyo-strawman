@@ -1,6 +1,6 @@
 {
   "main": "AnchorSample.js",
-  "style": [
+  "styles": [
     "AnchorSample.css"
   ]
 }

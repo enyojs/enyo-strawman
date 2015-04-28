@@ -2,7 +2,7 @@
 	"main": "index.js",
 	"libPath": "../../lib",
 	"title": "Moonstone Samples",
-	"style": [
+	"styles": [
 		"src/*.css"
 	],
 	"assets": [

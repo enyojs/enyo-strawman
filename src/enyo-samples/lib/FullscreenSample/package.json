@@ -1,6 +1,6 @@
 {
   "main": "FullscreenSample.js",
-  "style": [
+  "styles": [
     "FullscreenSample.css"
   ]
 }

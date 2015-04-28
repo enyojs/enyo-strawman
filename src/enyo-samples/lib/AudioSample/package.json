@@ -1,6 +1,6 @@
 {
   "main": "AudioSample.js",
-  "style": [
+  "styles": [
     "AudioSample.css"
   ]
 }

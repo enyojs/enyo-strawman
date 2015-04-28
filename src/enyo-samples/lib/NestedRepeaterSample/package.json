@@ -1,6 +1,6 @@
 {
   "main": "NestedRepeaterSample.js",
-  "style": [
+  "styles": [
     "NestedRepeaterSample.css"
   ]
 }

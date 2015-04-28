@@ -1,6 +1,6 @@
 {
   "main": "DateFormatting.js",
-  "style": [
+  "styles": [
     "DateFormatting.css"
   ]
 }

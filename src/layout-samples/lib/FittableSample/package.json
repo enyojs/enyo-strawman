@@ -1,6 +1,6 @@
 {
   "main": "FittableSample.js",
-  "style": [
+  "styles": [
     "FittableSample.css"
   ]
 }

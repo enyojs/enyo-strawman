@@ -1,6 +1,6 @@
 {
   "main": "SelectSample.js",
-  "style": [
+  "styles": [
     "SelectSample.css"
   ]
 }

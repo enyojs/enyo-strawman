@@ -1,6 +1,6 @@
 {
   "main": "ImageCarouselSample.js",
-  "style": [
+  "styles": [
     "ImageCarouselSample.css"
   ]
 }

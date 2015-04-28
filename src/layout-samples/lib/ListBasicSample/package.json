@@ -1,6 +1,6 @@
 {
   "main": "ListBasicSample.js",
-  "style": [
+  "styles": [
     "ListBasicSample.css"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "main": "TableSample.js",
-  "style": [
+  "styles": [
     "TableSample.css"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "main": "WebServiceSample.js",
-  "style": [
+  "styles": [
     "WebServiceSample.css"
   ]
 }

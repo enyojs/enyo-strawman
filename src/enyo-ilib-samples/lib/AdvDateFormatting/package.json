@@ -1,6 +1,6 @@
 {
   "main": "AdvDateFormatting.js",
-  "style": [
+  "styles": [
     "AdvDateFormatting.css"
   ]
 }

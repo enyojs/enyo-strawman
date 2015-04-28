@@ -1,6 +1,6 @@
 {
   "main": "InputSample.js",
-  "style": [
+  "styles": [
     "InputSample.css"
   ]
 }

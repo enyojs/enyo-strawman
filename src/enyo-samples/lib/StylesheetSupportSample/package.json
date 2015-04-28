@@ -1,6 +1,6 @@
 {
   "main": "StylesheetSupportSample.js",
-  "style": [
+  "styles": [
     "StylesheetSupportSample.css"
   ]
 }

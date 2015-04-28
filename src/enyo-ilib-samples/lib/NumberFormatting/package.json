@@ -1,6 +1,6 @@
 {
   "main": "NumberFormatting.js",
-  "style": [
+  "styles": [
     "NumberFormatting.css"
   ]
 }

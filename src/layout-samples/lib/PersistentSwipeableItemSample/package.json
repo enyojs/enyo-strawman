@@ -1,6 +1,6 @@
 {
   "main": "PersistentSwipeableItemSample.js",
-  "style": [
+  "styles": [
     "PersistentSwipeableItemSample.css"
   ]
 }

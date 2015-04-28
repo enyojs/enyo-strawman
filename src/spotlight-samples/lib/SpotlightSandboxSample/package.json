@@ -1,6 +1,6 @@
 {
   "main": "SpotlightSandboxSample.js",
-  "style": [
+  "styles": [
     "SpotlightSandboxSample.css"
   ]
 }

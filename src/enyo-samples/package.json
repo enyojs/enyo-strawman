@@ -5,7 +5,7 @@
   "outCssFile": "samples.css",
   "outJsFile": "samples.js",
   "title": "Enyo Samples",
-  "style": [
+  "styles": [
     "*.css"
   ],
   "assets": [

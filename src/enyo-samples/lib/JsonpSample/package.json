@@ -1,6 +1,6 @@
 {
   "main": "JsonpSample.js",
-  "style": [
+  "styles": [
     "JsonpSample.css"
   ]
 }

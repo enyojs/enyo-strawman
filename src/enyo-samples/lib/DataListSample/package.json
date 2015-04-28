@@ -1,6 +1,6 @@
 {
   "main": "DataListSample.js",
-  "style": [
+  "styles": [
     "DataListSample.css"
   ]
 }

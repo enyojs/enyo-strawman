@@ -1,6 +1,6 @@
 {
   "main": "TreeSample.js",
-  "style": [
+  "styles": [
     "TreeSample.css"
   ]
 }

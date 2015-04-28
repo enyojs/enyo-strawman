@@ -5,7 +5,7 @@
   "outCssFile": "samples.css",
   "outJsFile": "samples.js",
   "title": "Spotlight Samples",
-  "style": [
+  "styles": [
     "*.less"
   ],
   "assets": [

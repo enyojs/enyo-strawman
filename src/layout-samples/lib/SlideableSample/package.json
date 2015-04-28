@@ -1,6 +1,6 @@
 {
   "main": "SlideableSample.js",
-  "style": [
+  "styles": [
     "SlideableSample.css"
   ]
 }

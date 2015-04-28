@@ -1,6 +1,6 @@
 {
   "main": "DataGridListSample.js",
-  "style": [
+  "styles": [
     "DataGridListSample.css"
   ]
 }

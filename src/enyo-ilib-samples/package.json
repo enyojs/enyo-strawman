@@ -5,7 +5,7 @@
   "outCssFile": "samples.css",
   "outJsFile": "samples.js",
   "title": "iLib Samples",
-  "style": [
+  "styles": [
     "*.css"
   ],
   "assets": [

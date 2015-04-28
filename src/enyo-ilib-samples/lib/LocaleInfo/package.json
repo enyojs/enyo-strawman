@@ -1,6 +1,6 @@
 {
   "main": "LocaleInfo.js",
-  "style": [
+  "styles": [
     "LocaleInfo.css"
   ]
 }

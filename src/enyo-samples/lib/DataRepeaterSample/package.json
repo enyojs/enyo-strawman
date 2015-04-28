@@ -1,6 +1,6 @@
 {
   "main": "DataRepeaterSample.js",
-  "style": [
+  "styles": [
     "DataRepeaterSample.css"
   ]
 }

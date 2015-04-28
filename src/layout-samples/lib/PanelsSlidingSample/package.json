@@ -1,6 +1,6 @@
 {
   "main": "PanelsSlidingSample.js",
-  "style": [
+  "styles": [
     "PanelsSlidingSample.css"
   ]
 }
