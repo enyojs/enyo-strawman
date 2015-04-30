@@ -44,6 +44,7 @@ var
 		LabeledTextItemSample				: require('./lib/LabeledTextItemSample'),
 		ListActionsSample					: require('./lib/ListActionsSample'),
 		MarqueeSample						: require('./lib/MarqueeSample'),
+		NewDataListSample					: require('./lib/NewDataListSample'),
 		ObjectActionHorizontalTypeSample	: require('./lib/ObjectActionHorizontalTypeSample'),
 		ObjectActionVerticalTypeSample		: require('./lib/ObjectActionVerticalTypeSample'),
 		PanelsVideoPlayerSample				: require('./lib/PanelsVideoPlayerSample'),
