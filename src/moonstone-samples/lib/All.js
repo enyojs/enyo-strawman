@@ -15,6 +15,7 @@ var
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	DataList = require('moonstone/DataList'),
 	Divider = require('moonstone/Divider'),
+	MoonHistory = require('moonstone/History'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
@@ -171,6 +172,7 @@ module.exports = kind({
 			sup.apply(this, arguments);
 
 			this.initializeThemes();
+			MoonHistory.set('enableBackHistoryAPI', true);
 		};
 	}),
 	createList: function () {
