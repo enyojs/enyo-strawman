@@ -12,6 +12,7 @@ var
 	samples = {
 		Container			: require('./lib/ContainerSample'),
 		Disappear			: require('./lib/DisappearSample'),
+		Hold				: require('./lib/HoldSample'),
 		Sandbox				: require('./lib/SpotlightSandboxSample'),
 		TestPage			: require('./lib/TestPage')
 	};
