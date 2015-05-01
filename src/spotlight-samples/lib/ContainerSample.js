@@ -44,4 +44,4 @@ module.exports = kind({
 	}
 });
 
-Spotlight.verbose();
+// Spotlight.verbose();

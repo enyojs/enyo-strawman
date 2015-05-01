@@ -24,7 +24,7 @@ var samplekind = kind({
 
 var subsamplekind = kind({
 	name: "enyo.sample.SubSampleKind",
-	kind: "enyo.sample.SampleKind",
+	kind: samplekind,
 	componentOverrides: {
 		purple: {kind: Button, content:"Purple shmurple!", style:"border-radius:30px;"},
 		green: {kind: Button, content:"Now I'm a Pink button!", style:"background-color:pink;"}
