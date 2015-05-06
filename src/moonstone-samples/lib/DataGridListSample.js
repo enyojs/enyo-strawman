@@ -28,9 +28,10 @@ var GridSampleItem = kind({
 	selectionOverlayVerticalOffset: 35,
 	subCaption: 'Sub Caption',
 	bindings: [
-		{from: '.model.text', to: '.caption'},
-		{from: '.model.subText', to: '.subCaption'},
-		{from: '.model.url', to: '.source'}
+		{from: 'model.text', to: 'caption'},
+		{from: 'model.subText', to: 'subCaption'},
+		{from: 'model.url', to: 'source'},
+		{from: 'model.selected', to: 'selected', oneWay: false}
 	]
 });
 
