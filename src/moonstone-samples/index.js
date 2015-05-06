@@ -13,6 +13,7 @@ var
 		CheckboxItemSample					: require('./lib/CheckboxItemSample'),
 		ClockSample							: require('./lib/ClockSample'),
 		ContextualPopupSample				: require('./lib/ContextualPopupSample'),
+		DataGridListOverlaySample			: require('./lib/DataGridListOverlaySample'),
 		DataGridListSample					: require('./lib/DataGridListSample'),
 		DataListSample						: require('./lib/DataListSample'),
 		DatePickerSample					: require('./lib/DatePickerSample'),
