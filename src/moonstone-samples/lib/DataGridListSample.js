@@ -1,5 +1,6 @@
 var
 	kind = require('enyo/kind'),
+	utils = require('enyo/utils'),
 	Collection = require('enyo/Collection');
 
 var
@@ -35,29 +36,71 @@ var GridSampleItem = kind({
 	]
 });
 
+var HorizontalGridListImageItem = kind({
+	name: 'moon.HorizontalGridListImageItem',
+	kind: GridListImageItem,
+	mixins: [SelectionOverlaySupport],
+	classes: 'horizontal-gridList-image-item',
+
+	selectionOverlayVerticalOffset: 50,
+	selectionOverlayHorizontalOffset: 95,
+	centered: false
+});
+
+var HorizontalGridListItem = kind({
+	name: 'moon.HorizontalGridListItem',
+	kind: Item,
+	mixins: [SelectionOverlaySupport],
+	classes: 'moon-gridlist-imageitem horizontal-gridList-item',
+
+	selectionOverlayVerticalOffset: 50,
+	selectionOverlayHorizontalOffset: 5,
+	centered: false,
+
+	components: [
+		{name: 'caption', classes: 'caption'},
+		{name: 'subCaption', classes: 'sub-caption'}
+	],
+
+	published: {
+		caption: '',
+		subCaption: '',
+		selected: false
+	},
+
+	bindings: [
+		{from: 'caption', to: '$.caption.content'},
+		{from: 'caption', to: '$.caption.showing', kind: 'enyo.EmptyBinding'},
+		{from: 'subCaption', to: '$.subCaption.content'},
+		{from: 'subCaption', to: '$.subCaption.showing', kind: 'enyo.EmptyBinding'}
+	]
+});
+
 module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
 	pattern: 'activity',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{kind: Panel, classes: 'moon-6h', title: 'Menu', components: [
-			{kind: Item, content: 'Scroll'},
-			{kind: Item, content: 'the'},
-			{kind: Item, content: 'Data Grid List'},
-			{kind: Item, content: 'to'},
-			{kind: Item, content: 'the'},
-			{kind: Item, content: 'Right!'}
-		]},
-		{kind: Panel, joinToPrev: true, title: 'Data Grid List', headerComponents: [
-			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle'},
+		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
+			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Selection Type'},
 				{kind: ContextualPopup, classes: 'moon-4h', components: [
-					{kind: RadioItemGroup, name: 'selectionTypeGroup', components: [
+					{kind: RadioItemGroup, name: 'selectionTypeGroup', onActiveChanged: 'selectionTypeChanged', components: [
 						{content: 'Single', value: 'single', selected: true},
 						{content: 'Multiple', value: 'multi'},
 						{content: 'Group', value: 'group'}
+					]}
+				]}
+			]},
+			{kind: ContextualPopupDecorator, components: [
+				{kind: ContextualPopupButton, content:'Item Type'},
+				{kind: ContextualPopup, classes:'moon-6h', components: [
+					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged', components: [
+						{content: 'ImageItem', value: 'GridListImageItem', selected: true},
+						{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
+						{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
 					]}
 				]}
 			]},
@@ -80,24 +123,17 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '.collection', to: '.$.dataList.collection'},
-		{from: '.collection', to: '.$.gridList.collection'},
-		{from: '.$.selectionTypeGroup.active', to: '.$.gridList.selectionType',
-			transform: function (selected) {
-				return selected && selected.value;
-			}
-		},
-		{from: '.$.selectionToggle.value', to: '.$.gridList.selection', oneWay: false}
+		{from: 'collection', to: '$.gridList.collection'}
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
 		// we set the collection that will fire the binding and add it to the list
-		this.set('collection', new Collection(this.generateRecords()));
+		this.generateDataGridList('GridListImageItem');
 	},
-	generateRecords: function () {
+	generateRecords: function (amount) {
 		var records = [],
 			idx     = this.modelIndex || 0;
-		for (; records.length < 500; ++idx) {
+		for (; records.length < amount; ++idx) {
 			var title = (idx % 8 === 0) ? ' with long title' : '';
 			var subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
 			records.push({
@@ -111,12 +147,72 @@ module.exports = kind({
 		this.modelIndex = idx;
 		return records;
 	},
+	generateDataGridList: function(itemType) {
+		if (this.$.gridList) {
+			this.$.gridList.destroy();
+		}
+
+		var moreProps = {};
+
+		switch (itemType) {
+		case 'HorizontalGridListImageItem':
+			moreProps = {minWidth: 600, minHeight: 100,
+				components: [{
+					kind: HorizontalGridListImageItem,
+					bindings: [
+						{from: 'model.text', to: 'caption'},
+						{from: 'model.subText', to: 'subCaption'},
+						{from: 'model.url', to: 'source'},
+						{from: 'model.selected', to: 'selected', oneWay: false}
+					]
+				}]
+			};
+			break;
+		case 'HorizontalGridListItem':
+			moreProps = {minWidth: 600, minHeight: 100,
+				components: [{
+					kind: HorizontalGridListItem,
+					bindings: [
+						{from: 'model.text', to: 'caption'},
+						{from: 'model.subText', to: 'subCaption'},
+						{from: 'model.selected', to: 'selected', oneWay: false}
+					]
+				}]
+			};
+			break;
+		default:
+			break;
+		}
+
+		var props = utils.mixin({}, [this.dataListDefaults, moreProps]);
+		var c = this.$.listPanel.createComponent(props, {owner: this});
+		c.render();
+		this.set('collection', new Collection(this.generateRecords(40)));
+
+		this.$.gridList.set('collection', this.collection);
+		this.$.gridList.set('selection', this.$.selectionToggle.value);
+		if (this.$.selectionTypeGroup.active) {
+			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
+		}
+	},
+	selectionChanged: function(inSender, inEvent) {
+		this.$.gridList.set('selection', inSender.value);
+	},
+	itemTypeChanged: function(inSender, inEvent) {
+		this.generateDataGridList(inSender.active.value);
+	},
+	selectionTypeChanged: function(inSender, inEvent) {
+		this.$.gridList.set('selectionType', inSender.active.value);
+	},
 	refreshItems: function () {
 		// we fetch our collection reference
 		var collection = this.get('collection');
 		// we now remove all of the current records from the collection
 		collection.remove(collection.models);
 		// and we insert all new records that will update the list
-		collection.add(this.generateRecords());
-	}
+		collection.add(this.generateRecords(100));
+	},
+	dataListDefaults: {name: 'gridList', kind: DataGridList, selection: false, fit: true, spacing:20, minHeight: 270, minWidth: 180, scrollerOptions: { kind: Scroller, vertical:'scroll', horizontal: 'hidden', spotlightPagingControls: true }, components: [
+		{kind: GridSampleItem}
+	]}
 });
