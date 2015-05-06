@@ -3,7 +3,6 @@ var
 	Collection = require('enyo/Collection');
 
 var
-	
 	BadgeOverlaySupport = require('moonstone/BadgeOverlaySupport'),
 	Button = require('moonstone/Button'),
 	CheckboxItem = require('moonstone/CheckboxItem'),
