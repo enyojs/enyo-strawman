@@ -184,8 +184,8 @@ module.exports = kind({
 			break;
 		}
 
-		createComponent = this.$.listPanel.createComponent(props, {owner: this});
-		createComponent.render();
+		createdComponent = this.$.listPanel.createComponent(props, {owner: this});
+		createdComponent.render();
 		this.set('collection', new Collection(this.generateRecords(40)));
 
 		this.$.gridList.set('collection', this.collection);
