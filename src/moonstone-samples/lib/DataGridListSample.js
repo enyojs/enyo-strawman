@@ -1,7 +1,8 @@
 var
 	kind = require('enyo/kind'),
 	utils = require('enyo/utils'),
-	Collection = require('enyo/Collection');
+	Collection = require('enyo/Collection'),
+	EmptyBinding = require('enyo/EmptyBinding');
 
 var
 	Button = require('moonstone/Button'),
@@ -70,9 +71,9 @@ var HorizontalGridListItem = kind({
 
 	bindings: [
 		{from: 'caption', to: '$.caption.content'},
-		{from: 'caption', to: '$.caption.showing', kind: 'enyo.EmptyBinding'},
+		{from: 'caption', to: '$.caption.showing', kind: EmptyBinding},
 		{from: 'subCaption', to: '$.subCaption.content'},
-		{from: 'subCaption', to: '$.subCaption.showing', kind: 'enyo.EmptyBinding'}
+		{from: 'subCaption', to: '$.subCaption.showing', kind: EmptyBinding}
 	]
 });
 
@@ -147,7 +148,7 @@ module.exports = kind({
 		this.modelIndex = idx;
 		return records;
 	},
-	generateDataGridList: function(itemType) {
+	generateDataGridList: function (itemType) {
 		if (this.$.gridList) {
 			this.$.gridList.destroy();
 		}
@@ -180,8 +181,6 @@ module.exports = kind({
 				}]
 			};
 			break;
-		default:
-			break;
 		}
 
 		var props = utils.mixin({}, [this.dataListDefaults, moreProps]);
@@ -195,13 +194,13 @@ module.exports = kind({
 			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
 		}
 	},
-	selectionChanged: function(inSender, inEvent) {
+	selectionChanged: function (inSender, inEvent) {
 		this.$.gridList.set('selection', inSender.value);
 	},
-	itemTypeChanged: function(inSender, inEvent) {
+	itemTypeChanged: function (inSender, inEvent) {
 		this.generateDataGridList(inSender.active.value);
 	},
-	selectionTypeChanged: function(inSender, inEvent) {
+	selectionTypeChanged: function (inSender, inEvent) {
 		this.$.gridList.set('selectionType', inSender.active.value);
 	},
 	refreshItems: function () {
