@@ -153,39 +153,39 @@ module.exports = kind({
 			this.$.gridList.destroy();
 		}
 
-		var moreProps = {};
+		var props = utils.clone(this.dataListDefaults),
+			createdComponent;
 
 		switch (itemType) {
 		case 'HorizontalGridListImageItem':
-			moreProps = {minWidth: 600, minHeight: 100,
-				components: [{
-					kind: HorizontalGridListImageItem,
-					bindings: [
-						{from: 'model.text', to: 'caption'},
-						{from: 'model.subText', to: 'subCaption'},
-						{from: 'model.url', to: 'source'},
-						{from: 'model.selected', to: 'selected', oneWay: false}
-					]
-				}]
+			props.minWidth = 600;
+			props.minHeight = 100;
+			props.components[0] = {
+				kind: HorizontalGridListImageItem,
+				bindings: [
+					{from: 'model.text', to: 'caption'},
+					{from: 'model.subText', to: 'subCaption'},
+					{from: 'model.url', to: 'source'},
+					{from: 'model.selected', to: 'selected', oneWay: false}
+				]
 			};
 			break;
 		case 'HorizontalGridListItem':
-			moreProps = {minWidth: 600, minHeight: 100,
-				components: [{
-					kind: HorizontalGridListItem,
-					bindings: [
-						{from: 'model.text', to: 'caption'},
-						{from: 'model.subText', to: 'subCaption'},
-						{from: 'model.selected', to: 'selected', oneWay: false}
-					]
-				}]
+			props.minWidth = 600;
+			props.minHeight = 100;
+			props.components[0] = {
+				kind: HorizontalGridListItem,
+				bindings: [
+					{from: 'model.text', to: 'caption'},
+					{from: 'model.subText', to: 'subCaption'},
+					{from: 'model.selected', to: 'selected', oneWay: false}
+				]
 			};
 			break;
 		}
 
-		var props = utils.mixin({}, [this.dataListDefaults, moreProps]);
-		var c = this.$.listPanel.createComponent(props, {owner: this});
-		c.render();
+		createComponent = this.$.listPanel.createComponent(props, {owner: this});
+		createComponent.render();
 		this.set('collection', new Collection(this.generateRecords(40)));
 
 		this.$.gridList.set('collection', this.collection);
@@ -194,14 +194,14 @@ module.exports = kind({
 			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
 		}
 	},
-	selectionChanged: function (inSender, inEvent) {
-		this.$.gridList.set('selection', inSender.value);
+	selectionChanged: function (sender, event) {
+		this.$.gridList.set('selection', sender.value);
 	},
-	itemTypeChanged: function (inSender, inEvent) {
-		this.generateDataGridList(inSender.active.value);
+	itemTypeChanged: function (sender, event) {
+		this.generateDataGridList(sender.active.value);
 	},
-	selectionTypeChanged: function (inSender, inEvent) {
-		this.$.gridList.set('selectionType', inSender.active.value);
+	selectionTypeChanged: function (sender, event) {
+		this.$.gridList.set('selectionType', sender.active.value);
 	},
 	refreshItems: function () {
 		// we fetch our collection reference
