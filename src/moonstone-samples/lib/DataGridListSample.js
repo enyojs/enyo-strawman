@@ -129,7 +129,10 @@ module.exports = kind({
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
 		// we set the collection that will fire the binding and add it to the list
-		this.generateDataGridList('GridListImageItem');
+		this.set('itemKind', 'GridListImageItem');
+	},
+	itemKindChanged: function () {
+		this.generateDataGridList(this.itemKind);
 	},
 	generateRecords: function (amount) {
 		var records = [],
@@ -198,7 +201,7 @@ module.exports = kind({
 		this.$.gridList.set('selection', sender.value);
 	},
 	itemTypeChanged: function (sender, event) {
-		this.generateDataGridList(sender.active.value);
+		this.set('itemKind', sender.active.value);
 	},
 	selectionTypeChanged: function (sender, event) {
 		this.$.gridList.set('selectionType', sender.active.value);
