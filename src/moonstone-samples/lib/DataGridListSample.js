@@ -41,11 +41,7 @@ var HorizontalGridListImageItem = kind({
 	name: 'moon.HorizontalGridListImageItem',
 	kind: GridListImageItem,
 	mixins: [SelectionOverlaySupport],
-	classes: 'horizontal-gridList-image-item',
-
-	selectionOverlayVerticalOffset: 50,
-	selectionOverlayHorizontalOffset: 95,
-	centered: false
+	classes: 'horizontal-gridList-image-item'
 });
 
 var HorizontalGridListItem = kind({
@@ -53,10 +49,6 @@ var HorizontalGridListItem = kind({
 	kind: Item,
 	mixins: [SelectionOverlaySupport],
 	classes: 'moon-gridlist-imageitem horizontal-gridList-item',
-
-	selectionOverlayVerticalOffset: 50,
-	selectionOverlayHorizontalOffset: 5,
-	centered: false,
 
 	components: [
 		{name: 'caption', classes: 'caption'},
@@ -156,7 +148,14 @@ module.exports = kind({
 			this.$.gridList.destroy();
 		}
 
-		var props = utils.clone(this.dataListDefaults),
+		var props = {
+				name: 'gridList', kind: DataGridList, selection: false, fit: true, spacing: 20,
+				minHeight: 270, minWidth: 180, scrollerOptions: {
+					kind: Scroller, vertical:'scroll', horizontal: 'hidden', spotlightPagingControls: true
+				}, components: [
+					{kind: GridSampleItem}
+				]
+			},
 			createdComponent;
 
 		switch (itemType) {
@@ -213,8 +212,5 @@ module.exports = kind({
 		collection.remove(collection.models);
 		// and we insert all new records that will update the list
 		collection.add(this.generateRecords(100));
-	},
-	dataListDefaults: {name: 'gridList', kind: DataGridList, selection: false, fit: true, spacing:20, minHeight: 270, minWidth: 180, scrollerOptions: { kind: Scroller, vertical:'scroll', horizontal: 'hidden', spotlightPagingControls: true }, components: [
-		{kind: GridSampleItem}
-	]}
+	}
 });
