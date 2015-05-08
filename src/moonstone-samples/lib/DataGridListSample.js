@@ -41,7 +41,9 @@ var HorizontalGridListImageItem = kind({
 	name: 'moon.HorizontalGridListImageItem',
 	kind: GridListImageItem,
 	mixins: [SelectionOverlaySupport],
-	classes: 'horizontal-gridList-image-item'
+	classes: 'horizontal-gridList-image-item',
+	selectionOverlayVerticalOffset: 50,
+	selectionOverlayHorizontalOffset: 95
 });
 
 var HorizontalGridListItem = kind({
@@ -49,6 +51,8 @@ var HorizontalGridListItem = kind({
 	kind: Item,
 	mixins: [SelectionOverlaySupport],
 	classes: 'moon-gridlist-imageitem horizontal-gridList-item',
+	selectionOverlayVerticalOffset: 50,
+	selectionOverlayHorizontalOffset: 5,
 
 	components: [
 		{name: 'caption', classes: 'caption'},
