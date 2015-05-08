@@ -124,7 +124,7 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: 'collection', to: '$.gridList.collection'}
+		{from: 'collection', to: '$.dataList.collection'}
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
