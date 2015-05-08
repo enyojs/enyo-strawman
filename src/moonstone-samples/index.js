@@ -3,8 +3,10 @@ var
 	Sampler = require('./lib/All'),
 	samples = {
 		AccordionSample						: require('./lib/AccordionSample'),
+		ActivityLightPanelsSample			: require('./lib/ActivityLightPanelsSample'),
 		ActivityPanelsSample				: require('./lib/ActivityPanelsSample'),
 		ActivityPanelsWithVideoSample		: require('./lib/ActivityPanelsWithVideoSample'),
+		AlwaysViewingLightPanelsSample		: require('./lib/AlwaysViewingLightPanelsSample'),
 		AlwaysViewingPanelsSample			: require('./lib/AlwaysViewingPanelsSample'),
 		AlwaysViewingPanelsWithVideoSample	: require('./lib/AlwaysViewingPanelsWithVideoSample'),
 		BodyTextSample						: require('./lib/BodyTextSample'),
@@ -20,6 +22,7 @@ var
 		DividerSample						: require('./lib/DividerSample'),
 		DrawerSample						: require('./lib/DrawerSample'),
 		DynamicPanelsSample					: require('./lib/DynamicPanelsSample'),
+		DynamicLightPanelsSample			: require('./lib/DynamicLightPanelsSample'),
 		ExpandableDataPickerSample			: require('./lib/ExpandableDataPickerSample'),
 		ExpandableInputSample				: require('./lib/ExpandableInputSample'),
 		ExpandableListItemSample			: require('./lib/ExpandableListItemSample'),
