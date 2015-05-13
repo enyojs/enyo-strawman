@@ -3,5 +3,5 @@
 node_modules/
 dist/
 node_modules
-lib
+/lib
 dist
