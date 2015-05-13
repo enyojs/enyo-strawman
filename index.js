@@ -1,4 +1,4 @@
-var 
+var
 	kind = require('enyo/kind'),
 	ready = require('enyo/ready');
 
@@ -17,10 +17,11 @@ var
 		Moonstone: require('./src/moonstone-samples'), //router blocking
 		Spotlight: require('./src/spotlight-samples'),
 	  	iLib: require('./src/enyo-ilib-samples'),
-	  	Canvas: require('./src/canvas-samples')
+	  	Canvas: require('./src/canvas-samples'),
+	  	Svg: require('./src/svg-samples')
 	};
 
-var 
+var
 	List = kind({
 		components: [
 			{name: 'list', kind: DataRepeater, components: [
