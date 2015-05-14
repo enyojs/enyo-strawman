@@ -6,5 +6,17 @@
 }
 .scroller-sample-scroller {
 	border: 1px solid orange;
-	height:90%;
+	position: absolute;
+	top: 10px;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+}
+
+.scroller-sample-menu {
+	position: absolute;
+	right: 30px;
+	top: 10px;
+	width: 200px;
+	z-index: 10;
 }
