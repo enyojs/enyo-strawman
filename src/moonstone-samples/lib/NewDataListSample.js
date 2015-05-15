@@ -6,20 +6,19 @@ var
 
 var
 	GridListImageItem = require('moonstone/GridListImageItem'),
-	SelectionOverlaySupport = require('moonstone/SelectionOverlaySupport'),
 	Button = require('moonstone/Button'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
+	Icon = require('moonstone/Icon'),
 	NewDataList = require('moonstone/NewDataList'),
+	Overlay = require('moonstone/Overlay'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller');
 
 var ImageItem = kind({
 	kind: GridListImageItem,
-	mixins: [SelectionOverlaySupport],
-	selectionOverlayVerticalOffset: 35,
 	subCaption: 'Sub Caption',
-	style: 'box-sizing: border-box;',
+	mixins: [Overlay.Selection],
 	bindings: [
 		{from: 'model.text', to: 'caption'},
 		{from: 'model.subText', to: 'subCaption'},
@@ -32,7 +31,7 @@ var NoImageItem = kind({
 		{from: 'model.bgColor', to: 'bgColor'}
 	],
 	componentOverrides: {
-		image: {kind: Control, style: 'width: 194px; height: 194px; background: gray;'}
+		image: {kind: Control, mixins: [Overlay.Support, Overlay.Selection], style: 'width: 194px; height: 194px; background: gray;'}
 	},
 	imageSizingChanged: function(){},
 	bgColorChanged: function() {
@@ -58,12 +57,11 @@ var
 		{kind: NoImageItem, style: 'position: absolute;'}
 	],
 	plainImageComponents = [
-		{
-			kind: Img,
-			bindings: [
-				{from: 'model.url', to: 'src'}
-			]
-		}
+		{kind: Control, mixins: [Overlay.Support, Overlay.Selection], components: [
+			{name: 'img', kind: Img, style: 'height: 100%; width: 100%;'}
+		],bindings: [
+			{from: 'model.url', to: '$.img.src'}
+		]}
 	];
 
 function selectedValue (selected) {
@@ -80,7 +78,7 @@ module.exports = kind({
 			kind: Panel, classes:'moon-6h', title:'Menu',
 			components: [
 				{
-					kind: Scroller, 
+					kind: Scroller,
 					components: [
 						{
 							name: 'itemPicker', kind: ExpandablePicker, content: 'Items',

@@ -13,12 +13,13 @@ var
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
+	Icon = require('moonstone/Icon'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
 	RadioItemGroup = require('moonstone/RadioItemGroup'),
 	Scroller = require('moonstone/Scroller'),
-	SelectionOverlaySupport = require('moonstone/SelectionOverlaySupport'),
+	Overlay = require('moonstone/Overlay'),
 	ToggleButton = require('moonstone/ToggleButton');
 
 
@@ -26,8 +27,7 @@ var
 var GridSampleItem = kind({
 	name: 'moon.sample.GridSampleItem',
 	kind: GridListImageItem,
-	mixins: [SelectionOverlaySupport],
-	selectionOverlayVerticalOffset: 35,
+	mixins: [Overlay.Selection],
 	subCaption: 'Sub Caption',
 	bindings: [
 		{from: 'model.text', to: 'caption'},
@@ -40,19 +40,15 @@ var GridSampleItem = kind({
 var HorizontalGridListImageItem = kind({
 	name: 'moon.HorizontalGridListImageItem',
 	kind: GridListImageItem,
-	mixins: [SelectionOverlaySupport],
+	mixins: [Overlay.Selection],
 	classes: 'horizontal-gridList-image-item',
-	selectionOverlayVerticalOffset: 50,
-	selectionOverlayHorizontalOffset: 95
 });
 
 var HorizontalGridListItem = kind({
 	name: 'moon.HorizontalGridListItem',
 	kind: Item,
-	mixins: [SelectionOverlaySupport],
 	classes: 'moon-gridlist-imageitem horizontal-gridList-item',
-	selectionOverlayVerticalOffset: 50,
-	selectionOverlayHorizontalOffset: 5,
+	mixins: [Overlay.Support, Overlay.Selection],
 
 	components: [
 		{name: 'caption', classes: 'caption'},
@@ -140,7 +136,7 @@ module.exports = kind({
 				selected: false,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
-				url: 'http://placehold.it/300x300/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + idx
+				url: 'http://placehold.it/300x' + (this.itemKind == 'GridListImageItem' ? '300' : '100') + '/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + idx
 			});
 		}
 		// update our internal index so it will always generate unique values
