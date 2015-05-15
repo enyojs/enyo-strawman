@@ -3,10 +3,10 @@ var
 
 var 
 	Anchor = require('enyo/Anchor'),
+	Button = require('enyo/Button'),
 	Collection = require('enyo/Collection'),
 	Component = require('enyo/Component'),
 	Control = require('enyo/Control'),
-	DataListSample = require('./DataListSample'),
 	DataRepeater = require('enyo/DataRepeater'),
 	ScrollStrategy = require('enyo/ScrollStrategy'),
 	TouchScrollStrategy = require('enyo/TouchScrollStrategy'),
@@ -14,25 +14,31 @@ var
 	TransitionScrollStrategy = require('enyo/TransitionScrollStrategy'),
 	Select = require('enyo/Select');
 
+var
+	DataListSample = require('./DataListSample'),
+	DataGridListSample = require('./DataGridListSample');
+
+var samples = {
+	'DataList' : null,
+	'DataGridList' : null
+};
+
+var strategies = {
+	'Native' : {strategyKind: ScrollStrategy},
+	'Touch' : {strategyKind: TouchScrollStrategy},
+	'Translate' : {strategyKind: TranslateScrollStrategy},
+	'Translate (Optimized)' : {strategyKind: TranslateScrollStrategy, translateOptimized: true},
+	'Transition' : {strategyKind: TransitionScrollStrategy}
+};
+
 var TestMixin = {
 	classes: 'enyo-unselectable',
 	strategy: 'Native',
-	strategies: {
-		'Native' : {strategyKind: ScrollStrategy},
-		'Touch' : {strategyKind: TouchScrollStrategy},
-		'Translate' : {strategyKind: TranslateScrollStrategy},
-		'Translate (Optimized)' : {strategyKind: TranslateScrollStrategy, translateOptimized: true},
-		'Transition' : {strategyKind: TransitionScrollStrategy}
-	},
-	samples: {
-		'DataList' : 'enyo.sample.DataListScrollTestbed',
-		'DataGridList' : 'enyo.sample.DataGridListScrollTestbed'
-	},
 	addTestControls: function() {
 		this.createComponent({
-			style: 'position: absolute; top: 0; left: 0; right: 0; padding: 0.5em', defaultKind: 'enyo.Button', components: [
-				{kind: Select, onchange: 'sampleChanged', components: this.buildMenu('samples', 'sample')},
-				{kind: Select, onchange: 'strategyChanged', components: this.buildMenu('strategies', 'strategy')},
+			style: 'position: absolute; top: 0; left: 0; right: 0; padding: 0.5em', defaultKind: Button, components: [
+				{kind: Select, onchange: 'sampleChanged', components: this.buildMenu(samples, 'sample')},
+				{kind: Select, onchange: 'strategyChanged', components: this.buildMenu(strategies, 'strategy')},
 				{content: 'Scroll to Random Pos', ontap: 'scrollToRandomPos'},
 				{content: 'Scroll to Top', ontap: 'scrollToTop'},
 				{content: 'Scroll to Bottom', ontap: 'scrollToBottom'},
@@ -58,13 +64,13 @@ var TestMixin = {
 	},
 	create: kind.inherit(function(sup) {
 		return function() {
-			var ov = {repeater: {scrollerOptions: this.strategies[this.strategy]}};
+			var ov = {repeater: {scrollerOptions: strategies[this.strategy]}};
 			this.kindComponents = Component.overrideComponents(this.kindComponents, ov, Control);
-			sup.apply(this,arguments);
+			sup.apply(this, arguments);
 			this.r = this.$.repeater;
 			this.s = this.r.$.scroller;
 			// global reference for easier console testing
-			window._sample = this;
+			global._sample = this;
 			//hack
 			if (this.strategy == 'Translate (Optimized)') {
 				this.s.$.strategy.translateOptimized = true;
@@ -73,18 +79,18 @@ var TestMixin = {
 		};
 	}),
 	strategyChanged: function(sender, event) {
-		this.rebuild({strategy: event.originator.value});
+		this.rebuild({strategy: event.originator.value}, samples[this.sample]);
 	},
 	sampleChanged: function(sender, event) {
-		this.rebuild({strategy: this.strategy}, this.samples[event.originator.value]);
+		this.rebuild({strategy: this.strategy}, samples[event.originator.value]);
 	},
-	rebuild: function(props, kindName) {
-		var pn = this.hasNode().parentNode, Ctor = kind.constructorForKind(kindName || this.kindName);
+	rebuild: function(props, Ctor) {
+		var pn = this.hasNode().parentNode;
 		this.destroy();
 		new Ctor(props).renderInto(pn);
 	},
 	buildMenu: function(opts, val) {
-		var ss = Object.keys(this[opts]), c = [], i, s;
+		var ss = Object.keys(opts), c = [], i, s;
 		for (i = 0; !!(s = ss[i]); i++) {
 			c.push({content: s, selected: s == this[val]});
 		}
@@ -92,51 +98,18 @@ var TestMixin = {
 	}
 };
 
-var	
-	samples = {
-		DataListScrollTestbed : kind({
-			name: 'enyo.sample.DataListScrollTestbed',
-			kind: DataListSample,
-			sample: 'DataList',
-			mixins: [TestMixin]
-		}),
-		DataGridListScrollTestbed : kind({
-			name: 'enyo.sample.DataGridListScrollTestbed',
-			kind: DataListSample,
-			sample: 'DataGridList',
-			mixins: [TestMixin]
-		})
-	};
-
-var List = kind({
-	components: [
-		{name: 'list', kind: DataRepeater, components: [
-			{style: 'margin: 10px;', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				{from: 'model.name', to: '$.a.href', transform: function (v) { return '?Enyo&DataListScrollTestbed&' + v; }},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
-			]}
-		]}
-	],
-	create: function () {
-		Control.prototype.create.apply(this, arguments);
-		this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-			return {name: key};
-		})));
-	}
+samples.DataList = kind({
+	name: 'enyo.sample.DataListScrollTestbed',
+	kind: DataListSample,
+	sample: 'DataList',
+	mixins: [TestMixin]
 });
 
-module.exports = kind({
-	create: function() {
-		
-		this.inherited(arguments);
-		
-		var names = window.document.location.search.substring(1).split('&');
-		var name = names[2] || names[0];
-		
-		var sample = samples[name] || List;
-		
-		this.createComponent({kind:sample});
-	}
+samples.DataGridList = kind({
+	name: 'enyo.sample.DataGridListScrollTestbed',
+	kind: DataGridListSample,
+	sample: 'DataGridList',
+	mixins: [TestMixin]
 });
+
+module.exports = samples.DataList;
