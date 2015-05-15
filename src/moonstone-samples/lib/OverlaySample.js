@@ -59,12 +59,12 @@ module.exports = kind({
 			},
 			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'Icon Button', subCaption: 'Transparent BG', ontap: 'itemTapped',
 				overlayShowing: 'spotlight', overlayPosition: 'bottom', overlayAlign: 'right', overlayTransparent: true, overlayComponents: [
-					{kind: Icon, icon: 'play', classes: 'moon-icon-button', style: 'margin: 0; background-color: rgba(0,0,0,0.5)', ontap: 'badgeTapped'}
+					{kind: IconButton, icon: 'play', spotlight: false, backgroundOpacity: 'translucent', style: 'margin: 0;', ontap: 'badgeTapped'}
 				]
 			},
 			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'Centered Icon Button', ontap: 'itemTapped',
 				overlayShowing: 'spotlight', overlayPosition: 'centered', overlayComponents: [
-					{kind: Icon, icon: 'play', small: false, classes: 'moon-icon-button', style: 'margin: 12px;background-color: rgba(0,0,0,0.5)', ontap: 'badgeTapped'}
+					{kind: IconButton, icon: 'play', spotlight: false, small: false, backgroundOpacity: 'translucent', style: 'margin: 12px;', ontap: 'badgeTapped'}
 				]
 			},
 
