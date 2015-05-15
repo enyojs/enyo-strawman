@@ -3,10 +3,12 @@ var
 	Button = require('enyo/Button'),
 	Checkbox = require('enyo/Checkbox'),
 	Group = require('enyo/Group'),
+    Input = require('enyo/Input'),
 	Scroller = require('enyo/Scroller');
 
 var
-	ilib = require('enyo-ilib');
+	Name = require('enyo-ilib/Name'),
+    NameFmt = require('enyo-ilib/NameFmt');
 
 var
 	ChooseLocale = require('../ChooseLocale'),
@@ -44,15 +46,15 @@ module.exports = kind({
 
             {components: [
                 {content: rb.getString("Prefix"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "prefixInput", placeholder: rb.getString("Prefix")},
+                {kind: Input, name: "prefixInput", placeholder: rb.getString("Prefix")},
                 {content: rb.getString("Given Name"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "givenInput", placeholder: rb.getString("Given Name")},
+                {kind: Input, name: "givenInput", placeholder: rb.getString("Given Name")},
                 {content: rb.getString("Middle Name"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "middleInput", placeholder: rb.getString("Middle Name")},
+                {kind: Input, name: "middleInput", placeholder: rb.getString("Middle Name")},
                 {content: rb.getString("Family Name"), classes: "ilib-onyx-sample-divider"},
-				{kind: "onyx.Input", name: "familyInput", placeholder: rb.getString("Family Name")},
+				{kind: Input, name: "familyInput", placeholder: rb.getString("Family Name")},
                 {content: rb.getString("Suffix"), classes: "ilib-onyx-sample-divider"},
-				{kind: "onyx.Input", name: "suffixInput", placeholder: rb.getString("Suffix")}
+				{kind: Input, name: "suffixInput", placeholder: rb.getString("Suffix")}
             ]}
         ]},
         {tag: "br"},
@@ -138,8 +140,8 @@ module.exports = kind({
             locale: this.$.localeSelector.getValue()
         };
         // Formatting
-        var name = new ilib.Name(n);
-        var fmt = new ilib.NameFmt(options);
+        var name = new Name(n);
+        var fmt = new NameFmt(options);
         var postFmtData = "The name is: " + fmt.format(name); 
         // Output results
         this.$.rtlResult.setContent(postFmtData);
