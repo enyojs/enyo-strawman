@@ -104,6 +104,8 @@ module.exports = kind({
 	},
 	resetTapped: function(inSender, inEvent) {
 		this.$.picker.set('value', null);
+		this.$.picker.refresh();
+		this.$.picker.setOpen(false);
 		return true;
 	}
 });
