@@ -163,14 +163,14 @@ module.exports = kind({
 			{
 				kind: ContextualPopup,
 				name: 'buttonPopup',
-				classes: 'moon-8h moon-8v',
+				classes: 'moon-9h moon-8v',
 				modal: true,
 				autoDismiss: false,
 				spotlightModal: true,
 				components: [
 					{kind: Scroller, horizontal: 'auto', classes: 'enyo-fill', components: [
-						{kind: Button, content: 'Button'},
 						{kind: ToggleButton, content: 'SpotlightModal', value: true, ontap: 'buttonToggled'},
+						{kind: ToggleButton, content: 'Modal', value: true, ontap: 'modelToggled'},
 						{tag: 'br'},
 						{tag: 'br'},
 						{kind: InputDecorator, spotlight: true, components: [
@@ -235,6 +235,9 @@ module.exports = kind({
 			return val;
 		}}
 	],
+	modelToggled: function(inSender, inEvent) {
+		this.$.buttonPopup.setModal(inSender.getActive());
+	},
 	buttonToggled: function(inSender, inEvent) {
 		this.$.buttonPopup.setSpotlightModal(inSender.getActive());
 		this.$.buttonPopup.setAutoDismiss(!inSender.getActive());
