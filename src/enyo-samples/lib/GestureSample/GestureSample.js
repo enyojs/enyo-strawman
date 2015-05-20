@@ -81,17 +81,27 @@ var
 		}
 	});
 
-drag.configureHoldPulse({
-	frequency: 100,
-	events: [
-	    {name: 'hold', time: 200},
-	    {name: 'longpress', time: 500},
-	    {name: 'longerpress', time: 1000}
-	],
-	endHold: 'onMove',
-	moveTolerance: 16,
-	resume: false
-});
+var previousHoldPulseConfig;
+
+function overrideHoldPulseConfig() {
+	previousHoldPulseConfig = drag.holdPulseDefaultConfig;
+
+	drag.configureHoldPulse({
+		frequency: 100,
+		events: [
+		    {name: 'hold', time: 200},
+		    {name: 'longpress', time: 500},
+		    {name: 'longerpress', time: 1000}
+		],
+		endHold: 'onMove',
+		moveTolerance: 16,
+		resume: false
+	});
+}
+
+function restoreHoldPulseConfig() {
+	drag.configureHoldPulse(previousHoldPulseConfig);
+}
 
 module.exports = kind({
 	name: "enyo.sample.GestureSample",
@@ -153,6 +163,7 @@ module.exports = kind({
 	],
 	create: function() {
 		this.inherited(arguments);
+		overrideHoldPulseConfig();
 		this.eventList = {};
 		this.eventCount = 0;
 		utils.forEach(
@@ -161,6 +172,10 @@ module.exports = kind({
 			this.bindSafely(function(event) {
 				this.$.eventPicker.createComponent({content:event, style:"text-align:left"});
 			}));
+	},
+	destroy: function() {
+		restoreHoldPulseConfig();
+		this.inherited(arguments);
 	},
 	handleEvent: function(inSender, inEvent) {
 		var event = utils.clone(inEvent);
