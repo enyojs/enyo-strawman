@@ -13,7 +13,8 @@ var
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
-	TimePicker = require('moonstone/TimePicker');
+	TimePicker = require('moonstone/TimePicker'),
+	DayPicker = require('moonstone/DayPicker');
 
 module.exports = kind({
 	name: 'moon.sample.ExpandablePickerSample',
@@ -61,6 +62,7 @@ module.exports = kind({
 						{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
 						{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 						{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
+						{kind: DayPicker, noneText: "Pick a Day", content: "Day Picker"},
 						{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 						{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
 							{bindings: [
@@ -116,6 +118,7 @@ module.exports = kind({
 							{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
 							{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 							{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
+							{kind: DayPicker, noneText: "Pick a Day", content: "Day Picker"},
 							{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 							{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
 								{bindings: [
