@@ -1,53 +1,29 @@
 var
-	kind = require('enyo/kind'),
-	ready = require('enyo/ready');
+	kind = require('enyo/kind');
 	
 var	
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater');
+	List = require('../List');
 
 var
 	samples = {
-		Container			: require('./lib/ContainerSample'),
-		Disappear			: require('./lib/DisappearSample'),
-		Hold				: require('./lib/HoldSample'),
-		Sandbox				: require('./lib/SpotlightSandboxSample'),
-		TestPage			: require('./lib/TestPage')
+		Container			: request('./lib/ContainerSample'),
+		Disappear			: request('./lib/DisappearSample'),
+		Hold				: request('./lib/HoldSample'),
+		Sandbox				: request('./lib/SpotlightSandboxSample'),
+		TestPage			: request('./lib/TestPage')
 	};
 
-var List = kind({
-	kind: Control,
-	components: [
-		{name: 'list', kind: DataRepeater, components: [
-			{style: 'margin: 10px;', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				{from: 'model.name', to: '$.a.href', transform: function (v) { return '?Spotlight&' + v; }},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
-			]}
-		]}
-	],
-	create: function () {
-		Control.prototype.create.apply(this, arguments);
-		this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-			return {name: key};
-		})));
-	}
-});
-
-
 module.exports = kind({
-	create: function() {
-		
-		this.inherited(arguments);
-		
-		var names = window.document.location.search.substring(1).split('&');
-		var name = names[1] || names[0];
-		
-		var sample = samples[name] || List;
-		
-		this.createComponent({kind:sample});
+	baseHref: 'Spotlight',
+	kind: List,
+	classes: 'enyo-fit',
+	samples: Object.keys(samples),
+	sampleChanged: function () {
+		this.log(this.sample);
+
+		var app = this.app;
+		samples[this.sample].then(function (Sample) {
+			app.setupView(Sample, function () { app.reRender(); });
+		});
 	}
 });

@@ -45,24 +45,24 @@ var LocaleItem = kind({
 	}
 });
 
-var appRouter = kind({
-	kind: Router,
-	history: true,
-	routes: [
-		{path: ':sampleName/:locale', handler: 'handleRoute'},
-		{path: ':sampleName', handler: 'handleRoute'},
-		{path: '/:locale', handler: 'handleRouteLocaleOnly'}
-	],
-	events: {
-		onRouteChange: ''
-	},
-	handleRoute: function (sampleName, locale) {
-		this.doRouteChange({sampleName: sampleName, locale: locale || 'local'});
-	},
-	handleRouteLocaleOnly: function (locale) {
-		this.handleRoute({sampleName: null, locale: locale});
-	}
-});
+// var appRouter = kind({
+// 	kind: Router,
+// 	history: true,
+// 	routes: [
+// 		{path: ':sampleName/:locale', handler: 'handleRoute'},
+// 		{path: ':sampleName', handler: 'handleRoute'},
+// 		{path: '/:locale', handler: 'handleRouteLocaleOnly'}
+// 	],
+// 	events: {
+// 		onRouteChange: ''
+// 	},
+// 	handleRoute: function (sampleName, locale) {
+// 		this.doRouteChange({sampleName: sampleName, locale: locale || 'local'});
+// 	},
+// 	handleRouteLocaleOnly: function (locale) {
+// 		this.handleRoute({sampleName: null, locale: locale});
+// 	}
+// });
 
 /**
 * _Moonstone Sample_ is a tool for displaying and interacting with sample code in the Moonstone

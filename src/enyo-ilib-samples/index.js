@@ -4,57 +4,34 @@
 // require('enyo-ilib/full');
 
 var
-	kind = require('enyo/kind'),
-	ready = require('enyo/ready');
+	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater');
+	List = require('../List');
 
 var
 	samples = {
-		AddressFormatting	: require('./lib/AddressFormatting'),
-		AddressParsing		: require('./lib/AddressParsing'),
-		// AdvDateFormatting	: require('./lib/AdvDateFormatting'), //still has onyx timepicker
-		// DateFormatting: require('./lib/DateFormatting'),
-		LocaleInfo: require('./lib/LocaleInfo'),
-		NameFormatting: require('./lib/NameFormatting'),
-		NameParsing: require('./lib/NameParsing'),
-		NumberFormatting: require('./lib/NumberFormatting')
+		AddressFormatting	: request('./lib/AddressFormatting'),
+		AddressParsing		: request('./lib/AddressParsing'),
+		// AdvDateFormatting	: request('./lib/AdvDateFormatting'), //still has onyx timepicker
+		// DateFormatting: request('./lib/DateFormatting'),
+		LocaleInfo: request('./lib/LocaleInfo'),
+		NameFormatting: request('./lib/NameFormatting'),
+		NameParsing: request('./lib/NameParsing'),
+		NumberFormatting: request('./lib/NumberFormatting')
 	};
 
-var List = kind({
-	kind: Control,
-	components: [
-		{name: 'list', kind: DataRepeater, components: [
-			{style: 'margin: 10px;', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				{from: 'model.name', to: '$.a.href', transform: function (v) { return '?iLib&' + v; }},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
-			]}
-		]}
-	],
-	create: function () {
-		Control.prototype.create.apply(this, arguments);
-		this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-			return {name: key};
-		})));
-	}
-});
-
 module.exports = kind({
-	create: function() {
-		
-		this.inherited(arguments);
-		
-		var names = window.document.location.search.substring(1).split('&');
-		var name = names[1] || names[0];
-		
-		var sample = samples[name] || List;
-		
-		this.createComponent({kind:sample});
+	baseHref: 'iLib',
+	kind: List,
+	classes: 'enyo-fit',
+	samples: Object.keys(samples),
+	sampleChanged: function () {
+		this.log(this.sample);
+
+		var app = this.app;
+		samples[this.sample].then(function (Sample) {
+			app.setupView(Sample, function () { app.reRender(); });
+		});
 	}
 });

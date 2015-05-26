@@ -2,73 +2,51 @@ var
 	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater');
+	List = require('../List');
 
 var
 	samples = {
-		ContextualLayout			: require('./lib/ContextualLayoutSample'),
-		Easing						: require('./lib/EasingSample'),
-		FittableAppLayout1			: require('./lib/FittableAppLayout1'),
-		FittableAppLayout2			: require('./lib/FittableAppLayout2'),
-		FittableAppLayout3			: require('./lib/FittableAppLayout3'),
-		FittableAppLayout4			: require('./lib/FittableAppLayout4'),
-		FittableDescription			: require('./lib/FittableDescription'),
-		FittableTests				: require('./lib/FittableTests'),
-		Fittable					: require('./lib/FittableSample'),
-		FlyweightRepeater			: require('./lib/FlyweightRepeaterSample'),
-		ImageCarousel				: require('./lib/ImageCarouselSample'),
-		ImageView					: require('./lib/ImageViewSample'),
-		ListAround					: require('./lib/ListAroundSample'),
-		ListBasic					: require('./lib/ListBasicSample'),
-		ListContacts				: require('./lib/ListContactsSample'),
-		ListHorizontalFlickr		: require('./lib/ListHorizontalFlickrSample'),
-		ListLanguages				: require('./lib/ListLanguagesSample'),
-		ListNoSelect				: require('./lib/ListNoSelectSample'),
-		ListPulldown				: require('./lib/ListPulldownSample'),
-		PersistentSwipeableItem		: require('./lib/PersistentSwipeableItemSample'),
-		Panels						: require('./lib/PanelsSample'),
-		PanelsFlickr				: require('./lib/PanelsFlickrSample'),		
-		PanelsSliding				: require('./lib/PanelsSlidingSample'),
-		PanZoomView1				: require('./lib/PanZoomViewSample'),
-		PanZoomView2				: require('./lib/PanZoomViewSample2'),
-		PanZoomView3				: require('./lib/PanZoomViewSample3'),
-		Slideable					: require('./lib/SlideableSample'),
-		Tree						: require('./lib/TreeSample')
+		ContextualLayout			: request('./lib/ContextualLayoutSample'),
+		Easing						: request('./lib/EasingSample'),
+		FittableAppLayout1			: request('./lib/FittableAppLayout1'),
+		FittableAppLayout2			: request('./lib/FittableAppLayout2'),
+		FittableAppLayout3			: request('./lib/FittableAppLayout3'),
+		FittableAppLayout4			: request('./lib/FittableAppLayout4'),
+		FittableDescription			: request('./lib/FittableDescription'),
+		FittableTests				: request('./lib/FittableTests'),
+		Fittable					: request('./lib/FittableSample'),
+		FlyweightRepeater			: request('./lib/FlyweightRepeaterSample'),
+		ImageCarousel				: request('./lib/ImageCarouselSample'),
+		ImageView					: request('./lib/ImageViewSample'),
+		ListAround					: request('./lib/ListAroundSample'),
+		ListBasic					: request('./lib/ListBasicSample'),
+		ListContacts				: request('./lib/ListContactsSample'),
+		ListHorizontalFlickr		: request('./lib/ListHorizontalFlickrSample'),
+		ListLanguages				: request('./lib/ListLanguagesSample'),
+		ListNoSelect				: request('./lib/ListNoSelectSample'),
+		ListPulldown				: request('./lib/ListPulldownSample'),
+		PersistentSwipeableItem		: request('./lib/PersistentSwipeableItemSample'),
+		Panels						: request('./lib/PanelsSample'),
+		PanelsFlickr				: request('./lib/PanelsFlickrSample'),		
+		PanelsSliding				: request('./lib/PanelsSlidingSample'),
+		PanZoomView1				: request('./lib/PanZoomViewSample'),
+		PanZoomView2				: request('./lib/PanZoomViewSample2'),
+		PanZoomView3				: request('./lib/PanZoomViewSample3'),
+		Slideable					: request('./lib/SlideableSample'),
+		Tree						: request('./lib/TreeSample')
 	};
 
-var List = kind({
-	kind: Control,
-	components: [
-		{name: 'list', kind: DataRepeater, components: [
-			{style: 'margin: 10px;', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				{from: 'model.name', to: '$.a.href', transform: function (v) { return '?Layout&' + v; }},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
-			]}
-		]}
-	],
-	create: function () {
-		Control.prototype.create.apply(this, arguments);
-		this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-			return {name: key};
-		})));
-	}
-});
-
 module.exports = kind({
-	create: function() {
+	baseHref: 'Layout',
+	kind: List,
+	classes: 'enyo-fit',
+	samples: Object.keys(samples),
+	sampleChanged: function () {
+		this.log(this.sample);
 		
-		this.inherited(arguments);
-		
-		var names = window.document.location.search.substring(1).split('&');
-		var name = names[1] || names[0];
-		
-		var sample = samples[name] || List;
-		
-		this.createComponent({kind:sample});
+		var app = this.app;
+		samples[this.sample].then(function (Sample) {
+			app.setupView(Sample, function () { app.reRender(); });
+		});
 	}
 });
