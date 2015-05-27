@@ -6,6 +6,7 @@ var
 
 // Define all of the extras samples
 var samples = {
+	AnimatedButtonSample                 : require('./AnimatedButtonSample'),
 	AudioPlaybackSample                  : require('./AudioPlaybackSample'),
 	AudioPlaybackPlaylistSupportSample   : require('./AudioPlaybackPlaylistSupportSample'),
 	ActivityPanelsSample                 : require('./ActivityPanelsSample'),
