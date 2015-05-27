@@ -14,6 +14,6 @@
   },
   "private": true,
   "resolutions": {
-    "moonstone-extra": "76e549574685d65f2367d44546d2d29bf60d6ec2"
+    "moonstone-extra": "master"
   }
 }
