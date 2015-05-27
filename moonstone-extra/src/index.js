@@ -1,12 +1,10 @@
 var
 	strawman = require('../../src');
 
-var 
-	ready = require('enyo/ready'),
+var
 	kind = require('enyo/kind');
 
-var 
-
+var
 	oldSampler = require('../../src/moonstone-samples/lib/All');
 
 var
@@ -15,10 +13,8 @@ var
 	});
 
 newSampler.samples = {
-	ButtonSample: require('./ButtonAnimatedSample.js')
-}
+};
 
 strawman.samples['MoonstoneExtra'] = newSampler;
 
 module.exports = strawman;
-
