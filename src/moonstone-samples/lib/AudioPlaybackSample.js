@@ -116,16 +116,16 @@ var AudioPlaybackQueue = kind(
 	*/
 	components: [
 		{kind: Header, name: 'queueHeader', title: 'Music Queue', titleBelow: '2 Tracks'},
-		// {
-		// 	kind: DataList,
-		// 	name: 'list',
-		// 	classes: 'enyo-unselectable',
-		// 	fit: true,
-		// 	multiSelect: false,
-		// 	components: [
-		// 		{name: 'item', kind: AudioListItem, classes: 'moon-audio-queue-list enyo-border-box', onRemove: 'removeTap'}
-		// 	]
-		// }
+		{
+			kind: DataList,
+			name: 'list',
+			classes: 'enyo-unselectable',
+			fit: true,
+			multiSelect: false,
+			components: [
+				{name: 'item', kind: AudioListItem, classes: 'moon-audio-queue-list enyo-border-box', onRemove: 'removeTap'}
+			]
+		}
 	],
 
 	/**
@@ -166,19 +166,8 @@ var AudioPlaybackQueue = kind(
 });
 
 
-var mainPanel = kind({
+var basePanel = kind({
 	kind: Panel,
-	title: "App Name",
-    titleAbove: "Music",
-    titleBelow: "2 Tracks",
-	audioFiles: [
-		{src: "http://enyojs.com/_media/thunder.mp3", trackName: "Thunder", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:22"},
-		{src: "http://enyojs.com/_media/engine.mp3", trackName: "Engine", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
-		{src: "http://www.stephaniequinn.com/Music/Allegro%20from%20Duet%20in%20C%20Major.mp3", trackName: "Allegro", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
-		{src: "http://www.stephaniequinn.com/Music/Canon.mp3", trackName: "Canon", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
-		{src: "http://www.stephaniequinn.com/Music/Handel%20-%20Entrance%20of%20the%20Queen%20of%20Sheba.mp3", trackName: "Handel", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
-		{src: "http://www.stephaniequinn.com/Music/Jazz%20Rag%20Ensemble%20-%2010.mp3", trackName: "Engine", artistName: "Jazz", albumName: "Sound Effects", duration: "0:04"}
-	],    
     components: [
 	    {
 	    	name: 'repeater',
@@ -206,13 +195,12 @@ var mainPanel = kind({
 					],
 					ontap: "playIndex"
 				}
-			],
-			onScrollStop: 'scrollStopped'
+			]
 		}
 	],
 	create: function() {
 		this.inherited(arguments);
-		this.$.repeater.collection = new Collection(this.audioFiles);
+		this.$.repeater.collection = this.$.repeater.collection || new Collection(this.audioFiles);
 	},
 	playIndex: function(inSender, inEvent) {
 		this.bubble("onRequestSetupQueue", {collection: this.$.repeater.collection});
@@ -220,12 +208,37 @@ var mainPanel = kind({
 	}
 });
 
-var pageContent = kind({
+var mainPanel = kind({
+	kind: basePanel,
+	title: "App Name",
+    titleAbove: "Music",
+    titleBelow: "2 Tracks",
+	audioFiles: [
+		{src: "http://enyojs.com/_media/thunder.mp3", trackName: "Thunder", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:22"},
+		{src: "http://enyojs.com/_media/engine.mp3", trackName: "Engine", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"}
+	],
+});
+
+var secondPanel = kind({
+	kind: basePanel,
+	title: "App Name",
+    titleAbove: "Music",
+    titleBelow: "4 Tracks",
+	audioFiles: [
+		{src: "http://www.stephaniequinn.com/Music/Allegro%20from%20Duet%20in%20C%20Major.mp3", trackName: "Allegro", artistName: "Sound Effects Artist Sound Effects Artist Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
+		{src: "http://www.stephaniequinn.com/Music/Canon.mp3", trackName: "Canon", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
+		{src: "http://www.stephaniequinn.com/Music/Handel%20-%20Entrance%20of%20the%20Queen%20of%20Sheba.mp3", trackName: "Handel", artistName: "Sound Effects Artist", albumName: "Sound Effects", duration: "0:04"},
+		{src: "http://www.stephaniequinn.com/Music/Jazz%20Rag%20Ensemble%20-%2010.mp3", trackName: "Engine", artistName: "Jazz", albumName: "Sound Effects", duration: "0:04"}
+	],
+});
+
+var musicBrowser = kind({
     name: "moon.sample.audioPlayback.pageContent",
     kind: Panels,
     classes: 'enyo-fit',
     components: [
-    	{kind: mainPanel}
+    	{kind: mainPanel},
+    	{kind: secondPanel}
     ]
 });
 
@@ -268,21 +281,14 @@ module.exports = kind({
 				kind: myAudioPlayback,
 				name: "audioPlayback",
 				components: [
-					{content: 'play queue'} // 개발자가 PlaybackQueue 구현
+					{content: 'play queue'}
 				]
 			}
 		],
 		components: [
-			{kind: pageContent}
+			{kind: musicBrowser}
 		]}
 	],
-	create: function() {
-		this.inherited(arguments);
-		// this.setupAudioTracks();
-	},
-	rendered: function() {
-		this.inherited(arguments);
-	},
 	setupQueue: function(sender, event) {
 		this.$.audioPlayback.setupAudioTracks(sender, {tracks: event.collection.raw()});
 	},
