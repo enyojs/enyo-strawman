@@ -11,6 +11,7 @@ var
 	
 var	
 	samples = {
+		AccessibilitySample: require('./lib/AccessibilitySample'),
 		AjaxSample: require('./lib/AjaxSample'),
 		AnchorSample: require('./lib/AnchorSample'),
 		AnimatorSample: require('./lib/AnimatorSample'),
