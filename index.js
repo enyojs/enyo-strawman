@@ -11,14 +11,14 @@ var
 
 var
 	samples = {
-		// Enyo: require('./src/enyo-samples'),
-		// Layout: require('./src/layout-samples'),
-		// Onyx: require('./src/onyx-samples'),
+		Enyo: require('./src/enyo-samples'),
+		Layout: require('./src/layout-samples'),
+		Onyx: require('./src/onyx-samples'),
 		Moonstone: require('./src/moonstone-samples'), //router blocking
-		// Spotlight: require('./src/spotlight-samples'),
-	 //  	iLib: require('./src/enyo-ilib-samples'),
-	 //  	Canvas: require('./src/canvas-samples'),
-	 //  	Svg: require('./src/svg-samples')
+		Spotlight: require('./src/spotlight-samples'),
+	  	iLib: require('./src/enyo-ilib-samples'),
+	  	Canvas: require('./src/canvas-samples'),
+	  	Svg: require('./src/svg-samples')
 	};
 
 var
