@@ -3,7 +3,6 @@ var
 	kind = require('enyo/kind'),
 	Img = require('enyo/Image'),
 	Drawers = require('moonstone/Drawers'),
-	EnyoAudio = require('enyo/Audio'),
 	AudioPlayback = require('moonstone/AudioPlayback'),
 	Header = require('moonstone/Header'),
 	DataList = require('moonstone/DataList'),
