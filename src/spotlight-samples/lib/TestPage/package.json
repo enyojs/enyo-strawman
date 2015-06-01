@@ -1,6 +1,6 @@
 {
   "main": "TestPage.js",
   "styles": [
-    "TestPage.css"
+    "TestPage.less"
   ]
 }
