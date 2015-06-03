@@ -1,5 +1,4 @@
 var
-	ready = require('enyo/ready'),
 	Sampler = require('./lib/All'),
 	samples = {
 		AccordionSample						: require('./lib/AccordionSample'),

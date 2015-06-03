@@ -4,14 +4,10 @@
 // require('enyo-ilib/full');
 
 var
-	kind = require('enyo/kind'),
-	ready = require('enyo/ready');
+	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater');
+	SampleList = require('../strawman/SampleList');
 
 var
 	samples = {
@@ -25,36 +21,9 @@ var
 		NumberFormatting: require('./lib/NumberFormatting')
 	};
 
-var List = kind({
-	kind: Control,
-	components: [
-		{name: 'list', kind: DataRepeater, components: [
-			{style: 'margin: 10px;', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				{from: 'model.name', to: '$.a.href', transform: function (v) { return '?iLib&' + v; }},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
-			]}
-		]}
-	],
-	create: function () {
-		Control.prototype.create.apply(this, arguments);
-		this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-			return {name: key};
-		})));
-	}
-});
-
 module.exports = kind({
-	create: function() {
-		
-		this.inherited(arguments);
-		
-		var names = window.document.location.search.substring(1).split('&');
-		var name = names[1] || names[0];
-		
-		var sample = samples[name] || List;
-		
-		this.createComponent({kind:sample});
-	}
+	kind: SampleList,
+	title: 'iLib Samples',
+	libraryName: 'iLib',
+	samples: samples
 });
