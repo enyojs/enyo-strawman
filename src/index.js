@@ -2,10 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater'),
+	SampleList = require('./strawman/SampleList'),
 	History = require('moonstone/History');
 
 var
@@ -22,21 +19,16 @@ var
 
 var
 	List = kind({
-		components: [
-			{name: 'list', kind: DataRepeater, components: [
-				{style: 'margin: 10px;', components: [
-					{name: 'a', kind: Anchor}
-				], bindings: [
-					{from: 'model.name', to: '$.a.href', transform: function (v) { return '?' + v; }},
-					{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Samples'; }}
-				]}
-			]}
-		],
+		kind: SampleList,
+		title: 'Enyo Strawman - Samples Gallery',
+		classes: 'home',
+		listType: 'grid',
+		samples: samples,
 		create: function () {
-			Control.prototype.create.apply(this, arguments);
-			this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-				return {name: key};
-			})));
+			this.inherited(arguments);
+			console.log("strawman grid:", this);
+			this.addClass('enyo-fitted');
+			this.removeClass('enyo-fit');
 		}
 	});
 

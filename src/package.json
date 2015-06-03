@@ -2,7 +2,8 @@
   "filename": "index.js",
   "main": "index.js",
   "styles": [
-    "../*.css"
+    "../css/*.less",
+    "../css/*.css"
   ],
   "assets": [
     "../assets/*"
