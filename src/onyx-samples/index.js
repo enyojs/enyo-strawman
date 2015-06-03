@@ -32,7 +32,7 @@ var
 
 module.exports = kind({
 	kind: SampleList,
-	title: 'Onxy Samples',
+	title: 'Onyx Samples',
 	libraryName: 'Onyx',
 	samples: samples
 });
