@@ -8,7 +8,6 @@ var
 
 module.exports = kind({
 	title: 'Samples',
-	classes: 'strawman',
 	listComponents: [
 		{name: 'title', kind: Title},
 		{name: 'back', kind: Anchor, classes: 'back-button', content: 'Back', href: './'},
@@ -23,11 +22,11 @@ module.exports = kind({
 
 		// Set whether we're looking at a list of libraries or the root
 		this._libList = !name;
-		// debugger;
 
 		if (this.samples[name]) {
 			this.createComponent({kind: this.samples[name]});
 		} else {
+			this.addClass('strawman');
 			this.createComponents(this.listComponents);
 			this.binding({from: 'title',       to: '$.title.content'});
 			this.binding({from: 'samples',     to: '$.list.samples'});
@@ -36,8 +35,6 @@ module.exports = kind({
 
 			// Don't show back if we're at home.
 			this.$.back.set('showing', !this._libList);
-			// console.log("SampleList:", c, this);
-			// debugger;
 		}
 	}
 });

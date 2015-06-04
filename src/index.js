@@ -23,13 +23,7 @@ var
 		title: 'Enyo Strawman - Samples Gallery',
 		classes: 'home',
 		listType: 'grid',
-		samples: samples,
-		create: function () {
-			this.inherited(arguments);
-			console.log("strawman grid:", this);
-			this.addClass('enyo-fitted');
-			this.removeClass('enyo-fit');
-		}
+		samples: samples
 	});
 
 History.set('enableBackHistoryAPI', false);
