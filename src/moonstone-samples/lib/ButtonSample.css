@@ -13,3 +13,10 @@
 	background: rgba(0, 100, 200, 0.2);
 	border: 1px solid rgba(0, 100, 200, 0.4);
 }
+
+.moon-button-sample .image-background {
+	background: url(http://lorempixel.com/output/nature-q-c-640-480-10.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 20px;
+}
