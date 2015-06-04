@@ -95,10 +95,14 @@ module.exports = kind({
 				{name: 'hiddenButton', kind: Button, content: 'Hidden Button', renderOnShow: true, ontap: 'buttonTapped'},
 				{name: 'showButton', kind: Button, content: 'Show Hidden Button', ontap: 'showButtonTapped'},
 
-				{kind: Divider, content: 'translucent Buttons:'},
-				{name: 'opaqueButton', kind: Button, minWidth: false, content: 'opaque', ontap: 'buttonTapped'},
-				{name: 'translucentButton', kind: Button, minWidth: false, translucent: 'translucent', content: 'translucent', ontap: 'buttonTapped'},
-				{name: 'transparentButton', kind: Button, minWidth: false, translucent: 'transparent', content: 'transparent',  ontap: 'buttonTapped'}
+				{kind: Divider, content: 'Translucent Background Buttons:'},
+				{classes: 'image-background', components: [
+					{name: 'opaqueButton', kind: Button, minWidth: false, content: 'Normal Opaque', ontap: 'buttonTapped'},
+					{name: 'translucentButton', kind: Button, minWidth: false, backgroundOpacity: 'translucent', content: 'Translucent', ontap: 'buttonTapped'},
+					{name: 'disabledTranslucentButton', kind: Button, minWidth: false, backgroundOpacity: 'translucent', disabled: true, content: 'Disabled Translucent', ontap: 'buttonTapped'},
+					{name: 'transparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', content: 'Transparent',  ontap: 'buttonTapped'},
+					{name: 'disabledTransparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', disabled: true, content: 'Disabled Transparent',  ontap: 'buttonTapped'}
+				]}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},

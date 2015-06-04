@@ -14,7 +14,7 @@ var
 module.exports = kind({
 	name: 'moon.sample.IconButtonSample',
 	kind: FittableRows,
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-icon-button-sample',
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{fit:true, components: [
@@ -50,11 +50,16 @@ module.exports = kind({
 					{kind: IconButton, src: 'assets/icon-album.png', ontap: 'buttonTapped'}
 				]},
 				{classes: 'moon-1v'},
-				{kind: Divider, content: 'translucent Icon Buttons: '},
-				{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped'},
-				{kind: IconButton, icon: 'search', translucent: 'translucent', ontap: 'buttonTapped'},
-				{kind: IconButton, src: 'assets/icon-list.png', small: false, ontap: 'buttonTapped'},
-				{kind: IconButton, src: 'assets/icon-album.png', translucent: 'transparent', ontap: 'buttonTapped'}
+				{kind: Divider, content: 'Translucent Background Buttons:'},
+				{classes: 'image-background', components: [
+					{kind: IconButton, icon: 'backward', backgroundOpacity: 'translucent', ontap: 'buttonTapped'},
+					{kind: IconButton, icon: 'play', small: false, backgroundOpacity: 'translucent', ontap: 'buttonTapped'},
+					{kind: IconButton, icon: 'forward', backgroundOpacity: 'translucent', ontap: 'buttonTapped'},
+					{kind: IconButton, icon: 'exitfullscreen', small: false, backgroundOpacity: 'transparent', ontap: 'buttonTapped'},
+					{kind: IconButton, icon: 'fullscreen', small: false, backgroundOpacity: 'transparent', ontap: 'buttonTapped'},
+					{kind: IconButton, src: 'assets/icon-list.png', small: false, backgroundOpacity: 'translucent', ontap: 'buttonTapped'},
+					{kind: IconButton, src: 'assets/icon-album.png', backgroundOpacity: 'transparent', ontap: 'buttonTapped'}
+				]}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},
