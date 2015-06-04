@@ -49,7 +49,7 @@ module.exports = kind({
 					{kind: IconButton, src: 'assets/icon-list.png', ontap: 'buttonTapped'},
 					{kind: IconButton, src: 'assets/icon-album.png', ontap: 'buttonTapped'}
 				]},
-				{classes:'moon-1v'},
+				{classes: 'moon-1v'},
 				{kind: Divider, content: 'translucent Icon Buttons: '},
 				{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped'},
 				{kind: IconButton, icon: 'search', translucent: 'translucent', ontap: 'buttonTapped'},
