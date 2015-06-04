@@ -29,6 +29,8 @@
     "../*.css"
   ],
   "assets": [
-    "../assets/*"
+    "appinfo.json",
+    "icon.png",
+    "largeIcon.png"
   ]
 }
