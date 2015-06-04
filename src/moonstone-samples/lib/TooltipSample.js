@@ -54,7 +54,7 @@ module.exports = kind({
 				{kind: InputDecorator, components: [
 					{kind: Input, style: 'width: 130px;', placeholder: 'Below'}
 				]},
-				{kind: Tooltip, content: 'I\'m a tooltip for an input.', position: 'below'}
+				{kind: Tooltip, content: 'I\'m a tooltip for an input.', state: 'empty', position: 'below'}
 			]}
 		]},
 		//Bottom row of buttons
