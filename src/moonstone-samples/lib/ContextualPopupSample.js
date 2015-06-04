@@ -12,7 +12,8 @@ var
 	RadioItem = require('moonstone/RadioItem'),
 	RadioItemGroup = require('moonstone/RadioItemGroup'),
 	Scroller = require('moonstone/Scroller'),
-	ToggleButton = require('moonstone/ToggleButton');
+	ToggleButton = require('moonstone/ToggleButton'),
+	InvertBooleanBinding = require('enyo/InvertBooleanBinding');
 
 module.exports = kind({
 	name: 'moon.sample.ontextualPopupSample',
@@ -164,13 +165,10 @@ module.exports = kind({
 				kind: ContextualPopup,
 				name: 'buttonPopup',
 				classes: 'moon-9h moon-8v',
-				modal: true,
-				autoDismiss: false,
-				spotlightModal: true,
 				components: [
 					{kind: Scroller, horizontal: 'auto', classes: 'enyo-fill', components: [
-						{kind: ToggleButton, content: 'SpotlightModal', value: true, ontap: 'buttonToggled'},
-						{kind: ToggleButton, content: 'Modal', value: true, ontap: 'modelToggled'},
+						{name: 'btnSpotlightModal', kind: ToggleButton, content: 'SpotlightModal', value: true},
+						{name: 'btnModal', kind: ToggleButton, content: 'Modal', value: true},
 						{tag: 'br'},
 						{tag: 'br'},
 						{kind: InputDecorator, spotlight: true, components: [
@@ -233,7 +231,10 @@ module.exports = kind({
 		{from: '.$.nestedRadioGroup.active.content', to: '.$.nestedRadioValue.content', transform: function(val){
 			this.dismissRadioSelection();
 			return val;
-		}}
+		}},
+		{from: '$.btnSpotlightModal.value', to: '$.buttonPopup.spotlightModal', oneWay: false},
+		{from: '$.btnSpotlightModal.value', to: '$.buttonPopup.autoDismiss', kind: InvertBooleanBinding, oneWay: false},
+		{from: '$.btnModal.value', to: '$.buttonPopup.modal', oneWay: false}
 	],
 	modelToggled: function(inSender, inEvent) {
 		this.$.buttonPopup.setModal(inSender.getActive());
