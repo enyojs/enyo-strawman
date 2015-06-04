@@ -11,6 +11,7 @@ var
 		AnchorSample: require('./lib/AnchorSample'),
 		AnimatorSample: require('./lib/AnimatorSample'),
 		AudioSample: require('./lib/AudioSample'),
+		BackgroundTaskManagerSample: require('./lib/BackgroundTaskManagerSample'),
 		ButtonSample: require('./lib/ButtonSample'),
 		CheckboxSample: require('./lib/CheckboxSample'),
 		ComponentOverrideSample: require('./lib/ComponentOverrideSample'),
