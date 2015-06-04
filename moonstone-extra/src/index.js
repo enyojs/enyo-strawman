@@ -1,15 +1,16 @@
 var
-	strawman = require('../../src');
+	kind = require('enyo/kind');
 
 var
-	kind = require('enyo/kind');
+	strawman = require('../../src');
 
 var
 	oldSampler = require('../../src/moonstone-samples/lib/All');
 
 var
 	newSampler = kind({
-		kind: oldSampler
+		kind: oldSampler,
+		title: 'Moonstone Extra Samples'
 	});
 
 newSampler.samples = {

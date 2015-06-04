@@ -92,6 +92,7 @@ var appRouter = kind({
 */
 module.exports = kind({
 	name: 'moon.sample.All',
+	title: 'Moonstone Samples',
 	classes: 'moon enyo-unselectable enyo-fit',
 	themes: {
 		'dark': 'moonstone-dark.css',
@@ -133,11 +134,12 @@ module.exports = kind({
 		{name: 'router', kind: appRouter, history: true, triggerOnStart: true}
 	],
 	bindings: [
-		{from: 'locales', to: '$.localeRepeater.collection'}
+		{from: 'locales', to: '$.localeRepeater.collection'},
+		{from: 'title', to: '$.listpanel.title'}
 	],
 	listTools: [
 		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
-			{kind: Panel, title: 'Samples', headerType: 'small',
+			{kind: Panel, name: 'listpanel', headerType: 'small',
 				components: [
 					{name: 'list', kind: DataList, components: [
 						{kind: Anchor, classes: 'moon-sample-list-item enyo-border-box', bindings: [
@@ -264,7 +266,7 @@ module.exports = kind({
 			this.$.router.trigger({location: loc, change: true});
 			this.$.home.hide();
 			this.createComponent({name: s, kind: this.samples[s]}).render();
-			console.log('%c Created and Launched Sample', 'color:green;');
+			console.log('%c%s Created and Launched', 'color:green;', s);
 
 		} else {
 			this.createList();
@@ -283,6 +285,8 @@ module.exports = kind({
 			sheets[i].disabled = true;
 		}
 	},
+	// Theme detection and acquisition is not presently working and must be refactored to allow
+	// integration with the modular system, but is left in as a reminder and a starting point.
 	initializeThemes: function () {
 		var i,
 			theme = this.get('theme'),
@@ -311,8 +315,8 @@ module.exports = kind({
 		}
 	},
 	themeChanged: function (oldTheme, newTheme) {
-		this.themeNodeStore[oldTheme].disabled = true;
-		this.themeNodeStore[newTheme].disabled = false;
+		if (this.themeNodeStore[oldTheme]) { this.themeNodeStore[oldTheme].disabled = true; }
+		if (this.themeNodeStore[newTheme]) { this.themeNodeStore[newTheme].disabled = false; }
 	},
 	handleThemeTap: function (sender, ev) {
 		this.set('theme', ev.originator.owner.get('value') ? 'light' : 'dark');
