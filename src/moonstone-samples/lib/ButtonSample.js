@@ -93,7 +93,12 @@ module.exports = kind({
 
 				{kind: Divider, content: 'Hidden Buttons:'},
 				{name: 'hiddenButton', kind: Button, content: 'Hidden Button', renderOnShow: true, ontap: 'buttonTapped'},
-				{name: 'showButton', kind: Button, content: 'Show Hidden Button', ontap: 'showButtonTapped'}
+				{name: 'showButton', kind: Button, content: 'Show Hidden Button', ontap: 'showButtonTapped'},
+
+				{kind: Divider, content: 'translucent Buttons:'},
+				{name: 'opaqueButton', kind: Button, minWidth: false, content: 'opaque', ontap: 'buttonTapped'},
+				{name: 'translucentButton', kind: Button, minWidth: false, translucent: 'translucent', content: 'translucent', ontap: 'buttonTapped'},
+				{name: 'transparentButton', kind: Button, minWidth: false, translucent: 'transparent', content: 'transparent',  ontap: 'buttonTapped'}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},
