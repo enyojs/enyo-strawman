@@ -29,7 +29,8 @@ module.exports = kind({
 		]},
 		{kind: Button, content: 'Toggle Content', ontap: 'toggleContent'},
 		{kind: Button, content: 'Toggle Label', ontap: 'toggleLabel'},
-		{kind: Button, content: 'Toggle Hint', ontap: 'toggleHint'}
+		{kind: Button, content: 'Toggle Hint', ontap: 'toggleHint'},
+		{kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'}
 	],
 	toggleContent: function () {
 		this.$.dyn.set('content', this.$.dyn.content ? '' : 'Content');
@@ -39,5 +40,8 @@ module.exports = kind({
 	},
 	toggleHint: function () {
 		this.$.dyn.set('accessibilityHint', this.$.dyn.accessibilityHint ? '' : 'Hint');
+	},
+	toggleDisabled: function () {
+		this.$.dyn.set('accessibilityDisabled', this.$.dyn.accessibilityDisabled ? false : true);
 	}
 });
