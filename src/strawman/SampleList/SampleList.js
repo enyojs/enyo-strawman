@@ -2,7 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/anchor'),
+	Anchor = require('enyo/Anchor'),
 	List = require('../List'),
 	Title = require('../Title');
 
