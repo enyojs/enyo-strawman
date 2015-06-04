@@ -48,7 +48,13 @@ module.exports = kind({
 					{kind: IconButton, icon: 'search', ontap: 'buttonTapped'},
 					{kind: IconButton, src: 'assets/icon-list.png', ontap: 'buttonTapped'},
 					{kind: IconButton, src: 'assets/icon-album.png', ontap: 'buttonTapped'}
-				]}
+				]},
+				{classes:'moon-1v'},
+				{kind: Divider, content: 'translucent Icon Buttons: '},
+				{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped'},
+				{kind: IconButton, icon: 'search', translucent: 'translucent', ontap: 'buttonTapped'},
+				{kind: IconButton, src: 'assets/icon-list.png', small: false, ontap: 'buttonTapped'},
+				{kind: IconButton, src: 'assets/icon-album.png', translucent: 'transparent', ontap: 'buttonTapped'}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},
