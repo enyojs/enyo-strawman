@@ -155,7 +155,7 @@ module.exports = kind({
 		this.$.audioPlayback.set('model', null);
 	},
 	toggleShuffle: function () {
-		this.$.audioPlayback.toggleShuffle();
+		this.$.audioPlayback.toggleShuffle(true, true);
 	},
 	toggleRepeat: function () {
 		this.$.audioPlayback.toggleRepeat();
