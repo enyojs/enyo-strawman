@@ -64,7 +64,7 @@ module.exports = kind({
 			]}
 		]}
 	],
-	next: function(inSender, inEvent) {
+	next: function (inSender, inEvent) {
 		this.$.panels.next();
 		return true;
 	}
