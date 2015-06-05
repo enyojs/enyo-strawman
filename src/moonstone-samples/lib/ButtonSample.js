@@ -93,7 +93,16 @@ module.exports = kind({
 
 				{kind: Divider, content: 'Hidden Buttons:'},
 				{name: 'hiddenButton', kind: Button, content: 'Hidden Button', renderOnShow: true, ontap: 'buttonTapped'},
-				{name: 'showButton', kind: Button, content: 'Show Hidden Button', ontap: 'showButtonTapped'}
+				{name: 'showButton', kind: Button, content: 'Show Hidden Button', ontap: 'showButtonTapped'},
+
+				{kind: Divider, content: 'Translucent Background Buttons:'},
+				{classes: 'image-background', components: [
+					{name: 'opaqueButton', kind: Button, minWidth: false, content: 'Normal Opaque', ontap: 'buttonTapped'},
+					{name: 'translucentButton', kind: Button, minWidth: false, backgroundOpacity: 'translucent', content: 'Translucent', ontap: 'buttonTapped'},
+					{name: 'disabledTranslucentButton', kind: Button, minWidth: false, backgroundOpacity: 'translucent', disabled: true, content: 'Disabled Translucent', ontap: 'buttonTapped'},
+					{name: 'transparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', content: 'Transparent',  ontap: 'buttonTapped'},
+					{name: 'disabledTransparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', disabled: true, content: 'Disabled Transparent',  ontap: 'buttonTapped'}
+				]}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},
