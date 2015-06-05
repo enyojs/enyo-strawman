@@ -5,15 +5,15 @@ var
 	Spotlight = require('spotlight');
 
 var
-	ChannelInfo = require('moonstone/ChannelInfo'),
+	ChannelInfo = require('moonstone-extra/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone-extra/Panels'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
-	VideoPlayer = require('moonstone/VideoPlayer');
+	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',

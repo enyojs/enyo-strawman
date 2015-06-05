@@ -21,7 +21,9 @@ newSampler.samples = {
 	DynamicPanelsSample: require('./DynamicPanelsSample'),
 	PanelsVideoPlayerSample: require('./PanelsVideoPlayerSample'),
 	PanelsWithCardArrangerSample: require('./PanelsWithCardArrangerSample'),
-	PanelsWithCarouselArrangerSample: require('./PanelsWithCarouselArrangerSample')
+	PanelsWithCarouselArrangerSample: require('./PanelsWithCarouselArrangerSample'),
+	VideoPlayerInlineSample: require('./VideoPlayerInlineSample'),
+	VideoPlayerSample: require('./VideoPlayerSample')
 };
 
 strawman.samples['MoonstoneExtra'] = newSampler;
