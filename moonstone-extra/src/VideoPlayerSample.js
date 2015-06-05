@@ -27,8 +27,8 @@ module.exports = kind({
 			kind: VideoPlayer,
 			sources: [
 				{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'},
-				{src: "http://media.w3.org/2010/05/bunny/movie.ogv", type: "video/ogg"},
-				{src: "http://media.w3.org/2010/05/sintel/trailer.webm", type: "video/webm"}
+				{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
+				{src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm'}
 			],
 			poster: 'assets/video-poster.png',
 			autoplay: true,
@@ -37,24 +37,24 @@ module.exports = kind({
 				{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 					{
 						kind: ChannelInfo,
-						channelNo: "789-123",
-						channelName: "AMC",
-						channelDesc: "KRON-HD",
-						channelMoreDesc: "4:30 - 5:30PM",
+						channelNo: '789-123',
+						channelName: 'AMC',
+						channelDesc: 'KRON-HD',
+						channelMoreDesc: '4:30 - 5:30PM',
 						components: [
-							{content: "DTV"},
-							{content: "Cinema"},
-							{content: "3D"}
+							{content: 'DTV'},
+							{content: 'Cinema'},
+							{content: '3D'}
 						]
 					},
 					{
 						kind: VideoInfoHeader,
-						title: "Downton Abbey",
+						title: 'Downton Abbey',
 						uppercase: false,
 						// Todo, we can remove below comment out after policy of samples is decided.
 						// In latest tag like 2.6.0-pre.5, we don't have samples.
-						// src: "$lib/moonstone/samples/assets/default-music.png",
-						description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+						// src: '$lib/moonstone/samples/assets/default-music.png',
+						description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 					}
 				]},
 				{kind: VideoInfoBackground, orient: 'right', background: true, components: [
@@ -62,19 +62,20 @@ module.exports = kind({
 				]}
 			],
 	   		components: [
-				{kind: IconButton, small: false},
-				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls'},
-				{kind: Button, content: 'Unload', ontap: 'unload'},
-				{kind: Button, content: 'Reload', ontap: 'load'},
-				{kind: ToggleButton, content: 'FF/Rewind', name: 'ffrewToggleButton'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls', backgroundOpacity: 'translucent'},
+				{kind: Button, content: 'Unload', backgroundOpacity: 'translucent', ontap: 'unload'},
+				{kind: Button, content: 'Reload', backgroundOpacity: 'translucent', ontap: 'load'},
+				{kind: ToggleButton, content: 'FF/Rewind', name: 'ffrewToggleButton', backgroundOpacity: 'translucent'},
 				{kind: ContextualPopupDecorator, components: [
 					{kind: TooltipDecorator, components: [
-						{kind: Button, content: 'Popup'},
+						{kind: Button, content: 'Popup', backgroundOpacity: 'translucent'},
 						{kind: Tooltip, floating: true, content: 'I\'m a tooltip for a button.'}
 					]},
 					{
 						kind: ContextualPopup,
 						classes: 'moon-3h moon-6v',
+						backgroundOpacity: 'translucent',
 						components: [
 							{kind: Item, content: 'Item 1'},
 							{kind: Item, content: 'Item 2'},
@@ -82,9 +83,9 @@ module.exports = kind({
 						]
 					}
 				]},
-				{kind: IconButton, small: false},
-				{kind: IconButton, small: false},
-				{kind: IconButton, small: false}
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 			]
 		},
 		{kind: Dialog, name: 'tapDialog', title: 'The controls were tapped.', message: 'Press OK to dismiss', components: [
@@ -92,8 +93,8 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '.$.player.disablePlaybackControls', to: '.$.controlsToggleButton.value', oneWay:false},
-		{from: '.$.player.showFFRewindControls', to: '.$.ffrewToggleButton.value', oneWay:false}
+		{from: '$.player.disablePlaybackControls', to: '$.controlsToggleButton.value', oneWay:false},
+		{from: '$.player.showFFRewindControls', to: '$.ffrewToggleButton.value', oneWay:false}
 	],
 	controlsTapped: function () {
 		this.$.tapDialog.show();
@@ -109,8 +110,8 @@ module.exports = kind({
 		// We can set source by sources array
 		this.sources = [
 			{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'},
-			{src: "http://media.w3.org/2010/05/bunny/movie.ogv", type: "video/ogg"},
-			{src: "http://media.w3.org/2010/05/sintel/trailer.webm", type: "video/webm"}
+			{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
+			{src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
 	}

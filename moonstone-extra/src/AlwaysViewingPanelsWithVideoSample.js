@@ -27,11 +27,10 @@ module.exports = kind({
 					kind: ChannelInfo,
 					channelNo: '13',
 					channelName: 'AMC',
-					classes: 'moon-2h',
 					components: [
 						{content: '3D'},
 						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'moon-video-player-info-redicon '}
+						{content: 'REC 08:22', classes: 'redicon'}
 					]
 				},
 				{
@@ -62,15 +61,15 @@ module.exports = kind({
 				]},
 				{kind: Tooltip, floating:true, content: 'I\'m a tooltip for a button.'}
 			]},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 		]},
         {name: 'panels', kind: Panels, pattern: 'alwaysviewing', classes: 'enyo-fit', showing: false, components: [
             {title: 'First Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [

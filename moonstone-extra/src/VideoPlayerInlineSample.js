@@ -29,11 +29,10 @@ module.exports = kind({
 						kind: ChannelInfo,
 						channelNo: '13',
 						channelName: 'AMC',
-						classes: 'moon-2h',
 						components: [
-							{content: '3D'},
-							{content: 'Live'},
-							{content: 'REC 08:22', classes: 'moon-video-player-info-redicon'}
+							{content: 'DTV'},
+							{content: 'Cinema'},
+							{content: '3D'}
 						]
 					},
 					{
@@ -49,16 +48,16 @@ module.exports = kind({
 				]}
 			],
 			components: [
-				{kind: VideoFullscreenToggleButton},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+				{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 			]
 		}
 	]
