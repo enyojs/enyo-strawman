@@ -14,6 +14,14 @@ var
 	});
 
 newSampler.samples = {
+	ActivityPanelsSample: require('./ActivityPanelsSample'),
+	ActivityPanelsWithVideoSample: require('./ActivityPanelsWithVideoSample'),
+	AlwaysViewingPanelsSample: require('./AlwaysViewingPanelsSample'),
+	AlwaysViewingPanelsWithVideoSample: require('./AlwaysViewingPanelsWithVideoSample'),
+	DynamicPanelsSample: require('./DynamicPanelsSample'),
+	PanelsVideoPlayerSample: require('./PanelsVideoPlayerSample'),
+	PanelsWithCardArrangerSample: require('./PanelsWithCardArrangerSample'),
+	PanelsWithCarouselArrangerSample: require('./PanelsWithCarouselArrangerSample')
 };
 
 strawman.samples['MoonstoneExtra'] = newSampler;
