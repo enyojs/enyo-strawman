@@ -7,7 +7,8 @@
 }
 
 .image-badge-sample .float-right {
-	float: right;
+	position: absolute;
+	right: 0;
 }
 
 .image-badge-sample .moon-item {

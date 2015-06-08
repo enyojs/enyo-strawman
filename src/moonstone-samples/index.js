@@ -46,6 +46,7 @@ var
 		NewDataListSample					: require('./lib/NewDataListSample'),
 		ObjectActionHorizontalTypeSample	: require('./lib/ObjectActionHorizontalTypeSample'),
 		ObjectActionVerticalTypeSample		: require('./lib/ObjectActionVerticalTypeSample'),
+		OverlaySample						: require('./lib/OverlaySample'),
 		PanelsVideoPlayerSample				: require('./lib/PanelsVideoPlayerSample'),
 		PanelsWithCardArrangerSample		: require('./lib/PanelsWithCardArrangerSample'),
 		PanelsWithCarouselArrangerSample	: require('./lib/PanelsWithCarouselArrangerSample'),

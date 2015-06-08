@@ -13,12 +13,14 @@ var
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
+	Icon = require('moonstone/Icon'),
+	Image = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
 	RadioItemGroup = require('moonstone/RadioItemGroup'),
 	Scroller = require('moonstone/Scroller'),
-	SelectionOverlaySupport = require('moonstone/SelectionOverlaySupport'),
+	Overlay = require('moonstone/Overlay'),
 	ToggleButton = require('moonstone/ToggleButton');
 
 
@@ -26,8 +28,7 @@ var
 var GridSampleItem = kind({
 	name: 'moon.sample.GridSampleItem',
 	kind: GridListImageItem,
-	mixins: [SelectionOverlaySupport],
-	selectionOverlayVerticalOffset: 35,
+	mixins: [Overlay.Selection],
 	subCaption: 'Sub Caption',
 	bindings: [
 		{from: 'model.text', to: 'caption'},
@@ -37,22 +38,11 @@ var GridSampleItem = kind({
 	]
 });
 
-var HorizontalGridListImageItem = kind({
-	name: 'moon.HorizontalGridListImageItem',
-	kind: GridListImageItem,
-	mixins: [SelectionOverlaySupport],
-	classes: 'horizontal-gridList-image-item',
-	selectionOverlayVerticalOffset: 50,
-	selectionOverlayHorizontalOffset: 95
-});
-
 var HorizontalGridListItem = kind({
 	name: 'moon.HorizontalGridListItem',
 	kind: Item,
-	mixins: [SelectionOverlaySupport],
 	classes: 'moon-gridlist-imageitem horizontal-gridList-item',
-	selectionOverlayVerticalOffset: 50,
-	selectionOverlayHorizontalOffset: 5,
+	mixins: [Overlay.Support, Overlay.Selection],
 
 	components: [
 		{name: 'caption', classes: 'caption'},
@@ -70,6 +60,20 @@ var HorizontalGridListItem = kind({
 		{from: 'caption', to: '$.caption.showing', kind: EmptyBinding},
 		{from: 'subCaption', to: '$.subCaption.content'},
 		{from: 'subCaption', to: '$.subCaption.showing', kind: EmptyBinding}
+	]
+});
+
+var HorizontalGridListImageItem = kind({
+	name: 'moon.HorizontalGridListImageItem',
+	kind: HorizontalGridListItem,
+	classes: 'horizontal-gridList-image-item',
+	components: [
+		{name: 'img', kind: Image},
+		{name: 'caption', classes: 'caption'},
+		{name: 'subCaption', classes: 'sub-caption'}
+	],
+	bindings: [
+		{from: 'model.url', to: '$.img.src'}
 	]
 });
 
