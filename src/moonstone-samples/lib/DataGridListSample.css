@@ -26,7 +26,7 @@
 }
 
 .moon-gridlist-imageitem.horizontal-gridList-image-item {
-    padding-left: 12px;
+    padding: 0;
 }
 
 .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-overlay-container {
@@ -39,4 +39,4 @@
     position: relative;
     top: 18%;
     overflow: hidden;
-} 
+}
