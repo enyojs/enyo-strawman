@@ -5,15 +5,15 @@ var
 	Spotlight = require('spotlight');
 
 var
-	ChannelInfo = require('moonstone/ChannelInfo'),
+	ChannelInfo = require('moonstone-extra/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone-extra/Panels'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
-	VideoPlayer = require('moonstone/VideoPlayer');
+	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',
@@ -25,11 +25,10 @@ module.exports = kind({
 					kind: ChannelInfo,
 					channelNo: '13',
 					channelName: 'AMC',
-					classes: 'moon-2h',
 					components: [
 						{content: '3D'},
 						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'moon-video-player-info-redicon '}
+						{content: 'REC 08:22', classes: 'redicon'}
 					]
 				},
 				{
@@ -44,16 +43,16 @@ module.exports = kind({
 				{kind: Clock}
 			]}
 		], components: [
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 		]},
 		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, onShowingChanged: 'panelsShowingChanged', components: [
 			{title: 'First Panel', titleBelow:'Sub-title', subTitleBelow:'Sub-sub title', components: [

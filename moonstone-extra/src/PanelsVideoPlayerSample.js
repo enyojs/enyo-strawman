@@ -8,7 +8,7 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone/ChannelInfo'),
+	ChannelInfo = require('moonstone-extra/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),
@@ -16,10 +16,10 @@ var
 	Panels = require('moonstone-extra/Panels'),
 	SelectableItem = require('moonstone/SelectableItem'),
 	ToggleButton = require('moonstone/ToggleButton'),
-	VideoFullscreenToggleButton = require('moonstone/VideoFullscreenToggleButton'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
-	VideoPlayer = require('moonstone/VideoPlayer');
+	VideoFullscreenToggleButton = require('moonstone-extra/VideoFullscreenToggleButton'),
+	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
 	name: 'moon.sample.PanelsVideoPlayerSample',
@@ -63,11 +63,10 @@ module.exports = kind({
 										kind: ChannelInfo,
 										channelNo: '13',
 										channelName: 'AMC',
-										classes: 'moon-2h',
 										components: [
 											{content: '3D'},
 											{content: 'Live'},
-											{content: 'REC 08:22', classes: 'moon-video-player-info-redicon'}
+											{content: 'REC 08:22', classes: 'redicon'}
 										]
 									},
 									{
@@ -86,16 +85,16 @@ module.exports = kind({
 								]
 							}],
 							components: [
-								{kind: VideoFullscreenToggleButton},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png'}
+								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
+								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'}
 							]
 						}
 					]

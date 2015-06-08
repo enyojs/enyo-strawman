@@ -3,7 +3,7 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone/ChannelInfo'),
+	ChannelInfo = require('moonstone-extra/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
@@ -13,9 +13,9 @@ var
 	ToggleItem = require('moonstone/ToggleItem'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
-	VideoPlayer = require('moonstone/VideoPlayer');
+	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
     name: 'moon.sample.AlwaysViewingPanelsWithVideoSample',
@@ -27,11 +27,10 @@ module.exports = kind({
 					kind: ChannelInfo,
 					channelNo: '13',
 					channelName: 'AMC',
-					classes: 'moon-2h',
 					components: [
 						{content: '3D'},
 						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'moon-video-player-info-redicon '}
+						{content: 'REC 08:22', classes: 'redicon'}
 					]
 				},
 				{
@@ -46,7 +45,7 @@ module.exports = kind({
 				{kind: Clock}
 			]}
 		], components: [
-			{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
+			{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
 			{kind: TooltipDecorator, components: [
 				{kind: ContextualPopupDecorator, components: [
 					{kind: Button, content: 'Popup'},
@@ -62,15 +61,15 @@ module.exports = kind({
 				]},
 				{kind: Tooltip, floating:true, content: 'I\'m a tooltip for a button.'}
 			]},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 		]},
         {name: 'panels', kind: Panels, pattern: 'alwaysviewing', classes: 'enyo-fit', showing: false, components: [
             {title: 'First Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
