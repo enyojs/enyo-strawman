@@ -48,9 +48,9 @@ module.exports = kind({
 			{tag: 'br'},
 			{name: 'checkbox_result'},
 			{tag: 'br'},
-			{name: 'button', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport, ButtonAccessibilitySupport]},
+			{name: 'btn', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport, ButtonAccessibilitySupport]},
 			{tag: 'br'},
-			{name: 'button_result'},
+			{name: 'btn_result'},
 			{tag: 'br'}
 		]},
 		{name: "toggle2", kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'}
@@ -80,7 +80,7 @@ module.exports = kind({
 		} else if (sender.name === 'toggle2') {
 			this.$.popup.set('accessibilityDisabled', this.$.popup.accessibilityDisabled ? false : true);
 			this.$.checkbox.set('accessibilityDisabled', this.$.checkbox.accessibilityDisabled ? false : true);
-			this.$.button.set('accessibilityDisabled', this.$.button.accessibilityDisabled ? false : true);
+			this.$.btn.set('accessibilityDisabled', this.$.btn.accessibilityDisabled ? false : true);
 			this.showAriaAttributes();
 		}
 	},
@@ -99,10 +99,10 @@ module.exports = kind({
 		tabindex = this.$.checkbox.getAttribute('tabindex');
 		this.$.checkbox_result.setContent(' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-checked = ' + checked + ' :: aria-disabled = ' + disabled);
 	
-		label = this.$.button.getAttribute('aria-label');
-		role = this.$.button.getAttribute('role');
-		disabled = this.$.button.getAttribute('aria-disabled');
-		tabindex = this.$.button.getAttribute('tabindex');
-		this.$.button_result.setContent(' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-disabled = ' + disabled);
+		label = this.$.btn.getAttribute('aria-label');
+		role = this.$.btn.getAttribute('role');
+		disabled = this.$.btn.getAttribute('aria-disabled');
+		tabindex = this.$.btn.getAttribute('tabindex');
+		this.$.btn_result.setContent(' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-disabled = ' + disabled);
 	}
 });
