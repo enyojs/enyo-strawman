@@ -23,6 +23,7 @@ module.exports = kind({
 					classes: 'sample-drawers-partial',
 					open: false,
 					controlsOpen: false,
+					renderOnShow: true,
 					onActivate: 'partialDrawerChanged',
 					onDeactivate: 'partialDrawerChanged',
 					handle: {name: 'handleButton', content: 'Partial drawer with long text truncation'},
@@ -41,6 +42,7 @@ module.exports = kind({
 				},
 				{
 					name: 'searchDrawer',
+					renderOnShow: true,
 					handle: {content: 'Full drawer'},
 					components: [
 						{kind: Panel, classes: 'enyo-fit', title: 'Full Drawer', components: [
