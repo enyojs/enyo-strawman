@@ -2,6 +2,7 @@ var
 	kind = require('enyo/kind'),
 	AccessibilitySupport = require('enyo/AccessibilitySupport'),
 	Button = require('enyo/Button'),
+	Checkbox = require('enyo/Checkbox'),
 	Control = require('enyo/Control');
 
 module.exports = kind({
@@ -30,8 +31,29 @@ module.exports = kind({
 		{kind: Button, content: 'Toggle Content', ontap: 'toggleContent'},
 		{kind: Button, content: 'Toggle Label', ontap: 'toggleLabel'},
 		{kind: Button, content: 'Toggle Hint', ontap: 'toggleHint'},
-		{kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'}
+		{name: "toggle1", kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'},
+		{tag: 'h3', content: 'UI control accessibilityDisabled Example'},
+		{ components: [
+			{name: 'checkbox', kind: Checkbox, disabled: true, checked: true, content: 'simple checkbox', mixins: [AccessibilitySupport]},
+			{tag: 'br'},
+			{name: 'checkbox_result'},
+			{tag: 'br'},
+			{name: 'button', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport]},
+			{tag: 'br'},
+			{name: 'button_result'},
+			{tag: 'br'}
+		]},
+		{name: "toggle2", kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'}
 	],
+	/**
+	* @private
+	*/
+	rendered: kind.inherit(function (sup) {
+		return function (props) {
+			sup.apply(this, arguments);
+			this.checkAriaAttributes();
+		};
+	}),
 	toggleContent: function () {
 		this.$.dyn.set('content', this.$.dyn.content ? '' : 'Content');
 	},
@@ -41,7 +63,29 @@ module.exports = kind({
 	toggleHint: function () {
 		this.$.dyn.set('accessibilityHint', this.$.dyn.accessibilityHint ? '' : 'Hint');
 	},
-	toggleDisabled: function () {
-		this.$.dyn.set('accessibilityDisabled', this.$.dyn.accessibilityDisabled ? false : true);
+	toggleDisabled: function (sender, e) {
+		if (sender.name === 'toggle1') {
+			this.$.dyn.set('accessibilityDisabled', this.$.dyn.accessibilityDisabled ? false : true);
+		} else if (sender.name === 'toggle2') {
+			this.$.checkbox.set('accessibilityDisabled', this.$.checkbox.accessibilityDisabled ? false : true);
+			this.$.button.set('accessibilityDisabled', this.$.button.accessibilityDisabled ? false : true);
+			this.checkAriaAttributes();
+		}
+	},
+	checkAriaAttributes: function () {
+		var role, label, checked, disabled, tabindex;
+
+		label = this.$.checkbox.getAttribute('aria-label');
+		role = this.$.checkbox.getAttribute('role');
+		checked = this.$.checkbox.getAttribute('aria-checked');
+		disabled = this.$.checkbox.getAttribute('aria-disabled');
+		tabindex = this.$.checkbox.getAttribute('tabindex');
+		this.$.checkbox_result.setContent(' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-checked = ' + checked + ' :: aria-disabled = ' + disabled);
+	
+		label = this.$.button.getAttribute('aria-label');
+		role = this.$.button.getAttribute('role');
+		disabled = this.$.button.getAttribute('aria-disabled');
+		tabindex = this.$.button.getAttribute('tabindex');
+		this.$.button_result.setContent(' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-disabled = ' + disabled);
 	}
 });
