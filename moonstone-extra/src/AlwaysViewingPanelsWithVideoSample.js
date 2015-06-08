@@ -45,7 +45,7 @@ module.exports = kind({
 				{kind: Clock}
 			]}
 		], components: [
-			{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
+			{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
 			{kind: TooltipDecorator, components: [
 				{kind: ContextualPopupDecorator, components: [
 					{kind: Button, content: 'Popup'},
