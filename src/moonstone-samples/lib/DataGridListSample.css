@@ -11,17 +11,27 @@
 
 .moon-gridlist-imageitem.horizontal-gridList-image-item > .caption,
 .moon-gridlist-imageitem.horizontal-gridList-image-item > .sub-caption {
+    text-align: center;
     width: auto;
     overflow: hidden;
 }
 
 .moon-gridlist-imageitem.horizontal-gridList-item {
-    padding: 12px 0 0 99px;
+    padding-left: 99px;
 }
 
 .moon-gridlist-imageitem.horizontal-gridList-item .moon-overlay-container {
     width: 75px;
     right: auto;
+}
+
+.moon-gridlist-imageitem.horizontal-gridList-image-item {
+    padding-left: 12px;
+}
+
+.moon-gridlist-imageitem.horizontal-gridList-image-item .moon-overlay-container {
+    right: 0;
+    left: auto;
 }
 
 .moon-gridlist-imageitem.horizontal-gridList-item > .caption,

@@ -14,6 +14,7 @@ var
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
 	Icon = require('moonstone/Icon'),
+	Image = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
@@ -35,13 +36,6 @@ var GridSampleItem = kind({
 		{from: 'model.url', to: 'source'},
 		{from: 'model.selected', to: 'selected', oneWay: false}
 	]
-});
-
-var HorizontalGridListImageItem = kind({
-	name: 'moon.HorizontalGridListImageItem',
-	kind: GridListImageItem,
-	mixins: [Overlay.Selection],
-	classes: 'horizontal-gridList-image-item',
 });
 
 var HorizontalGridListItem = kind({
@@ -66,6 +60,20 @@ var HorizontalGridListItem = kind({
 		{from: 'caption', to: '$.caption.showing', kind: EmptyBinding},
 		{from: 'subCaption', to: '$.subCaption.content'},
 		{from: 'subCaption', to: '$.subCaption.showing', kind: EmptyBinding}
+	]
+});
+
+var HorizontalGridListImageItem = kind({
+	name: 'moon.HorizontalGridListImageItem',
+	kind: HorizontalGridListItem,
+	classes: 'horizontal-gridList-image-item',
+	components: [
+		{name: 'img', kind: Image},
+		{name: 'caption', classes: 'caption'},
+		{name: 'subCaption', classes: 'sub-caption'}
+	],
+	bindings: [
+		{from: 'model.url', to: '$.img.src'}
 	]
 });
 
@@ -136,7 +144,7 @@ module.exports = kind({
 				selected: false,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
-				url: 'http://placehold.it/300x' + (this.itemKind == 'GridListImageItem' ? '300' : '100') + '/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + idx
+				url: 'http://placehold.it/300x300/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + idx
 			});
 		}
 		// update our internal index so it will always generate unique values
