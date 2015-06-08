@@ -2,8 +2,13 @@ var
 	kind = require('enyo/kind'),
 	AccessibilitySupport = require('enyo/AccessibilitySupport'),
 	Button = require('enyo/Button'),
+	ButtonAccessibilitySupport = require('enyo/Button/ButtonAccessibilitySupport.js'),
 	Checkbox = require('enyo/Checkbox'),
-	Control = require('enyo/Control');
+	CheckboxAccessibilitySupport = require('enyo/Checkbox/CheckboxAccessibilitySupport.js'),
+	Control = require('enyo/Control'),
+	InputAccessibilitySupport = require('enyo/Input/InputAccessibilitySupport.js'),
+	Popup = require('enyo/Popup');
+	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport.js'),
 
 module.exports = kind({
 	components: [
@@ -34,11 +39,16 @@ module.exports = kind({
 		{name: "toggle1", kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'},
 		{tag: 'h3', content: 'UI control accessibilityDisabled Example'},
 		{ components: [
-			{name: 'checkbox', kind: Checkbox, disabled: true, checked: true, content: 'simple checkbox', mixins: [AccessibilitySupport]},
+			{kind: Popup, name: "popup", autoDismiss: false, classes: "popup", content: "popup", mixins: [AccessibilitySupport, PopupAccessibilitySupport]},
+			{tag: 'br'},
+			{tag: 'br'},
+			{name: 'popup_result'},
+			{tag: 'br'},
+			{name: 'checkbox', kind: Checkbox, disabled: true, checked: true, content: 'simple checkbox', mixins: [AccessibilitySupport, InputAccessibilitySupport, CheckboxAccessibilitySupport]},
 			{tag: 'br'},
 			{name: 'checkbox_result'},
 			{tag: 'br'},
-			{name: 'button', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport]},
+			{name: 'button', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport, ButtonAccessibilitySupport]},
 			{tag: 'br'},
 			{name: 'button_result'},
 			{tag: 'br'}
@@ -51,7 +61,8 @@ module.exports = kind({
 	rendered: kind.inherit(function (sup) {
 		return function (props) {
 			sup.apply(this, arguments);
-			this.checkAriaAttributes();
+			this.$.popup.setShowing(true);
+			this.showAriaAttributes();
 		};
 	}),
 	toggleContent: function () {
@@ -67,13 +78,19 @@ module.exports = kind({
 		if (sender.name === 'toggle1') {
 			this.$.dyn.set('accessibilityDisabled', this.$.dyn.accessibilityDisabled ? false : true);
 		} else if (sender.name === 'toggle2') {
+			this.$.popup.set('accessibilityDisabled', this.$.popup.accessibilityDisabled ? false : true);
 			this.$.checkbox.set('accessibilityDisabled', this.$.checkbox.accessibilityDisabled ? false : true);
 			this.$.button.set('accessibilityDisabled', this.$.button.accessibilityDisabled ? false : true);
-			this.checkAriaAttributes();
+			this.showAriaAttributes();
 		}
 	},
-	checkAriaAttributes: function () {
+	showAriaAttributes: function () {
 		var role, label, checked, disabled, tabindex;
+
+		label = this.$.popup.getAttribute('aria-label');
+		role = this.$.popup.getAttribute('role');
+		tabindex = this.$.popup.getAttribute('tabindex');
+		this.$.popup_result.setContent(' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label);
 
 		label = this.$.checkbox.getAttribute('aria-label');
 		role = this.$.checkbox.getAttribute('role');
