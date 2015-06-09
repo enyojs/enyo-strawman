@@ -85,12 +85,12 @@ module.exports = kind({
 	timeChanged: function (sender, event) {
 		if (this.$.result && event.value){
 			var timeArray;
-			if (inSender.localeValue) {
-				timeArray = inSender._tf.format(ilib.Date.newInstance({unixtime: inSender.localeValue.getTime(), timezone:'Etc/UTC'})).toString().split(':')
+			if (sender.localeValue) {
+				timeArray = sender._tf.format(ilib.Date.newInstance({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString().split(':')
 			} else {
-				timeArray = inEvent.value.toTimeString().split(":");
+				timeArray = event.value.toTimeString().split(":");
 			}
-			
+
 			this.$.result.setContent(event.name + ' changed to ' + timeArray[0] + ': ' + timeArray[1]);
 		}
 	},
