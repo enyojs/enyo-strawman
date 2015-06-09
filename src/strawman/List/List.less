@@ -1,0 +1,32 @@
+.strawman .strawman-list {
+	top: 5em;
+
+	// All items
+	.item {
+		margin: 0.5em;
+		border-radius: 0.2em;
+		background-image: linear-gradient(to right, rgba(125,185,232,1) 0%,rgba(125,185,232,0.1) 1%,rgba(125,185,232,0.1) 99%,rgba(125,185,232,1) 100%);
+
+		a {
+			height: 2em;
+			line-height: 2em;
+			color: @strawman-enyo-blue;
+			display: block;
+			padding: 0 1em;
+			text-decoration: none;
+		}
+	}
+
+	// Items inside a grid
+	.grid .item {
+		display: inline-block;
+		background-color: @strawman-enyo-blue;
+		background-image: none;
+
+		a {
+			height: 3em;
+			line-height: 3em;
+			color: #FFF;
+		}
+	}
+}

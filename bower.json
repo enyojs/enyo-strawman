@@ -12,5 +12,8 @@
     "canvas": "git@github.com:enyojs/canvas.git#2.6.0-dev",
     "svg": "git@github.com:enyojs/svg.git#master"
   },
-  "private": true
+  "private": true,
+  "resolutions": {
+    "moonstone-extra": "master"
+  }
 }

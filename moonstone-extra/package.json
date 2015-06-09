@@ -1,0 +1,36 @@
+{
+  "name": "enyo-strawman-moon-extra",
+  "filename": "index.js",
+  "version": "0.0.1",
+  "description": "Collection of Enyo lib samples for Quality Assurance with Moonstone Extras",
+  "homepage": "http://enyojs.com/",
+  "bugs": "http://jira.enyojs.com/",
+  "main": "index.js",
+  "keywords": [],
+  "maintainers": [
+    {
+      "name": "Enyo JS Framework Team",
+      "web": "http://enyojs.com/"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/enyojs/enyo-strawman"
+  },
+  "devDependencies": {},
+  "styles": [
+    "../*.css"
+  ],
+  "assets": [
+    "appinfo.json",
+    "icon.png",
+    "largeIcon.png"
+  ]
+}
