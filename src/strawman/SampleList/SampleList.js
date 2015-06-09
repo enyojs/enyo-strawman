@@ -24,7 +24,7 @@ module.exports = kind({
 		this._libList = !name;
 
 		if (this.samples[name]) {
-			this.createComponent({kind: this.samples[name]});
+			global.sample = this.createComponent({kind: this.samples[name]});
 		} else {
 			this.addClass('strawman');
 			this.createComponents(this.listComponents);
