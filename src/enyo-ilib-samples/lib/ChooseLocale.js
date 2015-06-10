@@ -203,7 +203,7 @@ module.exports = kind({
         this.inherited(arguments);
         var curLocale = ilib.getLocale();
         for(var i = 0; i < this.locales.length; i++) {
-            this.$.switcherLocale.createComponent({value: this.locales[i].locale, content: this.locales[i].locale +' ('+ this.locales[i].label +' / '+ this.locales[i].label_ol +')', active: this.locales[i].locale.toLowerCase() === curLocale.toLowerCase()});
+            this.$.switcherLocale.createComponent({value: this.locales[i].locale, content: this.locales[i].locale +' ('+ this.locales[i].label +' / '+ this.locales[i].label_ol +')', selected: this.locales[i].locale.toLowerCase() === curLocale.toLowerCase()});
         }
     },
 
