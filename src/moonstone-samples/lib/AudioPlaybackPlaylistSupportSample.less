@@ -1,0 +1,33 @@
+.sample-audio-playback {
+	@audio-thumbnail-size: 111px;
+
+	.sample-audio-playback-queue-list,
+	.sample-audio-playback-queue-detail {
+		height: 100%;
+		width: 50%;
+		display: inline-block;
+	}
+	.sample-audio-playback-queue-detail-content {
+		padding: 30px;
+	}
+	.sample-audio-playback-queue-list {
+		.moon-imageitem {
+			height: (@audio-thumbnail-size + @moon-spotlight-outset);
+
+			img {
+				height: @audio-thumbnail-size;
+				width: @audio-thumbnail-size;
+				margin-right: @moon-spotlight-outset;
+			}
+			&.playing .moon-labeledtextitem {
+				.label,
+				.text {
+					color: @moon-spotlight-text-color;
+				}
+			}
+		}
+		.moon-labeledtextitem {
+			height: @audio-thumbnail-size;
+		}
+	}
+}

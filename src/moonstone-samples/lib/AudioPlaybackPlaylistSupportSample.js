@@ -23,51 +23,30 @@ var audioQueue = kind({
 	titleBelow: '2 Tracks',
 	classes: 'sample-audio-playback-queue enyo-fit',
 	components: [
-		{
-			fit: true,
-			classes: 'sample-audio-playback-queue-body',
-			components: [
-				{
-					kind: Scroller,
-					horizontal: 'hidden',
-					spotlightPagingControls: true,
-					classes: 'sample-audio-playback-queue-detail',
-					components: [
-						{
-							classes: 'sample-audio-playback-queue-detail-content',
-							components: [
-								{ content: 'Lylics' },
-								{ tag: 'br' },
-								{ content: 'The Time Has Come One Way What The World Will Never Take Til I See You Take All Of Me The Stand You ll Come Break Free Look To You Where The Love Lasts Forever Forever There Is Nothing Like Tell The World All Day Take It All My Future Decided All I Need Is You Mighty To Save Nothing But The Blood' } 
-							]
-						}
-					]
-				},
-				{
-					classes: 'sample-audio-playback-queue-list',
-					components: [
-						{
-							name: 'datalist',
-							kind: DataList,
-							scrollerOptions: { kind: Scroller, horizontal: 'hidden', spotlightPagingControls: true},
-							components: [
-								{kind: ImageItem, ontap: 'play', bindings: [
-									{from: 'model.albumArt', to: 'source'},
-									{from: 'model.trackName', to: 'label'},
-									{from: 'model.artistName', to: 'text'},
-									{from: 'model.playing', to: 'playing'}
-								], observers: [
-									{method: 'playingHandler', path: ['playing']}
-								],
-								playingHandler: function (sender, event) {
-									this.addRemoveClass('playing', this.get('playing'));
-								}}
-							]
-						}
-					]
-				}
-			]
-		}
+		{classes: 'sample-audio-playback-queue-body', fit: true, components: [
+			{classes: 'sample-audio-playback-queue-list', components: [
+				{name: 'datalist', kind: DataList, scrollerOptions: { kind: Scroller, horizontal: 'hidden', spotlightPagingControls: true}, components: [
+					{kind: ImageItem, ontap: 'play', bindings: [
+						{from: 'model.albumArt', to: 'source'},
+						{from: 'model.trackName', to: 'label'},
+						{from: 'model.artistName', to: 'text'},
+						{from: 'model.playing', to: 'playing'}
+					], observers: [
+						{method: 'playingHandler', path: ['playing']}
+					],
+					playingHandler: function (sender, event) {
+						this.addRemoveClass('playing', this.get('playing'));
+					}}
+				]}
+			]},
+			{kind: Scroller, horizontal: 'hidden', spotlightPagingControls: true, classes: 'sample-audio-playback-queue-detail', components: [
+				{classes: 'sample-audio-playback-queue-detail-content', components: [
+					{content: 'Lylics'},
+					{classes: 'moon-1v'},
+					{content: 'The Time Has Come One Way What The World Will Never Take Til I See You Take All Of Me The Stand You ll Come Break Free Look To You Where The Love Lasts Forever Forever There Is Nothing Like Tell The World All Day Take It All My Future Decided All I Need Is You Mighty To Save Nothing But The Blood'}
+				]}
+			]}
+		]}
 	],
 	bindings: [
 		{from: 'collection', to: '$.datalist.collection'}
@@ -95,35 +74,27 @@ module.exports = kind({
 	},
 	components: [
 		{kind: Drawers, drawers:[
-			{
-				kind: AudioPlayback,
-				name: 'audioPlayback',
-				mixins: [ Playlist.Support ],
-				autoPlayOnShuffle: true,
-				components: [
-					{name: 'queue', kind: audioQueue}
-				],
-				moreComponents: [
-					{name: 'btnShuffle', kind: Button, ontap: 'toggleShuffle'},
-					{name: 'btnRepeat', kind: Button, ontap: 'toggleRepeat'},
-					{name: 'btnOpen', kind: IconButton, icon: 'list', small: false, ontap: 'toggleOpen'}
-				],
-				playbackRateHash: {
-					fastForward: ['2', '4'],
-					rewind: ['-2', '-4'],
-					slowForward: ['1/4', '1/2', '1'],
-					slowRewind: ['-1/2', '-1']
-				}
-			}
+			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ Playlist.Support ], autoPlayOnShuffle: true, components: [
+				{name: 'queue', kind: audioQueue}
+			], moreComponents: [
+				{name: 'btnShuffle', kind: Button, ontap: 'toggleShuffle'},
+				{name: 'btnRepeat', kind: Button, ontap: 'toggleRepeat'},
+				{name: 'btnOpen', kind: IconButton, icon: 'list', small: false, ontap: 'toggleOpen'}
+			], playbackRateHash: {
+				fastForward: ['2', '4'],
+				rewind: ['-2', '-4'],
+				slowForward: ['1/4', '1/2', '1'],
+				slowRewind: ['-1/2', '-1']
+			}}
 		],
 		components: [
 			// Fixme: If we are not using wrapper like scroller inside of drawer,
 			// drawer will not close itself when click blank area under the drawer.
 			{kind: Scroller, components: [
-				{tag: 'br'},{tag: 'br'},
-				{kind: Button, content: 'set audio #1', ontap: 'setAudio1'},
-				{kind: Button, content: 'set audio #2', ontap: 'setAudio2'},
-				{kind: Button, content: 'set audio list', ontap: 'setAudioList'},
+				{classes: 'moon-2v'},
+				{kind: Button, content: 'Set Audio #1', ontap: 'setAudio1'},
+				{kind: Button, content: 'Set Audio #2', ontap: 'setAudio2'},
+				{kind: Button, content: 'Set Audio List', ontap: 'setAudioList'},
 				{kind: Button, content: 'unload audio', ontap: 'unload'}
 			]}
 		]}
