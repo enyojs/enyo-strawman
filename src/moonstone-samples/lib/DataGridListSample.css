@@ -11,7 +11,6 @@
 
 .moon-gridlist-imageitem.horizontal-gridList-image-item > .caption,
 .moon-gridlist-imageitem.horizontal-gridList-image-item > .sub-caption {
-    text-align: center;
     width: auto;
     overflow: hidden;
 }
@@ -32,6 +31,11 @@
 .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-overlay-container {
     right: 0;
     left: auto;
+}
+
+.enyo-locale-right-to-left .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-overlay-container {
+    right: auto;
+    left: 0;
 }
 
 .moon-gridlist-imageitem.horizontal-gridList-item > .caption,
