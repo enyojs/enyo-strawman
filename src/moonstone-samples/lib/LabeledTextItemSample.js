@@ -12,7 +12,7 @@ module.exports = kind({
 		{kind: Scroller, classes: 'enyo-fill', components: [
 			{
 				kind: LabeledTextItem,
-				label: 'Breaking Bad Or Some Really Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Title',
+				label: 'Breaking Bad Or Some Reeeeeeeally Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Title',
 				text: 'A struggling high school chemistry teacher who is diagnosed with inoperable lung cancer turns to a life of crime, producing and selling methamphetamine with a former student'
 			},
 			{
