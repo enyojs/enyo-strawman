@@ -6,14 +6,16 @@ var
 
 var
 	Drawers = require('moonstone/Drawers'),
-	AudioPlayback = require('moonstone/AudioPlayback'),
-	Playlist = require('moonstone/PlaylistSupport'),
 	Panel = require('moonstone/Panel'),
 	Button = require('moonstone/Button'),
 	IconButton = require('moonstone/IconButton'),
 	ImageItem = require('moonstone/ImageItem'),
 	DataList = require('moonstone/DataList'),
 	Scroller = require('moonstone/Scroller');
+
+var
+	AudioPlayback = require('moonstone-extra/AudioPlayback'),
+	Playlist = require('moonstone-extra/PlaylistSupport');
 
 var audioQueue = kind({
 	name: 'sample.AudioQueue',

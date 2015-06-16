@@ -1,8 +1,6 @@
 var
 	Sampler = require('./lib/All'),
 	samples = {
-		AudioPlaybackSample					: require('./lib/AudioPlaybackSample'),
-		AudioPlaybackPlaylistSupportSample	: require('./lib/AudioPlaybackPlaylistSupportSample'),
 		AccordionSample						: require('./lib/AccordionSample'),
 		ActivityPanelsSample				: require('./lib/ActivityPanelsSample'),
 		ActivityPanelsWithVideoSample		: require('./lib/ActivityPanelsWithVideoSample'),

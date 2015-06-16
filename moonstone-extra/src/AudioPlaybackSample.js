@@ -6,10 +6,12 @@ var
 
 var
 	Drawers = require('moonstone/Drawers'),
-	AudioPlayback = require('moonstone/AudioPlayback'),
 	Button = require('moonstone/Button'),
 	IconButton = require('moonstone/IconButton'),
 	Scroller = require('moonstone/Scroller');
+
+var
+	AudioPlayback = require('moonstone-extra/AudioPlayback');
 
 module.exports = kind({
 	name: 'moon.sample.AudioPlaybackSample',
