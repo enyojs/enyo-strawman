@@ -7,8 +7,8 @@ var
 	CheckboxAccessibilitySupport = require('enyo/Checkbox/CheckboxAccessibilitySupport'),
 	Control = require('enyo/Control'),
 	InputAccessibilitySupport = require('enyo/Input/InputAccessibilitySupport'),
-	Popup = require('enyo/Popup');
-	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport'),
+	Popup = require('enyo/Popup'),
+	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport');
 
 module.exports = kind({
 	classes: 'accessibility-sample',
