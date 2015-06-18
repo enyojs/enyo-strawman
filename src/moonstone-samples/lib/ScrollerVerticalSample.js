@@ -84,16 +84,16 @@ module.exports = kind({
 						{kind: Input, placeholder: 'Input'}
 					]},
 					{kind: Accordion, content: 'Accordion 1', defaultKind: SelectableItem, components: [
-						{content: 'Item One'},
-						{content: 'Item Two'}
+						{kind: Item, content: 'Item One'},
+						{kind: Item, content: 'Item Two'}
 					]},
 					{kind: Accordion, content: 'Accordion 2', defaultKind: SelectableItem, components: [
-						{content: 'Item Three'},
-						{content: 'Item Four'}
+						{kind: Item, content: 'Item Three'},
+						{kind: Item, content: 'Item Four'}
 					]},
 					{kind: Accordion, content: 'Accordion 3', defaultKind: SelectableItem, components: [
-						{content: 'Item Five'},
-						{content: 'Item Six'}
+						{kind: Item, content: 'Item Five'},
+						{kind: Item, content: 'Item Six'}
 					]},
 					{kind: Item, content: 'Item 1'},
 					{kind: Item, content: 'Item 2'},
@@ -133,16 +133,16 @@ module.exports = kind({
 					{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 					{kind: TimePicker, noneText: 'Pick a Time', content: 'Time Picker'},
 					{kind: Accordion, content: 'Accordion 1', components: [
-						{content: 'Item One'},
-						{content: 'Item Two'}
+						{kind: Item, content: 'Item One'},
+						{kind: Item, content: 'Item Two'}
 					]},
 					{kind: Accordion, content: 'Accordion 2', components: [
-						{content: 'Item Three'},
-						{content: 'Item Four'}
+						{kind: Item, content: 'Item Three'},
+						{kind: Item, content: 'Item Four'}
 					]},
 					{kind: Accordion, content: 'Accordion 3', components: [
-						{content: 'Item Five'},
-						{content: 'Item Six'}
+						{kind: Item, content: 'Item Five'},
+						{kind: Item, content: 'Item Six'}
 					]}
 				]}
 			]}
