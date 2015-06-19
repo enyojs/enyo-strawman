@@ -16,9 +16,12 @@ var
 		CheckboxSample: require('./lib/CheckboxSample'),
 		ComponentOverrideSample: require('./lib/ComponentOverrideSample'),
 		DataGridListSample: require('./lib/DataGridListSample'),
+		DataGridListSampleWithJSData: require('./lib/DataGridListSampleWithJSData'),
 		DataListSample: require('./lib/DataListSample'),
+		DataListSampleWithJSData: require('./lib/DataListSampleWithJSData'),
 		DataListScrollTestbed: require('./lib/DataListScrollTestbed'), //has test variations that don't work for list atm
 		DataRepeaterSample: require('./lib/DataRepeaterSample'),
+		DataRepeaterSampleWithJSData: require('./lib/DataRepeaterSampleWithJSData'),
 		DragAvatarSample: require('./lib/DragAvatarSample'),
 		DrawerSample: require('./lib/DrawerSample'),
 		FullscreenSample: require('./lib/FullscreenSample'),
