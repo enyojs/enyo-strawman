@@ -7,14 +7,14 @@ var
 
 var
 	samples = {
-		Enyo: require('./enyo-samples'),
-		Layout: require('./layout-samples'),
-		Onyx: require('./onyx-samples'),
-		Moonstone: require('./moonstone-samples'), //router blocking
-		Spotlight: require('./spotlight-samples'),
-	  	iLib: require('./enyo-ilib-samples'),
-	  	Canvas: require('./canvas-samples'),
-	  	Svg: require('./svg-samples')
+		// Enyo: require('./enyo-samples'),
+		// Layout: require('./layout-samples'),
+		// Onyx: require('./onyx-samples'),
+		// Moonstone: require('./moonstone-samples'), //router blocking
+		// Spotlight: require('./spotlight-samples'),
+	  	// iLib: require('./enyo-ilib-samples'),
+	  	// Canvas: require('./canvas-samples'),
+	  	// Svg: require('./svg-samples')
 	};
 
 var

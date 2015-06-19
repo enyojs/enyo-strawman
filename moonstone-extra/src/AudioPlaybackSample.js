@@ -44,7 +44,7 @@ module.exports = kind({
 		components: [
 			// Fixme: If we are not using wrapper like scroller inside of drawer,
 			// drawer will not close itself when click blank area under the drawer.
-			{kind: Scroller, components: [
+			{kind: Scroller, classes: 'enyo-fit', components: [
 				{tag: 'br'},{tag: 'br'},
 				{kind: Button, content: 'set audio #1', ontap: 'setAudio1'},
 				{kind: Button, content: 'set audio #2', ontap: 'setAudio2'},

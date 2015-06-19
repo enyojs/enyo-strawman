@@ -22,7 +22,7 @@ var audioQueue = kind({
 	kind: Panel,
 	headerType: 'medium',
 	title: 'Current Playing List',
-	titleBelow: '2 Tracks',
+	titleBelow: '0 Tracks',
 	classes: 'sample-audio-playback-queue enyo-fit',
 	components: [
 		{classes: 'sample-audio-playback-queue-body', fit: true, components: [
@@ -51,8 +51,12 @@ var audioQueue = kind({
 		]}
 	],
 	bindings: [
-		{from: 'collection', to: '$.datalist.collection'}
+		{from: 'collection', to: '$.datalist.collection'},
+		{from: 'collection.length', to: 'titleBelow', transform: 'tracks'}
 	],
+	tracks: function (value) {
+		return value + ' Tracks';
+	},
 	play: function (sender, event) {
 		this.bubble('onPlayAudio', {model: sender.model, openPlayback: true});
 	}
@@ -92,12 +96,13 @@ module.exports = kind({
 		components: [
 			// Fixme: If we are not using wrapper like scroller inside of drawer,
 			// drawer will not close itself when click blank area under the drawer.
-			{kind: Scroller, components: [
+			{kind: Scroller, classes: 'enyo-fit', components: [
 				{classes: 'moon-2v'},
-				{kind: Button, content: 'Set Audio #1', ontap: 'setAudio1'},
-				{kind: Button, content: 'Set Audio #2', ontap: 'setAudio2'},
-				{kind: Button, content: 'Set Audio List', ontap: 'setAudioList'},
-				{kind: Button, content: 'unload audio', ontap: 'unload'}
+				{kind: Button, content: 'Set audio #1', ontap: 'setAudio1'},
+				{kind: Button, content: 'Set audio #2', ontap: 'setAudio2'},
+				{kind: Button, content: 'Set audio list', ontap: 'setAudioList'},
+				{kind: Button, content: 'unload audio', ontap: 'unload'},
+				{kind: Button, content: 'unload audio list', ontap: 'unloadList'}
 			]}
 		]}
 	],
@@ -126,6 +131,10 @@ module.exports = kind({
 	},
 	unload: function () {
 		this.$.audioPlayback.set('model', null);
+	},
+	unloadList: function () {
+		this.$.audioPlayback.set('model', null);
+		this.$.audioPlayback.set('collection', new Collection());
 	},
 	toggleShuffle: function () {
 		this.$.audioPlayback.toggleShuffle(true, true);
