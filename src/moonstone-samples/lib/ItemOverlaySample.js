@@ -11,6 +11,16 @@ var
 	MarqueeText = Marquee.Text,
 	Scroller = require('moonstone/Scroller');
 
+var myItem = kind({
+	kind: Item,
+	mixins: [ItemOverlaySupport],
+	beginningComponents: [
+		{name: 'icon', kind: Icon, icon: 'search', small: true}
+	], components: [
+		{kind: MarqueeText, content: 'Item with icon on the left side'}
+	]
+});
+
 module.exports = kind({
 	name: 'moon.sample.ItemOverlaySample',
 	classes: 'moon enyo-unselectable enyo-fit moon-item-overlay-sample-wrapper',
@@ -18,12 +28,7 @@ module.exports = kind({
 		{kind: Scroller, classes: 'enyo-fill moon-7h', components: [
 			{kind: Divider, content: 'Simple ItemOverlay Sample'},
 			{components: [
-				{kind: Item, mixins: [ItemOverlaySupport], beginningComponents: [
-						{kind: Icon, icon: 'search', small: true}
-					], components: [
-						{kind: MarqueeText, content: 'Item with icon on the left side'}
-					]
-				},
+				{kind: myItem},
 				{kind: Item, mixins: [ItemOverlaySupport], endingComponents: [
 						{kind: Icon, icon: 'check', small: true}
 					], components: [
