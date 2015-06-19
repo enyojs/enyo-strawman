@@ -105,6 +105,15 @@ module.exports = kind({
 					]}
 				]}
 			]},
+			{kind: ContextualPopupDecorator, components: [
+				{kind: ContextualPopupButton, content:'Data Type'},
+				{kind: ContextualPopup, classes:'moon-6h', components: [
+					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged', components: [
+						{content: 'Collections/Models', value: 'EnyoData', selected: true},
+						{content: 'JS Arrays/Objects', value: 'JS'}
+					]}
+				]}
+			]},
 			{kind: Button, content: 'Refresh', ontap: 'refreshItems'},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Popup List'},
@@ -124,7 +133,8 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: 'collection', to: '$.dataList.collection'}
+		{from: 'collection', to: '$.dataList.collection'},
+		{from: 'collection', to: '$.gridList.collection'}
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
@@ -196,9 +206,9 @@ module.exports = kind({
 
 		createdComponent = this.$.listPanel.createComponent(props, {owner: this});
 		createdComponent.render();
-		this.set('collection', new Collection(this.generateRecords(40)));
 
-		this.$.gridList.set('collection', this.collection);
+		this.refreshItems(40);
+
 		this.$.gridList.set('selection', this.$.selectionToggle.value);
 		if (this.$.selectionTypeGroup.active) {
 			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
@@ -210,15 +220,22 @@ module.exports = kind({
 	itemTypeChanged: function (sender, event) {
 		this.set('itemKind', sender.active.value);
 	},
+	dataTypeMenuChanged: function (sender, event) {
+		this.set('dataType', sender.active.value);
+		this.refreshItems();
+	},
 	selectionTypeChanged: function (sender, event) {
 		this.$.gridList.set('selectionType', sender.active.value);
 	},
-	refreshItems: function () {
-		// we fetch our collection reference
-		var collection = this.get('collection');
-		// we now remove all of the current records from the collection
-		collection.remove(collection.models);
-		// and we insert all new records that will update the list
-		collection.add(this.generateRecords(100));
+	refreshItems: function (num) {
+		var data;
+
+		num = (typeof num === 'number') ? num : 100;
+		data = this.generateRecords(num);
+
+		if (this.collection && this.collection.destroy) {
+			this.collection.destroy();
+		}
+		this.set('collection', this.dataType === 'JS' ? data : new Collection(data));
 	}
 });
