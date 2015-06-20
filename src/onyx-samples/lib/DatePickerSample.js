@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	$L = require('enyo/hooks').$L;
+	$L = require('enyo/i18n').$L;
 
 var
 	FittableColumns = require('layout/FittableColumns'),

@@ -1,7 +1,7 @@
 var
 	kind = require('enyo/kind'),
-	hooks = require('enyo/hooks'),
-	updateLocale = hooks.updateLocale;
+	i18n = require('enyo/i18n'),
+	updateLocale = i18n.updateLocale;
 
 var
 	FittableRows = require('layout/FittableRows');
