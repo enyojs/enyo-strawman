@@ -23,8 +23,6 @@ var
 	Overlay = require('moonstone/Overlay'),
 	ToggleButton = require('moonstone/ToggleButton');
 
-
-
 var GridSampleItem = kind({
 	name: 'moon.sample.GridSampleItem',
 	kind: GridListImageItem,
@@ -34,8 +32,9 @@ var GridSampleItem = kind({
 		{from: 'model.text', to: 'caption'},
 		{from: 'model.subText', to: 'subCaption'},
 		{from: 'model.url', to: 'source'},
-		{from: 'model.selected', to: 'selected', oneWay: false}
-	]
+		{from: 'model.selected', to: 'selected', oneWay: false},
+		{from: 'model.overlayTransparent', to: 'overlayTransparent', oneWay: false}
+	],
 });
 
 var HorizontalGridListItem = kind({
@@ -85,6 +84,7 @@ module.exports = kind({
 	components: [
 		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
+			{kind: ToggleButton, content: 'Transparency', name: 'transparencyToggle', onChange: 'transparencyChanged', value:false},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Selection Type'},
 				{kind: ContextualPopup, classes: 'moon-4h', components: [
@@ -135,16 +135,17 @@ module.exports = kind({
 		this.generateDataGridList(this.itemKind);
 	},
 	generateRecords: function (amount) {
-		var records = [],
+		var records = [], 
 			idx     = this.modelIndex || 0;
 		for (; records.length < amount; ++idx) {
 			var title = (idx % 8 === 0) ? ' with long title' : '';
 			var subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
 			records.push({
 				selected: false,
+				overlayTransparent: this.$.transparencyToggle.value,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
-				url: 'http://placehold.it/300x300/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + idx
+				url: "http://lorempixel.com/output/city-q-c-640-480-9.jpg"
 			});
 		}
 		// update our internal index so it will always generate unique values
@@ -155,13 +156,12 @@ module.exports = kind({
 		if (this.$.gridList) {
 			this.$.gridList.destroy();
 		}
-
 		var props = {
 				name: 'gridList', kind: DataGridList, selection: false, fit: true, spacing: 20,
 				minHeight: 270, minWidth: 180, scrollerOptions: {
 					kind: Scroller, vertical:'scroll', horizontal: 'hidden', spotlightPagingControls: true
 				}, components: [
-					{kind: GridSampleItem}
+					{kind: GridSampleItem, overlayTransparent: this.$.transparencyToggle.value}
 				]
 			},
 			createdComponent;
@@ -195,17 +195,22 @@ module.exports = kind({
 		}
 
 		createdComponent = this.$.listPanel.createComponent(props, {owner: this});
-		createdComponent.render();
 		this.set('collection', new Collection(this.generateRecords(40)));
-
 		this.$.gridList.set('collection', this.collection);
 		this.$.gridList.set('selection', this.$.selectionToggle.value);
+		this.$.gridList.set('overlayTransparent', this.$.transparencyToggle.value);
 		if (this.$.selectionTypeGroup.active) {
 			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
 		}
+
+		createdComponent.render();
 	},
 	selectionChanged: function (sender, event) {
 		this.$.gridList.set('selection', sender.value);
+	},
+	transparencyChanged: function (sender, event) {
+		this.$.gridList.set('overlayTransparent', sender.value);
+		this.generateDataGridList(this.itemKind);
 	},
 	itemTypeChanged: function (sender, event) {
 		this.set('itemKind', sender.active.value);
