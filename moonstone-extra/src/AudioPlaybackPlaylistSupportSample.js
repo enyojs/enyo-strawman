@@ -66,14 +66,14 @@ module.exports = kind({
 	name: 'moon.sample.AudioPlaybackPlaylistSupportSample',
 	classes: 'enyo-unselectable moon sample-audio-playback enyo-fit',
 	data: [
-		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
-		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'},
-		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
-		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'},
-		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
-		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'},
-		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
-		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'}
+		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder 1', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
+		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine 1', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'},
+		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder 2', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
+		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine 2', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'},
+		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder 3', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
+		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine 3', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'},
+		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder 4', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/storm-100.png', duration: '0:22'},
+		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine 4', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'assets/engine-100.png', duration: '0:04'}
 	],
 	handlers: {
 		onPlayAudio: 'playAudio'
