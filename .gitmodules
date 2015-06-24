@@ -1,0 +1,39 @@
+[submodule "lib/canvas"]
+	path = lib/canvas
+	url = https://github.com/enyojs/canvas.git
+[submodule "enyo"]
+	path = lib/enyo
+	url = https://github.com/enyojs/enyo.git
+[submodule "enyo-cordova"]
+	path = lib/enyo-cordova
+	url = https://github.com/enyojs/enyo-cordova.git
+[submodule "lib/enyo-ilib"]
+	path = lib/enyo-ilib
+	url = https://github.com/enyojs/enyo-ilib.git
+[submodule "lib/enyo-webos"]
+	path = lib/enyo-webos
+	url = https://github.com/enyojs/enyo-webos.git
+[submodule "lib/layout"]
+	path = lib/layout
+	url = https://github.com/enyojs/enyo-webos.git
+[submodule "lib/moonstone"]
+	path = lib/moonstone
+	url = https://github.com/enyojs/moonstone.git
+[submodule "lib/moonstone-extra"]
+	path = lib/moonstone-extra
+	url = https://github.com/enyojs/moonstone-extra.git
+[submodule "lib/onyx"]
+	path = lib/onyx
+	url = https://github.com/enyojs/onyx.git
+[submodule "lib/spotlight"]
+	path = lib/spotlight
+	url = https://github.com/enyojs/spotlight.git
+[submodule "lib/svg"]
+	path = lib/svg
+	url = https://github.com/enyojs/svg.git
+[submodule "lib/enyo"]
+	path = lib/enyo
+	url = https://github.com/enyojs/enyo.git
+[submodule "lib/enyo-cordova"]
+	path = lib/enyo-cordova
+	url = https://github.com/enyojs/enyo-cordova.git
