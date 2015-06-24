@@ -80,7 +80,7 @@ module.exports = kind({
 	},
 	components: [
 		{kind: Drawers, drawers:[
-			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ Playlist.Support ], autoPlayOnShuffle: true, components: [
+			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ Playlist.Support ], components: [
 				{name: 'queue', kind: audioQueue}
 			], moreComponents: [
 				{name: 'btnShuffle', kind: Button, ontap: 'toggleShuffle'},
@@ -133,11 +133,11 @@ module.exports = kind({
 		this.$.audioPlayback.set('model', null);
 	},
 	unloadList: function () {
-		this.$.audioPlayback.set('model', null);
+		// Note: set collection as null doesn't empty list
 		this.$.audioPlayback.set('collection', new Collection());
 	},
 	toggleShuffle: function () {
-		this.$.audioPlayback.toggleShuffle(true, true);
+		this.$.audioPlayback.toggleShuffle(true);
 	},
 	toggleRepeat: function () {
 		this.$.audioPlayback.toggleRepeat();
