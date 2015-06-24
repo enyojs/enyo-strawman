@@ -7,7 +7,7 @@ var
 	FittableRows = require('layout/FittableRows');
 
 var
-	ilib = require('enyo-ilib');
+	DateFmt = require('enyo-ilib/DateFmt');
 
 var
 	Button = require('onyx/Button'),
@@ -104,7 +104,7 @@ module.exports = kind({
 		this.getTimes();
 	},
 	getTimes: function () {
-		var fmt = new ilib.DateFmt({
+		var fmt = new DateFmt({
 			type: 'time',
 			length: 'short',
 			locale: this.locale,
@@ -115,7 +115,7 @@ module.exports = kind({
 		this.$.timePicker2Value.setContent(fmt.format(this.$.timePicker2.getValue()));
 	},
 	updateTimeValues: function (sender, date){
-		var fmt = new ilib.DateFmt({
+		var fmt = new DateFmt({
 			type: 'time',
 			length: 'short',
 			locale: this.locale,
