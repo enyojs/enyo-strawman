@@ -41,7 +41,7 @@ module.exports = kind({
 						title: 'Downton Abbey',
 						subTitle: 'Mon June 21, 7:00 - 8:00pm',
 						subSubTitle: 'R - TV 14, V, L, SC',
-						description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
+						description: 'The series, set in the Yorkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley family and'
 					}
 				]},
 				{kind: VideoInfoBackground, orient: 'right', components: [
