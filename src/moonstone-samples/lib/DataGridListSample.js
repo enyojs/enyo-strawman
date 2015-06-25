@@ -1,6 +1,5 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	Collection = require('enyo/Collection'),
 	EmptyBinding = require('enyo/EmptyBinding');
 
@@ -13,7 +12,6 @@ var
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
-	Icon = require('moonstone/Icon'),
 	Image = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
@@ -92,7 +90,7 @@ module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
 	pattern: 'activity',
-	classes: 'moon enyo-fit enyo-unselectable',
+	classes: 'moon enyo-fit enyo-unselectable moon-datagridlist-sample',
 	components: [
 		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
@@ -124,8 +122,8 @@ module.exports = kind({
 				{kind: ContextualPopup, classes: 'moon-6h moon-8v', components: [
 					{kind:DataList, components: [
 						{kind:CheckboxItem, bindings: [
-							{from: '.model.text', to: '.content'},
-							{from: '.model.selected', to: '.checked', oneWay: false}
+							{from: 'model.text', to: 'content'},
+							{from: 'model.selected', to: 'checked', oneWay: false}
 						]}
 					]}
 				]}

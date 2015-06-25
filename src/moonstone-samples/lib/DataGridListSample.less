@@ -1,46 +1,48 @@
-.moon-gridlist-imageitem:not(.sized-image) .moon-image {
-    height: 100%;
-}
+.moon-datagridlist-sample .moon-gridlist-imageitem {
+    &:not(.sized-image) .moon-image {
+        height: 100%;
+    }
 
-.moon-gridlist-imageitem.horizontal-gridList-image-item .moon-image {
-    height: 100%;
-    width: auto;
-    margin-right: 12px;
-    float: left;
-}
+    &.horizontal-gridList-image-item {
+        padding: 0;
 
-.moon-gridlist-imageitem.horizontal-gridList-image-item .moon-image img {
-    height: 100%;
-}
+        .moon-image {
+            height: 100%;
+            width: auto;
+            margin-right: 12px;
+            float: left;
 
-.moon-gridlist-imageitem.horizontal-gridList-image-item > .caption,
-.moon-gridlist-imageitem.horizontal-gridList-image-item > .sub-caption {
-    text-align: center;
-    width: auto;
-    overflow: hidden;
-}
+            img {
+                height: 100%;
+            }
+        }
 
-.moon-gridlist-imageitem.horizontal-gridList-item {
-    padding-left: 99px;
-}
+        .moon-overlay-container {
+            right: 0;
+            left: auto;
+        }
 
-.moon-gridlist-imageitem.horizontal-gridList-item .moon-overlay-container {
-    width: 75px;
-    right: auto;
-}
+        > .caption,
+        > .sub-caption {
+            text-align: center;
+            width: auto;
+            overflow: hidden;
+        }
+    }
 
-.moon-gridlist-imageitem.horizontal-gridList-image-item {
-    padding: 0;
-}
+    &.horizontal-gridList-item {
+        padding-left: 99px;
 
-.moon-gridlist-imageitem.horizontal-gridList-image-item .moon-overlay-container {
-    right: 0;
-    left: auto;
-}
+        .moon-overlay-container {
+            width: 75px;
+            right: auto;
+        }
 
-.moon-gridlist-imageitem.horizontal-gridList-item > .caption,
-.moon-gridlist-imageitem.horizontal-gridList-item > .sub-caption {
-    position: relative;
-    top: 18%;
-    overflow: hidden;
+        > .caption,
+        > .sub-caption {
+            position: relative;
+            top: 18%;
+            overflow: hidden;
+        }
+    }
 }
