@@ -77,6 +77,17 @@ var HorizontalGridListImageItem = kind({
 	]
 });
 
+var itemTypes = [
+	{content: 'ImageItem', value: 'GridListImageItem', selected: true},
+	{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
+	{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
+];
+
+var dataTypes = [
+	{content: 'Collections/Models', value: 'EnyoData', selected: true},
+	{content: 'JS Arrays/Objects', value: 'JS'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
@@ -98,20 +109,13 @@ module.exports = kind({
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content:'Item Type'},
 				{kind: ContextualPopup, classes:'moon-6h', components: [
-					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged', components: [
-						{content: 'ImageItem', value: 'GridListImageItem', selected: true},
-						{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
-						{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
-					]}
+					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged'}
 				]}
 			]},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content:'Data Type'},
 				{kind: ContextualPopup, classes:'moon-6h', components: [
-					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged', components: [
-						{content: 'Collections/Models', value: 'EnyoData', selected: true},
-						{content: 'JS Arrays/Objects', value: 'JS'}
-					]}
+					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged'}
 				]}
 			]},
 			{kind: Button, content: 'Refresh', ontap: 'refreshItems'},
@@ -138,11 +142,28 @@ module.exports = kind({
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
-		// we set the collection that will fire the binding and add it to the list
-		this.set('itemKind', 'GridListImageItem');
+
+		this.computeInitialValue(itemTypes, 'itemKind');
+		this.computeInitialValue(dataTypes, 'dataType');
+		this.$.itemTypeGroup.createComponents(itemTypes);
+		this.$.dataTypeGroup.createComponents(dataTypes);
+		this.itemKindChanged();
+	},
+	computeInitialValue: function (arr, prop) {
+		var idx, elem;
+		for (idx = 0; idx < arr.length; idx++) {
+			elem = arr[idx];
+			if (elem.selected) {
+				this[prop] = elem.value;
+				break;
+			}
+		}
 	},
 	itemKindChanged: function () {
 		this.generateDataGridList(this.itemKind);
+	},
+	dataTypeChanged: function () {
+		this.refreshItems();
 	},
 	generateRecords: function (amount) {
 		var records = [],
@@ -222,7 +243,6 @@ module.exports = kind({
 	},
 	dataTypeMenuChanged: function (sender, event) {
 		this.set('dataType', sender.active.value);
-		this.refreshItems();
 	},
 	selectionTypeChanged: function (sender, event) {
 		this.$.gridList.set('selectionType', sender.active.value);
