@@ -76,7 +76,7 @@ module.exports = kind({
 			{classes: 'moon-8h', defaultKind: CheckboxItem, components: [
 				{name: 'lockBarSetting',        checked: true,     content: 'Lock Bar to Knob', onchange: 'changeLockbar'},
 				{name: 'animateSetting',        checked: true,     content: 'Animated',        onchange: 'animateActivate'},
-				{name: 'noPopupSetting',        checked: false,    content: 'Hide Popup',      onchange: 'changeStatusBubble'},
+				{name: 'popupSetting',          checked: true,     content: 'Show Popup',      onchange: 'changeStatusBubble'},
 				{name: 'tapableSetting',        checked: true,     content: 'Tapable',         onchange: 'changeTapable'},
 				{name: 'constrainSetting',      checked: false,    content: 'Constrain to Background Progress', onchange: 'changeConstrain'},
 				{name: 'elasticSetting',        checked: false,    content: 'Elastic Effect',  onchange: 'changeElastic'},
@@ -186,11 +186,11 @@ module.exports = kind({
 		return true;
 	},
 	changeStatusBubble: function (sender, event) {
-		var ck = this.$.noPopupSetting.getChecked();
+		var ck = this.$.popupSetting.getChecked();
 
 		for (var i in this.$) {
 			if (this.$[i].kind == Slider) {
-				this.$[i].setNoPopup(ck);
+				this.$[i].set('popup', ck);
 			}
 		}
 		return true;
