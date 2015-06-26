@@ -1,48 +1,51 @@
 .moon-datagridlist-sample .moon-gridlist-imageitem {
-    &:not(.sized-image) .moon-image {
-        height: 100%;
-    }
+	&.horizontal-gridList-item {
 
-    &.horizontal-gridList-image-item {
-        padding: 0;
+		.moon-overlay-container {
+			width: 75px;
+		}
 
-        .moon-image {
-            height: 100%;
-            width: auto;
-            margin-right: 12px;
-            float: left;
+		> .caption,
+		> .sub-caption {
+			position: relative;
+			top: 18%;
+			overflow: hidden;
+		}
+	}
 
-            img {
-                height: 100%;
-            }
-        }
+	&.horizontal-gridList-image-item {
+		padding: 0;
 
-        .moon-overlay-container {
-            right: 0;
-            left: auto;
-        }
+		.moon-image {
+			height: 100%;
+			width: auto;
+			margin-right: 12px;
+			float: left;
 
-        > .caption,
-        > .sub-caption {
-            text-align: center;
-            width: auto;
-            overflow: hidden;
-        }
-    }
+			img {
+				height: 100%;
+			}
+		}
 
-    &.horizontal-gridList-item {
-        padding-left: 99px;
+		.moon-overlay-container {
+			left: auto;
+		}
 
-        .moon-overlay-container {
-            width: 75px;
-            right: auto;
-        }
+		> .caption,
+		> .sub-caption {
+			text-align: center;
+			width: auto;
+			overflow: hidden;
+		}
+	}
+}
 
-        > .caption,
-        > .sub-caption {
-            position: relative;
-            top: 18%;
-            overflow: hidden;
-        }
-    }
+// When inside a selection-enabled container, pad the content to make space for the checkbox
+.moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem {
+	.horizontal-gridList-item {
+		padding-left: 99px;
+	}
+	.horizontal-gridList-image-item {
+		padding-left: 0;
+	}
 }
