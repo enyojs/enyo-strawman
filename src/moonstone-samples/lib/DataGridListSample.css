@@ -1,3 +1,7 @@
+.moon-gridlist-imageitem:not(.sized-image) .moon-image {
+    height: 100%;
+}
+
 .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-image {
     height: 100%;
     width: auto;
