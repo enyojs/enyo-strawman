@@ -8,7 +8,6 @@ var
 	GridListImageItem = require('moonstone/GridListImageItem'),
 	Button = require('moonstone/Button'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
-	Icon = require('moonstone/Icon'),
 	NewDataList = require('moonstone/NewDataList'),
 	Overlay = require('moonstone/Overlay'),
 	Panel = require('moonstone/Panel'),
@@ -160,7 +159,7 @@ module.exports = kind({
 		for (; records.length < 500; ++idx) {
 			title = (idx % 8 === 0) ? ' with long title' : '';
 			subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
-			color = Math.floor(Math.random()*0x1000000).toString(16);
+			color = Math.floor((Math.random()*(0x1000000-0x101010))+0x101010).toString(16);
 
 			records.push({
 				selected: false,
