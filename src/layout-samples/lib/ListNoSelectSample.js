@@ -2,10 +2,8 @@ var
 	kind = require('enyo/kind');
 
 var
-	List = require('layout/List');
-
-var
-	names = require('./NameGenerator');
+	List = require('layout/List'),
+	NameGenerator = require('./NameGenerator');
 
 module.exports = kind({
 	name: 'enyo.sample.ListNoSelectSample',
@@ -19,15 +17,15 @@ module.exports = kind({
 			]}
 		]}
 	],
-	names: [],
+	NameGenerator: [],
 	setupItem: function (sender, event) {
 		// this is the row we're setting up
 		var i = event.index;
 		// make some mock data if we have none for this row
-		if (!this.names[i]) {
-			this.names[i] = names.makeName(5, 10, '', '');
+		if (!this.NameGenerator[i]) {
+			this.NameGenerator[i] = NameGenerator.makeName(5, 10, '', '');
 		}
-		var n = this.names[i];
+		var n = this.NameGenerator[i];
 		var ni = ('00000000' + i).slice(-7);
 		this.$.name.setContent(n);
 		this.$.index.setContent(ni);

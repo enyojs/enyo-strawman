@@ -1,15 +1,11 @@
 var
 	kind = require('enyo/kind'),
-	$L = require('enyo/hooks').$L;
-
-var
-	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
-
-var
+	$L = require('enyo/hooks').$L,
 	ilib = require('enyo-ilib');
 
 var
+	FittableColumns = require('layout/FittableColumns'),
+	FittableRows = require('layout/FittableRows'),
 	Button = require('onyx/Button'),
 	DatePicker = require('onyx/DatePicker'),
 	Groupbox = require('onyx/Groupbox'),

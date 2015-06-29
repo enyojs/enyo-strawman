@@ -1,17 +1,15 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Group = require('enyo/Group');
+	utils = require('enyo/utils');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	CaptionDecorator = require('moonstone/CaptionDecorator'),
 	Divider = require('moonstone/Divider'),
 	Scroller = require('moonstone/Scroller'),
-	ToggleButton = require('moonstone/ToggleButton');
+	ToggleButton = require('moonstone/ToggleButton'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.ToggleButtonSample',

@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	Divider = require('moonstone/Divider'),
 	Icon = require('moonstone/Icon'),
 	Img = require('moonstone/Image'),

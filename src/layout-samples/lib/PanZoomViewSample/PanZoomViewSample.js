@@ -1,10 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button');
+	kind = require('enyo/kind');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
-	PanZoomView = require('layout/PanZoomView');
+	PanZoomView = require('layout/PanZoomView'),
+	Button = require('enyo/Button');
 
 module.exports = kind({
 	name: 'enyo.sample.PanZoomViewSample',
@@ -40,7 +40,7 @@ module.exports = kind({
 			]}
 		]}
 	],
-	create: kind.inherit(function (sup) {
+	create: kind.inherit (function (sup) {
 		return function () {
 			sup.apply(this, arguments);
 			this.scale = 'auto';

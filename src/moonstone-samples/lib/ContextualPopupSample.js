@@ -235,18 +235,18 @@ module.exports = kind({
 			return val;
 		}}
 	],
-	buttonToggled: function(inSender, inEvent) {
+	buttonToggled: function (inSender, inEvent) {
 		this.$.buttonPopup.setSpotlightModal(inSender.getActive());
 		this.$.buttonPopup.setAutoDismiss(!inSender.getActive());
 	},
-	dismissRadioSelection: function(){
+	dismissRadioSelection: function () {
 		if(this.$.nestedRadioDismissButton.value) this.$.nestedRadioPopup.hide();
 	},
-	setPosition: function(){
+	setPosition: function () {
 		this.$.directionButton.applyStyle('left', this.$.leftInput.getValue() === '' ? '40%' : this.$.leftInput.getValue());
 		this.$.directionButton.applyStyle('top', this.$.topInput.getValue() === '' ? '70%' : this.$.topInput.getValue());
 	},
-	groupChanged: function(inSender, inEvent) {
+	groupChanged: function (inSender, inEvent) {
 		if(inEvent.originator.getActive() && inEvent.originator.kind === RadioItem) {
 			var selected = inEvent.originator.getContent();
 			this.$.directionContext.set('direction', selected);

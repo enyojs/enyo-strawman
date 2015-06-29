@@ -1,10 +1,10 @@
 var
 	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection'),
-	ProgressiveFilter = require('enyo/ProgressiveFilter');
+	$L = require('moonstone/i18n');
 
 var
-	$L = require('moonstone/i18n'),
+	Collection = require('enyo/Collection'),
+	ProgressiveFilter = require('enyo/ProgressiveFilter'),
 	Button = require('moonstone/Button'),
 	DataList = require('moonstone/DataList'),
 	Divider = require('moonstone/Divider'),

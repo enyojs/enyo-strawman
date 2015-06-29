@@ -1,11 +1,12 @@
 var
 	kind = require('enyo/kind'),
+	easing = require('layout/easing');
+
+var
 	Animator = require('enyo/Animator'),
 	Button = require('enyo/Button'),
 	Select = require('enyo/Select');
-
-var
-	easing = require('layout/easing');
+	
 
 module.exports = kind({
 	name: 'moon.sample.EasingSample',
@@ -29,12 +30,12 @@ module.exports = kind({
 			this.buildMenu();
 		};
 	}),
-	itemSelected: function(sender, event) {
+	itemSelected: function (sender, event) {
 		var item = Object.keys(easing)[sender.selected - 1];
 		this.$.animator.setEasingFunction(easing[item] || easing.linear);
 		this.play();
 	},
-	play: function() {
+	play: function () {
 		this.$.btnAnimate.set('disabled', true);
 		this.$.animator.play({
 			startValue: 0,
@@ -43,15 +44,15 @@ module.exports = kind({
 			duration: this.duration
 		});
 	},
-	animatorStep: function(sender) {
+	animatorStep: function (sender) {
 		this.$.box.applyStyle('top', sender.value + 'px');
 		return true;
 	},
-	animatorComplete: function(sender) {
+	animatorComplete: function (sender) {
 		this.$.btnAnimate.set('disabled', false);
 		return true;
 	},
-	buildMenu: function() {
+	buildMenu: function () {
 		for (var k in easing){
 			this.$.menu.createComponent({content: k});
 		}

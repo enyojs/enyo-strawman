@@ -1,20 +1,20 @@
 var
 	kind = require('enyo/kind'),
-	json = require('enyo/json'),
-	Ajax = require('enyo/Ajax'),
-	Button = require('enyo/Button'),
-	Component = require('enyo/Component'),
-	Img = require('enyo/Image'),
-	Input = require('enyo/Input'),
-	JsonpRequest = require('enyo/Jsonp');
+	json = require('enyo/json');
 
 var
 	CollapsingArranger = require('layout/CollapsingArranger'),
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
 	List = require('layout/List'),
-	Panels = require('layout/Panels');
-
+	Panels = require('layout/Panels'),
+	Ajax = require('enyo/Ajax'),
+	Button = require('enyo/Button'),
+	Component = require('enyo/Component'),
+	Img = require('enyo/Image'),
+	Input = require('enyo/Input'),
+	JsonpRequest = require('enyo/Jsonp');
+	
 // A simple component to do a Flickr search.
 var PanelsFlickrSearch = kind({
 	kind: Component,
@@ -27,7 +27,7 @@ var PanelsFlickrSearch = kind({
 	url: 'https://api.flickr.com/services/rest/',
 	pageSize: 200,
 	api_key: '2a21b46e58d207e4888e1ece0cb149a5',
-	search: function(inSearchText, inPage) {
+	search: function (inSearchText, inPage) {
 		this.searchText = inSearchText || this.searchText;
 		var i = (inPage || 0) * this.pageSize;
 		var params = {
@@ -52,11 +52,11 @@ var PanelsFlickrSearch = kind({
 		}
 		return req;
 	},
-	processAjaxResponse: function(inSender, inResponse) {
+	processAjaxResponse: function (inSender, inResponse) {
 		inResponse = json.parse(inResponse);
 		this.processResponse(inSender, inResponse);
 	},
-	processResponse: function(inSender, inResponse) {
+	processResponse: function (inSender, inResponse) {
 		var photos = inResponse.photos ? inResponse.photos.photo || [] : [];
 		for (var i=0, p; (p=photos[i]); i++) {
 			var urlprefix = 'http://farm' + p.farm + '.static.flickr.com/' + p.server + '/' + p.id + '_' + p.secret;
@@ -104,13 +104,13 @@ module.exports = kind({
 		]},
 		{name: 'flickrSearch', kind: PanelsFlickrSearch, onResults: 'searchResults'}
 	],
-	rendered: kind.inherit(function(sup) {
+	rendered: kind.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
 			this.search();
 		};
 	}),
-	reflow: kind.inherit(function(sup) {
+	reflow: kind.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
 			var backShowing = this.$.backToolbar.showing;
@@ -120,14 +120,14 @@ module.exports = kind({
 			}
 		};
 	}),
-	search: function() {
+	search: function () {
 		this.searchText = this.$.searchInput.getValue();
 		this.page = 0;
 		this.results = [];
 		this.$.searchSpinner.show();
 		this.$.flickrSearch.search(this.searchText);
 	},
-	searchResults: function(inSender, inResults) {
+	searchResults: function (inSender, inResults) {
 		this.$.searchSpinner.hide();
 		this.$.moreSpinner.hide();
 		this.results = this.results.concat(inResults);
@@ -138,7 +138,7 @@ module.exports = kind({
 			this.$.list.refresh();
 		}
 	},
-	setupItem: function(inSender, inEvent) {
+	setupItem: function (inSender, inEvent) {
 		var i = inEvent.index;
 		var item = this.results[i];
 		this.$.item.addRemoveClass('onyx-selected', inSender.isSelected(inEvent.index));
@@ -147,12 +147,12 @@ module.exports = kind({
 		this.$.more.canGenerate = !this.results[i+1];
 		return true;
 	},
-	more: function() {
+	more: function () {
 		this.page++;
 		this.$.moreSpinner.show();
 		this.$.flickrSearch.search(this.searchText, this.page);
 	},
-	itemTap: function(inSender, inEvent) {
+	itemTap: function (inSender, inEvent) {
 		if (Panels.isScreenNarrow()) {
 			this.setIndex(1);
 		}
@@ -166,7 +166,7 @@ module.exports = kind({
 			this.$.flickrImage.setSrc(item.original);
 		}
 	},
-	imageLoaded: function() {
+	imageLoaded: function () {
 		var img = this.$.flickrImage;
 		img.removeClass('tall');
 		img.removeClass('wide');
@@ -180,7 +180,7 @@ module.exports = kind({
 		}
 		this.$.imageSpinner.hide();
 	},
-	showList: function() {
+	showList: function () {
 		this.setIndex(0);
 	}
 });

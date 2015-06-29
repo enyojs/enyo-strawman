@@ -1,9 +1,9 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Control = require('enyo/Control');
+	utils = require('enyo/utils');
 
 var
+	Control = require('enyo/Control'),
 	Divider = require('moonstone/Divider'),
 	Table = require('moonstone/Table');
 

@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	ExpandableInput = require('moonstone/ExpandableInput'),
@@ -28,10 +26,10 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'Input:', allowHtml: true}
 	],
-	inputChanging: function(inSender, inEvent) {
+	inputChanging: function (inSender, inEvent) {
 		this.$.console.setContent('<em>'+inSender.getContent() + '</em> changing: \'' + inEvent.originator.getValue() + '\'');
 	},
-	inputChanged: function(inSender, inEvent) {
+	inputChanged: function (inSender, inEvent) {
 		this.$.console.setContent('<em>'+inSender.getContent() + '</em> changed to: \'' + inSender.getValue() + '\'');
 	}
 });

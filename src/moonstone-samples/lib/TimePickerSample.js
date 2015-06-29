@@ -1,14 +1,10 @@
 var
 	hooks = require('enyo/hooks'),
-	kind = require('enyo/kind');
-
-var
-	FittableRows = require('layout/FittableRows');
-
-var
+	kind = require('enyo/kind'),
 	ilib = require('enyo-ilib');
 
 var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	DatePicker = require('moonstone/DatePicker'),
@@ -60,7 +56,7 @@ module.exports = kind({
 		{from: '.value', to: '.$.pickerDateLinked.value', oneWay:false},
 		{from: '.value', to: '.$.pickerTimeLinked.value', oneWay:false}
 	],
-	create: function (){
+	create: function () {
 		FittableRows.prototype.create.apply(this, arguments);
 		if (!ilib) {
 			this.$.pickerLocale.hide();
@@ -68,7 +64,7 @@ module.exports = kind({
 		}
 		this.set('value', new Date('Mar 09 2014 01:59'));
 	},
-	setLocale: function (sender, event){
+	setLocale: function (sender, event) {
 		if (ilib) {
 			var locale = event.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;

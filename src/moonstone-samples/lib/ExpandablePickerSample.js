@@ -1,8 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	DatePicker = require('moonstone/DatePicker'),
@@ -14,7 +11,10 @@ var
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	TimePicker = require('moonstone/TimePicker'),
-	DayPicker = require('moonstone/DayPicker');
+	DayPicker = require('moonstone/DayPicker'),
+	Collection = require('enyo/Collection'),
+	Control = require('enyo/Control'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.ExpandablePickerSample',
@@ -194,7 +194,7 @@ module.exports = kind({
 		];
 		var index = 0;
 		var opened = false;
-		setInterval(this.bindSafely(function() {
+		setInterval(this.bindSafely(function () {
 			if (opened) {
 				this.$[pickers[index++]].setOpen(false);
 			} else {

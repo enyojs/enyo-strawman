@@ -1,68 +1,67 @@
 var
 	kind = require('enyo/kind'),
-	Button = require('enyo/Button'),
-	Checkbox = require('enyo/Checkbox'),
-	Group = require('enyo/Group'),
-	Scroller = require('enyo/Scroller');
-
-var
-	ilib = require('enyo-ilib');
+    ilib = require('enyo-ilib'),
+    rb = require('../ResBundle');	
 
 var
 	ChooseLocale = require('../ChooseLocale'),
-    rb = require('../ResBundle');
+    Button = require('enyo/Button'),
+    Checkbox = require('enyo/Checkbox'),
+    Group = require('enyo/Group'),
+    Scroller = require('enyo/Scroller');
+    
 
 module.exports = kind({
-    name: "ilib.sample.NameFormatting",
-    classes: "onyx ilib-onyx-sample enyo-fit",
+    name: 'ilib.sample.NameFormatting',
+    classes: 'onyx ilib-onyx-sample enyo-fit',
     components: [
         {kind: Scroller, fit: true, components: [
             {components: [
                 /* Header with selecting locale */
-                {kind: ChooseLocale, name: "localeSelector"},
-                {style: "width: 20px"},
-                {kind: Button, content: rb.getString("Apply"), ontap: "nameFormat", style: "vertical-align: bottom;", classes: "onyx-affirmative"},
+                {kind: ChooseLocale, name: 'localeSelector'},
+                {style: 'width: 20px'},
+                {kind: Button, content: rb.getString('Apply'), ontap: 'nameFormat', style: 'vertical-align: bottom;', classes: 'onyx-affirmative'},
                 {fit: true}
             ]},
-            {tag: "br"},
+            {tag: 'br'},
             
-            {content: rb.getString("Length"), classes: "ilib-onyx-sample-divider"},
-            {kind: Group, defaultKind: Button, name: "length", onActivate: "buttonActivated", components: [
-                {content: "Short", active: true, name:"short"},
-                {content: "Medium"},
-                {content: "Long"}
+            {content: rb.getString('Length'), classes: 'ilib-onyx-sample-divider'},
+            {kind: Group, defaultKind: Button, name: 'length', onActivate: 'buttonActivated', components: [
+                {content: 'Short', active: true, name:'short'},
+                {content: 'Medium'},
+                {content: 'Long'}
             ]},
             
-            {content: rb.getString("(or) Parts"), classes: "ilib-onyx-sample-divider"},
-            {classes: "namepart", components: [
-                {kind: Checkbox, name: "prefixCbox", content: "Prefix ", onchange:"checkboxChanged"},
-                {kind: Checkbox, name: "givenCbox",  content: "Given ",  onchange:"checkboxChanged"},
-                {kind: Checkbox, name: "middleCbox", content: "Middle ", onchange:"checkboxChanged"},
-                {kind: Checkbox, name: "familyCbox", content: "Family ",  onchange:"checkboxChanged"},
-                {kind: Checkbox, name: "suffixCbox", content: "Suffix ",  onchange:"checkboxChanged"}
+            {content: rb.getString('(or) Parts'), classes: 'ilib-onyx-sample-divider'},
+            {classes: 'namepart', components: [
+                {kind: Checkbox, name: 'prefixCbox', content: 'Prefix ', onchange:'checkboxChanged'},
+                {kind: Checkbox, name: 'givenCbox',  content: 'Given ',  onchange:'checkboxChanged'},
+                {kind: Checkbox, name: 'middleCbox', content: 'Middle ', onchange:'checkboxChanged'},
+                {kind: Checkbox, name: 'familyCbox', content: 'Family ',  onchange:'checkboxChanged'},
+                {kind: Checkbox, name: 'suffixCbox', content: 'Suffix ',  onchange:'checkboxChanged'}
             ]},
 
             {components: [
-                {content: rb.getString("Prefix"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "prefixInput", placeholder: rb.getString("Prefix")},
-                {content: rb.getString("Given Name"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "givenInput", placeholder: rb.getString("Given Name")},
-                {content: rb.getString("Middle Name"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "middleInput", placeholder: rb.getString("Middle Name")},
-                {content: rb.getString("Family Name"), classes: "ilib-onyx-sample-divider"},
-				{kind: "onyx.Input", name: "familyInput", placeholder: rb.getString("Family Name")},
-                {content: rb.getString("Suffix"), classes: "ilib-onyx-sample-divider"},
-				{kind: "onyx.Input", name: "suffixInput", placeholder: rb.getString("Suffix")}
+                {content: rb.getString('Prefix'), classes: 'ilib-onyx-sample-divider'},
+                {kind: 'onyx.Input', name: 'prefixInput', placeholder: rb.getString('Prefix')},
+                {content: rb.getString('Given Name'), classes: 'ilib-onyx-sample-divider'},
+                {kind: 'onyx.Input', name: 'givenInput', placeholder: rb.getString('Given Name')},
+                {content: rb.getString('Middle Name'), classes: 'ilib-onyx-sample-divider'},
+                {kind: 'onyx.Input', name: 'middleInput', placeholder: rb.getString('Middle Name')},
+                {content: rb.getString('Family Name'), classes: 'ilib-onyx-sample-divider'},
+				{kind: 'onyx.Input', name: 'familyInput', placeholder: rb.getString('Family Name')},
+                {content: rb.getString('Suffix'), classes: 'ilib-onyx-sample-divider'},
+				{kind: 'onyx.Input', name: 'suffixInput', placeholder: rb.getString('Suffix')}
             ]}
         ]},
-        {tag: "br"},
-        {kind: Group, classes:"onyx-sample-result-box", components: [
-            {content: rb.getString("Format result:")},
-            {name: "rtlResult", fit: true, content: "-", style: "padding: 10px"}
+        {tag: 'br'},
+        {kind: Group, classes:'onyx-sample-result-box', components: [
+            {content: rb.getString('Format result:')},
+            {name: 'rtlResult', fit: true, content: '-', style: 'padding: 10px'}
         ]}
     ],
  
-    buttonActivated: function(inSender, inEvent) {
+    buttonActivated: function (inSender, inEvent) {
 
         if (this.$.length.getActive().content === 'Short') {
             this.$.prefixCbox.setChecked(false);
@@ -85,7 +84,7 @@ module.exports = kind({
         }
     },
 
-    checkboxChanged: function(inSender, inEvent) {
+    checkboxChanged: function (inSender, inEvent) {
         if (!this.$.prefixCbox.getChecked() && !this.$.givenCbox.getChecked() && !this.$.middleCbox.getChecked() &&
             !this.$.familyCbox.getChecked() && !this.$.suffixCbox.getChecked()) {
             this.$.short.setActive(true);
@@ -94,7 +93,7 @@ module.exports = kind({
         }
     },
 
-    nameFormat: function(inSender, inEvent) {
+    nameFormat: function (inSender, inEvent) {
 
         // Processing parameters
 
@@ -102,19 +101,19 @@ module.exports = kind({
         var parts = [];
     
         if (this.$.prefixCbox.getChecked()) {
-            parts.push("p");
+            parts.push('p');
         }
         if (this.$.givenCbox.getChecked()) {
-            parts.push("g");
+            parts.push('g');
         }
         if (this.$.middleCbox.getChecked()) {
-            parts.push("m");
+            parts.push('m');
         }
         if (this.$.familyCbox.getChecked()) {
-            parts.push("f");
+            parts.push('f');
         }
         if (this.$.suffixCbox.getChecked()) {
-            parts.push("s");
+            parts.push('s');
         }
 
         var options = {
@@ -140,7 +139,7 @@ module.exports = kind({
         // Formatting
         var name = new ilib.Name(n);
         var fmt = new ilib.NameFmt(options);
-        var postFmtData = "The name is: " + fmt.format(name); 
+        var postFmtData = 'The name is: ' + fmt.format(name); 
         // Output results
         this.$.rtlResult.setContent(postFmtData);
     }

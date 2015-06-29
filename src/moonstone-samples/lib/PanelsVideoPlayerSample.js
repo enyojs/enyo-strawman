@@ -1,12 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
+	Group = require('enyo/Group'),
 	FittableLayout = require('layout/FittableLayout'),
-	FittableColumnsLayout = FittableLayout.Columns;
-
-var
+	FittableColumnsLayout = FittableLayout.Columns,
 	Button = require('moonstone/Button'),
 	ChannelInfo = require('moonstone/ChannelInfo'),
 	Clock = require('moonstone/Clock'),

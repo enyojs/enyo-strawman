@@ -107,37 +107,37 @@ module.exports = kind({
 			]}
 		]}
 	],
-	rendered: function() {
+	rendered: function () {
 		this.inherited(arguments);
 		Spotlight.spot(this.$.panels);
 	},
 	// custom next handler for each panel to avoid switching from one active panel
 	// to another with no visible change for demo
-	next1: function(inSender, inEvent) {
+	next1: function (inSender, inEvent) {
 		this.$.panels.setIndex(2);
 		return true;
 	},
-	next2: function(inSender, inEvent) {
+	next2: function (inSender, inEvent) {
 		this.$.panels.setIndex(2);
 		return true;
 	},
-	next3: function(inSender, inEvent) {
+	next3: function (inSender, inEvent) {
 		this.$.panels.setIndex(5);
 		return true;
 	},
-	next4: function(inSender, inEvent) {
+	next4: function (inSender, inEvent) {
 		this.$.panels.setIndex(5);
 		return true;
 	},
-	next5: function(inSender, inEvent) {
+	next5: function (inSender, inEvent) {
 		this.$.panels.setIndex(7);
 		return true;
 	},
-	next6: function(inSender, inEvent) {
+	next6: function (inSender, inEvent) {
 		this.$.panels.setIndex(7);
 		return true;
 	},
-	handleShowingChanged: function(inSender, inEvent) {
+	handleShowingChanged: function (inSender, inEvent) {
 		this.$.panels.setHandleShowing(inSender.getChecked());
 	},
 	panelsShowingChanged: function (sender, event) {

@@ -1,12 +1,12 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button'),
-	Control = require('enyo/Control'),
-	Input = require('enyo/Input');
+	kind = require('enyo/kind');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
+	FittableRows = require('layout/FittableRows'),
+	Button = require('enyo/Button'),
+	Control = require('enyo/Control'),
+	Input = require('enyo/Input');
 
 module.exports = kind({
 	name: 'enyo.sample.FittableAppLayout1',

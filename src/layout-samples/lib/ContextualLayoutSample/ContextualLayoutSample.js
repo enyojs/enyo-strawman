@@ -1,14 +1,14 @@
 var
-	kind = require('enyo/kind'),
-	Control = require('enyo/Control'),
-	Popup = require('enyo/Popup'),
-	Repeater = require('enyo/Repeater'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
 	ContextualLayout = require('layout/ContextualLayout'),
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
+	FittableRows = require('layout/FittableRows'),
+	Control = require('enyo/Control'),
+	Popup = require('enyo/Popup'),
+	Repeater = require('enyo/Repeater'),
+	Scroller = require('enyo/Scroller');
 
 
 /**
@@ -42,7 +42,7 @@ var ContextualPopup = kind({
 	setupItem: function (sender, event) {
 		event.item.$.item.set('content', 'Item ' + event.index);
 	},
-	requestShow: function(inSender, inEvent) {
+	requestShow: function (inSender, inEvent) {
 		var n = inEvent.activator.hasNode();
 		if (n) {
 			this.activatorOffset = this.getPageOffset(n);
@@ -50,7 +50,7 @@ var ContextualPopup = kind({
 		this.show();
 		return true;
 	},
-	getPageOffset: function(inNode) {
+	getPageOffset: function (inNode) {
 		// getBoundingClientRect returns top/left values which are relative to the viewport and not absolute
 		var r = inNode.getBoundingClientRect();
 

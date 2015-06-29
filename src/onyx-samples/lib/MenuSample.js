@@ -1,7 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller'),
-	TouchScrollStrategy = require('enyo/TouchScrollStrategy');
+	kind = require('enyo/kind');
 
 var
 	Button = require('onyx/Button'),
@@ -11,7 +9,9 @@ var
 	Menu = require('onyx/Menu'),
 	MenuDecorator = require('onyx/MenuDecorator'),
 	MenuItem = require('onyx/MenuItem'),
-	Toolbar = require('onyx/Toolbar');
+	Toolbar = require('onyx/Toolbar'),
+	Scroller = require('enyo/Scroller'),
+	TouchScrollStrategy = require('enyo/TouchScrollStrategy');
 
 module.exports = kind({
 	name: 'onyx.sample.MenuSample',

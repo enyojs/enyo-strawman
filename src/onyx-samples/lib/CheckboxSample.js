@@ -1,11 +1,11 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Checkbox = require('onyx/Checkbox'),
 	Groupbox = require('onyx/Groupbox'),
-	GroupboxHeader = require('onyx/GroupboxHeader');
+	GroupboxHeader = require('onyx/GroupboxHeader'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'onyx.sample.CheckboxSample',

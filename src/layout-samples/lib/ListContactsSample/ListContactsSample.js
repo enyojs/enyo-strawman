@@ -1,20 +1,18 @@
 var
 	kind = require('enyo/kind'),
 	job = require('enyo/job'),
-	utils = require('enyo/utils'),
-	Button = require('enyo/Button'),
-	Checkbox = require('enyo/Checkbox'),
-	Img = require('enyo/Image'),
-	Input = require('enyo/Input'),
-	Popup = require('enyo/Popup');
+	utils = require('enyo/utils');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
-	List = require('layout/List');
-
-var
-	names = require('../NameGenerator');
+	List = require('layout/List'),
+	Button = require('enyo/Button'),
+	Checkbox = require('enyo/Checkbox'),
+	Img = require('enyo/Image'),
+	Input = require('enyo/Input'),
+	Popup = require('enyo/Popup'),
+	NameGenerator = require('../NameGenerator');
 
 
 // It's convenient to create a kind for the item we'll render in the contacts list.
@@ -134,7 +132,7 @@ module.exports = kind({
 			]
 		}
 	],
-	rendered: kind.inherit(function (sup) {
+	rendered: kind.inherit (function (sup) {
 		return function () {
 			sup.apply(this, arguments);
 			this.populateList();
@@ -224,7 +222,7 @@ module.exports = kind({
 	createDb: function (inCount) {
 		this.db = [];
 		for (var i=0; i<inCount; i++) {
-			this.db.push(this.generateItem(names.makeName(4, 6) + ' ' + names.makeName(5, 10)));
+			this.db.push(this.generateItem(NameGenerator.makeName(4, 6) + ' ' + NameGenerator.makeName(5, 10)));
 		}
 		this.sortDb();
 	},
@@ -274,10 +272,10 @@ module.exports = kind({
 		}
 		return r;
 	},
-	countChanging: function (inSender, inEvent){
+	countChanging: function (inSender, inEvent) {
 		this.$.countOutput.setContent(Math.round(inSender.getValue()) * 50);
 	},
-	rowsChanging: function (inSender, inEvent){
+	rowsChanging: function (inSender, inEvent) {
 		this.$.rowsPerPageOutput.setContent(Math.round(inSender.getValue()) * 5);
 	}
 });

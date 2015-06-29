@@ -1,16 +1,12 @@
 var
 	kind = require('enyo/kind'),
 	hooks = require('enyo/hooks'),
-	updateLocale = hooks.updateLocale;
-
-var
-	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
-
-var
+	updateLocale = hooks.updateLocale,
 	ilib = require('enyo-ilib');
 
 var
+	FittableColumns = require('layout/FittableColumns'),
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Calendar = require('moonstone/Calendar'),
@@ -89,7 +85,7 @@ module.exports = kind({
 	bindings: [
 		{from: '.$.calendar.value', to: '.$.picker.value', oneWay:false}
 	],
-	create: function(){
+	create: function () {
 		this.inherited(arguments);
 		if (!ilib) {
 			this.$.localePicker.hide();
@@ -115,7 +111,7 @@ module.exports = kind({
 		this.$.result.setContent('Current Date' + ' changed to ' + formatted);
 	},
 
-	setLocale: function(inSender, inEvent){
+	setLocale: function (inSender, inEvent) {
 		if (ilib) {
 			var locale = inEvent.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
@@ -134,7 +130,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	setLabelLength: function(inSender, inEvent){
+	setLabelLength: function (inSender, inEvent) {
 		if (inEvent.content){
 			this.$.calendar.setDayOfWeekLength(inEvent.content);
 			if (ilib) {
@@ -151,7 +147,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	setLabelStyle: function(inSender, inEvent){
+	setLabelStyle: function (inSender, inEvent) {
 		if (inEvent.content){
 			this.$.calendar.setDayOfWeekClasses(inEvent.selected.className);
 			this.removeLabelItem(this.$.dowLengthPicker, inEvent, 'full', 'Divider');
@@ -167,18 +163,18 @@ module.exports = kind({
 			}
 		}
 	},
-	changed: function(inSender, inEvent) {
+	changed: function (inSender, inEvent) {
 		if (this.$.result && inEvent.value) {
 			this.updateCurrentString(inEvent.value);
 		}
 	},
-	setDate: function(inSender, inEvent){
+	setDate: function (inSender, inEvent) {
 		var year = isNaN(parseInt(this.$.yearInput.getValue(), 0)) ? this.$.picker.value.getFullYear() : parseInt(this.$.yearInput.getValue(), 0);
 		var month = isNaN(parseInt(this.$.monthInput.getValue(), 0)) ? this.$.picker.value.getMonth() : parseInt(this.$.monthInput.getValue(), 0) - 1;
 		var day = isNaN(parseInt(this.$.dayInput.getValue(), 0)) ? this.$.picker.value.getDate() : parseInt(this.$.dayInput.getValue(), 0);
 		this.$.calendar.setValue(new Date(year, month, day));
 	},
-	resetDate: function() {
+	resetDate: function () {
 		this.$.calendar.setValue(null);
 	}
 });

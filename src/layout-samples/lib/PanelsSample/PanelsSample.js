@@ -1,10 +1,6 @@
 
 var
-	kind = require('enyo/kind'),
-	Select = require('enyo/Select'),
-	Button = require('enyo/Button'),
-	ToolDecorator = require('enyo/ToolDecorator'),
-	Input = require('enyo/Input');
+	kind = require('enyo/kind');
 
 var
 	CardArranger = require('layout/CardArranger'),
@@ -18,8 +14,11 @@ var
 	Panels = require('layout/Panels'),
 	SpiralArranger = require('layout/SpiralArranger'),
 	TopBottomArranger = require('layout/TopBottomArranger');
-
-var MyGridArranger = kind({
+	Select = require('enyo/Select'),
+	Button = require('enyo/Button'),
+	ToolDecorator = require('enyo/ToolDecorator'),
+	Input = require('enyo/Input'),
+	MyGridArranger = kind({
 	kind: GridArranger,
 	colHeight: '150',
 	colWidth: '150'
@@ -65,7 +64,7 @@ module.exports = kind({
 		{name: 'DockRightArranger', arrangerKind: DockRightArranger, classes: 'panels-sample-collapsible'}
 	],
 	bgcolors: ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-	create: kind.inherit(function(sup) {
+	create: kind.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
 			for (var i=0; i<this.panelArrangers.length; i++) {
@@ -74,7 +73,7 @@ module.exports = kind({
 			this.panelCount=this.$.samplePanels.getPanels().length;
 		};
 	}),
-	arrangerSelected: function(sender, event) {
+	arrangerSelected: function (sender, event) {
 		var sp = this.$.samplePanels;
 		var p = this.panelArrangers[sender.selected - 1];
 		if (this.currentClass) {
@@ -92,19 +91,19 @@ module.exports = kind({
 		}
 	},
 	// panels
-	prevPanel: function() {
+	prevPanel: function () {
 		this.$.samplePanels.previous();
 		this.$.input.setValue(this.$.samplePanels.index);
 	},
-	nextPanel: function() {
+	nextPanel: function () {
 		this.$.samplePanels.next();
 		this.$.input.setValue(this.$.samplePanels.index);
 	},
-	gotoPanel: function() {
+	gotoPanel: function () {
 		this.$.samplePanels.setIndex(this.$.input.getValue());
 	},
 	panelCount: 0,
-	addPanel: function() {
+	addPanel: function () {
 		var sp = this.$.samplePanels;
 		var i = this.panelCount++;
 		var p = sp.createComponent({
@@ -115,7 +114,7 @@ module.exports = kind({
 		sp.reflow();
 		sp.setIndex(i);
 	},
-	deletePanel: function() {
+	deletePanel: function () {
 		var p = this.$.samplePanels.getActive();
 		if (p) {
 			p.destroy();

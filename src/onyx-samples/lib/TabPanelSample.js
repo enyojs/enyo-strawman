@@ -1,10 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Control = require('enyo/Control');
+	kind = require('enyo/kind');
 
 var
 	Button = require('onyx/Button'),
-	TabPanels = require('onyx/TabPanels');
+	TabPanels = require('onyx/TabPanels'),
+	Control = require('enyo/Control');
 
 var SimpleTabPanel = kind({
 	kind: TabPanels,

@@ -1,12 +1,12 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Button = require('onyx/Button'),
 	Groupbox = require('onyx/Groupbox'),
 	GroupboxHeader = require('onyx/GroupboxHeader'),
-	RadioGroup = require('onyx/RadioGroup');
+	RadioGroup = require('onyx/RadioGroup'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'onyx.sample.ButtonGroupSample',

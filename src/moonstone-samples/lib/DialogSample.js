@@ -33,17 +33,17 @@ module.exports = kind({
 		{from: '.$.showingToggle.value', to: '.$.dialog.showing', oneWay:false},
 		{from: '.$.dialog.animate', to: '.$.animateToggle.value', oneWay:false}
 	],
-	buttonToggled: function(sender, event) {
+	buttonToggled: function (sender, event) {
 		this.$.dialog.setSpotlightModal(sender.getActive());
 		this.$.dialog.setAutoDismiss(!sender.getActive());
 	},
-	showDialog: function(sender) {
+	showDialog: function (sender) {
 		this.$.dialog.show();
 	},
-	hideDialog: function(sender, event) {
+	hideDialog: function (sender, event) {
 		this.$.dialog.hide();
 	},
-	addMessage: function() {
+	addMessage: function () {
 		this.$.dialog.setMessage(this.$.dialog.getMessage() + '<br> No, seriously, you should probably take a break.');
 	}
 });

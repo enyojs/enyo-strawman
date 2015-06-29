@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	ExpandableText = require('moonstone/ExpandableText'),
@@ -34,7 +32,7 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'No change yet'}
 	],
-	collapsedChanged: function(inSender, inEvent) {
+	collapsedChanged: function (inSender, inEvent) {
 		this.$.console.setContent(inSender.name + (inSender.collapsed ? ' Collapsed' : ' Expanded'));
 	}
 });

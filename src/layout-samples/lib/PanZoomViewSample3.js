@@ -1,11 +1,11 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Button = require('enyo/Button'),
-	Img = require('enyo/Image');
+	utils = require('enyo/utils');
 
 var
-	PanZoomView = require('layout/PanZoomView');
+	PanZoomView = require('layout/PanZoomView'),
+	Button = require('enyo/Button'),
+	Img = require('enyo/Image');
 
 var ImagesView = kind({
 	width: 0,
@@ -17,23 +17,23 @@ var ImagesView = kind({
 		{kind: Img, onload: 'load', ondown: 'down'},
 		{kind: Img, onload: 'load', ondown: 'down'}
 	],
-	create: kind.inherit(function(sup) {
-		return function(){
+	create: kind.inherit(function (sup) {
+		return function () {
 			sup.apply(this, arguments);
 			this.srcChanged();
 		};
 	}),
-	srcChanged: function(){
+	srcChanged: function () {
 		this.height = this.width = 0;
 		this.$.image.setSrc(this.src);
 		this.$.image2.setSrc(this.src);
 	},
-	load: function(inSender, inEvent){
+	load: function (inSender, inEvent) {
 		this.width += inEvent.originator.node.clientWidth;
 		this.height = Math.max(this.height, inEvent.originator.node.clientHeight);
 		this.bubble('onSetDimensions', { width: this.width, height: this.height });
 	},
-	down: function(inSender, inEvent) {
+	down: function (inSender, inEvent) {
 		// Fix to prevent image drag in Firefox
 		inEvent.preventDefault();
 	}
@@ -51,7 +51,7 @@ module.exports = kind({
 		{kind: Button, content: 'change image', ontap: 'changeImage'}
 	],
 	planets: ['assets/globe.jpg', 'assets/earth.jpg', 'assets/jupiter.jpg', 'assets/mars.jpg', 'assets/mercury.jpg', 'assets/neptune.jpg', 'assets/saturn.jpg', 'assets/uranus.jpg', 'assets/venus.jpg'],
-	changeImage: function(){
+	changeImage: function () {
 		var imageview = this.$.panZoomView.$.imagesView;
 		imageview.setSrc( this.planets[ (utils.indexOf(imageview.src, this.planets)+1)%this.planets.length ] );
 	}

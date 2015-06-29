@@ -148,11 +148,11 @@ module.exports = kind({
 			]}
 		]}
 	],
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 		this.spacingChanged();
 	},
-	spacingChanged: function(inSender, inEvent) {
+	spacingChanged: function (inSender, inEvent) {
 		if (this.lastSpacingClass) {
 			this.$.wrapper.removeClass(this.lastSpacingClass);
 		}

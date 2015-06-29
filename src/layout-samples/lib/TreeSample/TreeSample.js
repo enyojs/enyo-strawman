@@ -1,9 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller'),
-	Selection = require('enyo/Selection');
+	kind = require('enyo/kind');
 
 var
+	Scroller = require('enyo/Scroller'),
+	Selection = require('enyo/Selection'),
 	FittableRows = require('layout/FittableRows'),
 	TreeNode = require('layout/Node');
 

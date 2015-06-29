@@ -1,12 +1,10 @@
 var
 	kind = require('enyo/kind'),
-	dom = require('enyo/dom'),
-	Control = require('enyo/Control');
+	dom = require('enyo/dom');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
+	Control = require('enyo/Control'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	FormCheckbox = require('moonstone/FormCheckbox'),

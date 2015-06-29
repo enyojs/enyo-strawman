@@ -1,5 +1,7 @@
 var
-	kind = require('enyo/kind'),
+	kind = require('enyo/kind');
+
+var
 	AccessibilitySupport = require('enyo/AccessibilitySupport'),
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control');

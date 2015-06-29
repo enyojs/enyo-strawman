@@ -1,11 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	Group = require('enyo/Group'),
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	ExpandableListItem = require('moonstone/ExpandableListItem'),
@@ -71,7 +69,7 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'Event'}
 	],
-	activateHandler: function(sender, event) {
+	activateHandler: function (sender, event) {
 		if (this.generated && event.originator instanceof ExpandableListItem) {
 			this.$.console.setContent(event.originator.getContent() + ' is now ' + (event.originator.getActive() ? 'open' : 'closed'));
 		}

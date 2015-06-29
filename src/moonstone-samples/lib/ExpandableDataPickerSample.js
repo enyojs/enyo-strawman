@@ -1,15 +1,13 @@
 var
-	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	Collection = require('enyo/Collection'),
 	Divider = require('moonstone/Divider'),
 	ExpandableDataPicker = require('moonstone/ExpandableDataPicker'),
 	FormCheckbox = require('moonstone/FormCheckbox'),
-	Scroller = require('moonstone/Scroller');
+	Scroller = require('moonstone/Scroller'),
+	FittableRows = require('layout/FittableRows');
 
 module.exports = kind({
 	name: 'moon.sample.ExpandableDataPickerSample',

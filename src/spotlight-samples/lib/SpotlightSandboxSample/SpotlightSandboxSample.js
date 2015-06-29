@@ -1,9 +1,7 @@
 var
 	kind = require('enyo/kind'),
 	Button = require('enyo/Button'),
-	Control = require('enyo/Control');
-
-var
+	Control = require('enyo/Control'),
 	Spotlight = require('spotlight');
 
 var Barracuda = kind({

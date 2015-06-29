@@ -1,16 +1,14 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
 	FittableRows = require('layout/FittableRows'),
-	FittableColumns = require('layout/FittableColumns');
-
-var
+	FittableColumns = require('layout/FittableColumns'),
 	ContextualPopup = require('onyx/ContextualPopup'),
 	IconButton = require('onyx/IconButton'),
 	MenuDecorator = require('onyx/MenuDecorator'),
-	Toolbar = require('onyx/Toolbar');
+	Toolbar = require('onyx/Toolbar'),
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'onyx.sample.ContextualPopupSample',

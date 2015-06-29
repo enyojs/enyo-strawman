@@ -1,7 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Scroller = require('enyo/Scroller');
+	utils = require('enyo/utils');
 
 var
 	Slider = require('onyx/Slider'),
@@ -11,7 +10,8 @@ var
 	GroupboxHeader = require('onyx/GroupboxHeader'),
 	RangeSlider = require('onyx/RangeSlider'),
 	Checkbox = require('onyx/Checkbox'),
-	Button = require('onyx/Button');
+	Button = require('onyx/Button'),
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'onyx.sample.SliderSample',

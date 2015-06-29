@@ -1,16 +1,17 @@
 var
 	kind = require('enyo/kind'),
-	json = require('enyo/json'),
+	json = require('enyo/json');
+
+var
+	PulldownList = require('layout/PulldownList'),
+	FittableRows = require('layout/FittableRows'),
 	Ajax = require('enyo/Ajax'),
 	Button = require('enyo/Button'),
 	Img = require('enyo/Image'),
 	Input = require('enyo/Input'),
 	JsonpRequest = require('enyo/Jsonp');
 
-var
-	PulldownList = require('layout/PulldownList'),
-	FittableRows = require('layout/FittableRows');
-
+	
 module.exports = kind({
 	name: 'enyo.sample.ListPulldownSample',
 	classes: 'enyo-unselectable enyo-fit onyx',
@@ -30,24 +31,24 @@ module.exports = kind({
 			]}
 		]}
 	],
-	rendered: kind.inherit(function(sup) {
+	rendered: kind.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
 			this.search();
 		};
 	}),
-	pullRelease: function() {
+	pullRelease: function () {
 		this.pulled = true;
 		// add 1 second delay so we can see the loading message
 		setTimeout(this.bindSafely(function() {
 			this.search();
 		}), 1000);
 	},
-	pullComplete: function() {
+	pullComplete: function () {
 		this.pulled = false;
 		this.$.list.reset();
 	},
-	search: function() {
+	search: function () {
 		// Capture searchText and strip any whitespace
 		var searchText = this.$.searchInput.getValue().replace(/^\s+|\s+$/g, '');
 		if (searchText === '') {
@@ -57,7 +58,7 @@ module.exports = kind({
 		}
 		this.searchFlickr(searchText);
 	},
-	searchFlickr: function(inSearchText) {
+	searchFlickr: function (inSearchText) {
 		var params = {
 			method: 'flickr.photos.search',
 			format: 'json',
@@ -80,11 +81,11 @@ module.exports = kind({
 				.go(params);
 		}
 	},
-	processAjaxSearchResults: function(inRequest, inResponse) {
+	processAjaxSearchResults: function (inRequest, inResponse) {
 		inResponse = json.parse(inResponse);
 		this.processSearchResults(inRequest, inResponse);
 	},
-	processSearchResults: function(inRequest, inResponse) {
+	processSearchResults: function (inRequest, inResponse) {
 		this.results = inResponse.photos.photo;
 		this.$.list.setCount(this.results.length);
 		if (this.pulled) {
@@ -93,7 +94,7 @@ module.exports = kind({
 			this.$.list.reset();
 		}
 	},
-	setupItem: function(inSender, inEvent) {
+	setupItem: function (inSender, inEvent) {
 		var i = inEvent.index;
 		var item = this.results[i];
 		if (!item.url_m) {

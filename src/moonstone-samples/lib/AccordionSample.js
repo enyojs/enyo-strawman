@@ -1,12 +1,12 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Scroller = require('moonstone/Scroller'),
 	Divider = require('moonstone/Divider'),
 	Accordion = require('moonstone/Accordion'),
-	SelectableItem = require('moonstone/SelectableItem');
+	SelectableItem = require('moonstone/SelectableItem'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.AccordionSample',

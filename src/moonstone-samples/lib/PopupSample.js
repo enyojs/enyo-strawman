@@ -4,9 +4,7 @@ var
 var
 	CardArranger = require('layout/CardArranger'),
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),

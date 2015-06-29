@@ -1,15 +1,15 @@
 var
-	kind = require('enyo/kind'),
+	kind = require('enyo/kind');
+
+var
+	FittableColumns = require('layout/FittableColumns'),
+	FittableRows = require('layout/FittableRows'),
+	List = require('layout/List'),
 	Button = require('enyo/Button'),
 	Component = require('enyo/Component'),
 	Img = require('enyo/Image'),
 	Input = require('enyo/Input'),
 	JsonpRequest = require('enyo/Jsonp');
-
-var
-	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows'),
-	List = require('layout/List');
 
 // A simple component to do a Flickr search.
 var ListHorizontalFlickrSearch = kind({
@@ -23,7 +23,7 @@ var ListHorizontalFlickrSearch = kind({
 	url: 'https://api.flickr.com/services/rest/',
 	pageSize: 200,
 	api_key: '2a21b46e58d207e4888e1ece0cb149a5',
-	search: function(inSearchText, inPage) {
+	search: function (inSearchText, inPage) {
 		this.searchText = inSearchText || this.searchText;
 		var i = (inPage || 0) * this.pageSize;
 		var params = {
@@ -38,7 +38,7 @@ var ListHorizontalFlickrSearch = kind({
 			.response(this, 'processResponse')
 			.go(params);
 	},
-	processResponse: function(inSender, inResponse) {
+	processResponse: function (inSender, inResponse) {
 		var photos = inResponse.photos ? inResponse.photos.photo || [] : [];
 		for (var i=0, p; (p=photos[i]); i++) {
 			var urlprefix = 'http://farm' + p.farm + '.static.flickr.com/' + p.server + '/' + p.id + '_' + p.secret;
@@ -80,14 +80,14 @@ module.exports = kind({
 			this.search();
 		};
 	}),
-	search: function() {
+	search: function () {
 		this.searchText = this.$.searchInput.getValue();
 		this.page = 0;
 		this.results = [];
 		this.$.searchSpinner.show();
 		this.$.flickrSearch.search(this.searchText);
 	},
-	searchResults: function(inSender, inResults) {
+	searchResults: function (inSender, inResults) {
 		this.$.searchSpinner.hide();
 		this.$.moreSpinner.hide();
 		this.results = this.results.concat(inResults);
@@ -99,7 +99,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	setupItem: function(inSender, inEvent) {
+	setupItem: function (inSender, inEvent) {
 		var i = inEvent.index;
 		var item = this.results[i];
 		this.$.item.addRemoveClass('onyx-selected', inSender.isSelected(inEvent.index));
@@ -107,12 +107,12 @@ module.exports = kind({
 		this.$.more.canGenerate = !this.results[i+1];
 		return true;
 	},
-	more: function() {
+	more: function () {
         this.page++;
 		this.$.moreSpinner.show();
         this.$.flickrSearch.search(this.searchText, this.page);
 	},
-	showList: function() {
+	showList: function () {
 		this.setIndex(0);
 	}
 });

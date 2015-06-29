@@ -1,15 +1,13 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	FormCheckbox = require('moonstone/FormCheckbox'),
-	Scroller = require('moonstone/Scroller');
+	Scroller = require('moonstone/Scroller'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.FormCheckboxSample',
@@ -43,10 +41,10 @@ module.exports = kind({
 			{kind: BodyText, name: 'result', content: 'Nothing selected'}
 		]}
 	],
-	itemChanged: function(inSender, inEvent) {
+	itemChanged: function (inSender, inEvent) {
 		this.$.result.setContent(inSender.getContent() + ' was ' + (inSender.getChecked() ? ' selected.' : 'deselected.'));
 	},
-	groupChanged: function(inSender, inEvent) {
+	groupChanged: function (inSender, inEvent) {
 		if (inEvent.toggledControl.getChecked()) {
 			var selected = inEvent.toggledControl.getContent();
 			this.$.result.setContent(selected + ' was selected.');

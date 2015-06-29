@@ -1,15 +1,14 @@
 var
     kind = require('enyo/kind'),
+    ilib = require('enyo-ilib'),
+    rb = require('./ResBundle');
+
+var
     Button = require('enyo/Button'),
     Input = require('enyo/Input'),
-    Scroller = require('enyo/Scroller');
-
-var
-    ilib = require('enyo-ilib');
-
-var
-    ChooseLocale = require('./ChooseLocale'),
-    rb = require('./ResBundle');
+    Scroller = require('enyo/Scroller'),
+    ChooseLocale = require('./ChooseLocale');
+    
 
 module.exports = kind({
     name: 'ilib.sample.AddressFormatting',

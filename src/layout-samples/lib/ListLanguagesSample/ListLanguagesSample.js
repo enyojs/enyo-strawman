@@ -1,13 +1,13 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Button = require('enyo/Button'),
-	Input = require('enyo/Input');
+	utils = require('enyo/utils');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
-	List = require('layout/List');
+	List = require('layout/List'),
+	Button = require('enyo/Button'),
+	Input = require('enyo/Input');
 
 module.exports = kind({
 	name: 'enyo.sample.ListLanguagesSample',
@@ -71,18 +71,18 @@ module.exports = kind({
 			]
 		}
 	],
-	rendered: kind.inherit(function(sup) {
+	rendered: kind.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
 			this.populateList();
 		};
 	}),
-	listReorder: function(inSender, inEvent) {
+	listReorder: function (inSender, inEvent) {
 		var movedItem = utils.clone(this.data[inEvent.reorderFrom]);
 		this.data.splice(inEvent.reorderFrom,1);
 		this.data.splice((inEvent.reorderTo),0,movedItem);
 	},
-	setupItem: function(inSender, inEvent) {
+	setupItem: function (inSender, inEvent) {
 		var i = inEvent.index;
 		if(!this.data[i]) {
 			return;
@@ -95,7 +95,7 @@ module.exports = kind({
 		this.$.text.setContent(number);
 		this.$.serial.setContent('#' + serial);
 	},
-	setupReorderComponents: function(inSender, inEvent) {
+	setupReorderComponents: function (inSender, inEvent) {
 		var i = inEvent.index;
 		if(!this.data[i]) {
 			return;
@@ -124,7 +124,7 @@ module.exports = kind({
 	/* cancelPinnedMode: function(inSender, inEvent) {
 		this.$.list.cancelPinnedMode(inEvent);
 	}, */
-	setupSwipeItem: function(inSender, inEvent) {
+	setupSwipeItem: function (inSender, inEvent) {
 		var i = inEvent.index;
 		if(!this.data[i]) {
 			return;
@@ -135,27 +135,27 @@ module.exports = kind({
 		this.$.swipeTitle.setContent(this.data[i].langs[newLang]);
 		return true;
 	},
-	swipeComplete: function(inSender, inEvent) {
+	swipeComplete: function (inSender, inEvent) {
 		var i = inEvent.index;
 		this.data[i].currentIndex = (inEvent.xDirection == 1)
 			? this.getNextLang(i)
 			: this.getPrevLang(i);
 		this.$.list.renderRow(i);
 	},
-	getNextLang: function(index) {
+	getNextLang: function (index) {
 		var currentLang = this.data[index].currentIndex;
 		return (currentLang + 1) % this.data[index].langs.length;
 	},
-	getPrevLang: function(index) {
+	getPrevLang: function (index) {
 		var currentLang = this.data[index].currentIndex;
 		return (currentLang - 1 + this.data[index].langs.length) % this.data[index].langs.length;
 	},
-	populateList: function() {
+	populateList: function () {
 		this.createRandomData();
 		this.$.list.setCount(this.data.length);
 		this.$.list.reset();
 	},
-	createRandomData: function() {
+	createRandomData: function () {
 		var languages = this.getLanguages();
 		var langs;
 		var dataCount = parseInt(this.$.numRows.getValue(), 10);
@@ -173,7 +173,7 @@ module.exports = kind({
 		}
 		this.data.sort(function() {return 0.5 - Math.random();});
 	},
-	getLanguages: function() {
+	getLanguages: function () {
 		return utils.keys(this.languages);
 	}
 });

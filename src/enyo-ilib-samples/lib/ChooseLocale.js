@@ -1,9 +1,10 @@
 var
     kind = require('enyo/kind'),
-    Select = require('enyo/Select');
+    ilib = require('enyo-ilib');
 
 var
-    ilib = require('enyo-ilib');
+    Select = require('enyo/Select');  
+
 
 module.exports = kind({
     name: 'ilib.sample.ChooseLocale',

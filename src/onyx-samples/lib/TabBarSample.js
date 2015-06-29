@@ -1,12 +1,12 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Control = require('enyo/Control');
+	utils = require('enyo/utils');
 
 var
 	Button = require('onyx/Button'),
 	Popup = require('onyx/Popup'),
-	TabBar = require('onyx/TabBar');
+	TabBar = require('onyx/TabBar'),
+	Control = require('enyo/Control');
 
 var SimpleTabBar = kind({
 	name: 'SimpleTabBar',

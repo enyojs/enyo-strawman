@@ -1,13 +1,13 @@
 var
-	kind = require('enyo/kind'),
-	Checkbox = require('enyo/Checkbox'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
 	FittableRows = require('layout/FittableRows'),
 	CollapsingArranger = require('layout/CollapsingArranger'),
 	Panels = require('layout/Panels'),
-	List = require('layout/List');
+	List = require('layout/List'),
+	Checkbox = require('enyo/Checkbox'),
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'enyo.sample.PanelsSlidingSample',

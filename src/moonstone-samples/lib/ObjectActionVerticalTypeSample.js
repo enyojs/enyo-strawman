@@ -1,13 +1,11 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
+	utils = require('enyo/utils');
+
+var
 	Img = require('enyo/Image'),
-	Repeater = require('enyo/Repeater');
-
-var
-	FittableRows = require('layout/FittableRows');
-
-var
+	Repeater = require('enyo/Repeater'),
+	FittableRows = require('layout/FittableRows'),
 	Divider = require('moonstone/Divider'),
 	Scroller = require('moonstone/Scroller'),
 	Item = require('moonstone/Item'),

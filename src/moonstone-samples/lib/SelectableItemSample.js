@@ -1,14 +1,12 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	Scroller = require('moonstone/Scroller'),
 	Divider = require('moonstone/Divider'),
-	SelectableItem = require('moonstone/SelectableItem');
+	SelectableItem = require('moonstone/SelectableItem'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.SelectableItemSample',

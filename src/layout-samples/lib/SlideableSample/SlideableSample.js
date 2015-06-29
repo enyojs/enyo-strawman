@@ -1,14 +1,14 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Control = require('enyo/Control');
+	utils = require('enyo/utils');
 
 var
 	FittableLayout = require('layout/FittableLayout'),
 	FittableRows = require('layout/FittableRows'),
 	Slideable = require('layout/Slideable'),
 	FittableColumnsLayout = FittableLayout.Columns,
-	FittableRowsLayout = FittableLayout.Rows;
+	FittableRowsLayout = FittableLayout.Rows,
+	Control = require('enyo/Control');
 
 var SlideableInfo = kind({
 	kind: Control,
@@ -28,20 +28,20 @@ var SlideableInfo = kind({
 	handlers: {
 		onUpdateInfo: 'updateInfo'
 	},
-	create: kind.inherit(function(sup) {
-		return function() {
+	create: kind.inherit(function (sup) {
+		return function () {
 			sup.apply(this, arguments);
 			this.infoChanged();
 		};
 	}),
-	infoChanged: function() {
+	infoChanged: function () {
 		for (var p in this.info) {
 			if (this.$[p]) {
 				this.$[p].setContent(utils.cap(p) + ': ' + this.info[p]);
 			}
 		}
 	},
-	updateInfo: function(inSender, inEvent) {
+	updateInfo: function (inSender, inEvent) {
 		this.setInfo(inEvent);
 		return true;
 	}
@@ -60,8 +60,8 @@ module.exports = kind({
 	handlers: {
 		ondragstart: 'suppressPanelDrag'
 	},
-	create: kind.inherit(function(sup) {
-		return function() {
+	create: kind.inherit(function (sup) {
+		return function () {
 			sup.apply(this, arguments);
 			var slideables = [];
 
@@ -73,7 +73,7 @@ module.exports = kind({
 			this.populate(slideables);
 		};
 	}),
-	populate: function(inSlideables) {
+	populate: function (inSlideables) {
 		var slideable;
 		for (var i = 0; i < inSlideables.length; i++) {
 			slideable = inSlideables[i];
@@ -95,7 +95,7 @@ module.exports = kind({
 			]);
 		}
 	},
-	updateInfo: function(inSender) {
+	updateInfo: function (inSender) {
 		inSender.waterfallDown('onUpdateInfo', {
 			name: inSender.name,
 			axis: inSender.axis,
@@ -107,7 +107,7 @@ module.exports = kind({
 		return true;
 	},
 	// keeps the view panel from moving in Sampler app while dragging the Slideable
-	suppressPanelDrag: function() {
+	suppressPanelDrag: function () {
 		return true;
 	}
 });

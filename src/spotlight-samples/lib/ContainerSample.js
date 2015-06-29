@@ -1,8 +1,8 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button');
+	kind = require('enyo/kind');
 
 var
+	Button = require('enyo/Button'),
 	Spotlight = require('spotlight');
 
 module.exports = kind({

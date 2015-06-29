@@ -1,11 +1,11 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Groupbox = require('onyx/Groupbox'),
 	GroupboxHeader = require('onyx/GroupboxHeader'),
-	ToggleButton = require('onyx/ToggleButton');
+	ToggleButton = require('onyx/ToggleButton'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'onyx.sample.ToggleButtonSample',

@@ -1,9 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button'),
-	Input = require('enyo/Input');
+	kind = require('enyo/kind');
 
 var
+	Button = require('enyo/Button'),
+	Input = require('enyo/Input'),
 	FittableRows = require('layout/FittableRows'),
 	ImageCarousel = require('layout/ImageCarousel');
 

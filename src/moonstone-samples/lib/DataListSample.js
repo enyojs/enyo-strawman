@@ -1,8 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control');
+	utils = require('enyo/utils');
 
 var
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
@@ -12,7 +10,9 @@ var
 	Button = require('moonstone/Button'),
 	Drawers = require('moonstone/Drawers'),
 	CaptionDecorator = require('moonstone/CaptionDecorator'),
-	ToggleButton = require('moonstone/ToggleButton');
+	ToggleButton = require('moonstone/ToggleButton'),
+	Collection = require('enyo/Collection'),
+	Control = require('enyo/Control');
 
 module.exports = kind({
 	name: 'moons.sample.DataListSample',
@@ -74,7 +74,7 @@ module.exports = kind({
 			this.isScrolled = false;
 		}
 	},
-	scrollStopped: function() {
+	scrollStopped: function () {
 		this.isScrolled = true;
 	},
 	toggleShowing: function (sender) {

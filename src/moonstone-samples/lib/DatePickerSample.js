@@ -1,14 +1,10 @@
 var
 	hooks = require('enyo/hooks'),
-	kind = require('enyo/kind');
-
-var
-	FittableRows = require('layout/FittableRows');
-
-var
+	kind = require('enyo/kind'),
 	ilib = require('enyo-ilib');
 
 var
+	FittableRows = require('layout/FittableRows'),
 	Scroller = require('moonstone/Scroller'),
 	DatePicker = require('moonstone/DatePicker'),
 	Button = require('moonstone/Button'),
@@ -70,14 +66,14 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
-	create: function(){
+	create: function () {
 		this.inherited(arguments);
 		if (!ilib) {
 			this.$.localePicker.hide();
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function(inSender, inEvent){
+	setLocale: function (inSender, inEvent) {
 		if (ilib) {
 			var locale = inEvent.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
@@ -87,22 +83,22 @@ module.exports = kind({
 		}
 		return true;
 	},
-	setDate: function() {
+	setDate: function () {
 		var current = this.$.picker.value || new Date();
 		var year = isNaN(parseInt(this.$.yearInput.getValue(), 0)) ? current.getFullYear() : parseInt(this.$.yearInput.getValue(), 0);
 		var month = isNaN(parseInt(this.$.monthInput.getValue(), 0)) ? current.getMonth() : parseInt(this.$.monthInput.getValue(), 0) - 1;
 		var day = isNaN(parseInt(this.$.dayInput.getValue(), 0)) ? current.getDate() : parseInt(this.$.dayInput.getValue(), 0);
 		this.$.picker.setValue(new Date(year, month, day));
 	},
-	resetDate: function() {
+	resetDate: function () {
 		this.$.picker.setValue(new Date());
 	},
-	changed: function(inSender, inEvent) {
+	changed: function (inSender, inEvent) {
 		if (this.$.result && inEvent.value){
 			this.$.result.setContent(inEvent.name + ' changed to ' + inEvent.value.toDateString());
 		}
 	},
-	resetTapped: function(inSender, inEvent) {
+	resetTapped: function (inSender, inEvent) {
 		this.$.picker.set('value', null);
 		return true;
 	}

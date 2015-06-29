@@ -1,13 +1,11 @@
 var
-	kind = require('enyo/kind'),
+	kind = require('enyo/kind');
+
+var
 	Collection = require('enyo/Collection'),
 	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater');
-
-var
-	Spotlight = require('spotlight');
-
-var
+	DataRepeater = require('enyo/DataRepeater'),
+	Spotlight = require('spotlight'),
 	Button = require('moonstone/Button'),
 	ChannelInfo = require('moonstone/ChannelInfo'),
 	CheckboxItem = require('moonstone/CheckboxItem'),

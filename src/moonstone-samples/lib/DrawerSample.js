@@ -129,10 +129,10 @@ module.exports = kind({
 	partialDrawerChanged: function () {
 		this.$.openMoreButton.setShowing(!this.$.partialDrawer.getOpen());
 	},
-	pickerChangedImg:function (sender, event){
+	pickerChangedImg:function (sender, event) {
 		this.$.drawers.set('src', event.selected.value);
 	},
-	pickerChangedIcon:function (sender, event){
+	pickerChangedIcon:function (sender, event) {
 		this.$.drawers.set('icon', event.selected.value);
 	}
 });

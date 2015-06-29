@@ -1,15 +1,13 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	Scroller = require('moonstone/Scroller'),
-	ToggleItem = require('moonstone/ToggleItem');
+	ToggleItem = require('moonstone/ToggleItem'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.ToggleItemSample',

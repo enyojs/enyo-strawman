@@ -1,8 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Collection = require('enyo/Collection'),
-	EmptyBinding = require('enyo/EmptyBinding');
+	utils = require('enyo/utils');
 
 var
 	Button = require('moonstone/Button'),
@@ -21,8 +19,9 @@ var
 	RadioItemGroup = require('moonstone/RadioItemGroup'),
 	Scroller = require('moonstone/Scroller'),
 	Overlay = require('moonstone/Overlay'),
-	ToggleButton = require('moonstone/ToggleButton');
-
+	ToggleButton = require('moonstone/ToggleButton'),
+	Collection = require('enyo/Collection'),
+	EmptyBinding = require('enyo/EmptyBinding');
 
 
 var GridSampleItem = kind({

@@ -1,15 +1,14 @@
 var
     kind = require('enyo/kind'),
-    Button = require('enyo/Button'),
-    Input = require('enyo/Input'),
-    Scroller = require('enyo/Scroller');
-
-var
-    ilib = require('enyo-ilib');
+    ilib = require('enyo-ilib'),
+    rb = require('./ResBundle');
 
 var
     ChooseLocale = require('./ChooseLocale'),
-    rb = require('./ResBundle');
+    Button = require('enyo/Button'),
+    Input = require('enyo/Input'),
+    Scroller = require('enyo/Scroller');
+    
 
 module.exports = kind({
     name: 'ilib.sample.AddressParsing',

@@ -1,13 +1,13 @@
 var
-	kind = require('enyo/kind'),
-	Repeater = require('enyo/Repeater');
+	kind = require('enyo/kind');
 
 var
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
-	Scroller = require('moonstone/Scroller');
+	Scroller = require('moonstone/Scroller'),
+	Repeater = require('enyo/Repeater');
 
 module.exports = kind({
 	name: 'moon.sample.HeaderAutoCollapsingSample',

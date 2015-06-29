@@ -1,7 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Control = require('enyo/Control'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Groupbox = require('onyx/Groupbox'),
@@ -9,7 +7,9 @@ var
 	Icon = require('onyx/Icon'),
 	IconButton = require('onyx/IconButton'),
 	ToggleIconButton = require('onyx/ToggleIconButton'),
-	Toolbar = require('onyx/Toolbar');
+	Toolbar = require('onyx/Toolbar'),
+	Control = require('enyo/Control'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'onyx.sample.IconButtonSample',

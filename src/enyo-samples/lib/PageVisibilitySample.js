@@ -6,17 +6,17 @@ var
 	Signals = require('enyo/Signals');
 
 module.exports = kind({
-	name: "enyo.sample.PageVisibilitySample",
+	name: 'enyo.sample.PageVisibilitySample',
 	kind: Control,
 	components: [
-		{kind: Signals, onvisibilitychange: "visibilitychanged"},
-		{name: "text", allowHtml: true}
+		{kind: Signals, onvisibilitychange: 'visibilitychanged'},
+		{name: 'text', allowHtml: true}
 	],
 	rendered: function () {
 		this.inherited(arguments);
 		this.visibilitychanged();
 	},
-	visibilitychanged: function(){
-		this.$.text.setContent(this.$.text.content + (Date().toString()) + (enyo.hidden ? ": hidden" : ": visible") + "<br>");
+	visibilitychanged: function () {
+		this.$.text.setContent(this.$.text.content + (Date().toString()) + (enyo.hidden ? ': hidden' : ': visible') + '<br>');
 	}
 });

@@ -1,14 +1,8 @@
 var
 	hooks = require('enyo/hooks'),
 	kind = require('enyo/kind'),
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Router = require('enyo/Router');
-
-var
 	ilib = require('enyo-ilib');
-
+	
 var
 	Button = require('moonstone/Button'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
@@ -21,7 +15,11 @@ var
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	ToggleButton = require('moonstone/ToggleButton'),
-	ToggleItem = require('moonstone/ToggleItem');
+	ToggleItem = require('moonstone/ToggleItem'),
+	Anchor = require('enyo/Anchor'),
+	Collection = require('enyo/Collection'),
+	DataRepeater = require('enyo/DataRepeater'),
+	Router = require('enyo/Router');
 
 var locales = [
 	{locale: 'local', title: '', selected: true},
@@ -40,7 +38,7 @@ var LocaleItem = kind({
 	observers: {
 		updateTitle: ['locale', 'title']
 	},
-	updateTitle: function() {
+	updateTitle: function () {
 		this.set('content', this.locale + ' ' + this.title);
 	}
 });

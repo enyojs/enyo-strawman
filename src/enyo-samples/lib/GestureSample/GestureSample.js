@@ -11,45 +11,45 @@ var
 
 var 
 	EventItem = kind({
-		name:"enyo.sample.EventItem",
+		name:'enyo.sample.EventItem',
 		published: {
-			event:"",
+			event:'',
 			truncate: true,
 			persist: false
 		},
-		style:"padding:4px;",
+		style:'padding:4px;',
 		events: {
-			onDone:""
+			onDone:''
 		},
 		components: [
-			{name: "eventProps", allowHtml:true},
-			{kind: Animator, duration:1000, startValue:0, endValue:255, onStep:"stepAnimation", onEnd:"animationEnded"}
+			{name: 'eventProps', allowHtml:true},
+			{kind: Animator, duration:1000, startValue:0, endValue:255, onStep:'stepAnimation', onEnd:'animationEnded'}
 		],
-		create: function() {
+		create: function () {
 			this.inherited(arguments);
 			this.eventChanged();
 			this.truncateChanged();
 		},
-		truncateChanged: function() {
-			this.$.eventProps.addRemoveClass("gesture-sample-truncate", this.truncate);
+		truncateChanged: function () {
+			this.$.eventProps.addRemoveClass('gesture-sample-truncate', this.truncate);
 		},
-		eventChanged: function(inOld) {
+		eventChanged: function (inOld) {
 			if (this.event) {
 				if (this.timeout) {
 					clearTimeout(this.timeout);
 					this.timeout = null;
 				}
 				this.$.animator.stop();
-				this.$.eventProps.set("content", this.getPropsString());
+				this.$.eventProps.set('content', this.getPropsString());
 				this.$.animator.play();
 			}
 		},
-		stepAnimation: function(inSender, inEvent) {
+		stepAnimation: function (inSender, inEvent) {
 			var v = Math.floor(inSender.value);
-			this.applyStyle("background-color", "rgb(" + v + ",255," + v + ");");
+			this.applyStyle('background-color', 'rgb(' + v + ',255,' + v + ');');
 			return true;
 		},
-		animationEnded: function() {
+		animationEnded: function () {
 			if (!this.persist) {
 				this.timeout = setTimeout(this.bindSafely(function() {
 					this.doDone({type:this.event.type});
@@ -57,33 +57,33 @@ var
 			}
 			return true;
 		},
-		destroy: function() {
+		destroy: function () {
 			if (this.timeout) {
 				clearTimeout(this.timeout);
 				this.timeout = null;
 			}
 			this.inherited(arguments);
 		},
-		getPropsString: function() {
+		getPropsString: function () {
 			var props = [];
 			for (var i in this.event) {
 				if ((this.event[i] !== undefined) &&
 					(this.event[i] !== null) &&
 					!(this.event[i] instanceof Object) &&
-					(i != "type")) {
-					props.push(i + ": " + this.event[i]);
+					(i != 'type')) {
+					props.push(i + ': ' + this.event[i]);
 				}
 			}
 			if (this.event.srcEvent && this.event.srcEvent.type) {
-				props.push("srcEvent.type: " + this.event.srcEvent.type);
+				props.push('srcEvent.type: ' + this.event.srcEvent.type);
 			}
-			return "<b>" + this.event.type + "</b>: { " + props.join(", ") + " }";
+			return '<b>' + this.event.type + '</b>: { ' + props.join(', ') + ' }';
 		}
 	});
 
 var previousHoldPulseConfig;
 
-function overrideHoldPulseConfig() {
+function overrideHoldPulseConfig () {
 	previousHoldPulseConfig = drag.holdPulseDefaultConfig;
 
 	drag.configureHoldPulse({
@@ -99,81 +99,81 @@ function overrideHoldPulseConfig() {
 	});
 }
 
-function restoreHoldPulseConfig() {
+function restoreHoldPulseConfig () {
 	drag.configureHoldPulse(previousHoldPulseConfig);
 }
 
 module.exports = kind({
-	name: "enyo.sample.GestureSample",
-	classes: "gesture-sample enyo-fit enyo-unselectable",
+	name: 'enyo.sample.GestureSample',
+	classes: 'gesture-sample enyo-fit enyo-unselectable',
 	components: [
 		{
-			classes:"gesture-sample-pad",
-			name: "gestureSamplePad",
+			classes:'gesture-sample-pad',
+			name: 'gestureSamplePad',
 			fit:true,
 			doubleTapEnabled: false,
-			ondown: "handleEvent",
-			onup: "handleEvent",
-			ontap: "handleEvent",
-			onmove: "handleEvent",
-			onenter: "handleEvent",
-			onleave: "handleEvent",
-			ondragstart: "handleEvent",
-			ondrag: "handleEvent",
-			ondragover: "handleEvent",
-			onhold: "handleEvent",
-			onrelease: "handleEvent",
-			onholdpulse: "handleEvent",
-			onflick: "handleEvent",
-			ongesturestart: "handleEvent",
-			ongesturechange: "handleEvent",
-			ongestureend: "handleEvent",
-			ondoubletap: "handleEvent",
-			onlongpress: "handleEvent",
-			onlongerpress: "handleEvent",
+			ondown: 'handleEvent',
+			onup: 'handleEvent',
+			ontap: 'handleEvent',
+			onmove: 'handleEvent',
+			onenter: 'handleEvent',
+			onleave: 'handleEvent',
+			ondragstart: 'handleEvent',
+			ondrag: 'handleEvent',
+			ondragover: 'handleEvent',
+			onhold: 'handleEvent',
+			onrelease: 'handleEvent',
+			onholdpulse: 'handleEvent',
+			onflick: 'handleEvent',
+			ongesturestart: 'handleEvent',
+			ongesturechange: 'handleEvent',
+			ongestureend: 'handleEvent',
+			ondoubletap: 'handleEvent',
+			onlongpress: 'handleEvent',
+			onlongerpress: 'handleEvent',
 			components: [
-				{content: "Perform gestures here", style: "pointer-events: none;"},
-				{classes: "gesture-sample-note", content:"(tap below for options)", style: "pointer-events: none;"}
+				{content: 'Perform gestures here', style: 'pointer-events: none;'},
+				{classes: 'gesture-sample-note', content:'(tap below for options)', style: 'pointer-events: none;'}
 			]
 		},
-		{kind: Group, ontap:"toggleSettings", components: [
-			{content: "Events"},
-			{name: "eventList", style:"font-size:12px;", onDone:"removeEvent", components: [
-				{name:"waiting", content: "Waiting for events...", style:"padding:4px;font-style:italic;color:gray;"}
+		{kind: Group, ontap:'toggleSettings', components: [
+			{content: 'Events'},
+			{name: 'eventList', style:'font-size:12px;', onDone:'removeEvent', components: [
+				{name:'waiting', content: 'Waiting for events...', style:'padding:4px;font-style:italic;color:gray;'}
 			]}
 		]},
-		{ontap:"toggleSettings", name:"settings", showing:false, components: [
-			{content: "Options"},
-			{kind: Group, classes:"gesture-sample-padded", components: [
-				{classes:"gesture-sample-setting", components: [
-					{content:"Truncate detail on small screen: "},
-					{name:"truncateDetail", onchange:"truncateChanged", ontap:"preventDefault", kind: Checkbox, checked:true}
+		{ontap:'toggleSettings', name:'settings', showing:false, components: [
+			{content: 'Options'},
+			{kind: Group, classes:'gesture-sample-padded', components: [
+				{classes:'gesture-sample-setting', components: [
+					{content:'Truncate detail on small screen: '},
+					{name:'truncateDetail', onchange:'truncateChanged', ontap:'preventDefault', kind: Checkbox, checked:true}
 				]},
-				{classes:"gesture-sample-setting", components: [
-					{content:"Enable Double Tap: "},
-					{name:"enableDoubleTap", onchange:"doubleTapChanged", ontap:"preventDefault", kind: Checkbox, checked:false}
+				{classes:'gesture-sample-setting', components: [
+					{content:'Enable Double Tap: '},
+					{name:'enableDoubleTap', onchange:'doubleTapChanged', ontap:'preventDefault', kind: Checkbox, checked:false}
 				]},
-				{classes:"gesture-sample-setting", style:"min-height:40px;", components: [
-					{content:"Monitor event: "},
-					{content:"Select event", style:"width:140px; margin-bottom:5px;"},
-					{name:"eventPicker", kind: Select, classes:"gesture-sample-left"}
+				{classes:'gesture-sample-setting', style:'min-height:40px;', components: [
+					{content:'Monitor event: '},
+					{content:'Select event', style:'width:140px; margin-bottom:5px;'},
+					{name:'eventPicker', kind: Select, classes:'gesture-sample-left'}
 				]}
 			]}
 		]}
 	],
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 		overrideHoldPulseConfig();
 		this.eventList = {};
 		this.eventCount = 0;
 		utils.forEach(
-			["All events","down","up","tap","move","enter","leave","dragstart","drag","dragover","hold","release",
-				"holdpulse","flick","gesturestart","gesturechange","gestureend","doubletap", "longpress", "longerpress"],
+			['All events','down','up','tap','move','enter','leave','dragstart','drag','dragover','hold','release',
+				'holdpulse','flick','gesturestart','gesturechange','gestureend','doubletap', 'longpress', 'longerpress'],
 			this.bindSafely(function(event) {
-				this.$.eventPicker.createComponent({content:event, style:"text-align:left"});
+				this.$.eventPicker.createComponent({content:event, style:'text-align:left'});
 			}));
 	},
-	destroy: function() {
+	destroy: function () {
 		restoreHoldPulseConfig();
 		this.inherited(arguments);
 	},
@@ -184,13 +184,13 @@ module.exports = kind({
 		}
 		var eventItem = this.eventList[event.type];
 		if (eventItem) {
-			eventItem.set("event", event, true);
+			eventItem.set('event', event, true);
 		} else {
 			this.eventCount++;
 			eventItem = this.$.eventList.createComponent({
 				kind: EventItem,
 				event:event,
-				truncate: this.$.truncateDetail.get("value"),
+				truncate: this.$.truncateDetail.get('value'),
 				persist: this.monitorEvent
 			});
 			this.eventList[event.type] = eventItem;
@@ -200,17 +200,17 @@ module.exports = kind({
 		this.reflow();
 		return true;
 	},
-	truncateChanged: function() {
+	truncateChanged: function () {
 		for (var i in this.eventList) {
-			this.eventList[i].set("truncate", this.$.truncateDetail.get("value"));
+			this.eventList[i].set('truncate', this.$.truncateDetail.get('value'));
 		}
 		this.reflow();
 		return false;
 	},
-	doubleTapChanged: function() {
+	doubleTapChanged: function () {
 		this.$.gestureSamplePad.doubleTapEnabled = this.$.enableDoubleTap.checked;
 	},
-	removeEvent: function(inSender, inEvent) {
+	removeEvent: function (inSender, inEvent) {
 		this.eventCount--;
 		this.eventList[inEvent.type].destroy();
 		delete this.eventList[inEvent.type];
@@ -220,7 +220,7 @@ module.exports = kind({
 		this.reflow();
 		return true;
 	},
-	removeAllEvents: function() {
+	removeAllEvents: function () {
 		for (var i in this.eventList) {
 			this.eventList[i].destroy();
 			delete this.eventList[i];
@@ -229,16 +229,16 @@ module.exports = kind({
 		this.$.waiting.show();
 		this.reflow();
 	},
-	toggleSettings: function() {
-		this.$.settings.set("showing", !this.$.settings.get("showing"));
+	toggleSettings: function () {
+		this.$.settings.set('showing', !this.$.settings.get('showing'));
 		this.reflow();
 	},
-	preventDefault: function() {
+	preventDefault: function () {
 		return true;
 	},
-	monitorEventSelected: function(inSender, inEvent) {
+	monitorEventSelected: function (inSender, inEvent) {
 		this.removeAllEvents();
-		if (inEvent.originator.content == "All events") {
+		if (inEvent.originator.content == 'All events') {
 			this.monitorEvent = null;
 		} else {
 			this.monitorEvent = inEvent.originator.content;

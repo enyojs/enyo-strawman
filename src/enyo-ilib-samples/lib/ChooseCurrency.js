@@ -1,29 +1,30 @@
 var
 	kind = require('enyo/kind'),
-    Select = require('enyo/Select');
-
-var
     rb = require('./ResBundle');
 
+var
+    Select = require('enyo/Select');
+    
+
 module.exports = kind({
-    name: "ilib.sample.ChooseCurrency",
+    name: 'ilib.sample.ChooseCurrency',
 
     published: {
-        "value": ""
+        'value': ''
     },
 
     components: [
-        {content: rb.getString("Currency"), classes: "ilib-onyx-sample-divider"},
-		{name: "currencies", kind: Select, onselect: "setCurrency"}
+        {content: rb.getString('Currency'), classes: 'ilib-onyx-sample-divider'},
+		{name: 'currencies', kind: Select, onselect: 'setCurrency'}
     ],
 
-    create: function() {
+    create: function () {
         this.inherited(arguments);
         this.initCurrencies();
         this.value = this.$.currencies.selected.content;
     },
     
-    initCurrencies: function() {
+    initCurrencies: function () {
         var currencies = ilib.Currency.getAvailableCurrencies();
         var indexCC = -1;
         for (var i = 0; i < currencies.length; ++i) {
@@ -33,7 +34,7 @@ module.exports = kind({
         this.selectCurrency();
     },
     
-    selectCurrency: function(locale) {
+    selectCurrency: function (locale) {
         var li = new ilib.LocaleInfo(locale);
         var currency = li['info'].currency;
         var components = this.$.currencies.getClientControls();
@@ -48,8 +49,8 @@ module.exports = kind({
         this.$.currencies.setSelected(selected);
     },
 
-    setCurrency: function(inSender, inEvent) {
+    setCurrency: function (inSender, inEvent) {
         this.setValue(inEvent.selected.content);
-        this.bubble("onSelectedCurrency", {content: inEvent.selected.content});
+        this.bubble('onSelectedCurrency', {content: inEvent.selected.content});
     }
 });

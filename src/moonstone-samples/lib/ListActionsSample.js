@@ -1,8 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	BodyText = require('moonstone/BodyText'),
@@ -18,7 +15,10 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	Tooltip = require('moonstone/Tooltip'),
-	TooltipDecorator = require('moonstone/TooltipDecorator');
+	TooltipDecorator = require('moonstone/TooltipDecorator'),
+	Collection = require('enyo/Collection'),
+	DataRepeater = require('enyo/DataRepeater'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.ListActionsSample',

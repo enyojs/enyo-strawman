@@ -1,10 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button'),
-	Control = require('enyo/Control');
+	kind = require('enyo/kind');
 
 var
-	Spotlight = require('spotlight');
+	Spotlight = require('spotlight'),
+	Button = require('enyo/Button'),
+	Control = require('enyo/Control');
 
 var h = {
 	ontap: 'tapped',
@@ -25,7 +25,7 @@ module.exports = kind({
 			{tag: 'li', name: 'd3', allowHtml: true, idleContent: '<i>waiting for other events...</i>'}
 		]}
 	],
-	setConfigSpotlight: function(sender, event) {
+	setConfigSpotlight: function (sender, event) {
 		if (event.keyCode === 13 && !Spotlight.Accelerator.isAccelerating()) {
 			event.configureHoldPulse({
 				frequency: 200, resume: true, endHold: 'onLeave',
@@ -37,25 +37,25 @@ module.exports = kind({
 			});
 		}
 	},
-	report: function(actor, action, display) {
+	report: function (actor, action, display) {
 		this.$[display].setContent(actor.content + ': ' + action);
 		this.resetSoon(display);
 	},
-	resetSoon: function(display) {
+	resetSoon: function (display) {
 		this.startJob('reset_' + display, function() {
 			this.reset(display);
 		}, 2000);
 	},
-	tapped: function(sender, event) {
+	tapped: function (sender, event) {
 		this.report(sender, 'tapped', 'd3');
 	},
-	pulse: function(sender, event) {
+	pulse: function (sender, event) {
 		this.report(sender, 'pulsing (' + event.holdTime + ')', 'd2');
 	},
-	held: function(sender, event) {
+	held: function (sender, event) {
 		this.report(sender, event.type, 'd');
 	},
-	released: function(sender, event) {
+	released: function (sender, event) {
 		this.report(sender, 'released', 'd');
 	}
 });

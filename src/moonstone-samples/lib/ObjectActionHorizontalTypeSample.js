@@ -1,11 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Repeater = require('enyo/Repeater');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	Repeater = require('enyo/Repeater'),
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),

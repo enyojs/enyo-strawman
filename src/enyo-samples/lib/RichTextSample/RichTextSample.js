@@ -13,50 +13,50 @@ var
 	RichText = require('enyo/RichText');
 
 module.exports = kind({
-	name: "enyo.sample.RichTextSample",
-	classes: "rich-text-sample",
+	name: 'enyo.sample.RichTextSample',
+	classes: 'rich-text-sample',
 	kind: Control,
 	components: [
-		{content: "Rich Text", classes: "section"},
-		{kind: Button, ontap: "buttonFormatTapped", action: "bold", components: [
-			{tag: "strong", content: "b"}
+		{content: 'Rich Text', classes: 'section'},
+		{kind: Button, ontap: 'buttonFormatTapped', action: 'bold', components: [
+			{tag: 'strong', content: 'b'}
 		]},
-		{kind: Button, ontap: "buttonFormatTapped", action: "italic", components: [
-			{tag: "em", content: "i"}
+		{kind: Button, ontap: 'buttonFormatTapped', action: 'italic', components: [
+			{tag: 'em', content: 'i'}
 		]},
-		{kind: Button, ontap: "buttonFormatTapped", action: "underline", components: [
-			{tag: "u", content: "u"}
+		{kind: Button, ontap: 'buttonFormatTapped', action: 'underline', components: [
+			{tag: 'u', content: 'u'}
 		]},
-		{kind: Button, content: "Select All", ontap: "buttonSelectAllTapped"},
-		{kind: Button, content: "Deselect All", ontap: "buttonDeselectAllTapped"},
-		{kind: Button, content: "Home", ontap: "buttonHomeTapped"},
-		{kind: Button, content: "End", ontap: "buttonEndTapped"},
-		{kind: RichText, value: "Input <em>any</em> text (HTML tags will be preserved)"},
-		{kind: Button, content: "Show RichText Value", classes: "button-value", ontap: "buttonValueTapped"},
-		{name: "results", classes: "results"}
+		{kind: Button, content: 'Select All', ontap: 'buttonSelectAllTapped'},
+		{kind: Button, content: 'Deselect All', ontap: 'buttonDeselectAllTapped'},
+		{kind: Button, content: 'Home', ontap: 'buttonHomeTapped'},
+		{kind: Button, content: 'End', ontap: 'buttonEndTapped'},
+		{kind: RichText, value: 'Input <em>any</em> text (HTML tags will be preserved)'},
+		{kind: Button, content: 'Show RichText Value', classes: 'button-value', ontap: 'buttonValueTapped'},
+		{name: 'results', classes: 'results'}
 	],
-	buttonSelectAllTapped: function(inSender, inEvent) {
+	buttonSelectAllTapped: function (inSender, inEvent) {
 		this.$.richText.focus();
 		this.$.richText.selectAll();
 	},
-	buttonDeselectAllTapped: function(inSender, inEvent) {
+	buttonDeselectAllTapped: function (inSender, inEvent) {
 		this.$.richText.focus();
 		this.$.richText.removeSelection();
 	},
-	buttonHomeTapped: function(inSender, inEvent) {
+	buttonHomeTapped: function (inSender, inEvent) {
 		this.$.richText.focus();
 		this.$.richText.moveCursorToStart();
 	},
-	buttonEndTapped: function(inSender, inEvent) {
+	buttonEndTapped: function (inSender, inEvent) {
 		this.$.richText.focus();
 		this.$.richText.moveCursorToEnd();
 	},
-	buttonFormatTapped: function(inSender, inEvent) {
+	buttonFormatTapped: function (inSender, inEvent) {
 		this.$.richText.focus();
 		document.execCommand(inSender.action, false, this.$.richText.getSelection());
 		this.$.richText.updateValue();
 	},
-	buttonValueTapped: function(inSender, inEvent) {
+	buttonValueTapped: function (inSender, inEvent) {
 		this.$.results.setContent(this.$.richText.getValue());
 	}
 });

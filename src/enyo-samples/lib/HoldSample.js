@@ -32,7 +32,7 @@ module.exports = kind({
 	bindings: [
 		{from: '$.config.value', to: 'config', transform: 'parseConfig'}
 	],
-	parseConfig: function(str) {
+	parseConfig: function (str) {
 		var cfg;
 		try {
 			cfg = JSON.parse(str);
@@ -43,7 +43,7 @@ module.exports = kind({
 		}
 		return cfg;
 	},
-	setHandlers: function(cfg) {
+	setHandlers: function (cfg) {
 		var evts = cfg.events,
 			i,
 			evt;
@@ -53,39 +53,39 @@ module.exports = kind({
 			}
 		}
 	},
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 		['d', 'd2', 'd3'].forEach(this.bindSafely(function(d) {
 			this.reset(d);
 		}));
 		this.$.config.set('value', JSON.stringify(this.config1, undefined, 2));
 	},
-	reset: function(display) {
+	reset: function (display) {
 		d = this.$[display];
 		d.set('content', d.get('idleContent'))
 	},
-	resetSoon: function(display) {
+	resetSoon: function (display) {
 		this.startJob('reset_' + display, function() {
 			this.reset(display);
 		}, 2000);
 	},
-	report: function(actor, action, display) {
+	report: function (actor, action, display) {
 		this.$[display].setContent(actor.content + ': ' + action);
 		this.resetSoon(display);
 	},
-	setConfig: function(sender, event) {
+	setConfig: function (sender, event) {
 		event.configureHoldPulse(this.config);
 	},
-	tapped: function(sender, event) {
+	tapped: function (sender, event) {
 		this.report(sender, 'tapped', 'd3');
 	},
-	pulse: function(sender, event) {
+	pulse: function (sender, event) {
 		this.report(sender, 'pulsing (' + event.holdTime + ')', 'd2');
 	},
-	held: function(sender, event) {
+	held: function (sender, event) {
 		this.report(sender, event.type, 'd');
 	},
-	released: function(sender, event) {
+	released: function (sender, event) {
 		this.report(sender, 'released', 'd');
 	},
 	config1: {
