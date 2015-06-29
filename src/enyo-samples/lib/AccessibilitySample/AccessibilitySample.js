@@ -10,12 +10,14 @@ var
 	Input = require('enyo/Input'),
 	InputAccessibilitySupport = require('enyo/Input/InputAccessibilitySupport'),
 	Popup = require('enyo/Popup'),
-	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport');
+	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport'),
+	Scroller = require('enyo/Scroller');
 var
 	VoiceReadout = require('enyo-webos/VoiceReadout');
 
 module.exports = kind({
-	classes: 'accessibility-sample',
+	kind: Scroller,
+	classes: 'accessibility-sample enyo-fit enyo-unselectable',
 	components: [
 		{tag: 'h3', content: 'Fixed Examples'},
 		{classes: 'aria-samples', components: [
