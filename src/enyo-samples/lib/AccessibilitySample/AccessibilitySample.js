@@ -1,14 +1,18 @@
 var
 	kind = require('enyo/kind'),
+	options = require('enyo/options');
 	AccessibilitySupport = require('enyo/AccessibilitySupport'),
 	Button = require('enyo/Button'),
 	ButtonAccessibilitySupport = require('enyo/Button/ButtonAccessibilitySupport'),
 	Checkbox = require('enyo/Checkbox'),
 	CheckboxAccessibilitySupport = require('enyo/Checkbox/CheckboxAccessibilitySupport'),
 	Control = require('enyo/Control'),
+	Input = require('enyo/Input'),
 	InputAccessibilitySupport = require('enyo/Input/InputAccessibilitySupport'),
-	Popup = require('enyo/Popup');
-	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport'),
+	Popup = require('enyo/Popup'),
+	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport');
+var
+	VoiceReadout = require('enyo-webos/VoiceReadout');
 
 module.exports = kind({
 	classes: 'accessibility-sample',
@@ -43,18 +47,19 @@ module.exports = kind({
 			{kind: Popup, name: 'popup', autoDismiss: false, classes: 'popup', content: 'popup', mixins: [AccessibilitySupport, PopupAccessibilitySupport]},
 			{tag: 'br'},
 			{tag: 'br'},
-			{name: 'popup_result'},
+			{classes: 'result', name: 'popup_result'},
 			{tag: 'br'},
 			{name: 'checkbox', kind: Checkbox, disabled: true, checked: true, content: 'simple checkbox', mixins: [AccessibilitySupport, InputAccessibilitySupport, CheckboxAccessibilitySupport]},
-			{tag: 'br'},
-			{name: 'checkbox_result'},
+			{classes: 'result', name: 'checkbox_result'},
 			{tag: 'br'},
 			{name: 'btn', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport, ButtonAccessibilitySupport]},
-			{tag: 'br'},
-			{name: 'btn_result'},
+			{classes: 'result', name: 'btn_result'},
 			{tag: 'br'}
 		]},
-		{name: 'toggle2', kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'}
+		{name: 'toggle2', kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'},
+		{tag: 'h3', content: 'readAlert API Example'},
+		{kind: Input, name: "inputText", type: "text", value: "Initial Value"},
+		{kind: Button, content: 'readAlert', ontap: 'readAlertText'}
 	],
 	/**
 	* @private
@@ -104,5 +109,9 @@ module.exports = kind({
 		disabled = this.$.btn.getAttribute('aria-disabled');
 		tabindex = this.$.btn.getAttribute('tabindex');
 		this.$.btn_result.set('content', ' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-disabled = ' + disabled);
+	},
+	readAlertText: function () {
+		options.accessibility = true;
+		VoiceReadout.readAlert(this.$.inputText.getValue());
 	}
 });
