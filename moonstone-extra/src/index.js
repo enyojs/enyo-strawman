@@ -14,6 +14,8 @@ var
 	});
 
 newSampler.samples = {
+	AudioPlaybackSample: require('./AudioPlaybackSample'),
+	AudioPlaybackPlaylistSupportSample: require('./AudioPlaybackPlaylistSupportSample'),
 	ActivityPanelsSample: require('./ActivityPanelsSample'),
 	ActivityPanelsWithVideoSample: require('./ActivityPanelsWithVideoSample'),
 	AlwaysViewingPanelsSample: require('./AlwaysViewingPanelsSample'),
