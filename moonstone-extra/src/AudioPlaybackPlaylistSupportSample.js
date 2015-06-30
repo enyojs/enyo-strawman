@@ -43,7 +43,7 @@ var audioQueue = kind({
 			]},
 			{kind: Scroller, horizontal: 'hidden', spotlightPagingControls: true, classes: 'sample-audio-playback-queue-detail', components: [
 				{classes: 'sample-audio-playback-queue-detail-content', components: [
-					{content: 'Lylics'},
+					{content: 'Lyrics'},
 					{classes: 'moon-1v'},
 					{content: 'The Time Has Come One Way What The World Will Never Take Til I See You Take All Of Me The Stand You ll Come Break Free Look To You Where The Love Lasts Forever Forever There Is Nothing Like Tell The World All Day Take It All My Future Decided All I Need Is You Mighty To Save Nothing But The Blood'}
 				]}
