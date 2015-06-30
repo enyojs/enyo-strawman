@@ -7,7 +7,7 @@ var
 	FittableRows = require('layout/FittableRows');
 
 var
-	ilib = require('enyo-ilib');
+	DateFmt = require('enyo-ilib/DateFmt');
 
 var
 	Button = require('onyx/Button'),
@@ -121,16 +121,12 @@ module.exports = kind({
 		this.$[event.name + 'Value'].setContent(fmt.format(event.value));
 	},
 	format: function (dateComponents) {
-		if (ilib) {
-			var fmt = new ilib.DateFmt({
-				dateComponents: dateComponents || undefined,
-				date: 'short',
-				locale: this.locale,
-				timezone: 'local'
-			});
-			return fmt;
-		} else {
-			return function (v) { return v ? v.toString() : ''; };
-		}
+		var fmt = new DateFmt({
+			dateComponents: dateComponents || undefined,
+			date: 'short',
+			locale: this.locale,
+			timezone: 'local'
+		});
+		return fmt;
 	}
 });
