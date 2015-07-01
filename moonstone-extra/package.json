@@ -30,8 +30,8 @@
     "src/*.less"
   ],
   "assets": [
-    "appinfo.json",
-    "icon.png",
-    "largeIcon.png"
+    "../appinfo.json",
+    "../icon.png",
+    "../largeIcon.png"
   ]
 }
