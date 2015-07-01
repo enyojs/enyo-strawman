@@ -38,6 +38,7 @@ var
 		PlatformSample: require('./lib/PlatformSample'),
 		PopupSample: require('./lib/PopupSample'),
 		PositionSample: require('./lib/PositionSample'),
+		readAlertSample: require('./lib/readAlertSample'),
 		RepeaterSample: require('./lib/RepeaterSample'),
 		RichTextSample: require('./lib/RichTextSample'),
 		ScrollerSample: require('./lib/ScrollerSample'),

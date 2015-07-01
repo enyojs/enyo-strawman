@@ -1,0 +1,7 @@
+{
+  "name": "readAlertSample",
+  "main": "readAlertSample.js",
+  "styles": [
+    "readAlertSample.less"
+  ]
+}
