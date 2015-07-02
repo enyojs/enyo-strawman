@@ -118,7 +118,7 @@ module.exports = kind({
 	setLocale: function(inSender, inEvent){
 		if (ilib) {
 			var locale = inEvent.selected.content,
-				val = (locale == 'Use Default Locale') ? null : locale;
+				val = (locale == 'Use Default Locale') ? '' : locale;
 			updateLocale(locale);
 			this.$.calendar.setLocale(val);
 			this.$.picker.setLocale(val);
