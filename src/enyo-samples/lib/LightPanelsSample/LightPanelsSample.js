@@ -5,7 +5,8 @@ var
 	Button = require('enyo/Button'),
 	Checkbox = require('enyo/Checkbox'),
 	Control = require('enyo/Control'),
-	LightPanels = require('enyo/LightPanels');
+	LightPanels = require('enyo/LightPanels'),
+	Orientation = LightPanels.Orientation;
 
 module.exports = kind({
 	name: 'enyo.sample.LightPanelsSample',
@@ -24,7 +25,7 @@ module.exports = kind({
 		]},
 		{classes: 'light-panels-set', components: [
 			{kind: LightPanels, name: 'lightHorizontal'},
-			{kind: LightPanels, name: 'lightVertical', orientation: 'vertical'}
+			{kind: LightPanels, name: 'lightVertical', orientation: Orientation.VERTICAL}
 		]}
 	],
 	bindings: [
