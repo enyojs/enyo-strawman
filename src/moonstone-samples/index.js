@@ -41,6 +41,7 @@ var
 		ItemSample							: require('./lib/ItemSample'),
 		ItemOverlaySample					: require('./lib/ItemOverlaySample'),
 		LabeledTextItemSample				: require('./lib/LabeledTextItemSample'),
+		LightPanelsSample					: require('./lib/LightPanelsSample'),
 		ListActionsSample					: require('./lib/ListActionsSample'),
 		MarqueeSample						: require('./lib/MarqueeSample'),
 		NewDataListSample					: require('./lib/NewDataListSample'),
