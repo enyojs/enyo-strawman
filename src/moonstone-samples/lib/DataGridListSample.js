@@ -135,7 +135,7 @@ module.exports = kind({
 		this.generateDataGridList(this.itemKind);
 	},
 	generateRecords: function (amount) {
-		var records = [], 
+		var records = [],
 			idx     = this.modelIndex || 0;
 		for (; records.length < amount; ++idx) {
 			var title = (idx % 8 === 0) ? ' with long title' : '';
@@ -145,7 +145,7 @@ module.exports = kind({
 				overlayTransparent: this.$.transparencyToggle.value,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
-				url: "http://lorempixel.com/output/city-q-c-640-480-9.jpg"
+				url: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg'
 			});
 		}
 		// update our internal index so it will always generate unique values
