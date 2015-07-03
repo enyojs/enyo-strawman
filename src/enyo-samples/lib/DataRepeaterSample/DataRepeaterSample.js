@@ -133,10 +133,15 @@ module.exports = kind({
 	bindings: [
 		{from: ".collection", to: ".$.repeater.collection"}
 	],
+	populateList: function () {
+		this.collection = new Collection(data);
+	},
 	create: kind.inherit(function (sup) {
 		return function () {
-			this.collection = new Collection(data);
+			this.populateList();
 			sup.apply(this, arguments);
 		};
 	})
 });
+
+module.exports.data = data;

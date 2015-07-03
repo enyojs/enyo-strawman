@@ -1,5 +1,5 @@
 var
-	hooks = require('enyo/hooks'),
+	i18n = require('enyo/i18n'),
 	kind = require('enyo/kind'),
 	Anchor = require('enyo/Anchor'),
 	Collection = require('enyo/Collection'),
@@ -110,12 +110,12 @@ module.exports = kind({
 		}
 	},
 	components: [
-		{classes: 'moon-sample-persistant-hotspot', components: [
-			{classes: 'moon-sample-persistant-frame', spotlight: 'container', components: [
-				{kind: Button, content: 'Reload', small: true, spotlight: false, classes: 'moon-sample-persistant-locale-button', ontap: 'reload'},
-				{kind: Button, content: 'Back to List', small: true, spotlight: false, classes: 'moon-sample-persistant-locale-button', ontap: 'backToList'},
+		{classes: 'moon-sample-persistent-hotspot', components: [
+			{classes: 'moon-sample-persistent-frame', spotlight: 'container', components: [
+				{kind: Button, content: 'Reload', small: true, spotlight: false, classes: 'moon-sample-persistent-locale-button', ontap: 'reload'},
+				{kind: Button, content: 'Back to List', small: true, spotlight: false, classes: 'moon-sample-persistent-locale-button', ontap: 'backToList'},
 				{kind: ContextualPopupDecorator, components: [
-					{kind: Button, content: 'Set Locale', small: true, spotlight: false, classes: 'moon-sample-persistant-locale-button'},
+					{kind: Button, content: 'Set Locale', small: true, spotlight: false, classes: 'moon-sample-persistent-locale-button'},
 					{name: 'localePopup', kind: ContextualPopup, classes: 'moon-sample-locale-popup', components: [
 						{content: 'Set Locale', kind: Divider},
 						{name: 'localeRepeater', kind: DataRepeater, ontap: 'localeListTapped', selection: true, groupSelection: true, selectionProperty: 'selected', containerOptions: {kind: Scroller, classes: 'enyo-fill'}, fit: true, components: [
@@ -127,7 +127,7 @@ module.exports = kind({
 						]}
 					]}
 				]},
-				{kind: ToggleButton, toggleOffLabel: 'Dark Theme', toggleOnLabel: 'Light Theme', small: true, ontap: 'handleThemeTap'}
+				{kind: ToggleButton, toggleOffLabel: 'Dark Theme', toggleOnLabel: 'Light Theme', small: true, spotlight: false, ontap: 'handleThemeTap'}
 			]}
 		]},
 		{name: 'home'},
@@ -212,7 +212,7 @@ module.exports = kind({
 			this.$.localePopup.hide();
 		}
 		this.locales.find(function(elem) { return elem.get('locale') == newLocale; }).set('selected', true);
-		hooks.updateLocale(newLocale);
+		i18n.updateLocale(newLocale);
 		this.$.router.trigger({location: this.get('location'), change: true});
 	},
 	sampleChanged: function (was, is) {
@@ -265,7 +265,7 @@ module.exports = kind({
 			loc = this.get('location');
 			this.$.router.trigger({location: loc, change: true});
 			this.$.home.hide();
-			this.createComponent({name: s, kind: this.samples[s]}).render();
+			global.sample = this.createComponent({name: s, kind: this.samples[s]}).render();
 			console.log('%c%s Created and Launched', 'color:green;', s);
 
 		} else {

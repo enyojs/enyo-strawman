@@ -6,7 +6,7 @@ var
 
 var
 	Canvas = require('canvas/Canvas'),
-	CanvasControl = require('canvas/CanvasControl'),
+	CanvasControl = require('canvas/Control'),
 	Circle = require('canvas/Circle'),
 	Rectangle = require('canvas/Rectangle'),
 	Text = require('canvas/Text');

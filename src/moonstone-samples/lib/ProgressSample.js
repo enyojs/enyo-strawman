@@ -18,6 +18,8 @@ module.exports = kind({
 		{kind: ProgressBar, progress: 25, bgProgress: 75},
 		{kind: ProgressBar, progress: 50, barClasses: 'moon-sample-green'},
 		{kind: ProgressBar, progress: 50, barClasses: 'moon-sample-red'},
+		{kind: Divider, content: 'Progress Bars with Popup'},
+		{kind: ProgressBar, progress: 25, popup: true},
 		{tag: 'br'},
 		{kind: InputDecorator, style: 'margin-right:10px;', components: [
 			{kind: Input, placeholder: 'Value'}

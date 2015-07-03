@@ -1,6 +1,5 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	Collection = require('enyo/Collection'),
 	EmptyBinding = require('enyo/EmptyBinding');
 
@@ -13,7 +12,6 @@ var
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
-	Icon = require('moonstone/Icon'),
 	Image = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
@@ -76,11 +74,22 @@ var HorizontalGridListImageItem = kind({
 	]
 });
 
+var itemTypes = [
+	{content: 'ImageItem', value: 'GridListImageItem', selected: true},
+	{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
+	{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
+];
+
+var dataTypes = [
+	{content: 'Collections/Models', value: 'EnyoData', selected: true},
+	{content: 'JS Arrays/Objects', value: 'JS'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
 	pattern: 'activity',
-	classes: 'moon enyo-fit enyo-unselectable',
+	classes: 'moon enyo-fit enyo-unselectable moon-datagridlist-sample',
 	components: [
 		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
@@ -98,11 +107,13 @@ module.exports = kind({
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content:'Item Type'},
 				{kind: ContextualPopup, classes:'moon-6h', components: [
-					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged', components: [
-						{content: 'ImageItem', value: 'GridListImageItem', selected: true},
-						{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
-						{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
-					]}
+					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged'}
+				]}
+			]},
+			{kind: ContextualPopupDecorator, components: [
+				{kind: ContextualPopupButton, content:'Data Type'},
+				{kind: ContextualPopup, classes:'moon-6h', components: [
+					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged'}
 				]}
 			]},
 			{kind: Button, content: 'Refresh', ontap: 'refreshItems'},
@@ -111,8 +122,8 @@ module.exports = kind({
 				{kind: ContextualPopup, classes: 'moon-6h moon-8v', components: [
 					{kind:DataList, components: [
 						{kind:CheckboxItem, bindings: [
-							{from: '.model.text', to: '.content'},
-							{from: '.model.selected', to: '.checked', oneWay: false}
+							{from: 'model.text', to: 'content'},
+							{from: 'model.selected', to: 'checked', oneWay: false}
 						]}
 					]}
 				]}
@@ -124,15 +135,33 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: 'collection', to: '$.dataList.collection'}
+		{from: 'collection', to: '$.dataList.collection'},
+		{from: 'collection', to: '$.gridList.collection'}
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
-		// we set the collection that will fire the binding and add it to the list
-		this.set('itemKind', 'GridListImageItem');
+
+		this.computeInitialValue(itemTypes, 'itemKind');
+		this.computeInitialValue(dataTypes, 'dataType');
+		this.$.itemTypeGroup.createComponents(itemTypes);
+		this.$.dataTypeGroup.createComponents(dataTypes);
+		this.itemKindChanged();
+	},
+	computeInitialValue: function (arr, prop) {
+		var idx, elem;
+		for (idx = 0; idx < arr.length; idx++) {
+			elem = arr[idx];
+			if (elem.selected) {
+				this[prop] = elem.value;
+				break;
+			}
+		}
 	},
 	itemKindChanged: function () {
 		this.generateDataGridList(this.itemKind);
+	},
+	dataTypeChanged: function () {
+		this.refreshItems();
 	},
 	generateRecords: function (amount) {
 		var records = [],
@@ -195,8 +224,9 @@ module.exports = kind({
 		}
 
 		createdComponent = this.$.listPanel.createComponent(props, {owner: this});
-		this.set('collection', new Collection(this.generateRecords(40)));
-		this.$.gridList.set('collection', this.collection);
+
+		this.refreshItems(40);
+
 		this.$.gridList.set('selection', this.$.selectionToggle.value);
 		this.$.gridList.set('overlayTransparent', this.$.transparencyToggle.value);
 		if (this.$.selectionTypeGroup.active) {
@@ -215,15 +245,21 @@ module.exports = kind({
 	itemTypeChanged: function (sender, event) {
 		this.set('itemKind', sender.active.value);
 	},
+	dataTypeMenuChanged: function (sender, event) {
+		this.set('dataType', sender.active.value);
+	},
 	selectionTypeChanged: function (sender, event) {
 		this.$.gridList.set('selectionType', sender.active.value);
 	},
-	refreshItems: function () {
-		// we fetch our collection reference
-		var collection = this.get('collection');
-		// we now remove all of the current records from the collection
-		collection.remove(collection.models);
-		// and we insert all new records that will update the list
-		collection.add(this.generateRecords(100));
+	refreshItems: function (num) {
+		var data;
+
+		num = (typeof num === 'number') ? num : 100;
+		data = this.generateRecords(num);
+
+		if (this.collection && this.collection.destroy) {
+			this.collection.destroy();
+		}
+		this.set('collection', this.dataType === 'JS' ? data : new Collection(data));
 	}
 });
