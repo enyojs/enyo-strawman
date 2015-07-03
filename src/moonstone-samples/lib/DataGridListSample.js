@@ -12,6 +12,7 @@ var
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
+	IconButton = require('moonstone/IconButton'),
 	Image = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
@@ -32,7 +33,7 @@ var GridSampleItem = kind({
 		{from: 'model.url', to: 'source'},
 		{from: 'model.selected', to: 'selected', oneWay: false},
 		{from: 'model.overlayTransparent', to: 'overlayTransparent', oneWay: false}
-	],
+	]
 });
 
 var HorizontalGridListItem = kind({
@@ -93,7 +94,7 @@ module.exports = kind({
 	components: [
 		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
-			{kind: ToggleButton, content: 'Transparency', name: 'transparencyToggle', onChange: 'transparencyChanged', value:false},
+			{kind: ToggleButton, content: 'Transparency', name: 'transparencyToggle', onChange: 'transparencyTypeChanged', value: true, disabled: true},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Selection Type'},
 				{kind: ContextualPopup, classes: 'moon-4h', components: [
@@ -116,7 +117,6 @@ module.exports = kind({
 					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged'}
 				]}
 			]},
-			{kind: Button, content: 'Refresh', ontap: 'refreshItems'},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Popup List'},
 				{kind: ContextualPopup, classes: 'moon-6h moon-8v', components: [
@@ -127,7 +127,8 @@ module.exports = kind({
 						]}
 					]}
 				]}
-			]}
+			]},
+			{kind: IconButton, icon: 'rollforward', ontap: 'refreshItems'}
 		], components: [
 			{name: 'gridList', fit: true, spacing: 20, minWidth: 180, minHeight: 270, kind: DataGridList, scrollerOptions: { kind: Scroller, vertical: 'scroll', horizontal: 'hidden', spotlightPagingControls: true }, components: [
 				{ kind: GridSampleItem }
@@ -146,6 +147,7 @@ module.exports = kind({
 		this.$.itemTypeGroup.createComponents(itemTypes);
 		this.$.dataTypeGroup.createComponents(dataTypes);
 		this.itemKindChanged();
+		this.transparency = true;
 	},
 	computeInitialValue: function (arr, prop) {
 		var idx, elem;
@@ -163,6 +165,14 @@ module.exports = kind({
 	dataTypeChanged: function () {
 		this.refreshItems();
 	},
+	transparencyChanged: function () {
+		var models = this.collection.models,
+			model, idx;
+		for (idx = 0; idx < models.length; idx++) {
+			model = models[idx];
+			model.set('overlayTransparent', this.transparency);
+		}
+	},
 	generateRecords: function (amount) {
 		var records = [],
 			idx     = this.modelIndex || 0;
@@ -171,7 +181,7 @@ module.exports = kind({
 			var subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
 			records.push({
 				selected: false,
-				overlayTransparent: this.$.transparencyToggle.value,
+				overlayTransparent: this.transparency,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
 				url: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg'
@@ -186,11 +196,21 @@ module.exports = kind({
 			this.$.gridList.destroy();
 		}
 		var props = {
-				name: 'gridList', kind: DataGridList, selection: false, fit: true, spacing: 20,
-				minHeight: 270, minWidth: 180, scrollerOptions: {
-					kind: Scroller, vertical:'scroll', horizontal: 'hidden', spotlightPagingControls: true
-				}, components: [
-					{kind: GridSampleItem, overlayTransparent: this.$.transparencyToggle.value}
+				name: 'gridList',
+				kind: DataGridList,
+				selection: false,
+				fit: true,
+				spacing: 20,
+				minHeight: 270,
+				minWidth: 180,
+				scrollerOptions: {
+					kind: Scroller,
+					vertical:'scroll',
+					horizontal: 'hidden',
+					spotlightPagingControls: true
+				},
+				components: [
+					{kind: GridSampleItem, overlayTransparent: this.transparency}
 				]
 			},
 			createdComponent;
@@ -228,27 +248,27 @@ module.exports = kind({
 		this.refreshItems(40);
 
 		this.$.gridList.set('selection', this.$.selectionToggle.value);
-		this.$.gridList.set('overlayTransparent', this.$.transparencyToggle.value);
+		// this.$.gridList.set('overlayTransparent', this.$.transparencyToggle.value);
 		if (this.$.selectionTypeGroup.active) {
 			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
 		}
 
 		createdComponent.render();
 	},
-	selectionChanged: function (sender, event) {
+	selectionChanged: function (sender, ev) {
+		this.$.transparencyToggle.set('disabled', !sender.value);
 		this.$.gridList.set('selection', sender.value);
 	},
-	transparencyChanged: function (sender, event) {
-		this.$.gridList.set('overlayTransparent', sender.value);
-		this.generateDataGridList(this.itemKind);
+	transparencyTypeChanged: function (sender, ev) {
+		this.set('transparency', sender.value);
 	},
-	itemTypeChanged: function (sender, event) {
+	itemTypeChanged: function (sender, ev) {
 		this.set('itemKind', sender.active.value);
 	},
-	dataTypeMenuChanged: function (sender, event) {
+	dataTypeMenuChanged: function (sender, ev) {
 		this.set('dataType', sender.active.value);
 	},
-	selectionTypeChanged: function (sender, event) {
+	selectionTypeChanged: function (sender, ev) {
 		this.$.gridList.set('selectionType', sender.active.value);
 	},
 	refreshItems: function (num) {
