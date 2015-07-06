@@ -14,12 +14,14 @@ module.exports = kind({
 	components: [
 		{classes: 'light-panels-options', components: [
 			{classes: 'horizontal-options', components: [
-				{kind: Checkbox, name: 'cachingHorizontal', content: 'Caching', onchange: ''},
-				{kind: Checkbox, name: 'multipleHorizontal', content: 'Multiple', onchange: ''}
+				{kind: Checkbox, name: 'cachingHorizontal', content: 'Cache'},
+				{kind: Checkbox, name: 'multipleHorizontal', content: 'Multi'},
+				{kind: Checkbox, name: 'animateHorizontal', content: 'Animate'}
 			]},
 			{classes: 'vertical-options', components: [
-				{kind: Checkbox, name: 'cachingVertical', content: 'Caching', onchange: ''},
-				{kind: Checkbox, name: 'multipleVertical', content: 'Multiple', onchange: ''}
+				{kind: Checkbox, name: 'cachingVertical', content: 'Cache'},
+				{kind: Checkbox, name: 'multipleVertical', content: 'Multi'},
+				{kind: Checkbox, name: 'animateVertical', content: 'Animate'}
 			]}
 		]},
 		{classes: 'light-panels-set', components: [
@@ -30,8 +32,10 @@ module.exports = kind({
 	bindings: [
 		{from: '$.cachingHorizontal.checked', to: '$.lightHorizontal.cacheViews'},
 		{from: '$.multipleHorizontal.checked', to: 'multipleHorizontal'},
+		{from: '$.animateHorizontal.checked', to: '$.lightHorizontal.animate'},
 		{from: '$.cachingVertical.checked', to: '$.lightVertical.cacheViews'},
-		{from: '$.multipleVertical.checked', to: 'multipleVertical'}
+		{from: '$.multipleVertical.checked', to: 'multipleVertical'},
+		{from: '$.animateVertical.checked', to: '$.lightVertical.animate'}
 	],
 	rendered: kind.inherit(function (sup) {
 		return function () {

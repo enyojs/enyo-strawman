@@ -6,6 +6,7 @@
 	background-color: white;
 	border-radius: 0 0 100px 100px;
 	z-index: 1;
+	font-size: 16px;
 }
 
 .light-panels-sample .vertical-options, .light-panels-sample .horizontal-options {
