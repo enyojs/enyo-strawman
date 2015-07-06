@@ -31,7 +31,7 @@ module.exports = kind({
 				{kind: TimePicker, name: 'pickerDisabled', meridiemEnable: true, disabled: true, noneText: 'Disabled Time Picker', content: 'Disabled Time'},
 				{kind: ExpandablePicker, name: 'pickerLocale', noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
 					{content: 'Use Default Locale', active: true},
-					{content: "am-ET"},
+					{content: 'am-ET'},
 					{content: 'ko-KR'},
 					{content: 'zh-TW'},
 					{content: 'fa-IR'},
@@ -86,9 +86,9 @@ module.exports = kind({
 		if (this.$.result && event.value){
 			var timeArray;
 			if (sender.localeValue) {
-				timeArray = sender._tf.format(ilib.Date.newInstance({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString().split(':')
+				timeArray = sender._tf.format(ilib.Date.newInstance({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString().split(':');
 			} else {
-				timeArray = event.value.toTimeString().split(":");
+				timeArray = event.value.toTimeString().split(':');
 			}
 
 			this.$.result.setContent(event.name + ' changed to ' + timeArray[0] + ': ' + timeArray[1]);
