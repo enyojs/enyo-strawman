@@ -30,6 +30,7 @@
     "src/*.less"
   ],
   "assets": [
+    "moonstone-extra/assets/*.png",
     "../appinfo.json",
     "../icon.png",
     "../largeIcon.png"
