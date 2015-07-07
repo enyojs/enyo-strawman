@@ -5,7 +5,8 @@ var
     Scroller = require('enyo/Scroller');
 
 var
-    ilib = require('enyo-ilib');
+    Address = require('enyo-ilib/Address'),
+    AddressFmt = require('enyo-ilib/AddressFmt');
 
 var
     ChooseLocale = require('./ChooseLocale'),
@@ -63,7 +64,7 @@ module.exports = kind({
             locale: this.$.localeSelector.getValue()
         };
        
-        var address =  new ilib.Address({
+        var address = new Address({
             streetAddress:this.$.stAddress.getValue(),
             locality: this.$.city.getValue(),
             postalCode: this.$.postalCode.getValue(),
@@ -71,7 +72,7 @@ module.exports = kind({
             country:this.$.country.getValue()
         });
 
-        var formatter = new ilib.AddressFmt(options);
+        var formatter = new AddressFmt(options);
         var postFmtData = formatter.format(address);
         this.$.rtlResult.setContent(postFmtData);
     }

@@ -10,7 +10,10 @@ var
     TimePicker = require('onyx/TimePicker');
 
 var
-    ilib = require('enyo-ilib');
+    Calendar = require('enyo-ilib/Calendar'),
+    DateFactory = require('enyo-ilib/DateFactory'),
+    DateFmt = require('enyo-ilib/DateFmt'),
+    ResBundle = require('enyo-ilib/ResBundle')  ;
 
 var
 	ChooseTimeZone = require('../ChooseTimeZone'),
@@ -135,7 +138,7 @@ module.exports = kind({
     },
 
     initCalendars: function() {
-        var calendarList = ilib.Cal.getCalendars();
+        var calendarList = Calendar.getCalendars();
         if (calendarList.indexOf('julianday') < 0)
             calendarList.push('julianday');
         calendarList.sort();
@@ -156,17 +159,17 @@ module.exports = kind({
         this.$.julianDate.setShowing(this.$.calendarType.selected.content === 'julianday');
         // Recalc calendar/sysres 
         var calendar = this.$.calendarType.selected.content || 'gregorian';
-        var cal = ilib.Cal.newInstance({
+        var cal = Calendar.newInstance({
             locale: this.$.localeSelector.getValue(),
             type: (calendar === "julianday") ? "gregorian" : calendar
         });
-        var sysres = new ilib.ResBundle({
+        var sysres = new ResBundle({
             name: "sysres",
             locale: this.$.localeSelector.getValue()
         });
         // Init Year
         if (this.$.year.getValue() == '') {
-        	var d = ilib.Date.newInstance();
+        	var d = DateFactory.newInstance();
             this.$.year.setValue(d.getYears());
         }
         // Init/Refill Month
@@ -220,7 +223,7 @@ module.exports = kind({
             options['timezone'] = this.$.formatZonesSelector.getValue();
         
         // processing
-        var cal = ilib.Cal.newInstance({
+        var cal = Calendar.newInstance({
             locale: options['locale'],
             type: (calendar === "julianday") ? "gregorian" : calendar
         });
@@ -243,7 +246,7 @@ module.exports = kind({
         //
         if (calendar !== 'gregorian' && calendar !== 'julianday')
             options.calendar = calendar;
-        var fmt = new ilib.DateFmt(options);
+        var fmt = new DateFmt(options);
         var postFmtData = fmt.format(date);
         // Output results
         this.$.rtlResult.setContent(postFmtData + ', '+ rb.getString('julian day: ') + date.getJulianDay() +', '+ rb.getString('unix time: ') + date.getTime());

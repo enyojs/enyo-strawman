@@ -3,7 +3,7 @@ var
     Select = require('enyo/Select');
 
 var 
-	ilib = require('enyo-ilib');
+	TimeZone = require('enyo-ilib/TimeZone');
 
 var
     rb = require('./ResBundle');

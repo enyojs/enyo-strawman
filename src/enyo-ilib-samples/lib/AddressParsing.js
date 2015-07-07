@@ -5,7 +5,8 @@ var
     Scroller = require('enyo/Scroller');
 
 var
-    ilib = require('enyo-ilib');
+    ResBundle = require('enyo-ilib/ResBundle'),
+    Address = require('enyo-ilib/Address');
 
 var
     ChooseLocale = require('./ChooseLocale'),
@@ -34,7 +35,7 @@ module.exports = kind({
         
     calcFormat: function (inSender, inEvent) {
         // Formatting
-        var parsedAddress = new ilib.Address(this.$.address.getValue());
+        var parsedAddress = new Address(this.$.address.getValue());
 
         var output = '';
 

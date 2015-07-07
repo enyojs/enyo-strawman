@@ -1,4 +1,4 @@
 var
-	ilib = require('enyo-ilib');
+	ResBundle = require('enyo-ilib/ResBundle')
 
-module.exports = new ilib.ResBundle();
+module.exports = new ResBundle();
