@@ -28,7 +28,7 @@ var AroundListContactItem = kind({
 			{name: 'title', classes: 'list-sample-around-description'},
 			{content: '(415) 711-1234', classes: 'list-sample-around-description'}
 		]},
-		{name: 'remove', kind: Img, classes: 'list-sample-around-remove-button', src: 'assets/remove-icon.png', ontap: 'removeTap'}
+		{name: 'remove', kind: Img, classes: 'list-sample-around-remove-button', src: '@../../assets/remove-icon.png', ontap: 'removeTap'}
 	],
 	setContact: function (contact) {
 		this.$.name.setContent(contact.name);
@@ -54,7 +54,7 @@ module.exports = kind({
 			{kind: FittableColumns, classes: 'layout-sample-toolbar', components: [
 				{kind: FittableColumns, tag: 'label', fit: true, noStretch: true, components: [
 					{kind: Input, placeholder: 'Search...', fit: true, oninput: 'searchInputChange'},
-					{kind: Img, src: 'assets/search-input-search.png', style: 'height: 20px; width: 20px;'}
+					{kind: Img, src: '@../../assets/search-input-search.png', style: 'height: 20px; width: 20px;'}
 				]}
 			]}
 		], components: [
@@ -210,19 +210,19 @@ module.exports = kind({
 });
 
 var avatars = [
-	'angel.png',
-	'astrologer.png',
-	'athlete.png',
-	'baby.png',
-	'clown.png',
-	'devil.png',
-	'doctor.png',
-	'dude.png',
-	'dude2.png',
-	'dude3.png',
-	'dude4.png',
-	'dude5.png',
-	'dude6.png'
+	'@./angel.png',
+	'@./astrologer.png',
+	'@./athlete.png',
+	'@./baby.png',
+	'@./clown.png',
+	'@./devil.png',
+	'@./doctor.png',
+	'@./dude.png',
+	'@./dude2.png',
+	'@./dude3.png',
+	'@./dude4.png',
+	'@./dude5.png',
+	'@./dude6.png'
 ];
 var titles = [
 	'Regional Data Producer',

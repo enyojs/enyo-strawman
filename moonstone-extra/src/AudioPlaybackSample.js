@@ -17,8 +17,8 @@ module.exports = kind({
 	name: 'moon.sample.AudioPlaybackSample',
 	classes: 'enyo-unselectable moon sample-audio-playback enyo-fit',
 	data: [
-		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'moonstone-extra/assets/storm-100.png', duration: '0:22'},
-		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: 'moonstone-extra/assets/engine-100.png', duration: '0:04'}
+		{src: 'http://enyojs.com/_media/thunder.mp3', trackName: 'Thunder', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: '@../assets/storm-100.png', duration: '0:22'},
+		{src: 'http://enyojs.com/_media/engine.mp3', trackName: 'Engine', artistName: 'Sound Effects Artist', albumName: 'Sound Effects', albumArt: '@../assets/engine-100.png', duration: '0:04'}
 	],
 	components: [
 		{kind: Drawers, drawers:[

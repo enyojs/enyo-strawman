@@ -53,7 +53,7 @@ module.exports = kind({
 							kind: VideoPlayer,
 							inline:true,
 							classes: 'moon-8h',
-							poster: 'assets/video-poster.png',
+							poster: '@../assets/video-poster.png',
 							infoComponents: [{
 								kind: VideoInfoBackground,
 								orient: 'left',
@@ -86,15 +86,15 @@ module.exports = kind({
 							}],
 							components: [
 								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'},
-								{kind: IconButton, src: 'images/video-player/icon-placeholder.png', backgroundOpacity: 'translucent'}
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'}
 							]
 						}
 					]

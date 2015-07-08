@@ -21,13 +21,13 @@ module.exports = kind({
     name: 'moon.sample.AlwaysViewingPanelsWithVideoSample',
     classes: 'moon enyo-fit enyo-unselectable',
     components: [
-        {name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: 'assets/video-poster.png', autoplay: true, infoComponents: [
+        {name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
 			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 				{
 					kind: ChannelInfo,
 					channelNo: '13',
 					channelName: 'AMC',
-					classes: 'moon-2h', 
+					classes: 'moon-2h',
 					components: [
 						{content: '3D'},
 						{content: 'Live'},
@@ -46,7 +46,7 @@ module.exports = kind({
 				{kind: Clock}
 			]}
 		], components: [
-			{kind: IconButton, src: 'images/video-player/icon-placeholder.png'},
+			{kind: IconButton, backgroundOpacity: 'translucent'},
 			{kind: TooltipDecorator, components: [
 				{kind: ContextualPopupDecorator, components: [
 					{kind: Button, content: 'Popup'},

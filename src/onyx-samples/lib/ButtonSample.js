@@ -32,11 +32,11 @@ module.exports = kind({
 		{classes: 'onyx-sample-divider', content: 'Buttons with images'},
 		{classes: 'onyx-sample-tools', components: [
 			{kind: Button, name:'Image Button', ontap:'buttonTapped', components: [
-				{tag: 'img', attributes: {src: 'assets/enyo-logo-small.png'}},
+				{tag: 'img', attributes: {src: '@../assets/enyo-logo-small.png'}},
 				{content: 'There is an image here'}
 			]},
 			{kind: Button, name:'Fishbowl Button', ontap:'buttonTapped', components: [
-				{_kind: 'onyx.Icon', src: 'assets/fish_bowl.png'}
+				{_kind: 'onyx.Icon', src: '@../assets/fish_bowl.png'}
 			]}
 		]},
 		{kind: Groupbox, classes:'onyx-sample-result-box', components: [
