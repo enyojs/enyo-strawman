@@ -36,7 +36,7 @@ module.exports = kind({
 				{content: 'There is an image here'}
 			]},
 			{kind: Button, name:'Fishbowl Button', ontap:'buttonTapped', components: [
-				{_kind: 'onyx.Icon', src: '@../assets/fish_bowl.png'}
+				{kind: 'onyx.Icon', src: '@../assets/fish_bowl.png'}
 			]}
 		]},
 		{kind: Groupbox, classes:'onyx-sample-result-box', components: [
