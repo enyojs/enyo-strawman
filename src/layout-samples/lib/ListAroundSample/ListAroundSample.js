@@ -164,7 +164,7 @@ module.exports = kind({
 	generateItem: function(inName) {
 		return {
 			name: inName,
-			avatar: 'assets/avatars/' + avatars[utils.irand(avatars.length)],
+			avatar: '@../../assets/avatars' + '/' + avatars[utils.irand(avatars.length)],
 			title: titles[utils.irand(titles.length)]
 		};
 	},
@@ -210,19 +210,19 @@ module.exports = kind({
 });
 
 var avatars = [
-	'@./angel.png',
-	'@./astrologer.png',
-	'@./athlete.png',
-	'@./baby.png',
-	'@./clown.png',
-	'@./devil.png',
-	'@./doctor.png',
-	'@./dude.png',
-	'@./dude2.png',
-	'@./dude3.png',
-	'@./dude4.png',
-	'@./dude5.png',
-	'@./dude6.png'
+	'angel.png',
+	'astrologer.png',
+	'athlete.png',
+	'baby.png',
+	'clown.png',
+	'devil.png',
+	'doctor.png',
+	'dude.png',
+	'dude2.png',
+	'dude3.png',
+	'dude4.png',
+	'dude5.png',
+	'dude6.png'
 ];
 var titles = [
 	'Regional Data Producer',
