@@ -9,6 +9,9 @@ var
 	Popup = require('enyo/Popup');
 
 var
+	Icon = require('onyx/Icon');
+
+var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
 	AroundList = require('layout/AroundList');
@@ -28,7 +31,7 @@ var AroundListContactItem = kind({
 			{name: 'title', classes: 'list-sample-around-description'},
 			{content: '(415) 711-1234', classes: 'list-sample-around-description'}
 		]},
-		{name: 'remove', kind: Img, classes: 'list-sample-around-remove-button', src: '@../../assets/remove-icon.png', ontap: 'removeTap'}
+		{name: 'remove', kind: Icon, classes: 'list-sample-around-remove-button', src: '@../../assets/remove-icon.png', ontap: 'removeTap'}
 	],
 	setContact: function (contact) {
 		this.$.name.setContent(contact.name);
