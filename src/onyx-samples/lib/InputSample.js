@@ -3,6 +3,9 @@ var
 	utils = require('enyo/utils');
 
 var
+	Image = require('enyo/Image');
+
+var
 	Checkbox = require('onyx/Checkbox'),
 	Groupbox = require('onyx/Groupbox'),
 	GroupboxHeader = require('onyx/GroupboxHeader'),
@@ -22,7 +25,7 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, components: [
 				{kind: Input, placeholder: 'Search term', onchange: 'inputChanged'},
-				{kind: 'Image', src: '@../assets/search-input-search.png'}
+				{kind: Image, src: '@../assets/search-input-search.png'}
 			]},
 			{kind: InputDecorator, components: [
 				{kind: Input, type: 'password', placeholder: 'Enter password', onchange: 'inputChanged'}
@@ -48,7 +51,7 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, components: [
 				{kind: RichText, style: 'width: 200px;', placeholder: 'Search term', onchange: 'inputChanged'},
-				{kind: 'Image', src: '@../assets/search-input-search.png'}
+				{kind: Image, src: '@../assets/search-input-search.png'}
 			]}
 		]},
 		{tag: 'br'},
@@ -59,7 +62,7 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, components: [
 				{kind: TextArea, placeholder: 'Search term', onchange: 'inputChanged'},
-				{kind: 'Image', src: '@../assets/search-input-search.png'}
+				{kind: Image, src: '@../assets/search-input-search.png'}
 			]}
 		]},
 		{tag: 'br'},
