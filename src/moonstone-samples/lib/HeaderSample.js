@@ -16,17 +16,17 @@ module.exports = kind({
 	classes: 'moon enyo-unselectable enyo-fit moon-header-sample',
 	components: [
 		{kind: Scroller, fit:true, components: [
-			{kind: Header, name: 'largeHeader', content: 'Large Header', titleAbove: '02', titleBelow: 'Sub Header', subTitleBelow: 'Sub-sub Header', components: [
+			{kind: Header, name: 'largeHeader', content: 'Largé Héader', titleAbove: '02', titleBelow: 'Sub Header', subTitleBelow: 'Sub-sub Header', components: [
 				{kind: Button, small: true, content: 'Description', ontap: 'describeLarge'},
 				{kind: Button, small: true, content: 'How to use', ontap: 'howToUseLarge'}
 			]},
 			{classes: 'moon-1v'},
-			{kind: Header, name: 'mediumHeader', content: 'Medium Header', type: 'medium', titleAbove: '03', titleBelow: 'Sub Header', subTitleBelow: '', components: [
+			{kind: Header, name: 'mediumHeader', content: 'Médium Héader', type: 'medium', titleAbove: '03', titleBelow: 'Sub Header', subTitleBelow: '', components: [
 				{kind: Button, small: true, content: 'Description', ontap: 'describeMedium'},
 				{kind: Button, small: true, content: 'How to use', ontap: 'howToUseMedium'}
 			]},
 			{classes: 'moon-1v'},
-			{kind: Header, name: 'smallHeader', content: 'Small Header', type: 'small', titleAbove: '04', subTitle: 'Sub Title', titleBelow: 'Sub Header', subTitleBelow: 'Sub-sub Header', components: [
+			{kind: Header, name: 'smallHeader', content: 'Small Héader', type: 'small', titleAbove: '04', subTitle: 'Sub Title', titleBelow: 'Sub Header', subTitleBelow: 'Sub-sub Header', components: [
 				{kind: Button, content: 'Description', ontap: 'describeSmall'},
 				{kind: Button, small: true, content: 'How to use', ontap: 'howToUseSmall'},
 				{kind: Button, small: true, content: 'RTL content', ontap: 'rtlSmall'}

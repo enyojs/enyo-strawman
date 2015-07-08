@@ -83,7 +83,7 @@ module.exports = kind({
 				{fit: true},
 				{tag: 'label', components: [
 					{kind: Input, placeholder: 'Search...', style: 'width: 140px;', oninput: 'searchInputChange'},
-					{kind: Img, src: 'assets/search-input-search.png', style: 'width: 20px;'}
+					{kind: Img, src: '@../../assets/search-input-search.png', style: 'width: 20px;'}
 				]},
 				{kind: Button, content: 'remove selected', ontap: 'removeSelected'}
 			]
@@ -231,7 +231,7 @@ module.exports = kind({
 	generateItem: function (inName) {
 		return {
 			name: inName,
-			avatar: 'assets/avatars/' + avatars[utils.irand(avatars.length)],
+			avatar: '@../../assets/avatars' + '/' + avatars[utils.irand(avatars.length)],
 			title: titles[utils.irand(titles.length)],
 			importance: 0
 		};

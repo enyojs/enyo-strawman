@@ -70,7 +70,7 @@ module.exports = kind({
 				}
 			],
 			components: [
-				{name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: 'assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
+				{name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
 					{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 						{
 							kind: ChannelInfo,

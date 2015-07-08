@@ -78,12 +78,12 @@ module.exports = kind({
 		//Bottom row of buttons
 		{components:[
 			{kind: TooltipDecorator, components: [
-				{kind: IconButton, src: 'assets/icon-button-enyo-logo.png'},
+				{kind: IconButton, src: '@../assets/icon-button-enyo-logo.png'},
 				{kind: Tooltip, floating: true, content: 'Floating tooltip for an IconButton.'}
 			]},
 
 			{kind: TooltipDecorator, style: 'float:right;', components: [
-				{kind: IconButton, src: 'assets/icon-button-enyo-logo.png'},
+				{kind: IconButton, src: '@../assets/icon-button-enyo-logo.png'},
 				{kind: Tooltip, floating: false, content: 'I\'m a tooltip for an IconButton.'}
 			]}
 		]}
