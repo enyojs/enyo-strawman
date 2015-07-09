@@ -37,7 +37,7 @@ module.exports = kind({
 		]}
 	],
 	nodeExpand: function (sender, event) {
-		sender.setIcon('@../../assets' + '/' + (sender.expanded ? 'folder-open.png' : 'folder.png'));
+		sender.setIcon('@../../assets/' + (sender.expanded ? 'folder-open.png' : 'folder.png'));
 	},
 	nodeTap: function (sender, event) {
 		var node = event.originator;

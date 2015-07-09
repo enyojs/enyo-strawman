@@ -231,7 +231,7 @@ module.exports = kind({
 	generateItem: function (inName) {
 		return {
 			name: inName,
-			avatar: '@../../assets/avatars' + '/' + avatars[utils.irand(avatars.length)],
+			avatar: '@../../assets/avatars/' + avatars[utils.irand(avatars.length)],
 			title: titles[utils.irand(titles.length)],
 			importance: 0
 		};
