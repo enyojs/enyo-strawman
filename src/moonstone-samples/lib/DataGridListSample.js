@@ -166,12 +166,17 @@ module.exports = kind({
 		this.refreshItems();
 	},
 	transparencyChanged: function () {
-		var models = this.collection.models,
-			model, idx;
-		for (idx = 0; idx < models.length; idx++) {
-			model = models[idx];
-			model.set('overlayTransparent', this.transparency);
+		var isDataTypeJS = this.dataType === 'JS',
+			items = isDataTypeJS ? this.collection : this.collection.models,
+			item, idx;
+
+		for (idx = 0; idx < items.length; idx++) {
+			item = items[idx];
+			if (isDataTypeJS) item.overlayTransparent = this.transparency;
+			else item.set('overlayTransparent', this.transparency);
 		}
+
+		if (isDataTypeJS) this.$.gridList.syncChildBindings({all: true, force: true});
 	},
 	generateRecords: function (amount) {
 		var records = [],
@@ -210,7 +215,7 @@ module.exports = kind({
 					spotlightPagingControls: true
 				},
 				components: [
-					{kind: GridSampleItem, overlayTransparent: this.transparency}
+					{kind: GridSampleItem}
 				]
 			},
 			createdComponent;
