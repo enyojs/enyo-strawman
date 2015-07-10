@@ -184,7 +184,7 @@ module.exports = kind({
 				overlayTransparent: this.transparency,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
-				url: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg'
+				url: 'http://placehold.it/300x300/' + Math.floor((Math.random()*(0x1000000-0x101010))+0x101010).toString(16) + '/ffffff&text=Image ' + idx
 			});
 		}
 		// update our internal index so it will always generate unique values
