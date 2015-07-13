@@ -22,12 +22,19 @@ module.exports = kind({
 				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with Value', noneText: 'No Input', placeholder: 'Placeholder', value: 'Initial value'},
 				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Disabled Input', noneText: 'No Input', disabled: true, value: 'I am disabled.'},
 				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with loooooooooooooooong text truncation', noneText: 'No Input with loooooooooooooooooong text truncation'},
-				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with no value or noneText'}
+				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with no value or noneText'},
+				{name: 'password', kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with password type'}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'Input:', allowHtml: true}
 	],
+	create: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.$.password.setInputAttribute('type', 'password');
+		};
+	}),
 	inputChanging: function(inSender, inEvent) {
 		this.$.console.setContent('<em>'+inSender.getContent() + '</em> changing: \'' + inEvent.originator.getValue() + '\'');
 	},
