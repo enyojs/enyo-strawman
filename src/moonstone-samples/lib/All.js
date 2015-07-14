@@ -140,6 +140,9 @@ module.exports = kind({
 	listTools: [
 		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
+				headerComponents: [
+					{kind: Button, content: 'Back', small: true, href: './', ontap: 'handleLink'}
+				],
 				components: [
 					{name: 'list', kind: DataList, components: [
 						{kind: Anchor, classes: 'moon-sample-list-item enyo-border-box', bindings: [
@@ -247,6 +250,12 @@ module.exports = kind({
 	},
 	reload: function () {
 		window.location.reload();
+	},
+	handleLink: function (sender, ev) {
+		var link = ev.originator.get('href') || ev.originator.parent.get('href');
+		if (link) {
+			window.location.href = link;
+		}
 	},
 	chooseSample: function (sender, ev) {
 		this.set('sample', ev.model.get('name'));
