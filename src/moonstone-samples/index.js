@@ -3,10 +3,10 @@ var
 	samples = {
 		AccessibilitySample					: require('./lib/AccessibilitySample'),
 		AccordionSample						: require('./lib/AccordionSample'),
-		ActivityPanelsSample				: require('./lib/ActivityPanelsSample'),
-		ActivityPanelsWithVideoSample		: require('./lib/ActivityPanelsWithVideoSample'),
-		AlwaysViewingPanelsSample			: require('./lib/AlwaysViewingPanelsSample'),
-		AlwaysViewingPanelsWithVideoSample	: require('./lib/AlwaysViewingPanelsWithVideoSample'),
+		// ActivityPanelsSample				: require('./lib/ActivityPanelsSample'),
+		// ActivityPanelsWithVideoSample		: require('./lib/ActivityPanelsWithVideoSample'),
+		// AlwaysViewingPanelsSample			: require('./lib/AlwaysViewingPanelsSample'),
+		// AlwaysViewingPanelsWithVideoSample	: require('./lib/AlwaysViewingPanelsWithVideoSample'),
 		BodyTextSample						: require('./lib/BodyTextSample'),
 		ButtonSample						: require('./lib/ButtonSample'),
 		CalendarSample						: require('./lib/CalendarSample'),
@@ -18,8 +18,8 @@ var
 		DatePickerSample					: require('./lib/DatePickerSample'),
 		DialogSample						: require('./lib/DialogSample'),
 		DividerSample						: require('./lib/DividerSample'),
-		DrawerSample						: require('./lib/DrawerSample'),
-		DynamicPanelsSample					: require('./lib/DynamicPanelsSample'),
+		// DrawerSample						: require('./lib/DrawerSample'),
+		// DynamicPanelsSample					: require('./lib/DynamicPanelsSample'),
 		ExpandableDataPickerSample			: require('./lib/ExpandableDataPickerSample'),
 		ExpandableInputSample				: require('./lib/ExpandableInputSample'),
 		ExpandableListItemSample			: require('./lib/ExpandableListItemSample'),
@@ -49,9 +49,9 @@ var
 		ObjectActionHorizontalTypeSample	: require('./lib/ObjectActionHorizontalTypeSample'),
 		ObjectActionVerticalTypeSample		: require('./lib/ObjectActionVerticalTypeSample'),
 		OverlaySample						: require('./lib/OverlaySample'),
-		PanelsVideoPlayerSample				: require('./lib/PanelsVideoPlayerSample'),
-		PanelsWithCardArrangerSample		: require('./lib/PanelsWithCardArrangerSample'),
-		PanelsWithCarouselArrangerSample	: require('./lib/PanelsWithCarouselArrangerSample'),
+		// PanelsVideoPlayerSample				: require('./lib/PanelsVideoPlayerSample'),
+		// PanelsWithCardArrangerSample		: require('./lib/PanelsWithCardArrangerSample'),
+		// PanelsWithCarouselArrangerSample	: require('./lib/PanelsWithCarouselArrangerSample'),
 		PopupSample							: require('./lib/PopupSample'),
 		ProgressButtonSample				: require('./lib/ProgressButtonSample'),
 		ProgressSample						: require('./lib/ProgressSample'),
@@ -69,9 +69,9 @@ var
 		TimePickerSample					: require('./lib/TimePickerSample'),
 		ToggleButtonSample					: require('./lib/ToggleButtonSample'),
 		ToggleItemSample					: require('./lib/ToggleItemSample'),
-		TooltipSample						: require('./lib/TooltipSample'),
-		VideoPlayerInlineSample				: require('./lib/VideoPlayerInlineSample'),
-		VideoPlayerSample					: require('./lib/VideoPlayerSample')
+		TooltipSample						: require('./lib/TooltipSample')
+		// VideoPlayerInlineSample				: require('./lib/VideoPlayerInlineSample'),
+		// VideoPlayerSample					: require('./lib/VideoPlayerSample')
 	};
 
 Sampler.samples = samples;

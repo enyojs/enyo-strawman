@@ -14,18 +14,19 @@ var
 	});
 
 newSampler.samples = {
-	AudioPlaybackSample: require('./AudioPlaybackSample'),
-	AudioPlaybackPlaylistSupportSample: require('./AudioPlaybackPlaylistSupportSample'),
-	ActivityPanelsSample: require('./ActivityPanelsSample'),
-	ActivityPanelsWithVideoSample: require('./ActivityPanelsWithVideoSample'),
-	AlwaysViewingPanelsSample: require('./AlwaysViewingPanelsSample'),
-	AlwaysViewingPanelsWithVideoSample: require('./AlwaysViewingPanelsWithVideoSample'),
-	DynamicPanelsSample: require('./DynamicPanelsSample'),
-	PanelsVideoPlayerSample: require('./PanelsVideoPlayerSample'),
-	PanelsWithCardArrangerSample: require('./PanelsWithCardArrangerSample'),
-	PanelsWithCarouselArrangerSample: require('./PanelsWithCarouselArrangerSample'),
-	VideoPlayerInlineSample: require('./VideoPlayerInlineSample'),
-	VideoPlayerSample: require('./VideoPlayerSample')
+	AudioPlaybackSample                  : require('./AudioPlaybackSample'),
+	AudioPlaybackPlaylistSupportSample   : require('./AudioPlaybackPlaylistSupportSample'),
+	ActivityPanelsSample                 : require('./ActivityPanelsSample'),
+	ActivityPanelsWithVideoSample        : require('./ActivityPanelsWithVideoSample'),
+	AlwaysViewingPanelsSample            : require('./AlwaysViewingPanelsSample'),
+	AlwaysViewingPanelsWithVideoSample   : require('./AlwaysViewingPanelsWithVideoSample'),
+	DrawerSample                         : require('./DrawerSample'),
+	DynamicPanelsSample                  : require('./DynamicPanelsSample'),
+	PanelsVideoPlayerSample              : require('./PanelsVideoPlayerSample'),
+	PanelsWithCardArrangerSample         : require('./PanelsWithCardArrangerSample'),
+	PanelsWithCarouselArrangerSample     : require('./PanelsWithCarouselArrangerSample'),
+	VideoPlayerInlineSample              : require('./VideoPlayerInlineSample'),
+	VideoPlayerSample                    : require('./VideoPlayerSample')
 };
 
 strawman.samples['MoonstoneExtra'] = newSampler;
