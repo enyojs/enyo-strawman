@@ -9,7 +9,7 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone/ChannelInfo'),
+	ChannelInfo = require('moonstone-extra/ChannelInfo'),
 	CheckboxItem = require('moonstone/CheckboxItem'),
 	Clock = require('moonstone/Clock'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
@@ -20,14 +20,14 @@ var
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	ListActions = require('moonstone/ListActions'),
-	Panel = require('moonstone/Panel'),
-	Panels = require('moonstone/Panels'),
+	Panel = require('moonstone-extra/Panel'),
+	Panels = require('moonstone-extra/Panels'),
 	Popup = require('moonstone/Popup'),
 	Scroller = require('moonstone/Scroller'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
-	VideoPlayer = require('moonstone/VideoPlayer');
+	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
 	name: 'dmoon.sample.HistorySample',
@@ -74,64 +74,66 @@ module.exports = kind({
 					{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 						{
 							kind: ChannelInfo,
-							channelNo: '13',
+							channelNo: '789-123',
 							channelName: 'AMC',
-							classes: 'moon-2h',
+							channelDesc: 'KRON-HD',
+							channelMoreDesc: '4:30 - 5:30PM',
 							components: [
-								{content: '3D'},
-								{content: 'Live'},
-								{content: 'REC 08:22', classes: 'moon-video-player-info-redicon '}
+								{content: 'DTV'},
+								{content: 'Cinema'},
+								{content: '3D'}
 							]
 						},
 						{
 							kind: VideoInfoHeader,
-							title: 'Downton Abbey - Extra Title',
-							subTitle: 'Mon June 21, 7:00 - 8:00pm',
-							subSubTitle: 'R - TV 14, V, L, SC',
-							description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
+							title: 'Downton Abbey',
+							uppercase: false,
+							// Todo, we can remove below comment out after policy of samples is decided.
+							// In latest tag like 2.6.0-pre.5, we don't have samples.
+							// src: '$lib/moonstone/samples/assets/default-music.png',
+							description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 						}
 					]},
 					{kind: VideoInfoBackground, orient: 'right', background: true, components: [
 						{kind: Clock}
 					]}
 				], components: [
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-					{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+					{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 				]},
 				{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, onShowingChanged: 'panelsShowingChanged', components: [
-					{title: 'First Panel', classes: 'moon-7h', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
+					{title: 'First Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 						{kind: Item, content: 'Item One', ontap: 'next1'},
 						{kind: Item, content: 'Item Two', ontap: 'next1'},
 						{kind: Item, content: 'Item Three', ontap: 'next1'},
 						{kind: Item, content: 'Item Four', ontap: 'next1'},
 						{kind: ToggleItem, content: 'Show/Hide Side Handle', checked: true,  onchange: 'handleShowingChanged'}
 					]},
-					{title: 'Second Panel', classes: 'moon-7h',
-						joinToPrev: true, components: [
+					{title: 'Second Panel', components: [
 						{kind: Item, content: 'Item One', ontap: 'next2'},
 						{kind: Item, content: 'Item Two', ontap: 'next2'},
 						{kind: Item, content: 'Item Three', ontap: 'next2'},
 						{kind: Item, content: 'Item Four', ontap: 'next2'},
 						{kind: Item, content: 'Item Five', ontap: 'next2'}
 					]},
-					{title: 'Third Panel', classes: 'moon-7h', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
+					{title: 'Third Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 						{kind: Item, content: 'Item One', ontap: 'next3'},
 						{kind: Item, content: 'Item Two', ontap: 'next3'},
 						{kind: Item, content: 'Item Three', ontap: 'next3'},
 						{kind: Item, content: 'Item Four', ontap: 'next3'},
 						{kind: Item, content: 'Item Five', ontap: 'next3'}
 					]},
-					{title: 'Fourth', classes: 'moon-7h', joinToPrev: true, titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', headerComponents: [
+					{title: 'Fourth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', headerComponents: [
 						{kind: Button, content: 'Basic Popup', ontap: 'showPopup', popup: 'basicPopup'},
-						{kind: ContextualPopupDecorator,	components:	[
+						{kind: ContextualPopupDecorator, components: [
 							{content: 'ContextualPopup'},
 							{kind: ContextualPopup, classes: 'moon-2h moon-8v', components: [
 								{content: 'Item 1'},
@@ -139,7 +141,7 @@ module.exports = kind({
 								{content: 'Item 3'}
 							]}
 						]},
-						{kind: ContextualPopupDecorator,	components:	[
+						{kind: ContextualPopupDecorator, components: [
 							{content: 'ContextualPopup'},
 							{kind: ContextualPopup, classes: 'moon-2h moon-8v', components: [
 								{content: 'Item 1'},
@@ -159,14 +161,14 @@ module.exports = kind({
 							{kind: Button, content: 'Hide Direct', ontap: 'hidePopup', popup: 'directPopup', direct: true}
 						]}
 					]},
-					{title: 'Fifth', classes: 'moon-7h', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
+					{title: 'Fifth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 						{kind: Item, content: 'Item One', ontap: 'next5'},
 						{kind: Item, content: 'Item Two', ontap: 'next5'},
 						{kind: Item, content: 'Item Three', ontap: 'next5'},
 						{kind: Item, content: 'Item Four', ontap: 'next5'},
 						{kind: Item, content: 'Item Five', ontap: 'next5'}
 					]},
-					{title: 'Sixth', classes: 'moon-7h', joinToPrev: true, titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', headerComponents: [
+					{title: 'Sixth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', headerComponents: [
 						//* List actions with default width
 						{kind: ListActions, name: 'listActions', icon: 'drawer', proportionalWidth: true, listActions: [
 							{action: 'category2', components: [
@@ -189,7 +191,7 @@ module.exports = kind({
 						{kind: Item, content: 'Item Four', ontap: 'next6'},
 						{kind: Item, content: 'Item Five', ontap: 'next6'}
 					]},
-					{title: 'Seventh', classes: 'moon-7h', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
+					{title: 'Seventh', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 						{kind: Item, content: 'Item One'},
 						{kind: Item, content: 'Item Two'},
 						{kind: Item, content: 'Item Three'},

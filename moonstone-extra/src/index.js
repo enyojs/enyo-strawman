@@ -22,6 +22,8 @@ newSampler.samples = {
 	AlwaysViewingPanelsWithVideoSample   : require('./AlwaysViewingPanelsWithVideoSample'),
 	DrawerSample                         : require('./DrawerSample'),
 	DynamicPanelsSample                  : require('./DynamicPanelsSample'),
+	HeaderAutoCollapsingSample           : require('./HeaderAutoCollapsingSample'),
+	HistorySample                        : require('./HistorySample'),
 	PanelsVideoPlayerSample              : require('./PanelsVideoPlayerSample'),
 	PanelsWithCardArrangerSample         : require('./PanelsWithCardArrangerSample'),
 	PanelsWithCarouselArrangerSample     : require('./PanelsWithCarouselArrangerSample'),

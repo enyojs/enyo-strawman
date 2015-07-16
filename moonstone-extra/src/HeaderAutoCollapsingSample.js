@@ -5,8 +5,8 @@ var
 var
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
-	Panel = require('moonstone/Panel'),
-	Panels = require('moonstone/Panels'),
+	Panel = require('moonstone-extra/Panel'),
+	Panels = require('moonstone-extra/Panels'),
 	Scroller = require('moonstone/Scroller');
 
 module.exports = kind({
@@ -14,7 +14,7 @@ module.exports = kind({
 	classes: 'moon enyo-unselectable enyo-fit',
 	components: [
 		{kind: Panels, classes: 'enyo-fit', pattern: 'activity', components: [
-			{kind: Panel, classes: 'moon-6h', collapsingHeader: true, title: 'Scroll Me', titleBelow: 'To test the auto-collapsing', subTitleBelow: 'Feature of moon.Panel', headerComponents: [
+			{kind: Panel, collapsingHeader: true, title: 'Scroll Me', titleBelow: 'To test the auto-collapsing', subTitleBelow: 'Feature of moon.Panel', headerComponents: [
 				{kind: IconButton, icon: 'check'},
 				{kind: IconButton, icon: 'arrowlargeright'}
 			], components: [
@@ -24,7 +24,7 @@ module.exports = kind({
 					]}
 				]}
 			]},
-			{kind: Panel, classes: 'moon-6h', joinToPrev: true, collapsingHeader: true, title: 'Me too', titleBelow: 'Another header', subTitleBelow: 'That collapses on scroll', headerComponents: [
+			{kind: Panel, collapsingHeader: true, title: 'Me too', titleBelow: 'Another header', subTitleBelow: 'That collapses on scroll', headerComponents: [
 				{kind: IconButton, icon: 'check'},
 				{kind: IconButton, icon: 'arrowlargeright'}
 			], components: [
@@ -34,7 +34,7 @@ module.exports = kind({
 					]}
 				]}
 			]},
-			{kind: Panel, classes: 'moon-6h', collapsingHeader: true, title: 'Yet another', headerComponents: [
+			{kind: Panel, collapsingHeader: true, title: 'Yet another', headerComponents: [
 				{kind: IconButton, icon: 'check'},
 				{kind: IconButton, icon: 'arrowlargeright'}
 			], components: [
