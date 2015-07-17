@@ -49,4 +49,27 @@
 .moon-sample-list-item {
 	text-decoration: none;
 	color: @moon-text-color;
+
+	&.new .moon-item {
+		padding-left: 48px;
+
+		&:before {
+			content: 'New!';
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: @moon-spotlight-background-color;
+			color: @moon-spotlight-text-color;
+			transform: translateY(110%) translateX(-10%) scale(0.5) rotateZ(-45deg);
+			padding: 0 3em;
+			border-radius: 9px;
+			line-height: 1.4em;
+			transform-origin: center left;
+			font-family: @moon-divider-font-family;
+		}
+		&.spotlight:before {
+			background-color: @moon-spotlight-text-color;
+			color: @moon-spotlight-background-color;
+		}
+	}
 }

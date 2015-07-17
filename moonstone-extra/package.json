@@ -26,6 +26,8 @@
   },
   "devDependencies": {},
   "styles": [
+    "../css/*.css",
+    "../css/*.less",
     "src/*.css",
     "src/*.less"
   ],

@@ -27,7 +27,7 @@ module.exports = kind({
 						return '?' + lib + v;
 					}
 				},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
+				{from: 'model.name', to: '$.a.content'}//, transform: function (v) { return v + ' Sample'; }}
 			]
 			// buildLink: function (v) {
 			// 	var lib = this.owner.libraryName;

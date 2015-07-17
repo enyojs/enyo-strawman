@@ -1,0 +1,6 @@
+{
+	"main": "All.js",
+	"styles": [
+		"All.less"
+	]
+}
