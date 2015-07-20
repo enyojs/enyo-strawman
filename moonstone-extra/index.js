@@ -13,10 +13,10 @@ var
 		Moonstone: require('./src'), //router blocking
 		Layout: require('../src/layout-samples'),
 		Spotlight: require('../src/spotlight-samples'),
-	  	iLib: require('../src/enyo-ilib-samples'),
+		iLib: require('../src/enyo-ilib-samples'),
 		Onyx: require('../src/onyx-samples'),
-	  	Canvas: require('../src/canvas-samples'),
-	  	Svg: require('../src/svg-samples')
+		Canvas: require('../src/canvas-samples'),
+		Svg: require('../src/svg-samples')
 	};
 
 var
