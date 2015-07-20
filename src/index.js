@@ -11,10 +11,10 @@ var
 		Moonstone: require('./moonstone-samples'), //router blocking
 		Layout: require('./layout-samples'),
 		Spotlight: require('./spotlight-samples'),
-	  	iLib: require('./enyo-ilib-samples'),
+		iLib: require('./enyo-ilib-samples'),
 		Onyx: require('./onyx-samples'),
-	  	Canvas: require('./canvas-samples'),
-	  	Svg: require('./svg-samples')
+		Canvas: require('./canvas-samples'),
+		Svg: require('./svg-samples')
 	};
 
 var
