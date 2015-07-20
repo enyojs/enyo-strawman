@@ -64,6 +64,22 @@ var appRouter = kind({
 	}
 });
 
+var SampleListItem = kind({
+	kind: Anchor,
+	classes: 'moon-sample-list-item enyo-border-box',
+	'new': false,
+	components: [
+		{name: 'item', kind: Item}
+	],
+	create: function () {
+		this.inherited(arguments);
+		this.newChanged();
+	},
+	newChanged: function () {
+		this.addRemoveClass('new', this.get('new'));
+	}
+});
+
 /**
 * _Moonstone Sample_ is a tool for displaying and interacting with sample code in the Moonstone
 * user interface library. This tool can display a list of all samples and load individual
@@ -142,13 +158,12 @@ module.exports = kind({
 			{kind: Panel, name: 'listpanel', headerType: 'small',
 				components: [
 					{name: 'list', kind: DataList, components: [
-						{kind: Anchor, classes: 'moon-sample-list-item enyo-border-box', bindings: [
+						{kind: SampleListItem, bindings: [
+							{from: 'model.new', to: 'new'},
 							{from: 'model.label', to: '$.item.content'},
 							{from: 'model.name', to: 'href', transform: function (v) {
 								return '#' + v;
 							}}
-						], components: [
-							{name: 'item', kind: Item}
 						]}
 					]}
 				]
@@ -184,8 +199,7 @@ module.exports = kind({
 		for (var i = 0; i < sorted.length; i++) {
 			var sampleName = sorted[i],
 				sample = samples[sampleName];
-
-			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1')});
+			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1'), 'new': sample['new']});
 		}
 		if (!this.$.list) {
 			this.$.home.createComponents(this.listTools, {owner: this});
