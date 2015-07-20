@@ -120,19 +120,9 @@ module.exports = kind({
 	},
 	showSmallButtonTapArea: function(inSender, inEvent) {
 		if (inEvent.checked) {
-			this.$.smallAButton.addClass('visible-tap-area');
-			this.$.smallBButton.addClass('visible-tap-area');
-			this.$.smallButton.addClass('visible-tap-area');
-			this.$.smallDisabledButton.addClass('visible-tap-area');
-			this.$.smallLongButton.addClass('visible-tap-area');
-			this.$.smallSpacesButton.addClass('visible-tap-area');
+			this.addClass('visible-tap-area');
 		} else {
-			this.$.smallAButton.removeClass('visible-tap-area');
-			this.$.smallBButton.removeClass('visible-tap-area');
-			this.$.smallButton.removeClass('visible-tap-area');
-			this.$.smallDisabledButton.removeClass('visible-tap-area');
-			this.$.smallLongButton.removeClass('visible-tap-area');
-			this.$.smallSpacesButton.removeClass('visible-tap-area');
+			this.removeClass('visible-tap-area');
 		}
 	}
 });
