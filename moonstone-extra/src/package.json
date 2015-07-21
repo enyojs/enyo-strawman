@@ -3,7 +3,9 @@
   "filename": "index.js",
   "main": "index.js",
   "styles": [
-    "../*.css"
+    "../*.css",
+    "../../src/moonstone-samples/lib/*.less",
+    "../../src/moonstone-samples/lib/*.css"
   ],
   "assets": [
     "../assets/*"
