@@ -41,11 +41,18 @@ var NoImageItem = kind({
 var
 	buttonComponents = [
 		{
-			kind: Button,
-			style: 'display: block; position: absolute;',
-			selectedClass: 'active',
+			kind: Control,
+			style: 'position: absolute;',
 			bindings: [
-				{from: 'model.text', to: 'content'}
+				{from: 'model.text', to: '$.button.content'}
+			],
+			components: [
+				{
+					kind: Button,
+					name: 'button',
+					style: 'position: relative; height: 100%; width: 100%;',
+					selectedClass: 'active',
+				}
 			]
 		}
 	],
