@@ -76,7 +76,7 @@ module.exports = kind({
 		{content: ": Drag a panel to the left or to the right.", classes: "g-sample-description"}
 	],
 	goBack: function(inSender, inEvent) {
-		global.location.href = "./index.html?Garnet"; // global.history.go(-1);
+		global.history.go(-1);
 		return false;
 	}
 });
