@@ -9,6 +9,10 @@ var
     TimePicker = require('onyx/TimePicker');
 
 var
+    Calendar = require('enyo-ilib/Calendar'),
+    DateFmt = require('enyo-ilib/DateFmt');
+
+var
     ChooseTimeZone = require('../ChooseTimeZone'),
 	ChooseLocale = require('../ChooseLocale'),
     rb = require('../ResBundle');
@@ -117,7 +121,7 @@ module.exports = kind({
         if (this.$.timeZonesSelector.getValue() !== 'default')
             options['timezone'] = this.$.timeZonesSelector.getValue();
         // processing    
-        var cal = ilib.Cal.newInstance({
+        var cal = Calendar.newInstance({
             locale: options['locale']
         });
         var dateCalendar = this.$.datePicker.getValue();
@@ -132,7 +136,7 @@ module.exports = kind({
             millisecond: 0,
             timezone: options['timezone']
         });
-        var fmt = new ilib.DateFmt(options);
+        var fmt = new DateFmt(options);
         var postFmtData = fmt.format(date);
         // Output results
         this.$.rtlResult.setContent(postFmtData + ', '+ rb.getString('julian day: ') + date.getJulianDay() +', '+ rb.getString('unix time: ') + date.getTime());

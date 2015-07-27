@@ -35,11 +35,11 @@ module.exports = kind({
 		{tag: 'br'},
 		{kind: Toolbar, classes: 'onyx-menu-toolbar', components: [
 			{kind: MenuDecorator, components: [
-				{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+				{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 				{kind: Tooltip, content: 'Bookmarks menu'},
 				{kind: Menu, components: [
 					{components: [
-						{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+						{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 						{content: 'Bookmarks'}
 					]},
 					{content: 'Favorites'},
@@ -52,7 +52,7 @@ module.exports = kind({
 				{kind: Tooltip, content: 'Tap to open...'},
 				{kind: Menu, components: [
 					{components: [
-						{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+						{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 						{content: 'Bookmarks'}
 					]},
 					{content: 'Favorites'},
@@ -76,11 +76,11 @@ module.exports = kind({
 		]},
 		{tag: 'br'},
 		{kind: MenuDecorator, components: [
-			{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+			{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 			{kind: Tooltip, content: 'Bookmarks menu'},
 			{kind: Menu, components: [
 				{components: [
-					{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+					{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 					{content: 'Bookmarks'}
 				]},
 				{content: 'Favorites'},
@@ -94,7 +94,7 @@ module.exports = kind({
 			{kind: Tooltip, content: 'Tap to open...'},
 			{kind: Menu, components: [
 				{components: [
-					{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+					{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 					{content: 'Bookmarks'}
 				]},
 				{content: 'Favorites'},

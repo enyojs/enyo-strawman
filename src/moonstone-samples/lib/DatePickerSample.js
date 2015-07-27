@@ -1,5 +1,5 @@
 var
-	hooks = require('enyo/hooks'),
+	i18n = require('enyo/i18n'),
 	kind = require('enyo/kind');
 
 var
@@ -82,7 +82,7 @@ module.exports = kind({
 		if (ilib) {
 			var locale = inEvent.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
-			hooks.updateLocale(locale);
+			i18n.updateLocale(locale);
 			this.$.picker.setLocale(val);
 			this.$.disabledPicker.setLocale(val);
 			this.$.result.setContent("locale changed to " + val);
@@ -106,6 +106,7 @@ module.exports = kind({
 	},
 	resetTapped: function(inSender, inEvent) {
 		this.$.picker.set('value', null);
+		this.$.picker.set('open', false);
 		return true;
 	}
 });

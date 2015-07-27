@@ -8,7 +8,6 @@ var
 	GridListImageItem = require('moonstone/GridListImageItem'),
 	Button = require('moonstone/Button'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
-	Icon = require('moonstone/Icon'),
 	NewDataList = require('moonstone/NewDataList'),
 	Overlay = require('moonstone/Overlay'),
 	Panel = require('moonstone/Panel'),
@@ -42,11 +41,18 @@ var NoImageItem = kind({
 var
 	buttonComponents = [
 		{
-			kind: Button,
-			style: 'display: block; position: absolute;',
-			selectedClass: 'active',
+			kind: Control,
+			style: 'position: absolute;',
 			bindings: [
-				{from: 'model.text', to: 'content'}
+				{from: 'model.text', to: '$.button.content'}
+			],
+			components: [
+				{
+					kind: Button,
+					name: 'button',
+					style: 'position: relative; height: 100%; width: 100%;',
+					selectedClass: 'active',
+				}
 			]
 		}
 	],
@@ -97,6 +103,13 @@ module.exports = kind({
 							]
 						},
 						{
+							name: 'dataTypePicker', kind: ExpandablePicker, content: 'Data',
+							components: [
+								{content: 'Collections/Models', value: 'EnyoData', active: true},
+								{content: 'JS Arrays/Objects', value: 'JS'}
+							]
+						},
+						{
 							name: 'selectionPicker', kind: ExpandablePicker, content: 'Selection',
 							components: [
 								{content: 'On', value: true},
@@ -137,13 +150,14 @@ module.exports = kind({
 		{from: 'collection', to: '$.list.collection'},
 		{from: '$.itemPicker.selected', to: '$.list.components', transform: selectedValue},
 		{from: '$.directionPicker.selected', to: '$.list.direction', transform: selectedValue},
+		{from: '$.dataTypePicker.selected', to: 'dataType', transform: selectedValue},
 		{from: '$.selectionPicker.selected', to: '$.list.selection', transform: selectedValue},
 		{from: '$.selectionPicker.selected', to: '$.selectionTypePicker.showing', transform: selectedValue},
 		{from: '$.selectionTypePicker.selected', to: '$.list.selectionType', transform: selectedValue}
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
-		this.set('collection', new Collection(this.generateRecords()));
+		this.refreshItems(500);
 	},
 	generateRecords: function () {
 		var records = [],
@@ -152,7 +166,7 @@ module.exports = kind({
 		for (; records.length < 500; ++idx) {
 			title = (idx % 8 === 0) ? ' with long title' : '';
 			subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
-			color = Math.floor(Math.random()*0x1000000).toString(16);
+			color = Math.floor((Math.random()*(0x1000000-0x101010))+0x101010).toString(16);
 
 			records.push({
 				selected: false,
@@ -167,12 +181,20 @@ module.exports = kind({
 		this.modelIndex = idx;
 		return records;
 	},
-	refreshItems: function () {
-		// we fetch our collection reference
-		var collection = this.get('collection');
-		// we now remove all of the current records from the collection
-		collection.remove(collection.models);
-		// and we insert all new records that will update the list
-		collection.add(this.generateRecords());
+	refreshItems: function (num) {
+		var data;
+
+		num = (typeof num === 'number') ? num : 100;
+		data = this.generateRecords(num);
+
+		if (this.collection && this.collection.destroy) {
+			this.collection.destroy();
+		}
+		this.set('collection', this.dataType === 'JS' ? data : new Collection(data));
+	},
+	dataTypeChanged: function (prev) {
+		if (prev) {
+			this.refreshItems(500);
+		}
 	}
 });

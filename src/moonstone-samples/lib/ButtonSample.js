@@ -1,6 +1,5 @@
 var
 	kind = require('enyo/kind'),
-	Control = require('enyo/Control'),
 	Group = require('enyo/Group');
 
 var
@@ -22,7 +21,7 @@ module.exports = kind({
 	classes: 'moon enyo-unselectable enyo-fit moon-button-sample',
 	components: [
 		{kind: Scroller, fit: true, components: [
-			{kind: Control, classes: 'moon-button-sample-wrapper', components: [
+			{classes: 'moon-button-sample-wrapper', components: [
 
 				{kind: Divider, content: 'Buttons:'},
 				{kind: TooltipDecorator, components: [
@@ -37,8 +36,7 @@ module.exports = kind({
 				{name: 'disabledButton', kind: Button, disabled: true, content: 'Disabled Button', ontap: 'buttonTapped'},
 				{name: 'longButton', kind: Button, content: 'Looooooooooooooooong Button', ontap: 'buttonTapped'},
 				{name: 'spacesButton', kind: Button, content: 'Button   with   extra   spaces', ontap: 'buttonTapped'},
-				{kind: Control, tag: 'br'},
-				{kind: Control, tag: 'br'},
+				{classes: 'moon-2v'},
 
 				{kind: Divider, content: 'Small Buttons:'},
 				{name: 'smallAButton', kind: Button, small: true, minWidth: false, content: 'A', ontap: 'buttonTapped'},
@@ -48,8 +46,7 @@ module.exports = kind({
 				{name: 'smallLongButton', kind: Button, small: true, content: 'Loooooooooooooooooooooooong Button', ontap: 'buttonTapped'},
 				{name: 'smallSpacesButton', kind: Button, small:true, content: 'Button   with   extra   spaces', ontap: 'buttonTapped'},
 				{kind: ToggleItem, classes: 'tap-area-toggle-container', content: 'Show Tap Area', onActivate: 'showSmallButtonTapArea'},
-				{kind: Control, tag: 'br'},
-				{kind: Control, tag: 'br'},
+				{classes: 'moon-2v'},
 
 				{kind: Divider, content: 'Captioned Buttons:'},
 				{kind: CaptionDecorator, side: 'top', content: 'Pow', components: [
@@ -64,8 +61,7 @@ module.exports = kind({
 				{kind: CaptionDecorator, side: 'left', content: 'Bang', components: [
 					{name: 'captionedDButton', kind: Button, content: 'D', ontap: 'buttonTapped'}
 				]},
-				{kind: Control, tag: 'br'},
-				{kind: Control, tag: 'br'},
+				{classes: 'moon-2v'},
 
 				{kind: Divider, content: 'Captioned Buttons with showOnFocus option:'},
 				{kind: CaptionDecorator, side: 'top', showOnFocus: true, content: 'Pow', components: [
@@ -81,8 +77,7 @@ module.exports = kind({
 				{kind: CaptionDecorator, side: 'right', showOnFocus: true, content: 'Boom', components: [
 					{name: 'showOnFocusCaptionRightButton', kind: Button, content: 'Right', ontap: 'buttonTapped'}
 				]},
-				{kind: Control, tag: 'br'},
-				{kind: Control, tag: 'br'},
+				{classes: 'moon-2v'},
 
 				{kind: Divider, content: 'Grouped Buttons:'},
 				{kind: Group, classes: 'moon-button-sample-group', components: [
@@ -90,18 +85,27 @@ module.exports = kind({
 					{name: 'bananaButton', kind: Button, content: 'Banana', ontap: 'buttonTapped'},
 					{name: 'saskatoonberryButton', kind: Button, content: 'Saskatoonberry', ontap: 'buttonTapped'}
 				]},
+				{classes: 'moon-2v'},
 
 				{kind: Divider, content: 'Hidden Buttons:'},
 				{name: 'hiddenButton', kind: Button, content: 'Hidden Button', renderOnShow: true, ontap: 'buttonTapped'},
 				{name: 'showButton', kind: Button, content: 'Show Hidden Button', ontap: 'showButtonTapped'},
 
+				{classes: 'moon-2v'},
 				{kind: Divider, content: 'Translucent Background Buttons:'},
 				{classes: 'image-background', components: [
 					{name: 'opaqueButton', kind: Button, minWidth: false, content: 'Normal Opaque', ontap: 'buttonTapped'},
 					{name: 'translucentButton', kind: Button, minWidth: false, backgroundOpacity: 'translucent', content: 'Translucent', ontap: 'buttonTapped'},
 					{name: 'disabledTranslucentButton', kind: Button, minWidth: false, backgroundOpacity: 'translucent', disabled: true, content: 'Disabled Translucent', ontap: 'buttonTapped'},
 					{name: 'transparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', content: 'Transparent',  ontap: 'buttonTapped'},
-					{name: 'disabledTransparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', disabled: true, content: 'Disabled Transparent',  ontap: 'buttonTapped'}
+					{name: 'disabledTransparentButton', kind: Button, minWidth: false, backgroundOpacity: 'transparent', disabled: true, content: 'Disabled Transparent',  ontap: 'buttonTapped'},
+					{classes: 'moon-1v'},
+					{kind: Divider, content: 'Grouped Buttons:'},
+					{kind: Group, classes: 'moon-button-sample-group', components: [
+						{name: 'appleButton2', kind: Button, content: 'Apple', backgroundOpacity: 'translucent', ontap: 'buttonTapped'},
+						{name: 'bananaButton2', kind: Button, content: 'Banana', backgroundOpacity: 'translucent', ontap: 'buttonTapped'},
+						{name: 'saskatoonberryButton2', kind: Button, content: 'Saskatoonberry', backgroundOpacity: 'translucent', ontap: 'buttonTapped'}
+					]}
 				]}
 			]}
 		]},
@@ -116,19 +120,9 @@ module.exports = kind({
 	},
 	showSmallButtonTapArea: function(inSender, inEvent) {
 		if (inEvent.checked) {
-			this.$.smallAButton.addClass('visible-tap-area');
-			this.$.smallBButton.addClass('visible-tap-area');
-			this.$.smallButton.addClass('visible-tap-area');
-			this.$.smallDisabledButton.addClass('visible-tap-area');
-			this.$.smallLongButton.addClass('visible-tap-area');
-			this.$.smallSpacesButton.addClass('visible-tap-area');
+			this.addClass('visible-tap-area');
 		} else {
-			this.$.smallAButton.removeClass('visible-tap-area');
-			this.$.smallBButton.removeClass('visible-tap-area');
-			this.$.smallButton.removeClass('visible-tap-area');
-			this.$.smallDisabledButton.removeClass('visible-tap-area');
-			this.$.smallLongButton.removeClass('visible-tap-area');
-			this.$.smallSpacesButton.removeClass('visible-tap-area');
+			this.removeClass('visible-tap-area');
 		}
 	}
 });

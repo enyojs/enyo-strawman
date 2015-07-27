@@ -1,5 +1,5 @@
 var
-	hooks = require('enyo/hooks'),
+	i18n = require('enyo/i18n'),
 	kind = require('enyo/kind');
 
 var
@@ -73,7 +73,7 @@ module.exports = kind({
 		if (ilib) {
 			var locale = event.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
-			hooks.updateLocale(locale);
+			i18n.updateLocale(locale);
 			this.$.pickerDateLinked.setLocale(val);
 			this.$.pickerTimeLinked.setLocale(val);
 			this.$.pickerTime.setLocale(val);

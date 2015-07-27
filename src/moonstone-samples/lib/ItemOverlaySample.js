@@ -65,13 +65,13 @@ module.exports = kind({
 			{kind: Divider, content: 'ItemOverlay Auto Hide Sample'},
 			{components: [
 				{kind: Item, mixins: [ItemOverlaySupport], autoHideBeginning: true, beginningComponents: [
-						{kind: Icon, src: 'assets/icon-list.png', small: true}
+						{kind: Icon, src: '@../assets/icon-list.png', small: true}
 					], components: [
 						{kind: MarqueeText, content: 'These text are flow when item is getting focused'}
 					]
 				},
 				{kind: Item, mixins: [ItemOverlaySupport], autoHideEnding: true, endingComponents: [
-						{kind: Icon, src: 'assets/icon-album.png', small: true}
+						{kind: Icon, src: '@../assets/icon-album.png', small: true}
 					], components: [
 						{kind: MarqueeText, content: 'These text are flow when item is getting focused'}
 					]

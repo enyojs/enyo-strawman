@@ -26,11 +26,15 @@
   },
   "devDependencies": {},
   "styles": [
-    "../*.css"
+    "../css/*.css",
+    "../css/*.less",
+    "src/*.css",
+    "src/*.less"
   ],
   "assets": [
-    "appinfo.json",
-    "icon.png",
-    "largeIcon.png"
+    "moonstone-extra/assets/*.png",
+    "../appinfo.json",
+    "../icon.png",
+    "../largeIcon.png"
   ]
 }

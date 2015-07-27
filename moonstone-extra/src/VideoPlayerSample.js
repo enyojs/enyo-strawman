@@ -30,7 +30,7 @@ module.exports = kind({
 				{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
 				{src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm'}
 			],
-			poster: 'assets/video-poster.png',
+			poster: '@../assets/video-poster.png',
 			autoplay: true,
 			onPlaybackControlsTapped: 'controlsTapped',
 			infoComponents: [
