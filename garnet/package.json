@@ -36,6 +36,7 @@
   "assets": [
     "../appinfo.json",
     "../icon.png",
-    "../largeIcon.png"
+    "../largeIcon.png",
+    "assets/**/*.*"
   ]
 }
