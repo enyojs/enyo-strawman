@@ -115,7 +115,7 @@ module.exports = kind({
 		this.$.result.setContent(inEvent.msg);
 	},
 	goBack: function(inSender, inEvent) {
-		global.location.href = "./index.html?Garnet"; // global.history.go(-1);
+		global.history.go(-1);
 		return false;
 	}
 });
