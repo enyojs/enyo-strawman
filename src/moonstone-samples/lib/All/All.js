@@ -1,7 +1,6 @@
 var
 	i18n = require('enyo/i18n'),
 	kind = require('enyo/kind'),
-	Anchor = require('enyo/Anchor'),
 	Collection = require('enyo/Collection'),
 	DataRepeater = require('enyo/DataRepeater'),
 	Router = require('enyo/Router');
@@ -22,6 +21,9 @@ var
 	Scroller = require('moonstone/Scroller'),
 	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem');
+
+var
+	LinkSupport = require('../../../strawman/LinkSupport');
 
 var locales = [
 	{locale: 'local', title: '', selected: true},
@@ -65,12 +67,10 @@ var appRouter = kind({
 });
 
 var SampleListItem = kind({
-	kind: Anchor,
+	kind: Item,
 	classes: 'moon-sample-list-item enyo-border-box',
 	'new': false,
-	components: [
-		{name: 'item', kind: Item}
-	],
+	mixins: [LinkSupport],
 	create: function () {
 		this.inherited(arguments);
 		this.newChanged();
@@ -160,7 +160,7 @@ module.exports = kind({
 					{name: 'list', kind: DataList, components: [
 						{kind: SampleListItem, bindings: [
 							{from: 'model.new', to: 'new'},
-							{from: 'model.label', to: '$.item.content'},
+							{from: 'model.label', to: 'content'},
 							{from: 'model.name', to: 'href', transform: function (v) {
 								return '#' + v;
 							}}
@@ -220,6 +220,9 @@ module.exports = kind({
 		this.set('sample', ev.sampleName);
 		this.set('locale', ev.locale);
 	},
+	updateTitle: function (title) {
+		document.title = (title ? title + ' - ' : '') + this.get('title');
+	},
 	localeChanged: function (oldLocale, newLocale) {
 		console.log('Setting Locale:', newLocale);
 		if (this.$.localePopup && this.$.localePopup.get('showing')) {
@@ -243,6 +246,8 @@ module.exports = kind({
 	},
 	activateList: function () {
 		console.log('%cList all of the Samples', 'color:green');
+		this.updateTitle();
+
 		this.disableAllStylesheets();
 		if (this.$.sample) {
 			this.$.sample.destroy();
@@ -281,6 +286,7 @@ module.exports = kind({
 			this.$.home.hide();
 			global.sample = this.createComponent({name: s, kind: this.samples[s]}).render();
 			console.log('%c%s Created and Launched', 'color:green;', s);
+			this.updateTitle(s);
 
 		} else {
 			this.createList();
