@@ -22,6 +22,9 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem');
 
+var
+	LinkSupport = require('../../../strawman/LinkSupport');
+
 var locales = [
 	{locale: 'local', title: '', selected: true},
 	{locale: 'en-US', title: '<span class="light">- US English</span>'},
@@ -67,21 +70,13 @@ var SampleListItem = kind({
 	kind: Item,
 	classes: 'moon-sample-list-item enyo-border-box',
 	'new': false,
-	handlers: {
-		ontap: 'handleLink'
-	},
+	mixins: [LinkSupport],
 	create: function () {
 		this.inherited(arguments);
 		this.newChanged();
 	},
 	newChanged: function () {
 		this.addRemoveClass('new', this.get('new'));
-	},
-	handleLink: function (sender, ev) {
-		var link = this.get('href') || ev.originator.get('href') || ev.originator.parent.get('href');
-		if (link) {
-			window.location.href = link;
-		}
 	}
 });
 
