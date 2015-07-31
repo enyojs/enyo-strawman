@@ -156,6 +156,9 @@ module.exports = kind({
 	listTools: [
 		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
+				headerComponents: [
+					{kind: Button, content: 'Back', small: true, href: './', mixins: [LinkSupport]}
+				],
 				components: [
 					{name: 'list', kind: DataList, components: [
 						{kind: SampleListItem, bindings: [
