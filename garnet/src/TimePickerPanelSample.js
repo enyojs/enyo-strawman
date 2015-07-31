@@ -9,7 +9,7 @@ var
 	TimePickerPanel = require('garnet/TimePickerPanel'),
 	Panel = require('garnet/Panel');
 
-kind({
+var TimePicker12Panel = kind({
 	name: "g.sample.TimePicker12Panel",
 	kind: TimePickerPanel,
 	handlers: {
@@ -30,7 +30,7 @@ kind({
 	}
 });
 
-kind({
+var TimePicker24Panel = kind({
 	name: "g.sample.TimePicker24Panel",
 	kind: TimePickerPanel,
 	handlers: {
@@ -64,12 +64,12 @@ module.exports = kind({
 		{style: "position: relative; height: 100%", components: [
 			{
 				name: "timePicker12Panel",
-				kind: "g.sample.TimePicker12Panel",
+				kind: TimePicker12Panel,
 				style: "background-color: #000000; position: relative; display: inline-block; overflow: hidden;"
 			},
 			{
 				name: "timePicker24Panel",
-				kind: "g.sample.TimePicker24Panel",
+				kind: TimePicker24Panel,
 				style: "background-color: #000000; position: relative; display: inline-block; margin-left: " + ri.scale(10) + "px; overflow: hidden;"
 			}
 		]},
