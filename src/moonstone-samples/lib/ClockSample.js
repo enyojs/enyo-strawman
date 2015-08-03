@@ -10,7 +10,7 @@ var
 	ilib = require('enyo-ilib');
 
 var
-	$L = require('moonstone/i18n'),
+	$L = i18n.$L,
 	Button = require('moonstone/Button'),
 	Clock = require('moonstone/Clock'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),

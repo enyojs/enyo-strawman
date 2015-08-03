@@ -4,7 +4,7 @@ var
 	ProgressiveFilter = require('enyo/ProgressiveFilter');
 
 var
-	$L = require('moonstone/i18n'),
+	$L = require('enyo/i18n').$L,
 	Button = require('moonstone/Button'),
 	DataList = require('moonstone/DataList'),
 	Divider = require('moonstone/Divider'),
