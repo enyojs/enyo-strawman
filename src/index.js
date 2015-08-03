@@ -3,12 +3,12 @@ var
 
 var
 	SampleList = require('./strawman/SampleList'),
-	History = require('moonstone/History');
+	History = request('moonstone/History');
 
 var
 	samples = {
 		Enyo: require('./enyo-samples'),
-		Moonstone: require('./moonstone-samples'), //router blocking
+		Moonstone: request('./moonstone-samples'), //router blocking
 		Layout: require('./layout-samples'),
 		Spotlight: require('./spotlight-samples'),
 		iLib: require('./enyo-ilib-samples'),
@@ -26,7 +26,7 @@ var
 		samples: samples
 	});
 
-History.set('enableBackHistoryAPI', false);
+//History.set('enableBackHistoryAPI', false);
 
 module.exports = {
 	samples: samples,
