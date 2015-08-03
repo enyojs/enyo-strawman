@@ -26,9 +26,8 @@ var
 		samples: samples
 	});
 
-//History.set('enableBackHistoryAPI', false);
-
 module.exports = {
 	samples: samples,
-	List: List
+	List: List,
+	History: History
 };
