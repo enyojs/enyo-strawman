@@ -14,7 +14,7 @@ var
 module.exports = kind({
 	name: 'enyo.sample.ImageViewSample',
 	components: [
-		{name: 'sampleImageView', kind: ImageView, src: '@../../assets/globe.jpg', scale: 'auto', classes: 'enyo-fit', components: [
+		{name: 'sampleImageView', kind: ImageView, src: '@../../assets/globe.jpg', scale: 'auto', classes: 'enyo-fit', ondown: 'configureHoldPulse', components: [
 			{kind: ImageViewPin, highlightAnchorPoint:true, anchor: {top:79, right:224}, position: {bottom:0, left:-16}, components: [
 				{kind: 'Image', src: '@../../assets/pin.png'}
 			]},
@@ -30,6 +30,11 @@ module.exports = kind({
 				{style: 'border:1px solid yellow;width:10px;background:red;height:10px;'}
 			]}
 		]}
-	]
+	],
+	configureHoldPulse: function (sender, ev) {
+		ev.configureHoldPulse({
+			endHold: 'onMove'
+		});
+	}
 });
 
