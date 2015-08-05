@@ -46,11 +46,11 @@ module.exports = kind({
 				{name: 'slider5', kind: Slider, orientation: 'vertical', style: 'height: 300px', onChanging: 'sliderChanging', onChange: 'sliderChanged'},
 				{classes: 'moon-2h'},
 				{name: 'slider6', kind: Slider,
-					value: 0, min: -100, max: 100, orientation: 'vertical', style: 'height: 300px', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
+					value: 0, min: -100, max: 100, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, iconDecreaseButton: 'arrowlargedown', iconIncreaseButton: 'arrowlargeup', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
 				},
 				{classes: 'moon-2h'},
 				{name: 'slider7', kind: Slider,
-					value: 5, min: 1, max: 10, orientation: 'vertical', style: 'height: 300px', popupSide: 'left', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
+					value: 5, min: 1, max: 10, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, jumpIncrement: '10%', iconDecreaseButton: 'minus', iconIncreaseButton: 'plus', popupSide: 'left', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
 				},
 				{classes: 'moon-2h'},
 				{name: 'slider8', kind: Slider,
