@@ -272,7 +272,7 @@ module.exports = kind({
 		return records;
 	},
 	goBack: function(inSender, inEvent) {
-		global.location.href = "./index.html?Garnet"; // global.history.go(-1);
+		global.history.go(-1);
 		return false;
 	},
 	data: [

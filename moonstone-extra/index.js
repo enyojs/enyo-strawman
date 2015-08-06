@@ -8,10 +8,11 @@ var
 	SampleList = require('../src/strawman/SampleList'),
 	History = require('moonstone/History');
 
+require('../src/moonstone-samples');	// Included for its assets and CSS
+
 var
 	samples = {
 		Enyo: require('../src/enyo-samples'),
-		// Moonstone: require('../src/moonstone-samples'), //router blocking
 		Moonstone: require('./src'), //router blocking
 		Layout: require('../src/layout-samples'),
 		Spotlight: require('../src/spotlight-samples'),
