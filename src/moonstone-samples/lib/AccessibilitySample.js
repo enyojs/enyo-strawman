@@ -7,6 +7,7 @@ var
 
 var
 	BodyText = require('moonstone/BodyText'),
+	Checkbox = require('moonstone/Checkbox'),
 	Divider = require('moonstone/Divider'),
 	Icon = require('moonstone/Icon'),
 	Item = require('moonstone/Item'),
@@ -23,32 +24,50 @@ module.exports = kind({
 	labelText : 'Label',
 	hintText : 'Hint',
 	components: [
-		{kind: Header, name: 'header', content: 'Accessibility', type: 'small', components: [
+		{kind: Header, name: 'header', content: 'Accessibility', titleBelow: 'Unusual case sample for Accessibility', type: 'small', components: [
 			{name: 'labelButton', kind: Button, small: true, minWidth: false, content: 'Set Label', ontap: 'labelButtonTapped'},
 			{name: 'hintButton', kind: Button, small: true, minWidth: false, content: 'Set Hint', ontap: 'hintButtonTapped'},
-			{name: 'toggle', kind: ToggleButton, small: true, toggleOnLabel: 'disabled is on', toggleOffLabel: 'disabled is off', ontap: 'disabledTapped'},
-			{name: 'reload', kind: Button, small: true, content: 'Reload', ontap: 'reload'}
+			{name: 'toggle', kind: ToggleButton, small: true, toggleOnLabel: 'disabled is on', toggleOffLabel: 'disabled is off', ontap: 'disabledTapped'}
 		]},
 		{name: 'container', kind: Scroller, fit: true, components: [
 			{classes: 'moon-1v'},
-			{kind: Divider, content: 'Icons: '},
-			{kind: Icon, icon: 'play', small: false, ontap: 'buttonTapped', accessibilityLabel: 'play'},
-			{kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped', accessibilityLabel: 'icon List'},
-			{kind: Item, classes: 'moon-hspacing', ontap: 'buttonTapped', accessibilityLabel: 'selectable icon List', components: [
-				{content: 'Selectable Item', accessibilityDisabled: true},
+			{kind: Control, tag: 'br'},
+			{kind: Divider, content: 'Case 1: Non spotlight'},
+			{kind: Icon, icon: 'play', small: false, ontap: 'buttonTapped'},
+			{kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped'},
+			{classes: 'moon-1v'},
+			{kind: Control, tag: 'br'},
+			{kind: Divider, content: 'Case 2: User defined'},
+			{kind: Item, classes: 'moon-hspacing', ontap: 'buttonTapped', components: [
+				{content: 'Content and Icon'},
 				{kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped'}
 			]},
-			{kind: Control, tag: 'br'},
+			{name: 'checkItem', kind: Item, accessibilityRole: 'checkbox', classes: 'moon-hspacing', ontap: 'buttonTapped', components: [
+				{content: 'Content and Checkbox'},
+				{name: 'checkbox', kind: Checkbox, spotlight:false, checked: true}
+			]},
 			{classes: 'moon-1v'},
-			{kind: Divider, content: 'Icon Buttons: '},
+			{kind: Control, tag: 'br'},
+			{kind: Divider, content: 'Case 3: Non content'},
 			{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped', accessibilityLabel: 'drawer'},
-			{kind: IconButton, src: '@../assets/icon-list.png', small: false, ontap: 'buttonTapped', accessibilityLabel: 'icon List'}
+			{kind: IconButton, src: '@../assets/icon-list.png', small: false, ontap: 'buttonTapped', accessibilityLabel: 'icon list'}
 		]},
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'No changes yet'}
 	],
 	buttonTapped: function (sender, event) {
-		this.$.console.setContent(sender.get('accessibilityDisabled') ? 'accessibility disabled' : sender.getAttribute('aria-label') +' tapped.');
+		var result;
+		if (sender.get('accessibilityDisabled')) {
+			result = 'accessibility disabled';
+		} else if (sender.getAttribute('aria-label')) {
+			result = sender.getAttribute('aria-label') + ' tapped.';
+		} else {
+			result = this.$.console.getContent();
+		}
+		this.$.console.setContent(result);
+		if (sender == this.$.checkItem) {
+			this.$.checkbox.setChecked(!this.$.checkbox.getChecked());
+		}
 	},
 	labelButtonTapped: function (sender, event) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityLabel to \'Label\'');
@@ -74,7 +93,12 @@ module.exports = kind({
 			this.$[control[i]].set('accessibilityDisabled', sender.value ? true : false);
 		}
 	},
-	reload: function (sender, event) {
-		window.location.reload();
-	}
+
+	// Accessibility
+
+	ariaObservers: [
+		{path:'$.checkbox.checked', method: function() {
+			this.$.checkItem.setAriaAttribute('aria-checked', this.$.checkbox.checked);
+		}}
+	]
 });
