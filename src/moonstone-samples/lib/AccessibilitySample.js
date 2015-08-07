@@ -61,9 +61,19 @@ module.exports = kind({
 		this.$.checkItem.setAttribute('aria-checked', this.$.checkbox.getChecked());
 	},
 	buttonTapped: function (sender, event) {
-		this.$.console.setContent(sender.get('accessibilityDisabled') ? 'accessibility disabled' : sender.getAttribute('aria-label') +' tapped.');
-		this.$.checkbox.setChecked(!this.$.checkbox.getChecked());
-		this.$.checkItem.setAttribute('aria-checked', this.$.checkbox.getChecked());
+		var result;
+		if (sender.get('accessibilityDisabled')) {
+			result = 'accessibility disabled';
+		} else if (sender.getAttribute('aria-label')) {
+			result = sender.getAttribute('aria-label') + ' tapped.';
+		} else {
+			result = this.$.console.getContent();
+		}
+		this.$.console.setContent(result);
+		if (sender == this.$.checkItem) {
+			this.$.checkbox.setChecked(!this.$.checkbox.getChecked());
+			this.$.checkItem.setAttribute('aria-checked', this.$.checkbox.getChecked());
+		}
 	},
 	labelButtonTapped: function (sender, event) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityLabel to \'Label\'');
