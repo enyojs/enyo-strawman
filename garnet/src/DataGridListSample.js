@@ -14,8 +14,8 @@ var
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-DataGridListSampleImageItem = kind({
-	name: "DataGridListSampleImageItem",
+var DataGridListSampleImageItem = kind({
+	name: "g.DataGridListSampleImageItem",
 	classes: "g-sample-gridlist-imageitem",
 	components: [{
 		name: "image",
@@ -56,7 +56,7 @@ DataGridListSampleImageItem = kind({
 
 kind({
 	name: "g.sample.DataGridListSampleItem",
-	kind: "DataGridListSampleImageItem",
+	kind: DataGridListSampleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/frame_check.png",
@@ -73,15 +73,15 @@ kind({
 	}]
 });
 
-kind({
+var DataGridListSampleCircleImageItem = kind({
 	name: "DataGridListSampleCircleImageItem",
-	kind: "DataGridListSampleImageItem",
+	kind: DataGridListSampleImageItem,
 	classes: "g-sample-gridlist-circle-imageitem"
 });
 
 kind({
 	name: "g.sample.DataGridListSampleCircleItem",
-	kind: "DataGridListSampleCircleImageItem",
+	kind: DataGridListSampleCircleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/frame_check.png",
@@ -98,7 +98,7 @@ kind({
 	}]
 });
 
-kind({
+var DataGridListPanel = kind({
 	name: "g.sample.DataGridListPanel",
 	kind: Panel,
 	title: true,
@@ -133,7 +133,7 @@ kind({
 
 kind({
 	name: "g.sample.DataGridListCirclePanel",
-	kind: "g.sample.DataGridListPanel",
+	kind: DataGridListPanel,
 	components: [{
 		name: "list",
 		kind: DataGridList,
@@ -165,7 +165,7 @@ module.exports = kind({
 			multipleSelection: true
 		}, {
 			name: "gridListMulti",
-			kind: "g.sample.DataGridListPanel",
+			kind: DataGridListPanel,
 			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
 			selection: true,
 			multipleSelection: true
@@ -176,7 +176,7 @@ module.exports = kind({
 			selection: true
 		}, {
 			name: "gridListSingle",
-			kind: "g.sample.DataGridListPanel",
+			kind: DataGridListPanel,
 			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
 			selection: true
 		}

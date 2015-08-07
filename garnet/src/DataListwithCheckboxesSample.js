@@ -14,7 +14,7 @@ var
 	Panel = require('garnet/Panel')
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-kind({
+var CheckboxItem = kind({
 	name: "g.CheckboxItem",
 	kind: Item,
 	classes: "g-sample-datalistcheckbox-checkbox-item",
@@ -46,7 +46,7 @@ kind({
 
 kind({
 	name: "g.sample.CheckboxItem",
-	kind: "g.CheckboxItem",
+	kind: CheckboxItem,
 	mixins: [SelectionOverlaySupport],
 	selectionOverlayVerticalOffset: 53,
 	selectionOverlayHorizontalOffset: 20,

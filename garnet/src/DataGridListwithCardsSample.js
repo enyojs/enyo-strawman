@@ -12,7 +12,7 @@ var
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-kind({
+var DataGridListCardsSampleImageItem = kind({
 	name: "DataGridListCardsSampleImageItem",
 	classes: "g-sample-gridlistcards-imageitem",
 	components: [
@@ -44,7 +44,7 @@ kind({
 
 kind({
 	name: "g.sample.DataGridListCardsSampleItem",
-	kind: "DataGridListCardsSampleImageItem",
+	kind: DataGridListCardsSampleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/badge_check.png",
@@ -57,15 +57,15 @@ kind({
 	]
 });
 
-kind({
+var DataGridListCardsSampleCircleImageItem = kind({
 	name: "DataGridListCardsSampleCircleImageItem",
-	kind: "DataGridListCardsSampleImageItem",
+	kind: DataGridListCardsSampleImageItem,
 	classes: "g-sample-gridlistcards-circle-imageitem"
 });
 
 kind({
 	name: "g.sample.DataGridListCardsSampleCircleItem",
-	kind: "DataGridListCardsSampleCircleImageItem",
+	kind: DataGridListCardsSampleCircleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/badge_check.png",

@@ -13,7 +13,7 @@ var
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-kind({
+var RadioButtonItem = kind({
 	name: "RadioButtonItem",
 	kind: Item,
 	classes: "g-datalist-radiobutton-item",
@@ -45,7 +45,7 @@ kind({
 
 kind({
 	name: "g.sample.RadioButtonItem",
-	kind: "RadioButtonItem",
+	kind: RadioButtonItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/btn_radio.svg",
