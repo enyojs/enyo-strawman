@@ -6,12 +6,12 @@ var
 	ri = require('enyo/resolution'),
 
 	g = require('garnet'),
-	TimePickerPanel = require('garnet/TimePickerPanel'),
+	GarnetTimePickerPanel = require('garnet/TimePickerPanel'),
 	Panel = require('garnet/Panel');
 
 var TimePicker12Panel = kind({
 	name: "g.sample.TimePicker12Panel",
-	kind: TimePickerPanel,
+	kind: GarnetTimePickerPanel,
 	handlers: {
 		onOK: "tapOK",
 		onCancel: "tapCancel"
@@ -32,7 +32,7 @@ var TimePicker12Panel = kind({
 
 var TimePicker24Panel = kind({
 	name: "g.sample.TimePicker24Panel",
-	kind: TimePickerPanel,
+	kind: GarnetTimePickerPanel,
 	handlers: {
 		onOK: "onOK",
 		onCancel: "onCancel"

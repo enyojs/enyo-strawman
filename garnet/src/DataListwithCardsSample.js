@@ -10,7 +10,7 @@ var
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel');
 
-kind({
+var DataListCardsPanel = kind({
 	name: "g.sample.DataListCardsPanel",
 	kind: Panel,
 	knob: true,
@@ -38,7 +38,7 @@ kind({
 	]
 });
 
-kind({
+var DataListSmallCardsPanel = kind({
 	name: "g.sample.DataListSmallCardsPanel",
 	kind: Panel,
 	knob: true,
@@ -81,8 +81,8 @@ module.exports = kind({
 		{content: "< Data List with Cards Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Data List with Cards", classes: "g-sample-subheader"},
-		{name: "listPanel", kind: "g.sample.DataListCardsPanel", style: "position: relative; display: inline-block;"},
-		{name: "listPanel2", kind: "g.sample.DataListSmallCardsPanel", style: "border-radius: 100%; position: relative; display: inline-block; margin-left: " + ri.scale(10) + "px;"}
+		{name: "listPanel", kind: DataListCardsPanel, style: "position: relative; display: inline-block;"},
+		{name: "listPanel2", kind: DataListSmallCardsPanel, style: "border-radius: 100%; position: relative; display: inline-block; margin-left: " + ri.scale(10) + "px;"}
 	],
 	bindings: [
 		{from: ".collection", to: ".$.listPanel.collection"},

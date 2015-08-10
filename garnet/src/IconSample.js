@@ -10,7 +10,7 @@ var
 	Icon = require('garnet/Icon'),
 	Panel = require('garnet/Panel');
 
-kind({
+var IconPanel = kind({
 	name: "g.sample.IconPanel",
 	kind: Panel,
 	classes: "g-layout-absolute-wrapper",
@@ -36,7 +36,7 @@ module.exports = kind({
 		{content: "< Icon Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Icons", classes: "g-sample-subheader"},
-		{kind: "g.sample.IconPanel", style: "position: relative;"}
+		{kind: IconPanel, style: "position: relative;"}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

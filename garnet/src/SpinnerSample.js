@@ -9,7 +9,7 @@ var
 	Spinner = require('garnet/Spinner'),
 	Panel = require('garnet/Panel');
 
-kind({
+var SpinnerPanel = kind({
 	name: "g.sample.SpinnerPanel",
 	kind: Panel,
 	style: "border-radius: 50%; background-color: #000000;",
@@ -20,7 +20,7 @@ kind({
 	]
 });
 
-kind({
+var TextSpinnerPanel = kind({
 	name: "g.sample.TextSpinnerPanel",
 	kind: Panel,
 	style: "border-radius: 50%; background-color: #000000;",
@@ -39,12 +39,12 @@ module.exports = kind({
 		{style: "position: relative; height: 100%", components: [
 			{
 				name: "spinnerPanel",
-				kind: "g.sample.SpinnerPanel",
+				kind: SpinnerPanel,
 				style: "background-color: #000000; position: relative; display: inline-block; overflow: hidden;"
 			},
 			{
 				name: "textSpinnerPanel",
-				kind: "g.sample.TextSpinnerPanel",
+				kind: TextSpinnerPanel,
 				style: "background-color: #000000; position: relative; display: inline-block; overflow: hidden;"
 			}
 		]}

@@ -10,7 +10,7 @@ var
 	Toast = require('garnet/Toast'),
 	Panel = require('garnet/Panel');
 
-kind({
+var ToastPanel = kind({
 	name: "g.sample.ToastPanel",
 	kind: Panel,
 	classes: "g-layout-absolute-wrapper", // for button
@@ -36,7 +36,7 @@ module.exports = kind({
 		{content: "< Toast Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Toast", classes: "g-sample-subheader"},
-		{kind: "g.sample.ToastPanel", style: "position: relative;"}
+		{kind: ToastPanel, style: "position: relative;"}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

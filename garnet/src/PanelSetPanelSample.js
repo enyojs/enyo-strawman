@@ -9,7 +9,9 @@ var
 	g = require('garnet'),
 	Scroller = require('garnet/Scroller'),
 	Panel = require('garnet/Panel'),
-	PanelSet = require('garnet/PanelSet');
+	PanelSet = require('garnet/PanelSet'),
+
+	SampleDataListPanel = require('./DataListSample').DataListPanel;
 
 module.exports = kind({
 	name: "g.sample.PanelSetPanelSample",
@@ -27,10 +29,10 @@ module.exports = kind({
 					kind: PanelSet,
 					components: [
 						{kind: Panel, name: "p3", components: [
-							{name: "panelA1-1", kind: "g.sample.DataListPanel", title: true, titleContent: "1-1"}
+							{name: "panelA1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"}
 						]},
-						{name: "panelA2", kind: "g.sample.DataListPanel", title: true, titleContent: "2"},
-						{name: "panelA3", kind: "g.sample.DataListPanel", title: true, titleContent: "3"}
+						{name: "panelA2", kind: SampleDataListPanel, title: true, titleContent: "2"},
+						{name: "panelA3", kind: SampleDataListPanel, title: true, titleContent: "3"}
 					]
 				}
 			]
@@ -42,9 +44,9 @@ module.exports = kind({
 					kind: Panel,
 					components: [
 						{kind: PanelSet, components: [
-							{name: "panelB1-1", kind: "g.sample.DataListPanel", title: true, titleContent: "1-1"},
-							{name: "panelB1-2", kind: "g.sample.DataListPanel", title: true, titleContent: "1-2"},
-							{name: "panelB1-3", kind: "g.sample.DataListPanel", title: true, titleContent: "1-3"}
+							{name: "panelB1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"},
+							{name: "panelB1-2", kind: SampleDataListPanel, title: true, titleContent: "1-2"},
+							{name: "panelB1-3", kind: SampleDataListPanel, title: true, titleContent: "1-3"}
 						]}
 					]
 				}
@@ -58,9 +60,9 @@ module.exports = kind({
 					components: [
 						{kind: Panel, components: [
 							{kind: PanelSet, components: [
-								{name: "panelC1-1", kind: "g.sample.DataListPanel", title: true, titleContent: "1-1"},
-								{name: "panelC1-2", kind: "g.sample.DataListPanel", title: true, titleContent: "1-2"},
-								{name: "panelC1-3", kind: "g.sample.DataListPanel", title: true, titleContent: "1-3"}
+								{name: "panelC1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"},
+								{name: "panelC1-2", kind: SampleDataListPanel, title: true, titleContent: "1-2"},
+								{name: "panelC1-3", kind: SampleDataListPanel, title: true, titleContent: "1-3"}
 							]}
 						]}
 					]
@@ -79,10 +81,10 @@ module.exports = kind({
 					pageIndicator: true,
 					components: [
 						{kind: Panel, pageIndicatorFadeOut: false, name: "p3", components: [
-							{name: "panelD1-1", kind: "g.sample.DataListPanel", title: true, titleContent: "1-1"}
+							{name: "panelD1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"}
 						]},
-						{name: "panelD2", kind: "g.sample.DataListPanel", title: true, titleContent: "2"},
-						{name: "panelD3", kind: "g.sample.DataListPanel", title: true, titleContent: "3"}
+						{name: "panelD2", kind: SampleDataListPanel, title: true, titleContent: "2"},
+						{name: "panelD3", kind: SampleDataListPanel, title: true, titleContent: "3"}
 					]
 				}
 			]
@@ -94,9 +96,9 @@ module.exports = kind({
 					kind: Panel,
 					components: [
 						{kind: PanelSet, effect: "move-transition", pageIndicator: true, components: [
-							{name: "panelE1-1", kind: "g.sample.DataListPanel", title: true, titleContent: "1-1"},
-							{name: "panelE1-2", kind: "g.sample.DataListPanel", title: true, titleContent: "1-2"},
-							{name: "panelE1-3", kind: "g.sample.DataListPanel", title: true, titleContent: "1-3"}
+							{name: "panelE1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"},
+							{name: "panelE1-2", kind: SampleDataListPanel, title: true, titleContent: "1-2"},
+							{name: "panelE1-3", kind: SampleDataListPanel, title: true, titleContent: "1-3"}
 						]}
 					]
 				}
@@ -110,9 +112,9 @@ module.exports = kind({
 					components: [
 						{kind: Panel, components: [
 							{kind: PanelSet, effect: "move-transition", pageIndicator: true, components: [
-								{name: "panelF1-1", kind: "g.sample.DataListPanel", title: true, titleContent: "1-1"},
-								{name: "panelF1-2", kind: "g.sample.DataListPanel", title: true, titleContent: "1-2"},
-								{name: "panelF1-3", kind: "g.sample.DataListPanel", title: true, titleContent: "1-3"}
+								{name: "panelF1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"},
+								{name: "panelF1-2", kind: SampleDataListPanel, title: true, titleContent: "1-2"},
+								{name: "panelF1-3", kind: SampleDataListPanel, title: true, titleContent: "1-3"}
 							]}
 						]}
 					]
@@ -172,128 +174,26 @@ module.exports = kind({
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.collection = new Collection(this.data);
-			this.set("collection2", new Collection(this.generateRecords()));
+			this.set("collection", new Collection(this.generateRecords()));
 		};
 	}),
 	generateRecords: function () {
 		var records = [],
-			idx     = this.index || 0;
+			idx = 0,
+			title = ["Alejandra", "Marquez", "Barr", "Everett", "Crane", "Raymond", "Petersen", "Kristina", "Barbra", "Tracey"],
+			genre = ["Rock", "Pop", "Hiphop", "Rock", "Ballad"];
+
 		for (; records.length < 500; ++idx) {
-			var title = (idx % 8 === 0) ? " with long title" : "";
 			records.push({
-				text: "Item " + idx + title,
-				url: "@../assets/photo.png"
+				iconUrl: "@../assets/ic_dialog_alert.svg",
+				albumTitle: title[idx % title.length] + ((idx % 8 === 0) ? " with long title" : ""),
+				albumGenre: genre[idx % genre.length]
 			});
 		}
-		// update our internal index so it will always generate unique values
-		this.index = idx;
 		return records;
 	},
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);
 		return false;
-	},
-	data: [
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock.collection"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop.collection"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop.collection"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock.collection"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad.collection"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Alejandra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Marquez", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barr", albumGenre: "Hiphop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Everett", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Crane", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Raymond", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Petersen", albumGenre: "Pop"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Kristina", albumGenre: "Ballad"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Barbra", albumGenre: "Rock"},
-		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"}
-	]
+	}
 });

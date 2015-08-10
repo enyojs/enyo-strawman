@@ -13,7 +13,7 @@ var
 	PopupScroller = require('garnet/PopupScroller'),
 	Panel = require('garnet/Panel');
 
-kind({
+var ConfirmPopupPanel = kind({
 	name: "g.sample.ConfirmPopupPanel",
 	kind: Panel,
 	events: {
@@ -149,7 +149,7 @@ module.exports = kind({
 		{content: "< Confirm Popup Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Confirm with only Text/Scroll + Text /Icon+Title+Text/ Scorll + Icon + Title+ Text ", classes: "g-sample-subheader"},
-		{kind: "g.sample.ConfirmPopupPanel", style: "position: relative;", onResult: "result"},
+		{kind: ConfirmPopupPanel, style: "position: relative;", onResult: "result"},
 
 		{style: "position: fixed; width: 100%; min-height: +" + ri.scale(160) + "px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

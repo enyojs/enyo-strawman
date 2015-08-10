@@ -11,7 +11,7 @@ var
 	Popup = require('garnet/Popup'),
 	WheelSliderController = require('garnet/WheelSliderController');
 
-kind({
+var WheelSliderControllerPopup = kind({
 	name: "g.sample.WheelSliderControllerPopup",
 	kind: Panel,
 	events: {
@@ -43,7 +43,7 @@ kind({
 	}
 });
 
-kind({
+var WheelSliderControllerPanel = kind({
 	name: "g.sample.WheelSliderController",
 	kind: Panel,
 	events: {
@@ -86,7 +86,7 @@ kind({
 				onChanging: "showPopup"
 			},
 			components: [
-				{kind: "g.sample.WheelSliderControllerPopup"}
+				{kind: WheelSliderControllerPopup}
 			],
 			popupAnimationFinished: function() {
 				if (this.showing) {
@@ -194,7 +194,7 @@ module.exports = kind({
 		{content: "< Wheel Slider Controller Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Wheel Slider Panel", classes: "g-sample-subheader"},
-		{kind: "g.sample.WheelSliderController", onResult: "result"},
+		{kind: WheelSliderControllerPanel, onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

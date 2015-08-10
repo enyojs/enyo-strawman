@@ -14,8 +14,8 @@ var
 	Panel = require('garnet/Panel')
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-var CheckboxItem = kind({
-	name: "g.CheckboxItem",
+var CheckboxItemBase = kind({
+	name: "g.sample.CheckboxItemBase",
 	kind: Item,
 	classes: "g-sample-datalistcheckbox-checkbox-item",
 	published: {
@@ -44,9 +44,9 @@ var CheckboxItem = kind({
 	}
 });
 
-kind({
+var CheckboxItem = kind({
 	name: "g.sample.CheckboxItem",
-	kind: CheckboxItem,
+	kind: CheckboxItemBase,
 	mixins: [SelectionOverlaySupport],
 	selectionOverlayVerticalOffset: 53,
 	selectionOverlayHorizontalOffset: 20,
@@ -55,7 +55,7 @@ kind({
 	]
 });
 
-kind({
+var CheckableDataListPanel = kind({
 	name: "g.sample.CheckableDataListPanel",
 	kind: Panel,
 	events: {
@@ -72,7 +72,7 @@ kind({
 			multipleSelection: true,
 			style: "background-color: #000000;",
 			components: [
-				{kind: "g.sample.CheckboxItem", ontap: "tapItem"}
+				{kind: CheckboxItem, ontap: "tapItem"}
 			],
 			footerComponents: [
 				{style: "height: " + ri.scale(116) + "px;"}
@@ -129,7 +129,7 @@ module.exports = kind({
 		{content: "< Data List with Checkboxes Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Data List with Checkboxes", classes: "g-sample-subheader"},
-		{name: "checkableListPanel", kind: "g.sample.CheckableDataListPanel", style: "position: relative;", onResult: "result"},
+		{name: "checkableListPanel", kind: CheckableDataListPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

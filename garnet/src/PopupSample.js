@@ -13,7 +13,7 @@ var
 	Popup = require('garnet/Popup'),
 	Scroller = require('garnet/Scroller');
 
-kind({
+var PopupPanel = kind({
 	name: "g.sample.PopupPanel",
 	kind: Panel,
 	events: {
@@ -83,7 +83,7 @@ module.exports = kind({
 		{content: "< Popup Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Popup with contents", classes: "g-sample-subheader"},
-		{kind: "g.sample.PopupPanel", style: "position: relative;", onResult: "result"},
+		{kind: PopupPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},
