@@ -14,7 +14,7 @@ var
 	Panel = require('garnet/Panel');
 
 var IconBadgeItem = kind({
-	name: "IconBadgeItem",
+	name: "g.sample.IconBadgeItem",
 	kind: Item,
 	classes: "g-datalist-icon-badge-item",
 	published: {

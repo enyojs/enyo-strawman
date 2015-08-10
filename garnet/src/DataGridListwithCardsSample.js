@@ -13,7 +13,7 @@ var
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
 var DataGridListCardsImageItem = kind({
-	name: "DataGridListCardsImageItem",
+	name: "g.sample.DataGridListCardsImageItem",
 	classes: "g-sample-gridlistcards-imageitem",
 	components: [
 		{name: "image", kind: Image},
@@ -58,7 +58,7 @@ var DataGridListCardsItem = kind({
 });
 
 var DataGridListCardsCircleImageItem = kind({
-	name: "DataGridListCardsCircleImageItem",
+	name: "g.sample.DataGridListCardsCircleImageItem",
 	kind: DataGridListCardsImageItem,
 	classes: "g-sample-gridlistcards-circle-imageitem"
 });

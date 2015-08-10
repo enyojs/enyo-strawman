@@ -15,7 +15,7 @@ var
 	Panel = require('garnet/Panel');
 
 var DataIndexListItem = kind({
-	name: "DataIndexListItem",
+	name: "g.sample.DataIndexListItem",
 	kind: Item,
 	classes: "g-sample-indexlist-item",
 	published: {

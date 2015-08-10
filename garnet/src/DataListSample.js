@@ -18,7 +18,7 @@ var
 	Panel = require('garnet/Panel');
 
 var DataListItem = kind({
-	name: "g.DataListItem",
+	name: "g.sample.DataListItem",
 	kind: Item,
 	classes: "g-sample-datalist-item",
 	handlers: {
