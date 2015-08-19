@@ -45,6 +45,7 @@ module.exports = kind({
 				]},
 				{name: 'localePicker', kind: ExpandablePicker, noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
 					{content: 'Use Default Locale', active: true},
+					{content: 'am-ET'},
 					{content: 'ko-KR'},
 					{content: 'zh-TW'},
 					{content: 'fa-IR'},
@@ -84,6 +85,7 @@ module.exports = kind({
 			i18n.updateLocale(locale);
 			this.$.picker.setLocale(val);
 			this.$.disabledPicker.setLocale(val);
+			this.$.result.setContent("locale Changed to " + val);
 		}
 		return true;
 	},
