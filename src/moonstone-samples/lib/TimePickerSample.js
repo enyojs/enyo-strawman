@@ -78,14 +78,14 @@ module.exports = kind({
 			this.$.pickerTimeLinked.setLocale(val);
 			this.$.pickerTime.setLocale(val);
 			this.$.pickerDisabled.setLocale(val);
-			this.$.result.setContent('locale changed to ' + locale);
+			this.$.result.setContent(event.originator.name + 'changed to ' + locale);
 		}
 		return true;
 	},
 	timeChanged: function (sender, event) {
 		if (this.$.result && event.value){
-			var timeArray = event.value.toTimeString().split(':');
-			this.$.result.setContent(event.name + ' changed to ' + timeArray[0] + ': ' + timeArray[1]);
+			var time = event.value.toTimeString();
+			this.$.result.setContent(event.name + ' changed to ' + time);
 		}
 	},
 	dateChanged: function (sender, event) {
