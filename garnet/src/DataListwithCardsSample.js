@@ -1,12 +1,10 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
-	Image = require('enyo/Image'),
-
-	g = require('garnet'),
+	EnyoImage = require('enyo/Image'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel');
 
@@ -25,7 +23,7 @@ var DataListCardsPanel = kind({
 			components: [
 				{ontap: "showPopup", components: [
 					{name: "listItem", classes: "g-sample-datalistcards-item", components: [
-						{name: "iconUrl", kind: Image, style: "width: " + ri.scale(320) + "px; height: " + ri.scale(320) + "px;"}
+						{name: "iconUrl", kind: EnyoImage, style: "width: " + ri.scale(320) + "px; height: " + ri.scale(320) + "px;"}
 					]}
 				], bindings: [
 					{from: ".model.iconUrl", to: ".$.iconUrl.src"}
@@ -60,7 +58,7 @@ var DataListSmallCardsPanel = kind({
 			components: [
 				{ontap: "showPopup", components: [
 					{name: "listItem", classes: "g-sample-datalistsmallcards-item", components: [
-						{name: "iconUrl", kind: Image},
+						{name: "iconUrl", kind: EnyoImage},
 						{classes: "g-sample-datalistsmallcards-title", content: "title"}
 					]}
 				], bindings: [

@@ -1,10 +1,7 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
 	Arc = require('garnet/Arc'),
 	Panel = require('garnet/Panel');
 

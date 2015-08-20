@@ -22,7 +22,8 @@ var ImageItem = kind({
 		{from: 'model.text', to: 'caption'},
 		{from: 'model.subText', to: 'subCaption'},
 		{from: 'model.url', to: 'source'}
-	]});
+	]
+});
 
 var NoImageItem = kind({
 	kind: ImageItem,
@@ -51,7 +52,7 @@ var
 					kind: Button,
 					name: 'button',
 					style: 'position: relative; height: 100%; width: 100%;',
-					selectedClass: 'active',
+					selectedClass: 'active'
 				}
 			]
 		}
@@ -81,13 +82,17 @@ module.exports = kind({
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
 		{
-			kind: Panel, classes:'moon-6h', title:'Menu',
+			kind: Panel,
+			classes:'moon-6h',
+			title:'Menu',
 			components: [
 				{
 					kind: Scroller,
 					components: [
 						{
-							name: 'itemPicker', kind: ExpandablePicker, content: 'Items',
+							name: 'itemPicker',
+							kind: ExpandablePicker,
+							content: 'Items',
 							components: [
 								{content: 'Image Items', value: imageComponents, active: true},
 								{content: 'No-Image Items', value: noImageComponents},
@@ -96,28 +101,36 @@ module.exports = kind({
 							]
 						},
 						{
-							name: 'directionPicker', kind: ExpandablePicker, content: 'Direction',
+							name: 'directionPicker',
+							kind: ExpandablePicker,
+							content: 'Direction',
 							components: [
 								{content: 'Vertical', value: 'vertical', active: true},
 								{content: 'Horizontal', value: 'horizontal'}
 							]
 						},
 						{
-							name: 'dataTypePicker', kind: ExpandablePicker, content: 'Data',
+							name: 'dataTypePicker',
+							kind: ExpandablePicker,
+							content: 'Data',
 							components: [
 								{content: 'Collections/Models', value: 'EnyoData', active: true},
 								{content: 'JS Arrays/Objects', value: 'JS'}
 							]
 						},
 						{
-							name: 'selectionPicker', kind: ExpandablePicker, content: 'Selection',
+							name: 'selectionPicker',
+							kind: ExpandablePicker,
+							content: 'Selection',
 							components: [
 								{content: 'On', value: true},
 								{content: 'Off', value: false, active: true}
 							]
 						},
 						{
-							name: 'selectionTypePicker', kind: ExpandablePicker, content: 'Selection Type',
+							name: 'selectionTypePicker',
+							kind: ExpandablePicker,
+							content: 'Selection Type',
 							components: [
 								{content: 'Single', value: 'single', active: true},
 								{content: 'Multiple', value: 'multi'},
@@ -129,22 +142,25 @@ module.exports = kind({
 			]
 		},
 		{
-			kind: Panel, joinToPrev: true, title:'New Data List',
+			kind: Panel,
+			joinToPrev: true,
+			title:'New Data List',
 			headerComponents: [
 				{kind: Button, content:'Refresh', ontap:'refreshItems'}
 			],
 			components: [
-			{
-				name: 'list',
-				kind: NewDataList,
-				minItemHeight: 270,
-				minItemWidth: 180,
-				spacing: 20,
-				columns: 6,
-				rows: 1,
-				components: imageComponents
-			}
-		]}
+				{
+					name: 'list',
+					kind: NewDataList,
+					minItemHeight: 270,
+					minItemWidth: 180,
+					spacing: 20,
+					columns: 6,
+					rows: 1,
+					components: imageComponents
+				}
+			]
+		}
 	],
 	bindings: [
 		{from: 'collection', to: '$.list.collection'},

@@ -1,9 +1,7 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
 	GarnetDatePickerPanel = require('garnet/DatePickerPanel');
 
 var SampleDatePickerPanel = kind({

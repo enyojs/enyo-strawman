@@ -1,12 +1,11 @@
 var
 	kind = require('enyo/kind'),
-	options = require('enyo/options');
+	options = require('enyo/options'),
 	AccessibilitySupport = require('enyo/AccessibilitySupport'),
 	Button = require('enyo/Button'),
 	ButtonAccessibilitySupport = require('enyo/Button/ButtonAccessibilitySupport'),
 	Checkbox = require('enyo/Checkbox'),
 	CheckboxAccessibilitySupport = require('enyo/Checkbox/CheckboxAccessibilitySupport'),
-	Control = require('enyo/Control'),
 	Input = require('enyo/Input'),
 	InputAccessibilitySupport = require('enyo/Input/InputAccessibilitySupport'),
 	Popup = require('enyo/Popup'),

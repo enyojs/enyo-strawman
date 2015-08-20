@@ -1,13 +1,10 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
-	Image = require('enyo/Image'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
+	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
@@ -16,7 +13,7 @@ var DataGridListCardsImageItem = kind({
 	name: "g.sample.DataGridListCardsImageItem",
 	classes: "g-sample-gridlistcards-imageitem",
 	components: [
-		{name: "image", kind: Image},
+		{name: "image", kind: EnyoImage},
 		{name: "caption", classes: "caption"}
 	],
 	published: {
@@ -169,7 +166,7 @@ module.exports = kind({
 				url: {
 					"w320": "@../assets/320/photocard.png",
 					"w360": "@../assets/360/photocard.png"
-				},
+				}
 			});
 		}
 		// update our internal index so it will always generate unique values

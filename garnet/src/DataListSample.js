@@ -1,14 +1,10 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	ToolDecorator = require('enyo/ToolDecorator'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	Item = require('garnet/Item'),
 	Icon = require('garnet/Icon'),
 	DataList = require('garnet/DataList'),

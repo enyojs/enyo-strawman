@@ -1,12 +1,9 @@
+require('garnet');
+
 // dafult commandBar sample
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
 	Scroller = require('garnet/Scroller');

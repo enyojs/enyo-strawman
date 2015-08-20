@@ -1,12 +1,8 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	ConfirmPopup = require('garnet/ConfirmPopup'),
 	Button = require('garnet/Button'),
 	IconButton = require('garnet/IconButton'),

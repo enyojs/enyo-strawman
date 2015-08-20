@@ -1,10 +1,9 @@
-var 
+var
 	kind = require('enyo/kind'),
 	dispatcher = require('enyo/dispatcher');
 
-var 
-	Control = require('enyo/Control'),
-	Repeater = require('enyo/Repeater');
+var
+	Control = require('enyo/Control');
 
 var PositionSampleNested = kind({
 	name: "enyo.sample.PositionSampleNested",
@@ -38,7 +37,7 @@ module.exports = kind({
 	handlers: {"onmousemove": "mouseMoved"},
 	rendered: function () {
 		this.inherited(arguments);
-		enyo.makeBubble("mousemove", this);
+		dispatcher.makeBubble("mousemove", this);
 	},
 	mouseMoved: function () {
 		var p = dispatcher.getPosition();

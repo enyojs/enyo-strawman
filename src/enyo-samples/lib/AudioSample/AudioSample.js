@@ -1,10 +1,10 @@
-var 
+var
 	kind = require('enyo/kind'),
 	job = require('enyo/job'),
 	utils = require('enyo/utils');
 
-var 
-	Audio = require('enyo/Audio'),
+var
+	EnyoAudio = require('enyo/Audio'),
 	Button = require('enyo/Button'),
 	Popup = require('enyo/Popup'),
 	Select = require('enyo/Select');
@@ -15,7 +15,7 @@ module.exports = kind({
 	classes: "audio-sample",
 	components: [
 		{
-			kind: Audio,
+			kind: EnyoAudio,
 			onratechange: "rateChanged",
 			ontimeupdate: "timeChanged",
 			onFastforward: "playbackChanged",

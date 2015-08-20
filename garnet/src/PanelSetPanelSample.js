@@ -1,12 +1,9 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
-
-	g = require('garnet'),
 	Scroller = require('garnet/Scroller'),
 	Panel = require('garnet/Panel'),
 	PanelSet = require('garnet/PanelSet'),

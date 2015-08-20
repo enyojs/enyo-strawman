@@ -1,10 +1,8 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Collection = require('enyo/Collection'),
+var
 	Control = require('enyo/Control'),
-	NewDrawer = require('enyo/NewDrawer'),
 	Repeater = require('enyo/Repeater');
 
 module.exports = kind({

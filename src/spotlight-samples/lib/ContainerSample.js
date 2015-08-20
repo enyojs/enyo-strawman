@@ -1,19 +1,18 @@
+require('spotlight');
+
 var
 	kind = require('enyo/kind'),
 	Button = require('enyo/Button');
-
-var
-	Spotlight = require('spotlight');
 
 module.exports = kind({
 	name    : 'enyo.Spotlight.ContainerSample',
 	classes : 'spotlight-sample',
 	fit     : true,
-	
+
 	handlers: {
 		onSpotlightFocused: 'buttonFocused'
 	},
-	
+
 	components: [
 		{name: 'c1', spotlight: 'container', onSpotlightContainerEnter: 'enterContainer', onSpotlightContainerLeave: 'leaveContainer', components: [
 			{name: 'c1b1', kind: Button, spotlight: true, content: 'c1b1'},
