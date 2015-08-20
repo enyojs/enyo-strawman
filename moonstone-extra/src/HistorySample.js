@@ -264,8 +264,13 @@ module.exports = kind({
 			}
 		}
 	},
+	openMainDrawer: function () {
+		this.$.openMoreButton.hide();
+		this.$.partialDrawer.setOpen(true);
+	},
 	close: function () {
 		if (this.$.partialDrawer.getOpen()) {
+			this.$.openMoreButton.show();
 			this.$.partialDrawer.setOpen(false);
 		} else {
 			this.$.partialDrawer.setControlsOpen(false);

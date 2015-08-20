@@ -14,7 +14,6 @@ var
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	DataList = require('moonstone/DataList'),
 	Divider = require('moonstone/Divider'),
-	MoonHistory = require('moonstone/History'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
@@ -49,7 +48,7 @@ var LocaleItem = kind({
 
 var appRouter = kind({
 	kind: Router,
-	history: true,
+	useHistory: true,
 	routes: [
 		{path: ':sampleName/:locale', handler: 'handleRoute'},
 		{path: ':sampleName', handler: 'handleRoute'},
@@ -192,7 +191,6 @@ module.exports = kind({
 			sup.apply(this, arguments);
 
 			this.initializeThemes();
-			MoonHistory.set('enableBackHistoryAPI', true);
 		};
 	}),
 	createList: function () {
@@ -284,8 +282,6 @@ module.exports = kind({
 			// Enable the stylesheet
 			// this.enableStylesheet(s);
 
-			loc = this.get('location');
-			this.$.router.trigger({location: loc, change: true});
 			this.$.home.hide();
 			global.sample = this.createComponent({name: s, kind: this.samples[s]}).render();
 			console.log('%c%s Created and Launched', 'color:green;', s);
