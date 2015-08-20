@@ -84,7 +84,11 @@ module.exports = kind({
 	},
 	timeChanged: function (sender, event) {
 		if (this.$.result && event.value){
-			var time = event.value.toTimeString();
+			if (sender.localeValue) {
+				time = sender._tf.format(DateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();	
+			} else {
+				time = event.value.toTimeString();
+			}
 			this.$.result.setContent(event.name + ' changed to ' + time);
 		}
 	},
