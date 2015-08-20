@@ -85,7 +85,7 @@ module.exports = kind({
 			i18n.updateLocale(locale);
 			this.$.picker.setLocale(val);
 			this.$.disabledPicker.setLocale(val);
-			this.$.result.setContent("locale Changed to " + val);
+			this.$.result.setContent(inEvent.originator.name + ' changed to ' + val);
 		}
 		return true;
 	},
