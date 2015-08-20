@@ -16,7 +16,7 @@ var
 	Panel = require('garnet/Panel'),
 	ProgressBar = require('garnet/ProgressBar');
 
-kind({
+var ProgressBarPanel = kind({
 	name: "g.sample.ProgressBarPanel",
 	kind: Panel,
 	handlers: {
@@ -100,7 +100,7 @@ module.exports = kind({
 		{content: "< Progress Bar Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "ProgressBars", classes: "g-sample-subheader"},
-		{kind: "g.sample.ProgressBarPanel", style: "position: relative;"}
+		{kind: ProgressBarPanel, style: "position: relative;"}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

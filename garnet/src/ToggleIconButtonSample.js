@@ -11,7 +11,7 @@ var
 	ToggleIconButton = require('garnet/ToggleIconButton'),
 	Panel = require('garnet/Panel');
 
-kind({
+var ToggleIconButtonPanel = kind({
 	name: "g.sample.ToggleIconButtonPanel",
 	kind: Panel,
 	handlers: {
@@ -69,7 +69,7 @@ module.exports = kind({
 		{content: "< Toggle Icon Button Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Toggle Icon Buttons", classes: "g-sample-subheader"},
-		{kind: "g.sample.ToggleIconButtonPanel", style: "position: relative;", onResult: "result"},
+		{kind: ToggleIconButtonPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

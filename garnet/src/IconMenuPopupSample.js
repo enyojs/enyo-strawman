@@ -11,7 +11,7 @@ var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel');
 
-kind({
+var IconMenuPopupPanel = kind({
 	name: "g.sample.IconMenuPopupPanel",
 	kind: Panel,
 	events: {
@@ -104,7 +104,7 @@ module.exports = kind({
 		{content: "< IconMenu Popup Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "IconMenu with 1 button / 2 buttons / 3 buttons", classes: "g-sample-subheader"},
-		{kind: "g.sample.IconMenuPopupPanel", style: "position: relative;", onResult: "result"},
+		{kind: IconMenuPopupPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

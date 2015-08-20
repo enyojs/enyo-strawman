@@ -9,10 +9,10 @@ var
 	g = require('garnet'),
 	FormPickerButton = require('garnet/FormPickerButton'),
 	Panel = require('garnet/Panel'),
-	PickerPanel = require('garnet/PickerPanel'),
+	GarnetPickerPanel = require('garnet/PickerPanel'),
 	Popup = require('garnet/Popup');
 
-kind({
+var SamplePickerPanel = kind({
 	name: "g.sample.PickerPanel",
 	kind: Panel,
 	events: {
@@ -23,7 +23,7 @@ kind({
 			{name: "pickerButton", kind: FormPickerButton, style: "top: " + ri.scale(134) + "px;", ontap: "showPopup", content: "Click here!"},
 			{name: "pickerPopup", kind: Popup, effect: "depth-transition", components: [
 				{style: "background-color: #000000;position: relative;", classes: "g-common-width-height-fit g-layout-absolute-wrapper", components: [
-					{name: "pickerPanel", kind: PickerPanel, title: true, titleContent: "PickerTitle", ontap: "tapItem"}
+					{name: "pickerPanel", kind: GarnetPickerPanel, title: true, titleContent: "PickerTitle", ontap: "tapItem"}
 				]}
 			]}
 		]}
@@ -80,7 +80,7 @@ module.exports = kind({
 		{content: "< PickerPanel Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "PickerPanel", classes: "g-sample-subheader"},
-		{kind: "g.sample.PickerPanel", style: "position: relative;", onResult: "result"},
+		{kind: SamplePickerPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

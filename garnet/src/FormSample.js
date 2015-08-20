@@ -25,7 +25,7 @@ var
 	Scroller = require('garnet/Scroller'),
 	TimePickerPanel = require('garnet/TimePickerPanel');
 
-kind({
+var FormPanel = kind({
 	name: "g.sample.FormPanel",
 	kind: Panel,
 	events: {
@@ -494,7 +494,7 @@ module.exports = kind({
 		{content: "< Form Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Form Picker Buttons / Form Buttons / Form Inputs", classes: "g-sample-subheader"},
-		{kind: "g.sample.FormPanel", style: "position: relative;", onResult: "result"},
+		{kind: FormPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

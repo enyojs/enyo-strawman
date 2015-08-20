@@ -10,7 +10,7 @@ var
 	Checkbox = require('garnet/Checkbox'),
 	Panel = require('garnet/Panel');
 
-kind({
+var CheckboxPanel = kind({
 	name: "g.sample.CheckboxPanel",
 	kind: Panel,
 	events: {
@@ -53,7 +53,7 @@ module.exports = kind({
 		{content: "< Checkbox Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Checkboxes", classes: "g-sample-subheader"},
-		{kind: "g.sample.CheckboxPanel", style: "position: relative;", onResult: "result"},
+		{kind: CheckboxPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

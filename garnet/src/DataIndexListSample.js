@@ -14,8 +14,8 @@ var
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel');
 
-kind({
-	name: "DataIndexListSampleItem",
+var DataIndexListItem = kind({
+	name: "g.sample.DataIndexListItem",
 	kind: Item,
 	classes: "g-sample-indexlist-item",
 	published: {
@@ -44,7 +44,7 @@ kind({
 	}
 });
 
-kind({
+var DataIndexListPanel = kind({
 	name: "g.sample.DataIndexListPanel",
 	kind: Panel,
 	title: true,
@@ -64,7 +64,7 @@ kind({
 				]}
 			],
 			components: [
-				{kind: "DataIndexListSampleItem"}
+				{kind: DataIndexListItem}
 			],
 			footerComponents: [
 				{style: "width: 100%; height: " + ri.scale(93) + "px;", ontap: "preventSound"}
@@ -86,7 +86,7 @@ module.exports = kind({
 		{content: "< Data Index List Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Data Index List", classes: "g-sample-subheader"},
-		{name: "list", kind: "g.sample.DataIndexListPanel", pagesPerRound: 10, style: "position: relative;"}
+		{name: "list", kind: DataIndexListPanel, pagesPerRound: 10, style: "position: relative;"}
 	],
 	bindings: [
 		{from: ".collection", to: ".$.list.collection"}

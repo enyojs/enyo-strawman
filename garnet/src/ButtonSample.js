@@ -9,7 +9,7 @@ var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel');
 
-kind({
+var ButtonPanel = kind({
 	name: "g.sample.ButtonPanel",
 	kind: Panel,
 	events: {
@@ -44,7 +44,7 @@ module.exports = kind({
 		{content: "< Button Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Buttons", classes: "g-sample-subheader"},
-		{kind: "g.sample.ButtonPanel", style: "position: relative;", onResult: "result"},
+		{kind: ButtonPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},
