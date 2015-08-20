@@ -59,8 +59,8 @@ module.exports = kind({
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
 	bindings: [
-		{from: '.value', to: '.$.pickerDateLinked.value', oneWay:false},
-		{from: '.value', to: '.$.pickerTimeLinked.value', oneWay:false}
+		{from: 'value', to: '$.pickerDateLinked.value', oneWay:false},
+		{from: 'value', to: '$.pickerTimeLinked.value', oneWay:false}
 	],
 	create: function (){
 		FittableRows.prototype.create.apply(this, arguments);
