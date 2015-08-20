@@ -28,7 +28,7 @@ module.exports = kind({
 				{
 					kind: PanelSet,
 					components: [
-						{kind: Panel, name: "p3", components: [
+						{kind: Panel, components: [
 							{name: "panelA1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"}
 						]},
 						{name: "panelA2", kind: SampleDataListPanel, title: true, titleContent: "2"},
@@ -80,7 +80,7 @@ module.exports = kind({
 					effect: "move-transition",
 					pageIndicator: true,
 					components: [
-						{kind: Panel, pageIndicatorFadeOut: false, name: "p3", components: [
+						{kind: Panel, pageIndicatorFadeOut: false, components: [
 							{name: "panelD1-1", kind: SampleDataListPanel, title: true, titleContent: "1-1"}
 						]},
 						{name: "panelD2", kind: SampleDataListPanel, title: true, titleContent: "2"},
