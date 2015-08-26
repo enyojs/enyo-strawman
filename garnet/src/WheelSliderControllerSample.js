@@ -187,7 +187,7 @@ var WheelSliderControllerPanel = kind({
 	}
 });
 
-module.exports = kind({
+var WheelSliderControllerSample = module.exports = kind({
 	name: "g.sample.WheelSliderControllerSample",
 	classes: "enyo-unselectable garnet g-sample",
 	components: [
@@ -209,3 +209,5 @@ module.exports = kind({
 		return false;
 	}
 });
+
+WheelSliderControllerSample.WheelSliderControllerPanel = WheelSliderControllerPanel;
