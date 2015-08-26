@@ -4,7 +4,7 @@ var
 var
 	Button = require('enyo/Button'),
 	Group = require('enyo/Group'),
-	Image = require('enyo/Image');
+	EnyoImage = require('enyo/Image');
 
 
 /*
@@ -28,7 +28,7 @@ module.exports = kind({
 		]},
 		{content: "Image Button", classes: "section"},
 		{kind: Button, content: "Image Button", classes: "image-button", ontap: "buttonTapped", components: [
-			{kind: Image, src: "http://enyojs.com/img/enyo-logo.png", alt: "Enyo Logo"}
+			{kind: EnyoImage, src: "http://enyojs.com/img/enyo-logo.png", alt: "Enyo Logo"}
 		]},
 		{name: "results", classes: "results"}
 	],

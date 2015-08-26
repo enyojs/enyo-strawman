@@ -1,13 +1,9 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
-	GarnetTimePickerPanel = require('garnet/TimePickerPanel'),
-	Panel = require('garnet/Panel');
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
+	GarnetTimePickerPanel = require('garnet/TimePickerPanel');
 
 var TimePicker12Panel = kind({
 	name: "g.sample.TimePicker12Panel",

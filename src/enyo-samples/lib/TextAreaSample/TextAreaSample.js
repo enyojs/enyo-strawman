@@ -1,8 +1,7 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Anchor = require('enyo/Anchor'),
+var
 	Button = require('enyo/Button'),
 	TextArea = require('enyo/TextArea');
 

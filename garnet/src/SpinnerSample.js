@@ -1,11 +1,8 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	Spinner = require('garnet/Spinner'),
 	Panel = require('garnet/Panel');
 

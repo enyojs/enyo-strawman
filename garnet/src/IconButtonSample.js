@@ -1,15 +1,10 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	IconButton = require('garnet/IconButton'),
-	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel');
 
 var IconButtonPanel = kind({

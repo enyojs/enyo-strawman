@@ -1,15 +1,11 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
-	Image = require('enyo/Image'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
+	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
@@ -19,7 +15,7 @@ var DataGridListImageItem = kind({
 	classes: "g-sample-gridlist-imageitem",
 	components: [{
 		name: "image",
-		kind: Image
+		kind: EnyoImage
 	}, {
 		name: "caption",
 		classes: "caption"

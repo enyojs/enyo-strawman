@@ -273,8 +273,7 @@ module.exports = kind({
 		this.checkLocale();
 	},
 	openSample: function () {
-		var s = this.get('sample'),
-			loc;
+		var s = this.get('sample');
 
 		// this.disableAllStylesheets();
 

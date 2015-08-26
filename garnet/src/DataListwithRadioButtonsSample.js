@@ -1,13 +1,10 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),

@@ -1,8 +1,7 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Button = require('enyo/Button'),
+var
 	Control = require('enyo/Control'),
 	Repeater = require('enyo/Repeater');
 
