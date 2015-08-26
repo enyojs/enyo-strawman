@@ -43,12 +43,7 @@
 // When inside a selection-enabled container, pad the content to make space for the checkbox
 .moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem {
 	&.horizontal-gridList-item {
-		padding-left: 99px;
-
-		.enyo-locale-right-to-left & {
-			padding-left: @moon-spotlight-outset;
-			padding-right: 99px;
-		}
+		.padding-start-end (99px, @moon-spotlight-outset);
 	}
 	&.horizontal-gridList-image-item {
 		padding-left: 0;
