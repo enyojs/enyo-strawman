@@ -5,6 +5,8 @@ var
 	Control = require('enyo/Control'),
 	Signals = require('enyo/Signals');
 
+require('enyo/pageVisibility');
+
 module.exports = kind({
 	name: "enyo.sample.PageVisibilitySample",
 	kind: Control,
@@ -14,9 +16,9 @@ module.exports = kind({
 	],
 	rendered: function () {
 		this.inherited(arguments);
-		this.visibilitychanged();
+		this.visibilitychanged(undefined, {hidden:false});
 	},
-	visibilitychanged: function(){
-		this.$.text.setContent(this.$.text.content + (Date().toString()) + (enyo.hidden ? ": hidden" : ": visible") + "<br>");
+	visibilitychanged: function(inSender, inEvent){
+		this.$.text.setContent(this.$.text.content + (Date().toString()) + (inEvent.hidden ? ": hidden" : ": visible") + "<br>");
 	}
 });
