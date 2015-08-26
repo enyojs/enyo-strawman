@@ -92,12 +92,12 @@ module.exports = kind({
 		], {owner: this});
 	},
 	prevTapped: function (sender, ev) {
-		var panels = ev.originator.parent.parent;
+		var panels = ev.originator.isDescendantOf(this.$.lightHorizontal) ? this.$.lightHorizontal : this.$.lightVertical;
 		panels.previous();
 		return true;
 	},
 	nextTapped: function (sender, ev) {
-		var panels = ev.originator.parent.parent;
+		var panels = ev.originator.isDescendantOf(this.$.lightHorizontal) ? this.$.lightHorizontal : this.$.lightVertical;
 		if ((panels.name == 'lightHorizontal' && this.multipleHorizontal) || (panels.name == 'lightVertical' && this.multipleVertical)) {
 			this.pushMultiplePanels(panels);
 		} else {
