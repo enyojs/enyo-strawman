@@ -6,7 +6,8 @@ var
 	FittableRows = require('layout/FittableRows');
 
 var
-	ilib = require('enyo-ilib');
+	ilib = require('enyo-ilib'),
+	DateFactory = require('enyo-ilib/DateFactory');
 
 var
 	BodyText = require('moonstone/BodyText'),
@@ -29,8 +30,9 @@ module.exports = kind({
 				{kind: TimePicker, name: 'pickerTime', noneText: 'Pick a Time', content: 'Time', meridiemEnable: true, onChange: 'timeChanged'},
 				{kind: Button, name: 'buttonReset', content: 'Reset Time', small: true, ontap: 'resetTapped'},
 				{kind: TimePicker, name: 'pickerDisabled', meridiemEnable: true, disabled: true, noneText: 'Disabled Time Picker', content: 'Disabled Time'},
-				{kind: ExpandablePicker, name: 'pickerLocale', noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
+				{kind: ExpandablePicker, name: 'localePicker', noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
 					{content: 'Use Default Locale', active: true},
+					{content: 'am-ET'},
 					{content: 'ko-KR'},
 					{content: 'zh-TW'},
 					{content: 'fa-IR'},
@@ -57,13 +59,13 @@ module.exports = kind({
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
 	bindings: [
-		{from: '.value', to: '.$.pickerDateLinked.value', oneWay:false},
-		{from: '.value', to: '.$.pickerTimeLinked.value', oneWay:false}
+		{from: 'value', to: '$.pickerDateLinked.value', oneWay:false},
+		{from: 'value', to: '$.pickerTimeLinked.value', oneWay:false}
 	],
 	create: function (){
 		FittableRows.prototype.create.apply(this, arguments);
 		if (!ilib) {
-			this.$.pickerLocale.hide();
+			this.$.localePicker.hide();
 			this.log('iLib not present -- hiding locale picker');
 		}
 		this.set('value', new Date('Mar 09 2014 01:59'));
@@ -77,14 +79,18 @@ module.exports = kind({
 			this.$.pickerTimeLinked.setLocale(val);
 			this.$.pickerTime.setLocale(val);
 			this.$.pickerDisabled.setLocale(val);
-			this.$.result.setContent('locale changed to ' + locale);
+			this.$.result.setContent(event.originator.name + ' changed to ' + locale);
 		}
 		return true;
 	},
 	timeChanged: function (sender, event) {
 		if (this.$.result && event.value){
-			var timeArray = event.value.toTimeString().split(': ');
-			this.$.result.setContent(event.name + ' changed to ' + timeArray[0] + ': ' + timeArray[1]);
+			if (sender.localeValue) {
+				time = sender._tf.format(DateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();	
+			} else {
+				time = event.value.toTimeString();
+			}
+			this.$.result.setContent(event.name + ' changed to ' + time);
 		}
 	},
 	dateChanged: function (sender, event) {
