@@ -37,6 +37,7 @@
     "../appinfo.json",
     "../icon.png",
     "../largeIcon.png",
-    "assets/**/*.*"
+    "assets/**/*.*",
+    "../resources/**/*.*"
   ]
 }
