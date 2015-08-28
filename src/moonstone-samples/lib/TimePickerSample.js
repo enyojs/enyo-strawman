@@ -7,7 +7,7 @@ var
 
 var
 	ilib = require('enyo-ilib'),
-	DateFactory = require('enyo-ilib/DateFactory');
+	dateFactory = require('enyo-ilib/DateFactory');
 
 var
 	BodyText = require('moonstone/BodyText'),
@@ -84,9 +84,10 @@ module.exports = kind({
 		return true;
 	},
 	timeChanged: function (sender, event) {
+		var time;
 		if (this.$.result && event.value){
 			if (sender.localeValue) {
-				time = sender._tf.format(DateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();	
+				time = sender._tf.format(dateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();	
 			} else {
 				time = event.value.toTimeString();
 			}
