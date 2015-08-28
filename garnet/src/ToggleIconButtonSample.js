@@ -22,11 +22,11 @@ var ToggleIconButtonPanel = kind({
 		{classes: "g-layout-absolute-center", style: "width: " + ri.scale(280) + "px; height: " + ri.scale(230) + "px;", components: [
 			{content: "Toggle Icon Buttons : ", style: "margin-left: " + ri.scale(10) + "px; font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
 			{tag: "br"},
-			{kind: ToggleIconButton, src: "@../assets/switch_default_oi_transparent.svg", classes: "g-common-toggle-icon-button-size-normal", active: true},
-			{kind: ToggleIconButton, src: "@../assets/switch_default_transparent.svg", classes: "g-common-toggle-icon-button-size-normal"},
-			{kind: ToggleIconButton, src: "@../assets/switch_default_oi_transparent.svg", classes: "g-common-toggle-icon-button-size-normal", pending: true, ontap: "togglePending"},
-			{kind: ToggleIconButton, src: "@../assets/switch_default_transparent.svg", classes: "g-common-toggle-icon-button-size-normal", disabled: true},
-			{content: "Grouped Icon Buttons : ", style: "font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
+			{kind: ToggleIconButton, src: "@../assets/switch_default_oi_transparent.svg", classes: "g-sample-toggle-icon-button-size", active: true},
+			{kind: ToggleIconButton, src: "@../assets/switch_default_transparent.svg", classes: "g-sample-toggle-icon-button-size"},
+			{kind: ToggleIconButton, src: "@../assets/switch_default_oi_transparent.svg", classes: "g-sample-toggle-icon-button-size", pending: true, ontap: "togglePending"},
+			{kind: ToggleIconButton, src: "@../assets/switch_default_transparent.svg", classes: "g-sample-toggle-icon-button-size", disabled: true},
+ 			{content: "Grouped Icon Buttons : ", style: "font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
 			{kind: Group, onActivate:"iconGroupActivated", components: [
 				{kind: ToggleIconButton, src: "@../assets/switch_default_transparent.svg", classes: "g-common-toggle-icon-button-size-normal", active: true},
 				{kind: ToggleIconButton, src: "@../assets/switch_default_oi_transparent.svg", classes: "g-common-toggle-icon-button-size-normal"},

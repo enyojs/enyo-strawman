@@ -13,7 +13,6 @@ var samples = {
 	ConfirmPopupSample              : require('./ConfirmPopupSample'),
 	DataGridListSample              : require('./DataGridListSample'),
 	DataGridListwithCardsSample     : require('./DataGridListwithCardsSample'),
-	DataIndexListSample             : require('./DataIndexListSample'),
 	DataListSample                  : require('./DataListSample'),
 	DataListwithCardsSample         : require('./DataListwithCardsSample'),
 	DataListwithCheckboxesSample    : require('./DataListwithCheckboxesSample'),
