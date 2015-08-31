@@ -17,7 +17,7 @@
     "src/*.less"
   ],
   "main": "index.js",
-  "moduleDir": "lib",
+  "moduleDir": "src",
   "filename": "index.js",
   "version": "0.0.1",
   "description": "Collection of Enyo lib samples for Quality Assurance with Garnet",
