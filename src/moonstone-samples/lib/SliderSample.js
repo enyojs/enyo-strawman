@@ -30,30 +30,33 @@ module.exports = kind({
 			{kind: Divider, content: 'Slider 2: Disabled, Bound to Slider 1'},
 			{name: 'slider2', kind: Slider, disabled: true},
 
-			{kind: Divider, content: 'Slider 3: Custom Popup Content'},
-			{name: 'slider3', kind: Slider, classes: 'rgb-sample-slider',
+			{kind: Divider, content: 'Slider 3: Enable JumpIncrement'},
+			{name: 'slider3', kind: Slider, showPercentage: false, enableJumpIncrement: true, value: 25, bgProgress: 35, onChanging: 'sliderChanging', onChange: 'sliderChanged'},
+
+			{kind: Divider, content: 'Slider 4: Custom Popup Content'},
+			{name: 'slider4', kind: Slider, classes: 'rgb-sample-slider',
 				popupColor: 'rgb(0, 0, 25)', value: 25, bgProgress: 150, min: 0, max: 255,
 				onChanging: 'customChanging', onChange: 'customChanged', onAnimateFinish: 'customAnimateFinish'
 			},
 
-			{kind: Divider, content: 'Slider 4: Negative Values'},
-			{name: 'slider4', kind: Slider,
+			{kind: Divider, content: 'Slider 5: Negative Values'},
+			{name: 'slider5', kind: Slider,
 				value: 0, min: -100, max: 100, showPercentage: false, enableJumpIncrement: true, onChanging: 'sliderChanging', onChange: 'sliderChanged'
 			},
 
-			{kind: Divider, content: 'Slider 5, 6, 7, 8: Vertical Orientation'},
+			{kind: Divider, content: 'Slider 6, 7, 8, 9: Vertical Orientation'},
 			{classes: 'moon-hspacing', components: [
-				{name: 'slider5', kind: Slider, orientation: 'vertical', style: 'height: 300px', onChanging: 'sliderChanging', onChange: 'sliderChanged'},
+				{name: 'slider6', kind: Slider, orientation: 'vertical', style: 'height: 300px', onChanging: 'sliderChanging', onChange: 'sliderChanged'},
 				{classes: 'moon-2h'},
-				{name: 'slider6', kind: Slider,
+				{name: 'slider7', kind: Slider,
 					value: 0, min: -100, max: 100, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, decrementIcon: 'arrowlargedown', incrementIcon: 'arrowlargeup', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
 				},
 				{classes: 'moon-2h'},
-				{name: 'slider7', kind: Slider,
+				{name: 'slider8', kind: Slider,
 					value: 5, min: 1, max: 10, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, jumpIncrement: '10%', decrementIcon: 'minus', incrementIcon: 'plus', popupSide: 'left', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
 				},
 				{classes: 'moon-2h'},
-				{name: 'slider8', kind: Slider,
+				{name: 'slider9', kind: Slider,
 					value: 5, min: 0, max: 7, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, jumpIncrement: 2, decrementIcon: 'minus', incrementIcon: 'plus', onChanging: 'sliderChanging', onChange: 'sliderChanged'
 				}
 			]},
@@ -114,7 +117,7 @@ module.exports = kind({
 	},
 	rendered: function () {
 		FittableRows.prototype.rendered.apply(this, arguments);
-		this.updateSlider3Popup(this.$.slider3.getValue());
+		this.updateSlider4Popup(this.$.slider4.getValue());
 	},
 	//* @protected
 	changeValue: function (sender, event) {
@@ -167,20 +170,20 @@ module.exports = kind({
 		this.$.result.setContent(sender.name + ' changed to ' + Math.round(sender.getValue()) + '.');
 	},
 	customChanging: function (sender, event) {
-		this.updateSlider3Popup(event.value);
+		this.updateSlider4Popup(event.value);
 		this.sliderChanging(sender, event);
 	},
 	customChanged: function (sender, event) {
-		this.updateSlider3Popup(sender.getValue());
+		this.updateSlider4Popup(sender.getValue());
 		this.sliderChanged(sender, event);
 	},
 	customAnimateFinish: function (sender, event) {
-		this.updateSlider3Popup(event.value);
+		this.updateSlider4Popup(event.value);
 	},
-	updateSlider3Popup: function (inValue) {
+	updateSlider4Popup: function (inValue) {
 		var color = 'rgb(0, 0, ' + Math.round(inValue) + ')';
-		this.$.slider3.setPopupContent(color);
-		this.$.slider3.setPopupColor(color);
+		this.$.slider4.setPopupContent(color);
+		this.$.slider4.setPopupColor(color);
 	},
 	changeLockbar: function (sender, event) {
 		var ck = this.$.lockBarSetting.getChecked();
