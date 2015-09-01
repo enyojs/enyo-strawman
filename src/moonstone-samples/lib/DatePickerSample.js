@@ -82,7 +82,7 @@ module.exports = kind({
 		if (ilib) {
 			var locale = event.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
-			i18n.updateLocale(locale);
+			i18n.updateLocale(val);
 			this.$.picker.setLocale(val);
 			this.$.disabledPicker.setLocale(val);
 			this.$.result.setContent(event.originator.name + ' changed to ' + val);
