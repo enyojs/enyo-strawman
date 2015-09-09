@@ -31,6 +31,33 @@ var ControlPanel = kind({
 	components: controls
 });
 
+var ControlContainer = kind({
+	kind: Control,
+	classes: 'control-container',
+	panelId: 0,
+	components: [
+		{kind: Control, components: [
+			{kind: IconButton, icon: 'arrowlargedown', ontap: 'prevIconTapped'},
+			{kind: IconButton, icon: 'arrowlargeup', ontap: 'nextIconTapped'}
+		]},
+		{kind: ControlPanel, name: 'controlPanel', classes: 'control-panel'}
+	],
+	bindings: [
+		{from: 'panelId', to: '$.controlPanel.index', transform: function (id) {
+			// clamping id such that we have a valid value
+			return id < controls.length ? id : controls.length - 1;
+		}}
+	],
+	prevIconTapped: function (sender, ev) {
+		this.$.controlPanel.previous();
+		return true;
+	},
+	nextIconTapped: function (sender, ev) {
+		this.$.controlPanel.next();
+		return true;
+	}
+});
+
 module.exports = kind({
 	name: 'moon.sample.LightPanelsSample',
 	classes: 'moon enyo-fit enyo-unselectable moon-light-panels-sample',
@@ -61,13 +88,7 @@ module.exports = kind({
 				}
 			],
 			clientComponents: [
-				{kind: Control, classes: 'control-container', components: [
-					{kind: Control, components: [
-						{kind: IconButton, icon: 'arrowlargedown', ontap: 'prevIconTapped'},
-						{kind: IconButton, icon: 'arrowlargeup', ontap: 'nextIconTapped'}
-					]},
-					{kind: ControlPanel, classes: 'control-panel', index: id < controls.length ? id : controls.length - 1}
-				]},
+				{kind: ControlContainer, panelId: id},
 				{kind: Scroller, classes: 'panel-scroller', components: [
 					{kind: Item, content: 'Item One', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Two', ontap: 'nextTapped'},
@@ -98,14 +119,6 @@ module.exports = kind({
 	},
 	nextTapped: function (sender, ev) {
 		this.pushSinglePanel();
-		return true;
-	},
-	prevIconTapped: function (sender, ev) {
-		this.$.lightPanels.previous();
-		return true;
-	},
-	nextIconTapped: function (sender, ev) {
-		this.$.lightPanels.next();
 		return true;
 	}
 });
