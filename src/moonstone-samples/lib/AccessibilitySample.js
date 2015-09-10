@@ -42,24 +42,19 @@ module.exports = kind({
 				{content: 'Content and Icon'},
 				{kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped'}
 			]},
-			{name: 'checkItem', kind: Item, classes: 'moon-hspacing', ontap: 'buttonTapped', components: [
+			{name: 'checkItem', kind: Item, accessibilityRole: 'checkbox', classes: 'moon-hspacing', ontap: 'buttonTapped', components: [
 				{content: 'Content and Checkbox'},
 				{name: 'checkbox', kind: Checkbox, spotlight:false, checked: true}
 			]},
 			{classes: 'moon-1v'},
 			{kind: Control, tag: 'br'},
 			{kind: Divider, content: 'Case 3: Non content'},
-			{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped'},
-			{kind: IconButton, src: '@../assets/icon-list.png', small: false, ontap: 'buttonTapped'}
+			{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped', accessibilityLabel: 'drawer'},
+			{kind: IconButton, src: '@../assets/icon-list.png', small: false, ontap: 'buttonTapped', accessibilityLabel: 'icon list'}
 		]},
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'No changes yet'}
 	],
-	rendered: function () {
-		Control.prototype.rendered.apply(this, arguments);
-		this.$.checkItem.setAttribute('role', 'checkbox');
-		this.$.checkItem.setAttribute('aria-checked', this.$.checkbox.getChecked());
-	},
 	buttonTapped: function (sender, event) {
 		var result;
 		if (sender.get('accessibilityDisabled')) {
@@ -72,7 +67,6 @@ module.exports = kind({
 		this.$.console.setContent(result);
 		if (sender == this.$.checkItem) {
 			this.$.checkbox.setChecked(!this.$.checkbox.getChecked());
-			this.$.checkItem.setAttribute('aria-checked', this.$.checkbox.getChecked());
 		}
 	},
 	labelButtonTapped: function (sender, event) {
@@ -81,9 +75,6 @@ module.exports = kind({
 			control = Object.keys(this.$);
 		for (i = 0; i < control.length; ++i) {
 			this.$[control[i]].set('accessibilityLabel', this.labelText);
-			if (this.$[control[i]] == this.$.checkItem) {
-				this.$[control[i]].setAttribute('role', 'checkbox');
-			}
 		}
 	},
 	hintButtonTapped: function (sender, event) {
@@ -92,9 +83,6 @@ module.exports = kind({
 			control = Object.keys(this.$);
 		for (i = 0; i < control.length; ++i) {
 			this.$[control[i]].set('accessibilityHint', this.hintText);
-			if (this.$[control[i]] == this.$.checkItem) {
-				this.$[control[i]].setAttribute('role', 'checkbox');
-			}
 		}
 	},
 	disabledTapped: function (sender, event) {
@@ -103,9 +91,14 @@ module.exports = kind({
 			control = Object.keys(this.$);
 		for (i = 0; i < control.length; ++i) {
 			this.$[control[i]].set('accessibilityDisabled', sender.value ? true : false);
-			if (this.$[control[i]] == this.$.checkItem) {
-				this.$[control[i]].setAttribute('role', 'checkbox');
-			}
 		}
-	}
+	},
+
+	// Accessibility
+
+	ariaObservers: [
+		{path:'$.checkbox.checked', method: function() {
+			this.$.checkItem.setAriaAttribute('aria-checked', this.$.checkbox.checked);
+		}}
+	]
 });
