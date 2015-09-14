@@ -79,14 +79,10 @@ module.exports = kind({
 		}
 	},
 	setLocale: function(sender, event){
-		if (ilib) {
-			var locale = event.selected.content,
-				val = (locale == 'Use Default Locale') ? null : locale;
-			i18n.updateLocale(val);
-			this.$.picker.setLocale(val);
-			this.$.disabledPicker.setLocale(val);
-			this.$.result.setContent(event.originator.name + ' changed to ' + val);
-		}
+		var locale = event.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
+		i18n.updateLocale(locale);
+		this.$.result.setContent(event.originator.name + ' changed to ' + ilib.getLocale());
 		return true;
 	},
 	setDate: function() {

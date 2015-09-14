@@ -230,7 +230,7 @@ module.exports = kind({
 			this.$.localePopup.hide();
 		}
 		this.locales.find(function(elem) { return elem.get('locale') == newLocale; }).set('selected', true);
-		i18n.updateLocale(newLocale);
+		i18n.updateLocale(newLocale == 'local' ? null : newLocale);
 		this.$.router.trigger({location: this.get('location'), change: true});
 	},
 	sampleChanged: function (was, is) {

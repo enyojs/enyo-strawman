@@ -66,10 +66,9 @@ module.exports = kind({
 		}
 	},
 	setLocale: function(inSender, inEvent){
-		var locale = inEvent.selected.content,
-			val = (locale == 'Use Default Locale') ? null : locale;
+		var locale = inEvent.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
 		updateLocale(locale);
-		this.$.clock.setLocale(val);
 		return true;
 	},
 	setTime: function() {
