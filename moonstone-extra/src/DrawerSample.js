@@ -60,10 +60,10 @@ module.exports = kind({
 						{title: 'First Panel', components: [
 							{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [
 								{kind: ExpandablePicker, onChange: 'pickerChangedImg', content: 'Select Image', components: [
-									{content: 'Music',value: '@../assets/drawer_icon.png'},
-									{content: 'LG', value: '@../assets/lg.png'},
-									{content: 'HTML5', value: '@../assets/html5.png'},
-									{content: 'CSS3', value: '@../assets/css3.png'},
+									{content: 'Music',value: 'src/moonstone-samples/assets/drawer_icon.png'},
+									{content: 'LG', value: 'src/moonstone-samples/assets/lg.png'},
+									{content: 'HTML5', value: 'src/moonstone-samples/assets/html5.png'},
+									{content: 'CSS3', value: 'src/moonstone-samples/assets/css3.png'},
 									{content: 'Default', value: '', active: true}
 								]},
 								{kind: ExpandablePicker, onChange: 'pickerChangedIcon', content: 'Select Icon', components: [
