@@ -14,7 +14,7 @@ gulp.task('jshint', lint);
 
 function lint () {
 	return gulp
-		.src(['./src/**/*.js', './moonstone-extra/src/**/*.js', './garnet/src/**/*.js'])
+		.src(['./src/**/*.js', './moonstone-extra/src/**/*.js', './garnet/src/**/*.js', './sunstone/src/**/*.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish, {verbose: true}))
 		.pipe(jshint.reporter('fail'));

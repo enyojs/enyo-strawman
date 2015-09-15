@@ -1,0 +1,47 @@
+/* ContextualPopupsample */
+
+.contextual-popup-scroller {
+}
+
+.contextual-popup {
+}
+
+.sun-selectiveItem {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	white-space: nowrap;
+	width: 100%;
+	padding: 0px 16px;
+	font-size: 18px;
+	color: #000000;
+	min-height: 48px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.sun-selectiveItem-contentWrapper {
+}
+
+.sun-selectiveItem[pressed]{
+	background-color: #e5e5e5;
+}
+
+.groupWrapper{
+	border-radius:5px;
+}
+
+.first-item {
+	border-radius: 3px 3px 0 0;
+}
+
+.last-item {
+	border: none;
+	border-radius: 0 0 3px 3px;
+}

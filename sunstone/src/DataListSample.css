@@ -1,0 +1,51 @@
+/* DataListSample */
+
+.data-repeater-sample, .data-repeater-sample .repeater-item, .data-repeater-sample .name-wrapper, .data-repeater-sample .repeater-item span {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.data-repeater-sample .repeater-item {
+	width: 100%;
+	height: 100px;
+	color: #FFFFFF;
+	border-bottom: 1px solid #e6e6e6;
+	position: relative;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+.data-repeater-sample .repeater-item.down {
+	background-color: #dfe0e1;
+}
+.data-repeater-sample .img-wrapper .enyo-image {
+	width: 50px;
+	height: 50px;
+}
+
+.data-repeater-sample .name-wrapper {
+	display: table;
+	table-layout: fixed;
+	//height: 100px;
+	padding: 0 10px;
+	width:100%;
+}
+.data-repeater-sample .contents-area {
+	display: table-cell;
+	vertical-align: middle;
+	padding:0 0 0 24px;
+}
+.data-repeater-sample .repeater-item .name {
+	padding-bottom: 4px;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 18px;
+	color:#000000;
+	text-overflow:ellipsis;
+}
+.img-wrapper {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	width: 96px;
+}
