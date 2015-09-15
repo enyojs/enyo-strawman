@@ -4,5 +4,6 @@
 
 .moon-scroller-sample-2d-scroller .moon-button {
 	display: inline-block;
-	margin: 190px;
+	margin: 185px;
+	min-width: 200px;
 }
