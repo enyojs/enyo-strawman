@@ -51,8 +51,8 @@ module.exports = kind({
 			this.$.lightHorizontal.createComponent(infoHorizontal, {owner: this});
 			this.$.lightVertical.createComponent(infoVertical, {owner: this});
 
-			this.$.lightHorizontal.set('index', 0);
-			this.$.lightVertical.set('index', 0);
+			this.$.lightHorizontal.set('index', startIndex);
+			this.$.lightVertical.set('index', startIndex);
 		};
 	}),
 	generatePanelInfo: function (id) {
