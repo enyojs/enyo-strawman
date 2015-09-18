@@ -9,7 +9,7 @@ var
 
 module.exports = kind({
 	name: 'sun.sample.DataGridListSample',
-	classes: 'enyo-fit data-grid-sample',
+	classes: 'enyo-fit data-grid-sample enyo-unselectable',
 	components: [
 		{name: 'gridList', spacing: 6, minWidth: 100, minHeight: 150, kind: DataGridList, components: [
 			{

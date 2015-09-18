@@ -42,18 +42,16 @@ var SelectiveItem = kind({
 	bindings: [
 		{from: 'content', to: '$.itemContent.content'}
 	],
-	pressedChanged: function() {
-		this.setAttribute('pressed', this.pressed ? 'pressed' : '');
-	},
 	eventDown: function(inSender,inEvent) {
-		this.set('pressed', true);
+		this.addClass('pressed');
+		return true;
 	},
 	eventUp: function(inSender,inEvent) {
-		this.set('pressed', false);
+		this.removeClass('pressed');
+		return true;
 	},
 	tap: function(inSender,inEvent) {
 		inEvent.preventDefault();
-		this.set('pressed', false);
 		if (!this.disabled) {
 			playFeedback();
 			if (!this.getActive()) {

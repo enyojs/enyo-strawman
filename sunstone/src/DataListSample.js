@@ -113,28 +113,40 @@ var data = [
 	{ classes: 'repeater-item', imageSrc: '@../assets/ic_list_ring.png',      firstName: 'Lori', lastName: 'Nolan' }
 ];
 
+var ListItem = kind({
+	kind: Control,
+	classes: 'sun-datalist-item',
+	handlers: {
+		ondown: 'down',
+		onup: 'up',
+		onleave: 'up',
+		ontap: 'tap'
+	},
+	components: [
+		{name: 'iconImage', kind: Img, sizing: 'cover', classes: 'icon-image'},
+		{name: 'firstName', kind: Control, classes: 'name'}
+	],
+	bindings: [
+		{from: '.model.imageSrc', to: '.$.iconImage.src'},
+		{from: '.model.firstName', to: '.$.firstName.content'}
+	],
+	down: function (inSender, inEvent) {
+		inSender.addClass('down');
+	},
+	up: function (inSender, inEvent) {
+		inSender.removeClass('down');
+	},
+	tap: function (inSender, inEvent) {
+		playFeedback();
+	}
+});
 
 module.exports = kind({
-	name: 'enyo.sample.DataListSample',
+	name: 'sun.sample.DataListSample',
 	kind: Control,
-	classes: 'data-list-sample data-repeater-sample enyo-fit',
+	classes: 'data-list-sample enyo-fit enyo-unselectable',
 	components: [
-		{name: 'repeater', kind: DataList, components: [
-			{ondown: 'down', onup: 'up', onleave: 'up', ontap: 'itemTapped', components: [
-				{classes: 'name-wrapper', components: [
-					{classes:'img-wrapper', tag:'span', components: [
-						{name: 'iconImage', kind: Img}
-					]},
-					{classes: 'contents-area', components: [
-						{name: 'firstName',/*mixins: ['sun.EllipsisSupport']*/classes: 'name'}
-					]}
-				]}
-			], bindings: [
-				{from: '.model.imageSrc', to: '.$.iconImage.src'},
-				{from: '.model.firstName', to: '.$.firstName.content'},
-				{from: '.model.classes', to: '.classes'}
-			]}
-		]}
+		{name: 'repeater', kind: DataList, components: [{kind: ListItem}]}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.repeater.collection'}
@@ -147,16 +159,7 @@ module.exports = kind({
 			this.populateList();
 			sup.apply(this, arguments);
 		};
-	}),
-	down: function(inSender, inEvent) {
-		inSender.addClass('down');
-	},
-	up: function(inSender, inEvent) {
-		inSender.removeClass('down');
-	},
-	itemTapped: function(inSender, inEvent) {
-		playFeedback();
-	}
+	})
 });
 
 module.exports.data = data;
