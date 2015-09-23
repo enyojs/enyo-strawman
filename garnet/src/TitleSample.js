@@ -1,16 +1,13 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	Button = require('garnet/Button'),
 	Scroller = require('garnet/Scroller'),
 	Panel = require('garnet/Panel');
 
-kind({
+var TitlePanel = kind({
 	name: "g.sample.TitlePanel",
 	kind: Panel,
 	handlers: {
@@ -52,7 +49,7 @@ module.exports = kind({
 		{content: "< Title ( + BodyText ) Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Title with a scrollable content area", classes: "g-sample-subheader"},
-		{kind: "g.sample.TitlePanel", style: "position: relative;", onResult: "result"},
+		{kind: TitlePanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

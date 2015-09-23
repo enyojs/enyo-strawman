@@ -1,13 +1,9 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	ConfirmPopup = require('garnet/ConfirmPopup'),
-	Popup = require('garnet/Popup'),
 	FormButton = require('garnet/FormButton'),
 	FormInput = require('garnet/FormInput'),
 	FormLabel = require('garnet/FormLabel'),
@@ -16,7 +12,7 @@ var
 	Panel = require('garnet/Panel'),
 	ProgressBar = require('garnet/ProgressBar');
 
-kind({
+var ProgressBarPanel = kind({
 	name: "g.sample.ProgressBarPanel",
 	kind: Panel,
 	handlers: {
@@ -100,7 +96,7 @@ module.exports = kind({
 		{content: "< Progress Bar Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "ProgressBars", classes: "g-sample-subheader"},
-		{kind: "g.sample.ProgressBarPanel", style: "position: relative;"}
+		{kind: ProgressBarPanel, style: "position: relative;"}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

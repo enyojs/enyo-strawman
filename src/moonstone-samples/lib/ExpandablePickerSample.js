@@ -62,7 +62,7 @@ module.exports = kind({
 						{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
 						{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 						{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
-						{kind: DayPicker, noneText: "Pick a Day", content: "Day Picker"},
+						{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
 						{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 						{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
 							{bindings: [
@@ -72,6 +72,11 @@ module.exports = kind({
 						{kind: ExpandablePicker, content: 'Initially Hidden Items Picker', renderItemsOnShow: true, components: [
 							{content: 'Item 1'},
 							{content: 'Item 2', active: true},
+							{content: 'Item 3'}
+						]},
+						{kind: ExpandablePicker, content: 'No None Text', noneText: '', components: [
+							{content: 'Item 1'},
+							{content: 'Item 2'},
 							{content: 'Item 3'}
 						]}
 					]}
@@ -118,7 +123,7 @@ module.exports = kind({
 							{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
 							{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 							{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
-							{kind: DayPicker, noneText: "Pick a Day", content: "Day Picker"},
+							{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
 							{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 							{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
 								{bindings: [
@@ -128,6 +133,11 @@ module.exports = kind({
 							{kind: ExpandablePicker, content: 'Initially Hidden Items Picker', renderItemsOnShow: true, components: [
 								{content: 'Item 1'},
 								{content: 'Item 2', active: true},
+								{content: 'Item 3'}
+							]},
+							{kind: ExpandablePicker, content: 'No None Text', noneText: '', components: [
+								{content: 'Item 1'},
+								{content: 'Item 2'},
 								{content: 'Item 3'}
 							]}
 						]}

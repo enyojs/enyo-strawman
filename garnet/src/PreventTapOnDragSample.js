@@ -1,11 +1,7 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
+require('garnet');
 
-	g = require('garnet'),
-	Panel = require('garnet/Panel');
+var
+	kind = require('enyo/kind');
 
 module.exports = kind({
 	name: "g.sample.PreventTapOnDragSample",

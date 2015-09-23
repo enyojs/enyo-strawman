@@ -4,6 +4,9 @@ var
 	updateLocale = i18n.updateLocale;
 
 var
+	Locale = require('enyo-ilib/Locale');
+
+var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows');
 
@@ -110,11 +113,13 @@ module.exports = kind({
 	},
 
 	setLocale: function(inSender, inEvent){
-		var locale = inEvent.selected.content,
-			val = (locale == 'Use Default Locale') ? null : locale;
+		var locale = inEvent.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
+		// auto-triggers update to correctly configured/written widgets
 		updateLocale(locale);
-		this.$.calendar.setLocale(val);
-		this.$.picker.setLocale(val);
+		// egregious misuse of now-deprecated widget/api to avoid needing to rewrite the entire
+		// widget at this time
+		this.$.calendar.set('locale', new Locale());
 
 		this.df = new DateFmt({
 			type: 'datetime',

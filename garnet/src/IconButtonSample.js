@@ -1,18 +1,13 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	IconButton = require('garnet/IconButton'),
-	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel');
 
-kind({
+var IconButtonPanel = kind({
 	name: "g.sample.IconButtonPanel",
 	kind: Panel,
 	events: {
@@ -53,7 +48,7 @@ module.exports = kind({
 		{content: "< Icon Button Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Icon Buttons", classes: "g-sample-subheader"},
-		{kind: "g.sample.IconButtonPanel", style: "position: relative;", onResult: "result"},
+		{kind: IconButtonPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

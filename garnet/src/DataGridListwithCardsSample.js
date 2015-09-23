@@ -1,22 +1,19 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
-	Image = require('enyo/Image'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
+	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-kind({
-	name: "DataGridListCardsSampleImageItem",
+var DataGridListCardsImageItem = kind({
+	name: "g.sample.DataGridListCardsImageItem",
 	classes: "g-sample-gridlistcards-imageitem",
 	components: [
-		{name: "image", kind: Image},
+		{name: "image", kind: EnyoImage},
 		{name: "caption", classes: "caption"}
 	],
 	published: {
@@ -42,9 +39,9 @@ kind({
 	}
 });
 
-kind({
-	name: "g.sample.DataGridListCardsSampleItem",
-	kind: "DataGridListCardsSampleImageItem",
+var DataGridListCardsItem = kind({
+	name: "g.sample.DataGridListCardsItem",
+	kind: DataGridListCardsImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/badge_check.png",
@@ -57,15 +54,15 @@ kind({
 	]
 });
 
-kind({
-	name: "DataGridListCardsSampleCircleImageItem",
-	kind: "DataGridListCardsSampleImageItem",
+var DataGridListCardsCircleImageItem = kind({
+	name: "g.sample.DataGridListCardsCircleImageItem",
+	kind: DataGridListCardsImageItem,
 	classes: "g-sample-gridlistcards-circle-imageitem"
 });
 
-kind({
-	name: "g.sample.DataGridListCardsSampleCircleItem",
-	kind: "DataGridListCardsSampleCircleImageItem",
+var DataGridListCardsCircleItem = kind({
+	name: "g.sample.DataGridListCardsCircleItem",
+	kind: DataGridListCardsCircleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/badge_check.png",
@@ -79,8 +76,8 @@ kind({
 	]
 });
 
-kind({
-	name: "g.sample.DataGridListCardsSamplePanel",
+var DataGridListCardsPanel = kind({
+	name: "g.sample.DataGridListCardsPanel",
 	kind: Panel,
 	title: true,
 	titleContent: "Title",
@@ -100,7 +97,7 @@ kind({
 			scrollerOptions: {maxHeight: ri.scale(370) + "px"},
 			style: "width: " + ri.scale(212) + "px; height: " + ri.scale(320) + "px; padding-top: " + ri.scale(6) + "px; margin: auto; background-color: #000000;",
 			components: [
-				{ kind: "g.sample.DataGridListCardsSampleItem" }
+				{kind: DataGridListCardsItem}
 			]
 		}
 	],
@@ -109,8 +106,8 @@ kind({
 	]
 });
 
-kind({
-	name: "g.sample.DataGridListCardsCircleSamplePanel",
+var DataGridListCardsCirclePanel = kind({
+	name: "g.sample.DataGridListCardsCirclePanel",
 	kind: Panel,
 	title: true,
 	titleContent: "Title",
@@ -130,7 +127,7 @@ kind({
 			scrollerOptions: {maxHeight: ri.scale(370) + "px"},
 			style: "width: " + ri.scale(212) + "px; height: " + ri.scale(320) + "px; padding-top: " + ri.scale(6) + "px; margin: auto; background-color: #000000;",
 			components: [
-				{ kind: "g.sample.DataGridListCardsSampleCircleItem" }
+				{kind: DataGridListCardsCircleItem}
 			]
 		}
 	],
@@ -146,8 +143,8 @@ module.exports = kind({
 		{content: "< Data Grid List with Cards Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Data Grid List with Cards", classes: "g-sample-subheader"},
-		{name: "gridList", kind: "g.sample.DataGridListCardsSamplePanel", style: "position: relative; display: inline-block; margin-right: " + ri.scale(10) + "px"},
-		{name: "gridListCircle", kind: "g.sample.DataGridListCardsCircleSamplePanel", style: "position: relative; display: inline-block;"}
+		{name: "gridList", kind: DataGridListCardsPanel, style: "position: relative; display: inline-block; margin-right: " + ri.scale(10) + "px"},
+		{name: "gridListCircle", kind: DataGridListCardsCirclePanel, style: "position: relative; display: inline-block;"}
 	],
 	bindings: [
 		{from: ".collection", to: ".$.gridList.collection"},
@@ -169,7 +166,7 @@ module.exports = kind({
 				url: {
 					"w320": "@../assets/320/photocard.png",
 					"w360": "@../assets/360/photocard.png"
-				},
+				}
 			});
 		}
 		// update our internal index so it will always generate unique values

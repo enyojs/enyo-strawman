@@ -1,11 +1,8 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	MenuCheckbox = require('garnet/MenuCheckbox'),
 	MenuItem = require('garnet/MenuItem'),
 	MenuItem = require('garnet/MenuItem'),
@@ -14,7 +11,7 @@ var
 	Panel = require('garnet/Panel'),
 	Popup = require('garnet/Popup');
 
-kind({
+var MenuScrollerPanel = kind({
 	name: "g.sample.MenuScrollerPanel",
 	kind: Panel,
 	handlers: {
@@ -63,7 +60,7 @@ module.exports = kind({
 		{content: "< Menu Scroller Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Menu Scroller", classes: "g-sample-subheader"},
-		{kind: "g.sample.MenuScrollerPanel", style: "position: relative;", onResult: "result"},
+		{kind: MenuScrollerPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

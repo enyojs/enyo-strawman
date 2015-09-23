@@ -30,7 +30,7 @@ module.exports = kind({
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{kind: Divider, content: 'Action Overlay'},
-			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, placeholder: Img.placeholder, caption: 'position-bottom', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'position-bottom', ontap: 'itemTapped',
 				overlayShowing: 'spotlight', overlayPosition: 'bottom', overlayComponents: [
 					{kind: Icon, icon: 'play', ontap: 'badgeTapped'}
 				]

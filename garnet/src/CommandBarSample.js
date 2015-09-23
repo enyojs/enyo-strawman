@@ -1,17 +1,14 @@
+require('garnet');
+
 // dafult commandBar sample
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
 	Scroller = require('garnet/Scroller');
 
-kind({
+var DefaultCommandBarPanel = kind({
 	name: "g.sample.DefaultCommandBarPanel",
 	kind: Panel,
 	events: {
@@ -40,7 +37,7 @@ kind({
 });
 
 // single commandBar sample
-kind({
+var SingleCommandBarPanel = kind({
 	name: "g.sample.SingleCommandBarPanel",
 	kind: Panel,
 	events: {
@@ -68,7 +65,7 @@ kind({
 });
 
 // custom commandBar sample
-kind({
+var CustomCommandBarPanel = kind({
 	name: "g.sample.CustomCommandBarPanel",
 	kind: Panel,
 	events: {
@@ -113,17 +110,17 @@ module.exports = kind({
 		{style: "position: relative; height: 100%;", components: [
 			{
 				name: "commandBar1",
-				kind: "g.sample.DefaultCommandBarPanel",
+				kind: DefaultCommandBarPanel,
 				style: "background-color: #000000; position: relative; display: inline-block; overflow: hidden;"
 			},
 			{
 				name: "commandBar2",
-				kind: "g.sample.SingleCommandBarPanel",
+				kind: SingleCommandBarPanel,
 				style: "background-color: #000000; position: relative; display: inline-block; margin-left: " + ri.scale(10) + "px; overflow: hidden;"
 			},
 			{
 				name: "commandBar3",
-				kind: "g.sample.CustomCommandBarPanel",
+				kind: CustomCommandBarPanel,
 				style: "background-color: #000000; position: relative; display: inline-block; margin-left: " + ri.scale(10) + "px; overflow: hidden;"
 			}
 		]},

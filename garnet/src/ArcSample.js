@@ -1,14 +1,11 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
 	Arc = require('garnet/Arc'),
 	Panel = require('garnet/Panel');
 
-kind({
+var ArcPanel = kind({
 	name: "g.sample.ArcPanel",
 	kind: Panel,
 	style: "position: relative; border-radius: 50%; background-color: #000000;",
@@ -45,7 +42,7 @@ module.exports = kind({
 		{content: "< Arc Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Arc", classes: "g-sample-subheader"},
-		{kind: "g.sample.ArcPanel"}
+		{kind: ArcPanel}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

@@ -5,7 +5,6 @@ var
     Scroller = require('enyo/Scroller');
 
 var
-    ResBundle = require('enyo-ilib/ResBundle'),
     Address = require('enyo-ilib/Address');
 
 var
@@ -14,7 +13,7 @@ var
 
 module.exports = kind({
     name: 'ilib.sample.AddressParsing',
-    kind: Scroller,     
+    kind: Scroller,
     components: [
         {style: 'margin: 10px;', components: [
             {kind: ChooseLocale, name: 'localeSelector'},
@@ -32,7 +31,7 @@ module.exports = kind({
             {name: 'rtlResult', allowHtml: true, content: '-', style: 'padding: 10px'}
         ]}
     ],
-        
+
     calcFormat: function (inSender, inEvent) {
         // Formatting
         var parsedAddress = new Address(this.$.address.getValue());

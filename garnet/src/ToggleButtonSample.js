@@ -1,16 +1,13 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
-
-	g = require('garnet'),
 	ToggleButton = require('garnet/ToggleButton'),
 	Panel = require('garnet/Panel');
 
-kind({
+var ToggleButtonPanel = kind({
 	name: "g.sample.ToggleButtonPanel",
 	kind: Panel,
 	events: {
@@ -44,7 +41,7 @@ module.exports = kind({
 		{content: "< Toggle Button Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Toggle Buttons", classes: "g-sample-subheader"},
-		{kind: "g.sample.ToggleButtonPanel", style: "position: relative;", onResult: "result"},
+		{kind: ToggleButtonPanel, style: "position: relative;", onResult: "result"},
 
 		{style: "position: fixed; width: 100%; min-height: +" + ri.scale(160) + "px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

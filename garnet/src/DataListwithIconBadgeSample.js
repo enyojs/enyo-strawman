@@ -1,20 +1,17 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
-
-	g = require('garnet'),
 	Item = require('garnet/Item'),
 	Icon = require('garnet/Icon'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel');
 
 var IconBadgeItem = kind({
-	name: "IconBadgeItem",
+	name: "g.sample.IconBadgeItem",
 	kind: Item,
 	classes: "g-datalist-icon-badge-item",
 	published: {

@@ -1,6 +1,6 @@
 .moon-button-sample-wrapper .moon-button-caption-decorator,
-.moon-button-sample-group button,
-.moon-button-sample-wrapper > button {
+.moon-button-sample-group .moon-button,
+.moon-button-sample-wrapper > .moon-button {
 	margin: 20px;
 }
 
@@ -9,7 +9,7 @@
 	margin: 20px 0px 0px 20px;
 }
 
-.moon-button-sample.visible-tap-area .moon-button:after {
+.moon-button-sample.visible-tap-area .moon-button:before{
 	background: rgba(0, 100, 200, 0.2);
 	border: 1px solid rgba(0, 100, 200, 0.4);
 }

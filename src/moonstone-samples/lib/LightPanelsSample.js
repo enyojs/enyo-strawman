@@ -4,9 +4,59 @@ var
 
 var
 	Button = require('moonstone/Button'),
+	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	LightPanels = require('moonstone/LightPanels'),
 	Scroller = require('moonstone/Scroller');
+
+var controls = [
+	{kind: Item, content: 'Control Item 1'},
+	{kind: Item, content: 'Control Item 2'},
+	{kind: Item, content: 'Control Item 3'},
+	{kind: Item, content: 'Control Item 4'},
+	{kind: Item, content: 'Control Item 5'},
+	{kind: Item, content: 'Control Item 6'},
+	{kind: Item, content: 'Control Item 7'},
+	{kind: Item, content: 'Control Item 8'},
+	{kind: Item, content: 'Control Item 9'}
+];
+
+var ControlPanel = kind({
+	kind: LightPanels,
+	cacheViews: false,
+	popOnBack: false,
+	wrap: true,
+	orientation: LightPanels.Orientation.VERTICAL,
+	direction: LightPanels.Direction.BACKWARDS,
+	components: controls
+});
+
+var ControlContainer = kind({
+	kind: Control,
+	classes: 'control-container',
+	panelId: 0,
+	components: [
+		{kind: Control, components: [
+			{kind: IconButton, icon: 'arrowlargedown', ontap: 'prevIconTapped'},
+			{kind: IconButton, icon: 'arrowlargeup', ontap: 'nextIconTapped'}
+		]},
+		{kind: ControlPanel, name: 'controlPanel', classes: 'control-panel'}
+	],
+	bindings: [
+		{from: 'panelId', to: '$.controlPanel.index', transform: function (id) {
+			// clamping id such that we have a valid value
+			return id < controls.length ? id : controls.length - 1;
+		}}
+	],
+	prevIconTapped: function (sender, ev) {
+		this.$.controlPanel.previous();
+		return true;
+	},
+	nextIconTapped: function (sender, ev) {
+		this.$.controlPanel.next();
+		return true;
+	}
+});
 
 module.exports = kind({
 	name: 'moon.sample.LightPanelsSample',
@@ -28,7 +78,7 @@ module.exports = kind({
 		panels.pushPanel({
 			classes: 'light-panel',
 			panelId: 'panel-' + id,
-			title: 'Panel ' + id,
+			title: 'This is the extended and long title of panel ' + id,
 			headerComponents: [
 				{
 					kind: Button,
@@ -38,7 +88,8 @@ module.exports = kind({
 				}
 			],
 			clientComponents: [
-				{kind: Scroller, style: 'height:800px', components: [
+				{kind: ControlContainer, panelId: id},
+				{kind: Scroller, classes: 'panel-scroller', components: [
 					{kind: Item, content: 'Item One', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Two', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Three', ontap: 'nextTapped'},

@@ -1,18 +1,15 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
-
-	g = require('garnet'),
 	FormPickerButton = require('garnet/FormPickerButton'),
-	MultiPickerPanel = require('garnet/MultiPickerPanel'),
+	GarnetMultiPickerPanel = require('garnet/MultiPickerPanel'),
 	Panel = require('garnet/Panel'),
 	Popup = require('garnet/Popup');
 
-kind({
+var SampleMultiPickerPanel = kind({
 	name: "g.sample.MultiPickerPanel",
 	kind: Panel,
 	handlers: {
@@ -27,7 +24,7 @@ kind({
 		{name: "pickerPopup", kind: Popup, effect: "depth-transition", components: [
 			{
 				name: "multipicker",
-				kind: MultiPickerPanel,
+				kind: GarnetMultiPickerPanel,
 				title: true,
 				titleContent: "MultiPickerTitle"
 			}
@@ -103,7 +100,7 @@ module.exports = kind({
 		{content: "< MultiPickerPanel Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "MultiPickerPanel", classes: "g-sample-subheader"},
-		{kind: "g.sample.MultiPickerPanel", style: "position: relative;", onResult: "result"},
+		{kind: SampleMultiPickerPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

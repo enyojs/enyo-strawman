@@ -27,14 +27,14 @@ module.exports = kind({
                 {fit: true}
             ]},
             {tag: "br"},
-            
+
             {content: rb.getString("Length"), classes: "ilib-onyx-sample-divider"},
             {kind: Group, defaultKind: Button, name: "length", onActivate: "buttonActivated", components: [
                 {content: "Short", active: true, name:"short"},
                 {content: "Medium"},
                 {content: "Long"}
             ]},
-            
+
             {content: rb.getString("(or) Parts"), classes: "ilib-onyx-sample-divider"},
             {classes: "namepart", components: [
                 {kind: Checkbox, name: "prefixCbox", content: "Prefix ", onchange:"checkboxChanged"},
@@ -63,7 +63,7 @@ module.exports = kind({
             {name: "rtlResult", fit: true, content: "-", style: "padding: 10px"}
         ]}
     ],
- 
+
     buttonActivated: function(inSender, inEvent) {
 
         if (this.$.length.getActive().content === 'Short') {
@@ -90,7 +90,7 @@ module.exports = kind({
     checkboxChanged: function(inSender, inEvent) {
         if (!this.$.prefixCbox.getChecked() && !this.$.givenCbox.getChecked() && !this.$.middleCbox.getChecked() &&
             !this.$.familyCbox.getChecked() && !this.$.suffixCbox.getChecked()) {
-            this.$.short.setActive(true);
+            this.$['short'].setActive(true);
         } else {
             this.$.length.setActive(false);
         }
@@ -102,7 +102,7 @@ module.exports = kind({
 
         var nameLength = this.$.length.getActive().content;
         var parts = [];
-    
+
         if (this.$.prefixCbox.getChecked()) {
             parts.push("p");
         }
@@ -122,7 +122,7 @@ module.exports = kind({
         var options = {
             locale : this.$.localeSelector.getValue()
         };
-            
+
         if (nameLength) {
             options.style = nameLength;
         }
@@ -130,7 +130,7 @@ module.exports = kind({
         if (parts.length > 0) {
             options.components = parts.join('');
         }
-                
+
         var n = {
             prefix: this.$.prefixInput.getValue(),
             givenName: this.$.givenInput.getValue(),
@@ -142,7 +142,7 @@ module.exports = kind({
         // Formatting
         var name = new Name(n);
         var fmt = new NameFmt(options);
-        var postFmtData = "The name is: " + fmt.format(name); 
+        var postFmtData = "The name is: " + fmt.format(name);
         // Output results
         this.$.rtlResult.setContent(postFmtData);
     }

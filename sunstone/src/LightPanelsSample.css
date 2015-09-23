@@ -1,0 +1,68 @@
+.sun-light-panels-sample .sun-light-panels-options {
+	position: fixed;
+	width: 100%;
+	background-color: white;
+	border-radius: 0 0 100px 100px;
+	z-index: 1;
+	font-size: 16px;
+}
+
+.sun-light-panels-sample .options {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	-webkit-box-pack: center; /* support safari */
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    height: 60px;
+}
+
+.sun-light-panels-sample .options .sun-checkbox-item {
+	display: inline-block;
+}
+
+.sun-light-panels-sample .enyo-light-panels.vertical {
+	left: 50%;
+}
+
+.sun-light-panels-sample .light-panel {
+	border: 2px solid white;
+}
+
+.sun-light-panels-sample .light-panel > * {
+	text-align: center;
+	font-weight: bold;
+}
+
+.sun-light-panels-sample .light-panel .label {
+	font-size: 36px;
+}
+
+.sun-light-panels-sample .light-panel > * {
+	position: absolute;
+}
+
+/* horizontal orientation */
+.sun-light-panels-sample .enyo-light-panels.horizontal .light-panel > * {
+	bottom: 50%;
+}
+
+.sun-light-panels-sample .enyo-light-panels.horizontal .light-panel .label {
+	left: 50%;
+}
+
+.sun-light-panels-sample .enyo-light-panels.horizontal .light-panel .enyo-tool-decorator.previous {
+	left: 0;
+}
+
+.sun-light-panels-sample .enyo-light-panels.horizontal .light-panel .enyo-tool-decorator.next {
+	right: 0;
+}

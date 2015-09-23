@@ -1,16 +1,12 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	Icon = require('garnet/Icon'),
 	Panel = require('garnet/Panel');
 
-kind({
+var IconPanel = kind({
 	name: "g.sample.IconPanel",
 	kind: Panel,
 	classes: "g-layout-absolute-wrapper",
@@ -36,7 +32,7 @@ module.exports = kind({
 		{content: "< Icon Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Icons", classes: "g-sample-subheader"},
-		{kind: "g.sample.IconPanel", style: "position: relative;"}
+		{kind: IconPanel, style: "position: relative;"}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

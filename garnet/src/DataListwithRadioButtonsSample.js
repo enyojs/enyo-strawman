@@ -1,20 +1,17 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-kind({
-	name: "RadioButtonItem",
+var RadioButtonItemBase = kind({
+	name: "g.sample.RadioButtonItemBase",
 	kind: Item,
 	classes: "g-datalist-radiobutton-item",
 	published: {
@@ -43,9 +40,9 @@ kind({
 	}
 });
 
-kind({
+var RadioButtonItem = kind({
 	name: "g.sample.RadioButtonItem",
-	kind: "RadioButtonItem",
+	kind: RadioButtonItemBase,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/btn_radio.svg",
@@ -58,7 +55,7 @@ kind({
 	]
 });
 
-kind({
+var RadioDataListPanel = kind({
 	name: "g.sample.RadioDataListPanel",
 	kind: Panel,
 	noDefer: true,
@@ -76,7 +73,7 @@ kind({
 			selection: true,
 			style: "background-color: #000000;",
 			components: [
-				{kind: "g.sample.RadioButtonItem", ontap: "tapItem"}
+				{kind: RadioButtonItem, ontap: "tapItem"}
 			],
 			footerComponents: [
 				{style: "height: " + ri.scale(116) + "px;"}
@@ -119,7 +116,7 @@ module.exports = kind({
 		{content: "< DataList with Radio Buttons Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "DataList with Radio Buttons", classes: "g-sample-subheader"},
-		{name: "radioDataListPanel", kind: "g.sample.RadioDataListPanel", style: "position: relative;", onResult: "result"},
+		{name: "radioDataListPanel", kind: RadioDataListPanel, style: "position: relative;", onResult: "result"},
 
 		{src: "@../assets/btn_command_next.svg", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

@@ -1,14 +1,10 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	ToolDecorator = require('enyo/ToolDecorator'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
 	Item = require('garnet/Item'),
 	Icon = require('garnet/Icon'),
 	DataList = require('garnet/DataList'),
@@ -17,8 +13,8 @@ var
 	IconMenuPopup = require('garnet/IconMenuPopup'),
 	Panel = require('garnet/Panel');
 
-kind({
-	name: "g.DataListSampleItem",
+var DataListItem = kind({
+	name: "g.sample.DataListItem",
 	kind: Item,
 	classes: "g-sample-datalist-item",
 	handlers: {
@@ -55,7 +51,7 @@ kind({
 	}
 });
 
-kind({
+var DataListPanel = kind({
 	name: "g.sample.DataListPanel",
 	kind: Panel,
 	title: true,
@@ -75,7 +71,7 @@ kind({
 				]}
 			],
 			components: [
-				{kind: "g.DataListSampleItem", onlongpress: "showPopup"}
+				{kind: DataListItem, onlongpress: "showPopup"}
 			],
 			footerComponents: [
 				{kind: Button, content: "Text", style: "width: " + ri.scale(122) + "px; height: " + ri.scale(52) + "px; margin: " + ri.scale(21) + "px " + ri.scale(99) +"px " + ri.scale(21) +"px;"}
@@ -119,14 +115,14 @@ kind({
 	]
 });
 
-module.exports = kind({
+var DataListSample = module.exports = kind({
 	name: "g.sample.DataListSample",
 	classes: "enyo-unselectable garnet g-sample",
 	components: [
 		{content: "< Data List Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Data List", classes: "g-sample-subheader"},
-		{name: "listPanel", kind: "g.sample.DataListPanel", style: "position: relative;"}
+		{name: "listPanel", kind: DataListPanel, style: "position: relative;"}
 	],
 	bindings: [
 		{from: ".collection", to: ".$.listPanel.collection"}
@@ -244,3 +240,5 @@ module.exports = kind({
 		{iconUrl: "@../assets/ic_dialog_alert.svg", albumTitle: "Tracey", albumGenre: "Hiphop"}
 	]
 });
+
+DataListSample.DataListPanel = DataListPanel;

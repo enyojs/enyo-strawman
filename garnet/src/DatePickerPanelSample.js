@@ -1,14 +1,12 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
+	GarnetDatePickerPanel = require('garnet/DatePickerPanel');
 
-	g = require('garnet'),
-	DatePickerPanel = require('garnet/DatePickerPanel');
-
-kind({
+var SampleDatePickerPanel = kind({
 	name: "g.sample.DatePickerPanel",
-	kind: DatePickerPanel,
+	kind: GarnetDatePickerPanel,
 	handlers: {
 		onOK: "tapOK",
 		onCancel: "tapCancel"
@@ -34,7 +32,7 @@ module.exports = kind({
 		{content: "< Date Picker Panel Sample", classes: "g-sample-header", ontap: "goBack"},
 
 		{content: "Date Picker Panel", classes: "g-sample-subheader"},
-		{kind: "g.sample.DatePickerPanel", style: "position: relative;", onResult: "result"},
+		{kind: SampleDatePickerPanel, style: "position: relative;", onResult: "result"},
 
 		{style: "position: fixed; width: 100%; min-height: 160px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;", classes: "g-sample-result", components: [
 			{content: "Result", classes: "g-sample-subheader"},

@@ -1,25 +1,21 @@
+require('garnet');
+
 var
-	enyo = require('enyo'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
-	Image = require('enyo/Image'),
-
-	g = require('garnet'),
-	g_ri = require('garnet/resolution'),
+	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
-DataGridListSampleImageItem = kind({
-	name: "DataGridListSampleImageItem",
+var DataGridListImageItem = kind({
+	name: "g.sample.DataGridListImageItem",
 	classes: "g-sample-gridlist-imageitem",
 	components: [{
 		name: "image",
-		kind: Image
+		kind: EnyoImage
 	}, {
 		name: "caption",
 		classes: "caption"
@@ -54,9 +50,9 @@ DataGridListSampleImageItem = kind({
 	}
 });
 
-kind({
-	name: "g.sample.DataGridListSampleItem",
-	kind: "DataGridListSampleImageItem",
+var DataGridListItem = kind({
+	name: "g.sample.DataGridListItem",
+	kind: DataGridListImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/frame_check.png",
@@ -73,15 +69,15 @@ kind({
 	}]
 });
 
-kind({
-	name: "DataGridListSampleCircleImageItem",
-	kind: "DataGridListSampleImageItem",
+var DataGridListCircleImageItem = kind({
+	name: "g.sample.DataGridListCircleImageItem",
+	kind: DataGridListImageItem,
 	classes: "g-sample-gridlist-circle-imageitem"
 });
 
-kind({
-	name: "g.sample.DataGridListSampleCircleItem",
-	kind: "DataGridListSampleCircleImageItem",
+var DataGridListCircleItem = kind({
+	name: "g.sample.DataGridListCircleItem",
+	kind: DataGridListCircleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
 		"w320": "garnet/images/320/frame_check.png",
@@ -98,7 +94,7 @@ kind({
 	}]
 });
 
-kind({
+var DataGridListPanel = kind({
 	name: "g.sample.DataGridListPanel",
 	kind: Panel,
 	title: true,
@@ -115,7 +111,7 @@ kind({
 		spacing: 0,
 		style: "width: " + ri.scale(232) + "px; height: " + ri.scale(320) + "px; margin: auto; background-color: #000000;",
 		components: [{
-			kind: "g.sample.DataGridListSampleItem"
+			kind: DataGridListItem
 		}]
 	}],
 	bindings: [{
@@ -131,9 +127,9 @@ kind({
 	})
 });
 
-kind({
+var DataGridListCirclePanel = kind({
 	name: "g.sample.DataGridListCirclePanel",
-	kind: "g.sample.DataGridListPanel",
+	kind: DataGridListPanel,
 	components: [{
 		name: "list",
 		kind: DataGridList,
@@ -142,12 +138,12 @@ kind({
 		minHeight: 106,
 		style: "width: " + ri.scale(230) + "px; height: " + ri.scale(320) + "px; margin: auto; background-color: #000000;",
 		components: [{
-			kind: "g.sample.DataGridListSampleCircleItem"
+			kind: DataGridListCircleItem
 		}]
 	}]
 });
 
-module.exports = kind({
+var DataGridListSample = module.exports = kind({
 	name: "g.sample.DataGridListSample",
 	classes: "enyo-unselectable garnet g-sample",
 	components: [
@@ -159,24 +155,24 @@ module.exports = kind({
 			content: "Data Grid List", classes: "g-sample-subheader"
 		}, {
 			name: "gridListCircle",
-			kind: "g.sample.DataGridListCirclePanel",
+			kind: DataGridListCirclePanel,
 			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
 			selection: true,
 			multipleSelection: true
 		}, {
 			name: "gridListMulti",
-			kind: "g.sample.DataGridListPanel",
+			kind: DataGridListPanel,
 			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
 			selection: true,
 			multipleSelection: true
 		}, {
 			name: "gridListSingleCircle",
-			kind: "g.sample.DataGridListCirclePanel",
+			kind: DataGridListCirclePanel,
 			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
 			selection: true
 		}, {
 			name: "gridListSingle",
-			kind: "g.sample.DataGridListPanel",
+			kind: DataGridListPanel,
 			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
 			selection: true
 		}
@@ -215,3 +211,5 @@ module.exports = kind({
 		return false;
 	}
 });
+
+DataGridListSample.DataGridListPanel = DataGridListPanel;
