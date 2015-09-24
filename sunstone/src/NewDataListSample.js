@@ -18,7 +18,9 @@ var ListItem = kind({
 		ondown: 'down',
 		onup: 'up',
 		onleave: 'up',
-		ontap: 'tap'
+		ontap: 'tap',
+		ongesturechange: 'up',
+		ongestureend: 'up'
 	},
 	components: [
 		{name: 'iconImage', kind: Img, sizing: 'cover', classes: 'icon-image'},
@@ -29,10 +31,10 @@ var ListItem = kind({
 		{from: '.model.firstName', to: '.$.firstName.content'}
 	],
 	down: function (inSender, inEvent) {
-		inSender.addClass('down');
+		this.addClass('down');
 	},
 	up: function (inSender, inEvent) {
-		inSender.removeClass('down');
+		this.removeClass('down');
 	},
 	tap: function (inSender, inEvent) {
 		playFeedback();
