@@ -12,32 +12,32 @@ var
 	playFeedback = require('sunstone/feedback');
 
 module.exports = kind({
-	name: "sun.sample.ListBasicSample",
+	name: 'sun.sample.ListBasicSample',
 	kind: FittableRows,
-	classes: "enyo-fit enyo-unselectable",
+	classes: 'enyo-fit enyo-unselectable',
 	components: [
-		{name: "header", kind: Header, title:"Header"},
+		{name: 'header', kind: Header, title:'Header'},
 		{
-			name: "list",
+			name: 'list',
 			kind: List,
-			classes: "sun-list-sample",
+			classes: 'sun-list-sample',
 			fit: true,
 			reorderable: true,
 			centerReorderContainer: false,
 			count: 20,
-			onSetupItem: "setupItem",
-			onReorder: "listReorder",
-			onSetupReorderComponents: "setupReorderComponents",
+			onSetupItem: 'setupItem',
+			onReorder: 'listReorder',
+			onSetupReorderComponents: 'setupReorderComponents',
 			components: [
-				{ondown: "pressed", onup: "unpressed", onleave: "unpressed", ontap: "itemTapped", name: "item", classes: "list-sample-item", components: [
-					{name: "name", style: "display: inline-block;"},
-					{name: "checkbox", kind: Checkbox, style: "clear: both; float: right", onchange: "checkboxChanged", ondown: "checkboxDown"}
+				{ondown: 'pressed', onup: 'unpressed', onleave: 'unpressed', ontap: 'itemTapped', name: 'item', classes: 'list-item', components: [
+					{name: 'name'},
+					{name: 'checkbox', kind: Checkbox, onchange: 'checkboxChanged', ondown: 'checkboxDown'}
 				]}
 			],
 			reorderComponents: [
-				{name: "reorderContent", classes: "enyo-fit reorderDragger list-sample-item enyo-border-box", components: [
-					{name: "reorderName", style: "display: inline-block;"},
-					{name: "reorderCheckbox", kind: Checkbox, style: "clear: both; float: right"}
+				{name: 'reorderContent', classes: 'enyo-fit reorderDragger list-sample-item enyo-border-box', components: [
+					{name: 'reorderName', style: 'display: inline-block;'},
+					{name: 'reorderCheckbox', kind: Checkbox, style: 'clear: both; float: right'}
 				]}
 			]
 		}
@@ -49,7 +49,7 @@ module.exports = kind({
 			sup.apply(this, arguments);
 			// make some mock data if we have none for this row
 			for(i = 0; i < this.$.list.count; i++) {
-				this.names.push({name: "List Item " + i, checked: false});
+				this.names.push({name: 'List Item ' + i, checked: false});
 			}
 		};
 	}),
@@ -101,7 +101,7 @@ module.exports = kind({
 		var i = inEvent.index;
 		var n = this.names[i];
 		// apply selection style if inSender (the list) indicates that this row is selected.
-		this.$.item.addRemoveClass("list-sample-selected", inSender.isSelected(i));
+		this.$.item.addRemoveClass('list-sample-selected', inSender.isSelected(i));
 		this.$.name.setContent(n.name);
 		this.$.checkbox.setChecked(n.checked);
 		return true;
@@ -110,14 +110,19 @@ module.exports = kind({
 		this.$.list.lockRow();
 		this.$.list.prepareRow(e.index);
 		inSender.addClass('pressed');
-		if (e.originator.name === 'checkbox') {
+		if (e.originator instanceof Checkbox) {
 			this.waterfallDown('ondown', e, inSender);
 		}
 	},
 	unpressed: function (inSender, e) {
 		inSender.removeClass('pressed');
+		if (!(e.originator instanceof Checkbox)) {
+			this.$.list.lockRow();
+		}
 	},
-	itemTapped: function () {
-		playFeedback();
+	itemTapped: function (inSender, e) {
+		if (!(e.originator instanceof Checkbox)) {
+			playFeedback();
+		}
 	}
 });
