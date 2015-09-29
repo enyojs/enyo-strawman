@@ -97,7 +97,7 @@ module.exports = kind({
 				{name: 'lockBarSetting',        checked: true,     content: 'Lock Bar to Knob', onchange: 'changeLockbar'},
 				{name: 'animateSetting',        checked: true,     content: 'Animated',        onchange: 'animateActivate'},
 				{name: 'popupSetting',          checked: true,     content: 'Show Popup',      onchange: 'changeStatusBubble'},
-				{name: 'tapableSetting',        checked: true,     content: 'Tapable',         onchange: 'changeTapable'},
+				{name: 'tappableSetting',        checked: true,     content: 'Tappable',         onchange: 'changeTappable'},
 				{name: 'constrainSetting',      checked: false,    content: 'Constrain to Background Progress', onchange: 'changeConstrain'},
 				{name: 'elasticSetting',        checked: false,    content: 'Elastic Effect',  onchange: 'changeElastic'},
 				{name: 'showPercentageSetting', checked: false,    content: 'Show Percentage', onchange: 'changePercentage'}
@@ -111,7 +111,7 @@ module.exports = kind({
 		this.changeLockbar();
 		this.animateActivate();
 		this.changeStatusBubble();
-		this.changeTapable();
+		this.changeTappable();
 		this.changeConstrain();
 		this.changeElastic();
 	},
@@ -215,8 +215,8 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeTapable: function (sender, event) {
-		var ck = this.$.tapableSetting.getChecked();
+	changeTappable: function (sender, event) {
+		var ck = this.$.tappableSetting.getChecked();
 
 		for (var i in this.$) {
 			if (this.$[i].kind == Slider) {
