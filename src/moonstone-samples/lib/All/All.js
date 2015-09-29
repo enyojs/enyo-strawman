@@ -215,11 +215,12 @@ module.exports = kind({
 		var locale = ev.model.get('locale');
 		if (locale) {
 			this.set('locale', locale);
+			this.$.router.trigger({location: this.get('location'), change: true});
 		}
 	},
 	handleRoute: function (sender, ev) {
-		this.set('sample', ev.sampleName);
 		this.set('locale', ev.locale);
+		this.set('sample', ev.sampleName);
 	},
 	updateTitle: function (title) {
 		document.title = (title ? title + ' - ' : '') + this.get('title');
@@ -231,7 +232,6 @@ module.exports = kind({
 		}
 		this.locales.find(function(elem) { return elem.get('locale') == newLocale; }).set('selected', true);
 		i18n.updateLocale(newLocale == 'local' ? null : newLocale);
-		this.$.router.trigger({location: this.get('location'), change: true});
 	},
 	sampleChanged: function (was, is) {
 		if (was) {
