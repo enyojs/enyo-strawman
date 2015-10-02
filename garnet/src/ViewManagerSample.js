@@ -2,8 +2,10 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection.js'),
+	Collection = require('enyo/Collection'),
+	Item = require('garnet/Item'),
 	Scroller = require('garnet/Scroller'),
+	Panel = require('garnet/Panel'),
 	SampleDataListPanel = require('./DataListSample').DataListPanel,
 	ViewManager = require('garnet/ViewManager');
 
@@ -31,7 +33,7 @@ function panelSet (letter, number, layoutCover, prevDisabled, nextDisabled) {
 function viewSample (letter, outerCover, innerCover) {
 	return {
 		style: panelStyle,
-		components: [			
+		components: [
 			{name: 'panelSet' + letter, kind: ViewManager, classes: 'enyo-fit', draggable: false, layoutCover: outerCover, pageIndicator: true, components: [
 				panelSet(letter, '1', innerCover, true),
 				panelSet(letter, '2', innerCover),
@@ -59,7 +61,28 @@ module.exports = kind({
 		viewSample('C', true, true),
 
 		{content: 'Depth in Move = fixed+slide > fixed+cover', classes: 'g-sample-subheader'},
-		viewSample('D', false, true)
+		viewSample('D', false, true),
+
+		{content: 'Fixed > Floating', classes: 'g-sample-subheader'},
+		{style: panelStyle, components: [
+			{name: 'fixedFloating', kind: ViewManager, classes: 'enyo-fit', pageIndicator: true, components: [
+				{name: 'fixedFloatingList', kind: SampleDataListPanel, title: true, titleContent: 'Fixed Floating', commandBarComponents: [
+					{src: '@../assets/btn_share.svg', ontap: 'handleShareTapped'}
+				]},
+				{kind: Panel, components: [
+					{content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et ut, veritatis voluptas quibusdam alias consequatur incidunt distinctio dolores quos! Unde architecto fugit nam culpa, eum quaerat neque consectetur, ad nesciunt.'}
+				]},
+				{kind: Panel, components: [
+					{content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et ut, veritatis voluptas quibusdam alias consequatur incidunt distinctio dolores quos! Unde architecto fugit nam culpa, eum quaerat neque consectetur, ad nesciunt.'}
+				]},
+				{kind: Panel, components: [
+					{content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et ut, veritatis voluptas quibusdam alias consequatur incidunt distinctio dolores quos! Unde architecto fugit nam culpa, eum quaerat neque consectetur, ad nesciunt.'}
+				]}
+			]}
+		]}
+	],
+	bindings: [
+		{from: 'collection', to: '$.fixedFloatingList.collection'}
 	],
 	previousTap: function(inSender, inEvent) {
 		var namePrefix = inSender.name.substr(8,1),
@@ -70,6 +93,28 @@ module.exports = kind({
 		var namePrefix = inSender.name.substr(4,1),
 			vm = this.$['panelSet' + namePrefix];
 		if (vm) vm.next();
+	},
+	handleShareTapped: function (sender, event) {
+		this.$.fixedFloating.pushFloatingView({
+			name: 'share',
+			kind: Panel,
+			owner: this,
+			components: [
+				{kind: Item, content: 'Facebook', ontap: 'handleMethodTapped'},
+				{kind: Item, content: 'Twitter', ontap: 'handleMethodTapped'},
+				{kind: Item, content: 'Email', ontap: 'handleMethodTapped'}
+			]
+		});
+	},
+	handleMethodTapped: function (sender, event) {
+		this.$.fixedFloating.pushFloatingView({
+			name: 'method',
+			kind: Panel,
+			owner: this,
+			components: [
+				{content: 'Enter message here ...'}
+			]
+		});
 	},
 	create: kind.inherit(function(sup) {
 		return function() {
