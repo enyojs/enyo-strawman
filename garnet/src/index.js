@@ -42,6 +42,7 @@ var samples = {
 	ToastSample                     : require('./ToastSample'),
 	ToggleButtonSample              : require('./ToggleButtonSample'),
 	ToggleIconButtonSample          : require('./ToggleIconButtonSample'),
+	ViewManagerSample               : require('./ViewManagerSample'),
 	WheelSliderControllerSample     : require('./WheelSliderControllerSample')
 };
 
