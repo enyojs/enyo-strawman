@@ -87,10 +87,12 @@ module.exports = kind({
 		return true;
 	},
 	buttonRewindTapped: function(inSender, inEvent) {
+		this.set("isPlaying", true);
 		this.$.video.rewind();
 		return true;
 	},
 	buttonFastForwardTapped: function(inSender, inEvent) {
+		this.set("isPlaying", true);
 		this.$.video.fastForward();
 		return true;
 	},
