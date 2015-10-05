@@ -53,17 +53,31 @@ module.exports = kind({
 			components: [
 				{kind: Item, content: 'Facebook', ontap: 'handleMethodTapped'},
 				{kind: Item, content: 'Twitter', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Email', ontap: 'handleMethodTapped'}
+				{kind: Item, content: 'Email', ontap: 'handleMethodTapped'},
+				{kind: Item, content: 'More ... (Replace View)', ontap: 'handleMoreTapped'}
 			]
 		});
 	},
 	handleMethodTapped: function (sender, event) {
-		this.$.fixedFloating.replaceFloatingView({
+		this.$.fixedFloating.pushFloatingView({
 			name: 'method',
 			kind: Panel,
 			owner: this,
 			components: [
 				{content: 'Enter message here ...'}
+			]
+		});
+	},
+	handleMoreTapped: function (sender, event) {
+		this.$.fixedFloating.replaceFloatingView({
+			name: 'more',
+			kind: Panel,
+			owner: this,
+			components: [
+				{kind: Item, content: 'LinkedIn', ontap: 'handleMethodTapped'},
+				{kind: Item, content: 'Instagram', ontap: 'handleMethodTapped'},
+				{kind: Item, content: 'Friendster', ontap: 'handleMethodTapped'},
+				{kind: Item, content: 'MySpace', ontap: 'handleMethodTapped'}
 			]
 		});
 	},
