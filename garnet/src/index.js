@@ -43,6 +43,7 @@ var samples = {
 	ToggleButtonSample              : require('./ToggleButtonSample'),
 	ToggleIconButtonSample          : require('./ToggleIconButtonSample'),
 	ViewManagerSample               : require('./ViewManagerSample'),
+	ViewManagerLegacySample         : require('./ViewManagerLegacySample'),
 	WheelSliderControllerSample     : require('./WheelSliderControllerSample')
 };
 
