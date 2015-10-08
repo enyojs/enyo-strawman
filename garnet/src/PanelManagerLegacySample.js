@@ -7,7 +7,7 @@ var
 
 var
 	Scroller = require('garnet/Scroller'),
-	ViewManager = require('garnet/ViewManager');
+	PanelManager = require('garnet/PanelManager');
 
 var
 	SampleDataListPanel = require('./DataListSample').DataListPanel;
@@ -24,7 +24,7 @@ function commandBarComponents (prevName, nextName, prevDisabled, nextDisabled) {
 function panelSet (letter, number, layoutCover, prevDisabled, nextDisabled) {
 	var prefix = letter + number;
 	return {components: [
-		{name: 'vm' + prefix, kind: ViewManager, layoutCover: layoutCover, classes: 'enyo-fit', components: [
+		{name: 'vm' + prefix, kind: PanelManager, layoutCover: layoutCover, classes: 'enyo-fit', components: [
 			{name: 'panel' + prefix + '-1', kind: SampleDataListPanel, title: true, titleContent: number + '-1', commandBarComponents: commandBarComponents('previous' + prefix + '-1', 'next' + prefix + '-1', prevDisabled, nextDisabled)},
 			{name: 'panel' + prefix + '-2', kind: SampleDataListPanel, title: true, titleContent: number + '-2', commandBarComponents: commandBarComponents('previous' + prefix + '-2', 'next' + prefix + '-2', prevDisabled, nextDisabled)},
 			{name: 'panel' + prefix + '-3', kind: SampleDataListPanel, title: true, titleContent: number + '-3', commandBarComponents: commandBarComponents('previous' + prefix + '-3', 'next' + prefix + '-3', prevDisabled, nextDisabled)}
@@ -36,7 +36,7 @@ function viewSample (letter, outerCover, innerCover) {
 	return {
 		style: panelStyle,
 		components: [
-			{name: 'panelSet' + letter, kind: ViewManager, classes: 'enyo-fit', draggable: false, layoutCover: outerCover, pageIndicator: true, components: [
+			{name: 'panelSet' + letter, kind: PanelManager, classes: 'enyo-fit', draggable: false, layoutCover: outerCover, pageIndicator: true, components: [
 				panelSet(letter, '1', innerCover, true),
 				panelSet(letter, '2', innerCover),
 				panelSet(letter, '3', innerCover, false, true)
@@ -46,12 +46,12 @@ function viewSample (letter, outerCover, innerCover) {
 }
 
 module.exports = kind({
-	name: 'g.sample.ViewManagerSample',
+	name: 'g.sample.PanelManagerLegacySample',
 	horizontal: 'hidden',
 	classes: 'enyo-unselectable enyo-fit garnet g-sample',
 	kind: Scroller,
 	components: [
-		{content: '< ViewManager (Legacy PanelSet port) Sample', classes: 'g-sample-header', ontap: 'goBack'},
+		{content: '< PanelManager (Legacy PanelSet port) Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Move in Move = fixed+slide > fixed+slide', classes: 'g-sample-subheader'},
 		viewSample('A', false, false),

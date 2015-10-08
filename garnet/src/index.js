@@ -26,6 +26,8 @@ var samples = {
 	MenuScrollerSample              : require('./MenuScrollerSample'),
 	MultiPickerPanelSample          : require('./MultiPickerPanelSample'),
 	PageIndicatorSample             : require('./PageIndicatorSample'),
+	PanelManagerSample              : require('./PanelManagerSample'),
+	PanelManagerLegacySample         : require('./PanelManagerLegacySample'),
 	PanelSetDepthInMoveSample       : require('./PanelSetDepthInMoveSample'),
 	PanelSetDepthtInDepthSample     : require('./PanelSetDepthtInDepthSample'),
 	PanelSetMoveInDepthSample       : require('./PanelSetMoveInDepthSample'),
@@ -42,8 +44,6 @@ var samples = {
 	ToastSample                     : require('./ToastSample'),
 	ToggleButtonSample              : require('./ToggleButtonSample'),
 	ToggleIconButtonSample          : require('./ToggleIconButtonSample'),
-	ViewManagerSample               : require('./ViewManagerSample'),
-	ViewManagerLegacySample         : require('./ViewManagerLegacySample'),
 	WheelSliderControllerSample     : require('./WheelSliderControllerSample')
 };
 
