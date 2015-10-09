@@ -91,6 +91,7 @@ var moonstoneSamples = {
 	ScrollerTextSample                   : require('../../src/moonstone-samples/lib/ScrollerTextSample'),
 	ScrollerVerticalSample               : require('../../src/moonstone-samples/lib/ScrollerVerticalSample'),
 	SelectableItemSample                 : require('../../src/moonstone-samples/lib/SelectableItemSample'),
+	ShowingTransitionSample              : require('../../src/moonstone-samples/lib/ShowingTransitionSample'),
 	SimpleIntegerPickerSample            : require('../../src/moonstone-samples/lib/SimpleIntegerPickerSample'),
 	SimplePickerSample                   : require('../../src/moonstone-samples/lib/SimplePickerSample'),
 	SliderSample                         : require('../../src/moonstone-samples/lib/SliderSample'),

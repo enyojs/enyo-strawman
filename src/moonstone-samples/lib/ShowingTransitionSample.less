@@ -1,0 +1,45 @@
+.showing-transition-sample {
+	.pane {
+		overflow: hidden;
+
+		&.hiding .glass {
+			transition: transform 500ms ease-out;
+			transform-origin: bottom left;
+			transform: rotate(-90deg);
+		}
+		&.hidden .glass {
+			transform-origin: top left;
+			transform: rotate(-90deg);
+		}
+		&.showing .glass {
+			transition: transform 1s ease-in;
+			transform-origin: top left;
+			transform: rotate(0deg);
+		}
+
+		.glass {
+			padding: @moon-spotlight-outset;
+			border: 3px solid transparent;
+			border-color: inherit;
+		}
+	}
+
+	.popup-mockup {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: transform 500ms ease-in-out;
+		padding: (@moon-spotlight-outset * 2);
+		text-align: center;
+
+		&.hiding,
+		&.hidden {
+			transform: translateY(100%);
+		}
+		&.showing,
+		&.shown {
+			transform: translateY(0%);
+		}
+	}
+}
