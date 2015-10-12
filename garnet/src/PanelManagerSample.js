@@ -44,7 +44,7 @@ module.exports = kind({
 		{from: 'collection', to: '$.fixedFloatingList.collection'}
 	],
 	handleShareTapped: function (sender, event) {
-		this.$.fixedFloating.pushFloatingView({
+		this.$.fixedFloating.pushFloatingPanel({
 			name: 'share',
 			owner: this,
 			components: [
@@ -56,7 +56,7 @@ module.exports = kind({
 		});
 	},
 	handleMethodTapped: function (sender, event) {
-		this.$.fixedFloating.pushFloatingView({
+		this.$.fixedFloating.pushFloatingPanel({
 			name: 'method',
 			owner: this,
 			components: [
@@ -65,7 +65,7 @@ module.exports = kind({
 		});
 	},
 	handleMoreTapped: function (sender, event) {
-		this.$.fixedFloating.replaceFloatingView({
+		this.$.fixedFloating.replaceFloatingPanel({
 			name: 'more',
 			owner: this,
 			components: [
@@ -92,7 +92,7 @@ module.exports = kind({
 		// to be removed was active so we transition it off, flag it for removal, and then remove it
 		// in the deactivated handler.
 		this.$.fixedFloating.previous();
-		this.$.fixedFloating.views.forEach(function (view) {
+		this.$.fixedFloating.getClientControls().forEach(function (view) {
 			if (event.originator.isDescendantOf(view)) {
 				this.removedView = view;
 			}
