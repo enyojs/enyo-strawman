@@ -20,7 +20,7 @@ var
 function img (w, h, text, color) {
 	text = text || 'Image';
 	color = color || Math.floor(Math.random()*0x1000000).toString(16);
-	return 'http://placehold.it/' + w + 'x' + h + '/' + color + '/ffffff&text=' + text;
+	return '//placehold.it/' + w + 'x' + h + '/' + color + '/ffffff&text=' + text;
 }
 
 module.exports = kind({
@@ -73,26 +73,26 @@ module.exports = kind({
 			// enyo/DataRepeater adds the `selection-enabled` class when selection is enabled
 			// (appropriately enough). Simulating the same here.
 			{classes: 'selection-enabled', components: [
-				{kind: GridListImageItem, source: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
+				{kind: GridListImageItem, source: '//lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection], overlayTransparent: false
 				},
-				{kind: GridListImageItem, source: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Transparent', ontap: 'toggleSelected',
+				{kind: GridListImageItem, source: '//lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Transparent', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection]
 				},
-				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
+				{kind: GridListImageItem, selected: true, source: '//lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection], overlayTransparent: false
 				},
-				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Transparent', ontap: 'toggleSelected',
+				{kind: GridListImageItem, selected: true, source: '//lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Transparent', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection]
 				}
 			]},
 
 
 			{kind: Divider, content: 'Text Overlay'},
-			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/technics', placeholder: Img.placeholder, caption: 'Text Only', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: '//lorempixel.com/300/300/technics', placeholder: Img.placeholder, caption: 'Text Only', ontap: 'itemTapped',
 				mixins: [Overlay.Text], overlayShowing: 'spotlight', overlayTitle: 'Technics', overlaySubtitle: '12'
 			},
-			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/people', placeholder: Img.placeholder, caption: 'Clamped Title', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: '//lorempixel.com/300/300/people', placeholder: Img.placeholder, caption: 'Clamped Title', ontap: 'itemTapped',
 				mixins: [Overlay.Text], overlayShowing: 'spotlight', overlayComponents: [
 					// overlayComponents provided by Overlay.Text can be overridden for custom
 					// behavior like clamping the text to 3 lines. If the overlay is not always
@@ -102,10 +102,10 @@ module.exports = kind({
 					{classes: 'moon-overlay-text-subtitle', content: '3 lines'}
 				]
 			},
-			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/city', placeholder: Img.placeholder, caption: 'Marquee Title', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: '//lorempixel.com/300/300/city', placeholder: Img.placeholder, caption: 'Marquee Title', ontap: 'itemTapped',
 				mixins: [Overlay.Marquee], overlayShowing: 'spotlight', overlayTitle: 'Some Important Information To Share', overlaySubtitle: '15'
 			},
-			{kind: GridListImageItem, source: 'http://lorempixel.com/300/300/abstract', placeholder: Img.placeholder, caption: 'Marquee Both', subCaption: 'Will marquee with the overlay text', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: '//lorempixel.com/300/300/abstract', placeholder: Img.placeholder, caption: 'Marquee Both', subCaption: 'Will marquee with the overlay text', ontap: 'itemTapped',
 				mixins: [Overlay.Marquee], overlayShowing: 'spotlight', overlayTitle: 'Some Important Information To Share', overlaySubtitle: '1,000,000,000,000'
 			},
 
