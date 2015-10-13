@@ -46,11 +46,11 @@ module.exports = kind({
 	style: 'width: 600px; border: 1px solid #ccc; margin: auto;',
 	components: [
 		{kind: PanZoomView, style: 'width: 100%; height: 400px;', scale: 'fit', components: [
-			{name: 'imagesView', kind: ImagesView, src: 'assets/globe.jpg'}
+			{name: 'imagesView', kind: ImagesView, src: '@../assets/globe.jpg'}
 		]},
 		{kind: Button, content: 'change image', ontap: 'changeImage'}
 	],
-	planets: ['assets/globe.jpg', 'assets/earth.jpg', 'assets/jupiter.jpg', 'assets/mars.jpg', 'assets/mercury.jpg', 'assets/neptune.jpg', 'assets/saturn.jpg', 'assets/uranus.jpg', 'assets/venus.jpg'],
+	planets: ['@../assets/globe.jpg', '@../assets/earth.jpg', '@../assets/jupiter.jpg', '@../assets/mars.jpg', '@../assets/mercury.jpg', '@../assets/neptune.jpg', '@../assets/saturn.jpg', '@../assets/uranus.jpg', '@../assets/venus.jpg'],
 	changeImage: function(){
 		var imageview = this.$.panZoomView.$.imagesView;
 		imageview.setSrc( this.planets[ (utils.indexOf(imageview.src, this.planets)+1)%this.planets.length ] );

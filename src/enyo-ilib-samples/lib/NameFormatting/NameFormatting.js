@@ -3,10 +3,12 @@ var
 	Button = require('enyo/Button'),
 	Checkbox = require('enyo/Checkbox'),
 	Group = require('enyo/Group'),
+    Input = require('enyo/Input'),
 	Scroller = require('enyo/Scroller');
 
 var
-	ilib = require('enyo-ilib');
+	Name = require('enyo-ilib/Name'),
+    NameFmt = require('enyo-ilib/NameFmt');
 
 var
 	ChooseLocale = require('../ChooseLocale'),
@@ -25,14 +27,14 @@ module.exports = kind({
                 {fit: true}
             ]},
             {tag: "br"},
-            
+
             {content: rb.getString("Length"), classes: "ilib-onyx-sample-divider"},
             {kind: Group, defaultKind: Button, name: "length", onActivate: "buttonActivated", components: [
                 {content: "Short", active: true, name:"short"},
                 {content: "Medium"},
                 {content: "Long"}
             ]},
-            
+
             {content: rb.getString("(or) Parts"), classes: "ilib-onyx-sample-divider"},
             {classes: "namepart", components: [
                 {kind: Checkbox, name: "prefixCbox", content: "Prefix ", onchange:"checkboxChanged"},
@@ -44,15 +46,15 @@ module.exports = kind({
 
             {components: [
                 {content: rb.getString("Prefix"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "prefixInput", placeholder: rb.getString("Prefix")},
+                {kind: Input, name: "prefixInput", placeholder: rb.getString("Prefix")},
                 {content: rb.getString("Given Name"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "givenInput", placeholder: rb.getString("Given Name")},
+                {kind: Input, name: "givenInput", placeholder: rb.getString("Given Name")},
                 {content: rb.getString("Middle Name"), classes: "ilib-onyx-sample-divider"},
-                {kind: "onyx.Input", name: "middleInput", placeholder: rb.getString("Middle Name")},
+                {kind: Input, name: "middleInput", placeholder: rb.getString("Middle Name")},
                 {content: rb.getString("Family Name"), classes: "ilib-onyx-sample-divider"},
-				{kind: "onyx.Input", name: "familyInput", placeholder: rb.getString("Family Name")},
+				{kind: Input, name: "familyInput", placeholder: rb.getString("Family Name")},
                 {content: rb.getString("Suffix"), classes: "ilib-onyx-sample-divider"},
-				{kind: "onyx.Input", name: "suffixInput", placeholder: rb.getString("Suffix")}
+				{kind: Input, name: "suffixInput", placeholder: rb.getString("Suffix")}
             ]}
         ]},
         {tag: "br"},
@@ -61,7 +63,7 @@ module.exports = kind({
             {name: "rtlResult", fit: true, content: "-", style: "padding: 10px"}
         ]}
     ],
- 
+
     buttonActivated: function(inSender, inEvent) {
 
         if (this.$.length.getActive().content === 'Short') {
@@ -88,7 +90,7 @@ module.exports = kind({
     checkboxChanged: function(inSender, inEvent) {
         if (!this.$.prefixCbox.getChecked() && !this.$.givenCbox.getChecked() && !this.$.middleCbox.getChecked() &&
             !this.$.familyCbox.getChecked() && !this.$.suffixCbox.getChecked()) {
-            this.$.short.setActive(true);
+            this.$['short'].setActive(true);
         } else {
             this.$.length.setActive(false);
         }
@@ -100,7 +102,7 @@ module.exports = kind({
 
         var nameLength = this.$.length.getActive().content;
         var parts = [];
-    
+
         if (this.$.prefixCbox.getChecked()) {
             parts.push("p");
         }
@@ -120,7 +122,7 @@ module.exports = kind({
         var options = {
             locale : this.$.localeSelector.getValue()
         };
-            
+
         if (nameLength) {
             options.style = nameLength;
         }
@@ -128,7 +130,7 @@ module.exports = kind({
         if (parts.length > 0) {
             options.components = parts.join('');
         }
-                
+
         var n = {
             prefix: this.$.prefixInput.getValue(),
             givenName: this.$.givenInput.getValue(),
@@ -138,9 +140,9 @@ module.exports = kind({
             locale: this.$.localeSelector.getValue()
         };
         // Formatting
-        var name = new ilib.Name(n);
-        var fmt = new ilib.NameFmt(options);
-        var postFmtData = "The name is: " + fmt.format(name); 
+        var name = new Name(n);
+        var fmt = new NameFmt(options);
+        var postFmtData = "The name is: " + fmt.format(name);
         // Output results
         this.$.rtlResult.setContent(postFmtData);
     }

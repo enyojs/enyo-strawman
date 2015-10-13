@@ -5,7 +5,7 @@ var
     Scroller = require('enyo/Scroller');
 
 var
-    ilib = require('enyo-ilib');
+    Address = require('enyo-ilib/Address');
 
 var
     ChooseLocale = require('./ChooseLocale'),
@@ -13,7 +13,7 @@ var
 
 module.exports = kind({
     name: 'ilib.sample.AddressParsing',
-    kind: Scroller,     
+    kind: Scroller,
     components: [
         {style: 'margin: 10px;', components: [
             {kind: ChooseLocale, name: 'localeSelector'},
@@ -31,10 +31,10 @@ module.exports = kind({
             {name: 'rtlResult', allowHtml: true, content: '-', style: 'padding: 10px'}
         ]}
     ],
-        
+
     calcFormat: function (inSender, inEvent) {
         // Formatting
-        var parsedAddress = new ilib.Address(this.$.address.getValue());
+        var parsedAddress = new Address(this.$.address.getValue());
 
         var output = '';
 

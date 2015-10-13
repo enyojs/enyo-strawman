@@ -9,6 +9,10 @@ var
 	Select = require('enyo/Select');
 
 var
+    Num = require('enyo-ilib/INumber'),
+    NumFmt = require('enyo-ilib/NumFmt');
+
+var
 	ChooseLocale = require('../ChooseLocale'),
 	ChooseCurrency = require('../ChooseCurrency'),
     rb = require('../ResBundle');
@@ -128,8 +132,8 @@ module.exports = kind({
             options.currency = this.$.currency.getValue();
         }
         // Formatting
-        var num = new ilib.Number(this.$.number.getValue());
-        var fmt = new ilib.NumFmt(options);
+        var num = new Num(this.$.number.getValue());
+        var fmt = new NumFmt(options);
         var postFmtData = fmt.format(num); 
         // Output results
         this.$.rtlResult.setContent(postFmtData);

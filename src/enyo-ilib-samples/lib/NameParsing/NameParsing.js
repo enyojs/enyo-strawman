@@ -8,6 +8,9 @@ var
 	Scroller = require('enyo/Scroller');
 
 var
+    Name = require('enyo-ilib/Name');
+
+var
 	ChooseLocale = require('../ChooseLocale'),
     rb = require('../ResBundle');
 
@@ -43,7 +46,7 @@ module.exports = kind({
       
         // Parsing
         var nameStr = this.$.name.getValue();       
-        var name = new ilib.Name(nameStr, options);
+        var name = new Name(nameStr, options);
         var output = "";
         if (name.prefix) {
             output += "Prefix: " + name.prefix + "<br>";

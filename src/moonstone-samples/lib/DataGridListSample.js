@@ -1,11 +1,9 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	Collection = require('enyo/Collection'),
 	EmptyBinding = require('enyo/EmptyBinding');
 
 var
-	Button = require('moonstone/Button'),
 	CheckboxItem = require('moonstone/CheckboxItem'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupButton = require('moonstone/ContextualPopupButton'),
@@ -13,8 +11,8 @@ var
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
-	Icon = require('moonstone/Icon'),
-	Image = require('moonstone/Image'),
+	IconButton = require('moonstone/IconButton'),
+	MoonImage = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
@@ -22,8 +20,6 @@ var
 	Scroller = require('moonstone/Scroller'),
 	Overlay = require('moonstone/Overlay'),
 	ToggleButton = require('moonstone/ToggleButton');
-
-
 
 var GridSampleItem = kind({
 	name: 'moon.sample.GridSampleItem',
@@ -34,7 +30,8 @@ var GridSampleItem = kind({
 		{from: 'model.text', to: 'caption'},
 		{from: 'model.subText', to: 'subCaption'},
 		{from: 'model.url', to: 'source'},
-		{from: 'model.selected', to: 'selected', oneWay: false}
+		{from: 'model.selected', to: 'selected', oneWay: false},
+		{from: 'model.overlayTransparent', to: 'overlayTransparent', oneWay: false}
 	]
 });
 
@@ -68,7 +65,7 @@ var HorizontalGridListImageItem = kind({
 	kind: HorizontalGridListItem,
 	classes: 'horizontal-gridList-image-item',
 	components: [
-		{name: 'img', kind: Image},
+		{name: 'img', kind: MoonImage},
 		{name: 'caption', classes: 'caption'},
 		{name: 'subCaption', classes: 'sub-caption'}
 	],
@@ -77,14 +74,26 @@ var HorizontalGridListImageItem = kind({
 	]
 });
 
+var itemTypes = [
+	{content: 'ImageItem', value: 'GridListImageItem', selected: true},
+	{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
+	{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
+];
+
+var dataTypes = [
+	{content: 'Collections/Models', value: 'EnyoData', selected: true},
+	{content: 'JS Arrays/Objects', value: 'JS'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
 	pattern: 'activity',
-	classes: 'moon enyo-fit enyo-unselectable',
+	classes: 'moon enyo-fit enyo-unselectable moon-datagridlist-sample',
 	components: [
 		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
+			{kind: ToggleButton, content: 'Transparency', name: 'transparencyToggle', onChange: 'transparencyTypeChanged', value: true, disabled: true},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Selection Type'},
 				{kind: ContextualPopup, classes: 'moon-4h', components: [
@@ -98,25 +107,27 @@ module.exports = kind({
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content:'Item Type'},
 				{kind: ContextualPopup, classes:'moon-6h', components: [
-					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged', components: [
-						{content: 'ImageItem', value: 'GridListImageItem', selected: true},
-						{content: 'HorizontalImageItem', value: 'HorizontalGridListImageItem'},
-						{content: 'HorizontalItem', value: 'HorizontalGridListItem'}
-					]}
+					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged'}
 				]}
 			]},
-			{kind: Button, content: 'Refresh', ontap: 'refreshItems'},
+			{kind: ContextualPopupDecorator, components: [
+				{kind: ContextualPopupButton, content:'Data Type'},
+				{kind: ContextualPopup, classes:'moon-6h', components: [
+					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged'}
+				]}
+			]},
 			{kind: ContextualPopupDecorator, components: [
 				{kind: ContextualPopupButton, content: 'Popup List'},
 				{kind: ContextualPopup, classes: 'moon-6h moon-8v', components: [
 					{kind:DataList, components: [
 						{kind:CheckboxItem, bindings: [
-							{from: '.model.text', to: '.content'},
-							{from: '.model.selected', to: '.checked', oneWay: false}
+							{from: 'model.text', to: 'content'},
+							{from: 'model.selected', to: 'checked', oneWay: false}
 						]}
 					]}
 				]}
-			]}
+			]},
+			{kind: IconButton, icon: 'rollforward', ontap: 'refreshItems'}
 		], components: [
 			{name: 'gridList', fit: true, spacing: 20, minWidth: 180, minHeight: 270, kind: DataGridList, scrollerOptions: { kind: Scroller, vertical: 'scroll', horizontal: 'hidden', spotlightPagingControls: true }, components: [
 				{ kind: GridSampleItem }
@@ -124,25 +135,55 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: 'collection', to: '$.dataList.collection'}
+		{from: 'collection', to: '$.dataList.collection'},
+		{from: 'collection', to: '$.gridList.collection'}
 	],
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
-		// we set the collection that will fire the binding and add it to the list
-		this.set('itemKind', 'GridListImageItem');
+
+		this.computeInitialValue(itemTypes, 'itemKind');
+		this.computeInitialValue(dataTypes, 'dataType');
+		this.$.itemTypeGroup.createComponents(itemTypes);
+		this.$.dataTypeGroup.createComponents(dataTypes);
+		this.itemKindChanged();
+		this.transparency = true;
+	},
+	computeInitialValue: function (arr, prop) {
+		var idx, elem;
+		for (idx = 0; idx < arr.length; idx++) {
+			elem = arr[idx];
+			if (elem.selected) {
+				this[prop] = elem.value;
+				break;
+			}
+		}
 	},
 	itemKindChanged: function () {
 		this.generateDataGridList(this.itemKind);
 	},
+	dataTypeChanged: function () {
+		this.refreshItems();
+	},
+	transparencyChanged: function () {
+		var models = this.collection.models,
+			model, idx;
+		for (idx = 0; idx < models.length; idx++) {
+			model = models[idx];
+			model.set('overlayTransparent', this.transparency);
+		}
+	},
 	generateRecords: function (amount) {
 		var records = [],
-			idx     = this.modelIndex || 0;
+			idx     = this.modelIndex || 0,
+			hex = function () { return(Math.floor(Math.random()*16)).toString(16); };
+
 		for (; records.length < amount; ++idx) {
 			var title = (idx % 8 === 0) ? ' with long title' : '';
 			var subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
-			var randomColor = "000000".replace(/0/g,function(){return (Math.floor(Math.random()*16)).toString(16);});
+			var randomColor = "000000".replace(/0/g,hex);
 			records.push({
 				selected: false,
+				overlayTransparent: this.transparency,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
 				url: 'http://placehold.it/300x300/' + randomColor + '/ffffff&text=Image ' + idx
@@ -156,13 +197,22 @@ module.exports = kind({
 		if (this.$.gridList) {
 			this.$.gridList.destroy();
 		}
-
 		var props = {
-				name: 'gridList', kind: DataGridList, selection: false, fit: true, spacing: 20,
-				minHeight: 270, minWidth: 180, scrollerOptions: {
-					kind: Scroller, vertical:'scroll', horizontal: 'hidden', spotlightPagingControls: true
-				}, components: [
-					{kind: GridSampleItem}
+				name: 'gridList',
+				kind: DataGridList,
+				selection: false,
+				fit: true,
+				spacing: 20,
+				minHeight: 270,
+				minWidth: 180,
+				scrollerOptions: {
+					kind: Scroller,
+					vertical:'scroll',
+					horizontal: 'hidden',
+					spotlightPagingControls: true
+				},
+				components: [
+					{kind: GridSampleItem, overlayTransparent: this.transparency}
 				]
 			},
 			createdComponent;
@@ -196,30 +246,42 @@ module.exports = kind({
 		}
 
 		createdComponent = this.$.listPanel.createComponent(props, {owner: this});
-		createdComponent.render();
-		this.set('collection', new Collection(this.generateRecords(40)));
 
-		this.$.gridList.set('collection', this.collection);
+		this.refreshItems(40);
+
 		this.$.gridList.set('selection', this.$.selectionToggle.value);
+		// this.$.gridList.set('overlayTransparent', this.$.transparencyToggle.value);
 		if (this.$.selectionTypeGroup.active) {
 			this.$.gridList.set('selectionType', this.$.selectionTypeGroup.active.value);
 		}
+
+		createdComponent.render();
 	},
-	selectionChanged: function (sender, event) {
+	selectionChanged: function (sender, ev) {
+		this.$.transparencyToggle.set('disabled', !sender.value);
 		this.$.gridList.set('selection', sender.value);
 	},
-	itemTypeChanged: function (sender, event) {
+	transparencyTypeChanged: function (sender, ev) {
+		this.set('transparency', sender.value);
+	},
+	itemTypeChanged: function (sender, ev) {
 		this.set('itemKind', sender.active.value);
 	},
-	selectionTypeChanged: function (sender, event) {
+	dataTypeMenuChanged: function (sender, ev) {
+		this.set('dataType', sender.active.value);
+	},
+	selectionTypeChanged: function (sender, ev) {
 		this.$.gridList.set('selectionType', sender.active.value);
 	},
-	refreshItems: function () {
-		// we fetch our collection reference
-		var collection = this.get('collection');
-		// we now remove all of the current records from the collection
-		collection.remove(collection.models);
-		// and we insert all new records that will update the list
-		collection.add(this.generateRecords(100));
+	refreshItems: function (num) {
+		var data;
+
+		num = (typeof num === 'number') ? num : 100;
+		data = this.generateRecords(num);
+
+		if (this.collection && this.collection.destroy) {
+			this.collection.destroy();
+		}
+		this.set('collection', this.dataType === 'JS' ? data : new Collection(data));
 	}
 });

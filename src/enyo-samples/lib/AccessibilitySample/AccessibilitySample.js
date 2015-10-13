@@ -1,38 +1,37 @@
 var
 	kind = require('enyo/kind'),
-	AccessibilitySupport = require('enyo/AccessibilitySupport'),
 	Button = require('enyo/Button'),
-	ButtonAccessibilitySupport = require('enyo/Button/ButtonAccessibilitySupport'),
 	Checkbox = require('enyo/Checkbox'),
-	CheckboxAccessibilitySupport = require('enyo/Checkbox/CheckboxAccessibilitySupport'),
-	Control = require('enyo/Control'),
-	InputAccessibilitySupport = require('enyo/Input/InputAccessibilitySupport'),
-	Popup = require('enyo/Popup');
-	PopupAccessibilitySupport = require('enyo/Popup/PopupAccessibilitySupport'),
+	Input = require('enyo/Input'),
+	Popup = require('enyo/Popup'),
+	Scroller = require('enyo/Scroller');
+var
+	VoiceReadout = require('enyo-webos/VoiceReadout');
 
 module.exports = kind({
-	classes: 'accessibility-sample',
+	kind: Scroller,
+	classes: 'accessibility-sample enyo-fit enyo-unselectable',
 	components: [
 		{tag: 'h3', content: 'Fixed Examples'},
 		{classes: 'aria-samples', components: [
 			// only content
-			{name: 'c', content: 'content', mixins: [AccessibilitySupport]},
+			{name: 'c', content: 'content'},
 			// content + label
-			{name: 'cl', content: 'content', accessibilityLabel: 'the label', mixins: [AccessibilitySupport]},
+			{name: 'cl', content: 'content', accessibilityLabel: 'the label'},
 			// content + hint
-			{name: 'ch', content: 'content', accessibilityHint: 'the hint', mixins: [AccessibilitySupport]},
+			{name: 'ch', content: 'content', accessibilityHint: 'the hint'},
 			// content + label + hint
-			{name: 'clh', content: 'content', accessibilityLabel: 'the label', accessibilityHint: 'the hint', mixins: [AccessibilitySupport]},
+			{name: 'clh', content: 'content', accessibilityLabel: 'the label', accessibilityHint: 'the hint'},
 			// label + hint
-			{name: 'lh', accessibilityLabel: 'the label', accessibilityHint: 'the hint', mixins: [AccessibilitySupport]},
+			{name: 'lh', accessibilityLabel: 'the label', accessibilityHint: 'the hint'},
 			// only label
-			{name: 'l', accessibilityLabel: 'the label', mixins: [AccessibilitySupport]},
+			{name: 'l', accessibilityLabel: 'the label'},
 			// only hint
-			{name: 'h', accessibilityHint: 'the hint', mixins: [AccessibilitySupport]}
+			{name: 'h', accessibilityHint: 'the hint'}
 		]},
 		{tag: 'h3', content: 'Dynamic Example'},
 		{classes: 'aria-samples', components: [
-			{name: 'dyn', content: 'Content', mixins: [AccessibilitySupport]}
+			{name: 'dyn', content: 'Content'}
 		]},
 		{kind: Button, content: 'Toggle Content', ontap: 'toggleContent'},
 		{kind: Button, content: 'Toggle Label', ontap: 'toggleLabel'},
@@ -40,21 +39,22 @@ module.exports = kind({
 		{name: 'toggle1', kind: Button, content: 'Toggle Disabled', ontap: 'toggleDynDisabled'},
 		{tag: 'h3', content: 'UI control accessibilityDisabled Example'},
 		{components: [
-			{kind: Popup, name: 'popup', autoDismiss: false, classes: 'popup', content: 'popup', mixins: [AccessibilitySupport, PopupAccessibilitySupport]},
+			{kind: Popup, name: 'popup', autoDismiss: false, classes: 'popup', content: 'popup'},
 			{tag: 'br'},
 			{tag: 'br'},
-			{name: 'popup_result'},
+			{classes: 'result', name: 'popup_result'},
 			{tag: 'br'},
-			{name: 'checkbox', kind: Checkbox, disabled: true, checked: true, content: 'simple checkbox', mixins: [AccessibilitySupport, InputAccessibilitySupport, CheckboxAccessibilitySupport]},
+			{name: 'checkbox', kind: Checkbox, disabled: true, checked: true, content: 'simple checkbox'},
+			{classes: 'result', name: 'checkbox_result'},
 			{tag: 'br'},
-			{name: 'checkbox_result'},
-			{tag: 'br'},
-			{name: 'btn', kind: Button, disabled: true, content: 'button', mixins: [AccessibilitySupport, ButtonAccessibilitySupport]},
-			{tag: 'br'},
-			{name: 'btn_result'},
+			{name: 'btn', kind: Button, disabled: true, content: 'button'},
+			{classes: 'result', name: 'btn_result'},
 			{tag: 'br'}
 		]},
-		{name: 'toggle2', kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'}
+		{name: 'toggle2', kind: Button, content: 'Toggle Disabled', ontap: 'toggleDisabled'},
+		{tag: 'h3', content: 'readAlert API Example'},
+		{kind: Input, name: "inputText", type: "text", value: "Initial Value"},
+		{kind: Button, content: 'readAlert', ontap: 'readAlertText'}
 	],
 	/**
 	* @private
@@ -104,5 +104,8 @@ module.exports = kind({
 		disabled = this.$.btn.getAttribute('aria-disabled');
 		tabindex = this.$.btn.getAttribute('tabindex');
 		this.$.btn_result.set('content', ' :: tabindex = ' + tabindex + ' :: role = ' + role + ' :: aria-label = ' + label + ' :: aria-disabled = ' + disabled);
+	},
+	readAlertText: function () {
+		VoiceReadout.readAlert(this.$.inputText.getValue());
 	}
 });

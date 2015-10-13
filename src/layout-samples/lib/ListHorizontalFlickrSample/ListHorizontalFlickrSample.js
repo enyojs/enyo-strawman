@@ -58,9 +58,9 @@ module.exports = kind({
 			{classes: 'layout-sample-toolbar', components: [
 				{kind: FittableColumns, tag: 'label', style: 'width: 90%;', components: [
 					{name: 'searchInput', fit: true, kind: Input, value: 'Japan', onchange: 'search'},
-					{kind: Img, src: 'assets/search-input-search.png', style: 'width: 20px; height: 20px;'}
+					{kind: Img, src: '@../../assets/search-input-search.png', style: 'width: 20px; height: 20px;'}
 				]},
-				{name: 'searchSpinner', kind: Img, src: 'assets/spinner.gif', showing: false}
+				{name: 'searchSpinner', kind: Img, src: '@../../assets/spinner.gif', showing: false}
 			]},
 			{kind: List, orient: 'h', fit: true, onSetupItem: 'setupItem', components: [
 				{name: 'item', style: 'padding: 10px;', classes: 'list-sample-flickr-item enyo-border-box', ontap: 'itemTap', components: [
@@ -68,7 +68,7 @@ module.exports = kind({
 				]},
 				{name: 'more', style: 'padding: 10px;position:absolute', classes: 'list-sample-flickr-more enyo-border-box', components: [
 					{kind: Button, content: 'more',  ontap: 'more'},
-					{name: 'moreSpinner', kind: Img, src: 'assets/spinner.gif', classes: 'list-sample-flickr-more-spinner'}
+					{name: 'moreSpinner', kind: Img, src: '@../../assets/spinner.gif', classes: 'list-sample-flickr-more-spinner'}
 				]}
 			]}
 		]},

@@ -24,7 +24,7 @@ module.exports = kind({
 					{kind: CheckboxItem, content: 'Option 2', onchange: 'itemChanged'},
 					{kind: CheckboxItem, disabled: true, content: 'Disabled', onchange: 'itemChanged'},
 					{kind: CheckboxItem, content: 'Option 4', checked: true, onchange: 'itemChanged'},
-					{kind: CheckboxItem, content: 'This is a verrry long option 5 with a custom checkmark', icon: '', src: 'assets/icon-button-enyo-logo.png', onchange: 'itemChanged'}
+					{kind: CheckboxItem, content: 'This is a verrry long option 5 with a custom checkmark', icon: '', src: '@../assets/icon-button-enyo-logo.png', onchange: 'itemChanged'}
 				]},
 				{components: [
 					{kind: Divider, content: 'Right-Handed Checkbox Items'},

@@ -1,0 +1,11 @@
+/* ButtonSample */
+
+.sun-button-sample-wrapper,
+.sun-button-sample-group button,
+.sun-button-sample-wrapper > button {
+	margin: 10px;
+}
+
+.sun-sample-font {
+	font-size: 20px;
+}

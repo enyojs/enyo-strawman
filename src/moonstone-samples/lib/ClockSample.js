@@ -1,7 +1,7 @@
 var
 	kind = require('enyo/kind'),
-	hooks = require('enyo/hooks'),
-	updateLocale = hooks.updateLocale;
+	i18n = require('enyo/i18n'),
+	updateLocale = i18n.updateLocale;
 
 var
 	FittableRows = require('layout/FittableRows');
@@ -66,10 +66,9 @@ module.exports = kind({
 		}
 	},
 	setLocale: function(inSender, inEvent){
-		var locale = inEvent.selected.content,
-			val = (locale == 'Use Default Locale') ? null : locale;
+		var locale = inEvent.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
 		updateLocale(locale);
-		this.$.clock.setLocale(val);
 		return true;
 	},
 	setTime: function() {

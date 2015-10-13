@@ -3,6 +3,10 @@ var
     Select = require('enyo/Select');
 
 var
+    Currency = require('enyo-ilib/Currency'),
+    LocaleInfo = require('enyo-ilib/LocaleInfo');
+
+var
     rb = require('./ResBundle');
 
 module.exports = kind({
@@ -22,19 +26,18 @@ module.exports = kind({
         this.initCurrencies();
         this.value = this.$.currencies.selected.content;
     },
-    
+
     initCurrencies: function() {
-        var currencies = ilib.Currency.getAvailableCurrencies();
-        var indexCC = -1;
+        var currencies = Currency.getAvailableCurrencies();
         for (var i = 0; i < currencies.length; ++i) {
             this.$.currencies.createComponent({content: currencies[i]});
         }
         // pre-selects the current locale's currency
         this.selectCurrency();
     },
-    
+
     selectCurrency: function(locale) {
-        var li = new ilib.LocaleInfo(locale);
+        var li = new LocaleInfo(locale);
         var currency = li['info'].currency;
         var components = this.$.currencies.getClientControls();
         var selected;

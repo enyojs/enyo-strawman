@@ -2,8 +2,8 @@ var
 	kind = require('enyo/kind'),
     Select = require('enyo/Select');
 
-var 
-	ilib = require('enyo-ilib');
+var
+	TimeZone = require('enyo-ilib/TimeZone');
 
 var
     rb = require('./ResBundle');
@@ -29,9 +29,9 @@ module.exports = kind({
         this.initTimeZones();
         this.$.tzheader.setContent(this.label.toString());
     },
-    
+
     initTimeZones: function() {
-        var timeZones = ilib.TimeZone.getAvailableIds();
+        var timeZones = TimeZone.getAvailableIds();
         for (var i = 0; i < timeZones.length; ++i)
             this.$.timeZones.createComponent({content: timeZones[i]});
     },

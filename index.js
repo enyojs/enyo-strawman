@@ -1,3 +1,5 @@
+require('enyo/options').accessibility = true;
+
 var
 	ready = require('enyo/ready');
 

@@ -1,7 +1,12 @@
 var
 	kind = require('enyo/kind'),
 	Group = require('enyo/Group'),
-	Scroller = require('enyo/Scroller');
+	Scroller = require('enyo/Scroller'),
+    TextArea = require('enyo/TextArea');
+
+var
+    ilib = require('enyo-ilib'),
+    LocaleInfo = require('enyo-ilib/LocaleInfo');
 
 var
 	ChooseLocale = require('../ChooseLocale'),
@@ -19,7 +24,7 @@ module.exports = kind({
             
             {kind: Group, classes:"onyx-sample-result-box", components: [
                 {content: rb.getString("Current Locale")},
-                {name: "currentLocateData", classes:"onyx-sample-result"}
+                {name: "currentLocateData", kind: TextArea, style: 'box-sizing: border-box; width: 100%; height: 600px;'}
             ]}            
         ]}
     ],
@@ -39,10 +44,9 @@ module.exports = kind({
         if (this.$['currentLocateData']) {
             this.$.currentLocateData.destroyComponents();
             this.$.currentLocateData.createComponent({content: "getLocale : "+ locale, style: "font-size: 16px"});
-            var localeInfo = new ilib.LocaleInfo(locale);
-            var str = JSON.stringify(localeInfo, null, ' ').replace(/"([^"]+)"/g, '$1').replace(/,$/mg, '');
-            this.$.currentLocateData.createComponent({tag: "pre", fit: true, content: str, style: "font-size: 16px"});
-            this.$.currentLocateData.render();
+            var localeInfo = new LocaleInfo(locale);
+            var str = JSON.stringify(localeInfo, null, '\t').replace(/"([^"]+)"/g, '$1').replace(/,$/mg, '');
+            this.$.currentLocateData.set('value', str);
         }
     }
 });
