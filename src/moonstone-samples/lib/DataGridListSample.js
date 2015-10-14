@@ -174,19 +174,16 @@ module.exports = kind({
 	},
 	generateRecords: function (amount) {
 		var records = [],
-			idx     = this.modelIndex || 0,
-			hex = function () { return(Math.floor(Math.random()*16)).toString(16); };
-
+			idx     = this.modelIndex || 0;
 		for (; records.length < amount; ++idx) {
 			var title = (idx % 8 === 0) ? ' with long title' : '';
 			var subTitle = (idx % 8 === 0) ? 'Lorem ipsum dolor sit amet' : 'Subtitle';
-			var randomColor = "000000".replace(/0/g,hex);
 			records.push({
 				selected: false,
 				overlayTransparent: this.transparency,
 				text: 'Item ' + idx + title,
 				subText: subTitle,
-				url: 'http://placehold.it/300x300/' + randomColor + '/ffffff&text=Image ' + idx
+				url: 'http://placehold.it/300x300/' + Math.floor((Math.random()*(0x1000000-0x101010))+0x101010).toString(16) + '/ffffff&text=Image ' + idx
 			});
 		}
 		// update our internal index so it will always generate unique values
