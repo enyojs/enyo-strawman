@@ -32,7 +32,8 @@ var locales = [
 	{locale: 'ar-SA', title: '<span class="light">- Arabic, RTL and standard font</span>'},
 	{locale: 'ur-PK', title: '<span class="light">- Urdu, RTL and custom Urdu font</span>'},
 	{locale: 'zh-Hant-HK', title: '<span class="light">- Traditional Chinese, custom Hant font</span>'},
-	{locale: 'ja-JP', title: '<span class="light">- Japanese, custom Japanese font</span>'}
+	{locale: 'ja-JP', title: '<span class="light">- Japanese, custom Japanese font</span>'},
+	{locale: 'en-JP', title: '<span class="light">- English, custom Japanese font</span>'}
 ];
 
 var LocaleItem = kind({
