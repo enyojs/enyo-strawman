@@ -159,7 +159,7 @@ module.exports = kind({
 					{kind: Button, content: 'Back', small: true, href: './', mixins: [LinkSupport]}
 				],
 				components: [
-					{name: 'list', kind: DataList, components: [
+					{name: 'list', kind: DataList, fixedChildSize: 63, components: [
 						{kind: SampleListItem, bindings: [
 							{from: 'model.new', to: 'new'},
 							{from: 'model.label', to: 'content'},
