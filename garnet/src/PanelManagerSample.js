@@ -18,6 +18,31 @@ var
 	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; margin: ' + ri.scale(20) + 'px',
 	buttonStyle = 'margin: ' + ri.scale(30) + 'px ' + ri.scale(10) + 'px;';
 
+var List = kind({
+	kind: SampleDataListPanel,
+	title: true,
+	titleContent: 'Fixed Floating',
+	events: {
+		onShare: ''
+	},
+	commandBarComponents: [
+		{src: '@../assets/btn_share.svg', ontap: 'doShare'}
+	],
+	// Illustrating the 4 lifecycle methods that are invoked by garnet/PanelManager on this panel
+	activate: function (event) {
+		this.log('Activating the List', event.dragging ? 'during drag' : '');
+	},
+	deactivate: function (event) {
+		this.log('Deactivating the List', event.dragging ? 'during drag' : '');
+	},
+	activated: function (event) {
+		this.log('List has been activated');
+	},
+	deactivated: function (event) {
+		this.log('List has been deactivated');
+	}
+});
+
 module.exports = kind({
 	name: 'g.sample.PanelManagerSample',
 	horizontal: 'hidden',
@@ -29,9 +54,7 @@ module.exports = kind({
 		{content: 'Fixed + Push Floating', classes: 'g-sample-subheader'},
 		{style: panelStyle, components: [
 			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', pageIndicator: true, components: [
-				{name: 'fixedFloatingList', kind: SampleDataListPanel, title: true, titleContent: 'Fixed Floating', commandBarComponents: [
-					{src: '@../assets/btn_share.svg', ontap: 'handleShareTapped'}
-				]},
+				{name: 'fixedFloatingList', kind: List, onShare: 'handleShareTapped'},
 				{components: [
 					{kind: Scroller, classes: 'enyo-fit', components: [
 						{kind: Button, content: 'Push Another Panel', style: buttonStyle, ontap: 'handlePushTapped'}
