@@ -65,17 +65,20 @@ module.exports = kind({
 	components: [
 		{kind: LightPanels, name: 'panels'}
 	],
-	rendered: kind.inherit(function (sup) {
+	create: kind.inherit(function (sup) {
 		return function () {
+			var startIndex = 0,
+				info;
+
 			sup.apply(this, arguments);
-			this.pushSinglePanel(true);
+
+			info = this.generatePanelInfo(startIndex);
+			this.$.panels.createComponent(info, {owner: this});
+			this.$.panels.set('index', startIndex);
 		};
 	}),
-	pushSinglePanel: function (direct) {
-		var panels = this.$.panels,
-			id = panels.getPanels().length;
-
-		panels.pushPanel({
+	generatePanelInfo: function (id) {
+		return {
 			classes: 'light-panel',
 			panelId: 'panel-' + id,
 			title: 'This is the extended and long title of panel ' + id,
@@ -111,7 +114,14 @@ module.exports = kind({
 					{kind: Item, content: 'Item Twenty', ontap: 'nextTapped'}
 				]}
 			]
-		}, {owner: this}, {direct: direct});
+		};
+	},
+	pushSinglePanel: function (direct) {
+		var panels = this.$.panels,
+			id = panels.getPanels().length,
+			info = this.generatePanelInfo(id);
+
+		this.$.panels.pushPanel(info, {owner: this}, {direct: direct});
 	},
 	prevTapped: function (sender, ev) {
 		this.$.panels.previous();
