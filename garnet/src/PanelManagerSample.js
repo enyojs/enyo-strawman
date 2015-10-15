@@ -3,10 +3,10 @@ require('garnet');
 var
 	kind = require('enyo/kind'),
 	ri = require('enyo/resolution'),
-	Button = require('enyo/Button'),
 	Collection = require('enyo/Collection');
 
 var
+	Button = require('garnet/Button'),
 	Item = require('garnet/Item'),
 	Scroller = require('garnet/Scroller'),
 	PanelManager = require('garnet/PanelManager');
@@ -83,7 +83,8 @@ module.exports = kind({
 			name: 'method',
 			owner: this,
 			components: [
-				{content: 'Enter message here ...'}
+				{content: 'Enter message here ...'},
+				{kind: Button, content: 'Done', ontap: 'handleDismissTapped'}
 			]
 		});
 	},
@@ -126,6 +127,9 @@ module.exports = kind({
 			this.removedView.destroy();
 			this.removedView = null;
 		}
+	},
+	handleDismissTapped: function () {
+		this.$.fixedFloating.dismissFloatingPanels();
 	},
 	create: kind.inherit(function(sup) {
 		return function() {
