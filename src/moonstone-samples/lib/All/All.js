@@ -157,7 +157,7 @@ module.exports = kind({
 		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
 				headerComponents: [
-					{kind: Button, content: 'Back', small: true, href: './', mixins: [LinkSupport]}
+					{kind: Button, content: 'Back', small: true, href: 'index.html', mixins: [LinkSupport]}
 				],
 				components: [
 					{name: 'list', kind: DataList, fixedChildSize: 63, components: [
@@ -262,9 +262,13 @@ module.exports = kind({
 		this.render();
 	},
 	backToList: function () {
-		this.set('sample', null);
-		this.$.router.trigger({location: this.get('location'), change: true});
-		this.checkLocale();
+		if (this.get('sample')) {
+			this.set('sample', null);
+			this.$.router.trigger({location: this.get('location'), change: true});
+			this.checkLocale();
+		} else {
+			window.location.href = 'index.html';
+		}
 	},
 	reload: function () {
 		window.location.reload();
