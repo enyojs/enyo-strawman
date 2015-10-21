@@ -61,6 +61,7 @@ var
 		ScrollerTextSample					: require('./lib/ScrollerTextSample'),
 		ScrollerVerticalSample				: require('./lib/ScrollerVerticalSample'),
 		SelectableItemSample				: require('./lib/SelectableItemSample'),
+		ShowingTransitionSample				: require('./lib/ShowingTransitionSample'),
 		SimpleIntegerPickerSample			: require('./lib/SimpleIntegerPickerSample'),
 		SimplePickerSample					: require('./lib/SimplePickerSample'),
 		SliderSample						: require('./lib/SliderSample'),
