@@ -9,10 +9,10 @@ var
 
 module.exports = kind({
 	name: 'enyo.sample.ListBasicSample',
-	classes: 'list-sample enyo-fit',
+	classes: 'list-sample enyo-fit enyo-unselectable',
 	components: [
 		{name: 'list', kind: List, count: 20000, multiSelect: false, classes: 'enyo-fit list-sample-list', onSetupItem: 'setupItem', components: [
-			{name: 'item', classes: 'list-sample-item enyo-border-box', components: [
+			{name: 'item', ondown: 'down', onleave: 'up', classes: 'list-sample-item enyo-border-box', components: [
 				{name: 'index', classes: 'list-sample-index'},
 				{name: 'name'}
 			]}
@@ -33,5 +33,14 @@ module.exports = kind({
 		this.$.name.setContent(n);
 		this.$.index.setContent(ni);
 		return true;
+	},
+	down: function(sender, event) {
+		this.$.list.lockRow();
+		this.$.list.prepareRow(event.index);
+		sender.addClass('pressed');
+	},
+	up: function(sender, event) {
+		sender.removeClass('pressed');
+		this.$.list.lockRow();
 	}
 });
