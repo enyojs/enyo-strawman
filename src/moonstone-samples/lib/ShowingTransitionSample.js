@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	Image = require('enyo/Image');
+	Img = require('enyo/Image');
 
 var
 	Scroller = require('moonstone/Scroller'),
@@ -45,7 +45,7 @@ module.exports = kind({
 		]},
 		{name: 'popup', kind: PopupMockup, components: [
 			{content: 'Commense the jiggling!'},
-			{kind: Image, src: 'http://static.fjcdn.com/gifs/Shake+it_945873_5126044.gif'}
+			{kind: Img, src: 'http://static.fjcdn.com/gifs/Shake+it_945873_5126044.gif'}
 		]}
 	],
 	togglePane: function (sender, ev) {
