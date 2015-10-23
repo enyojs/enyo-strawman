@@ -27,7 +27,7 @@ module.exports = kind({
 				onSetupItem: "setupItem",
 				count: 20,
 				components: [
-					{ondown: "pressed", onup:"unpressed", ondragfinish: "unpressed", /*onleave: "unpressed",*/ ontap: "itemTapped", name: "tile", kind: GridListImageItem, source: "@../assets/default-music.png"}
+					{ondown: "pressed", onup:"unpressed", ondragout: "unpressed", ontap: "itemTapped", name: "tile", kind: GridListImageItem, source: "@../assets/default-music.png"}
 				],
 				reorderComponents: [
 					{name: "reorderContent", classes: "enyo-fit reorderDragger", components: [
@@ -38,6 +38,7 @@ module.exports = kind({
 		]}
 	],
 	names: [],
+	isPressed: false, // For preventing remained pressed state when user taps item with two-finger
 	create: kind.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
@@ -100,13 +101,17 @@ module.exports = kind({
 		return true;
 	},
 	pressed: function(inSender, inEvent) {
-		this.$.list.lockRow();
-		this.$.list.prepareRow(inEvent.index);
-		inSender.addClass('pressed');
+		if (!this.isPressed) {
+			this.$.list.lockRow();
+			this.$.list.prepareRow(inEvent.index);
+			inSender.addClass('pressed');
+			this.isPressed = true;
+		}
 	},
 	unpressed: function(inSender, inEvent) {
 		inSender.removeClass('pressed');
 		this.$.list.lockRow();
+		this.isPressed = false;
 	},
 	itemTapped: function() {
 		playFeedback();
