@@ -17,6 +17,8 @@ module.exports = kind({
 				onup: 'unpressed',
 				onleave: 'unpressed',
 				ontap: 'itemTapped',
+				ongesturechange: 'unpressed',
+				ongestureend: 'unpressed',
 				kind: GridListImageItem,
 				source: '@../assets/default-music.png',
 				bindings: [

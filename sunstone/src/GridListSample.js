@@ -12,39 +12,40 @@ var
 	Header = require('sunstone/Header');
 
 module.exports = kind({
-	name: "enyo.sample.GridListSample",
+	name: 'enyo.sample.GridListSample',
 	kind: FittableRows,
-	classes: "enyo-unselectable enyo-fit",
+	classes: 'enyo-unselectable enyo-fit',
 	components: [
-		{kind: Header, title:"Header"},
-		{fit:true, classes:"watch-wrapper", components:[
+		{kind: Header, title: 'Header'},
+		{fit: true, classes: 'watch-wrapper', components: [
 			{
-				name: "list",
+				name: 'list',
 				kind: GridList,
 				reorderable: true,
-				onReorder: "listReorder",
-				onSetupReorderComponents: "setupReorderComponents",
-				onSetupItem: "setupItem",
+				onReorder: 'listReorder',
+				onSetupReorderComponents: 'setupReorderComponents',
+				onSetupItem: 'setupItem',
 				count: 20,
 				components: [
-					{ondown: "pressed", onup:"unpressed", ondragfinish: "unpressed", /*onleave: "unpressed",*/ ontap: "itemTapped", name: "tile", kind: GridListImageItem, source: "@../assets/default-music.png"}
+					{ondown: 'pressed', onup:'unpressed', onrelease: 'unpressed', ondragout: 'unpressed', ontap: 'itemTapped', name: 'tile', kind: GridListImageItem, source: '@../assets/default-music.png'}
 				],
 				reorderComponents: [
-					{name: "reorderContent", classes: "enyo-fit reorderDragger", components: [
-						{name: "reorderTile", kind: GridListImageItem}
+					{name: 'reorderContent', classes: 'enyo-fit reorderDragger', components: [
+						{name: 'reorderTile', kind: GridListImageItem}
 					]}
 				]
 			}
 		]}
 	],
 	names: [],
+	isPressed: false, // For preventing remained pressed state when user taps item with two-finger
 	create: kind.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
 			// make some mock data if we have none for this row
 			var i = 0;
 			for (; i < this.$.list.count; i++) {
-				this.names.push({name:"Item " + i});
+				this.names.push({name:'Item ' + i});
 			}
 		};
 	}),
@@ -88,7 +89,7 @@ module.exports = kind({
 			return;
 		}
 		var item = this.names[i];
-		this.$.reorderTile.setSource("@../assets/default-music.png");
+		this.$.reorderTile.setSource('@../assets/default-music.png');
 		this.$.reorderTile.setCaption(item.name);
 		this.$.reorderTile.setSelected(this.$.list.isSelected(i));
 	},
@@ -100,13 +101,17 @@ module.exports = kind({
 		return true;
 	},
 	pressed: function(inSender, inEvent) {
-		this.$.list.lockRow();
-		this.$.list.prepareRow(inEvent.index);
-		inSender.addClass('pressed');
+		if (!this.isPressed) {
+			this.$.list.lockRow();
+			this.$.list.prepareRow(inEvent.index);
+			inSender.addClass('pressed');
+			this.isPressed = true;
+		}
 	},
 	unpressed: function(inSender, inEvent) {
 		inSender.removeClass('pressed');
 		this.$.list.lockRow();
+		this.isPressed = false;
 	},
 	itemTapped: function() {
 		playFeedback();

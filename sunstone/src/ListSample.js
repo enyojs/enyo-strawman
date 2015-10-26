@@ -29,7 +29,7 @@ module.exports = kind({
 			onReorder: 'listReorder',
 			onSetupReorderComponents: 'setupReorderComponents',
 			components: [
-				{ondown: 'pressed', onup: 'unpressed', onleave: 'unpressed', ontap: 'itemTapped', name: 'item', classes: 'list-item', components: [
+				{ondown: 'pressed', onup: 'unpressed', onrelease: 'unpressed', ondragout: 'unpressed', ontap: 'itemTapped', name: 'item', classes: 'list-item', components: [
 					{name: 'name'},
 					{name: 'checkbox', kind: Checkbox, onchange: 'checkboxChanged', ondown: 'checkboxDown'}
 				]}
@@ -43,6 +43,7 @@ module.exports = kind({
 		}
 	],
 	names: [],
+	isPressed: false, // For preventing remained pressed state when user taps item with two-finger
 	create: kind.inherit(function(sup) {
 		return function() {
 			var i;
@@ -107,11 +108,14 @@ module.exports = kind({
 		return true;
 	},
 	pressed: function (inSender, e) {
-		this.$.list.lockRow();
-		this.$.list.prepareRow(e.index);
-		inSender.addClass('pressed');
-		if (e.originator instanceof Checkbox) {
-			this.waterfallDown('ondown', e, inSender);
+		if (!this.isPressed) {
+			this.isPressed = true;
+			this.$.list.lockRow();
+			this.$.list.prepareRow(e.index);
+			inSender.addClass('pressed');
+			if (e.originator instanceof Checkbox) {
+				this.waterfallDown('ondown', e, inSender);
+			}
 		}
 	},
 	unpressed: function (inSender, e) {
@@ -119,6 +123,7 @@ module.exports = kind({
 		if (!(e.originator instanceof Checkbox)) {
 			this.$.list.lockRow();
 		}
+		this.isPressed = false;
 	},
 	itemTapped: function (inSender, e) {
 		if (!(e.originator instanceof Checkbox)) {
