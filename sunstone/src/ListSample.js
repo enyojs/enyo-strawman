@@ -29,7 +29,7 @@ module.exports = kind({
 			onReorder: 'listReorder',
 			onSetupReorderComponents: 'setupReorderComponents',
 			components: [
-				{ondown: 'pressed', onup: 'unpressed', ondragout: 'unpressed', ontap: 'itemTapped', name: 'item', classes: 'list-item', components: [
+				{ondown: 'pressed', onup: 'unpressed', onrelease: 'unpressed', ondragout: 'unpressed', ontap: 'itemTapped', name: 'item', classes: 'list-item', components: [
 					{name: 'name'},
 					{name: 'checkbox', kind: Checkbox, onchange: 'checkboxChanged', ondown: 'checkboxDown'}
 				]}

@@ -12,26 +12,26 @@ var
 	Header = require('sunstone/Header');
 
 module.exports = kind({
-	name: "enyo.sample.GridListSample",
+	name: 'enyo.sample.GridListSample',
 	kind: FittableRows,
-	classes: "enyo-unselectable enyo-fit",
+	classes: 'enyo-unselectable enyo-fit',
 	components: [
-		{kind: Header, title:"Header"},
-		{fit:true, classes:"watch-wrapper", components:[
+		{kind: Header, title: 'Header'},
+		{fit: true, classes: 'watch-wrapper', components: [
 			{
-				name: "list",
+				name: 'list',
 				kind: GridList,
 				reorderable: true,
-				onReorder: "listReorder",
-				onSetupReorderComponents: "setupReorderComponents",
-				onSetupItem: "setupItem",
+				onReorder: 'listReorder',
+				onSetupReorderComponents: 'setupReorderComponents',
+				onSetupItem: 'setupItem',
 				count: 20,
 				components: [
-					{ondown: "pressed", onup:"unpressed", ondragout: "unpressed", ontap: "itemTapped", name: "tile", kind: GridListImageItem, source: "@../assets/default-music.png"}
+					{ondown: 'pressed', onup:'unpressed', onrelease: 'unpressed', ondragout: 'unpressed', ontap: 'itemTapped', name: 'tile', kind: GridListImageItem, source: '@../assets/default-music.png'}
 				],
 				reorderComponents: [
-					{name: "reorderContent", classes: "enyo-fit reorderDragger", components: [
-						{name: "reorderTile", kind: GridListImageItem}
+					{name: 'reorderContent', classes: 'enyo-fit reorderDragger', components: [
+						{name: 'reorderTile', kind: GridListImageItem}
 					]}
 				]
 			}
@@ -45,7 +45,7 @@ module.exports = kind({
 			// make some mock data if we have none for this row
 			var i = 0;
 			for (; i < this.$.list.count; i++) {
-				this.names.push({name:"Item " + i});
+				this.names.push({name:'Item ' + i});
 			}
 		};
 	}),
@@ -89,7 +89,7 @@ module.exports = kind({
 			return;
 		}
 		var item = this.names[i];
-		this.$.reorderTile.setSource("@../assets/default-music.png");
+		this.$.reorderTile.setSource('@../assets/default-music.png');
 		this.$.reorderTile.setCaption(item.name);
 		this.$.reorderTile.setSelected(this.$.list.isSelected(i));
 	},
