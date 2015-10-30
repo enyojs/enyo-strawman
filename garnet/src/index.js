@@ -26,6 +26,8 @@ var samples = {
 	MenuScrollerSample              : require('./MenuScrollerSample'),
 	MultiPickerPanelSample          : require('./MultiPickerPanelSample'),
 	PageIndicatorSample             : require('./PageIndicatorSample'),
+	PanelManagerSample              : require('./PanelManagerSample'),
+	PanelManagerLegacySample         : require('./PanelManagerLegacySample'),
 	PanelSetDepthInMoveSample       : require('./PanelSetDepthInMoveSample'),
 	PanelSetDepthtInDepthSample     : require('./PanelSetDepthtInDepthSample'),
 	PanelSetMoveInDepthSample       : require('./PanelSetMoveInDepthSample'),
