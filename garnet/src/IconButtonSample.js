@@ -17,15 +17,15 @@ var IconButtonPanel = kind({
 	style: "border-radius: 50%; background-color: #000000;",
 	components: [
 		{classes: "g-layout-absolute-center", style: "width: " + ri.scale(255) + "px; height: " + ri.scale(230) + "px;", components: [
-			{content: "Icon Buttons : ", style: "margin-left: " + ri.scale(10) + "px; font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
+			{content: "Icon Buttons : ", accessibilityLabel: 'check icon', style: "margin-left: " + ri.scale(10) + "px; font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
 			{tag: "br"},
-			{kind: IconButton, src: "@../assets/btn_done.svg", ontap: "tapButton"},
-			{kind: IconButton, src: "@../assets/btn_done.svg", disabled: true, ontap: "tapButton"},
+			{kind: IconButton, accessibilityLabel: 'check icon', src: "@../assets/btn_done.svg", ontap: "tapButton"},
+			{kind: IconButton, accessibilityLabel: 'check icon', src: "@../assets/btn_done.svg", disabled: true, ontap: "tapButton"},
 			{content: "Grouped Icon Buttons : ", style: "font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
 			{kind: Group, onActivate:"iconGroupActivated", components: [
-				{kind: IconButton, src: "@../assets/btn_done.svg", classes: "g-common-button-size-small", active: true},
-				{kind: IconButton, src: "@../assets/btn_done.svg", classes: "g-common-button-size-normal"},
-				{kind: IconButton, src: "@../assets/btn_done.svg", classes: "g-common-button-size-large"}
+				{kind: IconButton, accessibilityLabel: 'check icon', src: "@../assets/btn_done.svg", classes: "g-common-button-size-small", active: true},
+				{kind: IconButton, accessibilityLabel: 'check icon', src: "@../assets/btn_done.svg", classes: "g-common-button-size-normal"},
+				{kind: IconButton, accessibilityLabel: 'check icon', src: "@../assets/btn_done.svg", classes: "g-common-button-size-large"}
 			]}
 		]}
 	],
