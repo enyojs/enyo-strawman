@@ -7,6 +7,7 @@ var
 	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
+	Title = require('garnet/Title'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
 var DataGridListCardsImageItem = kind({
@@ -79,8 +80,6 @@ var DataGridListCardsCircleItem = kind({
 var DataGridListCardsPanel = kind({
 	name: 'g.sample.DataGridListCardsPanel',
 	kind: Panel,
-	title: true,
-	titleContent: 'Title',
 	knob: true,
 	classes: 'g-layout-absolute-wrapper',
 	style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; background-color: #000000;',
@@ -90,12 +89,12 @@ var DataGridListCardsPanel = kind({
 			kind: DataGridList,
 			controlsPerPage: 3,
 			selection: true,
-			multipleSelection: false,
 			spacing: 0,
 			minHeight: ri.scale(232),
 			minWidth: ri.scale(212),
 			scrollerOptions: {maxHeight: ri.scale(370) + 'px'},
 			style: 'width: ' + ri.scale(212) + 'px; height: ' + ri.scale(320) + 'px; padding-top: ' + ri.scale(6) + 'px; margin: auto; background-color: #000000;',
+			headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
 			components: [
 				{kind: DataGridListCardsItem}
 			]
@@ -109,8 +108,6 @@ var DataGridListCardsPanel = kind({
 var DataGridListCardsCirclePanel = kind({
 	name: 'g.sample.DataGridListCardsCirclePanel',
 	kind: Panel,
-	title: true,
-	titleContent: 'Title',
 	knob: true,
 	classes: 'g-layout-absolute-wrapper',
 	style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; background-color: #000000;',
@@ -120,12 +117,12 @@ var DataGridListCardsCirclePanel = kind({
 			kind: DataGridList,
 			controlsPerPage: 3,
 			selection: true,
-			multipleSelection: false,
 			spacing: 0,
 			minHeight: ri.scale(252),
 			minWidth: ri.scale(212),
 			scrollerOptions: {maxHeight: ri.scale(370) + 'px'},
 			style: 'width: ' + ri.scale(212) + 'px; height: ' + ri.scale(320) + 'px; padding-top: ' + ri.scale(6) + 'px; margin: auto; background-color: #000000;',
+			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: DataGridListCardsCircleItem}
 			]

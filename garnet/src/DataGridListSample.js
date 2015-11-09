@@ -8,6 +8,7 @@ var
 	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
+	Title = require('garnet/Title'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
 var DataGridListImageItem = kind({
@@ -97,11 +98,8 @@ var DataGridListCircleItem = kind({
 var DataGridListPanel = kind({
 	name: 'g.sample.DataGridListPanel',
 	kind: Panel,
-	title: true,
-	titleContent: 'Title',
 	knob: true,
 	selection: false,
-	multipleSelection: false,
 	classes: 'g-layout-absolute-wrapper',
 	style: 'background-color: #000000;',
 	components: [{
@@ -110,6 +108,7 @@ var DataGridListPanel = kind({
 		controlsPerPage: 8,
 		spacing: 0,
 		style: 'width: ' + ri.scale(232) + 'px; height: ' + ri.scale(320) + 'px; margin: auto; background-color: #000000;',
+		headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
 		components: [{
 			kind: DataGridListItem
 		}]
@@ -122,7 +121,7 @@ var DataGridListPanel = kind({
 		return function() {
 			sup.apply(this, arguments);
 			this.$.list.set('selection', this.selection);
-			this.$.list.set('multipleSelection', this.multipleSelection);
+			this.$.list.set('selectionType', this.selectionType);
 		};
 	})
 });
@@ -137,6 +136,7 @@ var DataGridListCirclePanel = kind({
 		spacing: 0,
 		minHeight: 106,
 		style: 'width: ' + ri.scale(230) + 'px; height: ' + ri.scale(320) + 'px; margin: auto; background-color: #000000;',
+		headerComponents: [{kind: Title, content: 'Title'}],
 		components: [{
 			kind: DataGridListCircleItem
 		}]
@@ -158,13 +158,13 @@ var DataGridListSample = module.exports = kind({
 			kind: DataGridListCirclePanel,
 			style: 'position: relative; display: inline-block; margin-right: ' + ri.scale(20) + 'px;',
 			selection: true,
-			multipleSelection: true
+			selectionType: 'multi'
 		}, {
 			name: 'gridListMulti',
 			kind: DataGridListPanel,
 			style: 'position: relative; display: inline-block; margin-right: ' + ri.scale(20) + 'px;',
 			selection: true,
-			multipleSelection: true
+			selectionType: 'multi'
 		}, {
 			name: 'gridListSingleCircle',
 			kind: DataGridListCirclePanel,
