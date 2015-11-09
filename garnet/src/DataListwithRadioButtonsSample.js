@@ -8,6 +8,7 @@ var
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
+	Title = require('garnet/Title'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
 var RadioButtonItemBase = kind({
@@ -62,8 +63,6 @@ var RadioDataListPanel = kind({
 	events: {
 		onResult: ''
 	},
-	title: true,
-	titleContent: 'DataList with Radio Buttons',
 	components: [
 		{
 			name: 'list',
@@ -72,6 +71,7 @@ var RadioDataListPanel = kind({
 			groupSelection: true,
 			selection: true,
 			style: 'background-color: #000000;',
+			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
 			],
