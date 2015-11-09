@@ -6,8 +6,7 @@ var
 	ri = require('enyo/resolution'),
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
-	Scroller = require('garnet/Scroller'),
-	Title = require('garnet/Title');
+	Scroller = require('garnet/Scroller');
 
 var DefaultCommandBarPanel = kind({
 	name: 'g.sample.DefaultCommandBarPanel',
@@ -15,13 +14,14 @@ var DefaultCommandBarPanel = kind({
 	events: {
 		onResult: ''
 	},
+	title: true,
+	titleContent: 'Title',
 	components: [
 		{
 			name: 'defaultScroller',
 			kind: Scroller,
 			classes: 'enyo-fit g-layout-text-center',
 			components: [
-				{kind: Title, content: 'Title'},
 				{style: 'padding-top: 60px; width: 200px; margin: auto;', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
 				{kind: Button, style: 'margin: ' + ri.scale(20) + 'px 0 ' + ri.scale(116) + 'px;', content: 'OK!!!'}
 			]
@@ -43,13 +43,14 @@ var SingleCommandBarPanel = kind({
 	events: {
 		onResult: ''
 	},
+	title: true,
+	titleContent: 'Title',
 	components: [
 		{
-			name: 'singleScroller',
+			name: 'sigleScroller',
 			kind: Scroller,
 			classes: 'enyo-fit g-layout-text-center',
 			components: [
-				{kind: Title, content: 'Title'},
 				{style: 'padding-top: 60px; width: 200px; margin: auto;', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
 				{kind: Button, style: 'margin: ' + ri.scale(20) + 'px 0 ' + ri.scale(116) + 'px;', content: 'OK!!!'}
 			]
@@ -70,13 +71,14 @@ var CustomCommandBarPanel = kind({
 	events: {
 		onResult: ''
 	},
+	title: true,
+	titleContent: 'Title',
 	components: [
 		{
-			name: 'singleScroller',
+			name: 'sigleScroller',
 			kind: Scroller,
 			classes: 'enyo-fit g-layout-text-center',
 			components: [
-				{kind: Title, content: 'Title'},
 				{style: 'padding-top: 60px; width: 200px; margin: auto;', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
 				{kind: Button, style: 'margin: ' + ri.scale(20) + 'px 0 ' + ri.scale(116) + 'px;', content: 'OK!!!'}
 			]

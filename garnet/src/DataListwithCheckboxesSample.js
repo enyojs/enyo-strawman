@@ -8,7 +8,6 @@ var
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
-	Title = require('garnet/Title'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
 var CheckboxItemBase = kind({
@@ -58,15 +57,16 @@ var CheckableDataListPanel = kind({
 	events: {
 		onResult: ''
 	},
+	title: true,
+	titleContent: 'Title',
 	components: [
 		{
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
 			selection: true,
-			selectionType: 'multi',
+			multipleSelection: true,
 			style: 'background-color: #000000;',
-			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: CheckboxItem, ontap: 'tapItem'}
 			],

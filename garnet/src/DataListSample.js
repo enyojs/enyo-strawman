@@ -11,8 +11,7 @@ var
 	Checkbox = require('garnet/Checkbox'),
 	Button = require('garnet/Button'),
 	IconMenuPopup = require('garnet/IconMenuPopup'),
-	Panel = require('garnet/Panel'),
-	Title = require('garnet/Title');
+	Panel = require('garnet/Panel');
 
 var DataListItem = kind({
 	name: 'g.sample.DataListItem',
@@ -55,6 +54,8 @@ var DataListItem = kind({
 var DataListPanel = kind({
 	name: 'g.sample.DataListPanel',
 	kind: Panel,
+	title: true,
+	titleContent: 'Title',
 	knob: true,
 	components: [
 		{
@@ -62,7 +63,13 @@ var DataListPanel = kind({
 			kind: DataList,
 			controlsPerPage: 4,
 			style: 'background-color: #000000;',
-			headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
+			headerComponents: [
+				{style: 'height: ' + ri.scale(60) + 'px;'},
+				{kind: ToolDecorator, style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(71) + 'px; border-bottom: ' + ri.scale(1) + 'px solid #202328; ', ontap: 'preventSound', components: [
+					{content: 'Activated', style: 'width: ' + ri.scale(151) + 'px; padding: 0 ' + ri.scale(5) + 'px 0 ' + ri.scale(58) + 'px; line-height: ' + ri.scale(71) + 'px;'},
+					{kind: Checkbox, style: 'width: ' + ri.scale(48) + 'px;'}
+				]}
+			],
 			components: [
 				{kind: DataListItem, onlongpress: 'showPopup'}
 			],
