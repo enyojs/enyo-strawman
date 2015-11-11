@@ -7,7 +7,7 @@ var
 var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
-	IconMenuPanel = require('garnet/IconMenuPanel'),
+	ContextualPanel = require('garnet/ContextualPanel'),
 	Scroller = require('garnet/Scroller'),
 	PanelManager = require('garnet/PanelManager');
 
@@ -16,7 +16,7 @@ var
 
 var OneButtonPanel = kind({
 	name: 'g.sample.OneButtonPanel',
-	kind: IconMenuPanel,
+	kind: ContextualPanel,
 	events: {
 		onHidePanel: ''
 	},
@@ -39,7 +39,7 @@ var OneButtonPanel = kind({
 
 var TwoButtonPanel = kind({
 	name: 'g.sample.TwoButtonPanel',
-	kind: IconMenuPanel,
+	kind: ContextualPanel,
 	events: {
 		onHidePanel: ''
 	},
@@ -69,7 +69,7 @@ var TwoButtonPanel = kind({
 
 var ThreeButtonPanel = kind({
 	name: 'g.sample.ThreeButtonPanel',
-	kind: IconMenuPanel,
+	kind: ContextualPanel,
 	events: {
 		onHidePanel: ''
 	},
@@ -103,8 +103,8 @@ var ThreeButtonPanel = kind({
 	}
 });
 
-var IconMenuBasePanel = kind({
-	name: 'g.sample.IconMenuBasePanel',
+var ContextualBasePanel = kind({
+	name: 'g.sample.ContextualBasePanel',
 	kind: Panel,
 	events: {
 		onShowPanel: ''
@@ -124,17 +124,17 @@ var IconMenuBasePanel = kind({
 });
 
 module.exports = kind({
-	name: 'g.sample.IconMenuPanelSample',
+	name: 'g.sample.ContextualPanelSample',
 	horizontal: 'hidden',
 	classes: 'enyo-unselectable enyo-fit garnet g-sample',
 	kind: Scroller,
 	components: [
-		{content: '< IconMenuPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
+		{content: '< ContextualPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
-		{content: 'IconMenu with 1 button / 2 buttons / 3 buttons', classes: 'g-sample-subheader'},
+		{content: 'Contextual with 1 button / 2 buttons / 3 buttons', classes: 'g-sample-subheader'},
 		{style: panelStyle, components: [
 			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', components: [
-				{name: 'fixedFloatingPanel', kind: IconMenuBasePanel, onShowPanel: 'handleShow'}
+				{name: 'fixedFloatingPanel', kind: ContextualBasePanel, onShowPanel: 'handleShow'}
 			]}
 		]},
 		{style: 'position: fixed; width: 100%; min-height: +' + ri.scale(160) + 'px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;', classes: 'g-sample-result', components: [
