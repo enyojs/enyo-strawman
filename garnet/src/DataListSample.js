@@ -17,17 +17,10 @@ var DataListItem = kind({
 	name: 'g.sample.DataListItem',
 	kind: Item,
 	classes: 'g-sample-datalist-item',
-	handlers: {
-		onItemDown: 'itemDown'
-	},
-	published: {
-		selected: false
-	},
 	components: [
 		{name: 'iconUrl', kind: Icon, classes: 'g-sample-datalist-item-icon'},
 		{name: 'albumTitle', classes: 'g-sample-datalist-item-title'},
-		{name: 'albumGenre', classes: 'g-sample-datalist-item-genre'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{name: 'albumGenre', classes: 'g-sample-datalist-item-genre'}
 	],
 	bindings: [
 		{from: '.model.iconUrl', to: '.$.iconUrl.src'},
@@ -38,16 +31,11 @@ var DataListItem = kind({
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.selectedChanged();
+			this.disabledChanged();
 		};
 	}),
-	selectedChanged: function() {
-		this.addRemoveClass('selected', this.selected);
-	},
 	disabledChanged: function() {
 		this.addRemoveClass('disabled', this.disabled);
-	},
-	itemDown: function(inSender, inEvent) {
 	}
 });
 
@@ -62,7 +50,7 @@ var DataListPanel = kind({
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
-			style: 'background-color: #000000;',
+			classes: 'g-sample-datalist',
 			headerComponents: [
 				{style: 'height: ' + ri.scale(60) + 'px;'},
 				{kind: ToolDecorator, style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(71) + 'px; border-bottom: ' + ri.scale(1) + 'px solid #202328; ', ontap: 'preventSound', components: [
@@ -74,7 +62,7 @@ var DataListPanel = kind({
 				{kind: DataListItem, onlongpress: 'showPopup'}
 			],
 			footerComponents: [
-				{kind: Button, content: 'Text', style: 'width: ' + ri.scale(122) + 'px; height: ' + ri.scale(52) + 'px; margin: ' + ri.scale(21) + 'px ' + ri.scale(99) +'px ' + ri.scale(21) +'px;'}
+				{kind: Button, content: 'Text', classes: 'g-sample-datalist-footer'}
 			]
 		},
 		{
@@ -111,7 +99,8 @@ var DataListPanel = kind({
 		this.$.popup.show();
 	},
 	bindings: [
-		{from: '.collection', to: '.$.list.collection'}
+		{from: '.collection', to: '.$.list.collection'},
+		{from: '.circle', to: '.$.list.circle'}
 	]
 });
 
@@ -122,9 +111,13 @@ var DataListSample = module.exports = kind({
 		{content: '< Data List Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List', classes: 'g-sample-subheader'},
-		{name: 'listPanel', kind: DataListPanel, style: 'position: relative;'}
+		{style: 'position: relative; height: 100%;', components: [
+			{name: 'circleListPanel', kind: DataListPanel, circle: true, classes: 'g-sample-datalist-panel'},
+			{name: 'listPanel', kind: DataListPanel, classes: 'g-sample-datalist-panel'}
+		]}
 	],
 	bindings: [
+		{from: '.collection', to: '.$.circleListPanel.collection'},
 		{from: '.collection', to: '.$.listPanel.collection'}
 	],
 	create: kind.inherit(function(sup) {
