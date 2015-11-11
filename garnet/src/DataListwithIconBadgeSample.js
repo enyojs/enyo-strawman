@@ -8,7 +8,8 @@ var
 	Item = require('garnet/Item'),
 	Icon = require('garnet/Icon'),
 	DataList = require('garnet/DataList'),
-	Panel = require('garnet/Panel');
+	Panel = require('garnet/Panel'),
+	Title = require('garnet/Title');
 
 var IconBadgeItem = kind({
 	name: 'g.sample.IconBadgeItem',
@@ -59,8 +60,6 @@ var IconBadgeItem = kind({
 var IconBadgeDataListPanel = kind({
 	name: 'g.sample.IconBadgeDataListPanel',
 	kind: Panel,
-	title: true,
-	titleContent: 'Title',
 	knob: true,
 	components: [
 		{
@@ -70,6 +69,7 @@ var IconBadgeDataListPanel = kind({
 			selection: false,
 			multipleSelection: false,
 			style: 'background-color: #000000;',
+			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: IconBadgeItem}
 			]
