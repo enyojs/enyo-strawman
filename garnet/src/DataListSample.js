@@ -91,8 +91,7 @@ var DataListPanel = kind({
 		this.$.popup.show();
 	},
 	bindings: [
-		{from: '.collection', to: '.$.list.collection'},
-		{from: '.circle', to: '.$.list.circle'}
+		{from: '.collection', to: '.$.list.collection'}
 	]
 });
 
@@ -103,13 +102,9 @@ var DataListSample = module.exports = kind({
 		{content: '< Data List Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List', classes: 'g-sample-subheader'},
-		{style: 'position: relative; height: 100%;', components: [
-			{name: 'circleListPanel', kind: DataListPanel, circle: true, classes: 'g-sample-datalist-panel'},
-			{name: 'listPanel', kind: DataListPanel, classes: 'g-sample-datalist-panel'}
-		]}
+		{name: 'listPanel', kind: DataListPanel, classes: 'g-sample-datalist-panel'}
 	],
 	bindings: [
-		{from: '.collection', to: '.$.circleListPanel.collection'},
 		{from: '.collection', to: '.$.listPanel.collection'}
 	],
 	create: kind.inherit(function(sup) {
