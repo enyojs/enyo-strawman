@@ -10,7 +10,8 @@ var
 	Button = require('garnet/Button'),
 	IconMenuPopup = require('garnet/IconMenuPopup'),
 	Panel = require('garnet/Panel'),
-	Title = require('garnet/Title');
+	Title = require('garnet/Title'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var DataListItem = kind({
 	name: 'g.sample.DataListItem',
@@ -18,8 +19,8 @@ var DataListItem = kind({
 	classes: 'g-sample-datalist-item',
 	components: [
 		{name: 'iconUrl', kind: Icon, classes: 'g-sample-datalist-item-icon'},
-		{name: 'albumTitle', classes: 'g-sample-datalist-item-title'},
-		{name: 'albumGenre', classes: 'g-sample-datalist-item-genre'}
+		{name: 'albumTitle', mixins: [MarqueeSupport], classes: 'g-sample-datalist-item-title'},
+		{name: 'albumGenre', mixins: [MarqueeSupport], classes: 'g-sample-datalist-item-genre'}
 	],
 	bindings: [
 		{from: '.model.iconUrl', to: '.$.iconUrl.src'},
@@ -48,7 +49,7 @@ var DataListPanel = kind({
 			kind: DataList,
 			controlsPerPage: 4,
 			classes: 'g-sample-datalist',
-			headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
+			headerComponents: [{kind: Title, content: 'Title: long text will fade out', classes: 'g-sample-datalist-header'}],
 			components: [
 				{kind: DataListItem, onlongpress: 'showPopup'}
 			],
@@ -221,7 +222,7 @@ var DataListSample = module.exports = kind({
 		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Petersen', albumGenre: 'Pop'},
 		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Kristina', albumGenre: 'Ballad'},
 		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Barbra', albumGenre: 'Rock'},
-		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Tracey', albumGenre: 'Hiphop'}
+		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Looooooooooooong Title', albumGenre: 'Hiphop'}
 	]
 });
 
