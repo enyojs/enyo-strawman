@@ -5,6 +5,7 @@ var
 	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	Panel = require('garnet/Panel'),
+	Title = require('garnet/Title'),
 	DatePickerPanel = require('garnet/DatePickerPanel'),
 	FormButton = require('garnet/FormButton'),
 	FormInput = require('garnet/FormInput'),
@@ -31,14 +32,12 @@ var FormPanel = kind({
 		onOK: 'tapOK',
 		ontap: 'tapOK'
 	},
-	title: true,
-	titleContent: 'Title: long text will fade out',
 	style: 'position: relative; background-color: #000000;overflow: hidden;',
 	classes: 'g-common-width-height-fit g-layout-absolute-wrapper',
 	components: [
 		{classes: 'g-common-width-height-fit', style: 'overflow: hidden;', components: [
 			{kind: Scroller, scrollIndicatorEnabled: true, style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; border-radius: 50%; background-color: #000000;', components: [
-				{style: 'width: 100%; height: ' + ri.scale(57) + 'px;'},
+				{kind: Title, content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, content: 'Form Picker Buttons : <br>> Time Picker - current', allowHtml: 'true'},
 				{name: 'timePickerButton', kind: FormPickerButton, content: 'None', ontap: 'showTimePickerPopup'},
