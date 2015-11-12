@@ -1,25 +1,149 @@
 require('garnet');
 
 var
-	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
-	Collection = require('enyo/Collection.js'),
-	Panel = require('garnet/Panel'),
-	Title = require('garnet/Title'),
-	DatePickerPanel = require('garnet/DatePickerPanel'),
-	FormButton = require('garnet/FormButton'),
-	FormInput = require('garnet/FormInput'),
+	kind               = require('enyo/kind'),
+	ri                 = require('enyo/resolution'),
+	Collection         = require('enyo/Collection.js'),
+	Title              = require('garnet/Title'),
+	IconButton         = require('garnet/IconButton'),
+	FormButton         = require('garnet/FormButton'),
+	FormInput          = require('garnet/FormInput'),
 	FormInputDecorator = require('garnet/FormInputDecorator'),
-	FormLabel = require('garnet/FormLabel'),
-	FormPickerButton = require('garnet/FormPickerButton'),
-	FormToolDecorator = require('garnet/FormToolDecorator'),
-	IconButton = require('garnet/IconButton'),
-	MultiPickerPanel = require('garnet/MultiPickerPanel'),
-	Panel = require('garnet/Panel'),
-	PickerPanel = require('garnet/PickerPanel'),
-	Popup = require('garnet/Popup'),
-	Scroller = require('garnet/Scroller'),
-	TimePickerPanel = require('garnet/TimePickerPanel');
+	FormLabel          = require('garnet/FormLabel'),
+	FormPickerButton   = require('garnet/FormPickerButton'),
+	FormToolDecorator  = require('garnet/FormToolDecorator'),
+	Panel              = require('garnet/Panel'),
+	Scroller           = require('garnet/Scroller'),
+	TimePickerPanel    = require('garnet/TimePickerPanel'),
+	DatePickerPanel    = require('garnet/DatePickerPanel'),
+	PickerPanel        = require('garnet/PickerPanel'),
+	MultiPickerPanel   = require('garnet/MultiPickerPanel'),
+	PanelManager       = require('garnet/PanelManager'),
+
+	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block;';
+
+var Formatter = kind.singleton({
+	name: 'g.sample.Formatter',
+	/*
+	* From TimePickerPanel.value to FormPickerButton.content
+	*/
+	TimePickerPanel: function(val) {
+		var timestr;
+
+		if (val.hour < 10 && val.hour > 0) {
+			timestr = '0' + val.hour;
+		} else if (val.hour === 0) {
+			timestr = '12';
+		} else {
+			timestr = val.hour;
+		}
+		timestr += ':';
+		if (val.minute < 10 && val.minute >= 0) {
+			timestr += '0';
+		}
+		timestr += val.minute;
+		timestr += ' ';
+		timestr += val.meridiem;
+
+		return timestr;
+	},
+	/*
+	* From datePicker.value to FormPickerButton.content
+	*/
+	DatePickerPanel: function(val) {
+		return (val.getYear() + 1900) + '/' + (val.getMonth() + 1) + '/' + val.getDate();
+	},
+	/*
+	* From pickerPanel.value to FormPickerButton.content
+	*/
+	CollectionPickerPanel: function(val, data) {
+		var
+			item = val,
+			name = 'No item';
+
+		if (typeof val === 'number') {
+			return data[val].item;
+		}
+		if (item !== null && item !== undefined) {
+			name = item.attributes.item;
+		}
+
+		return name;
+	},
+	/*
+	* From multiPickerPanel.value to FormPickerButton.content
+	*/
+	CollectionMultiPickerPanel: function(val, data) {
+		var
+			items = val,
+			names = '',
+			i;
+
+		if (val instanceof Array) {
+			var multipleSelection = [];
+
+			for (var i = 0; i <val.length; i++) {
+				multipleSelection[i] = data[val[i]].item;
+			}
+			return multipleSelection.join(', ');
+		}
+		if (items !== null && items !== undefined && items.length > 0) {
+			for (i = 0; i < items.length; i++) {
+				names += ', ' + items[i].attributes.item;
+			}
+			names = names.slice(2);
+		} else {
+			names = 'No items';
+		}
+
+		return names;
+	}
+});
+
+var CollectionPickerPanel = kind({
+	name: 'g.sample.CollectionPickerPanel',
+	kind: PickerPanel,
+	create: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.collection = new Collection(this.app.data);
+		};
+	})
+});
+
+var CollectionMultiPickerPanel = kind({
+	name: 'g.sample.CollectionMultiPickerPanel',
+	kind: MultiPickerPanel,
+	create: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.collection = new Collection(this.app.data);
+		};
+	})
+});
+
+var
+	panels = {
+		timePickerButton:                {name: 'timePicker', kind: TimePickerPanel},
+		timePickerButtonWithValue:       {name: 'timePickerPopupWithValue', kind: TimePickerPanel},
+		datePickerButton:                {name: 'datePicker', kind: DatePickerPanel},
+		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: DatePickerPanel},
+		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
+		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle',ontap: 'hidePickerPanelPopupWithValue'},
+		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true},
+		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true}
+	},
+
+	today = new Date(),
+
+	defaults = {
+		timePickerButton: {hour: today.getHours(), meridiem: today.getHours() / 12 ? 'PM' : 'AM', minute: today.getMinutes()},
+		timePickerButtonWithValue: {hour: 12, meridiem: "PM", minute: 30},
+		datePickerButton: new Date(),
+		datePickerButtonWithValue: new Date('2014/1/1'),
+		pickerPanelButtonWithValue: 0,
+		multiPickerPanelButtonWithValue: [0, 1]
+	};
 
 var FormPanel = kind({
 	name: 'g.sample.FormPanel',
@@ -40,24 +164,24 @@ var FormPanel = kind({
 				{kind: Title, content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, content: 'Form Picker Buttons : <br>> Time Picker - current', allowHtml: 'true'},
-				{name: 'timePickerButton', kind: FormPickerButton, content: 'None', ontap: 'showTimePickerPopup'},
+				{name: 'timePickerButton', kind: FormPickerButton, ontap: 'showPanel'},
 				{kind: FormLabel, content: '> Time Picker : initValue'},
-				{name: 'timePickerButtonWithcustomValue', kind: FormPickerButton, content: 'None', ontap: 'showTimePickerPopupWithcustomValue'},
+				{name: 'timePickerButtonWithValue', kind: FormPickerButton, ontap: 'showPanel'},
 				//
 				{kind: FormLabel, content: '> Date Picker : current'},
-				{name: 'datePickerButton', kind: FormPickerButton, content: 'None', ontap: 'showDatePickerPopup'},
+				{name: 'datePickerButton', kind: FormPickerButton, ontap: 'showPanel'},
 				{kind: FormLabel, content: '> Date Picker : initValue'},
-				{name: 'datePickerButtonWithcustomValue', kind: FormPickerButton, content: 'None', ontap: 'showDatePickerPopupWithcustomValue'},
+				{name: 'datePickerButtonWithValue', kind: FormPickerButton, ontap: 'showPanel'},
 				//
 				{kind: FormLabel, content: '> PickerPanel : none'},
-				{name: 'pickerPanelButton', kind: FormPickerButton, content: 'None', ontap: 'showPickerPanelPopup'},
+				{name: 'pickerPanelButton', kind: FormPickerButton, ontap: 'showPanel'},
 				{kind: FormLabel, content: '> PickerPanel : initValue'},
-				{name: 'pickerPanelButtonWithcustomValue', kind: FormPickerButton, content: 'None', ontap: 'showPickerPanelPopupWithcustomValue'},
+				{name: 'pickerPanelButtonWithValue', kind: FormPickerButton, ontap: 'showPanel'},
 				//
 				{kind: FormLabel, content: '> MultiPickerPanel : none'},
-				{name: 'multiPickerPanelButton', kind: FormPickerButton, content: 'None', ontap: 'showMultiPickerPanelPopup'},
+				{name: 'multiPickerPanelButton', kind: FormPickerButton, ontap: 'showPanel'},
 				{kind: FormLabel, content: '> MultiPickerPanel : initValue'},
-				{name: 'multiPickerPanelButtonWithcustomValue', kind: FormPickerButton, content: 'None', ontap: 'showMultiPickerPanelPopupWithcustomValue'},
+				{name: 'multiPickerPanelButtonWithValue', kind: FormPickerButton, ontap: 'showPanel'},
 				//
 				{kind: FormLabel, content: 'Form Buttons'},
 				{kind: FormButton, content: '+Add new'},
@@ -81,425 +205,159 @@ var FormPanel = kind({
 				]},
 				{style: 'width: 100%; height: ' + ri.scale(70) + 'px;'}
 			]}
-		]},
-		{
-			name: 'timePickerPopup',
-			kind: Popup,
-			style: 'background-color: transparent;',
-			effect: 'depth-transition',
-			components: [
-				{
-					name: 'timePicker',
-					kind: TimePickerPanel
-				}
-			]
-		},
-		{
-			name: 'timePickerPopupWithcustomValue',
-			kind: Popup,
-			style: 'background-color: transparent;',
-			effect: 'depth-transition',
-			components: [
-				{
-					name: 'timePickerWithcustomValue',
-					kind: TimePickerPanel,
-					hourValue: 12,
-					minuteValue: 30,
-					meridiemValue: 'PM'
-				}
-			]
-		},
-		{
-			name: 'datePickerPopup',
-			kind: Popup,
-			style: 'background-color: transparent;',
-			effect: 'depth-transition',
-			components: [
-				{
-					name: 'datePicker',
-					kind: DatePickerPanel
-				}
-			]
-		},
-		{
-			name: 'datePickerPopupWithcustomValue',
-			kind: Popup,
-			style: 'background-color: transparent;',
-			effect: 'depth-transition',
-			components: [
-				{
-					name: 'datePickerWithcustomValue',
-					kind: DatePickerPanel,
-					value: new Date('2014/1/1')
-				}
-			]
-		},
-		{
-			name: 'pickerPanelPopup',
-			kind: Popup,
-			effect: 'depth-transition',
-			components: [
-				{style: 'background-color: #000000; position: relative;', classes: 'g-common-width-height-fit g-layout-absolute-wrapper', components: [
-					{name: 'pickerPanel', kind: PickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'}
-				]}
-			]
-		},
-		{
-			name: 'pickerPanelPopupWithcustomValue',
-			kind: Popup,
-			effect: 'depth-transition',
-			components: [
-				{style: 'background-color: #000000; position: relative;', classes: 'g-common-width-height-fit g-layout-absolute-wrapper', components: [
-					{name: 'pickerPanelWithcustomValue', kind: PickerPanel, title:true, titleContent: 'PickerTitle',ontap: 'hidePickerPanelPopupWithcustomValue'}
-				]}
-			]
-		},
-		{
-			name: 'multiPickerPanelPopup',
-			kind: Popup,
-			effect: 'depth-transition',
-			components: [
-				{style: 'background-color: #000000; position: relative;', classes: 'g-common-width-height-fit g-layout-absolute-wrapper', components: [
-					{name: 'multiPickerPanel', kind: MultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true}
-				]}
-			]
-		},
-		{
-			name: 'multiPickerPanelPopupWithcustomValue',
-			kind: Popup,
-			effect: 'depth-transition',
-			components: [
-				{style: 'background-color: #000000; position: relative;', classes: 'g-common-width-height-fit g-layout-absolute-wrapper', components: [
-					{name: 'multiPickerPanelWithcustomValue', kind: MultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true}
-				]}
-			]
-		}
+		]}
 	],
-	bindings: [
-		{from: '.collection', to: '.$.pickerPanel.collection'},
-		{from: '.collection', to: '.$.pickerPanelWithcustomValue.collection'},
-		{from: '.collection', to: '.$.multiPickerPanel.collection'},
-		{from: '.collection', to: '.$.multiPickerPanelWithcustomValue.collection'},
-		//
-		{from: '.$.timePicker.value', to: '.$.timePickerButton.content', transform: function(val) {
-			var timestr;
-			if (val.hour<10 && val.hour>0) {
-				timestr = '0' + val.hour;
-			} else if (val.hour===0) {
-				timestr = '12';
-			} else {
-				timestr = val.hour;
-			}
-			timestr += ':';
-			if (val.minute<10 && val.minute>=0) {
-				timestr += '0';
-			}
-			timestr += val.minute;
-			timestr += ' ';
-			timestr += val.meridiem;
-			return timestr;
-		}},
-		{from: '.$.timePickerWithcustomValue.value', to: '.$.timePickerButtonWithcustomValue.content', transform: function(val) {
-			var timestr;
-			if (val.hour<10 && val.hour>0) {
-				timestr = '0' + val.hour;
-			} else if (val.hour===0) {
-				timestr = '12';
-			} else {
-				timestr = val.hour;
-			}
-			timestr += ':';
-			if (val.minute<10 && val.minute>=0) {
-				timestr += '0';
-			}
-			timestr += val.minute;
-			timestr += ' ';
-			timestr += val.meridiem;
-			return timestr;
-		}},
-		{from: '.$.datePicker.value', to: '.$.datePickerButton.content', transform: function(val) {
-			return (val.getYear() + 1900) + '/' + (val.getMonth() + 1) + '/' + val.getDate();
-		}},
-		{from: '.$.datePickerWithcustomValue.value', to: '.$.datePickerButtonWithcustomValue.content', transform: function(val) {
-			return (val.getYear() + 1900) + '/' + (val.getMonth() + 1) + '/' + val.getDate();
-		}},
-		{from: '.$.pickerPanel.value', to: '.$.pickerPanelButton.content', transform: function(val) {
-			var items = val,
-				names = 'None';
-			if (items !== null && items !== undefined) {
-				names = items.attributes.item;
-			}
-
-			return names;
-		}},
-		{from: '.$.pickerPanelWithcustomValue.value', to: '.$.pickerPanelButtonWithcustomValue.content', transform: function(val) {
-			var items = val,
-				names = 'None';
-			if (items !== null && items !== undefined) {
-				names = items.attributes.item;
-			}
-
-			return names;
-		}},
-		{from: '.$.multiPickerPanel.value', to: '.$.multiPickerPanelButton.content', transform: function(val) {
-			var items = val,
-				names = '';
-			if (items !== null && items !== undefined && items.length > 0) {
-				for (var i=0; i<items.length; i++) {
-					names += ', ' + items[i].attributes.item;
-				}
-				names = names.slice(2);
-			} else {
-				names = 'None';
-			}
-
-			return names;
-		}},
-		{from: '.$.multiPickerPanelWithcustomValue.value', to: '.$.multiPickerPanelButtonWithcustomValue.content', transform: function(val) {
-			var items = val,
-				names = '';
-			if (items !== null && items !== undefined && items.length > 0) {
-				for (var i=0; i<items.length; i++) {
-					names += ', ' + items[i].attributes.item;
-				}
-				names = names.slice(2);
-			} else {
-				names = 'None';
-			}
-
-			return names;
-		}}
-	],
-	create: kind.inherit(function(sup) {
+	initComponents: kind.inherit(function(sup) {
 		return function() {
+
 			sup.apply(this, arguments);
-			this.collection = new Collection(this.data);
+			this.$.timePickerButton.setContent(Formatter.TimePickerPanel(defaults.timePickerButton));
+			this.$.timePickerButtonWithValue.setContent(Formatter.TimePickerPanel(defaults.timePickerButtonWithValue));
+			this.$.datePickerButton.setContent(Formatter.DatePickerPanel(defaults.datePickerButton));
+			this.$.datePickerButtonWithValue.setContent(Formatter.DatePickerPanel(defaults.datePickerButtonWithValue));
+			this.$.pickerPanelButton.setContent(Formatter.CollectionPickerPanel());
+			this.$.pickerPanelButtonWithValue.setContent(Formatter.CollectionPickerPanel(defaults.pickerPanelButtonWithValue, this.app.data));
+			this.$.multiPickerPanelButton.setContent(Formatter.CollectionMultiPickerPanel());
+			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.CollectionMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, this.app.data));
 		};
 	}),
-	rendered: kind.inherit(function(sup) {
-		return function() {
-			this.$.pickerPanelWithcustomValue.setIndex(0);
-			this.$.multiPickerPanelWithcustomValue.select(0);
-			this.$.multiPickerPanelWithcustomValue.select(1);
-			this.$.multiPickerPanelWithcustomValue._onOK();
-			sup.apply(this, arguments);
-		};
-	}),
-	showTimePickerPopup: function() {
-		this.$.timePickerPopup.show();
-	},
-	showTimePickerPopupWithcustomValue: function() {
-		this.$.timePickerPopupWithcustomValue.show();
-	},
-	showDatePickerPopup: function() {
-		this.$.datePickerPopup.show();
-	},
-	showDatePickerPopupWithcustomValue: function() {
-		this.$.datePickerPopupWithcustomValue.show();
-	},
-	showPickerPanelPopup: function() {
-		this.$.pickerPanelPopup.show();
-	},
-	showPickerPanelPopupWithcustomValue: function() {
-		this.$.pickerPanelPopupWithcustomValue.show();
-	},
-	showMultiPickerPanelPopup: function() {
-		this.$.multiPickerPanelPopup.show();
-	},
-	showMultiPickerPanelPopupWithcustomValue: function() {
-		this.$.multiPickerPanelPopupWithcustomValue.show();
-	},
-	hidePickerPanelPopup: function() {
-		this.$.pickerPanelPopup.hide();
-	},
-	hidePickerPanelPopupWithcustomValue: function() {
-		this.$.pickerPanelPopupWithcustomValue.hide();
-	},
-	getSelectedFromMultiPickerPanle: function(selected) {
-		var items = selected,
-			names = '';
-		if (items !== null && items !== undefined && items.length > 0) {
-			for (var i=0; i<items.length; i++) {
-				names += ', ' + items[i].attributes.item;
+	showPanel: function(inSender, inEvent) {
+		var
+			name = inSender.name,
+			options = {owner: this};
+
+		// initialize default values
+		if (name === 'timePickerButtonWithValue') {
+			options = {
+				hourValue: defaults.timePickerButtonWithValue.hour,
+				minuteValue: defaults.timePickerButtonWithValue.minute,
+				meridiemValue: defaults.timePickerButtonWithValue.meridiem,
+				owner: this
+			};
+		} else if (name === 'datePickerButtonWithValue') {
+			options = {
+				value: defaults.datePickerButtonWithValue,
+				owner: this
+			};
+		}
+
+		// push a panel
+		this.bubbleUp('onPushPanel', {panel: panels[name], options: options});
+
+		// initialize default values
+		if (name === 'pickerPanelButtonWithValue') {
+			this.$.pickerPanelWithValue.setIndex(defaults.pickerPanelButtonWithValue);
+		} else if (name === 'multiPickerPanelButtonWithValue') {
+			var values = defaults.multiPickerPanelButtonWithValue;
+			for (var i = 0; i < values.length; i++) {
+				this.$.multiPickerPanelWithValue.select(values[i]);
 			}
-			names = names.slice(2);
-		} else {
-			names = 'None';
-		}
-		return names;
-	},
-	tapOK: function(inSender, inEvent) {
-		var items;
-		if (inEvent.originator.name === 'multiPickerPanel') {
-			items = this.getSelectedFromMultiPickerPanle(this.$.multiPickerPanel.value);
-			this.doResult({msg: items});
-			this.hideMultiPickerPanelPopup();
-		} else if (inEvent.originator.name === 'multiPickerPanelWithcustomValue') {
-			items = this.getSelectedFromMultiPickerPanle(this.$.multiPickerPanelWithcustomValue.value);
-			this.doResult({msg: items});
-			this.hideMultiPickerPanelPopupWithcustomValue();
-		} else if (inEvent.originator.name === 'datePicker') {
-			this.doResult({msg: 'Date is ' + this.$.datePicker.getValue()});
-			this.$.datePickerPopup.hide();
-		} else if (inEvent.originator.name === 'timePicker') {
-			this.doResult({msg: 'Time is ' + this.$.timePicker.getHourValue() + ' : ' + this.$.timePicker.getMinuteValue() + ' ' + this.$.timePicker.getMeridiemValue()});
-			this.$.timePickerPopup.hide();
-		} else if (inEvent.originator.name === 'datePickerWithcustomValue') {
-			this.doResult({msg: 'Date is ' + this.$.datePickerWithcustomValue.getValue()});
-			this.$.datePickerPopupWithcustomValue.hide();
-		} else if (inEvent.originator.name === 'timePickerWithcustomValue') {
-			this.doResult({msg: 'Time is ' + this.$.timePickerWithcustomValue.getHourValue() + ' : ' + this.$.timePickerWithcustomValue.getMinuteValue() + ' ' + this.$.timePickerWithcustomValue.getMeridiemValue()});
-			this.$.timePickerPopupWithcustomValue.hide();
 		}
 	},
-	tapCancel: function(inSender, inEvent) {
-		if (inEvent.originator.name === 'multiPickerPanel') {
-			this.hideMultiPickerPanelPopup();
-		} else if (inEvent.originator.name === 'multiPickerPanelWithcustomValue') {
-			this.hideMultiPickerPanelPopupWithcustomValue();
-		} else if (inEvent.originator.name === 'datePicker') {
-			this.doResult({msg: 'Cancel!'});
-			this.$.datePickerPopup.hide();
-		} else if (inEvent.originator.name === 'timePicker') {
-			this.doResult({msg: 'Cancel!'});
-			this.$.timePickerPopup.hide();
-		} else if (inEvent.originator.name === 'datePickerWithcustomValue') {
-			this.doResult({msg: 'Cancel!'});
-			this.$.datePickerPopupWithcustomValue.hide();
-		} else if (inEvent.originator.name === 'timePickerWithcustomValue') {
-			this.doResult({msg: 'Cancel!'});
-			this.$.timePickerPopupWithcustomValue.hide();
+	updateContent: function(inSender, inEvent) {
+		var
+			name = inEvent.originator.name,
+			content;
+
+		if (name === 'timePicker') {
+			content = Formatter.TimePickerPanel({hour: 8, meridiem: "AM", minute: 46});
+			this.$.timePickerButton.setContent(content);
+		} else if (name === 'timePickerPopupWithValue') {
+			content = Formatter.TimePickerPanel({hour: 12, meridiem: "PM", minute: 30});
+			this.$.timePickerButtonWithValue.setContent(content);
+		} else if (name === 'datePicker') {
+			content = Formatter.DatePickerPanel(new Date());
+			this.$.datePickerButton.setContent(content);
+		} else if (name === 'datePickerWithValue') {
+			content = Formatter.DatePickerPanel(new Date('2014/1/1'));
+			this.$.datePickerButtonWithValue.setContent(content);
+		} else if (name === 'pickerPanel') {
+			content = Formatter.CollectionPickerPanel();
+			this.$.pickerPanelButton.setContent(content);
+		} else if (name === 'pickerPanelWithValue') {
+			content = Formatter.CollectionPickerPanel(this.app.data[0].item);
+			this.$.pickerPanelButtonWithValue.setContent(content);
+		} else if (name === 'multiPickerPanel') {
+			content = Formatter.CollectionPickerPanel();
+			this.$.multiPickerPanelButton.setContent(content);
+		} else if (name === 'multiPickerPanelWithValue') {
+			content = Formatter.CollectionPickerPanel([this.app.data[0].item, this.app.data[1].item]);
+			this.$.multiPickerPanelButtonWithValue.setContent(content);
 		}
+
+		this.doResult({msg: content});
+	}
+});
+
+var PanelManager = kind({
+	kind: PanelManager,
+	handlers: {
+		onPushPanel: 'pushPanel',
+		onPopPanel: 'popPanel'
 	},
-	hideMultiPickerPanelPopup: function() {
-		this.$.multiPickerPanelPopup.hide();
+	components: [
+		{name: 'formPanel', kind: FormPanel},
+	],
+	pushPanel: function (inSender, inEvent) {
+		this.pushFloatingPanel(inEvent.panel, inEvent.options);
 	},
-	hideMultiPickerPanelPopupWithcustomValue: function() {
-		this.$.multiPickerPanelPopupWithcustomValue.hide();
-	},
-	data: [
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'}
-	]
+	popPanel: function (inSender, inEvent) {
+		this.popFloatingPanel();
+	}
 });
 
 module.exports = kind({
 	name: 'g.sample.FormSample',
+	handlers: {
+		onResult: 'result'
+	},
 	classes: 'enyo-unselectable garnet g-sample',
 	components: [
 		{content: '< Form Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Form Picker Buttons / Form Buttons / Form Inputs', classes: 'g-sample-subheader'},
-		{kind: FormPanel, style: 'position: relative;', onResult: 'result'},
+		{style: panelStyle, kind: PanelManager},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}
 	],
+	// If you already use enyo/Application, you don't have to define 'adjustComponentProps' function.
+	// 'app' property is used to get share data easily.
+	adjustComponentProps: kind.inherit(function (sup) {
+		return function (props) {
+			props.app = this;
+			sup.apply(this, arguments);
+		};
+	}),
 	result: function(inSender, inEvent) {
 		this.$.result.setContent(inEvent.msg);
 	},
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);
 		return false;
-	}
+	},
+	data: [
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey10'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey20'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey30'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey40'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey50'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey60'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey70'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey80'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey90'},
+		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey100'}
+	]
 });
