@@ -70,7 +70,6 @@ var ScrollTextPanel = kind({
 	},
 	tapOK: function(inSender, inEvent) {
 		this.owner.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
-		// this.owner.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	}
 });
@@ -102,7 +101,6 @@ var IconTitleTextPanel = kind({
 	},
 	tapOK: function(inSender, inEvent) {
 		this.owner.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
-		// this.owner.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	}
 });

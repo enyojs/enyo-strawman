@@ -31,11 +31,9 @@ var OneButtonPanel = kind({
 	],
 	hidePanel: function(inSender, inEvent) {
 		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		// this.bubbleUp('onResult', {msg: '"' + this.name + '" PopupPanel closed'});
 	},
 	buttonTap: function(inSender, inEvent) {
 		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
-		// this.bubbleUp('onPopPanel', {msg: '"' + inEvent.originator.name + '" is selected'});
 	}
 });
 
@@ -62,11 +60,9 @@ var TwoButtonPanel = kind({
 	],
 	hidePanel: function(inSender, inEvent) {
 		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		// this.bubbleUp('onResult', {msg: '"' + this.name + '" PopupPanel closed'});
 	},
 	buttonTap: function(inSender, inEvent) {
 		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
-		// this.bubbleUp('onPopPanel', {msg: '"' + inEvent.originator.name + '" is selected'});
 	}
 });
 
@@ -99,11 +95,9 @@ var ThreeButtonPanel = kind({
 	],
 	hidePanel: function(inSender, inEvent) {
 		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		// this.bubbleUp('onResult', {msg: '"' + this.name + '" PopupPanel closed'});
 	},
 	buttonTap: function(inSender, inEvent) {
 		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
-		// this.bubbleUp('onPopPanel', {msg: '"' + inEvent.originator.name + '" is selected'});
 	}
 });
 
