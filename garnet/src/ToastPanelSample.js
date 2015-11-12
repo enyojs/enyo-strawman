@@ -10,7 +10,7 @@ var
 	PanelManager = require('garnet/PanelManager');
 
 var
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; margin: ';
+	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; ';
 
 var SampleToast = kind({
 	name: 'toast',
@@ -23,15 +23,31 @@ var SampleToast = kind({
 var ToastBasePanel = kind({
 	name: 'g.sample.ToastBasePanel',
 	kind: Panel,
-	events: {
-		onShow: ''
-	},
 	classes: 'g-layout-absolute-wrapper', // for button
 	components: [
-		{kind: Button, style: 'position: absolute; width: ' + ri.scale(310) + 'px; margin: auto;', classes: 'g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPopup', content: 'Click here'}
+		{kind: Button, style: 'position: absolute; width: ' + ri.scale(310) + 'px; margin: auto;', classes: 'g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
 	],
-	showPopup: function(inSender, inEvent) {
-		this.doShow({panelType: name, panelName: name});
+	showPanel: function(inSender, inEvent) {
+		this.bubbleUp('onPushPanel', {panelName: name, owner: this});
+	}
+});
+
+var PanelManager = kind({
+	name: 'fixedFloating',
+	kind: PanelManager,
+	handlers: {
+		onPushPanel: 'pushPanel'
+	},
+	classes: 'enyo-fit',
+	components: [
+		{kind: ToastBasePanel}
+	],
+	pushPanel: function (inSender, inEvent) {
+		this.pushFloatingPanel({
+			name: 'toast',
+			kind: SampleToast,
+			owner: inEvent.owner ? inEvent.owner : this
+		});
 	}
 });
 
@@ -42,19 +58,8 @@ module.exports = kind({
 		{content: '< Toast Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Toast', classes: 'g-sample-subheader'},
-		{style: panelStyle, components: [
-			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', components: [
-				{name: 'fixedFloatingPanel', kind: ToastBasePanel, onShow: 'handleShow'}
-			]}
-		]}
+		{style: panelStyle, kind: PanelManager}
 	],
-	handleShow: function (inSender, inEvent) {
-		this.$.fixedFloating.pushFloatingPanel({
-			name: 'toast',
-			kind: SampleToast,
-			owner: this
-		});
-	},
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);
 		return false;

@@ -2,6 +2,7 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
+	utils = require('enyo/utils'),
 	ri = require('enyo/resolution');
 
 var
@@ -12,102 +13,106 @@ var
 	PanelManager = require('garnet/PanelManager');
 
 var
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; margin: ';
+	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; ';
 
 var OneButtonPanel = kind({
 	name: 'g.sample.OneButtonPanel',
 	kind: ContextualPanel,
-	events: {
-		onHidePanel: ''
+	handlers: {
+		onHide: 'hidePanel'
 	},
 	buttonComponents: [
 		{
 			name: 'button1',
-			ontap: 'hidePanel',
+			ontap: 'buttonTap',
 			src: '@../assets/btn_delete.svg',
-			title: 'delete'
+			title: 'Delete'
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		var name = inEvent.originator.name;
-
-		if (inEvent.originator.active === true && (name === 'button1')) {
-			this.doHidePanel({msg: name + ' is selected.'});
-		}
+		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		// this.bubbleUp('onResult', {msg: '"' + this.name + '" PopupPanel closed'});
+	},
+	buttonTap: function(inSender, inEvent) {
+		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
+		// this.bubbleUp('onPopPanel', {msg: '"' + inEvent.originator.name + '" is selected'});
 	}
 });
 
 var TwoButtonPanel = kind({
 	name: 'g.sample.TwoButtonPanel',
 	kind: ContextualPanel,
-	events: {
-		onHidePanel: ''
+	handlers: {
+		onHide: 'hidePanel'
 	},
 	buttonComponents: [
 		{
 			name: '1st 2 buttons',
-			ontap: 'hidePanel',
+			ontap: 'buttonTap',
 			src: '@../assets/btn_delete.svg',
-			title: 'delete'
+			title: 'Delete'
 		},
 		{
 			name: '2nd 2 buttons',
-			ontap: 'hidePanel',
+			ontap: 'buttonTap',
 			src: '@../assets/btn_share.svg',
 			disabled: true,
-			title: 'share'
+			title: 'Share'
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		var name = inEvent.originator.name;
-
-		if (inEvent.originator.active === true && (name === '1st 2 buttons' || name === '2nd 2 buttons')) {
-			this.doHidePanel({msg: name + ' is selected.'});
-		}
+		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		// this.bubbleUp('onResult', {msg: '"' + this.name + '" PopupPanel closed'});
+	},
+	buttonTap: function(inSender, inEvent) {
+		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
+		// this.bubbleUp('onPopPanel', {msg: '"' + inEvent.originator.name + '" is selected'});
 	}
 });
 
 var ThreeButtonPanel = kind({
 	name: 'g.sample.ThreeButtonPanel',
 	kind: ContextualPanel,
-	events: {
-		onHidePanel: ''
+	handlers: {
+		onHide: 'hidePanel'
 	},
 	buttonComponents: [
 		{
 			name: '1st 3 buttons',
-			ontap: 'hidePanel',
+			ontap: 'buttonTap',
 			src: '@../assets/btn_delete.svg',
-			title: 'delete'
+			title: 'Delete'
 		},
 		{
 			name: '2nd 3 buttons',
-			ontap: 'hidePanel',
+			ontap: 'buttonTap',
 			src: '@../assets/btn_share.svg',
-			title: 'share',
+			title: 'Share',
 			disabled: true
 		},
 		{
 			name: '3rd 3 buttons',
-			ontap: 'hidePanel',
+			ontap: 'buttonTap',
 			src: '@../assets/btn_share.svg',
-			title: 'share'
+			title: 'Share'
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		var name = inEvent.originator.name;
-
-		if (inEvent.originator.active === true && (name === '1st 3 buttons' || name === '2nd 3 buttons'  || name === '3rd 3 buttons')) {
-			this.doHidePanel({msg: name + ' is selected.'});
-		}
+		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		// this.bubbleUp('onResult', {msg: '"' + this.name + '" PopupPanel closed'});
+	},
+	buttonTap: function(inSender, inEvent) {
+		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
+		// this.bubbleUp('onPopPanel', {msg: '"' + inEvent.originator.name + '" is selected'});
 	}
 });
 
 var ContextualBasePanel = kind({
 	name: 'g.sample.ContextualBasePanel',
 	kind: Panel,
-	events: {
-		onShowPanel: ''
+	handlers: {
+		onHide2: 'result',
+		onButtonTap: 'result'
 	},
 	components: [
 		{name: 'oneButton', kind: Button, style: 'margin: ' + ri.scale(55)+ 'px ' + ri.scale(5) + 'px ' + ri.scale(5)+ 'px; width: ' + ri.scale(310) + 'px;', ontap: 'showPanel', content: 'Click here to show panel!'},
@@ -118,46 +123,72 @@ var ContextualBasePanel = kind({
 		var name = inSender.name;
 
 		if (name == 'oneButton' || name == 'twoButton' || name == 'threeButton' ) {
-			this.doShowPanel({panelType: name, panelName: name});
+			this.bubbleUp('onPushPanel', {panelName: name, owner: this});
 		}
+	},
+	result: function(inSender, inEvent) {
+		var
+			name = inEvent.originalEvent.originator.name,
+			msg = '"' + name + '" PopupPanel closed ',
+			title = inEvent.originalEvent.title;
+
+		if (title) {
+			msg += ('by ' + title + ' button');
+		}
+
+		this.bubbleUp(title ? 'onPopPanel' : 'onResult', {msg: msg});
+	}
+});
+
+var PanelManager = kind({
+	name: 'fixedFloating',
+	kind: PanelManager,
+	handlers: {
+		onPushPanel: 'pushPanel',
+		onPopPanel: 'popPanel'
+	},
+	classes: 'enyo-fit',
+	components: [
+		{kind: ContextualBasePanel}
+	],
+	pushPanel: function (inSender, inEvent) {
+		var type = {
+			oneButton: {name: 'OneButtonPanel', kind: OneButtonPanel},
+			twoButton: {name: 'TwoButtonPanel', kind: TwoButtonPanel},
+			threeButton: {name: 'ThreeButtonPanel', kind: ThreeButtonPanel}
+		};
+
+		this.pushFloatingPanel({
+			name: type[inEvent.panelName].name,
+			kind: type[inEvent.panelName].kind,
+			owner: inEvent.owner ? inEvent.owner : this
+		});
+	},
+	popPanel: function (inSender, inEvent) {
+		this.popFloatingPanel();
 	}
 });
 
 module.exports = kind({
 	name: 'g.sample.ContextualPanelSample',
-	horizontal: 'hidden',
-	classes: 'enyo-unselectable enyo-fit garnet g-sample',
 	kind: Scroller,
+	horizontal: 'hidden',
+	handlers: {
+		onResult: "result",
+		onPopPanel: "result"
+	},
+	classes: 'enyo-unselectable enyo-fit garnet g-sample',
 	components: [
 		{content: '< ContextualPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Contextual with 1 button / 2 buttons / 3 buttons', classes: 'g-sample-subheader'},
-		{style: panelStyle, components: [
-			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', components: [
-				{name: 'fixedFloatingPanel', kind: ContextualBasePanel, onShowPanel: 'handleShow'}
-			]}
-		]},
+		{style: panelStyle, kind: PanelManager},
 		{style: 'position: fixed; width: 100%; min-height: +' + ri.scale(160) + 'px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}
 	],
-	handleShow: function (inSender, inEvent) {
-		var type = {
-			oneButton: {kind: OneButtonPanel, name: 'OneButtonPanel'},
-			twoButton: {kind: TwoButtonPanel, name: 'TwoButtonPanel'},
-			threeButton: {kind: ThreeButtonPanel, name: 'ThreeButtonPanel'}
-		};
-
-		this.$.fixedFloating.pushFloatingPanel({
-			name: type[inEvent.panelType].name,
-			kind: type[inEvent.panelType].kind,
-			owner: this,
-			onHidePanel: 'handleHide'
-		});
-	},
-	handleHide: function (inSender, inEvent) {
-		this.$.fixedFloating.popFloatingPanel();
+	result: function (inSender, inEvent) {
 		this.$.result.setContent(inEvent.msg);
 	},
 	goBack: function(inSender, inEvent) {
