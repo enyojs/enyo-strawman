@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	Item = require('garnet/Item'),
 	Icon = require('garnet/Icon'),
@@ -10,23 +9,17 @@ var
 	Button = require('garnet/Button'),
 	IconMenuPopup = require('garnet/IconMenuPopup'),
 	Panel = require('garnet/Panel'),
-	Title = require('garnet/Title');
+	Title = require('garnet/Title'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var DataListItem = kind({
 	name: 'g.sample.DataListItem',
 	kind: Item,
 	classes: 'g-sample-datalist-item',
-	handlers: {
-		onItemDown: 'itemDown'
-	},
-	published: {
-		selected: false
-	},
 	components: [
 		{name: 'iconUrl', kind: Icon, classes: 'g-sample-datalist-item-icon'},
-		{name: 'albumTitle', classes: 'g-sample-datalist-item-title'},
-		{name: 'albumGenre', classes: 'g-sample-datalist-item-genre'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{name: 'albumTitle', mixins: [MarqueeSupport], classes: 'g-sample-datalist-item-title'},
+		{name: 'albumGenre', mixins: [MarqueeSupport], classes: 'g-sample-datalist-item-genre'}
 	],
 	bindings: [
 		{from: '.model.iconUrl', to: '.$.iconUrl.src'},
@@ -37,16 +30,11 @@ var DataListItem = kind({
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.selectedChanged();
+			this.disabledChanged();
 		};
 	}),
-	selectedChanged: function() {
-		this.addRemoveClass('selected', this.selected);
-	},
 	disabledChanged: function() {
 		this.addRemoveClass('disabled', this.disabled);
-	},
-	itemDown: function(inSender, inEvent) {
 	}
 });
 
@@ -59,13 +47,13 @@ var DataListPanel = kind({
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
-			style: 'background-color: #000000;',
-			headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
+			classes: 'g-sample-datalist',
+			headerComponents: [{kind: Title, content: 'Title: long text will fade out', classes: 'g-sample-datalist-header'}],
 			components: [
 				{kind: DataListItem, onlongpress: 'showPopup'}
 			],
 			footerComponents: [
-				{kind: Button, content: 'Text', style: 'width: ' + ri.scale(122) + 'px; height: ' + ri.scale(52) + 'px; margin: ' + ri.scale(21) + 'px ' + ri.scale(99) +'px ' + ri.scale(21) +'px;'}
+				{kind: Button, content: 'Text', classes: 'g-sample-datalist-footer'}
 			]
 		},
 		{
@@ -113,7 +101,7 @@ var DataListSample = module.exports = kind({
 		{content: '< Data List Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List', classes: 'g-sample-subheader'},
-		{name: 'listPanel', kind: DataListPanel, style: 'position: relative;'}
+		{name: 'listPanel', kind: DataListPanel, classes: 'g-sample-datalist-panel'}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.listPanel.collection'}
@@ -228,7 +216,7 @@ var DataListSample = module.exports = kind({
 		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Petersen', albumGenre: 'Pop'},
 		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Kristina', albumGenre: 'Ballad'},
 		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Barbra', albumGenre: 'Rock'},
-		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Tracey', albumGenre: 'Hiphop'}
+		{iconUrl: '@../assets/ic_dialog_alert.svg', albumTitle: 'Looooooooooooong Title', albumGenre: 'Hiphop'}
 	]
 });
 
