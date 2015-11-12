@@ -10,7 +10,9 @@ var samples = {
 	ButtonSample                    : require('./ButtonSample'),
 	CheckboxSample                  : require('./CheckboxSample'),
 	CommandBarSample                : require('./CommandBarSample'),
+	ConfirmPanelSample              : require('./ConfirmPanelSample'),
 	ConfirmPopupSample              : require('./ConfirmPopupSample'),
+	ContextualPanelSample           : require('./ContextualPanelSample'),
 	DataGridListSample              : require('./DataGridListSample'),
 	DataGridListwithCardsSample     : require('./DataGridListwithCardsSample'),
 	DataListSample                  : require('./DataListSample'),
@@ -33,6 +35,7 @@ var samples = {
 	TimePickerPanelSample           : require('./TimePickerPanelSample'),
 	TitleSample                     : require('./TitleSample'),
 	ToastSample                     : require('./ToastSample'),
+	ToastPanelSample                : require('./ToastPanelSample'),
 	ToggleButtonSample              : require('./ToggleButtonSample'),
 	ToggleIconButtonSample          : require('./ToggleIconButtonSample'),
 	WheelSliderControllerSample     : require('./WheelSliderControllerSample')
