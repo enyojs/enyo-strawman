@@ -8,7 +8,7 @@
   ],
   "devAssets": [],
   "styles": [
-    "*.css"
+    "css/*.less"
   ],
   "main": "index.js",
   "moduleDir": "src",

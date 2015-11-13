@@ -1,14 +1,29 @@
-require('enyo/options').accessibility = true;
+require('garnet');
 
 var
-	ready = require('enyo/ready');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready'),
+	Control = require('enyo/Control'),
+	Title = require('garnet/Title');
 
-var
-	strawman = require('./src');
+var BareGarnet = enyo.kind({
+	name: 'g.sample.BareGarnet',
+	kind: Control,
+	handlers: {
+		onSwipe: 'eventHandler'
+	},
+	classes: 'enyo-unselectable garnet main-view',
+	components: [
+		{kind: Title, content: 'Bare Garnet'},
+		{content: 'Drag right to close app', classes:'g-sample-text'}
+	],
+	eventHandler: function(inSender, inEvent) {
+		if (inEvent.direction === 'right') {
+			window.close();
+		}
+	}
+});
 
 ready(function () {
-	var names = window.document.location.search.substring(1).split('&'),
-		name = names[0],
-		Sample = strawman.samples[name] || strawman.List;
-	new Sample().renderInto(document.body);
+	new BareGarnet().renderInto(document.body);
 });
