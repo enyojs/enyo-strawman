@@ -34,15 +34,15 @@ var OneTextPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	},
 	tapOK: function(inSender, inEvent) {
-		this.owner.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	},
 	tapCancel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onCancel', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onCancel', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	}
 });
@@ -65,11 +65,11 @@ var ScrollTextPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	},
 	tapOK: function(inSender, inEvent) {
-		this.owner.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
+		this.fromPanel.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
 		return true;
 	}
 });
@@ -96,11 +96,11 @@ var IconTitleTextPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	},
 	tapOK: function(inSender, inEvent) {
-		this.owner.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
+		this.fromPanel.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
 		return true;
 	}
 });
@@ -126,15 +126,15 @@ var ScrollIconTitleTextPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	},
 	tapOK: function(inSender, inEvent) {
-		this.owner.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	},
 	tapCancel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onCancel', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onCancel', {originalEvent: utils.clone(inEvent, true)});
 		return true;
 	}
 });
@@ -198,7 +198,7 @@ var PanelManager = kind({
 		this.pushFloatingPanel({
 			name: type[inEvent.panelName].name,
 			kind: type[inEvent.panelName].kind,
-			owner: inEvent.owner ? inEvent.owner : this
+			fromPanel: inEvent.owner ? inEvent.owner : this
 		});
 	},
 	popPanel: function (inSender, inEvent) {

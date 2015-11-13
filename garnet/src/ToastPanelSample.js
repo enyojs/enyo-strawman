@@ -46,7 +46,7 @@ var PanelManager = kind({
 		this.pushFloatingPanel({
 			name: 'toast',
 			kind: SampleToast,
-			owner: inEvent.owner ? inEvent.owner : this
+			fromPanel: inEvent.owner ? inEvent.owner : this
 		});
 	}
 });

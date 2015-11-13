@@ -30,10 +30,10 @@ var OneButtonPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 	},
 	buttonTap: function(inSender, inEvent) {
-		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
+		this.fromPanel.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
 	}
 });
 
@@ -59,10 +59,10 @@ var TwoButtonPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 	},
 	buttonTap: function(inSender, inEvent) {
-		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
+		this.fromPanel.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
 	}
 });
 
@@ -94,10 +94,10 @@ var ThreeButtonPanel = kind({
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
-		this.owner.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
+		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
 	},
 	buttonTap: function(inSender, inEvent) {
-		this.owner.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
+		this.fromPanel.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
 	}
 });
 
@@ -155,7 +155,7 @@ var PanelManager = kind({
 		this.pushFloatingPanel({
 			name: type[inEvent.panelName].name,
 			kind: type[inEvent.panelName].kind,
-			owner: inEvent.owner ? inEvent.owner : this
+			fromPanel: inEvent.owner ? inEvent.owner : this
 		});
 	},
 	popPanel: function (inSender, inEvent) {
