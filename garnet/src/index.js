@@ -26,7 +26,6 @@ var samples = {
 	IconMenuPopupSample             : require('./IconMenuPopupSample'),
 	IconSample                      : require('./IconSample'),
 	MultiPickerPanelSample          : require('./MultiPickerPanelSample'),
-	PanelSetSample                  : require('./PanelSetSample'),
 	PickerPanelSample               : require('./PickerPanelSample'),
 	PopupSample                     : require('./PopupSample'),
 	PreventTapOnDragSample          : require('./PreventTapOnDragSample'),
