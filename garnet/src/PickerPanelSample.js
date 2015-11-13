@@ -6,68 +6,107 @@ var
 	Collection = require('enyo/Collection.js'),
 	FormPickerButton = require('garnet/FormPickerButton'),
 	Panel = require('garnet/Panel'),
-	GarnetPickerPanel = require('garnet/PickerPanel'),
-	Popup = require('garnet/Popup');
+	PickerPanel = require('garnet/PickerPanel'),
+	PanelManager = require('garnet/PanelManager'),
+
+	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block;';
+
+var Formatter = kind.singleton({
+	/*
+	* From PickerPanel.value to FormPickerButton.content
+	*/
+	PickerPanel: function(val, data) {
+		var
+			item = val,
+			name = 'No item';
+
+		if (typeof val === 'number') {
+			return data[val].item;
+		}
+		if (!!item) {
+			name = item.attributes.item;
+		}
+
+		return name;
+	}
+});
 
 var SamplePickerPanel = kind({
 	name: 'g.sample.PickerPanel',
+	kind: PickerPanel,
+	title: true,
+	titleContent: 'PickerTitle',
+	create: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.collection = new Collection(data);
+		};
+	}),
+	valueChanged: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			if (this.fromPanel) {
+				this.fromPanel.triggerHandler('onUpdate', {
+					name: this.name,
+					value: this.value
+				});
+			}
+		};
+	})
+});
+
+var FormPanel = kind({
+	name: 'g.sample.FormPanel',
 	kind: Panel,
 	events: {
 		onResult: ''
 	},
+	handlers: {
+		onUpdate: 'updateContent'
+	},
 	components: [
 		{style: 'position: relative; background-color: #000000;', classes: 'g-common-width-height-fit', components: [
-			{name: 'pickerButton', kind: FormPickerButton, style: 'top: ' + ri.scale(134) + 'px;', ontap: 'showPopup', content: 'Click here!'},
-			{name: 'pickerPopup', kind: Popup, effect: 'depth-transition', components: [
-				{style: 'background-color: #000000;position: relative;', classes: 'g-common-width-height-fit g-layout-absolute-wrapper', components: [
-					{name: 'pickerPanel', kind: GarnetPickerPanel, title: true, titleContent: 'PickerTitle', ontap: 'tapItem'}
-				]}
-			]}
+			{name: 'pickerButton', kind: FormPickerButton, style: 'top: ' + ri.scale(134) + 'px;', ontap: 'showPanel', content: 'Click here!'}
 		]}
 	],
-	bindings: [
-		{from: '.collection', to: '.$.pickerPanel.collection'}
-	],
-	create: kind.inherit(function(sup) {
+	initComponents: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.collection = new Collection(this.data);
+			this.$.pickerButton.setContent(data[2].item);
 		};
 	}),
-	rendered: function() {
-		// default index
-		this.$.pickerPanel.setIndex(2);
-		this.doResult({msg: 'The item index #' + this.$.pickerPanel.getIndex() + ' is selected.'});
-	},
-	showPopup: function(inSender, inEvent) {
-		if (inSender.name === 'pickerButton') {
-			this.$.pickerPopup.show();
+	showPanel: function(inSender, inEvent) {
+		var init = true;
+		if (this.$.pickerPanel) {
+			init = false;
+		}
+		this.bubbleUp('onPushPanel', {panel: {name: 'pickerPanel', kind: SamplePickerPanel}, options: {owner: this, fromPanel: this}});
+		if (init) {
+			this.$.pickerPanel.setIndex(2);
 		}
 	},
-	tapItem: function(inSender, inEvent) {
-		var index = this.$.pickerPanel.getIndex();
+	updateContent: function(inSender, inEvent) {
+		var content = Formatter.PickerPanel(inEvent.value);
+		this.$.pickerButton.setContent(content);
+		this.doResult({msg: content});
+	}
+});
 
-		this.doResult({msg: 'The item index #' + index + ' is selected.'});
-		this.$.pickerPopup.hide();
-		this.$.pickerButton.setContent((this.data[index]).item);
+var PanelManager = kind({
+	kind: PanelManager,
+	handlers: {
+		onPushPanel: 'pushPanel',
+		onPopPanel: 'popPanel'
 	},
-	data: [
-		{item: 'This item title is very long'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'},
-		{item: 'Raymond'},
-		{item: 'Petersen'},
-		{item: 'Kristina'},
-		{item: 'Barbra'},
-		{item: 'Tracey'},
-		{item: 'Alejandra'},
-		{item: 'Marquez'},
-		{item: 'Barr'},
-		{item: 'Everett'},
-		{item: 'Crane'}
-	]
+	components: [
+		{kind: FormPanel, style: 'position: relative;', onResult: 'result'}
+	],
+	pushPanel: function (inSender, inEvent) {
+		this.pushFloatingPanel(inEvent.panel, inEvent.options);
+	},
+	popPanel: function (inSender, inEvent) {
+		this.popFloatingPanel();
+	}
 });
 
 module.exports = kind({
@@ -77,7 +116,7 @@ module.exports = kind({
 		{content: '< PickerPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'PickerPanel', classes: 'g-sample-subheader'},
-		{kind: SamplePickerPanel, style: 'position: relative;', onResult: 'result'},
+		{style: panelStyle, kind: PanelManager},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
@@ -92,3 +131,21 @@ module.exports = kind({
 		return false;
 	}
 });
+
+var data = [
+	{item: 'This item title is very long'},
+	{item: 'Marquez'},
+	{item: 'Barr'},
+	{item: 'Everett'},
+	{item: 'Crane'},
+	{item: 'Raymond'},
+	{item: 'Petersen'},
+	{item: 'Kristina'},
+	{item: 'Barbra'},
+	{item: 'Tracey'},
+	{item: 'Alejandra'},
+	{item: 'Marquez'},
+	{item: 'Barr'},
+	{item: 'Everett'},
+	{item: 'Crane'}
+];

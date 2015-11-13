@@ -69,13 +69,13 @@ var Formatter = kind.singleton({
 	},
 
 	/*
-	* From datePicker.value to FormPickerButton.content
+	* From DatePicker.value to FormPickerButton.content
 	*/
 	DatePickerPanel: function(val) {
 		return (val.getYear() + 1900) + '/' + (val.getMonth() + 1) + '/' + val.getDate();
 	},
 	/*
-	* From pickerPanel.value to FormPickerButton.content
+	* From PickerPanel.value to FormPickerButton.content
 	*/
 	CollectionPickerPanel: function(val, data) {
 		var
@@ -85,14 +85,14 @@ var Formatter = kind.singleton({
 		if (typeof val === 'number') {
 			return data[val].item;
 		}
-		if (item !== null && item !== undefined) {
+		if (!!item) {
 			name = item.attributes.item;
 		}
 
 		return name;
 	},
 	/*
-	* From multiPickerPanel.value to FormPickerButton.content
+	* From MultiPickerPanel.value to FormPickerButton.content
 	*/
 	CollectionMultiPickerPanel: function(val, data) {
 		var
@@ -100,15 +100,15 @@ var Formatter = kind.singleton({
 			names = '',
 			i;
 
-		if (val instanceof Array) {
+		if (val instanceof Array && val.length && typeof val[0] === 'number') {
 			var multipleSelection = [];
 
-			for (var i = 0; i <val.length; i++) {
+			for (i = 0; i < val.length; i++) {
 				multipleSelection[i] = data[val[i]].item;
 			}
 			return multipleSelection.join(', ');
 		}
-		if (items !== null && items !== undefined && items.length > 0) {
+		if (!!items && items.length > 0) {
 			for (i = 0; i < items.length; i++) {
 				names += ', ' + items[i].attributes.item;
 			}
@@ -134,7 +134,7 @@ var SampleTimePickerPanel = kind({
 					minute: this.getMinuteValue(),
 					meridiem: this.getMeridiemValue()
 				});
-			}			
+			}
 		};
 	})
 });
@@ -150,7 +150,7 @@ var SampleDatePickerPanel = kind({
 					name: this.name,
 					value: this.value
 				});
-			}			
+			}
 		};
 	})
 });
@@ -158,10 +158,23 @@ var SampleDatePickerPanel = kind({
 var CollectionPickerPanel = kind({
 	name: 'g.sample.CollectionPickerPanel',
 	kind: PickerPanel,
+	title: true,
+	titleContent: 'PickerTitle',
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.collection = new Collection(this.app.data);
+			this.collection = new Collection(data);
+		};
+	}),
+	valueChanged: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			if (this.fromPanel) {
+				this.fromPanel.triggerHandler('onUpdate', {
+					name: this.name,
+					value: this.value
+				});
+			}
 		};
 	})
 });
@@ -169,12 +182,32 @@ var CollectionPickerPanel = kind({
 var CollectionMultiPickerPanel = kind({
 	name: 'g.sample.CollectionMultiPickerPanel',
 	kind: MultiPickerPanel,
+	handlers: {
+		onCancel: 'popPanel',
+		onOK: 'popPanel'
+	},
+	title: true,
+	titleContent: 'MultiPickerPanel',
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.collection = new Collection(this.app.data);
+			this.collection = new Collection(data);
 		};
-	})
+	}),
+	valueChanged: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			if (this.fromPanel) {
+				this.fromPanel.triggerHandler('onUpdate', {
+					name: this.name,
+					value: this.value
+				});
+			}
+		};
+	}),
+	popPanel: function() {
+		this.bubbleUp('onPopPanel');
+	}
 });
 
 var
@@ -207,9 +240,6 @@ var FormPanel = kind({
 		onResult: ''
 	},
 	handlers: {
-		onCancel: 'tapCancel',
-		onOK: 'tapOK',
-		ontap: 'tapOK',
 		onUpdate: 'updateContent'
 	},
 	style: 'position: relative; background-color: #000000;overflow: hidden;',
@@ -272,9 +302,9 @@ var FormPanel = kind({
 			this.$.datePickerButton.setContent(Formatter.DatePickerPanel(defaults.datePickerButton));
 			this.$.datePickerButtonWithValue.setContent(Formatter.DatePickerPanel(defaults.datePickerButtonWithValue));
 			this.$.pickerPanelButton.setContent(Formatter.CollectionPickerPanel());
-			this.$.pickerPanelButtonWithValue.setContent(Formatter.CollectionPickerPanel(defaults.pickerPanelButtonWithValue, this.app.data));
+			this.$.pickerPanelButtonWithValue.setContent(Formatter.CollectionPickerPanel(defaults.pickerPanelButtonWithValue, data));
 			this.$.multiPickerPanelButton.setContent(Formatter.CollectionMultiPickerPanel());
-			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.CollectionMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, this.app.data));
+			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.CollectionMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, data));
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
@@ -283,7 +313,7 @@ var FormPanel = kind({
 			options = {owner: this, fromPanel: this};
 
 		// initialize default values
-		if (name === 'timePickerButtonWithValue') {
+		if (name === 'timePickerButtonWithValue' && !this.$.timePickerWithValue) {
 			options = {
 				hourValue: defaults.timePickerButtonWithValue.hour,
 				minuteValue: defaults.timePickerButtonWithValue.minute,
@@ -291,7 +321,7 @@ var FormPanel = kind({
 				owner: this,
 				fromPanel: this
 			};
-		} else if (name === 'datePickerButtonWithValue') {
+		} else if (name === 'datePickerButtonWithValue' && !this.$.datePickerWithValue) {
 			options = {
 				value: defaults.datePickerButtonWithValue,
 				owner: this,
@@ -317,30 +347,39 @@ var FormPanel = kind({
 			name = inEvent.name,
 			content;
 
-		if (name === 'timePicker') {
-			content = Formatter.TimePickerPanel24({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
-			this.$.timePickerButton.setContent(content);
-		} else if (name === 'timePickerWithValue') {
-			content = Formatter.TimePickerPanel({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
-			this.$.timePickerButtonWithValue.setContent(content);
-		} else if (name === 'datePicker') {
-			content = Formatter.DatePickerPanel(inEvent.value);
-			this.$.datePickerButton.setContent(content);
-		} else if (name === 'datePickerWithValue') {
-			content = Formatter.DatePickerPanel(inEvent.value);
-			this.$.datePickerButtonWithValue.setContent(content);
-		} else if (name === 'pickerPanel') {
-			content = Formatter.CollectionPickerPanel();
-			this.$.pickerPanelButton.setContent(content);
-		} else if (name === 'pickerPanelWithValue') {
-			content = Formatter.CollectionPickerPanel(this.app.data[0].item);
-			this.$.pickerPanelButtonWithValue.setContent(content);
-		} else if (name === 'multiPickerPanel') {
-			content = Formatter.CollectionPickerPanel();
-			this.$.multiPickerPanelButton.setContent(content);
-		} else if (name === 'multiPickerPanelWithValue') {
-			content = Formatter.CollectionPickerPanel([this.app.data[0].item, this.app.data[1].item]);
-			this.$.multiPickerPanelButtonWithValue.setContent(content);
+		switch (name) {
+			case 'timePicker':
+				content = Formatter.TimePickerPanel24({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
+				this.$.timePickerButton.setContent(content);
+				break;
+			case 'timePickerWithValue':
+				content = Formatter.TimePickerPanel({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
+				this.$.timePickerButtonWithValue.setContent(content);
+				break;
+			case 'datePicker':
+				content = Formatter.DatePickerPanel(inEvent.value);
+				this.$.datePickerButton.setContent(content);
+				break;
+			case 'datePickerWithValue':
+				content = Formatter.DatePickerPanel(inEvent.value);
+				this.$.datePickerButtonWithValue.setContent(content);
+				break;
+			case 'pickerPanel':
+				content = Formatter.CollectionPickerPanel(inEvent.value);
+				this.$.pickerPanelButton.setContent(content);
+				break;
+			case 'pickerPanelWithValue':
+				content = Formatter.CollectionPickerPanel(inEvent.value);
+				this.$.pickerPanelButtonWithValue.setContent(content);
+				break;
+			case 'multiPickerPanel':
+				content = Formatter.CollectionMultiPickerPanel(inEvent.value);
+				this.$.multiPickerPanelButton.setContent(content);
+				break;
+			case 'multiPickerPanelWithValue':
+				content = Formatter.CollectionMultiPickerPanel(inEvent.value);
+				this.$.multiPickerPanelButtonWithValue.setContent(content);
+				break;
 		}
 
 		this.doResult({msg: content});
@@ -354,7 +393,7 @@ var PanelManager = kind({
 		onPopPanel: 'popPanel'
 	},
 	components: [
-		{name: 'formPanel', kind: FormPanel},
+		{name: 'formPanel', kind: FormPanel}
 	],
 	pushPanel: function (inSender, inEvent) {
 		this.pushFloatingPanel(inEvent.panel, inEvent.options);
@@ -381,41 +420,34 @@ module.exports = kind({
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}
 	],
-	// If you already use enyo/Application, you don't have to define 'adjustComponentProps' function.
-	// 'app' property is used to get share data easily.
-	adjustComponentProps: kind.inherit(function (sup) {
-		return function (props) {
-			props.app = this;
-			sup.apply(this, arguments);
-		};
-	}),
 	result: function(inSender, inEvent) {
 		this.$.result.setContent(inEvent.msg);
 	},
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);
 		return false;
-	},
-	data: [
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey10'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey20'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey30'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey40'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey50'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey60'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey70'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey80'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey90'},
-		{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
-		{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey100'}
-	]
+	}
 });
+
+var data = [
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey10'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey20'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey30'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey40'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey50'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey60'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey70'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey80'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey90'},
+	{item: 'Alejandra'}, {item: 'Marquez'},  {item: 'Barr'},     {item: 'Everett'}, {item: 'Crane'},
+	{item: 'Raymond'},   {item: 'Petersen'}, {item: 'Kristina'}, {item: 'Barbra'},  {item: 'Tracey100'}
+];
