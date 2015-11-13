@@ -1,7 +1,0 @@
-{
-  "name": "AccessibilitySample",
-  "main": "AccessibilitySample.js",
-  "styles": [
-    "AccessibilitySample.less"
-  ]
-}
