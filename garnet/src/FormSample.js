@@ -47,6 +47,27 @@ var Formatter = kind.singleton({
 
 		return timestr;
 	},
+
+	/*
+	* From TimePickerPanel.value to FormPickerButton.content 24hour
+	*/
+	TimePickerPanel24: function(val) {
+		var timestr;
+
+		if (val.hour < 10 && val.hour > 0) {
+			timestr = '0' + val.hour;
+		} else {
+			timestr = val.hour;
+		}
+		timestr += ':';
+		if (val.minute < 10 && val.minute >= 0) {
+			timestr += '0';
+		}
+		timestr += val.minute;
+
+		return timestr;
+	},
+
 	/*
 	* From datePicker.value to FormPickerButton.content
 	*/
@@ -100,6 +121,24 @@ var Formatter = kind.singleton({
 	}
 });
 
+var SampleTimePickerPanel = kind({
+	name: 'g.sample.CurrentTimePickerPanel',
+	kind: TimePickerPanel,
+	valueChanged: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			if (this.fromPanel) {
+				this.fromPanel.triggerHandler('onUpdate', {
+					name: this.name,
+					hour: this.getHourValue(),
+					minute: this.getMinuteValue(),
+					meridiem: this.getMeridiemValue()
+				});
+			}			
+		};
+	})
+});
+
 var CollectionPickerPanel = kind({
 	name: 'g.sample.CollectionPickerPanel',
 	kind: PickerPanel,
@@ -124,8 +163,8 @@ var CollectionMultiPickerPanel = kind({
 
 var
 	panels = {
-		timePickerButton:                {name: 'timePicker', kind: TimePickerPanel},
-		timePickerButtonWithValue:       {name: 'timePickerPopupWithValue', kind: TimePickerPanel},
+		timePickerButton:                {name: 'timePicker', kind: SampleTimePickerPanel, meridiemValue: '24'},
+		timePickerButtonWithValue:       {name: 'timePickerWithValue', kind: SampleTimePickerPanel},
 		datePickerButton:                {name: 'datePicker', kind: DatePickerPanel},
 		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: DatePickerPanel},
 		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
@@ -137,7 +176,7 @@ var
 	today = new Date(),
 
 	defaults = {
-		timePickerButton: {hour: today.getHours(), meridiem: today.getHours() / 12 ? 'PM' : 'AM', minute: today.getMinutes()},
+		timePickerButton: {hour: today.getHours(), meridiem: '', minute: today.getMinutes()},
 		timePickerButtonWithValue: {hour: 12, meridiem: "PM", minute: 30},
 		datePickerButton: new Date(),
 		datePickerButtonWithValue: new Date('2014/1/1'),
@@ -154,7 +193,8 @@ var FormPanel = kind({
 	handlers: {
 		onCancel: 'tapCancel',
 		onOK: 'tapOK',
-		ontap: 'tapOK'
+		ontap: 'tapOK',
+		onUpdate: 'updateContent'
 	},
 	style: 'position: relative; background-color: #000000;overflow: hidden;',
 	classes: 'g-common-width-height-fit g-layout-absolute-wrapper',
@@ -211,7 +251,7 @@ var FormPanel = kind({
 		return function() {
 
 			sup.apply(this, arguments);
-			this.$.timePickerButton.setContent(Formatter.TimePickerPanel(defaults.timePickerButton));
+			this.$.timePickerButton.setContent(Formatter.TimePickerPanel24(defaults.timePickerButton));
 			this.$.timePickerButtonWithValue.setContent(Formatter.TimePickerPanel(defaults.timePickerButtonWithValue));
 			this.$.datePickerButton.setContent(Formatter.DatePickerPanel(defaults.datePickerButton));
 			this.$.datePickerButtonWithValue.setContent(Formatter.DatePickerPanel(defaults.datePickerButtonWithValue));
@@ -224,7 +264,7 @@ var FormPanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			options = {owner: this};
+			options = {owner: this, fromPanel: this};
 
 		// initialize default values
 		if (name === 'timePickerButtonWithValue') {
@@ -232,12 +272,14 @@ var FormPanel = kind({
 				hourValue: defaults.timePickerButtonWithValue.hour,
 				minuteValue: defaults.timePickerButtonWithValue.minute,
 				meridiemValue: defaults.timePickerButtonWithValue.meridiem,
-				owner: this
+				owner: this,
+				fromPanel: this
 			};
 		} else if (name === 'datePickerButtonWithValue') {
 			options = {
 				value: defaults.datePickerButtonWithValue,
-				owner: this
+				owner: this,
+				fromPanel: this
 			};
 		}
 
@@ -256,14 +298,14 @@ var FormPanel = kind({
 	},
 	updateContent: function(inSender, inEvent) {
 		var
-			name = inEvent.originator.name,
+			name = inEvent.name,
 			content;
 
 		if (name === 'timePicker') {
-			content = Formatter.TimePickerPanel({hour: 8, meridiem: "AM", minute: 46});
+			content = Formatter.TimePickerPanel24({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
 			this.$.timePickerButton.setContent(content);
-		} else if (name === 'timePickerPopupWithValue') {
-			content = Formatter.TimePickerPanel({hour: 12, meridiem: "PM", minute: 30});
+		} else if (name === 'timePickerWithValue') {
+			content = Formatter.TimePickerPanel({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
 			this.$.timePickerButtonWithValue.setContent(content);
 		} else if (name === 'datePicker') {
 			content = Formatter.DatePickerPanel(new Date());
