@@ -1,8 +1,6 @@
-var
-	kind = require('enyo/kind');
+var kind = require('enyo/kind');
 
-var
-	SampleList = require('../../src/strawman/SampleList');
+var SampleList = require('../../src/strawman/SampleList');
 
 // Define all of the extras samples
 var samples = {

@@ -36,7 +36,8 @@ var CheckboxPanel = kind({
 	},
 	groupActivated: function(inSender, inEvent) {
 		if (inEvent.originator.getActive()) {
-			var ordinals = ['1st', '2nd', '3rd'],
+			var
+				ordinals = ['1st', '2nd', '3rd'],
 				selected = inEvent.originator.indexInContainer();
 			this.doResult({msg: 'The ' + ordinals[selected] + ' checkbox in the group is selected.'});
 		}

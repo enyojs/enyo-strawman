@@ -12,9 +12,8 @@ var
 	Scroller = require('garnet/Scroller'),
 	PopupPanelScroller = require('garnet/PopupPanelScroller'),
 	IconButton = require('garnet/IconButton'),
-	PanelManager = require('garnet/PanelManager');
+	PanelManager = require('garnet/PanelManager'),
 
-var
 	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block;';
 
 var OneTextPanel = kind({

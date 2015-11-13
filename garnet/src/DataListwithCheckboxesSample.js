@@ -102,8 +102,9 @@ var CheckableDataListPanel = kind({
 		}
 	},
 	tapItem: function(inSender, inEvent) {
-		var items = this.getCheckedItems();
-		var control = inEvent.originator.parent;
+		var
+			items = this.getCheckedItems(),
+			control = inEvent.originator.parent;
 		if (control.selected || control.parent.selected) {
 			this.doResult({msg: 'The ' + inEvent.index + ' th item in the list is selected.'});
 			if (items.length > 0) {

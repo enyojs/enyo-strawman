@@ -154,7 +154,8 @@ module.exports = kind({
 		};
 	}),
 	generateRecords: function () {
-		var records	= [],
+		var
+			records	= [],
 			idx     = this.index || 0;
 		for (; records.length < 500; ++idx) {
 			var title = (idx % 8 === 0) ? ' with long title' : '';
