@@ -122,7 +122,7 @@ var Formatter = kind.singleton({
 });
 
 var SampleTimePickerPanel = kind({
-	name: 'g.sample.CurrentTimePickerPanel',
+	name: 'g.sample.TimePickerPanel',
 	kind: TimePickerPanel,
 	valueChanged: kind.inherit(function(sup) {
 		return function() {
@@ -133,6 +133,22 @@ var SampleTimePickerPanel = kind({
 					hour: this.getHourValue(),
 					minute: this.getMinuteValue(),
 					meridiem: this.getMeridiemValue()
+				});
+			}			
+		};
+	})
+});
+
+var SampleDatePickerPanel = kind({
+	name: 'g.sample.DatePickerPanel',
+	kind: DatePickerPanel,
+	valueChanged: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			if (this.fromPanel) {
+				this.fromPanel.triggerHandler('onUpdate', {
+					name: this.name,
+					value: this.value
 				});
 			}			
 		};
@@ -165,8 +181,8 @@ var
 	panels = {
 		timePickerButton:                {name: 'timePicker', kind: SampleTimePickerPanel, meridiemValue: '24'},
 		timePickerButtonWithValue:       {name: 'timePickerWithValue', kind: SampleTimePickerPanel},
-		datePickerButton:                {name: 'datePicker', kind: DatePickerPanel},
-		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: DatePickerPanel},
+		datePickerButton:                {name: 'datePicker', kind: SampleDatePickerPanel},
+		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: SampleDatePickerPanel},
 		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
 		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle',ontap: 'hidePickerPanelPopupWithValue'},
 		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true},
@@ -308,10 +324,10 @@ var FormPanel = kind({
 			content = Formatter.TimePickerPanel({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
 			this.$.timePickerButtonWithValue.setContent(content);
 		} else if (name === 'datePicker') {
-			content = Formatter.DatePickerPanel(new Date());
+			content = Formatter.DatePickerPanel(inEvent.value);
 			this.$.datePickerButton.setContent(content);
 		} else if (name === 'datePickerWithValue') {
-			content = Formatter.DatePickerPanel(new Date('2014/1/1'));
+			content = Formatter.DatePickerPanel(inEvent.value);
 			this.$.datePickerButtonWithValue.setContent(content);
 		} else if (name === 'pickerPanel') {
 			content = Formatter.CollectionPickerPanel();
