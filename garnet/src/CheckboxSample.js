@@ -16,13 +16,13 @@ var CheckboxPanel = kind({
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{classes: 'g-layout-absolute-center g-sample-setting', classes: 'g-sample-checkbox-container', components: [
-			{content: 'Checkboxes : ', classes: 'g-samle-checkbox-checkboxes-text'},
+			{content: 'Checkboxes : ', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: Checkbox, onchange:'checkboxChanged'},
 			{kind: Checkbox, onchange:'checkboxChanged', checked: true},
 			{kind: Checkbox, onchange:'checkboxChanged', disabled: true},
 			{kind: Checkbox, onchange:'checkboxChanged', checked: true, disabled: true},
-			{content: 'Grouped Checkboxes : ', classes: 'g-samle-checkbox-checkboxes-group-text'},
+			{content: 'Grouped Checkboxes : ', classes: 'g-sample-text'},
 			{kind: Group, onActivate:'groupActivated', components: [
 				{kind: Checkbox, checked: true},
 				{kind: Checkbox},

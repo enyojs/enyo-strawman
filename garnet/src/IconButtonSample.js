@@ -16,11 +16,11 @@ var IconButtonPanel = kind({
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{classes: 'g-layout-absolute-center', classes: 'g-sample-icon-button-container', components: [
-			{content: 'Icon Buttons : ', accessibilityLabel: 'check icon', classes: 'g-sample-icon-button-text'},
+			{content: 'Icon Buttons : ', accessibilityLabel: 'check icon', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', ontap: 'tapButton'},
 			{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', disabled: true, ontap: 'tapButton'},
-			{content: 'Grouped Icon Buttons : ', classes: 'g-sample-icon-button-group-text'},
+			{content: 'Grouped Icon Buttons : ', classes: 'g-sample-text'},
 			{kind: Group, onActivate:'iconGroupActivated', components: [
 				{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', classes: 'g-common-button-size-small', active: true},
 				{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', classes: 'g-common-button-size-normal'},

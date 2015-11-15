@@ -19,7 +19,7 @@ var ToggleButtonPanel = kind({
 			{kind: ToggleButton, value: true, content: '1', ontap: 'tapButton'},
 			{kind: ToggleButton, content: '2', ontap: 'tapButton'},
 			{kind: ToggleButton, disabled: true, content: 'Disabled', ontap: 'tapButton'},
-			{content: 'Grouped ToggleButtons : ', classes: 'g-sample-toggle-icon-button-group-text'},
+			{content: 'Grouped ToggleButtons : ', classes: 'g-sample-text'},
 			{kind: Group, components: [
 				{kind: ToggleButton, active: true, content: 'AA', ontap: 'tapButton'},
 				{kind: ToggleButton, content: 'BB', ontap: 'tapButton'},

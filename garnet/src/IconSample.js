@@ -12,7 +12,7 @@ var IconPanel = kind({
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{classes: 'g-layout-absolute-center', classes: 'g-sample-icon-container', components: [
-			{content: 'Icons : ', classes: 'g-sample-icon-text'},
+			{content: 'Icons : ', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-normal'},
