@@ -179,7 +179,6 @@ var PanelManager = kind({
 		onPushPanel: 'pushPanel',
 		onPopPanel: 'popPanel'
 	},
-	classes: 'enyo-fit',
 	components: [
 		{kind: ConfirmBasePanel, classes: 'g-sample-panel'}
 	],

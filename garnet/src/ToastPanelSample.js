@@ -34,7 +34,6 @@ var PanelManager = kind({
 	handlers: {
 		onPushPanel: 'pushPanel'
 	},
-	classes: 'enyo-fit',
 	components: [
 		{kind: ToastBasePanel}
 	],

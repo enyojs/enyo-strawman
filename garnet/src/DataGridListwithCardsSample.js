@@ -139,7 +139,7 @@ module.exports = kind({
 
 		{content: 'Data Grid List with Cards', classes: 'g-sample-subheader'},
 		{name: 'gridList', kind: DataGridListCardsPanel, classes: 'g-sample-panel-margin g-common-width-height-fit'},
-		{name: 'gridListCircle', kind: DataGridListCardsCirclePanel, classes: 'g-sample-panel-margin g-common-width-height-fit'}
+		{name: 'gridListCircle', kind: DataGridListCardsCirclePanel, classes: 'g-sample-circle-panel-margin g-common-width-height-fit'}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.gridList.collection'},
