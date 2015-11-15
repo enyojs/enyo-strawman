@@ -1,10 +1,51 @@
 /* ToggleIconButtonSample */
 
+// Common classes
+
+.g-sample-circle-panel {
+	background-color: #000000;
+
+	position: relative;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.g-sample-result {
+	background-color: #EDEDED;
+	position: fixed;
+	width: 100%;
+	min-height: 160px;
+	bottom: 0;
+	z-index: 9999;
+	opacity: 0.8;
+}
+
+// Sample specific classes
+
 .g-sample .g-toggle-icon-button {
 	margin-right: 2px;
 }
 .g-sample-toggle-icon-button-size {
+	background-size: 60px 360px, 60px 120px;
+
 	width: 60px;
 	height: 60px;
-	background-size: 60px 360px, 60px 120px;
+}
+.g-sample-toggle-icon-button-container {
+	width: 280px;
+	height: 230px;
+}
+.g-sample-toggle-icon-button-text {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+
+	font-size: 20px;
+	color: #FFFFFF;
+}
+.g-sample-toggle-icon-button-group-text {
+	display: inline-block;
+	margin-right: 10px;
+
+	font-size: 20px;
+	color: #FFFFFF;
 }

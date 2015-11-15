@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
 	Item = require('garnet/Item'),
@@ -14,7 +13,7 @@ var
 var IconBadgeItem = kind({
 	name: 'g.sample.IconBadgeItem',
 	kind: Item,
-	classes: 'g-datalist-icon-badge-item',
+	classes: 'g-datalist-iconbadge-item',
 	published: {
 		title: '',
 		newIcon: false,
@@ -25,7 +24,7 @@ var IconBadgeItem = kind({
 		{name: 'newIconBadge', kind: Icon, src: '@../assets/badge_unread.svg', classes: 'icon-badge-item-new-icon'},
 		{name: 'infoIconBadge', kind: Icon, src: '@../assets/badge_extra_info.svg', classes: 'icon-badge-item-info-icon'},
 		{name: 'title', classes: 'icon-badge-item-title'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{tag: 'hr', classes: 'g-datalist-iconbadge-item-border'}
 	],
 	bindings: [
 		{from: '.model.albumTitle', to: '.$.title.content'},
@@ -68,7 +67,6 @@ var IconBadgeDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: false,
 			multipleSelection: false,
-			style: 'background-color: #000000;',
 			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: IconBadgeItem}
@@ -87,7 +85,7 @@ module.exports = kind({
 		{content: '< Data List with Icon Badge Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List with Icon Badge', classes: 'g-sample-subheader'},
-		{name: 'iconBadgeListPanel', kind: IconBadgeDataListPanel, style: 'position: relative;'}
+		{name: 'iconBadgeListPanel', kind: IconBadgeDataListPanel, classes: 'g-sample-panel'}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.iconBadgeListPanel.collection'}

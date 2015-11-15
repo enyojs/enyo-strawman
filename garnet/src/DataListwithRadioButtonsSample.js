@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
 	Item = require('garnet/Item'),
@@ -14,14 +13,14 @@ var
 var RadioButtonItemBase = kind({
 	name: 'g.sample.RadioButtonItemBase',
 	kind: Item,
-	classes: 'g-datalist-radiobutton-item',
+	classes: 'g-datalist-radiobuttons-item',
 	published: {
 		title: '',
 		selected: false
 	},
 	components: [
 		{name: 'title', classes: 'radiobutton-item-title'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{tag: 'hr', classes: 'g-datalist-radiobuttons-item-border'}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -70,13 +69,12 @@ var RadioDataListPanel = kind({
 			controlsPerPage: 4,
 			groupSelection: true,
 			selection: true,
-			style: 'background-color: #000000;',
 			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
 			],
 			footerComponents: [
-				{style: 'height: ' + ri.scale(116) + 'px;'}
+				{classes: 'g-datalist-radiobuttons-footer'}
 			]
 		}
 	],
@@ -116,7 +114,7 @@ module.exports = kind({
 		{content: '< DataList with Radio Buttons Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'DataList with Radio Buttons', classes: 'g-sample-subheader'},
-		{name: 'radioDataListPanel', kind: RadioDataListPanel, style: 'position: relative;', onResult: 'result'},
+		{name: 'radioDataListPanel', kind: RadioDataListPanel, classes: 'g-sample-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

@@ -2,17 +2,15 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Spinner = require('garnet/Spinner'),
 	Panel = require('garnet/Panel');
 
 var SpinnerPanel = kind({
 	name: 'g.sample.SpinnerPanel',
 	kind: Panel,
-	style: 'border-radius: 50%; background-color: #000000;',
 	components: [
-		{classes: 'g-layout-absolute-center', style: 'width: ' + ri.scale(244) + 'px; height: ' + ri.scale(110) + 'px;', components: [
-			{kind: Spinner, style: 'width: 100%', content: 'Connecting to the server'}
+		{classes: 'g-sample-spinner-container g-layout-absolute-center', components: [
+			{kind: Spinner, classes: 'g-sample-spinner-width', content: 'Connecting to the server'}
 		]}
 	]
 });
@@ -20,9 +18,8 @@ var SpinnerPanel = kind({
 var TextSpinnerPanel = kind({
 	name: 'g.sample.TextSpinnerPanel',
 	kind: Panel,
-	style: 'border-radius: 50%; background-color: #000000;',
 	components: [
-		{kind: Spinner, classes: 'g-layout-absolute-center', style: 'position: absolute;'}
+		{kind: Spinner, classes: 'g-sample-spinner-text-spinner g-layout-absolute-center'}
 	]
 });
 
@@ -33,16 +30,16 @@ module.exports = kind({
 		{content: '< Spinner Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Spinners', classes: 'g-sample-subheader'},
-		{style: 'position: relative; height: 100%', components: [
+		{classes: 'g-sample-panels', components: [
 			{
 				name: 'spinnerPanel',
 				kind: SpinnerPanel,
-				style: 'background-color: #000000; position: relative; display: inline-block; overflow: hidden;'
+				classes: 'g-sample-circle-panel-margin'
 			},
 			{
 				name: 'textSpinnerPanel',
 				kind: TextSpinnerPanel,
-				style: 'background-color: #000000; position: relative; display: inline-block; overflow: hidden;'
+				classes: 'g-sample-circle-panel-margin'
 			}
 		]}
 	],

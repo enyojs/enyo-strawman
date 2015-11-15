@@ -2,8 +2,7 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	ri = require('enyo/resolution');
+	utils = require('enyo/utils');
 
 var
 	Button = require('garnet/Button'),
@@ -11,9 +10,6 @@ var
 	ContextualPanel = require('garnet/ContextualPanel'),
 	Scroller = require('garnet/Scroller'),
 	PanelManager = require('garnet/PanelManager');
-
-var
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; ';
 
 var OneButtonPanel = kind({
 	name: 'g.sample.OneButtonPanel',
@@ -109,9 +105,9 @@ var ContextualBasePanel = kind({
 		onButtonTap: 'result'
 	},
 	components: [
-		{name: 'oneButton', kind: Button, style: 'margin: ' + ri.scale(55)+ 'px ' + ri.scale(5) + 'px ' + ri.scale(5)+ 'px; width: ' + ri.scale(310) + 'px;', ontap: 'showPanel', content: 'Click here to show panel!'},
-		{name: 'twoButton', kind: Button, style: 'margin: ' + ri.scale(5) + 'px; width: ' + ri.scale(310) + 'px;', ontap: 'showPanel', content: 'Click here to show panel!'},
-		{name: 'threeButton', kind: Button, style: 'margin: ' + ri.scale(5) + 'px; width: ' + ri.scale(310) + 'px;', ontap: 'showPanel', content: 'Click here to show panel!'}
+		{name: 'oneButton', kind: Button, classes: 'g-sample-contextual-panel-button:first-child', ontap: 'showPanel', content: 'Click here to show panel!'},
+		{name: 'twoButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'},
+		{name: 'threeButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'}
 	],
 	showPanel: function(inSender, inEvent) {
 		var name = inSender.name;
@@ -141,7 +137,6 @@ var PanelManager = kind({
 		onPushPanel: 'pushPanel',
 		onPopPanel: 'popPanel'
 	},
-	classes: 'enyo-fit',
 	components: [
 		{kind: ContextualBasePanel}
 	],
@@ -176,8 +171,8 @@ module.exports = kind({
 		{content: '< ContextualPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Contextual with 1 button / 2 buttons / 3 buttons', classes: 'g-sample-subheader'},
-		{style: panelStyle, kind: PanelManager},
-		{style: 'position: fixed; width: 100%; min-height: +' + ri.scale(160) + 'px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;', classes: 'g-sample-result', components: [
+		{kind: PanelManager, classes: 'g-sample-panel-manager'},
+		{classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}

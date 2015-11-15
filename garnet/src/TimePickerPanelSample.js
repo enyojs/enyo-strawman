@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	GarnetTimePickerPanel = require('garnet/TimePickerPanel');
 
 var TimePicker12Panel = kind({
@@ -31,16 +30,16 @@ module.exports = kind({
 		{content: '< Time Picker Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Time Picker Panel', classes: 'g-sample-subheader'},
-		{style: 'position: relative; height: 100%', components: [
+		{classes: 'g-sample-panels', components: [
 			{
 				name: 'timePicker12Panel',
 				kind: TimePicker12Panel,
-				style: 'background-color: #000000; position: relative; display: inline-block; overflow: hidden;'
+				classes: 'g-sample-panel-margin'
 			},
 			{
 				name: 'timePicker24Panel',
 				kind: TimePicker24Panel,
-				style: 'background-color: #000000; position: relative; display: inline-block; margin-left: ' + ri.scale(10) + 'px; overflow: hidden;'
+				classes: 'g-sample-panel-margin'
 			}
 		]},
 

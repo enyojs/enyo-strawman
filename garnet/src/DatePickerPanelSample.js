@@ -8,7 +8,6 @@ var SampleDatePickerPanel = kind({
 	name: 'g.sample.DatePickerPanel',
 	kind: GarnetDatePickerPanel,
 	locale: 'en-US',
-	style: 'position: relative;',
 	mode: 'year'
 });
 
@@ -19,9 +18,9 @@ module.exports = kind({
 		{content: '< Date Picker Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Date Picker Panel', classes: 'g-sample-subheader'},
-		{name: 'datepicker', kind: SampleDatePickerPanel, style: 'position: relative;'},
+		{name: 'datepicker', kind: SampleDatePickerPanel, classes: 'g-sample-panel'},
 
-		{style: 'position: fixed; width: 100%; min-height: 160px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;', classes: 'g-sample-result', components: [
+		{classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}

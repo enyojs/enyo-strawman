@@ -2,14 +2,11 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	FormPickerButton = require('garnet/FormPickerButton'),
 	Panel = require('garnet/Panel'),
 	PickerPanel = require('garnet/PickerPanel'),
-	PanelManager = require('garnet/PanelManager'),
-
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block;';
+	PanelManager = require('garnet/PanelManager');
 
 var Formatter = kind.singleton({
 	/*
@@ -65,9 +62,7 @@ var FormPanel = kind({
 		onUpdate: 'updateContent'
 	},
 	components: [
-		{style: 'position: relative; background-color: #000000;', classes: 'g-common-width-height-fit', components: [
-			{name: 'pickerButton', kind: FormPickerButton, style: 'top: ' + ri.scale(134) + 'px;', ontap: 'showPanel', content: 'Click here!'}
-		]}
+		{name: 'pickerButton', kind: FormPickerButton, classes: 'g-sample-picker-panel-button', ontap: 'showPanel', content: 'Click here!'}
 	],
 	initComponents: kind.inherit(function(sup) {
 		return function() {
@@ -99,7 +94,7 @@ var PanelManager = kind({
 		onPopPanel: 'popPanel'
 	},
 	components: [
-		{kind: FormPanel, style: 'position: relative;', onResult: 'result'}
+		{kind: FormPanel, classes: 'g-sample-panel', onResult: 'result'}
 	],
 	pushPanel: function (inSender, inEvent) {
 		this.pushFloatingPanel(inEvent.panel, inEvent.options);
@@ -116,7 +111,7 @@ module.exports = kind({
 		{content: '< PickerPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'PickerPanel', classes: 'g-sample-subheader'},
-		{style: panelStyle, kind: PanelManager},
+		{kind: PanelManager, classes: 'g-sample-panel-manager'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
 	IconButton = require('garnet/IconButton'),
 	Panel = require('garnet/Panel');
@@ -14,14 +13,13 @@ var IconButtonPanel = kind({
 		onResult: ''
 	},
 	classes: 'g-layout-absolute-wrapper',
-	style: 'border-radius: 50%; background-color: #000000;',
 	components: [
-		{classes: 'g-layout-absolute-center', style: 'width: ' + ri.scale(255) + 'px; height: ' + ri.scale(230) + 'px;', components: [
-			{content: 'Icon Buttons : ', accessibilityLabel: 'check icon', style: 'margin-left: ' + ri.scale(10) + 'px; font-size: ' + ri.scale(20) + 'px; display: inline-block; margin-right: ' + ri.scale(10) + 'px; color: #FFFFFF;'},
+		{classes: 'g-sample-icon-button-container g-layout-absolute-center', components: [
+			{content: 'Icon Buttons : ', accessibilityLabel: 'check icon', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', ontap: 'tapButton'},
 			{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', disabled: true, ontap: 'tapButton'},
-			{content: 'Grouped Icon Buttons : ', style: 'font-size: ' + ri.scale(20) + 'px; display: inline-block; margin-right: ' + ri.scale(10) + 'px; color: #FFFFFF;'},
+			{content: 'Grouped Icon Buttons : ', classes: 'g-sample-text'},
 			{kind: Group, onActivate:'iconGroupActivated', components: [
 				{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', classes: 'g-common-button-size-small', active: true},
 				{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', classes: 'g-common-button-size-normal'},
@@ -48,7 +46,7 @@ module.exports = kind({
 		{content: '< Icon Button Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Icon Buttons', classes: 'g-sample-subheader'},
-		{kind: IconButtonPanel, style: 'position: relative;', onResult: 'result'},
+		{kind: IconButtonPanel, classes: 'g-sample-circle-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

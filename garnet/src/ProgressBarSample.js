@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	ConfirmPopup = require('garnet/ConfirmPopup'),
 	FormButton = require('garnet/FormButton'),
 	FormInput = require('garnet/FormInput'),
@@ -19,10 +18,9 @@ var ProgressBarPanel = kind({
 		onCancel: 'hidePopup',
 		onPopUpAnimationEnd: 'popupAnimationFinished'
 	},
-	style: 'border-radius: 50%; background-color: #000000;',
 	components: [
-		{style: 'width: 100%; height: ' + ri.scale(10) + 'px;'},
-		{name: 'popupButton', kind: FormButton, ontap: 'showPopup', content: 'Popup', style: 'width: ' + ri.scale(140) + 'px; margin: auto; display: block;'},
+		{classes: 'g-sample-progressbar-header'},
+		{name: 'popupButton', kind: FormButton, ontap: 'showPopup', content: 'Popup', classes: 'g-sample-progressbar-popup-button'},
 		{
 			name: 'confirmPopupWithOnlyCancelButton',
 			kind: ConfirmPopup,
@@ -30,23 +28,23 @@ var ProgressBarPanel = kind({
 				{name: 'cancel', kind: IconButton, ontap: 'hidePopup', classes: 'g-cancel-image'}
 			],
 			components: [
-				{classes: 'g-common-width-height-fit', style: 'overflow: hidden; top: 28%;', components: [
-					{name: 'percentage', style:'font-size: ' + ri.scale(28) + 'px; width: ' + ri.scale(240) + 'px; margin: ' + ri.scale(97) + 'px ' + ri.scale(20) + 'px ' + ri.scale(15) + 'px ' + ri.scale(20) + 'px; text-align: center; display: inline-block; color: #FAFAFA;', content: 'Loading...'},
-					{kind: ProgressBar, name: 'popupProgress', style:'left: 12%; width: ' + ri.scale(240) + 'px;', progress: 0, max: 100, onChange: 'updateProgressP'},
-					{name: 'percentageP', style:'font-size: ' + ri.scale(26) + 'px; width: ' + ri.scale(240) + 'px; margin: ' + ri.scale(15) + 'px ' + ri.scale(30) + 'px 0; line-height: ' + ri.scale(26) + 'px; text-align: center; display: inline-block; color: #1CD2D2;'}
+				{classes: 'g-sample-progressbar-popup g-common-width-height-fit', components: [
+					{name: 'percentage', classes:'g-sample-progressbar-popup-loading', content: 'Loading...'},
+					{kind: ProgressBar, name: 'popupProgress', classes:'g-sample-progressbar-popup-progressbar', progress: 0, max: 100, onChange: 'updateProgressP'},
+					{name: 'percentageP', classes:'g-sample-progressbar-popup-text'}
 				]}
 			]
 		},
 		{kind: FormLabel, content: 'Progress Bar: set value '},
-		{name: 'progressBar1', kind: ProgressBar, progress: 25, max: 100, style: 'margin: ' + ri.scale(10) + 'px ' + ri.scale(18) + 'px ' + ri.scale(12) + 'px;'},
-		{name: 'progressBar2', kind: ProgressBar, progress: 25, bgProgress: 75, max: 100, style: 'margin: ' + ri.scale(10) + 'px ' + ri.scale(18) + 'px ' + ri.scale(12) + 'px;'},
-		{kind: FormToolDecorator, style: 'text-align: center;', components: [
-			{name: 'input' ,kind: FormInput, value: 25, style: 'width: ' + ri.scale(150) + 'px; margin-right: ' + ri.scale(10) + 'px;'},
-			{kind: FormButton, content:'Set', ontap: 'changeValue', style: 'width: ' + ri.scale(80) + 'px;'}
+		{name: 'progressBar1', kind: ProgressBar, progress: 25, max: 100, classes: 'g-sample-progressbar-progressbar1'},
+		{name: 'progressBar2', kind: ProgressBar, progress: 25, bgProgress: 75, max: 100, classes: 'g-sample-progressbar-progressbar2'},
+		{kind: FormToolDecorator, components: [
+			{name: 'input' ,kind: FormInput, value: 25, classes: 'g-sample-form-input'},
+			{kind: FormButton, content:'Set', ontap: 'changeValue', classes: 'g-sample-form-value'}
 		]},
-		{kind: FormToolDecorator, style: 'text-align: center;', components: [
-			{kind: FormButton, content:'-', ontap: 'decValue', style: 'width: ' + ri.scale(70) + 'px; margin: 0 ' + ri.scale(4) + 'px 0 ' + ri.scale(45) + 'px;'},
-			{kind: FormButton, content:'+', ontap: 'incValue', style: 'width: ' + ri.scale(70) + 'px; margin-right: ' + ri.scale(45) + 'px;'}
+		{kind: FormToolDecorator, classes: 'g-sample-probressbar-tooldecorator', components: [
+			{kind: FormButton, content:'-', ontap: 'decValue', classes: 'g-sample-form-button-minus'},
+			{kind: FormButton, content:'+', ontap: 'incValue', classes: 'g-sample-form-button-plus'}
 		]}
 	],
 	changeValue: function(inSender, inEvent) {
@@ -96,7 +94,7 @@ module.exports = kind({
 		{content: '< Progress Bar Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'ProgressBars', classes: 'g-sample-subheader'},
-		{kind: ProgressBarPanel, style: 'position: relative;'}
+		{kind: ProgressBarPanel, classes: 'g-sample-circle-panel'}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

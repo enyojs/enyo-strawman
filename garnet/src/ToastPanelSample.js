@@ -2,15 +2,11 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 
 	Button = require('garnet/Button'),
 	ToastPanel = require('garnet/ToastPanel'),
 	Panel = require('garnet/Panel'),
 	PanelManager = require('garnet/PanelManager');
-
-var
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; ';
 
 var SampleToast = kind({
 	name: 'toast',
@@ -25,7 +21,7 @@ var ToastBasePanel = kind({
 	kind: Panel,
 	classes: 'g-layout-absolute-wrapper', // for button
 	components: [
-		{kind: Button, style: 'position: absolute; width: ' + ri.scale(310) + 'px; margin: auto;', classes: 'g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
+		{kind: Button, classes: 'g-sample-toast-panel-container g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
 	],
 	showPanel: function(inSender, inEvent) {
 		this.bubbleUp('onPushPanel', {panelName: name, owner: this});
@@ -38,7 +34,6 @@ var PanelManager = kind({
 	handlers: {
 		onPushPanel: 'pushPanel'
 	},
-	classes: 'enyo-fit',
 	components: [
 		{kind: ToastBasePanel}
 	],
@@ -58,7 +53,7 @@ module.exports = kind({
 		{content: '< Toast Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Toast', classes: 'g-sample-subheader'},
-		{style: panelStyle, kind: PanelManager}
+		{kind: PanelManager, classes: 'g-sample-panel-manager'}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

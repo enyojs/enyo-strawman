@@ -1,34 +1,67 @@
 /* DataListwithCheckboxesSample */
 
-.g-sample-datalistcheckbox-footer-comp {
+// Common classes
+
+.g-sample-panel {
+	background-color: #000000;
+
+	position: relative;
+	overflow: hidden;
+}
+.g-sample-result {
+	background-color: #EDEDED;
+
+	position: fixed;
 	width: 100%;
-	height: 93px;
+	min-height: 160px;
+	bottom: 0;
+	z-index: 9999;
+	opacity: 0.8;
+}
+
+// Sample specific classes
+
+.g-sample-datalist-checkboxes-footer {
+	height: 116px;
 }
 
 /* Checkbox Item */
-.g-sample-datalistcheckbox-checkbox-item{
-	height: 72px;
-	line-height: 72px;
+.g-sample-datalist-checkboxes-checkbox-item{
 	position: relative; /* Do not omit this. It's critical */
+	height: 72px;
+
+	line-height: 72px;
+
 	cursor: pointer;
 }
-.g-sample-datalistcheckbox-checkbox-item .checkbox-item-title {
+.g-sample-datalist-checkboxes-checkbox-item .checkbox-item-title {
 	width: 186px;
 	height: 72px;
 	margin-left: 96px;
+
 	font-size: 28px;
 	color: #FAFAFA;
+
 	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
 	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
 }
-.g-sample-datalistcheckbox-checkbox-item.disabled {
+.g-sample-datalist-checkboxes-checkbox-item-border {
+	background-color: #202328;
+	height: 1px;
+	border: 0;
+	bottom: 0;
+
+	color: #202328;
+}
+.g-sample-datalist-checkboxes-checkbox-item.disabled {
 	opacity: 0.4;
+
 	filter: alpha(opacity=40);
 }
 /* This for always showing checkbox */
 .g-selection-overlay-support-scrim {
 	display: inline;
 }
-.g-sample-datalistcheckbox-checkbox-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
+.g-sample-datalist-checkboxes-checkbox-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
 	background-position: 0 -48px;
 }

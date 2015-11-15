@@ -12,7 +12,7 @@ var
 
 var DataGridListCardsImageItem = kind({
 	name: 'g.sample.DataGridListCardsImageItem',
-	classes: 'g-sample-gridlistcards-imageitem',
+	classes: 'g-sample-datagridlist-cards-imageitem',
 	components: [
 		{name: 'image', kind: EnyoImage},
 		{name: 'caption', classes: 'caption'}
@@ -58,7 +58,7 @@ var DataGridListCardsItem = kind({
 var DataGridListCardsCircleImageItem = kind({
 	name: 'g.sample.DataGridListCardsCircleImageItem',
 	kind: DataGridListCardsImageItem,
-	classes: 'g-sample-gridlistcards-circle-imageitem'
+	classes: 'g-sample-datagridlist-cards-circle-imageitem'
 });
 
 var DataGridListCardsCircleItem = kind({
@@ -82,7 +82,6 @@ var DataGridListCardsPanel = kind({
 	kind: Panel,
 	knob: true,
 	classes: 'g-layout-absolute-wrapper',
-	style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; background-color: #000000;',
 	components: [
 		{
 			name: 'list',
@@ -93,7 +92,7 @@ var DataGridListCardsPanel = kind({
 			minHeight: ri.scale(232),
 			minWidth: ri.scale(212),
 			scrollerOptions: {maxHeight: ri.scale(370) + 'px'},
-			style: 'width: ' + ri.scale(212) + 'px; height: ' + ri.scale(320) + 'px; padding-top: ' + ri.scale(6) + 'px; margin: auto; background-color: #000000;',
+			classes: 'g-sample-datagridlist-panel-card',
 			headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
 			components: [
 				{kind: DataGridListCardsItem}
@@ -110,7 +109,6 @@ var DataGridListCardsCirclePanel = kind({
 	kind: Panel,
 	knob: true,
 	classes: 'g-layout-absolute-wrapper',
-	style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; background-color: #000000;',
 	components: [
 		{
 			name: 'list',
@@ -121,7 +119,7 @@ var DataGridListCardsCirclePanel = kind({
 			minHeight: ri.scale(252),
 			minWidth: ri.scale(212),
 			scrollerOptions: {maxHeight: ri.scale(370) + 'px'},
-			style: 'width: ' + ri.scale(212) + 'px; height: ' + ri.scale(320) + 'px; padding-top: ' + ri.scale(6) + 'px; margin: auto; background-color: #000000;',
+			classes: 'g-sample-datagridlist-panel-card',
 			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: DataGridListCardsCircleItem}
@@ -140,8 +138,8 @@ module.exports = kind({
 		{content: '< Data Grid List with Cards Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data Grid List with Cards', classes: 'g-sample-subheader'},
-		{name: 'gridList', kind: DataGridListCardsPanel, style: 'position: relative; display: inline-block; margin-right: ' + ri.scale(10) + 'px'},
-		{name: 'gridListCircle', kind: DataGridListCardsCirclePanel, style: 'position: relative; display: inline-block;'}
+		{name: 'gridList', kind: DataGridListCardsPanel, classes: 'g-sample-panel-margin g-common-width-height-fit'},
+		{name: 'gridListCircle', kind: DataGridListCardsCirclePanel, classes: 'g-sample-circle-panel-margin g-common-width-height-fit'}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.gridList.collection'},
