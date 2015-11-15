@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	GarnetTimePickerPanel = require('garnet/TimePickerPanel');
 
 var TimePicker12Panel = kind({

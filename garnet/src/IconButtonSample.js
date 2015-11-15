@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
 	IconButton = require('garnet/IconButton'),
 	Panel = require('garnet/Panel');
@@ -15,7 +14,7 @@ var IconButtonPanel = kind({
 	},
 	classes: 'g-layout-absolute-wrapper',
 	components: [
-		{classes: 'g-layout-absolute-center', classes: 'g-sample-icon-button-container', components: [
+		{classes: 'g-sample-icon-button-container g-layout-absolute-center', components: [
 			{content: 'Icon Buttons : ', accessibilityLabel: 'check icon', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: IconButton, accessibilityLabel: 'check icon', src: '@../assets/btn_done.svg', ontap: 'tapButton'},

@@ -2,12 +2,11 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 
 	Button = require('garnet/Button'),
 	ToastPanel = require('garnet/ToastPanel'),
 	Panel = require('garnet/Panel'),
-	PanelManager = require('garnet/PanelManager');;
+	PanelManager = require('garnet/PanelManager');
 
 var SampleToast = kind({
 	name: 'toast',

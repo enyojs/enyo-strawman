@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	ConfirmPopup = require('garnet/ConfirmPopup'),
 	FormButton = require('garnet/FormButton'),
 	FormInput = require('garnet/FormInput'),
@@ -29,7 +28,7 @@ var ProgressBarPanel = kind({
 				{name: 'cancel', kind: IconButton, ontap: 'hidePopup', classes: 'g-cancel-image'}
 			],
 			components: [
-				{classes: 'g-common-width-height-fit', classes: 'g-sample-progressbar-popup', components: [
+				{classes: 'g-sample-progressbar-popup g-common-width-height-fit', components: [
 					{name: 'percentage', classes:'g-sample-progressbar-popup-loading', content: 'Loading...'},
 					{kind: ProgressBar, name: 'popupProgress', classes:'g-sample-progressbar-popup-progressbar', progress: 0, max: 100, onChange: 'updateProgressP'},
 					{name: 'percentageP', classes:'g-sample-progressbar-popup-text'}

@@ -2,10 +2,8 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	IconButton = require('garnet/IconButton'),
 	Panel = require('garnet/Panel'),
-	Popup = require('garnet/Popup'),
 	WheelSliderController = require('garnet/WheelSliderController');
 
 var WheelSliderControllerPanel = kind({

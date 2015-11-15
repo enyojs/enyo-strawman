@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
 	EnyoImage = require('enyo/Image'),

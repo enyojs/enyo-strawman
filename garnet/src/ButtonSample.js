@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel');
@@ -15,7 +14,7 @@ var ButtonPanel = kind({
 	},
 	classes: 'g-layout-absolute-wrapper',
 	components: [
-		{classes: 'g-layout-absolute-center', classes: 'g-sample-button-container', components: [
+		{classes: 'g-sample-button-container g-layout-absolute-center', components: [
 			{name: 'B Button', kind: Button, content: 'B', ontap: 'tapButton'},
 			{name: 'Button', kind: Button, content: 'Btn A', ontap: 'tapButton'},
 			{name: 'B Button Disabled', kind: Button, content: 'Disabled', classes: 'g-sample-button-disable', disabled: true, ontap: 'tapButton'},

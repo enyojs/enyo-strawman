@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Icon = require('garnet/Icon'),
 	Panel = require('garnet/Panel');
 
@@ -11,7 +10,7 @@ var IconPanel = kind({
 	kind: Panel,
 	classes: 'g-layout-absolute-wrapper',
 	components: [
-		{classes: 'g-layout-absolute-center', classes: 'g-sample-icon-container', components: [
+		{classes: 'g-sample-icon-container g-layout-absolute-center', components: [
 			{content: 'Icons : ', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small'},

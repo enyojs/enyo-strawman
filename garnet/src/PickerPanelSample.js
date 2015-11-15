@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	FormPickerButton = require('garnet/FormPickerButton'),
 	Panel = require('garnet/Panel'),

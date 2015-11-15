@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Button = require('garnet/Button'),
 	Scroller = require('garnet/Scroller'),
 	Panel = require('garnet/Panel'),

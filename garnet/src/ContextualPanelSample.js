@@ -2,8 +2,7 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	ri = require('enyo/resolution');
+	utils = require('enyo/utils');
 
 var
 	Button = require('garnet/Button'),

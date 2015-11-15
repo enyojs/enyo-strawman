@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Spinner = require('garnet/Spinner'),
 	Panel = require('garnet/Panel');
 
@@ -20,7 +19,7 @@ var TextSpinnerPanel = kind({
 	name: 'g.sample.TextSpinnerPanel',
 	kind: Panel,
 	components: [
-		{kind: Spinner, classes: 'g-layout-absolute-center', classes: 'g-sample-spinner-text-spinner'}
+		{kind: Spinner, classes: 'g-sample-spinner-text-spinner g-layout-absolute-center'}
 	]
 });
 

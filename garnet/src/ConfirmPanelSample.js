@@ -2,8 +2,7 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	ri = require('enyo/resolution');
+	utils = require('enyo/utils');
 
 var
 	Button = require('garnet/Button'),
@@ -12,7 +11,7 @@ var
 	Scroller = require('garnet/Scroller'),
 	PopupPanelScroller = require('garnet/PopupPanelScroller'),
 	IconButton = require('garnet/IconButton'),
-	PanelManager = require('garnet/PanelManager')
+	PanelManager = require('garnet/PanelManager');
 
 var OneTextPanel = kind({
 	name: 'confirmPanelNoScrollNoIcon',
@@ -182,7 +181,7 @@ var PanelManager = kind({
 	},
 	classes: 'enyo-fit',
 	components: [
-		{kind: ConfirmBasePanel}
+		{kind: ConfirmBasePanel, classes: 'g-sample-panel'}
 	],
 	pushPanel: function (inSender, inEvent) {
 		var type = {

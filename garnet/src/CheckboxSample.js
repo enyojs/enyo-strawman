@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
 	Checkbox = require('garnet/Checkbox'),
 	Panel = require('garnet/Panel');
@@ -15,7 +14,7 @@ var CheckboxPanel = kind({
 	},
 	classes: 'g-layout-absolute-wrapper',
 	components: [
-		{classes: 'g-layout-absolute-center g-sample-setting', classes: 'g-sample-checkbox-container', components: [
+		{classes: 'g-sample-checkbox-container g-layout-absolute-center g-sample-setting', components: [
 			{content: 'Checkboxes : ', classes: 'g-sample-text'},
 			{tag: 'br'},
 			{kind: Checkbox, onchange:'checkboxChanged'},
