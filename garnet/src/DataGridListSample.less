@@ -3,30 +3,39 @@
 // Common
 .g-sample-panel-margin {
 	background-color: #000000;
+
 	position: relative;
-	overflow: hidden;
 	display: inline-block;
 	margin-right: 10px;
+	overflow: hidden;
 }
 
 .g-sample-gridlist-panel {
-	width: 232px; height: 320px; margin: auto; background-color: #000000;
+	background-color: #000000;
+
+	width: 232px;
+	height: 320px;
+	margin: auto;
 }
 .g-sample-gridlist-imageitem {
 	width: 127px;
 	height: 127px;
-	cursor: pointer;
+
 	text-align: center;
+
+	cursor: pointer;
 }
 .g-sample-gridlist-imageitem img {
+	background-size: contain;
+
 	width: 107px;
 	height: 107px;
-	background-size: contain;
 }
 .g-sample-gridlist-circle-imageitem img {
+	background-size: contain;
+
 	width: 82px;
 	height: 82px;
-	background-size: contain;
 	border-radius: 100%;
 	margin-top: 0.8px;
 }
@@ -36,24 +45,28 @@
 	overflow: hidden;
 }
 .g-sample-gridlist-circle-imageitem .caption{
+	width: 92px;
+	height: 20px;
 	margin-top: 0px;
 	margin-left: 15px;
 	margin-right: 15px;
+
 	font-size: 18px;
-	width: 92px;
-	height: 20px;
 	color: #FAFAFA;
+
 	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
 	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
 }
 .g-sample-gridlist-imageitem.disabled {
 	opacity: 0.4;
+
 	filter: alpha(opacity=40);
 }
 
 /* GridList Imageitem */
 .selection-enabled .g-sample-gridlist-imageitem.g-selection-overlay-support.selected .g-icon-button {
 	background-position: 0 -325.8px;
+
 	margin-top: 0px;
 	margin-left: 5px;
 	margin-right: 15px;
@@ -67,6 +80,7 @@
 }
 .selection-enabled .g-sample-gridlist-circle-imageitem.g-selection-overlay-support.selected .g-icon-button {
 	background-position: 0 -331px;
+
 	margin-top: 0px;
 	margin-left: 5px;
 	margin-right: 0;
@@ -76,5 +90,5 @@
 	width: 107px;
 	height: 88px;
 	margin-top: 0;
-	margin-left: 0px;
+	margin-left: 0;
 }
