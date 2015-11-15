@@ -21,7 +21,7 @@ var CheckboxItemBase = kind({
 	},
 	components: [
 		{name: 'title', classes: 'checkbox-item-title'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{tag: 'hr', classes: 'g-sample-datalistcheckbox-checkbox-item-border'}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -65,13 +65,12 @@ var CheckableDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: true,
 			selectionType: 'multi',
-			style: 'background-color: #000000;',
 			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: CheckboxItem, ontap: 'tapItem'}
 			],
 			footerComponents: [
-				{style: 'height: ' + ri.scale(116) + 'px;'}
+				{classes: 'g-sample-datalistcheckbox-footer'}
 			]
 		}
 	],
@@ -126,7 +125,7 @@ module.exports = kind({
 		{content: '< Data List with Checkboxes Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List with Checkboxes', classes: 'g-sample-subheader'},
-		{name: 'checkableListPanel', kind: CheckableDataListPanel, style: 'position: relative;', onResult: 'result'},
+		{name: 'checkableListPanel', kind: CheckableDataListPanel, classes: 'g-sample-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

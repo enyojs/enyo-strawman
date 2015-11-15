@@ -14,16 +14,15 @@ var CheckboxPanel = kind({
 		onResult: ''
 	},
 	classes: 'g-layout-absolute-wrapper',
-	style: 'border-radius: 50%; background-color: #000000;',
 	components: [
-		{classes: 'g-layout-absolute-center g-sample-setting', style: 'width: ' + ri.scale(255) + 'px; height: ' + ri.scale(230) + 'px;', components: [
-			{content: 'Checkboxes : ', style: 'margin-left: ' + ri.scale(10) + 'px; font-size: ' + ri.scale(20) + 'px; display: inline-block; margin-right: ' + ri.scale(10) + 'px; color: #FFFFFF;'},
+		{classes: 'g-layout-absolute-center g-sample-setting', classes: 'g-sample-checkbox-container', components: [
+			{content: 'Checkboxes : ', classes: 'g-samle-checkbox-checkboxes-text'},
 			{tag: 'br'},
 			{kind: Checkbox, onchange:'checkboxChanged'},
 			{kind: Checkbox, onchange:'checkboxChanged', checked: true},
 			{kind: Checkbox, onchange:'checkboxChanged', disabled: true},
 			{kind: Checkbox, onchange:'checkboxChanged', checked: true, disabled: true},
-			{content: 'Grouped Checkboxes : ', style: 'font-size: ' + ri.scale(20) + 'px; display: inline-block; margin-right: ' + ri.scale(10) + 'px; color: #FFFFFF;'},
+			{content: 'Grouped Checkboxes : ', classes: 'g-samle-checkbox-checkboxes-group-text'},
 			{kind: Group, onActivate:'groupActivated', components: [
 				{kind: Checkbox, checked: true},
 				{kind: Checkbox},
@@ -51,7 +50,7 @@ module.exports = kind({
 		{content: '< Checkbox Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Checkboxes', classes: 'g-sample-subheader'},
-		{kind: CheckboxPanel, style: 'position: relative;', onResult: 'result'},
+		{kind: CheckboxPanel, classes: 'g-sample-circle-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

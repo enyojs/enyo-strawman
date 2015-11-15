@@ -101,7 +101,7 @@ var DataListSample = module.exports = kind({
 		{content: '< Data List Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List', classes: 'g-sample-subheader'},
-		{name: 'listPanel', kind: DataListPanel, classes: 'g-sample-datalist-panel'}
+		{name: 'listPanel', kind: DataListPanel, classes: 'g-sample-panel'}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.listPanel.collection'}

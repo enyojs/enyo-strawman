@@ -22,8 +22,8 @@ var DefaultCommandBarPanel = kind({
 			classes: 'enyo-fit g-layout-text-center',
 			components: [
 				{kind: Title, content: 'Title'},
-				{style: 'padding-top: 60px; width: 200px; margin: auto;', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
-				{kind: Button, style: 'margin: ' + ri.scale(20) + 'px 0 ' + ri.scale(116) + 'px;', content: 'OK!!!'}
+				{classes: 'g-sample-commandbar-content', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
+				{kind: Button, classes: 'g-sample-commandbar-button', content: 'OK!!!'}
 			]
 		}
 	],
@@ -50,8 +50,8 @@ var SingleCommandBarPanel = kind({
 			classes: 'enyo-fit g-layout-text-center',
 			components: [
 				{kind: Title, content: 'Title'},
-				{style: 'padding-top: 60px; width: 200px; margin: auto;', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
-				{kind: Button, style: 'margin: ' + ri.scale(20) + 'px 0 ' + ri.scale(116) + 'px;', content: 'OK!!!'}
+				{classes: 'g-sample-commandbar-content', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
+				{kind: Button, classes: 'g-sample-commandbar-button', content: 'OK!!!'}
 			]
 		}
 	],
@@ -77,8 +77,8 @@ var CustomCommandBarPanel = kind({
 			classes: 'enyo-fit g-layout-text-center',
 			components: [
 				{kind: Title, content: 'Title'},
-				{style: 'padding-top: 60px; width: 200px; margin: auto;', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
-				{kind: Button, style: 'margin: ' + ri.scale(20) + 'px 0 ' + ri.scale(116) + 'px;', content: 'OK!!!'}
+				{classes: 'g-sample-commandbar-content', content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.'},
+				{kind: Button, classes: 'g-sample-commandbar-button', content: 'OK!!!'}
 			]
 		}
 	],
@@ -105,25 +105,25 @@ module.exports = kind({
 		{content: '< CommandBar Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Default / Single / Custom', classes: 'g-sample-subheader'},
-		{style: 'position: relative; height: 100%;', components: [
+		{classes: 'g-sample-panels', components: [
 			{
 				name: 'commandBar1',
 				kind: DefaultCommandBarPanel,
-				style: 'background-color: #000000; position: relative; display: inline-block; overflow: hidden;'
+				classes: 'g-sample-panel-margin'
 			},
 			{
 				name: 'commandBar2',
 				kind: SingleCommandBarPanel,
-				style: 'background-color: #000000; position: relative; display: inline-block; margin-left: ' + ri.scale(10) + 'px; overflow: hidden;'
+				classes: 'g-sample-panel-margin'
 			},
 			{
 				name: 'commandBar3',
 				kind: CustomCommandBarPanel,
-				style: 'background-color: #000000; position: relative; display: inline-block; margin-left: ' + ri.scale(10) + 'px; overflow: hidden;'
+				classes: 'g-sample-panel-margin'
 			}
 		]},
 
-		{style: 'position: fixed; width: 100%; min-height: ' + ri.scale(160)+ 'px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;', classes: 'g-sample-result', components: [
+		{classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}

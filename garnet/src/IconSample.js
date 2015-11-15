@@ -10,10 +10,9 @@ var IconPanel = kind({
 	name: 'g.sample.IconPanel',
 	kind: Panel,
 	classes: 'g-layout-absolute-wrapper',
-	style: 'border-radius: 50%; background-color: #000000;',
 	components: [
-		{classes: 'g-layout-absolute-center', style: 'width: ' + ri.scale(255) + 'px; height: ' + ri.scale(230) + 'px;', components: [
-			{content: 'Icons : ', style: 'margin-left: ' + ri.scale(10) + 'px; font-size: ' + ri.scale(20) + 'px; display: inline-block; margin-right: ' + ri.scale(10) + 'px; color: #FFFFFF;'},
+		{classes: 'g-layout-absolute-center', classes: 'g-sample-icon-container', components: [
+			{content: 'Icons : ', classes: 'g-sample-icon-text'},
 			{tag: 'br'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-normal'},
@@ -32,7 +31,7 @@ module.exports = kind({
 		{content: '< Icon Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Icons', classes: 'g-sample-subheader'},
-		{kind: IconPanel, style: 'position: relative;'}
+		{kind: IconPanel, classes: 'g-sample-circle-panel'}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

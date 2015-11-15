@@ -18,9 +18,7 @@ var
 	DatePickerPanel    = require('garnet/DatePickerPanel'),
 	PickerPanel        = require('garnet/PickerPanel'),
 	MultiPickerPanel   = require('garnet/MultiPickerPanel'),
-	PanelManager       = require('garnet/PanelManager'),
-
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block;';
+	PanelManager       = require('garnet/PanelManager');
 
 var Formatter = kind.singleton({
 	name: 'g.sample.Formatter',
@@ -218,8 +216,8 @@ var
 		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: SampleDatePickerPanel},
 		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
 		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle',ontap: 'hidePickerPanelPopupWithValue'},
-		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true},
-		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', style: 'position: relative; display: inline-block; margin-right: 20px;', selection: true, multipleSelection: true}
+		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selection: true, multipleSelection: true},
+		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selection: true, multipleSelection: true}
 	},
 
 	today = new Date(),
@@ -242,11 +240,10 @@ var FormPanel = kind({
 	handlers: {
 		onUpdate: 'updateContent'
 	},
-	style: 'position: relative; background-color: #000000;overflow: hidden;',
-	classes: 'g-common-width-height-fit g-layout-absolute-wrapper',
+	classes: 'g-sample-panel g-common-width-height-fit g-layout-absolute-wrapper',
 	components: [
-		{classes: 'g-common-width-height-fit', style: 'overflow: hidden;', components: [
-			{kind: Scroller, scrollIndicatorEnabled: true, style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; border-radius: 50%; background-color: #000000;', components: [
+		{classes: 'g-common-width-height-fit', components: [
+			{kind: Scroller, scrollIndicatorEnabled: true, classes: 'g-sample-panel g-common-width-height-fit', components: [
 				{kind: Title, content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, content: 'Form Picker Buttons : <br>> Time Picker - current', allowHtml: 'true'},
@@ -272,8 +269,8 @@ var FormPanel = kind({
 				{kind: FormLabel, content: 'Form Buttons'},
 				{kind: FormButton, content: '+Add new'},
 				{kind: FormToolDecorator, components: [
-					{kind: FormButton, content: 'Special', style: 'width: ' + ri.scale(118) + 'px; margin-right: ' + ri.scale(4) + 'px; font-size: ' + ri.scale(20) + 'px;'},
-					{kind: FormButton, content: '+Add new', style: 'width: ' + ri.scale(120) + 'px; font-size: ' + ri.scale(20) + 'px;'}
+					{kind: FormButton, content: 'Special', classes: 'g-sample-form-button1'},
+					{kind: FormButton, content: '+Add new', classes: 'g-sample-form-button2'}
 				]},
 				//
 				{kind: FormLabel, content: 'Form Inputs'},
@@ -284,12 +281,12 @@ var FormPanel = kind({
 					{kind: FormInput, value: 'Guide Text'}
 				]},
 				{kind: FormToolDecorator, components: [
-					{kind: FormInputDecorator, style: 'width: ' + ri.scale(185) + 'px; margin-right: ' + ri.scale(6) + 'px;', components: [
+					{kind: FormInputDecorator, classes: 'g-sample-form-input', components: [
 						{kind: FormInput, value: 'Guide Text'}
 					]},
 					{kind: IconButton, src: '@../assets/btn_ic_deleted.svg', classes: 'g-common-button-size-small'}
 				]},
-				{style: 'width: 100%; height: ' + ri.scale(70) + 'px;'}
+				{classes: 'g-sample-form-footer'}
 			]}
 		]}
 	],
@@ -413,7 +410,7 @@ module.exports = kind({
 		{content: '< Form Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Form Picker Buttons / Form Buttons / Form Inputs', classes: 'g-sample-subheader'},
-		{style: panelStyle, kind: PanelManager},
+		{kind: PanelManager, classes: 'g-sample-panel-manager'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

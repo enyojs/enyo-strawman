@@ -12,9 +12,7 @@ var
 	Scroller = require('garnet/Scroller'),
 	PopupPanelScroller = require('garnet/PopupPanelScroller'),
 	IconButton = require('garnet/IconButton'),
-	PanelManager = require('garnet/PanelManager'),
-
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block;';
+	PanelManager = require('garnet/PanelManager')
 
 var OneTextPanel = kind({
 	name: 'confirmPanelNoScrollNoIcon',
@@ -147,10 +145,10 @@ var ConfirmBasePanel = kind({
 		onCancel: 'result'
 	},
 	components: [
-		{name: 'button1', kind: Button, style: 'margin:' + ri.scale(20) + 'px ' + ri.scale(5) +'px ' + ri.scale(5) +'px; width:' + ri.scale(310) + 'px', ontap: 'showPanel', content: 'Only text'},
-		{name: 'button2', kind: Button, style: 'margin:' + ri.scale(5) + 'px; width:' + ri.scale(310) + 'px', ontap: 'showPanel', content: 'Scroll + Text'},
-		{name: 'button3', kind: Button, style: 'margin:' + ri.scale(5) + 'px; width:' + ri.scale(310) + 'px', ontap: 'showPanel', content: 'Icon + Title + Text'},
-		{name: 'button4', kind: Button, style: 'margin:' + ri.scale(5) + 'px; width:' + ri.scale(310) + 'px', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
+		{name: 'button1', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Only text'},
+		{name: 'button2', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll + Text'},
+		{name: 'button3', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Icon + Title + Text'},
+		{name: 'button4', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
 	],
 	showPanel: function(inSender, inEvent) {
 		var name = inSender.name;
@@ -218,8 +216,8 @@ module.exports = kind({
 		{content: '< Confirm Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Confirm with only Text/Scroll + Text /Icon+Title+Text/ Scorll + Icon + Title+ Text ', classes: 'g-sample-subheader'},
-		{style: panelStyle, kind: PanelManager},
-		{style: 'position: fixed; width: 100%; min-height: +' + ri.scale(160) + 'px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;', classes: 'g-sample-result', components: [
+		{kind: PanelManager, classes: 'g-sample-panel-manager'},
+		{classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
 		]}

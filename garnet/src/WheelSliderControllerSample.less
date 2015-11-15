@@ -1,5 +1,27 @@
 /* WheelSliderControllerSample */
 
+// Common
+.g-sample-panel {
+	background-color: #000000;
+	position: relative;
+	overflow: hidden;
+}
+.g-sample-circle-panel {
+	background-color: #000000;
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.g-sample-result {
+	background-color: #EDEDED;
+	position: fixed;
+	width: 100%;
+	min-height: 160px;
+	bottom: 0;
+	z-index: 9999;
+	opacity: 0.8;
+}
+
 .g-sample .g-sample-wheel-slider-ok-image {
 	.g-common-ok;
 	pointer-events: auto;
@@ -9,4 +31,16 @@
 	.g-common-cancel;
 	pointer-events: auto;
 	margin: 0 17px 0 75px;
+}
+.g-sample-pointer-evetns-none {
+	
+}
+.g-sample-wheel-slider-value {
+	pointer-events: auto; margin-left: 20%; display: block; width: 60%; margin-top: 60px; height: 99px; text-align: center; font-weight: 400; font-size: 100px;
+}
+.g-sample-wheel-slider-text {
+	pointer-events: auto; margin-left: 10%; display: block; width: 80%; text-align: center; color: #FFFFFF; font-weight: 800; font-size: 22px;
+}
+.g-sample-wheel-slider-container {
+	margin-top: 15px;
 }

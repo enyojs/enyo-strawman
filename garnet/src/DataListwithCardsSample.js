@@ -19,11 +19,10 @@ var DataListCardsPanel = kind({
 			kind: DataList,
 			controlsPerPage: 2,
 			cards: true,
-			style: 'background-color: #000000;',
 			components: [
 				{ontap: 'showPopup', components: [
 					{name: 'listItem', classes: 'g-sample-datalistcards-item', components: [
-						{name: 'iconUrl', kind: EnyoImage, style: 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px;'}
+						{name: 'iconUrl', kind: EnyoImage, classes: 'g-common-width-height-fit'}
 					]}
 				], bindings: [
 					{from: '.model.iconUrl', to: '.$.iconUrl.src'}
@@ -48,12 +47,12 @@ var DataListSmallCardsPanel = kind({
 			controlsPerPage: 2,
 			cards: true,
 			itemHeight: ri.scale(216),
-			style: 'height: ' + ri.scale(320) + 'px; width: ' + ri.scale(240) + 'px; margin-left: ' + ri.scale(40) + 'px;',
+			classes: 'g-sample-datalistcards-list',
 			headerComponents: [
-				{style: 'height: ' + ri.scale(70) + 'px;'}
+				{classes: 'g-sample-datalistcards-list-header'}
 			],
 			footerComponents: [
-				{style: 'height: ' + ri.scale(34) + 'px;'}
+				{classes: 'g-sample-datalistcards-list-footer'}
 			],
 			components: [
 				{ontap: 'showPopup', components: [
@@ -79,8 +78,10 @@ module.exports = kind({
 		{content: '< Data List with Cards Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List with Cards', classes: 'g-sample-subheader'},
-		{name: 'listPanel', kind: DataListCardsPanel, style: 'position: relative; display: inline-block;'},
-		{name: 'listPanel2', kind: DataListSmallCardsPanel, style: 'border-radius: 100%; position: relative; display: inline-block; margin-left: ' + ri.scale(10) + 'px;'}
+		{classes: 'g-sample-panels', components: [
+			{name: 'listPanel', kind: DataListCardsPanel, classes: 'g-sample-panel-margin'},
+			{name: 'listPanel2', kind: DataListSmallCardsPanel, classes: 'g-sample-circle-panel-margin'}
+		]}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.listPanel.collection'},

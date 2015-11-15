@@ -1,8 +1,23 @@
 /* DataListwithCheckboxesSample */
 
-.g-sample-datalistcheckbox-footer-comp {
+// Common
+.g-sample-panel {
+	background-color: #000000;
+	position: relative;
+	overflow: hidden;
+}
+.g-sample-result {
+	background-color: #EDEDED;
+	position: fixed;
 	width: 100%;
-	height: 93px;
+	min-height: 160px;
+	bottom: 0;
+	z-index: 9999;
+	opacity: 0.8;
+}
+
+.g-sample-datalistcheckbox-footer {
+	height: 116px;
 }
 
 /* Checkbox Item */
@@ -20,6 +35,9 @@
 	color: #FAFAFA;
 	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
 	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+}
+.g-sample-datalistcheckbox-checkbox-item-border {
+	border: 0; color: #202328; height: 1px; background-color: #202328; bottom: 0;
 }
 .g-sample-datalistcheckbox-checkbox-item.disabled {
 	opacity: 0.4;
