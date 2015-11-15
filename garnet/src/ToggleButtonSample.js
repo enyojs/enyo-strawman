@@ -15,7 +15,7 @@ var ToggleButtonPanel = kind({
 	},
 	classes: 'g-layout-absolute-wrapper',
 	components: [
-		{classes: 'g-layout-absolute-center g-sample-toggle-icon-button-container', components: [
+		{classes: 'g-layout-absolute-center g-sample-toggle-button-container', components: [
 			{kind: ToggleButton, value: true, content: '1', ontap: 'tapButton'},
 			{kind: ToggleButton, content: '2', ontap: 'tapButton'},
 			{kind: ToggleButton, disabled: true, content: 'Disabled', ontap: 'tapButton'},

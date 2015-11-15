@@ -14,14 +14,14 @@ var
 var CheckboxItemBase = kind({
 	name: 'g.sample.CheckboxItemBase',
 	kind: Item,
-	classes: 'g-sample-datalistcheckbox-checkbox-item',
+	classes: 'g-sample-datalist-checkboxes-checkbox-item',
 	published: {
 		title: '',
 		selected: false
 	},
 	components: [
 		{name: 'title', classes: 'checkbox-item-title'},
-		{tag: 'hr', classes: 'g-sample-datalistcheckbox-checkbox-item-border'}
+		{tag: 'hr', classes: 'g-sample-datalist-checkboxes-checkbox-item-border'}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -70,7 +70,7 @@ var CheckableDataListPanel = kind({
 				{kind: CheckboxItem, ontap: 'tapItem'}
 			],
 			footerComponents: [
-				{classes: 'g-sample-datalistcheckbox-footer'}
+				{classes: 'g-sample-datalist-checkboxes-footer'}
 			]
 		}
 	],

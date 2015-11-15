@@ -14,7 +14,7 @@ var
 var IconBadgeItem = kind({
 	name: 'g.sample.IconBadgeItem',
 	kind: Item,
-	classes: 'g-datalist-icon-badge-item',
+	classes: 'g-datalist-iconbadge-item',
 	published: {
 		title: '',
 		newIcon: false,
@@ -25,7 +25,7 @@ var IconBadgeItem = kind({
 		{name: 'newIconBadge', kind: Icon, src: '@../assets/badge_unread.svg', classes: 'icon-badge-item-new-icon'},
 		{name: 'infoIconBadge', kind: Icon, src: '@../assets/badge_extra_info.svg', classes: 'icon-badge-item-info-icon'},
 		{name: 'title', classes: 'icon-badge-item-title'},
-		{tag: 'hr', classes: 'g-datalist-icon-badge-item-border'}
+		{tag: 'hr', classes: 'g-datalist-iconbadge-item-border'}
 	],
 	bindings: [
 		{from: '.model.albumTitle', to: '.$.title.content'},

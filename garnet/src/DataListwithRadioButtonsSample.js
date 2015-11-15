@@ -14,14 +14,14 @@ var
 var RadioButtonItemBase = kind({
 	name: 'g.sample.RadioButtonItemBase',
 	kind: Item,
-	classes: 'g-datalist-radiobutton-item',
+	classes: 'g-datalist-radiobuttons-item',
 	published: {
 		title: '',
 		selected: false
 	},
 	components: [
 		{name: 'title', classes: 'radiobutton-item-title'},
-		{tag: 'hr', classes: 'g-datalist-radiobutton-item-border'}
+		{tag: 'hr', classes: 'g-datalist-radiobuttons-item-border'}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -75,7 +75,7 @@ var RadioDataListPanel = kind({
 				{kind: RadioButtonItem, ontap: 'tapItem'}
 			],
 			footerComponents: [
-				{classes: 'g-datalist-radiobutton-footer'}
+				{classes: 'g-datalist-radiobuttons-footer'}
 			]
 		}
 	],

@@ -21,7 +21,7 @@ var DataListCardsPanel = kind({
 			cards: true,
 			components: [
 				{ontap: 'showPopup', components: [
-					{name: 'listItem', classes: 'g-sample-datalistcards-item', components: [
+					{name: 'listItem', classes: 'g-sample-datalist-cards-item', components: [
 						{name: 'iconUrl', kind: EnyoImage, classes: 'g-common-width-height-fit'}
 					]}
 				], bindings: [
@@ -47,18 +47,18 @@ var DataListSmallCardsPanel = kind({
 			controlsPerPage: 2,
 			cards: true,
 			itemHeight: ri.scale(216),
-			classes: 'g-sample-datalistcards-list',
+			classes: 'g-sample-datalist-cards-list',
 			headerComponents: [
-				{classes: 'g-sample-datalistcards-list-header'}
+				{classes: 'g-sample-datalist-cards-list-header'}
 			],
 			footerComponents: [
-				{classes: 'g-sample-datalistcards-list-footer'}
+				{classes: 'g-sample-datalist-cards-list-footer'}
 			],
 			components: [
 				{ontap: 'showPopup', components: [
-					{name: 'listItem', classes: 'g-sample-datalistsmallcards-item', components: [
+					{name: 'listItem', classes: 'g-sample-datalist-smallcards-item', components: [
 						{name: 'iconUrl', kind: EnyoImage},
-						{classes: 'g-sample-datalistsmallcards-title', content: 'title'}
+						{classes: 'g-sample-datalist-smallcards-title', content: 'title'}
 					]}
 				], bindings: [
 					{from: '.model.iconUrl', to: '.$.iconUrl.src'}

@@ -13,7 +13,7 @@ var
 
 var DataGridListImageItem = kind({
 	name: 'g.sample.DataGridListImageItem',
-	classes: 'g-sample-gridlist-imageitem',
+	classes: 'g-sample-datagridlist-imageitem',
 	components: [{
 		name: 'image',
 		kind: EnyoImage
@@ -73,7 +73,7 @@ var DataGridListItem = kind({
 var DataGridListCircleImageItem = kind({
 	name: 'g.sample.DataGridListCircleImageItem',
 	kind: DataGridListImageItem,
-	classes: 'g-sample-gridlist-circle-imageitem'
+	classes: 'g-sample-datagridlist-circle-imageitem'
 });
 
 var DataGridListCircleItem = kind({
@@ -106,7 +106,7 @@ var DataGridListPanel = kind({
 		kind: DataGridList,
 		controlsPerPage: 8,
 		spacing: 0,
-		classes: 'g-sample-gridlist-panel',
+		classes: 'g-sample-datagridlist-panel',
 		headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
 		components: [{
 			kind: DataGridListItem
@@ -134,7 +134,7 @@ var DataGridListCirclePanel = kind({
 		controlsPerPage: 8,
 		spacing: 0,
 		minHeight: 106,
-		classes: 'g-sample-gridlist-panel',
+		classes: 'g-sample-datagridlist-panel',
 		headerComponents: [{kind: Title, content: 'Title'}],
 		components: [{
 			kind: DataGridListCircleItem

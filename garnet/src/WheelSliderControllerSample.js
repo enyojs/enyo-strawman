@@ -28,11 +28,11 @@ var WheelSliderControllerPanel = kind({
 			onChanging: 'changingEventHandler'
 		},
 		{classes: 'g-common-width-height-fit g-sample-pointer-evetns-none', components: [
-			{name: 'sampleValue', content: '', classes: 'g-sample-wheel-slider-value'},
-			{content: 'Brightness', classes: 'g-sample-wheel-slider-text'},
-			{classes:'g-sample-wheel-slider-container', components: [
-				{name: 'cancel', kind: IconButton, accessibilityLabel: 'cancel', ontap: 'tapCancel', classes: 'g-sample-wheel-slider-cancel-image'},
-				{name: 'ok', kind: IconButton, accessibilityLabel: 'ok', ontap: 'tapOK', classes: 'g-sample-wheel-slider-ok-image'}
+			{name: 'sampleValue', content: '', classes: 'g-sample-wheelslider-value'},
+			{content: 'Brightness', classes: 'g-sample-wheelslider-text'},
+			{classes:'g-sample-wheelslider-container', components: [
+				{name: 'cancel', kind: IconButton, accessibilityLabel: 'cancel', ontap: 'tapCancel', classes: 'g-sample-wheelslider-cancel-image'},
+				{name: 'ok', kind: IconButton, accessibilityLabel: 'ok', ontap: 'tapOK', classes: 'g-sample-wheelslider-ok-image'}
 			]}
 		]}
 	],

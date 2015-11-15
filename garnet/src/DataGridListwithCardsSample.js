@@ -12,7 +12,7 @@ var
 
 var DataGridListCardsImageItem = kind({
 	name: 'g.sample.DataGridListCardsImageItem',
-	classes: 'g-sample-gridlistcards-imageitem',
+	classes: 'g-sample-datagridlist-cards-imageitem',
 	components: [
 		{name: 'image', kind: EnyoImage},
 		{name: 'caption', classes: 'caption'}
@@ -58,7 +58,7 @@ var DataGridListCardsItem = kind({
 var DataGridListCardsCircleImageItem = kind({
 	name: 'g.sample.DataGridListCardsCircleImageItem',
 	kind: DataGridListCardsImageItem,
-	classes: 'g-sample-gridlistcards-circle-imageitem'
+	classes: 'g-sample-datagridlist-cards-circle-imageitem'
 });
 
 var DataGridListCardsCircleItem = kind({
@@ -92,7 +92,7 @@ var DataGridListCardsPanel = kind({
 			minHeight: ri.scale(232),
 			minWidth: ri.scale(212),
 			scrollerOptions: {maxHeight: ri.scale(370) + 'px'},
-			classes: 'g-sample-gridlist-panel-card',
+			classes: 'g-sample-datagridlist-panel-card',
 			headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
 			components: [
 				{kind: DataGridListCardsItem}
@@ -119,7 +119,7 @@ var DataGridListCardsCirclePanel = kind({
 			minHeight: ri.scale(252),
 			minWidth: ri.scale(212),
 			scrollerOptions: {maxHeight: ri.scale(370) + 'px'},
-			classes: 'g-sample-gridlist-panel-card',
+			classes: 'g-sample-datagridlist-panel-card',
 			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: DataGridListCardsCircleItem}
