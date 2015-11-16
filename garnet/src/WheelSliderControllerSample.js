@@ -6,8 +6,8 @@ var
 	Panel = require('garnet/Panel'),
 	WheelSliderController = require('garnet/WheelSliderController');
 
-var WheelSliderControllerPanel = kind({
-	name: 'g.sample.WheelSliderController',
+var WheelSliderPanel = kind({
+	name: 'g.sample.WheelSliderPanel',
 	kind: Panel,
 	events: {
 		onResult: ''
@@ -66,7 +66,7 @@ var WheelSliderControllerSample = module.exports = kind({
 		{content: '< Wheel Slider Controller Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Wheel Slider Panel', classes: 'g-sample-subheader'},
-		{kind: WheelSliderControllerPanel, classes: 'g-sample-panel', onResult: 'result'},
+		{kind: WheelSliderPanel, classes: 'g-sample-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
@@ -82,4 +82,4 @@ var WheelSliderControllerSample = module.exports = kind({
 	}
 });
 
-WheelSliderControllerSample.WheelSliderControllerPanel = WheelSliderControllerPanel;
+WheelSliderControllerSample.WheelSliderPanel = WheelSliderPanel;
