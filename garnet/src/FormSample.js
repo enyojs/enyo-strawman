@@ -227,7 +227,13 @@ var SampleWheelSliderPanel = kind({
 				});
 			}
 		};
-	})
+	}),
+	changingEventHandler: function(inSender, inEvent) {
+		this.doResult({msg: 'value : ' + inEvent.value});
+	},
+	changeEventHandler: function(inSender, inEvent) {
+		this.doResult({msg: 'value : ' + inEvent.value});
+	}
 });
 
 var
@@ -253,7 +259,6 @@ var
 		datePickerButtonWithValue: new Date('2014/1/1'),
 		pickerPanelButtonWithValue: 0,
 		multiPickerPanelButtonWithValue: [0, 1],
-		wheelSliderPanelWithValue: 0,
 		wheelSliderPanelWithValue: 25
 	};
 
@@ -415,6 +420,14 @@ var FormPanel = kind({
 			case 'multiPickerPanelWithValue':
 				content = Formatter.CollectionMultiPickerPanel(inEvent.value);
 				this.$.multiPickerPanelButtonWithValue.setContent(content);
+				break;
+			case 'wheelSliderPanel':
+				content = Formatter.WheelSliderPanel(inEvent.value);
+				this.$.wheelSliderPanelButton.setContent(content);
+				break;
+			case 'wheelSliderPanelWithValue':
+				content = Formatter.WheelSliderPanel(inEvent.value);
+				this.$.wheelSliderPanelButtonWithValue.setContent(content);
 				break;
 		}
 

@@ -2,40 +2,27 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	IconButton = require('garnet/IconButton'),
-	Panel = require('garnet/Panel'),
 	WheelSliderController = require('garnet/WheelSliderController');
 
 var WheelSliderPanel = kind({
 	name: 'g.sample.WheelSliderPanel',
-	kind: Panel,
+	kind: WheelSliderController,
 	events: {
 		onResult: ''
 	},
-	classes: 'g-common-width-height-fit g-layout-absolute-wrapper',
+	minimumValue: 0,
+	maximumValue: 100,
+	stepValue: 5,
+	value: 50,
+	classes: 'g-sample-circle-panel',
 	components: [
-		{
-			name: 'panel',
-			kind: WheelSliderController,
-			classes: 'g-sample-circle-panel',
-			minimumValue: -100,
-			maximumValue: 100,
-			stepValue: 10,
-			value: 50,
-			onChange: 'changeEventHandler',
-			onChanging: 'changingEventHandler'
-		},
-		{classes: 'g-common-width-height-fit g-sample-pointer-evetns-none', components: [
+		{classes: 'g-common-width-height-fit g-sample-pointer-events-none', components: [
 			{name: 'sampleValue', content: '', classes: 'g-sample-wheelslider-value'},
-			{content: 'Brightness', classes: 'g-sample-wheelslider-text'},
-			{classes:'g-sample-wheelslider-container', components: [
-				{name: 'cancel', kind: IconButton, accessibilityLabel: 'cancel', ontap: 'tapCancel', classes: 'g-sample-wheelslider-cancel-image'},
-				{name: 'ok', kind: IconButton, accessibilityLabel: 'ok', ontap: 'tapOK', classes: 'g-sample-wheelslider-ok-image'}
-			]}
+			{content: 'Brightness', classes: 'g-sample-wheelslider-text'}
 		]}
 	],
 	bindings: [
-		{from: '.$.panel.value', to: '.$.sampleValue.content'}
+		{from: '.value', to: '.$.sampleValue.content'}
 	],
 	create: kind.inherit(function(sup) {
 		return function() {
@@ -45,12 +32,6 @@ var WheelSliderPanel = kind({
 			this.$.sampleValue.setAttribute('aria-live', 'assertive');
 		};
 	}),
-	tapCancel: function(inSender, inEvent) {
-		this.doResult({msg: 'Cancel button tapped !!'});
-	},
-	tapOK: function(inSender, inEvent) {
-		this.doResult({msg: 'OK button tapped !!'});
-	},
 	changingEventHandler: function(inSender, inEvent) {
 		this.doResult({msg: 'changing inEvent.value : ' + inEvent.value});
 	},
