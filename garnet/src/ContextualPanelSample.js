@@ -2,6 +2,7 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
+	Control = require('enyo/Control'),
 	utils = require('enyo/utils');
 
 var
@@ -21,7 +22,7 @@ var OneButtonPanel = kind({
 		{
 			name: 'button1',
 			ontap: 'buttonTap',
-			src: '@../assets/btn_delete.svg',
+			src: '@../assets/btn_context_delete.svg',
 			title: 'Delete'
 		}
 	],
@@ -43,15 +44,15 @@ var TwoButtonPanel = kind({
 		{
 			name: '1st 2 buttons',
 			ontap: 'buttonTap',
-			src: '@../assets/btn_delete.svg',
-			title: 'Delete'
+			src: '@../assets/btn_context_edit.svg',
+			title: 'Edit'
 		},
 		{
 			name: '2nd 2 buttons',
 			ontap: 'buttonTap',
-			src: '@../assets/btn_share.svg',
+			src: '@../assets/btn_context_delete.svg',
 			disabled: true,
-			title: 'Share'
+			title: 'Delete'
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
@@ -72,21 +73,21 @@ var ThreeButtonPanel = kind({
 		{
 			name: '1st 3 buttons',
 			ontap: 'buttonTap',
-			src: '@../assets/btn_delete.svg',
-			title: 'Delete'
+			src: '@../assets/btn_context_favorite.svg',
+			title: 'Favorite'
 		},
 		{
 			name: '2nd 3 buttons',
 			ontap: 'buttonTap',
-			src: '@../assets/btn_share.svg',
-			title: 'Share',
+			src: '@../assets/btn_context_edit.svg',
+			title: 'Edit',
 			disabled: true
 		},
 		{
 			name: '3rd 3 buttons',
 			ontap: 'buttonTap',
-			src: '@../assets/btn_share.svg',
-			title: 'Share'
+			src: '@../assets/btn_context_delete.svg',
+			title: 'Delete'
 		}
 	],
 	hidePanel: function(inSender, inEvent) {
@@ -105,7 +106,7 @@ var ContextualBasePanel = kind({
 		onButtonTap: 'result'
 	},
 	components: [
-		{name: 'oneButton', kind: Button, classes: 'g-sample-contextual-panel-button:first-child', ontap: 'showPanel', content: 'Click here to show panel!'},
+		{name: 'oneButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'},
 		{name: 'twoButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'},
 		{name: 'threeButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'}
 	],
@@ -160,7 +161,7 @@ var PanelManager = kind({
 
 module.exports = kind({
 	name: 'g.sample.ContextualPanelSample',
-	kind: Scroller,
+	kind: Control,
 	handlers: {
 		onResult: "result",
 		onPopPanel: "result"
