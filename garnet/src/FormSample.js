@@ -121,7 +121,7 @@ var Formatter = kind.singleton({
 	* From WheelSliderPanel.value to FormPickerButton.content
 	*/
 	WheelSliderPanel: function(val) {
-		return val;
+		return '' + val;
 	}
 });
 
@@ -227,13 +227,7 @@ var SampleWheelSliderPanel = kind({
 				});
 			}
 		};
-	}),
-	changingEventHandler: function(inSender, inEvent) {
-		this.doResult({msg: 'value : ' + inEvent.value});
-	},
-	changeEventHandler: function(inSender, inEvent) {
-		this.doResult({msg: 'value : ' + inEvent.value});
-	}
+	})
 });
 
 var
