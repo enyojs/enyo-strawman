@@ -204,7 +204,6 @@ var PanelManager = kind({
 module.exports = kind({
 	name: 'g.sample.ConfirmPanelSample',
 	kind: Scroller,
-	horizontal: 'hidden',
 	classes: 'enyo-unselectable enyo-fit garnet g-sample',
 	handlers: {
 		onResult: "result",

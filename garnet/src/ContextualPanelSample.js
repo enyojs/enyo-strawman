@@ -161,7 +161,6 @@ var PanelManager = kind({
 module.exports = kind({
 	name: 'g.sample.ContextualPanelSample',
 	kind: Scroller,
-	horizontal: 'hidden',
 	handlers: {
 		onResult: "result",
 		onPopPanel: "result"
