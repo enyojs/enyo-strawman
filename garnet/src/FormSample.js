@@ -17,7 +17,7 @@ var
 	DatePickerPanel    = require('garnet/DatePickerPanel'),
 	PickerPanel        = require('garnet/PickerPanel'),
 	MultiPickerPanel   = require('garnet/MultiPickerPanel'),
-	WheelSliderPanel   = require('./WheelSliderControllerSample').WheelSliderPanel,
+	WheelSliderPanel   = require('./WheelSliderPanelSample').WheelSliderPanel,
 	PanelManager       = require('garnet/PanelManager');
 
 var Formatter = kind.singleton({
@@ -246,7 +246,6 @@ var
 		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle',ontap: 'hidePickerPanelPopupWithValue'},
 		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selection: true, multipleSelection: true},
 		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selection: true, multipleSelection: true},
-		wheelSliderPanelButton:          {name: 'wheelSliderPanel', kind: SampleWheelSliderPanel, title:true, titleContent: 'WheelSliderTitle'},
 		wheelSliderPanelButtonWithValue: {name: 'wheelSliderPanelWithValue', kind: SampleWheelSliderPanel, title:true, titleContent: 'WheelSliderTitle'}
 	},
 
@@ -297,8 +296,6 @@ var FormPanel = kind({
 				{kind: FormLabel, content: '> MultiPickerPanel : initValue'},
 				{name: 'multiPickerPanelButtonWithValue', kind: FormPickerButton, ontap: 'showPanel'},
 				//
-				{kind: FormLabel, content: '> WheelSliderPanel : none'},
-				{name: 'wheelSliderPanelButton', kind: FormPickerButton, ontap: 'showPanel'},
 				{kind: FormLabel, content: '> WheelSliderPanel : initValue'},
 				{name: 'wheelSliderPanelButtonWithValue', kind: FormPickerButton, ontap: 'showPanel'},
 				//
@@ -338,7 +335,6 @@ var FormPanel = kind({
 			this.$.pickerPanelButtonWithValue.setContent(Formatter.CollectionPickerPanel(defaults.pickerPanelButtonWithValue, data));
 			this.$.multiPickerPanelButton.setContent(Formatter.CollectionMultiPickerPanel());
 			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.CollectionMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, data));
-			this.$.wheelSliderPanelButton.setContent(Formatter.WheelSliderPanel(defaults.wheelSliderPanel));
 			this.$.wheelSliderPanelButtonWithValue.setContent(Formatter.WheelSliderPanel(defaults.wheelSliderPanelWithValue));
 		};
 	}),
@@ -420,10 +416,6 @@ var FormPanel = kind({
 			case 'multiPickerPanelWithValue':
 				content = Formatter.CollectionMultiPickerPanel(inEvent.value);
 				this.$.multiPickerPanelButtonWithValue.setContent(content);
-				break;
-			case 'wheelSliderPanel':
-				content = Formatter.WheelSliderPanel(inEvent.value);
-				this.$.wheelSliderPanelButton.setContent(content);
 				break;
 			case 'wheelSliderPanelWithValue':
 				content = Formatter.WheelSliderPanel(inEvent.value);

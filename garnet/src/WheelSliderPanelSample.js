@@ -2,11 +2,11 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	WheelSliderController = require('garnet/WheelSliderController');
+	WheelSliderPanel = require('garnet/WheelSliderPanel');
 
 var WheelSliderPanel = kind({
 	name: 'g.sample.WheelSliderPanel',
-	kind: WheelSliderController,
+	kind: WheelSliderPanel,
 	events: {
 		onResult: ''
 	},
@@ -17,8 +17,8 @@ var WheelSliderPanel = kind({
 	classes: 'g-sample-circle-panel',
 	components: [
 		{classes: 'g-common-width-height-fit g-sample-pointer-events-none', components: [
-			{name: 'sampleValue', content: '', classes: 'g-sample-wheelslider-value'},
-			{content: 'Brightness', classes: 'g-sample-wheelslider-text'}
+			{name: 'sampleValue', content: '', classes: 'g-sample-wheelslider-panel-value'},
+			{content: 'Brightness', classes: 'g-sample-wheelslider-panel-text'}
 		]}
 	],
 	bindings: [
@@ -32,19 +32,19 @@ var WheelSliderPanel = kind({
 			this.$.sampleValue.setAttribute('aria-live', 'assertive');
 		};
 	}),
-	changingEventHandler: function(inSender, inEvent) {
-		this.doResult({msg: 'changing inEvent.value : ' + inEvent.value});
-	},
-	changeEventHandler: function(inSender, inEvent) {
-		this.doResult({msg: 'change inEvent.value : ' + inEvent.value});
-	}
+	valueChanged: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.doResult({msg: 'wheel slider value : ' + this.value});
+		};
+	})
 });
 
-var WheelSliderControllerSample = module.exports = kind({
-	name: 'g.sample.WheelSliderControllerSample',
+var WheelSliderPanelSample = module.exports = kind({
+	name: 'g.sample.WheelSliderPanelSample',
 	classes: 'enyo-unselectable garnet g-sample',
 	components: [
-		{content: '< Wheel Slider Controller Sample', classes: 'g-sample-header', ontap: 'goBack'},
+		{content: '< Wheel Slider Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Wheel Slider Panel', classes: 'g-sample-subheader'},
 		{kind: WheelSliderPanel, classes: 'g-sample-panel', onResult: 'result'},
@@ -63,4 +63,4 @@ var WheelSliderControllerSample = module.exports = kind({
 	}
 });
 
-WheelSliderControllerSample.WheelSliderPanel = WheelSliderPanel;
+WheelSliderPanelSample.WheelSliderPanel = WheelSliderPanel;

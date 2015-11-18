@@ -35,7 +35,7 @@ var samples = {
 	ToastPanelSample                : require('./ToastPanelSample'),
 	ToggleButtonSample              : require('./ToggleButtonSample'),
 	ToggleIconButtonSample          : require('./ToggleIconButtonSample'),
-	WheelSliderControllerSample     : require('./WheelSliderControllerSample')
+	WheelSliderPanelSample          : require('./WheelSliderPanelSample')
 };
 
 module.exports = kind({
