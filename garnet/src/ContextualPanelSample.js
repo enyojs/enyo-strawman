@@ -9,7 +9,6 @@ var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
 	ContextualPanel = require('garnet/ContextualPanel'),
-	Scroller = require('garnet/Scroller'),
 	PanelManager = require('garnet/PanelManager');
 
 var OneButtonPanel = kind({

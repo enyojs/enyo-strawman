@@ -9,7 +9,6 @@ var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
 	ConfirmPanel = require('garnet/ConfirmPanel'),
-	Scroller = require('garnet/Scroller'),
 	PopupPanelScroller = require('garnet/PopupPanelScroller'),
 	IconButton = require('garnet/IconButton'),
 	PanelManager = require('garnet/PanelManager');
