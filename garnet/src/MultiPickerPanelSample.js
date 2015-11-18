@@ -89,15 +89,7 @@ var FormPanel = kind({
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
-		var init = true;
-		if (this.$.multiPickerPanel) {
-			init = false;
-		}
-		this.bubbleUp('onPushPanel', {panel: {name: 'multiPickerPanel', kind: SampleMultiPickerPanel}, options: {owner: this, fromPanel: this}});
-		if (init) {
-			this.$.multiPickerPanel.select(1);
-			this.$.multiPickerPanel.select(2);
-		}
+		this.bubbleUp('onPushPanel', {panel: {name: 'multiPickerPanel', kind: SampleMultiPickerPanel, owner: this, fromPanel: this, selectedIndex: [1, 2]}});
 	},
 	updateContent: function(inSender, inEvent) {
 		var content = Formatter.MultiPickerPanel(inEvent.value);
