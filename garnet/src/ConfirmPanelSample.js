@@ -2,13 +2,13 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
+	Control = require('enyo/Control'),
 	utils = require('enyo/utils');
 
 var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
 	ConfirmPanel = require('garnet/ConfirmPanel'),
-	Scroller = require('garnet/Scroller'),
 	PopupPanelScroller = require('garnet/PopupPanelScroller'),
 	IconButton = require('garnet/IconButton'),
 	PanelManager = require('garnet/PanelManager');
@@ -203,7 +203,7 @@ var PanelManager = kind({
 
 module.exports = kind({
 	name: 'g.sample.ConfirmPanelSample',
-	kind: Scroller,
+	kind: Control,
 	classes: 'enyo-unselectable enyo-fit garnet g-sample',
 	handlers: {
 		onResult: "result",
