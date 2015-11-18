@@ -185,9 +185,9 @@ var PanelManager = kind({
 	pushPanel: function (inSender, inEvent) {
 		var type = {
 			button1: {name: 'confirmPanelNoScrollNoIcon', kind: OneTextPanel},
-			button2: {name: 'confirmPopupWithScrollNoIcon', kind: ScrollTextPanel},
-			button3: {name: 'confirmPopupWithIconNoScroll', kind: IconTitleTextPanel},
-			button4: {name: 'confirmPopupWithIconAndScroll', kind: ScrollIconTitleTextPanel}
+			button2: {name: 'confirmPanelWithScrollNoIcon', kind: ScrollTextPanel},
+			button3: {name: 'confirmPanelWithIconNoScroll', kind: IconTitleTextPanel},
+			button4: {name: 'confirmPanelWithIconAndScroll', kind: ScrollIconTitleTextPanel}
 		};
 
 		this.pushFloatingPanel({

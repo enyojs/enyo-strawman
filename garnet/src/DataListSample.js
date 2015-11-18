@@ -7,7 +7,6 @@ var
 	Icon = require('garnet/Icon'),
 	DataList = require('garnet/DataList'),
 	Button = require('garnet/Button'),
-	IconMenuPopup = require('garnet/IconMenuPopup'),
 	Panel = require('garnet/Panel'),
 	Title = require('garnet/Title'),
 	MarqueeSupport = require('garnet/MarqueeSupport');
@@ -50,44 +49,15 @@ var DataListPanel = kind({
 			classes: 'g-sample-datalist',
 			headerComponents: [{kind: Title, content: 'Title: long text will fade out', classes: 'g-sample-datalist-header'}],
 			components: [
-				{kind: DataListItem, onlongpress: 'showPopup'}
+				{kind: DataListItem}
 			],
 			footerComponents: [
 				{kind: Button, content: 'Text', classes: 'g-sample-datalist-footer'}
-			]
-		},
-		{
-			name: 'popup',
-			kind: IconMenuPopup,
-			buttonComponents: [
-				{
-					name: 'First button2',
-					ontap: 'hidePopup',
-					src: '@../assets/btn_delete.svg'
-				},
-				{
-					name: 'Second button2',
-					ontap: 'hidePopup',
-					src: '@../assets/btn_share.svg'
-				},
-				{
-					name: 'Third button2',
-					ontap: 'hidePopup',
-					src: '@../assets/btn_delete.svg'
-				},
-				{
-					name: 'Firth button2',
-					ontap: 'hidePopup',
-					src: '@../assets/btn_share.svg'
-				}
 			]
 		}
 	],
 	preventSound: function(inSender, inEvent) {
 		inEvent.preventSound = true;
-	},
-	showPopup: function(inSender, inEvent) {
-		this.$.popup.show();
 	},
 	bindings: [
 		{from: '.collection', to: '.$.list.collection'}
