@@ -71,14 +71,7 @@ var FormPanel = kind({
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
-		var init = true;
-		if (this.$.pickerPanel) {
-			init = false;
-		}
-		this.bubbleUp('onPushPanel', {panel: {name: 'pickerPanel', kind: SamplePickerPanel}, options: {owner: this, fromPanel: this}});
-		if (init) {
-			this.$.pickerPanel.setIndex(2);
-		}
+		this.bubbleUp('onPushPanel', {panel: {name: 'pickerPanel', kind: SamplePickerPanel, owner: this, fromPanel: this, selectedIndex: 2}});
 	},
 	updateContent: function(inSender, inEvent) {
 		var content = Formatter.PickerPanel(inEvent.value);

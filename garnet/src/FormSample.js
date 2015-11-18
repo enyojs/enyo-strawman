@@ -214,9 +214,9 @@ var
 		datePickerButton:                {name: 'datePicker', kind: SampleDatePickerPanel},
 		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: SampleDatePickerPanel},
 		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
-		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle',ontap: 'hidePickerPanelPopupWithValue'},
-		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selection: true, multipleSelection: true},
-		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selection: true, multipleSelection: true}
+		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', selectedIndex: 0, ontap: 'hidePickerPanelPopupWithValue'},
+		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle'},
+		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selectedIndex: [0, 1]}
 	},
 
 	today = new Date(),
@@ -327,16 +327,6 @@ var FormPanel = kind({
 
 		// push a panel
 		this.bubbleUp('onPushPanel', {panel: panels[name], options: options});
-
-		// initialize default values
-		if (name === 'pickerPanelButtonWithValue') {
-			this.$.pickerPanelWithValue.setIndex(defaults.pickerPanelButtonWithValue);
-		} else if (name === 'multiPickerPanelButtonWithValue') {
-			var values = defaults.multiPickerPanelButtonWithValue;
-			for (var i = 0; i < values.length; i++) {
-				this.$.multiPickerPanelWithValue.select(values[i]);
-			}
-		}
 	},
 	updateContent: function(inSender, inEvent) {
 		var
