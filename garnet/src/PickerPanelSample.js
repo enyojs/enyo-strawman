@@ -19,7 +19,7 @@ var SamplePickerPanel = kind({
 			sup.apply(this, arguments);
 			this.collection = new Collection(data);
 		};
-	}),
+	})
 });
 
 var FormPanel = kind({
