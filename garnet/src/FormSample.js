@@ -292,7 +292,8 @@ var FormPanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			panel = this.popPanels[name];
+			panel = this.popPanels[name],
+			options;
 
 		// initialize default values
 		if (name === 'timePickerButtonWithValue' && !this.$.timePickerWithValue) {
