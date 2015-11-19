@@ -1,6 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Image = require('enyo/Image');
+	kind = require('enyo/kind');
 
 var
 	FittableColumns = require('layout/FittableColumns');
