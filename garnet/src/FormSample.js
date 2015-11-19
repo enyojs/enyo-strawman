@@ -2,6 +2,7 @@ require('garnet');
 
 var
 	kind               = require('enyo/kind'),
+	utils              = require('enyo/utils'),
 	Collection         = require('enyo/Collection.js'),
 
 	Title              = require('garnet/Title'),
@@ -76,7 +77,7 @@ var Formatter = kind.singleton({
 	/*
 	* From PickerPanel.value to FormPickerButton.content
 	*/
-	CollectionPickerPanel: function(val, data) {
+	SamplePickerPanel: function(val, data) {
 		var
 			item = val,
 			name = 'No item';
@@ -93,7 +94,7 @@ var Formatter = kind.singleton({
 	/*
 	* From MultiPickerPanel.value to FormPickerButton.content
 	*/
-	CollectionMultiPickerPanel: function(val, data) {
+	SampleMultiPickerPanel: function(val, data) {
 		var
 			items = val,
 			names = '',
@@ -126,11 +127,9 @@ var Formatter = kind.singleton({
 	}
 });
 
-var CollectionPickerPanel = kind({
-	name: 'g.sample.CollectionPickerPanel',
+var SamplePickerPanel = kind({
+	name: 'g.sample.SamplePickerPanel',
 	kind: PickerPanel,
-	title: true,
-	titleContent: 'PickerTitle',
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
@@ -139,41 +138,19 @@ var CollectionPickerPanel = kind({
 	})
 });
 
-var CollectionMultiPickerPanel = kind({
-	name: 'g.sample.CollectionMultiPickerPanel',
+var SampleMultiPickerPanel = kind({
+	name: 'g.sample.SampleMultiPickerPanel',
 	kind: MultiPickerPanel,
-	handlers: {
-		onCancel: 'popPanel',
-		onOK: 'popPanel'
-	},
-	title: true,
-	titleContent: 'MultiPickerPanel',
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
 			this.collection = new Collection(data);
 		};
-	}),
-	popPanel: function() {
-		this.bubbleUp('onPopPanel');
-	}
+	})
 });
 
 var
-	panels = {
-		timePickerButton:                {name: 'timePicker', kind: TimePickerPanel, meridiemValue: '24'},
-		timePickerButtonWithValue:       {name: 'timePickerWithValue', kind: TimePickerPanel},
-		datePickerButton:                {name: 'datePicker', kind: DatePickerPanel},
-		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: DatePickerPanel},
-		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
-		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', selectedIndex: 0, ontap: 'hidePickerPanelPopupWithValue'},
-		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle'},
-		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selectedIndex: [0, 1]},
-		wheelSliderPanelButtonWithValue: {name: 'wheelSliderPanelWithValue', kind: WheelSliderPanel, title:true, titleContent: 'WheelSliderTitle'}
-	},
-
 	today = new Date(),
-
 	defaults = {
 		timePickerButton: {hour: today.getHours(), meridiem: '', minute: today.getMinutes()},
 		timePickerButtonWithValue: {hour: 12, meridiem: "PM", minute: 30},
@@ -243,25 +220,79 @@ var FormPanel = kind({
 			]}
 		]}
 	],
+	popPanels: {
+		timePickerButton: {
+			name: 'timePicker',
+			kind: TimePickerPanel,
+			meridiemValue: '24'
+		},
+		timePickerButtonWithValue: {
+			name: 'timePickerWithValue',
+			kind: TimePickerPanel
+		},
+		datePickerButton: {
+			name: 'datePicker',
+			kind: DatePickerPanel
+		},
+		datePickerButtonWithValue: {
+			name: 'datePickerWithValue',
+			kind: DatePickerPanel
+		},
+		pickerPanelButton: {
+			name: 'pickerPanel',
+			kind: SamplePickerPanel,
+			title: true,
+			titleContent: 'PickerTitle'
+		},
+		pickerPanelButtonWithValue: {
+			name: 'pickerPanelWithValue',
+			kind: SamplePickerPanel,
+			title: true,
+			titleContent: 'PickerTitle',
+			selectedIndex: 0
+		},
+		multiPickerPanelButton: {
+			name: 'multiPickerPanel',
+			kind: SampleMultiPickerPanel,
+			onCancel: 'popPanel',
+			onOK: 'popPanel',
+			title: true,
+			titleContent: 'MultiPickerPanel'
+		},
+		multiPickerPanelButtonWithValue: {
+			name: 'multiPickerPanelWithValue',
+			kind: SampleMultiPickerPanel,
+			onCancel: 'popPanel',
+			onOK: 'popPanel',
+			title: true,
+			titleContent: 'MultiPickerPanel',
+			selectedIndex: [0, 1]
+		},
+		wheelSliderPanelButtonWithValue: {
+			name: 'wheelSliderPanelWithValue',
+			kind: WheelSliderPanel,
+			title:true,
+			titleContent: 'WheelSliderTitle'
+		}
+	},
 	initComponents: kind.inherit(function(sup) {
 		return function() {
-
 			sup.apply(this, arguments);
 			this.$.timePickerButton.setContent(Formatter.TimePickerPanel24(defaults.timePickerButton));
 			this.$.timePickerButtonWithValue.setContent(Formatter.TimePickerPanel(defaults.timePickerButtonWithValue));
 			this.$.datePickerButton.setContent(Formatter.DatePickerPanel(defaults.datePickerButton));
 			this.$.datePickerButtonWithValue.setContent(Formatter.DatePickerPanel(defaults.datePickerButtonWithValue));
-			this.$.pickerPanelButton.setContent(Formatter.CollectionPickerPanel());
-			this.$.pickerPanelButtonWithValue.setContent(Formatter.CollectionPickerPanel(defaults.pickerPanelButtonWithValue, data));
-			this.$.multiPickerPanelButton.setContent(Formatter.CollectionMultiPickerPanel());
-			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.CollectionMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, data));
+			this.$.pickerPanelButton.setContent(Formatter.SamplePickerPanel());
+			this.$.pickerPanelButtonWithValue.setContent(Formatter.SamplePickerPanel(defaults.pickerPanelButtonWithValue, data));
+			this.$.multiPickerPanelButton.setContent(Formatter.SampleMultiPickerPanel());
+			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.SampleMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, data));
 			this.$.wheelSliderPanelButtonWithValue.setContent(Formatter.WheelSliderPanel(defaults.wheelSliderPanelWithValue));
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			options = {owner: this, onUpdate: 'updateContent'};
+			panel = this.popPanels[name];
 
 		// initialize default values
 		if (name === 'timePickerButtonWithValue' && !this.$.timePickerWithValue) {
@@ -269,25 +300,31 @@ var FormPanel = kind({
 				hourValue: defaults.timePickerButtonWithValue.hour,
 				minuteValue: defaults.timePickerButtonWithValue.minute,
 				meridiemValue: defaults.timePickerButtonWithValue.meridiem,
-				owner: this,
 				onUpdate: 'updateContent'
 			};
 		} else if (name === 'datePickerButtonWithValue' && !this.$.datePickerWithValue) {
 			options = {
 				value: defaults.datePickerButtonWithValue,
-				owner: this,
 				onUpdate: 'updateContent'
 			};
 		} else if (name === 'wheelSliderPanelButtonWithValue' && !this.$.wheelSliderPanelWithValue) {
 			options = {
 				value: defaults.wheelSliderPanelWithValue,
-				owner: this,
 				onUpdate: 'updateContent'
 			};
+		} else {
+			options = {onUpdate: 'updateContent'};
 		}
 
-		// push a panel
-		this.container.pushFloatingPanel(panels[name], options);
+		utils.mixin(panel, options);
+
+		if (panel) {
+			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
+		}
+	},
+	popPanel: function(inSender, inEvent) {
+		this.bubbleUp('onPopPanel');
+		this.updateContent(inSender, inEvent.originalEvent);
 	},
 	updateContent: function(inSender, inEvent) {
 		var
@@ -312,19 +349,19 @@ var FormPanel = kind({
 				this.$.datePickerButtonWithValue.setContent(content);
 				break;
 			case 'pickerPanel':
-				content = Formatter.CollectionPickerPanel(inEvent.value);
+				content = Formatter.SamplePickerPanel(inEvent.value);
 				this.$.pickerPanelButton.setContent(content);
 				break;
 			case 'pickerPanelWithValue':
-				content = Formatter.CollectionPickerPanel(inEvent.value);
+				content = Formatter.SamplePickerPanel(inEvent.value);
 				this.$.pickerPanelButtonWithValue.setContent(content);
 				break;
 			case 'multiPickerPanel':
-				content = Formatter.CollectionMultiPickerPanel(inEvent.value);
+				content = Formatter.SampleMultiPickerPanel(inEvent.value);
 				this.$.multiPickerPanelButton.setContent(content);
 				break;
 			case 'multiPickerPanelWithValue':
-				content = Formatter.CollectionMultiPickerPanel(inEvent.value);
+				content = Formatter.SampleMultiPickerPanel(inEvent.value);
 				this.$.multiPickerPanelButtonWithValue.setContent(content);
 				break;
 			case 'wheelSliderPanelWithValue':
@@ -347,7 +384,7 @@ var PanelManager = kind({
 		{name: 'formPanel', kind: FormPanel}
 	],
 	pushPanel: function (inSender, inEvent) {
-		this.pushFloatingPanel(inEvent.panel, inEvent.options);
+		this.pushFloatingPanel(inEvent.panel, {owner: inEvent.owner});
 	},
 	popPanel: function (inSender, inEvent) {
 		this.popFloatingPanel();
