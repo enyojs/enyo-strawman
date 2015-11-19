@@ -12,9 +12,6 @@ var
 var SamplePickerPanel = kind({
 	name: 'g.sample.PickerPanel',
 	kind: PickerPanel,
-	events: {
-		onUpdate: ''
-	},
 	title: true,
 	titleContent: 'PickerTitle',
 	create: kind.inherit(function(sup) {
@@ -23,11 +20,6 @@ var SamplePickerPanel = kind({
 			this.collection = new Collection(data);
 		};
 	}),
-	deactivate: function(inEvent) {
-		if (!inEvent.dragging) {
-			this.doUpdate({name: this.name, value: this.value});
-		}
-	}
 });
 
 var FormPanel = kind({
@@ -46,7 +38,7 @@ var FormPanel = kind({
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
-		this.container.pushFloatingPanel({name: 'pickerPanel', kind: PickerPanel, title: true, titleContent: 'PickerTitle', owner: this, onUpdate: 'updateContent'});
+		this.container.pushFloatingPanel({name: 'pickerPanel', kind: SamplePickerPanel, owner: this, selectedIndex: 2, onUpdate: 'updateContent'});
 	},
 	updateContent: function(inSender, inEvent) {
 		var content = this.formattingContent(inEvent.value);
