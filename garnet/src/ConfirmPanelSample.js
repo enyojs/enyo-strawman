@@ -3,145 +3,23 @@ require('garnet');
 var
 	kind = require('enyo/kind'),
 	Control = require('enyo/Control'),
-	utils = require('enyo/utils');
 
-var
 	Button = require('garnet/Button'),
+	IconButton = require('garnet/IconButton'),
+	PopupPanelScroller = require('garnet/PopupPanelScroller'),
 	Panel = require('garnet/Panel'),
 	ConfirmPanel = require('garnet/ConfirmPanel'),
-	PopupPanelScroller = require('garnet/PopupPanelScroller'),
-	IconButton = require('garnet/IconButton'),
 	PanelManager = require('garnet/PanelManager');
-
-var OneTextPanel = kind({
-	name: 'confirmPanelNoScrollNoIcon',
-	kind: ConfirmPanel,
-	handlers: {
-		onHide: 'hidePanel',
-		onOK: 'tapOK',
-		onCancel: 'tapCancel'
-	},
-	components: [
-		{
-			kind: PopupPanelScroller,
-			components: [
-				{content: 'All the labels follow guideline.'}
-			]
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	},
-	tapOK: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	},
-	tapCancel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onCancel', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	}
-});
-
-var ScrollTextPanel = kind({
-	name: 'confirmPanelWithScrollNoIcon',
-	kind: ConfirmPanel,
-	handlers: {
-		onHide: 'hidePanel'
-	},
-	buttonComponents: [
-		{name: 'ok', kind: IconButton, ontap: 'tapOK', classes: 'g-ok-image'}
-	],
-	components: [
-		{
-			kind: PopupPanelScroller,
-			components: [
-				{content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch'}
-			]
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	},
-	tapOK: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
-		return true;
-	}
-});
-
-var IconTitleTextPanel = kind({
-	name: 'confirmPanelWithIconNoScroll',
-	kind: ConfirmPanel,
-	handlers: {
-		onHide: 'hidePanel'
-	},
-	buttonComponents: [
-		{name: 'ok2', kind: IconButton, ontap: 'tapOK', classes: 'g-ok-image'}
-	],
-	components: [
-		{
-			kind: PopupPanelScroller,
-			icon: true,
-			iconSrc: '@../assets/ic_warning.svg',
-			title: true,
-			titleContent: 'test',
-			components: [
-				{content: 'All the labels follow guideline.'}
-			]
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	},
-	tapOK: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onOK', {originalEvent: {originator: this, type: 'onOK'}});
-		return true;
-	}
-});
-
-var ScrollIconTitleTextPanel = kind({
-	name: 'confirmPanelWithIconAndScroll',
-	kind: ConfirmPanel,
-	handlers: {
-		onHide: 'hidePanel',
-		onOK: 'tapOK',
-		onCancel: 'tapCancel'
-	},
-	components: [
-		{
-			kind: PopupPanelScroller,
-			icon: true,
-			iconSrc: '@../assets/ic_warning.svg',
-			title: true,
-			titleContent: 'ScrollIconTitleTextPanelTitle',
-			components: [
-				{content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.et Quad-Core Processor, 1080p resolution screen, 13-megapixel rear'}
-			]
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	},
-	tapOK: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onOK', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	},
-	tapCancel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onCancel', {originalEvent: utils.clone(inEvent, true)});
-		return true;
-	}
-});
 
 var ConfirmBasePanel = kind({
 	name: 'g.sample.ConfirmBasePanel',
 	kind: Panel,
+	events: {
+		onResult: ''
+	},
 	handlers: {
-		onHide2: 'result',
-		onOK: 'result',
-		onCancel: 'result'
+		onOK: 'okHandler',
+		onCancel: 'cancelHandler'
 	},
 	components: [
 		{name: 'button1', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Only text'},
@@ -149,26 +27,104 @@ var ConfirmBasePanel = kind({
 		{name: 'button3', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Icon + Title + Text'},
 		{name: 'button4', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
 	],
-	showPanel: function(inSender, inEvent) {
-		var name = inSender.name;
-
-		if (name == 'button1' || name == 'button2' || name == 'button3' || name == 'button4') {
-			this.bubbleUp('onPushPanel', {panelName: name, owner: this});
+	popPanels: {
+		button1: {
+			name: 'confirmPanelNoScrollNoIcon',
+			kind: ConfirmPanel,
+			onCancel: 'cancelHandler',
+			onOK: 'okHandler',
+			components: [
+				{
+					kind: PopupPanelScroller,
+					components: [
+						{content: 'All the labels follow guideline.'}
+					]
+				}
+			]
+		},
+		button2: {
+			name: 'confirmPanelWithScrollNoIcon',
+			kind: ConfirmPanel,
+			events: {
+				onOK: ''
+			},
+			buttonComponents: [
+				{name: 'ok', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image'}
+			],
+			components: [
+				{
+					kind: PopupPanelScroller,
+					components: [
+						{content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch'}
+					]
+				}
+			],
+			okHandler: function(inSender, inEvent) {
+				this.doOK();
+			}
+		},
+		button3: {
+			name: 'confirmPanelWithIconNoScroll',
+			kind: ConfirmPanel,
+			events: {
+				onOK: ''
+			},
+			buttonComponents: [
+				{name: 'ok2', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image'}
+			],
+			components: [
+				{
+					kind: PopupPanelScroller,
+					icon: true,
+					iconSrc: '@../assets/ic_warning.svg',
+					title: true,
+					titleContent: 'test',
+					components: [
+						{content: 'All the labels follow guideline.'}
+					]
+				}
+			],
+			okHandler: function(inSender, inEvent) {
+				this.doOK();
+			}
+		},
+		button4: {
+			name: 'confirmPanelWithIconAndScroll',
+			kind: ConfirmPanel,
+			onCancel: 'cancelHandler',
+			onOK: 'okHandler',
+			components: [
+				{
+					kind: PopupPanelScroller,
+					icon: true,
+					iconSrc: '@../assets/ic_warning.svg',
+					title: true,
+					titleContent: 'ScrollIconTitleTextPanelTitle',
+					components: [
+						{content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch as well as the emulator provided. Browser-wise, Garnet supports the browser on LG smart watch, Firefox 16, Opera 15, Safari 3.1, Chrome 27 and their higher versions.et Quad-Core Processor, 1080p resolution screen, 13-megapixel rear'}
+					]
+				}
+			]
 		}
 	},
-	result: function(inSender, inEvent) {
+	showPanel: function(inSender, inEvent) {
 		var
-			name = inEvent.originalEvent.originator.name,
-			msg = '"' + name + '" PopupPanel closed ',
-			type = inEvent.originalEvent.type;
+			name = inSender.name,
+			panel = this.popPanels[name];
 
-		if (type == 'onOK') {
-			msg += 'by OK button';
-		} else if (type == 'onCancel') {
-			msg += 'by Cancel button';
+		if (panel) {
+			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
 		}
-
-		this.bubbleUp((type == 'onOK' || type == 'onCancel') ? 'onPopPanel' : 'onResult', {msg: msg});
+	},
+	cancelHandler: function(inSender, inEvent) {
+		var name = inSender.name;
+		this.bubbleUp('onPopPanel');
+		this.doResult({msg: name + ' is hidden by Cancel button'});
+	},
+	okHandler: function(inSender, inEvent) {
+		var name = inSender.name;
+		this.bubbleUp('onPopPanel');
+		this.doResult({msg: name + ' is hidden by OK button'});
 	}
 });
 
@@ -183,18 +139,7 @@ var PanelManager = kind({
 		{kind: ConfirmBasePanel, classes: 'g-sample-panel'}
 	],
 	pushPanel: function (inSender, inEvent) {
-		var type = {
-			button1: {name: 'confirmPanelNoScrollNoIcon', kind: OneTextPanel},
-			button2: {name: 'confirmPanelWithScrollNoIcon', kind: ScrollTextPanel},
-			button3: {name: 'confirmPanelWithIconNoScroll', kind: IconTitleTextPanel},
-			button4: {name: 'confirmPanelWithIconAndScroll', kind: ScrollIconTitleTextPanel}
-		};
-
-		this.pushFloatingPanel({
-			name: type[inEvent.panelName].name,
-			kind: type[inEvent.panelName].kind,
-			fromPanel: inEvent.owner ? inEvent.owner : this
-		});
+		this.pushFloatingPanel(inEvent.panel, {owner: inEvent.owner});
 	},
 	popPanel: function (inSender, inEvent) {
 		this.popFloatingPanel();

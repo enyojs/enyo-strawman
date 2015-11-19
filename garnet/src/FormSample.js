@@ -3,6 +3,7 @@ require('garnet');
 var
 	kind               = require('enyo/kind'),
 	Collection         = require('enyo/Collection.js'),
+
 	Title              = require('garnet/Title'),
 	IconButton         = require('garnet/IconButton'),
 	FormButton         = require('garnet/FormButton'),
@@ -11,8 +12,8 @@ var
 	FormLabel          = require('garnet/FormLabel'),
 	FormPickerButton   = require('garnet/FormPickerButton'),
 	FormToolDecorator  = require('garnet/FormToolDecorator'),
-	Panel              = require('garnet/Panel'),
 	Scroller           = require('garnet/Scroller'),
+	Panel              = require('garnet/Panel'),
 	TimePickerPanel    = require('garnet/TimePickerPanel'),
 	DatePickerPanel    = require('garnet/DatePickerPanel'),
 	PickerPanel        = require('garnet/PickerPanel'),
@@ -125,40 +126,6 @@ var Formatter = kind.singleton({
 	}
 });
 
-var SampleTimePickerPanel = kind({
-	name: 'g.sample.TimePickerPanel',
-	kind: TimePickerPanel,
-	valueChanged: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (this.fromPanel) {
-				this.fromPanel.triggerHandler('onUpdate', {
-					name: this.name,
-					hour: this.getHourValue(),
-					minute: this.getMinuteValue(),
-					meridiem: this.getMeridiemValue()
-				});
-			}
-		};
-	})
-});
-
-var SampleDatePickerPanel = kind({
-	name: 'g.sample.DatePickerPanel',
-	kind: DatePickerPanel,
-	valueChanged: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (this.fromPanel) {
-				this.fromPanel.triggerHandler('onUpdate', {
-					name: this.name,
-					value: this.value
-				});
-			}
-		};
-	})
-});
-
 var CollectionPickerPanel = kind({
 	name: 'g.sample.CollectionPickerPanel',
 	kind: PickerPanel,
@@ -168,17 +135,6 @@ var CollectionPickerPanel = kind({
 		return function() {
 			sup.apply(this, arguments);
 			this.collection = new Collection(data);
-		};
-	}),
-	valueChanged: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (this.fromPanel) {
-				this.fromPanel.triggerHandler('onUpdate', {
-					name: this.name,
-					value: this.value
-				});
-			}
 		};
 	})
 });
@@ -198,49 +154,22 @@ var CollectionMultiPickerPanel = kind({
 			this.collection = new Collection(data);
 		};
 	}),
-	valueChanged: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (this.fromPanel) {
-				this.fromPanel.triggerHandler('onUpdate', {
-					name: this.name,
-					value: this.value
-				});
-			}
-		};
-	}),
 	popPanel: function() {
 		this.bubbleUp('onPopPanel');
 	}
 });
 
-var SampleWheelSliderPanel = kind({
-	name: 'g.sample.WheelSliderPanel',
-	kind: WheelSliderPanel,
-	valueChanged: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (this.fromPanel) {
-				this.fromPanel.triggerHandler('onUpdate', {
-					name: this.name,
-					value: this.value
-				});
-			}
-		};
-	})
-});
-
 var
 	panels = {
-		timePickerButton:                {name: 'timePicker', kind: SampleTimePickerPanel, meridiemValue: '24'},
-		timePickerButtonWithValue:       {name: 'timePickerWithValue', kind: SampleTimePickerPanel},
-		datePickerButton:                {name: 'datePicker', kind: SampleDatePickerPanel},
-		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: SampleDatePickerPanel},
+		timePickerButton:                {name: 'timePicker', kind: TimePickerPanel, meridiemValue: '24'},
+		timePickerButtonWithValue:       {name: 'timePickerWithValue', kind: TimePickerPanel},
+		datePickerButton:                {name: 'datePicker', kind: DatePickerPanel},
+		datePickerButtonWithValue:       {name: 'datePickerWithValue', kind: DatePickerPanel},
 		pickerPanelButton:               {name: 'pickerPanel', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', ontap: 'hidePickerPanelPopup'},
 		pickerPanelButtonWithValue:      {name: 'pickerPanelWithValue', kind: CollectionPickerPanel, title:true, titleContent: 'PickerTitle', selectedIndex: 0, ontap: 'hidePickerPanelPopupWithValue'},
 		multiPickerPanelButton:          {name: 'multiPickerPanel', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle'},
 		multiPickerPanelButtonWithValue: {name: 'multiPickerPanelWithValue', kind: CollectionMultiPickerPanel, title:true, titleContent: 'MultiPickerTitle', selectedIndex: [0, 1]},
-		wheelSliderPanelButtonWithValue: {name: 'wheelSliderPanelWithValue', kind: SampleWheelSliderPanel, title:true, titleContent: 'WheelSliderTitle'}
+		wheelSliderPanelButtonWithValue: {name: 'wheelSliderPanelWithValue', kind: WheelSliderPanel, title:true, titleContent: 'WheelSliderTitle'}
 	},
 
 	today = new Date(),
@@ -260,9 +189,6 @@ var FormPanel = kind({
 	kind: Panel,
 	events: {
 		onResult: ''
-	},
-	handlers: {
-		onUpdate: 'updateContent'
 	},
 	classes: 'g-sample-panel g-common-width-height-fit g-layout-absolute-wrapper',
 	components: [
@@ -335,7 +261,7 @@ var FormPanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			options = {owner: this, fromPanel: this};
+			options = {owner: this, onUpdate: 'updateContent'};
 
 		// initialize default values
 		if (name === 'timePickerButtonWithValue' && !this.$.timePickerWithValue) {
@@ -344,24 +270,24 @@ var FormPanel = kind({
 				minuteValue: defaults.timePickerButtonWithValue.minute,
 				meridiemValue: defaults.timePickerButtonWithValue.meridiem,
 				owner: this,
-				fromPanel: this
+				onUpdate: 'updateContent'
 			};
 		} else if (name === 'datePickerButtonWithValue' && !this.$.datePickerWithValue) {
 			options = {
 				value: defaults.datePickerButtonWithValue,
 				owner: this,
-				fromPanel: this
+				onUpdate: 'updateContent'
 			};
 		} else if (name === 'wheelSliderPanelButtonWithValue' && !this.$.wheelSliderPanelWithValue) {
 			options = {
 				value: defaults.wheelSliderPanelWithValue,
 				owner: this,
-				fromPanel: this
+				onUpdate: 'updateContent'
 			};
 		}
 
 		// push a panel
-		this.bubbleUp('onPushPanel', {panel: panels[name], options: options});
+		this.container.pushFloatingPanel(panels[name], options);
 	},
 	updateContent: function(inSender, inEvent) {
 		var
@@ -439,7 +365,6 @@ module.exports = kind({
 
 		{content: 'Form Picker Buttons / Form Buttons / Form Inputs', classes: 'g-sample-subheader'},
 		{kind: PanelManager, classes: 'g-sample-panel-manager'},
-
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}

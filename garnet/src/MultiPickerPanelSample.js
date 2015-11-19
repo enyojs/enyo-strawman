@@ -3,16 +3,69 @@ require('garnet');
 var
 	kind = require('enyo/kind'),
 	Collection = require('enyo/Collection.js'),
+
 	FormPickerButton = require('garnet/FormPickerButton'),
 	Panel = require('garnet/Panel'),
 	MultiPickerPanel = require('garnet/MultiPickerPanel'),
 	PanelManager = require('garnet/PanelManager');
 
-var Formatter = kind.singleton({
-	/*
-	* From multiPickerPanel.value to FormPickerButton.content
-	*/
-	MultiPickerPanel: function(val, data) {
+var SampleMultiPickerPanel = kind({
+	name: 'g.sample.SampleMultiPickerPanel',
+	kind: MultiPickerPanel,
+	create: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.collection = new Collection(data);
+		};
+	})
+});
+
+var FormPanel = kind({
+	name: 'g.sample.FormPanel',
+	kind: Panel,
+	events: {
+		onResult: ''
+	},
+	components: [
+		{name: 'multiPickerButton', kind: FormPickerButton, classes: 'g-sample-multipicker-panel-button', ontap: 'showPanel', content: 'Click here!'}
+	],
+	popPanels: {
+		multiPickerButton: {
+			name: 'multiPickerPanel',
+			kind: SampleMultiPickerPanel,
+			onCancel: 'popPanel',
+			onOK: 'popPanel',
+			onUpdate: 'updateContent',
+			title: true,
+			titleContent: 'MultiPickerPanel',
+			selectedIndex: [1, 2]
+		}
+	},
+	initComponents: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.$.multiPickerButton.setContent(data[1].item + ', ' + data[2].item);
+		};
+	}),
+	showPanel: function(inSender, inEvent) {
+		var
+			name = inSender.name,
+			panel = this.popPanels[name];
+
+		if (panel) {
+			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
+		}
+	},
+	popPanel: function(inSender, inEvent) {
+		this.bubbleUp('onPopPanel');
+		this.updateContent(inSender, inEvent.originalEvent);
+	},
+	updateContent: function(inSender, inEvent) {
+		var content = this.formattingValueToTexts(inEvent.value);
+		this.$.multiPickerButton.setContent(content);
+		this.doResult({msg: content + ' selected'});
+	},
+	formattingValueToTexts: function(val, data) {
 		var
 			items = val,
 			names = '',
@@ -39,65 +92,6 @@ var Formatter = kind.singleton({
 	}
 });
 
-var SampleMultiPickerPanel = kind({
-	name: 'g.sample.MultiPickerPanel',
-	kind: MultiPickerPanel,
-	handlers: {
-		onCancel: 'popPanel',
-		onOK: 'popPanel'
-	},
-	title: true,
-	titleContent: 'MultiPickerPanel',
-	create: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.collection = new Collection(data);
-		};
-	}),
-	valueChanged: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (this.fromPanel) {
-				this.fromPanel.triggerHandler('onUpdate', {
-					name: this.name,
-					value: this.value
-				});
-			}
-		};
-	}),
-	popPanel: function() {
-		this.bubbleUp('onPopPanel');
-	}
-});
-
-var FormPanel = kind({
-	name: 'g.sample.FormPanel',
-	kind: Panel,
-	events: {
-		onResult: ''
-	},
-	handlers: {
-		onUpdate: 'updateContent'
-	},
-	components: [
-		{name: 'multiPickerButton', kind: FormPickerButton, classes: 'g-sample-multipicker-panel-button', ontap: 'showPanel', content: 'Click here!'}
-	],
-	initComponents: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.$.multiPickerButton.setContent(data[1].item + ', ' + data[2].item);
-		};
-	}),
-	showPanel: function(inSender, inEvent) {
-		this.bubbleUp('onPushPanel', {panel: {name: 'multiPickerPanel', kind: SampleMultiPickerPanel, owner: this, fromPanel: this, selectedIndex: [1, 2]}});
-	},
-	updateContent: function(inSender, inEvent) {
-		var content = Formatter.MultiPickerPanel(inEvent.value);
-		this.$.multiPickerButton.setContent(content);
-		this.doResult({msg: content});
-	}
-});
-
 var PanelManager = kind({
 	kind: PanelManager,
 	handlers: {
@@ -105,10 +99,10 @@ var PanelManager = kind({
 		onPopPanel: 'popPanel'
 	},
 	components: [
-		{kind: FormPanel, classes: 'g-sample-panel;', onResult: 'result'}
+		{kind: FormPanel, classes: 'g-sample-panel'}
 	],
 	pushPanel: function (inSender, inEvent) {
-		this.pushFloatingPanel(inEvent.panel, inEvent.options);
+		this.pushFloatingPanel(inEvent.panel, {owner: inEvent.owner});
 	},
 	popPanel: function (inSender, inEvent) {
 		this.popFloatingPanel();
@@ -122,8 +116,7 @@ module.exports = kind({
 		{content: '< MultiPickerPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'MultiPickerPanel', classes: 'g-sample-subheader'},
-		{kind: PanelManager, classes: 'g-sample-panel-manager'},
-
+		{kind: PanelManager, classes: 'g-sample-panel-manager', onResult: 'result'},
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}

@@ -4,27 +4,34 @@ var
 	kind = require('enyo/kind'),
 
 	Button = require('garnet/Button'),
-	ToastPanel = require('garnet/ToastPanel'),
 	Panel = require('garnet/Panel'),
+	ToastPanel = require('garnet/ToastPanel'),
 	PanelManager = require('garnet/PanelManager');
-
-var SampleToast = kind({
-	name: 'toast',
-	kind: ToastPanel,
-	allowHtml: true,
-	duration: 5000,
-	content: 'Toast<br><br>Saved'
-});
 
 var ToastBasePanel = kind({
 	name: 'g.sample.ToastBasePanel',
 	kind: Panel,
 	classes: 'g-layout-absolute-wrapper', // for button
 	components: [
-		{kind: Button, classes: 'g-sample-toast-panel-container g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
+		{name: 'button', kind: Button, classes: 'g-sample-toast-panel-container g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
 	],
+	popPanels: {
+		button: {
+			name: 'toast',
+			kind: ToastPanel,
+			allowHtml: true,
+			duration: 5000,
+			content: 'Toast<br><br>Saved'
+		}
+	},
 	showPanel: function(inSender, inEvent) {
-		this.bubbleUp('onPushPanel', {panelName: name, owner: this});
+		var
+			name = inSender.name,
+			panel = this.popPanels[name];
+
+		if (panel) {
+			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
+		}
 	}
 });
 
@@ -35,14 +42,13 @@ var PanelManager = kind({
 		onPushPanel: 'pushPanel'
 	},
 	components: [
-		{kind: ToastBasePanel}
+		{kind: ToastBasePanel, classes: 'g-sample-panel'}
 	],
 	pushPanel: function (inSender, inEvent) {
-		this.pushFloatingPanel({
-			name: 'toast',
-			kind: SampleToast,
-			fromPanel: inEvent.owner ? inEvent.owner : this
-		});
+		this.pushFloatingPanel(inEvent.panel, {owner: inEvent.owner});
+	},
+	popPanel: function (inSender, inEvent) {
+		this.popFloatingPanel();
 	}
 });
 
