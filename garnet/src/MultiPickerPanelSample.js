@@ -24,7 +24,7 @@ var SampleMultiPickerPanel = kind({
 		};
 	}),
 	popPanel: function() {
-		this.container.popFloatingPanel();
+		this.bubbleUp('onPopPanel');
 	}
 });
 
@@ -44,7 +44,7 @@ var FormPanel = kind({
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
-		this.container.pushFloatingPanel({name: 'multiPickerPanel', kind: SampleMultiPickerPanel, owner: this, selectedIndex: [1, 2], onUpdate: 'updateContent'});
+		this.bubbleUp('onPushPanel', {panel: {name: 'multiPickerPanel', kind: SampleMultiPickerPanel, owner: this, selectedIndex: [1, 2], onUpdate: 'updateContent'}});
 	},
 	updateContent: function(inSender, inEvent) {
 		var content = this.formattingContent(inEvent.value);
@@ -78,6 +78,23 @@ var FormPanel = kind({
 	}
 });
 
+var PanelManager = kind({
+	kind: PanelManager,
+	handlers: {
+		onPushPanel: 'pushPanel',
+		onPopPanel: 'popPanel'
+	},
+	components: [
+		{kind: FormPanel, classes: 'g-sample-panel;'}
+	],
+	pushPanel: function (inSender, inEvent) {
+		this.pushFloatingPanel(inEvent.panel, inEvent.options);
+	},
+	popPanel: function (inSender, inEvent) {
+		this.popFloatingPanel();
+	}
+});
+
 module.exports = kind({
 	name: 'g.sample.MultiPickerPanelSample',
 	classes: 'enyo-unselectable garnet g-sample',
@@ -85,10 +102,7 @@ module.exports = kind({
 		{content: '< MultiPickerPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'MultiPickerPanel', classes: 'g-sample-subheader'},
-		{kind: PanelManager, classes: 'g-sample-panel-manager', components: [
-			{kind: FormPanel, classes: 'g-sample-panel;', onResult: 'result'}
-		]},
-
+		{kind: PanelManager, classes: 'g-sample-panel-manager', onResult: 'result'},
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}

@@ -154,7 +154,7 @@ var CollectionMultiPickerPanel = kind({
 		};
 	}),
 	popPanel: function() {
-		this.container.popFloatingPanel();
+		this.bubbleUp('onPopPanel');
 	}
 });
 
@@ -336,6 +336,23 @@ var FormPanel = kind({
 	}
 });
 
+var PanelManager = kind({
+	kind: PanelManager,
+	handlers: {
+		onPushPanel: 'pushPanel',
+		onPopPanel: 'popPanel'
+	},
+	components: [
+		{name: 'formPanel', kind: FormPanel}
+	],
+	pushPanel: function (inSender, inEvent) {
+		this.pushFloatingPanel(inEvent.panel, inEvent.options);
+	},
+	popPanel: function (inSender, inEvent) {
+		this.popFloatingPanel();
+	}
+});
+
 module.exports = kind({
 	name: 'g.sample.FormSample',
 	handlers: {
@@ -346,10 +363,7 @@ module.exports = kind({
 		{content: '< Form Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Form Picker Buttons / Form Buttons / Form Inputs', classes: 'g-sample-subheader'},
-		{kind: PanelManager, classes: 'g-sample-panel-manager', components: [
-			{name: 'formPanel', kind: FormPanel}
-		]},
-
+		{kind: PanelManager, classes: 'g-sample-panel-manager'},
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
 			{name: 'result', allowHtml: true, content: 'No button pressed yet.', classes: 'g-sample-description'}
