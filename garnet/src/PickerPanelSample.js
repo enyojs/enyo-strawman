@@ -3,17 +3,15 @@ require('garnet');
 var
 	kind = require('enyo/kind'),
 	Collection = require('enyo/Collection.js'),
+
 	FormPickerButton = require('garnet/FormPickerButton'),
 	Panel = require('garnet/Panel'),
 	PickerPanel = require('garnet/PickerPanel'),
 	PanelManager = require('garnet/PanelManager');
 
-
-var SamplePickerPanel = kind({
-	name: 'g.sample.PickerPanel',
+SamplePickerPanel = kind({
+	name: 'g.sample.SamplePickerPanel',
 	kind: PickerPanel,
-	title: true,
-	titleContent: 'PickerTitle',
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
@@ -31,6 +29,17 @@ var FormPanel = kind({
 	components: [
 		{name: 'pickerButton', kind: FormPickerButton, classes: 'g-sample-picker-panel-button', ontap: 'showPanel', content: 'Click here!'}
 	],
+	popPanels: {
+		pickerButton: {
+			name: 'pickerPanel',
+			kind: SamplePickerPanel,
+			title: true,
+			titleContent: 'PickerTitle',
+			selectedIndex: 2,
+			onUpdate: 'updateContent'
+
+		}
+	},
 	initComponents: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
@@ -38,14 +47,20 @@ var FormPanel = kind({
 		};
 	}),
 	showPanel: function(inSender, inEvent) {
-		this.bubbleUp('onPushPanel', {panel: {name: 'pickerPanel', kind: SamplePickerPanel, owner: this, selectedIndex: 2, onUpdate: 'updateContent'}});
+		var
+			name = inSender.name,
+			panel = this.popPanels[name];
+
+		if (panel) {
+			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
+		}
 	},
 	updateContent: function(inSender, inEvent) {
-		var content = this.formattingContent(inEvent.value);
+		var content = this.formattingValueToText(inEvent.value);
 		this.$.pickerButton.setContent(content);
-		this.doResult({msg: content});
+		this.doResult({msg: content + ' tapped'});
 	},
-	formattingContent: function(val, data) {
+	formattingValueToText: function(val, data) {
 		var
 			item = val,
 			name = 'No item';
@@ -68,10 +83,10 @@ var PanelManager = kind({
 		onPopPanel: 'popPanel'
 	},
 	components: [
-		{kind: FormPanel, classes: 'g-sample-panel;'}
+		{kind: FormPanel, classes: 'g-sample-panel'}
 	],
 	pushPanel: function (inSender, inEvent) {
-		this.pushFloatingPanel(inEvent.panel, inEvent.options);
+		this.pushFloatingPanel(inEvent.panel, {owner: inEvent.owner});
 	},
 	popPanel: function (inSender, inEvent) {
 		this.popFloatingPanel();

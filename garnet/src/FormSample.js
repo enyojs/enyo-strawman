@@ -3,6 +3,7 @@ require('garnet');
 var
 	kind               = require('enyo/kind'),
 	Collection         = require('enyo/Collection.js'),
+
 	Title              = require('garnet/Title'),
 	IconButton         = require('garnet/IconButton'),
 	FormButton         = require('garnet/FormButton'),
@@ -11,8 +12,8 @@ var
 	FormLabel          = require('garnet/FormLabel'),
 	FormPickerButton   = require('garnet/FormPickerButton'),
 	FormToolDecorator  = require('garnet/FormToolDecorator'),
-	Panel              = require('garnet/Panel'),
 	Scroller           = require('garnet/Scroller'),
+	Panel              = require('garnet/Panel'),
 	TimePickerPanel    = require('garnet/TimePickerPanel'),
 	DatePickerPanel    = require('garnet/DatePickerPanel'),
 	PickerPanel        = require('garnet/PickerPanel'),

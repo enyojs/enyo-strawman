@@ -3,130 +3,94 @@ require('garnet');
 var
 	kind = require('enyo/kind'),
 	Control = require('enyo/Control'),
-	utils = require('enyo/utils');
 
-var
 	Button = require('garnet/Button'),
 	Panel = require('garnet/Panel'),
 	ContextualPanel = require('garnet/ContextualPanel'),
 	PanelManager = require('garnet/PanelManager');
 
-var OneButtonPanel = kind({
-	name: 'g.sample.OneButtonPanel',
-	kind: ContextualPanel,
-	handlers: {
-		onHide: 'hidePanel'
-	},
-	buttonComponents: [
-		{
-			name: 'button1',
-			ontap: 'buttonTap',
-			src: '@../assets/btn_context_delete.svg',
-			title: 'Delete'
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-	},
-	buttonTap: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
-	}
-});
-
-var TwoButtonPanel = kind({
-	name: 'g.sample.TwoButtonPanel',
-	kind: ContextualPanel,
-	handlers: {
-		onHide: 'hidePanel'
-	},
-	buttonComponents: [
-		{
-			name: '1st 2 buttons',
-			ontap: 'buttonTap',
-			src: '@../assets/btn_context_edit.svg',
-			title: 'Edit'
-		},
-		{
-			name: '2nd 2 buttons',
-			ontap: 'buttonTap',
-			src: '@../assets/btn_context_delete.svg',
-			disabled: true,
-			title: 'Delete'
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-	},
-	buttonTap: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
-	}
-});
-
-var ThreeButtonPanel = kind({
-	name: 'g.sample.ThreeButtonPanel',
-	kind: ContextualPanel,
-	handlers: {
-		onHide: 'hidePanel'
-	},
-	buttonComponents: [
-		{
-			name: '1st 3 buttons',
-			ontap: 'buttonTap',
-			src: '@../assets/btn_context_favorite.svg',
-			title: 'Favorite'
-		},
-		{
-			name: '2nd 3 buttons',
-			ontap: 'buttonTap',
-			src: '@../assets/btn_context_edit.svg',
-			title: 'Edit',
-			disabled: true
-		},
-		{
-			name: '3rd 3 buttons',
-			ontap: 'buttonTap',
-			src: '@../assets/btn_context_delete.svg',
-			title: 'Delete'
-		}
-	],
-	hidePanel: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onHide2', {originalEvent: utils.clone(inEvent, true)});
-	},
-	buttonTap: function(inSender, inEvent) {
-		this.fromPanel.triggerHandler('onButtonTap', {originalEvent: {originator: this, title: inEvent.originator.title}});
-	}
-});
-
 var ContextualBasePanel = kind({
 	name: 'g.sample.ContextualBasePanel',
 	kind: Panel,
-	handlers: {
-		onHide2: 'result',
-		onButtonTap: 'result'
+	events: {
+		onResult: ''
 	},
 	components: [
 		{name: 'oneButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'},
 		{name: 'twoButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'},
 		{name: 'threeButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'}
 	],
-	showPanel: function(inSender, inEvent) {
-		var name = inSender.name;
-
-		if (name == 'oneButton' || name == 'twoButton' || name == 'threeButton' ) {
-			this.bubbleUp('onPushPanel', {panelName: name, owner: this});
+	popPanels: {
+		oneButton: {
+			name: 'g.sample.OneButtonPanel',
+			kind: ContextualPanel,
+			buttonComponents: [
+				{
+					name: '1rd Contextual 1st button',
+					ontap: 'tapHandler',
+					src: '@../assets/btn_context_delete.svg',
+					title: 'Delete'
+				}
+			]
+		},
+		twoButton: {
+			name: 'g.sample.TwoButtonPanel',
+			kind: ContextualPanel,
+			buttonComponents: [
+				{
+					name: '2rd Contextual 1st button',
+					ontap: 'tapHandler',
+					src: '@../assets/btn_context_edit.svg',
+					title: 'Edit'
+				},
+				{
+					name: '2nd Contextual 2nd button',
+					ontap: 'tapHandler',
+					src: '@../assets/btn_context_delete.svg',
+					disabled: true,
+					title: 'Delete'
+				}
+			]
+		},
+		threeButton: {
+			name: 'g.sample.ThreeButtonPanel',
+			kind: ContextualPanel,
+			buttonComponents: [
+				{
+					name: '3rd Contextual 1st button',
+					ontap: 'tapHandler',
+					src: '@../assets/btn_context_favorite.svg',
+					title: 'Favorite'
+				},
+				{
+					name: '3nd Contextual 2nd button',
+					ontap: 'tapHandler',
+					src: '@../assets/btn_context_edit.svg',
+					title: 'Edit',
+					disabled: true
+				},
+				{
+					name: '3rd Contextual 3rd button',
+					ontap: 'tapHandler',
+					src: '@../assets/btn_context_delete.svg',
+					title: 'Delete'
+				}
+			]
 		}
 	},
-	result: function(inSender, inEvent) {
+	showPanel: function(inSender, inEvent) {
 		var
-			name = inEvent.originalEvent.originator.name,
-			msg = '"' + name + '" PopupPanel closed ',
-			title = inEvent.originalEvent.title;
+			name = inSender.name,
+			panel = this.popPanels[name];
 
-		if (title) {
-			msg += ('by ' + title + ' button');
+		if (panel) {
+			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
 		}
-
-		this.bubbleUp(title ? 'onPopPanel' : 'onResult', {msg: msg});
+	},
+	tapHandler: function(inSender, inEvent) {
+		var name = inSender.name;
+		this.bubbleUp('onPopPanel');
+		this.doResult({msg: name + ' tapped'});
 	}
 });
 
@@ -138,20 +102,10 @@ var PanelManager = kind({
 		onPopPanel: 'popPanel'
 	},
 	components: [
-		{kind: ContextualBasePanel}
+		{kind: ContextualBasePanel, classes: 'g-sample-panel'}
 	],
 	pushPanel: function (inSender, inEvent) {
-		var type = {
-			oneButton: {name: 'OneButtonPanel', kind: OneButtonPanel},
-			twoButton: {name: 'TwoButtonPanel', kind: TwoButtonPanel},
-			threeButton: {name: 'ThreeButtonPanel', kind: ThreeButtonPanel}
-		};
-
-		this.pushFloatingPanel({
-			name: type[inEvent.panelName].name,
-			kind: type[inEvent.panelName].kind,
-			fromPanel: inEvent.owner ? inEvent.owner : this
-		});
+		this.pushFloatingPanel(inEvent.panel, {owner: inEvent.owner});
 	},
 	popPanel: function (inSender, inEvent) {
 		this.popFloatingPanel();
