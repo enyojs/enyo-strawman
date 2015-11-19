@@ -29,7 +29,7 @@ var FormPanel = kind({
 	components: [
 		{name: 'pickerButton', kind: FormPickerButton, classes: 'g-sample-picker-panel-button', ontap: 'showPanel', content: 'Click here!'}
 	],
-	popPanels: {
+	popUpAndPickerPanelComponents: {
 		pickerButton: {
 			name: 'pickerPanel',
 			kind: SamplePickerPanel,
@@ -49,7 +49,7 @@ var FormPanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			panel = this.popPanels[name];
+			panel = this.popUpAndPickerPanelComponents[name];
 
 		if (panel) {
 			this.bubbleUp('onPushPanel', {panel: panel, owner: this});

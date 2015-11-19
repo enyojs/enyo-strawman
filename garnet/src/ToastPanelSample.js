@@ -15,7 +15,7 @@ var ToastBasePanel = kind({
 	components: [
 		{name: 'button', kind: Button, classes: 'g-sample-toast-panel-container g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
 	],
-	popPanels: {
+	popUpAndPickerPanelComponents: {
 		button: {
 			name: 'toast',
 			kind: ToastPanel,
@@ -27,7 +27,7 @@ var ToastBasePanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			panel = this.popPanels[name];
+			panel = this.popUpAndPickerPanelComponents[name];
 
 		if (panel) {
 			this.bubbleUp('onPushPanel', {panel: panel, owner: this});

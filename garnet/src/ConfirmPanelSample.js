@@ -27,7 +27,7 @@ var ConfirmBasePanel = kind({
 		{name: 'button3', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Icon + Title + Text'},
 		{name: 'button4', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
 	],
-	popPanels: {
+	popUpAndPickerPanelComponents: {
 		button1: {
 			name: 'confirmPanelNoScrollNoIcon',
 			kind: ConfirmPanel,
@@ -110,7 +110,7 @@ var ConfirmBasePanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			panel = this.popPanels[name];
+			panel = this.popUpAndPickerPanelComponents[name];
 
 		if (panel) {
 			this.bubbleUp('onPushPanel', {panel: panel, owner: this});

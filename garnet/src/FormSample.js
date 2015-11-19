@@ -220,7 +220,7 @@ var FormPanel = kind({
 			]}
 		]}
 	],
-	popPanels: {
+	popUpAndPickerPanelComponents: {
 		timePickerButton: {
 			name: 'timePicker',
 			kind: TimePickerPanel,
@@ -292,7 +292,7 @@ var FormPanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			panel = this.popPanels[name],
+			panel = this.popUpAndPickerPanelComponents[name],
 			options;
 
 		// initialize default values

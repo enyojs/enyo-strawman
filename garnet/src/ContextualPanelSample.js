@@ -20,7 +20,7 @@ var ContextualBasePanel = kind({
 		{name: 'twoButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'},
 		{name: 'threeButton', kind: Button, classes: 'g-sample-contextual-panel-button', ontap: 'showPanel', content: 'Click here to show panel!'}
 	],
-	popPanels: {
+	popUpAndPickerPanelComponents: {
 		oneButton: {
 			name: 'g.sample.OneButtonPanel',
 			kind: ContextualPanel,
@@ -81,7 +81,7 @@ var ContextualBasePanel = kind({
 	showPanel: function(inSender, inEvent) {
 		var
 			name = inSender.name,
-			panel = this.popPanels[name];
+			panel = this.popUpAndPickerPanelComponents[name];
 
 		if (panel) {
 			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
