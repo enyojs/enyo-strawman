@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	Image = require('enyo/Image');
+	Img = require('enyo/Image');
 
 var
 	FittableRows = require('layout/FittableRows');
@@ -20,7 +20,7 @@ module.exports = kind({
 	components: [
 		{kind: Header, title: 'Watch Manager'},
 		{classes: 'imageArea', components: [
-			{kind: Image, src: '@../assets/ic_list_ring.png'}
+			{kind: Img, src: '@../assets/ic_list_ring.png'}
 		]},
 		{kind: Scroller, fit: true, classes: 'settingList', components: [
 			{classes: 'general-index', content: 'CATEGORY 1'},

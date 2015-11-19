@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	Image = require('enyo/Image');
+	Img = require('enyo/Image');
 
 var
 	FittableRows = require('layout/FittableRows'),
@@ -20,7 +20,7 @@ module.exports = kind({
 		{kind: Scroller, fit: true, horizontal: 'hidden', components: [
 			{classes: 'contacts-table', kind: FittableColumns, components: [
 				{classes: 'contacts-table-cell', components: [
-					{kind: Image, style: 'margin: 10px; width: 60px; height: 60px;', src: '@../assets/contacts_01.png'}
+					{kind: Img, style: 'margin: 10px; width: 60px; height: 60px;', src: '@../assets/contacts_01.png'}
 				]},
 				{classes: 'contacts-table-cell', fit: true, components: [
 					{content: 'Emil Decosta'}
