@@ -9,7 +9,7 @@ var
 	PickerPanel = require('garnet/PickerPanel'),
 	PanelManager = require('garnet/PanelManager');
 
-SamplePickerPanel = kind({
+var SamplePickerPanel = kind({
 	name: 'g.sample.SamplePickerPanel',
 	kind: PickerPanel,
 	create: kind.inherit(function(sup) {
