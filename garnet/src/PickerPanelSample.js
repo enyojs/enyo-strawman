@@ -36,8 +36,7 @@ var FormPanel = kind({
 			title: true,
 			titleContent: 'PickerTitle',
 			selectedIndex: 2,
-			onUpdate: 'updateContent'
-
+			onValueChange: 'updateContent'
 		}
 	},
 	initComponents: kind.inherit(function(sup) {

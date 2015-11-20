@@ -301,20 +301,20 @@ var FormPanel = kind({
 				hourValue: defaults.timePickerButtonWithValue.hour,
 				minuteValue: defaults.timePickerButtonWithValue.minute,
 				meridiemValue: defaults.timePickerButtonWithValue.meridiem,
-				onUpdate: 'updateContent'
+				onValueChange: 'updateContent'
 			};
 		} else if (name === 'datePickerButtonWithValue' && !this.$.datePickerWithValue) {
 			options = {
 				value: defaults.datePickerButtonWithValue,
-				onUpdate: 'updateContent'
+				onValueChange: 'updateContent'
 			};
 		} else if (name === 'wheelSliderPanelButtonWithValue' && !this.$.wheelSliderPanelWithValue) {
 			options = {
 				value: defaults.wheelSliderPanelWithValue,
-				onUpdate: 'updateContent'
+				onValueChange: 'updateContent'
 			};
 		} else {
-			options = {onUpdate: 'updateContent'};
+			options = {onValueChange: 'updateContent'};
 		}
 
 		utils.mixin(panel, options);
@@ -329,16 +329,16 @@ var FormPanel = kind({
 	},
 	updateContent: function(inSender, inEvent) {
 		var
-			name = inEvent.name,
+			name = inSender.name,
 			content;
 
 		switch (name) {
 			case 'timePicker':
-				content = Formatter.TimePickerPanel24({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
+				content = Formatter.TimePickerPanel24({hour: inEvent.value.hour, meridiem: inEvent.value.meridiem, minute: inEvent.value.minute});
 				this.$.timePickerButton.setContent(content);
 				break;
 			case 'timePickerWithValue':
-				content = Formatter.TimePickerPanel({hour: inEvent.hour, meridiem: inEvent.meridiem, minute: inEvent.minute});
+				content = Formatter.TimePickerPanel({hour: inEvent.value.hour, meridiem: inEvent.value.meridiem, minute: inEvent.value.minute});
 				this.$.timePickerButtonWithValue.setContent(content);
 				break;
 			case 'datePicker':
