@@ -2,29 +2,27 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Group = require('enyo/Group'),
 	ToggleButton = require('garnet/ToggleButton'),
 	Panel = require('garnet/Panel');
 
 var ToggleButtonPanel = kind({
-	name: "g.sample.ToggleButtonPanel",
+	name: 'g.sample.ToggleButtonPanel',
 	kind: Panel,
 	events: {
-		onResult: ""
+		onResult: ''
 	},
-	classes: "g-layout-absolute-wrapper",
-	style: "border-radius: 50%; background-color: #000000;",
+	classes: 'g-layout-absolute-wrapper',
 	components: [
-		{classes: "g-layout-absolute-center", style: "width: " + ri.scale(280) + "px; height: " + ri.scale(230) + "px;", components: [
-			{kind: ToggleButton, value: true, content: "1", ontap: "tapButton"},
-			{kind: ToggleButton, content: "2", ontap: "tapButton"},
-			{kind: ToggleButton, disabled: true, content: "Disabled", ontap: "tapButton"},
-			{content: "Grouped ToggleButtons : ", style: "font-size: " + ri.scale(20) + "px; display: inline-block; margin-right: " + ri.scale(10) + "px; color: #FFFFFF;"},
+		{classes: 'g-layout-absolute-center g-sample-toggle-button-container', components: [
+			{kind: ToggleButton, value: true, content: '1', ontap: 'tapButton'},
+			{kind: ToggleButton, content: '2', ontap: 'tapButton'},
+			{kind: ToggleButton, disabled: true, content: 'Disabled', ontap: 'tapButton'},
+			{content: 'Grouped ToggleButtons : ', classes: 'g-sample-text'},
 			{kind: Group, components: [
-				{kind: ToggleButton, active: true, content: "AA", ontap: "tapButton"},
-				{kind: ToggleButton, content: "BB", ontap: "tapButton"},
-				{kind: ToggleButton, content: "CC", ontap: "tapButton"}
+				{kind: ToggleButton, active: true, content: 'AA', ontap: 'tapButton'},
+				{kind: ToggleButton, content: 'BB', ontap: 'tapButton'},
+				{kind: ToggleButton, content: 'CC', ontap: 'tapButton'}
 			]}
 		]}
 	],
@@ -35,17 +33,17 @@ var ToggleButtonPanel = kind({
 });
 
 module.exports = kind({
-	name: "g.sample.ToggleButtonSample",
-	classes: "enyo-unselectable garnet g-sample",
+	name: 'g.sample.ToggleButtonSample',
+	classes: 'enyo-unselectable garnet g-sample',
 	components: [
-		{content: "< Toggle Button Sample", classes: "g-sample-header", ontap: "goBack"},
+		{content: '< Toggle Button Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
-		{content: "Toggle Buttons", classes: "g-sample-subheader"},
-		{kind: ToggleButtonPanel, style: "position: relative;", onResult: "result"},
+		{content: 'Toggle Buttons', classes: 'g-sample-subheader'},
+		{kind: ToggleButtonPanel, classes: 'g-sample-circle-panel', onResult: 'result'},
 
-		{style: "position: fixed; width: 100%; min-height: +" + ri.scale(160) + "px; bottom: 0; z-index: 9999; background-color: #EDEDED; opacity: 0.8;", classes: "g-sample-result", components: [
-			{content: "Result", classes: "g-sample-subheader"},
-			{name: "result", allowHtml: true, content: "No action yet", classes: "g-sample-description"}
+		{classes: 'g-sample-result', components: [
+			{content: 'Result', classes: 'g-sample-subheader'},
+			{name: 'result', allowHtml: true, content: 'No action yet', classes: 'g-sample-description'}
 		]}
 	],
 	result: function(inSender, inEvent) {

@@ -2,38 +2,38 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
 	EnyoImage = require('enyo/Image'),
 	DataGridList = require('garnet/DataGridList'),
 	Panel = require('garnet/Panel'),
+	Title = require('garnet/Title'),
 	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
 
 var DataGridListImageItem = kind({
-	name: "g.sample.DataGridListImageItem",
-	classes: "g-sample-gridlist-imageitem",
+	name: 'g.sample.DataGridListImageItem',
+	classes: 'g-sample-datagridlist-imageitem',
 	components: [{
-		name: "image",
+		name: 'image',
 		kind: EnyoImage
 	}, {
-		name: "caption",
-		classes: "caption"
+		name: 'caption',
+		classes: 'caption'
 	}],
 	published: {
-		source: "",
-		caption: "",
+		source: '',
+		caption: '',
 		selected: false
 	},
 	bindings: [{
-		from: ".source",
-		to: ".$.image.src"
+		from: '.source',
+		to: '.$.image.src'
 	}, {
-		from: ".caption",
-		to: ".$.caption.content"
+		from: '.caption',
+		to: '.$.caption.content'
 	}, {
-		from: ".caption",
-		to: ".$.caption.showing",
+		from: '.caption',
+		to: '.$.caption.showing',
 		kind: EmptyBinding
 	}],
 	create: kind.inherit(function(sup) {
@@ -43,100 +43,98 @@ var DataGridListImageItem = kind({
 		};
 	}),
 	selectedChanged: function() {
-		this.addRemoveClass("selected", this.selected);
+		this.addRemoveClass('selected', this.selected);
 	},
 	disabledChanged: function() {
-		this.addRemoveClass("disabled", this.disabled);
+		this.addRemoveClass('disabled', this.disabled);
 	}
 });
 
 var DataGridListItem = kind({
-	name: "g.sample.DataGridListItem",
+	name: 'g.sample.DataGridListItem',
 	kind: DataGridListImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
-		"w320": "garnet/images/320/frame_check.png",
-		"w360": "garnet/images/360/frame_check.png"
+		'w320': 'garnet/images/320/frame_check.png',
+		'w360': 'garnet/images/360/frame_check.png'
 	},
 	selectionOverlayVerticalOffset: 0,
 	selectionOverlayHorizontalOffset: 0,
 	bindings: [{
-		from: ".model.text",
-		to: ".caption"
+		from: '.model.text',
+		to: '.caption'
 	}, {
-		from: ".model.url",
-		to: ".source"
+		from: '.model.url',
+		to: '.source'
 	}]
 });
 
 var DataGridListCircleImageItem = kind({
-	name: "g.sample.DataGridListCircleImageItem",
+	name: 'g.sample.DataGridListCircleImageItem',
 	kind: DataGridListImageItem,
-	classes: "g-sample-gridlist-circle-imageitem"
+	classes: 'g-sample-datagridlist-circle-imageitem'
 });
 
 var DataGridListCircleItem = kind({
-	name: "g.sample.DataGridListCircleItem",
+	name: 'g.sample.DataGridListCircleItem',
 	kind: DataGridListCircleImageItem,
 	mixins: [SelectionOverlaySupport],
 	selectionScrimIcon: {
-		"w320": "garnet/images/320/frame_check.png",
-		"w360": "garnet/images/360/frame_check.png"
+		'w320': 'garnet/images/320/frame_check.png',
+		'w360': 'garnet/images/360/frame_check.png'
 	},
 	selectionOverlayVerticalOffset: 0.5,
 	selectionOverlayHorizontalOffset: 0,
 	bindings: [{
-		from: ".model.text",
-		to: ".caption"
+		from: '.model.text',
+		to: '.caption'
 	}, {
-		from: ".model.url",
-		to: ".source"
+		from: '.model.url',
+		to: '.source'
 	}]
 });
 
 var DataGridListPanel = kind({
-	name: "g.sample.DataGridListPanel",
+	name: 'g.sample.DataGridListPanel',
 	kind: Panel,
-	title: true,
-	titleContent: "Title",
 	knob: true,
 	selection: false,
-	multipleSelection: false,
-	classes: "g-layout-absolute-wrapper",
-	style: "background-color: #000000;",
+	classes: 'g-layout-absolute-wrapper',
 	components: [{
-		name: "list",
+		name: 'list',
 		kind: DataGridList,
 		controlsPerPage: 8,
 		spacing: 0,
-		style: "width: " + ri.scale(232) + "px; height: " + ri.scale(320) + "px; margin: auto; background-color: #000000;",
+		classes: 'g-sample-datagridlist-panel',
+		headerComponents: [{kind: Title, content: 'Title: long text will fade out'}],
 		components: [{
 			kind: DataGridListItem
 		}]
 	}],
 	bindings: [{
-		from: ".collection",
-		to: ".$.list.collection"
+		from: '.collection',
+		to: '.$.list.collection'
 	}],
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.$.list.set("selection", this.selection);
-			this.$.list.set("multipleSelection", this.multipleSelection);
+			this.$.list.set('selection', this.selection);
+			this.$.list.set('selectionType', this.selectionType);
 		};
 	})
 });
 
 var DataGridListCirclePanel = kind({
-	name: "g.sample.DataGridListCirclePanel",
+	name: 'g.sample.DataGridListCirclePanel',
 	kind: DataGridListPanel,
 	components: [{
-		name: "list",
+		name: 'list',
 		kind: DataGridList,
 		controlsPerPage: 8,
 		spacing: 0,
 		minHeight: 106,
-		style: "width: " + ri.scale(230) + "px; height: " + ri.scale(320) + "px; margin: auto; background-color: #000000;",
+		classes: 'g-sample-datagridlist-panel',
+		headerComponents: [{kind: Title, content: 'Title'}],
 		components: [{
 			kind: DataGridListCircleItem
 		}]
@@ -144,61 +142,62 @@ var DataGridListCirclePanel = kind({
 });
 
 var DataGridListSample = module.exports = kind({
-	name: "g.sample.DataGridListSample",
-	classes: "enyo-unselectable garnet g-sample",
+	name: 'g.sample.DataGridListSample',
+	classes: 'enyo-unselectable garnet g-sample',
 	components: [
 		{
-			content: "< Data Grid List Sample",
-			classes: "g-sample-header",
-			ontap: "goBack"
+			content: '< Data Grid List Sample',
+			classes: 'g-sample-header',
+			ontap: 'goBack'
 		}, {
-			content: "Data Grid List", classes: "g-sample-subheader"
+			content: 'Data Grid List', classes: 'g-sample-subheader'
 		}, {
-			name: "gridListCircle",
+			name: 'gridListCircle',
 			kind: DataGridListCirclePanel,
-			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
+			classes: 'g-sample-panel-margin',
 			selection: true,
-			multipleSelection: true
+			selectionType: 'multi'
 		}, {
-			name: "gridListMulti",
+			name: 'gridListMulti',
 			kind: DataGridListPanel,
-			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
+			classes: 'g-sample-panel-margin',
 			selection: true,
-			multipleSelection: true
+			selectionType: 'multi'
 		}, {
-			name: "gridListSingleCircle",
+			name: 'gridListSingleCircle',
 			kind: DataGridListCirclePanel,
-			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
+			classes: 'g-sample-panel-margin',
 			selection: true
 		}, {
-			name: "gridListSingle",
+			name: 'gridListSingle',
 			kind: DataGridListPanel,
-			style: "position: relative; display: inline-block; margin-right: " + ri.scale(20) + "px;",
+			classes: 'g-sample-panel-margin',
 			selection: true
 		}
 	],
 	bindings: [
-		{from: ".collection", to: ".$.gridListMulti.collection"},
-		{from: ".collection", to: ".$.gridListCircle.collection"},
-		{from: ".collection", to: ".$.gridListSingleCircle.collection"},
-		{from: ".collection", to: ".$.gridListSingle.collection"}
+		{from: '.collection', to: '.$.gridListMulti.collection'},
+		{from: '.collection', to: '.$.gridListCircle.collection'},
+		{from: '.collection', to: '.$.gridListSingleCircle.collection'},
+		{from: '.collection', to: '.$.gridListSingle.collection'}
 	],
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.set("collection", new Collection(this.generateRecords()));
+			this.set('collection', new Collection(this.generateRecords()));
 		};
 	}),
 	generateRecords: function() {
-		var records = [],
+		var
+			records = [],
 			idx = this.index || 0;
 		for (; records.length < 500; ++idx) {
-			var title = (idx % 8 === 0) ? " with long title" : "";
+			var title = (idx % 8 === 0) ? ' with long title' : '';
 			records.push({
-				text: "Item " + idx + title,
+				text: 'Item ' + idx + title,
 				url: {
-					"w320": "@../assets/320/photo.png",
-					"w360": "@../assets/360/photo.png"
+					'w320': '@../assets/320/photo.png',
+					'w360': '@../assets/360/photo.png'
 				}
 			});
 		}

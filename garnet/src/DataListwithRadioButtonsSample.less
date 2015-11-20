@@ -1,45 +1,77 @@
-/* DataListwithRadioButtonsSample.less */
+/* DataListwithRadioButtonsSample */
 
-.g-sample-datalistwithradiobuttons {
-	.g-listradio-footer-comp {
-		width: 100%;
-		height: 93px;
-	}
-	/* RadioButton Item */
-	.g-datalist-radiobutton-item{
-		height: 72px;
-		line-height: 72px;
-		position: relative; /* Do not omit this. It's critical */
-		cursor: pointer;
-	}
-	.g-datalist-radiobutton-item .radiobutton-item-title {
-		width: 186px;
-		height: 72px;
-		margin-left: 38px;
-		font-size: 28px;
-		color: #FAFAFA;
-		-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-		-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-	}
-	.g-datalist-radiobutton-item.disabled {
-		opacity: 0.4;
-		filter: alpha(opacity=40);
-	}
-	/* This for always showing radiobutton */
-	.g-selection-overlay-support-scrim {
-		display: inline;
-	}
-	/* This is to make radiobutton to draw image based on "active" attribute not "selected" */
-	.enyo-data-list .active {
-		overflow: inherit;
-	}
-	.g-selection-overlay-support.selected .g-icon-button {
-		background-position: 0 0;
-	}
-	.g-selection-overlay-support.active .g-icon-button {
-		background-position: 0 -144px;
-	}
-	.g-datalist-radiobutton-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
-		background-position: 0 -48px;
-	}
+// Common classes
+
+.g-sample-panel {
+	background-color: #000000;
+
+	position: relative;
+	overflow: hidden;
+}
+.g-sample-result {
+	background-color: #EDEDED;
+
+	position: fixed;
+	width: 100%;
+	min-height: 160px;
+	bottom: 0;
+	z-index: 9999;
+	opacity: 0.8;
+}
+
+// Sample specific classes
+
+.g-datalist-radiobuttons-footer {
+	height: 116px;
+}
+/* RadioButton Item */
+.g-datalist-radiobuttons-item{
+	position: relative; /* Do not omit this. It's critical */
+	height: 72px;
+
+	line-height: 72px;
+
+	cursor: pointer;
+}
+.g-datalist-radiobuttons-item .radiobutton-item-title {
+	width: 186px;
+	height: 72px;
+	margin-left: 38px;
+
+	font-size: 28px;
+	color: #FAFAFA;
+
+	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+}
+.g-datalist-radiobuttons-item-border {
+	background-color: #202328;
+
+	height: 1px;
+	border: 0;
+	bottom: 0;
+
+	color: #202328;
+}
+.g-datalist-radiobuttons-item.disabled {
+	opacity: 0.4;
+
+	filter: alpha(opacity=40);
+}
+/* This for always showing radiobutton */
+.g-selection-overlay-support-scrim {
+	display: inline;
+}
+/* This is to make radiobutton to draw image based on 'active' attribute not 'selected' */
+.enyo-data-list .active {
+	overflow: inherit;
+}
+.g-selection-overlay-support.selected .g-icon-button {
+	background-position: 0 0;
+}
+.g-selection-overlay-support.active .g-icon-button {
+	background-position: 0 -144px;
+}
+.g-datalist-radiobuttons-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
+	background-position: 0 -48px;
 }
