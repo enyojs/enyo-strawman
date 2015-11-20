@@ -20,5 +20,14 @@
 		&.spotlight {
 			opacity: 1;
 		}
+
+		@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+			opacity: 0.01;
+			width: 100%;
+			margin: 0;
+			line-height: 2em;
+			font-size: 3em;
+			border-radius: 0;
+		}
 	}
 }
