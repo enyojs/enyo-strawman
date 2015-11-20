@@ -117,14 +117,12 @@ var ConfirmBasePanel = kind({
 		}
 	},
 	cancelHandler: function(inSender, inEvent) {
-		var name = inSender.name;
 		this.bubbleUp('onPopPanel');
-		this.doResult({msg: name + ' is hidden by Cancel button'});
+		this.doResult({msg: 'Confirm panel is hidden by Cancel button'});
 	},
 	okHandler: function(inSender, inEvent) {
-		var name = inSender.name;
 		this.bubbleUp('onPopPanel');
-		this.doResult({msg: name + ' is hidden by OK button'});
+		this.doResult({msg: 'Confirm panel is hidden by OK button'});
 	}
 });
 

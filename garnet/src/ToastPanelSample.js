@@ -20,7 +20,6 @@ var ToastBasePanel = kind({
 			name: 'toast',
 			kind: ToastPanel,
 			allowHtml: true,
-			duration: 5000,
 			content: 'Toast<br><br>Saved'
 		}
 	},
