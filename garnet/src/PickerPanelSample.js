@@ -56,11 +56,11 @@ var FormPanel = kind({
 		}
 	},
 	updateContent: function(inSender, inEvent) {
-		var content = this.formattingValueToText(inEvent.value);
+		var content = this.formattingValue(inEvent.value);
 		this.$.pickerButton.setContent(content);
 		this.doResult({msg: content + ' tapped'});
 	},
-	formattingValueToText: function(val, data) {
+	formattingValue: function(val, data) {
 		var
 			item = val,
 			name = 'No item';

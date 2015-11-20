@@ -61,11 +61,11 @@ var FormPanel = kind({
 		this.updateContent(inSender, inEvent.originalEvent);
 	},
 	updateContent: function(inSender, inEvent) {
-		var content = this.formattingValueToTexts(inEvent.value);
+		var content = this.formattingValue(inEvent.value);
 		this.$.multiPickerButton.setContent(content);
 		this.doResult({msg: content + ' selected'});
 	},
-	formattingValueToTexts: function(val, data) {
+	formattingValue: function(val, data) {
 		var
 			items = val,
 			names = '',
