@@ -8,7 +8,8 @@ var
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
 	Title = require('garnet/Title'),
-	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
+	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var CheckboxItemBase = kind({
 	name: 'g.sample.CheckboxItemBase',
@@ -19,8 +20,7 @@ var CheckboxItemBase = kind({
 		selected: false
 	},
 	components: [
-		{name: 'title', classes: 'checkbox-item-title'},
-		{tag: 'hr', classes: 'g-sample-datalist-checkboxes-checkbox-item-border'}
+		{name: 'title', classes: 'checkbox-item-title', mixins: [MarqueeSupport]}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -45,7 +45,7 @@ var CheckboxItem = kind({
 	kind: CheckboxItemBase,
 	mixins: [SelectionOverlaySupport],
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 20,
+	selectionOverlayHorizontalOffset: 10,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
@@ -64,13 +64,11 @@ var CheckableDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: true,
 			selectionType: 'multi',
-			headerComponents: [{kind: Title, content: 'Title'}],
+			headerComponents: [{kind: Title, content: 'Title', classes: 'g-sample-datalist-checkboxes-header'}],
 			components: [
 				{kind: CheckboxItem, ontap: 'tapItem'}
 			],
-			footerComponents: [
-				{classes: 'g-sample-datalist-checkboxes-footer'}
-			]
+			footerComponents: [{classes: 'g-sample-datalist-checkboxes-footer'}]
 		}
 	],
 	commandBarComponents: [

@@ -8,7 +8,8 @@ var
 	Icon = require('garnet/Icon'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
-	Title = require('garnet/Title');
+	Title = require('garnet/Title'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var IconBadgeItem = kind({
 	name: 'g.sample.IconBadgeItem',
@@ -23,8 +24,7 @@ var IconBadgeItem = kind({
 		{name: 'icon', kind: Icon, src: '@../assets/ic_dialog_alert.svg', classes: 'icon-badge-item-icon'},
 		{name: 'newIconBadge', kind: Icon, src: '@../assets/badge_unread.svg', classes: 'icon-badge-item-new-icon'},
 		{name: 'infoIconBadge', kind: Icon, src: '@../assets/badge_extra_info.svg', classes: 'icon-badge-item-info-icon'},
-		{name: 'title', classes: 'icon-badge-item-title'},
-		{tag: 'hr', classes: 'g-datalist-iconbadge-item-border'}
+		{name: 'title', classes: 'icon-badge-item-title', mixins: [MarqueeSupport]}
 	],
 	bindings: [
 		{from: '.model.albumTitle', to: '.$.title.content'},
@@ -66,10 +66,11 @@ var IconBadgeDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: false,
 			multipleSelection: false,
-			headerComponents: [{kind: Title, content: 'Title'}],
+			headerComponents: [{kind: Title, content: 'Title', classes: 'g-sample-datalist-iconbadge-header'}],
 			components: [
 				{kind: IconBadgeItem}
-			]
+			],
+			footerComponents: [{classes: 'g-sample-datalist-iconbadge-footer'}]
 		}
 	],
 	bindings: [
