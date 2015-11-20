@@ -67,8 +67,8 @@ var RadioDataListPanel = kind({
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
-			groupSelection: true,
 			selection: true,
+			selectionType: 'gruop',
 			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
