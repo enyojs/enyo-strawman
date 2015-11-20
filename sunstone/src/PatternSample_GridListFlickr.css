@@ -69,6 +69,14 @@
 	height: 56px;
 }
 
+.gridflickr-sample .sun-gridlist-imageitem {
+	background-color: transparent;
+}
+
+.gridflickr-sample .sun-gridlist-imageitem .caption {
+	color: #ffffff;
+}
+
 .gridflickr-sample .grid-table-cell {
 	display: table-cell;
 	vertical-align: middle;
