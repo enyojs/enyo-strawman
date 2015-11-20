@@ -59,7 +59,6 @@ var IconBadgeItem = kind({
 var IconBadgeDataListPanel = kind({
 	name: 'g.sample.IconBadgeDataListPanel',
 	kind: Panel,
-	knob: true,
 	components: [
 		{
 			name: 'list',

@@ -80,7 +80,6 @@ var DataGridListCardsCircleItem = kind({
 var DataGridListCardsPanel = kind({
 	name: 'g.sample.DataGridListCardsPanel',
 	kind: Panel,
-	knob: true,
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{
@@ -107,7 +106,6 @@ var DataGridListCardsPanel = kind({
 var DataGridListCardsCirclePanel = kind({
 	name: 'g.sample.DataGridListCardsCirclePanel',
 	kind: Panel,
-	knob: true,
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{
