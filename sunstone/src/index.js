@@ -26,7 +26,13 @@ var samples = {
 	SpinnerSample                     : require('./SpinnerSample'),
 	TabSample                         : require('./TabSample'),
 	ToastPopupSample                  : require('./ToastPopupSample'),
-	ToggleButtonSample                : require('./ToggleButtonSample')
+	ToggleButtonSample                : require('./ToggleButtonSample'),
+	PatternSample_Contacts            : require('./PatternSample_Contacts'),
+	PatternSample_DeleteData          : require('./PatternSample_DeleteData'),
+	PatternSample_GridListFlickr      : require('./PatternSample_GridListFlickr'),
+	PatternSample_Profile             : require('./PatternSample_Profile'),
+	PatternSample_WatchManager        : require('./PatternSample_WatchManager'),
+	PatternSample_VolumeSetting       : require('./PatternSample_VolumeSetting')
 };
 
 module.exports = kind({
