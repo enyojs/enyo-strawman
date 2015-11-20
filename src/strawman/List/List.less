@@ -31,4 +31,10 @@
 			background-color: lighten(@strawman-enyo-blue, 10%);
 		}
 	}
+
+	@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+		.list-frame:not(.grid) a {
+			font-size: 2rem;
+		}
+	}
 }
