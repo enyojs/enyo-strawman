@@ -21,39 +21,36 @@
 
 // Sample specific classes
 
-.g-datalist-radiobuttons-footer {
-	height: 116px;
+.g-sample-datalist-radiobuttons-header {
+	// Box properties
+
+	height: 100px;
+	border-bottom: 3px solid #202328;
+}
+.g-sample-datalist-radiobuttons-footer {
+	height: 100px;
 }
 /* RadioButton Item */
-.g-datalist-radiobuttons-item{
+.g-sample-datalist-radiobuttons-item {
 	position: relative; /* Do not omit this. It's critical */
-	height: 72px;
+	height: 114px;
+	border-bottom: 3px solid #202328;
+	overflow: hidden;
 
-	line-height: 72px;
+	line-height: 114px;
 
 	cursor: pointer;
 }
-.g-datalist-radiobuttons-item .radiobutton-item-title {
-	width: 186px;
-	height: 72px;
-	margin-left: 38px;
+.g-sample-datalist-radiobuttons-item .radiobutton-item-title {
+	width: 166px;
+	height: 114px;
+	margin: 0 77px;
 
-	font-size: 28px;
-	color: #FAFAFA;
-
-	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 40px;
 }
-.g-datalist-radiobuttons-item-border {
-	background-color: #202328;
-
-	height: 1px;
-	border: 0;
-	bottom: 0;
-
-	color: #202328;
-}
-.g-datalist-radiobuttons-item.disabled {
+.g-sample-datalist-radiobuttons-item.disabled {
 	opacity: 0.4;
 
 	filter: alpha(opacity=40);
@@ -67,11 +64,11 @@
 	overflow: inherit;
 }
 .g-selection-overlay-support.selected .g-icon-button {
-	background-position: 0 0;
+	background-position: 0 -144px;
 }
 .g-selection-overlay-support.active .g-icon-button {
 	background-position: 0 -144px;
 }
-.g-datalist-radiobuttons-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
+.g-sample-datalist-radiobuttons-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
 	background-position: 0 -48px;
 }

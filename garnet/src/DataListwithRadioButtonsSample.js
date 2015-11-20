@@ -4,23 +4,24 @@ var
 	kind = require('enyo/kind'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
+
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
 	Title = require('garnet/Title'),
-	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
+	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var RadioButtonItemBase = kind({
 	name: 'g.sample.RadioButtonItemBase',
 	kind: Item,
-	classes: 'g-datalist-radiobuttons-item',
+	classes: 'g-sample-datalist-radiobuttons-item',
 	published: {
 		title: '',
 		selected: false
 	},
 	components: [
-		{name: 'title', classes: 'radiobutton-item-title'},
-		{tag: 'hr', classes: 'g-datalist-radiobuttons-item-border'}
+		{name: 'title', classes: 'radiobutton-item-title', mixins: [MarqueeSupport]}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -67,15 +68,13 @@ var RadioDataListPanel = kind({
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
-			groupSelection: true,
 			selection: true,
-			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
+			selectionType: 'group',
+			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons', classes: 'g-sample-datalist-radiobuttons-header'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
 			],
-			footerComponents: [
-				{classes: 'g-datalist-radiobuttons-footer'}
-			]
+			footerComponents: [{classes: 'g-sample-datalist-radiobuttons-footer'}]
 		}
 	],
 	commandBarComponents: [

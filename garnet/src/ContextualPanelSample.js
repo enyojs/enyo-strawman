@@ -47,7 +47,6 @@ var ContextualBasePanel = kind({
 					name: '2nd Contextual 2nd button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_delete.svg',
-					disabled: true,
 					title: 'Delete'
 				}
 			]
@@ -66,8 +65,7 @@ var ContextualBasePanel = kind({
 					name: '3nd Contextual 2nd button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_edit.svg',
-					title: 'Edit',
-					disabled: true
+					title: 'Edit'
 				},
 				{
 					name: '3rd Contextual 3rd button',

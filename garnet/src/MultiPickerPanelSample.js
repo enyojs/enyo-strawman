@@ -35,7 +35,7 @@ var FormPanel = kind({
 			kind: SampleMultiPickerPanel,
 			onCancel: 'popPanel',
 			onOK: 'popPanel',
-			onUpdate: 'updateContent',
+			onValueChange: 'updateContent',
 			title: true,
 			titleContent: 'MultiPickerPanel',
 			selectedIndex: [1, 2]

@@ -97,7 +97,6 @@ var DataGridListCircleItem = kind({
 var DataGridListPanel = kind({
 	name: 'g.sample.DataGridListPanel',
 	kind: Panel,
-	knob: true,
 	selection: false,
 	classes: 'g-layout-absolute-wrapper',
 	components: [{

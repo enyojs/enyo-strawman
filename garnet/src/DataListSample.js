@@ -40,7 +40,6 @@ var DataListItem = kind({
 var DataListPanel = kind({
 	name: 'g.sample.DataListPanel',
 	kind: Panel,
-	knob: true,
 	components: [
 		{
 			name: 'list',

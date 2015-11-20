@@ -11,7 +11,6 @@ var
 var DataListCardsPanel = kind({
 	name: 'g.sample.DataListCardsPanel',
 	kind: Panel,
-	knob: true,
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{
@@ -38,7 +37,6 @@ var DataListCardsPanel = kind({
 var DataListSmallCardsPanel = kind({
 	name: 'g.sample.DataListSmallCardsPanel',
 	kind: Panel,
-	knob: true,
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{
