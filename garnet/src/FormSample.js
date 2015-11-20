@@ -170,7 +170,7 @@ var FormPanel = kind({
 	classes: 'g-sample-panel g-common-width-height-fit g-layout-absolute-wrapper',
 	components: [
 		{classes: 'g-common-width-height-fit', components: [
-			{kind: Scroller, scrollIndicatorEnabled: true, classes: 'g-sample-panel g-common-width-height-fit', components: [
+			{kind: Scroller, circle: true, scrollIndicatorEnabled: true, classes: 'g-sample-panel g-common-width-height-fit', components: [
 				{kind: Title, classes: 'g-sample-form-title', content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, content: 'Form Picker Buttons : <br>> Time Picker - current', allowHtml: 'true'},
