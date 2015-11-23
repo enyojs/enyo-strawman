@@ -45,7 +45,7 @@ var CheckboxItem = kind({
 	kind: CheckboxItemBase,
 	mixins: [SelectionOverlaySupport],
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 10,
+	selectionOverlayHorizontalOffset: 10.3,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
