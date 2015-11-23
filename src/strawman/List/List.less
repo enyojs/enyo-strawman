@@ -2,7 +2,7 @@
 	top: 5em;
 
 	// All items
-	a {
+	.link {
 		margin: 0.5em;
 		border-radius: 0.2em;
 		background-image: linear-gradient(to right, rgba(125,185,232,1) 0%,rgba(125,185,232,0.1) 1%,rgba(125,185,232,0.1) 99%,rgba(125,185,232,1) 100%);
@@ -12,6 +12,7 @@
 		display: block;
 		padding: 0 1em;
 		text-decoration: none;
+		overflow: hidden;
 
 		&.spotlight {
 			background-image: linear-gradient(to right, rgba(125,185,232,1) 0%,rgba(125,185,232,0.2) 1%,rgba(125,185,232,0.2) 99%,rgba(125,185,232,1) 100%);
@@ -19,7 +20,7 @@
 	}
 
 	// Items inside a grid
-	.grid a {
+	.grid .link {
 		display: inline-block;
 		background-color: @strawman-enyo-blue;
 		background-image: none;
@@ -33,8 +34,8 @@
 	}
 
 	@media only screen and (max-width: @strawman-screen-max-size-wearable) {
-		.list-frame:not(.grid) a {
-			font-size: 2rem;
+		.list-frame:not(.grid) .link {
+			font-size: 1.5rem;
 		}
 	}
 }
