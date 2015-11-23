@@ -50,7 +50,7 @@ var RadioButtonItem = kind({
 		'w360': 'garnet/images/360/btn_radio.svg'
 	},
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 69.3,
+	selectionOverlayHorizontalOffset: 80,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
