@@ -1,0 +1,96 @@
+/* GridFlickr patten Sample */
+
+.gridflickr-sample .reorderDragger {
+	border: 3px solid yellow;
+}
+
+.gridflickr-sample .apps-title {
+	width: 100%;
+	height: 48px;
+	line-height: 48px;
+	background-color: #f5f5f5;
+	padding: 0 16px;
+}
+
+.gridflickr-sample .button-wrapper {
+	width: 100%;
+	background-color: gray;
+	padding: 3px;
+}
+
+.gridflickr-sample .cancel-button, .gridflickr-sample .save-button {
+	width: 50%;
+}
+
+.gridflickr-sample .divider {
+	height: 87px;
+}
+
+.gridflickr-sample .watch-wrapper {
+	background-color: #000;
+	height: 100%;
+}
+
+.gridflickr-sample .left-arrow {
+	width: 14px;
+	background: url('../assets/ic_arrow_left_off.svg') no-repeat;
+	background-position: center center;
+}
+
+.gridflickr-sample .right-arrow {
+	width: 14px;
+	background: url('../assets/ic_arrow_right_off.svg') no-repeat;
+	background-position: center center;
+}
+
+.gridflickr-sample .title-content {
+	text-align: center;
+}
+
+.gridflickr-sample .rearrange {
+	width: 56px;
+	height: 56px;
+	background: url('../assets/ic_menu_rearrange.svg') no-repeat;
+	background-position: center center;
+}
+
+.gridflickr-sample .viewappby {
+	width: 56px;
+	height: 56px;
+	background: url('../assets/ic_menu_viewappby.svg') no-repeat;
+	background-position: center center;
+}
+
+.gridflickr-sample .header-ic {
+	height: 56px;
+}
+
+.gridflickr-sample .sun-gridlist-imageitem img {
+	height: 56px;
+}
+
+.gridflickr-sample .sun-gridlist-imageitem {
+	background-color: transparent;
+}
+
+.gridflickr-sample .sun-gridlist-imageitem .caption {
+	color: #ffffff;
+}
+
+.gridflickr-sample .grid-table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.gridflickr-sample .grid-table {
+	background-color: #f8f9fa;
+	height: 48px;
+	display: table;
+	table-layout: fixed;
+}
+
+.gridflickr-sample .button-divider {
+	background-color: #aaaaaa;
+	margin: 8px 0;
+	height: 32px;
+}
