@@ -10,7 +10,7 @@ var SpinnerPanel = kind({
 	kind: Panel,
 	components: [
 		{classes: 'g-sample-spinner-container g-layout-absolute-center', components: [
-			{kind: Spinner, classes: 'g-sample-spinner-width', content: 'Connecting to the server'}
+			{kind: Spinner, classes: 'g-sample-spinner-width', content: 'Connecting...'}
 		]}
 	]
 });
