@@ -25,8 +25,23 @@ var ConfirmBasePanel = kind({
 		{name: 'button1', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Only text'},
 		{name: 'button2', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll + Text'},
 		{name: 'button3', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Icon + Title + Text'},
-		{name: 'button4', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
+		// {name: 'button4', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
+		{name: 'nFPButton', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll+Icon+Title+Text'}
 	],
+	normalFloatingPanel: {
+		name: 'normalFloatingPanel',
+		kind: Panel,
+		components: [
+			{name: 'normal01', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: '2popupPanel'}
+		]
+	},
+	normalFloatingPanel2: {
+		name: 'normalFloatingPanel2',
+		kind: Panel,
+		components: [
+			{name: 'button4', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: '3popupPanel'}
+		]
+	},
 	popUpAndPickerPanelComponents: {
 		button1: {
 			name: 'confirmPanelNoScrollNoIcon',
@@ -114,6 +129,10 @@ var ConfirmBasePanel = kind({
 
 		if (panel) {
 			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
+		} else if (name === 'nFPButton') {
+			this.bubbleUp('onPushPanel', {panel: this.normalFloatingPanel, owner: this});
+		} else if (name === 'normal01') {
+			this.bubbleUp('onPushPanel', {panel: this.normalFloatingPanel2, owner: this});
 		}
 	},
 	cancelHandler: function(inSender, inEvent) {
