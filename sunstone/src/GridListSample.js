@@ -83,7 +83,7 @@ module.exports = kind({
 		}
 		this.$.list.refresh();
 	},
-	setupReorderComponents: function (inSender, inEvent) {
+	setupReorderComponents: function(inSender, inEvent) {
 		var i = inEvent.index;
 		if (!this.names[i]) {
 			return;
@@ -93,7 +93,7 @@ module.exports = kind({
 		this.$.reorderTile.setCaption(item.name);
 		this.$.reorderTile.setSelected(this.$.list.isSelected(i));
 	},
-	setupItem: function (inSender, inEvent) {
+	setupItem: function(inSender, inEvent) {
 		var i = inEvent.index,
 			item = this.names[i];
 		this.$.tile.setCaption(item.name);
@@ -101,7 +101,7 @@ module.exports = kind({
 		this.$.tile.setSelected(this.$.list.isSelected(i));
 		return true;
 	},
-	pressed: function (inSender, inEvent) {
+	pressed: function(inSender, inEvent) {
 		if (!this.isPressed) {
 			this.$.list.lockRow();
 			this.$.list.prepareRow(inEvent.index);
@@ -109,7 +109,7 @@ module.exports = kind({
 			this.isPressed = true;
 		}
 	},
-	unpressed: function (inSender, inEvent) {
+	unpressed: function(inSender, inEvent) {
 		inSender.removeClass('pressed');
 		this.$.list.lockRow();
 		this.isPressed = false;
