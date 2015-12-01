@@ -64,11 +64,10 @@ var CheckableDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: true,
 			selectionType: 'multi',
-			headerComponents: [{kind: Title, content: 'Title', classes: 'g-sample-datalist-checkboxes-header'}],
+			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: CheckboxItem, ontap: 'tapItem'}
-			],
-			footerComponents: [{classes: 'g-sample-datalist-checkboxes-footer'}]
+			]
 		}
 	],
 	commandBarComponents: [

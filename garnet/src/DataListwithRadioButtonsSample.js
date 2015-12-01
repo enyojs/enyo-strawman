@@ -70,11 +70,10 @@ var RadioDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: true,
 			selectionType: 'group',
-			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons', classes: 'g-sample-datalist-radiobuttons-header'}],
+			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
-			],
-			footerComponents: [{classes: 'g-sample-datalist-radiobuttons-footer'}]
+			]
 		}
 	],
 	commandBarComponents: [
