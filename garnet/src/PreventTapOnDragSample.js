@@ -1,7 +1,6 @@
 require('garnet');
 
-var
-	kind = require('enyo/kind');
+var kind = require('enyo/kind');
 
 module.exports = kind({
 	name: 'g.sample.PreventTapOnDragSample',
@@ -10,9 +9,9 @@ module.exports = kind({
 		{content: '< Prevent Tap On Drag Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Drag inside the buttons', classes: 'g-sample-subheader'},
-		{style:'background:red; border-radius:10px; margin:10px; padding:40px; display:inline-block; color: white;', content:'Drag inside', ontap:'tap', name:'red'},
-		{style:'background:blue; border-radius:10px; margin:10px; padding:40px; display:inline-block; color: white;', content:'Drag inside', ontap:'tap', name: 'blue', ondragfinish: 'dragfinish'},
-		{name: 'result', allowHtml: true, content: '', style: 'color: black'}
+		{classes:'g-sample-prevent-tap-on-drag-box', content:'Drag inside', ontap:'tap', name:'red'},
+		{classes:'g-sample-prevent-tap-on-drag-box', content:'Drag inside', ontap:'tap', name: 'blue', ondragfinish: 'dragfinish'},
+		{name: 'result', allowHtml: true, content: '', classes: 'g-sample-prevent-tap-on-drag-result'}
 	],
 	dragfinish: function(inSender, inEvent) {
 		inEvent.preventTap();

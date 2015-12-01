@@ -2,25 +2,26 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
+
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
-	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
+	Title = require('garnet/Title'),
+	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var RadioButtonItemBase = kind({
 	name: 'g.sample.RadioButtonItemBase',
 	kind: Item,
-	classes: 'g-datalist-radiobutton-item',
+	classes: 'g-sample-datalist-radiobuttons-item',
 	published: {
 		title: '',
 		selected: false
 	},
 	components: [
-		{name: 'title', classes: 'radiobutton-item-title'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{name: 'title', classes: 'radiobutton-item-title', mixins: [MarqueeSupport]}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -49,7 +50,7 @@ var RadioButtonItem = kind({
 		'w360': 'garnet/images/360/btn_radio.svg'
 	},
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 80,
+	selectionOverlayHorizontalOffset: 69.3,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
@@ -62,21 +63,16 @@ var RadioDataListPanel = kind({
 	events: {
 		onResult: ''
 	},
-	title: true,
-	titleContent: 'DataList with Radio Buttons',
 	components: [
 		{
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
-			groupSelection: true,
 			selection: true,
-			style: 'background-color: #000000;',
+			selectionType: 'group',
+			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
-			],
-			footerComponents: [
-				{style: 'height: ' + ri.scale(116) + 'px;'}
 			]
 		}
 	],
@@ -116,7 +112,7 @@ module.exports = kind({
 		{content: '< DataList with Radio Buttons Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'DataList with Radio Buttons', classes: 'g-sample-subheader'},
-		{name: 'radioDataListPanel', kind: RadioDataListPanel, style: 'position: relative;', onResult: 'result'},
+		{name: 'radioDataListPanel', kind: RadioDataListPanel, classes: 'g-sample-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},

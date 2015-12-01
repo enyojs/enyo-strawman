@@ -1,34 +1,58 @@
-/* DataListwithCheckboxesSample.less */
+/* DataListwithCheckboxesSample */
 
-.g-sample-datalistcheckbox-footer-comp {
-	width: 100%;
-	height: 93px;
+// Common classes
+
+.g-sample-panel {
+	background-color: #000000;
+
+	position: relative;
+	overflow: hidden;
 }
+.g-sample-result {
+	background-color: #EDEDED;
+
+	position: fixed;
+	width: 100%;
+	min-height: 160px;
+	bottom: 0;
+	z-index: 9999;
+	opacity: 0.8;
+}
+
+// Sample specific classes
 
 /* Checkbox Item */
-.g-sample-datalistcheckbox-checkbox-item{
-	height: 72px;
-	line-height: 72px;
+.g-sample-datalist-checkboxes-checkbox-item {
 	position: relative; /* Do not omit this. It's critical */
+	height: 134px;
+	overflow: hidden;
+
+	line-height: 134px;
+
 	cursor: pointer;
 }
-.g-sample-datalistcheckbox-checkbox-item .checkbox-item-title {
-	width: 186px;
-	height: 72px;
-	margin-left: 96px;
-	font-size: 28px;
-	color: #FAFAFA;
-	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+.g-sample-datalist-checkboxes-checkbox-item .checkbox-item-title {
+	width: 170px;
+	height: 134px;
+	margin: 0 38px 0 112px;
+
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 40px;
 }
-.g-sample-datalistcheckbox-checkbox-item.disabled {
+.g-sample-datalist-checkboxes-checkbox-item.disabled {
 	opacity: 0.4;
+
 	filter: alpha(opacity=40);
 }
 /* This for always showing checkbox */
 .g-selection-overlay-support-scrim {
 	display: inline;
 }
-.g-sample-datalistcheckbox-checkbox-item.pressed .g-selection-overlay-support-scrim .g-icon-button {
-	background-position: 0 -48px;
+.g-selection-overlay-support-scrim .g-icon-button {
+	margin-left: 0;
+	background-size: 100%;
+}
+.g-sample-datalist-checkboxes-checkbox-item.pressed-effect .g-selection-overlay-support-scrim .g-icon-button {
+	background-position: 0 -60px;
 }

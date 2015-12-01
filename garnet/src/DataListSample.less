@@ -1,35 +1,55 @@
-/* DataListSample.less */
+/* DataListSample */
 
+// Common classes
+
+.g-sample-panel {
+	background-color: #000000;
+
+	position: relative;
+	overflow: hidden;
+}
+
+// Sample specific classes
+
+.g-sample-datalist-footer {
+	border-top: 3px solid #202328;
+}
+.g-sample-datalist-footer > .g-button {
+	width: 122px;
+	height: 60px;
+	margin: 10px 99px 9px;
+}
 .g-sample-datalist-item {
-	height: 72px;
-	line-height: 72px;
+	position: relative;
+	height: 134px;
+	overflow: hidden;
+
 	cursor: pointer;
 }
-.g-sample-datalist-item.selected {
-	background-color: rgba(230, 230, 230, 0.4);
-}
 .g-sample-datalist-item-icon {
-	width: 48px;
-	height: 48px;
-	margin-left: 38px;
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	margin: auto 0;
+	top: 0;
+	bottom: 0;
+	left: 38px;
 }
 .g-sample-datalist-item-title {
-	position: absolute;
-	display: inline;
-	width: 186px;
-	height: 72px;
-	font-size: 28px;
-	color: #FAFAFA;
-	margin-left: 10px;
-	margin-top: -15px;
-	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+	width: 170px;
+	height: 47px;
+	margin: 16px 0 0 112px;
+
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 40px;
 }
 .g-sample-datalist-item-genre {
-	position: absolute;
-	display: inline;
-	font-size: 22px;
-	color: #A0A0A0;
-	margin-left: 10px;
-	margin-top: 16px;
+	width: 170px;
+	height: 30px;
+	margin: 4px 0 0 112px;
+
+	color: #AFAFAF;
+	text-align: center;
+	font-size: 26px;
 }

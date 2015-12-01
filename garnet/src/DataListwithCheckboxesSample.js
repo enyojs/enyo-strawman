@@ -2,25 +2,25 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection.js'),
 	EmptyBinding = require('enyo/EmptyBinding.js'),
 	Item = require('garnet/Item'),
 	DataList = require('garnet/DataList'),
 	Panel = require('garnet/Panel'),
-	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport');
+	Title = require('garnet/Title'),
+	SelectionOverlaySupport = require('garnet/SelectionOverlaySupport'),
+	MarqueeSupport = require('garnet/MarqueeSupport');
 
 var CheckboxItemBase = kind({
 	name: 'g.sample.CheckboxItemBase',
 	kind: Item,
-	classes: 'g-sample-datalistcheckbox-checkbox-item',
+	classes: 'g-sample-datalist-checkboxes-checkbox-item',
 	published: {
 		title: '',
 		selected: false
 	},
 	components: [
-		{name: 'title', classes: 'checkbox-item-title'},
-		{tag: 'hr', style: 'border: 0; color: #202328; height: ' + ri.scale(1) + 'px; background-color: #202328; bottom: 0;'}
+		{name: 'title', classes: 'checkbox-item-title', mixins: [MarqueeSupport]}
 	],
 	bindings: [
 		{from: '.title', to: '.$.title.content'},
@@ -45,7 +45,7 @@ var CheckboxItem = kind({
 	kind: CheckboxItemBase,
 	mixins: [SelectionOverlaySupport],
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 20,
+	selectionOverlayHorizontalOffset: 12,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
@@ -57,21 +57,16 @@ var CheckableDataListPanel = kind({
 	events: {
 		onResult: ''
 	},
-	title: true,
-	titleContent: 'Title',
 	components: [
 		{
 			name: 'list',
 			kind: DataList,
 			controlsPerPage: 4,
 			selection: true,
-			multipleSelection: true,
-			style: 'background-color: #000000;',
+			selectionType: 'multi',
+			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: CheckboxItem, ontap: 'tapItem'}
-			],
-			footerComponents: [
-				{style: 'height: ' + ri.scale(116) + 'px;'}
 			]
 		}
 	],
@@ -102,8 +97,9 @@ var CheckableDataListPanel = kind({
 		}
 	},
 	tapItem: function(inSender, inEvent) {
-		var items = this.getCheckedItems();
-		var control = inEvent.originator.parent;
+		var
+			items = this.getCheckedItems(),
+			control = inEvent.originator.parent;
 		if (control.selected || control.parent.selected) {
 			this.doResult({msg: 'The ' + inEvent.index + ' th item in the list is selected.'});
 			if (items.length > 0) {
@@ -125,7 +121,7 @@ module.exports = kind({
 		{content: '< Data List with Checkboxes Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Data List with Checkboxes', classes: 'g-sample-subheader'},
-		{name: 'checkableListPanel', kind: CheckableDataListPanel, style: 'position: relative;', onResult: 'result'},
+		{name: 'checkableListPanel', kind: CheckableDataListPanel, classes: 'g-sample-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
