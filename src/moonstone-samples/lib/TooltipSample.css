@@ -5,3 +5,13 @@
 .enyo-locale-right-to-left .right {
 	float: left;
 }
+
+.draggable {
+	position: absolute;
+	transform: translateX(798px);
+	z-index: 1;
+}
+
+.enyo-locale-right-to-left .draggable {
+	transform: translateX(-798px);
+}
