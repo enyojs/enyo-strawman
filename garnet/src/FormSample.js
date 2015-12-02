@@ -77,7 +77,7 @@ var Formatter = kind.singleton({
 	/*
 	* From PickerPanel.value to FormPickerButton.content
 	*/
-	SamplePickerPanel: function(val, data) {
+	PickerPanel: function(val, data) {
 		var
 			item = val,
 			name = 'No item';
@@ -94,7 +94,7 @@ var Formatter = kind.singleton({
 	/*
 	* From MultiPickerPanel.value to FormPickerButton.content
 	*/
-	SampleMultiPickerPanel: function(val, data) {
+	MultiPickerPanel: function(val, data) {
 		var
 			items = val,
 			names = '',
@@ -125,28 +125,6 @@ var Formatter = kind.singleton({
 	WheelSliderPanel: function(val) {
 		return '' + val;
 	}
-});
-
-var SamplePickerPanel = kind({
-	name: 'g.sample.SamplePickerPanel',
-	kind: PickerPanel,
-	create: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.collection = new Collection(data);
-		};
-	})
-});
-
-var SampleMultiPickerPanel = kind({
-	name: 'g.sample.SampleMultiPickerPanel',
-	kind: MultiPickerPanel,
-	create: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.collection = new Collection(data);
-		};
-	})
 });
 
 var
@@ -240,20 +218,20 @@ var FormPanel = kind({
 		},
 		pickerPanelButton: {
 			name: 'pickerPanel',
-			kind: SamplePickerPanel,
+			kind: PickerPanel,
 			title: true,
 			titleContent: 'PickerTitle'
 		},
 		pickerPanelButtonWithValue: {
 			name: 'pickerPanelWithValue',
-			kind: SamplePickerPanel,
+			kind: PickerPanel,
 			title: true,
 			titleContent: 'PickerTitle',
 			selectedIndex: 0
 		},
 		multiPickerPanelButton: {
 			name: 'multiPickerPanel',
-			kind: SampleMultiPickerPanel,
+			kind: MultiPickerPanel,
 			onCancel: 'popPanel',
 			onOK: 'popPanel',
 			title: true,
@@ -261,7 +239,7 @@ var FormPanel = kind({
 		},
 		multiPickerPanelButtonWithValue: {
 			name: 'multiPickerPanelWithValue',
-			kind: SampleMultiPickerPanel,
+			kind: MultiPickerPanel,
 			onCancel: 'popPanel',
 			onOK: 'popPanel',
 			title: true,
@@ -282,10 +260,10 @@ var FormPanel = kind({
 			this.$.timePickerButtonWithValue.setContent(Formatter.TimePickerPanel(defaults.timePickerButtonWithValue));
 			this.$.datePickerButton.setContent(Formatter.DatePickerPanel(defaults.datePickerButton));
 			this.$.datePickerButtonWithValue.setContent(Formatter.DatePickerPanel(defaults.datePickerButtonWithValue));
-			this.$.pickerPanelButton.setContent(Formatter.SamplePickerPanel());
-			this.$.pickerPanelButtonWithValue.setContent(Formatter.SamplePickerPanel(defaults.pickerPanelButtonWithValue, data));
-			this.$.multiPickerPanelButton.setContent(Formatter.SampleMultiPickerPanel());
-			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.SampleMultiPickerPanel(defaults.multiPickerPanelButtonWithValue, data));
+			this.$.pickerPanelButton.setContent(Formatter.PickerPanel());
+			this.$.pickerPanelButtonWithValue.setContent(Formatter.PickerPanel(defaults.pickerPanelButtonWithValue, data));
+			this.$.multiPickerPanelButton.setContent(Formatter.MultiPickerPanel());
+			this.$.multiPickerPanelButtonWithValue.setContent(Formatter.MultiPickerPanel(defaults.multiPickerPanelButtonWithValue, data));
 			this.$.wheelSliderPanelButtonWithValue.setContent(Formatter.WheelSliderPanel(defaults.wheelSliderPanelWithValue));
 		};
 	}),
@@ -308,6 +286,15 @@ var FormPanel = kind({
 				value: defaults.datePickerButtonWithValue,
 				onValueChange: 'updateContent'
 			};
+		} else if ((name === 'pickerPanelButton' && !this.$.pickerPanel) ||
+			(name === 'pickerPanelButtonWithValue' && !this.$.pickerPanelWithValue) ||
+			(name === 'multiPickerPanelButton' && !this.$.multiPickerPanel) ||
+			(name === 'multiPickerPanelButtonWithValue' && !this.$.multiPickerPanelWithValue)) {
+			this.collection = new Collection(data);
+			options = {
+				onValueChange: 'updateContent',
+				collection: this.collection
+			};
 		} else if (name === 'wheelSliderPanelButtonWithValue' && !this.$.wheelSliderPanelWithValue) {
 			options = {
 				value: defaults.wheelSliderPanelWithValue,
@@ -316,7 +303,6 @@ var FormPanel = kind({
 		} else {
 			options = {onValueChange: 'updateContent'};
 		}
-
 		utils.mixin(panel, options);
 
 		if (panel) {
@@ -350,19 +336,19 @@ var FormPanel = kind({
 				this.$.datePickerButtonWithValue.setContent(content);
 				break;
 			case 'pickerPanel':
-				content = Formatter.SamplePickerPanel(inEvent.value);
+				content = Formatter.PickerPanel(inEvent.value);
 				this.$.pickerPanelButton.setContent(content);
 				break;
 			case 'pickerPanelWithValue':
-				content = Formatter.SamplePickerPanel(inEvent.value);
+				content = Formatter.PickerPanel(inEvent.value);
 				this.$.pickerPanelButtonWithValue.setContent(content);
 				break;
 			case 'multiPickerPanel':
-				content = Formatter.SampleMultiPickerPanel(inEvent.value);
+				content = Formatter.MultiPickerPanel(inEvent.value);
 				this.$.multiPickerPanelButton.setContent(content);
 				break;
 			case 'multiPickerPanelWithValue':
-				content = Formatter.SampleMultiPickerPanel(inEvent.value);
+				content = Formatter.MultiPickerPanel(inEvent.value);
 				this.$.multiPickerPanelButtonWithValue.setContent(content);
 				break;
 			case 'wheelSliderPanelWithValue':
