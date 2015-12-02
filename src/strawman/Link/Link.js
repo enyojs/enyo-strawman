@@ -1,13 +1,14 @@
 var
 	kind = require('enyo/kind'),
-	Anchor = require('enyo/Anchor');
+	Control = require('enyo/Control');
 
 var
 	LinkSupport = require('../LinkSupport');
 
 module.exports = kind({
 	name: 'Link',
-	kind: Anchor,
+	kind: Control,
+	tag: 'span',
 	classes: 'link',
 	spotlight: true,
 	mixins: [LinkSupport]
