@@ -48,6 +48,18 @@ var CustomCheckboxItem = kind({
 	]
 });
 
+var UserItem = kind({
+	kind: Item,
+	classes: 'moon-hspacing',
+	bindings: [
+		{from: 'content', to: '$.client.content'}
+	],
+	components: [
+		{name: 'client'},
+		{kind: Icon, src: '@../assets/icon-list.png'}
+	]
+});
+
 module.exports = kind({
 	name: 'moon.sample.AccessibilitySample',
 	kind: FittableRows,
@@ -58,27 +70,24 @@ module.exports = kind({
 		{kind: Header, name: 'header', content: 'Accessibility', titleBelow: 'Unusual case sample for Accessibility', type: 'small', components: [
 			{name: 'labelButton', kind: Button, small: true, minWidth: false, content: 'Set Label', ontap: 'labelButtonTapped'},
 			{name: 'hintButton', kind: Button, small: true, minWidth: false, content: 'Set Hint', ontap: 'hintButtonTapped'},
-			{name: 'toggle', kind: ToggleButton, small: true, toggleOnLabel: 'disabled is on', toggleOffLabel: 'disabled is off', ontap: 'disabledTapped'}
+			{name: 'toggle', kind: ToggleButton, small: true, content: 'disabled', ontap: 'disabledTapped'}
 		]},
 		{name: 'container', kind: Scroller, fit: true, components: [
 			{classes: 'moon-1v'},
 			{kind: Control, tag: 'br'},
 			{kind: Divider, content: 'Case 1: Non spotlight'},
-			{kind: Icon, icon: 'play', small: false, ontap: 'buttonTapped'},
-			{kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped'},
+			{name: 'playIcon', kind: Icon, icon: 'play', small: false, ontap: 'buttonTapped'},
+			{name: 'listIcon', kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped'},
 			{classes: 'moon-1v'},
 			{kind: Control, tag: 'br'},
 			{kind: Divider, content: 'Case 2: User defined'},
-			{kind: Item, classes: 'moon-hspacing', ontap: 'buttonTapped', components: [
-				{content: 'Content and Icon'},
-				{kind: Icon, src: '@../assets/icon-list.png', ontap: 'buttonTapped'}
-			]},
+			{name: 'userItem', kind: UserItem, content: 'Content and Icon', ontap: 'buttonTapped'},
 			{name: 'checkItem', kind: CustomCheckboxItem, content: 'Content and Checkbox', ontap: 'buttonTapped'},
 			{classes: 'moon-1v'},
 			{kind: Control, tag: 'br'},
 			{kind: Divider, content: 'Case 3: Non content'},
-			{kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped', accessibilityLabel: 'drawer'},
-			{kind: IconButton, src: '@../assets/icon-list.png', small: false, ontap: 'buttonTapped', accessibilityLabel: 'icon list'}
+			{name: 'drawerIconButton', kind: IconButton, icon: 'drawer', small: false, ontap: 'buttonTapped'},
+			{name: 'listIconButton', kind: IconButton, src: '@../assets/icon-list.png', small: false, ontap: 'buttonTapped'}
 		]},
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'No changes yet'}
@@ -97,25 +106,31 @@ module.exports = kind({
 	labelButtonTapped: function (sender, event) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityLabel to \'Label\'');
 		var i,
-			control = Object.keys(this.$);
+			control = this.$.container.components;
 		for (i = 0; i < control.length; ++i) {
-			this.$[control[i]].set('accessibilityLabel', this.labelText);
+			if (control[i].name) {
+				this.$[control[i].name].set('accessibilityLabel', this.labelText);
+			}
 		}
 	},
 	hintButtonTapped: function (sender, event) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityHint to \'Hint\'');
 		var i,
-			control = Object.keys(this.$);
+			control = this.$.container.components;
 		for (i = 0; i < control.length; ++i) {
-			this.$[control[i]].set('accessibilityHint', this.hintText);
+			if (control[i].name) {
+				this.$[control[i].name].set('accessibilityHint', this.hintText);
+			}
 		}
 	},
 	disabledTapped: function (sender, event) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityDisabled to ' + sender.value);
 		var i,
-			control = Object.keys(this.$);
+			control = this.$.container.components;
 		for (i = 0; i < control.length; ++i) {
-			this.$[control[i]].set('accessibilityDisabled', sender.value ? true : false);
+			if (control[i].name) {
+				this.$[control[i].name].set('accessibilityDisabled', sender.value ? true : false);
+			}
 		}
 	}
 });
