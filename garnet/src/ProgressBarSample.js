@@ -20,7 +20,7 @@ var ProgressBarPanel = kind({
 		{name: 'progressBar2', kind: ProgressBar, progress: 25, bgProgress: 75, max: 100, classes: 'g-sample-progressbar-progressbar2'},
 		{kind: FormToolDecorator, components: [
 			{kind: FormInputDecorator, classes: 'g-sample-form-input', components: [
-				{kind: FormInput, value: 25}
+				{name: 'input', kind: FormInput, value: 25}
 			]},
 			{kind: FormButton, content:'Set', ontap: 'changeValue', classes: 'g-sample-form-value'}
 		]},
