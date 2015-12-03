@@ -13,6 +13,7 @@ var
 var IconBadgeItem = kind({
 	name: 'g.sample.IconBadgeItem',
 	kind: Item,
+	border: true,
 	classes: 'g-datalist-iconbadge-item',
 	published: {
 		title: '',

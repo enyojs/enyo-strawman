@@ -15,6 +15,7 @@ var
 var RadioButtonItemBase = kind({
 	name: 'g.sample.RadioButtonItemBase',
 	kind: Item,
+	border: true,
 	classes: 'g-sample-datalist-radiobuttons-item',
 	published: {
 		title: '',

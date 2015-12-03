@@ -14,6 +14,7 @@ var
 var DataListItem = kind({
 	name: 'g.sample.DataListItem',
 	kind: Item,
+	border: true,
 	classes: 'g-sample-datalist-item',
 	components: [
 		{name: 'icon', kind: Icon, classes: 'g-sample-datalist-item-icon'},

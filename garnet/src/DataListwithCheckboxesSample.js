@@ -14,6 +14,7 @@ var
 var CheckboxItemBase = kind({
 	name: 'g.sample.CheckboxItemBase',
 	kind: Item,
+	border: true,
 	classes: 'g-sample-datalist-checkboxes-checkbox-item',
 	published: {
 		title: '',
