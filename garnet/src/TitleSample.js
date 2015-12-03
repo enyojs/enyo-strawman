@@ -41,7 +41,7 @@ var TitlePanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.TitleSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-title',
 	components: [
 		{content: '< Title ( + BodyText ) Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

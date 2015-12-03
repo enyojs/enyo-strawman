@@ -147,7 +147,7 @@ var PanelManager = kind({
 module.exports = kind({
 	name: 'g.sample.ConfirmPanelSample',
 	kind: Control,
-	classes: 'enyo-unselectable enyo-fit garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-confirm-panel',
 	handlers: {
 		onResult: "result",
 		onPopPanel: "result"

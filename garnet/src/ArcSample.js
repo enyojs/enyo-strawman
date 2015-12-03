@@ -36,7 +36,7 @@ var ArcPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.ArcSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-arc',
 	components: [
 		{content: '< Arc Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

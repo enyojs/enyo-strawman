@@ -25,7 +25,7 @@ module.exports = kind({
 	handlers: {
 		onResult: 'result'
 	},
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-time-picker-panel',
 	components: [
 		{content: '< Time Picker Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

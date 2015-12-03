@@ -65,7 +65,7 @@ var DataListPanel = kind({
 
 var DataListSample = module.exports = kind({
 	name: 'g.sample.DataListSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-datalist',
 	components: [
 		{content: '< Data List Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

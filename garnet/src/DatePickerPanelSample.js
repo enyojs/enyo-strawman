@@ -13,7 +13,7 @@ var SampleDatePickerPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DatePickerPanelSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-date-picker-panel',
 	components: [
 		{content: '< Date Picker Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

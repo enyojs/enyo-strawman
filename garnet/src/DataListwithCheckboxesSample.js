@@ -116,7 +116,7 @@ var CheckableDataListPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DataListwithCheckboxesSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-datalist-checkboxes',
 	components: [
 		{content: '< Data List with Checkboxes Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
