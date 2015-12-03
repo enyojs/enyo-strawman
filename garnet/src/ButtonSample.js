@@ -16,15 +16,13 @@ var ButtonPanel = kind({
 	components: [
 		{classes: 'g-sample-button-container g-layout-absolute-center', components: [
 			{name: 'B Button', kind: Button, content: 'B', ontap: 'tapButton'},
-			{name: 'Button', kind: Button, content: 'Btn A', ontap: 'tapButton'},
 			{name: 'B Button Disabled', kind: Button, content: 'Disabled', classes: 'g-sample-button-disable', disabled: true, ontap: 'tapButton'},
 			{content: 'Fixed Button : ', classes: 'g-sample-text'},
 			{name: 'Fixed Button', kind: Button, content: 'Fixed Button', classes: 'g-sample-button-fixed', ontap: 'tapButton'},
 			{content: 'Grouped Buttons : ', classes: 'g-sample-text'},
 			{kind: Group, components: [
 				{name: 'Apple Button', kind: Button, active: true, content: 'AA', ontap: 'tapButton'},
-				{name: 'Banana Button', kind: Button, content: 'BB', ontap: 'tapButton'},
-				{name: 'Saskatoonberry Button', kind: Button,  content: 'CC', ontap: 'tapButton'}
+				{name: 'Banana Button', kind: Button, content: 'BB', ontap: 'tapButton'}
 			]}
 		]}
 	],

@@ -14,6 +14,7 @@ var
 var CheckboxItemBase = kind({
 	name: 'g.sample.CheckboxItemBase',
 	kind: Item,
+	border: true,
 	classes: 'g-sample-datalist-checkboxes-checkbox-item',
 	published: {
 		title: '',
@@ -45,7 +46,7 @@ var CheckboxItem = kind({
 	kind: CheckboxItemBase,
 	mixins: [SelectionOverlaySupport],
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 10,
+	selectionOverlayHorizontalOffset: 12,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
@@ -64,11 +65,10 @@ var CheckableDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: true,
 			selectionType: 'multi',
-			headerComponents: [{kind: Title, content: 'Title', classes: 'g-sample-datalist-checkboxes-header'}],
+			headerComponents: [{kind: Title, content: 'Title'}],
 			components: [
 				{kind: CheckboxItem, ontap: 'tapItem'}
-			],
-			footerComponents: [{classes: 'g-sample-datalist-checkboxes-footer'}]
+			]
 		}
 	],
 	commandBarComponents: [

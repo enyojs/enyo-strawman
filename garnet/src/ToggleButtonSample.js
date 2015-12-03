@@ -15,14 +15,12 @@ var ToggleButtonPanel = kind({
 	classes: 'g-layout-absolute-wrapper',
 	components: [
 		{classes: 'g-layout-absolute-center g-sample-toggle-button-container', components: [
-			{kind: ToggleButton, value: true, content: '1', ontap: 'tapButton'},
-			{kind: ToggleButton, content: '2', ontap: 'tapButton'},
+			{kind: ToggleButton, value: true, content: 'Toggle', ontap: 'tapButton'},
 			{kind: ToggleButton, disabled: true, content: 'Disabled', ontap: 'tapButton'},
 			{content: 'Grouped ToggleButtons : ', classes: 'g-sample-text'},
 			{kind: Group, components: [
 				{kind: ToggleButton, active: true, content: 'AA', ontap: 'tapButton'},
-				{kind: ToggleButton, content: 'BB', ontap: 'tapButton'},
-				{kind: ToggleButton, content: 'CC', ontap: 'tapButton'}
+				{kind: ToggleButton, content: 'BB', ontap: 'tapButton'}
 			]}
 		]}
 	],

@@ -14,6 +14,7 @@ var
 var DataListItem = kind({
 	name: 'g.sample.DataListItem',
 	kind: Item,
+	border: true,
 	classes: 'g-sample-datalist-item',
 	components: [
 		{name: 'icon', kind: Icon, classes: 'g-sample-datalist-item-icon'},
@@ -46,13 +47,15 @@ var DataListPanel = kind({
 			kind: DataList,
 			classes: 'g-sample-datalist',
 			headerComponents: [
-				{kind: Title, content: 'Title: long text will fade out', classes: 'g-sample-datalist-header'}
+				{kind: Title, content: 'Title: long text will fade out'}
 			],
 			components: [
 				{kind: DataListItem}
 			],
 			footerComponents: [
-				{kind: Button, content: 'Text', classes: 'g-sample-datalist-footer'}
+				{classes: 'g-sample-datalist-footer', components: [
+					{kind: Button, content: 'Text'}
+				]}
 			]
 		}
 	],

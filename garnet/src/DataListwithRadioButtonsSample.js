@@ -15,6 +15,7 @@ var
 var RadioButtonItemBase = kind({
 	name: 'g.sample.RadioButtonItemBase',
 	kind: Item,
+	border: true,
 	classes: 'g-sample-datalist-radiobuttons-item',
 	published: {
 		title: '',
@@ -50,7 +51,7 @@ var RadioButtonItem = kind({
 		'w360': 'garnet/images/360/btn_radio.svg'
 	},
 	selectionOverlayVerticalOffset: 53,
-	selectionOverlayHorizontalOffset: 80,
+	selectionOverlayHorizontalOffset: 69.3,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
 	]
@@ -70,11 +71,10 @@ var RadioDataListPanel = kind({
 			controlsPerPage: 4,
 			selection: true,
 			selectionType: 'group',
-			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons', classes: 'g-sample-datalist-radiobuttons-header'}],
+			headerComponents: [{kind: Title, content: 'DataList with Radio Buttons'}],
 			components: [
 				{kind: RadioButtonItem, ontap: 'tapItem'}
-			],
-			footerComponents: [{classes: 'g-sample-datalist-radiobuttons-footer'}]
+			]
 		}
 	],
 	commandBarComponents: [

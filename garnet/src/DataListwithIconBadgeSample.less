@@ -12,58 +12,46 @@
 
 // Sample specific classes
 
-.g-sample-datalist-iconbadge-header {
-	// Box properties
-
-	height: 100px;
-	border-bottom: 3px solid #202328;
-}
-.g-sample-datalist-iconbadge-footer {
-	height: 100px;
-}
-
-.g-datalist-iconbadge-item{
-	position: relative; /* Do not omit this. It's critical */
-	height: 114px;
-	border-bottom: 3px solid #202328;
+.g-datalist-iconbadge-item {
+	position: relative;
+	height: 134px;
 	overflow: hidden;
-
-	line-height: 114px;
 
 	cursor: pointer;
 }
+.g-datalist-iconbadge-item .icon-badge-item-icon {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	margin: auto 0;
+	top: 0;
+	bottom: 0;
+	left: 38px;
+}
+.g-datalist-iconbadge-item .icon-badge-item-new-icon {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	top: 0;
+	right: 0;
+}
+.g-datalist-iconbadge-item .icon-badge-item-info-icon {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	bottom: 0;
+	right: 0;
+}
 .g-datalist-iconbadge-item .icon-badge-item-title {
-	width: 166px;
-	height: 114px;
-	margin: 0 77px;
+	position: absolute;
+	width: 170px;
+	height: 47px;
+	top: 50%;
+	left: 112px;
+
+	transform: translateY(-50%);
 
 	color: #FFFFFF;
 	text-align: center;
 	font-size: 40px;
-}
-.g-datalist-iconbadge-item.disabled {
-	opacity: 0.4;
-
-	filter: alpha(opacity=40);
-}
-.g-datalist-iconbadge-item .icon-badge-item-icon {
-	position: absolute;
-	width: 48px;
-	height: 48px;
-	margin-left: 28px;
-	margin-top: 33px;
-}
-.g-datalist-iconbadge-item .icon-badge-item-new-icon {
-	position: absolute;
-	width: 24px;
-	height: 24px;
-	margin-left: 52px;
-	margin-top: 33px;
-}
-.g-datalist-iconbadge-item .icon-badge-item-info-icon {
-	position: absolute;
-	width: 24px;
-	height: 24px;
-	margin-left: 52px;
-	margin-top: 56px;
 }

@@ -4,7 +4,7 @@ var
 	kind = require('enyo/kind'),
 	WheelSliderPanel = require('garnet/WheelSliderPanel');
 
-var WheelSliderPanel = kind({
+var WheelSliderPanelBrightness = kind({
 	name: 'g.sample.WheelSliderPanel',
 	kind: WheelSliderPanel,
 	events: {
@@ -47,7 +47,7 @@ var WheelSliderPanelSample = module.exports = kind({
 		{content: '< Wheel Slider Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Wheel Slider Panel', classes: 'g-sample-subheader'},
-		{kind: WheelSliderPanel, classes: 'g-sample-panel', onResult: 'result'},
+		{kind: WheelSliderPanelBrightness, classes: 'g-sample-panel', onResult: 'result'},
 
 		{src: '@../assets/btn_command_next.svg', classes: 'g-sample-result', components: [
 			{content: 'Result', classes: 'g-sample-subheader'},
@@ -63,4 +63,4 @@ var WheelSliderPanelSample = module.exports = kind({
 	}
 });
 
-WheelSliderPanelSample.WheelSliderPanel = WheelSliderPanel;
+WheelSliderPanelSample.WheelSliderPanel = WheelSliderPanelBrightness;
