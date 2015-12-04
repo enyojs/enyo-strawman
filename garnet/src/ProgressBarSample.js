@@ -50,7 +50,7 @@ var ProgressBarPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.ProgressBarSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-progressbar',
 	components: [
 		{content: '< Progress Bar Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

@@ -4,7 +4,7 @@ var kind = require('enyo/kind');
 
 module.exports = kind({
 	name: 'g.sample.PreventTapOnDragSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-prevent-tap-on-drag',
 	components: [
 		{content: '< Prevent Tap On Drag Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

@@ -44,7 +44,7 @@ var CheckboxPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.CheckboxSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable garnet g-sample g-sample-checkbox',
 	components: [
 		{content: '< Checkbox Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
