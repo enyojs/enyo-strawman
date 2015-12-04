@@ -149,7 +149,7 @@ var FormPanel = kind({
 	components: [
 		{classes: 'g-common-width-height-fit', components: [
 			{kind: Scroller, circle: true, scrollIndicatorEnabled: true, classes: 'g-sample-panel g-common-width-height-fit', components: [
-				{kind: Title, classes: 'g-sample-form-title', content: 'Title: long text will fade out'},
+				{kind: Title, content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, classes: 'g-sample-form-top-label', content: '> Time Picker - current', allowHtml: 'true'},
 				{name: 'timePickerButton', kind: FormPickerButton, ontap: 'showPanel'},
