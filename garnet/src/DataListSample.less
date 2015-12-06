@@ -9,12 +9,20 @@
 	position: relative;
 	overflow: hidden;
 }
+@media all and (max-width: 799px) {
+	.g-sample-header {
+		display: none;
+	}
+	.g-sample-panel {
+		background-color: #000000;
+
+		position: static;
+		overflow: visible;
+	}
+}
 
 // Sample specific classes
 
-.g-sample-datalist-list {
-	transform: scale3d(1, 1, 1);
-}
 .g-sample-datalist-footer {
 	border-top: 3px solid #202328;
 }
@@ -29,11 +37,7 @@
 .g-sample-datalist-item {
 	background: #000000;
 
-	position: relative;
 	height: 134px;
-	overflow: hidden;
-
-	transform: scale3d(1, 1, 1);
 
 	cursor: pointer;
 }
@@ -43,6 +47,7 @@
 	width: 320px; // should be 320px
 	height: 81px;
 	padding: 26px 0 27px 0;
+	overflow: hidden;
 
 	transform: scale3d(1, 1, 1);
 }
