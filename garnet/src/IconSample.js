@@ -13,7 +13,7 @@ var IconPanel = kind({
 		{classes: 'g-sample-icon-container g-layout-absolute-center', components: [
 			{content: 'Icons : ', classes: 'g-sample-text'},
 			{tag: 'br'},
-			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small'},
+			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small', accessibilityLabel: 'Icon label'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-normal'},
 			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-large'},
 			{tag: 'br'},
