@@ -79,7 +79,7 @@ var IconBadgeDataListPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DataListwithIconBadgeSample',
-	classes: 'enyo-unselectable garnet g-sample g-datalist-iconbadge',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-datalist-iconbadge',
 	components: [
 		{content: '< Data List with Icon Badge Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

@@ -131,7 +131,7 @@ var DataGridListCardsCirclePanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DataGridListwithCardsSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-datagridlist-cards',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-datagridlist-cards',
 	components: [
 		{content: '< Data Grid List with Cards Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

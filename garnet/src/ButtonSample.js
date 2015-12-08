@@ -33,7 +33,7 @@ var ButtonPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.ButtonSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-button',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-button',
 	components: [
 		{content: '< Button Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

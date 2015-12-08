@@ -99,7 +99,7 @@ module.exports = kind({
 	handlers: {
 		onResult: 'result'
 	},
-	classes: 'enyo-unselectable garnet g-sample g-sample-commandbar',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-commandbar',
 	components: [
 		{content: '< CommandBar Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
