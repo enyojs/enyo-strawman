@@ -25,7 +25,7 @@ var TextSpinnerPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.SpinnerSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-spinner',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-spinner',
 	components: [
 		{content: '< Spinner Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

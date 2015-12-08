@@ -25,7 +25,7 @@ var IconPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.IconSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-icon',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-icon',
 	components: [
 		{content: '< Icon Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

@@ -111,7 +111,7 @@ var PanelManager = kind({
 
 module.exports = kind({
 	name: 'g.sample.MultiPickerPanelSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-multipicker-panel',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-multipicker-panel',
 	components: [
 		{content: '< MultiPickerPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

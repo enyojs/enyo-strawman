@@ -32,7 +32,7 @@ var ToggleButtonPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.ToggleButtonSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-toggle-button',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-toggle-button',
 	components: [
 		{content: '< Toggle Button Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
