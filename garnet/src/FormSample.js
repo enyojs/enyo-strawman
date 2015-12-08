@@ -383,7 +383,7 @@ module.exports = kind({
 	handlers: {
 		onResult: 'result'
 	},
-	classes: 'enyo-unselectable garnet g-sample g-sample-form',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-form',
 	components: [
 		{content: '< Form Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

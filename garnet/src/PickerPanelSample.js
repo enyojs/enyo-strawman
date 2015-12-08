@@ -94,7 +94,7 @@ var PanelManager = kind({
 
 module.exports = kind({
 	name: 'g.sample.PickerPanelSample',
-	classes: 'enyo-unselectable garnet g-sample g-sample-picker-panel',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-picker-panel',
 	components: [
 		{content: '< PickerPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
