@@ -1,97 +1,99 @@
 /* DataGridListSample */
 
-// Common classes
+.g-sample-datagridlist {
+	// Common classes
 
-.g-sample-panel-margin {
-	background-color: #000000;
+	.g-sample-panel-margin {
+		background-color: #000000;
 
-	position: relative;
-	display: inline-block;
-	margin-right: 10px;
-	overflow: hidden;
-}
+		position: relative;
+		display: inline-block;
+		margin-right: 10px;
+		overflow: hidden;
+	}
 
-// Sample specific classes
+	// Sample specific classes
 
-.g-sample-datagridlist-panel {
-	background-color: #000000;
+	.g-sample-datagridlist-panel {
+		background-color: #000000;
 
-	width: 232px;
-	height: 320px;
-	margin: auto;
-}
-.g-sample-datagridlist-imageitem {
-	width: 127px;
-	height: 127px;
+		width: 232px;
+		height: 320px;
+		margin: auto;
+	}
+	.g-sample-datagridlist-imageitem {
+		width: 127px;
+		height: 127px;
 
-	text-align: center;
+		text-align: center;
 
-	cursor: pointer;
-}
-.g-sample-datagridlist-imageitem img {
-	background-size: contain;
+		cursor: pointer;
+	}
+	.g-sample-datagridlist-imageitem img {
+		background-size: contain;
 
-	width: 107px;
-	height: 107px;
-}
-.g-sample-datagridlist-circle-imageitem img {
-	background-size: contain;
+		width: 107px;
+		height: 107px;
+	}
+	.g-sample-datagridlist-circle-imageitem img {
+		background-size: contain;
 
-	width: 82px;
-	height: 82px;
-	border-radius: 100%;
-	margin-top: 0.8px;
-}
-.g-sample-datagridlist-imageitem .caption{
-	width: 0;
-	height: 0;
-	overflow: hidden;
-}
-.g-sample-datagridlist-circle-imageitem .caption{
-	width: 92px;
-	height: 20px;
-	margin-top: 0;
-	margin-left: 15px;
-	margin-right: 15px;
+		width: 82px;
+		height: 82px;
+		border-radius: 100%;
+		margin-top: 0.8px;
+	}
+	.g-sample-datagridlist-imageitem .caption{
+		width: 0;
+		height: 0;
+		overflow: hidden;
+	}
+	.g-sample-datagridlist-circle-imageitem .caption{
+		width: 92px;
+		height: 20px;
+		margin-top: 0;
+		margin-left: 15px;
+		margin-right: 15px;
 
-	font-size: 18px;
-	color: #FAFAFA;
+		font-size: 18px;
+		color: #FAFAFA;
 
-	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-}
-.g-sample-datagridlist-imageitem.disabled {
-	opacity: 0.4;
+		-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+		-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+	}
+	.g-sample-datagridlist-imageitem.disabled {
+		opacity: 0.4;
 
-	filter: alpha(opacity=40);
-}
+		filter: alpha(opacity=40);
+	}
 
-/* GridList Imageitem */
-.selection-enabled .g-sample-datagridlist-imageitem.g-selection-overlay-support.selected .g-icon-button {
-	background-position: 0 -325.8px;
+	/* GridList Imageitem */
+	.selection-enabled .g-sample-datagridlist-imageitem.g-selection-overlay-support.selected .g-icon-button {
+		background-position: 0 -325.8px;
 
-	margin-top: 0;
-	margin-left: 4.7px;
-	margin-right: 15px;
-}
-.g-sample-datagridlist-imageitem .g-selection-overlay-support-scrim .g-selection-overlay-support-checkbox {
-	position: absolute;
-	width: 107px;
-	height: 107px;
-	margin-top: 0;
-	margin-left: 0;
-}
-.selection-enabled .g-sample-datagridlist-circle-imageitem.g-selection-overlay-support.selected .g-icon-button {
-	background-position: 0 -331px;
+		margin-top: 0;
+		margin-left: 4.7px;
+		margin-right: 15px;
+	}
+	.g-sample-datagridlist-imageitem .g-selection-overlay-support-scrim .g-selection-overlay-support-checkbox {
+		position: absolute;
+		width: 107px;
+		height: 107px;
+		margin-top: 0;
+		margin-left: 0;
+	}
+	.selection-enabled .g-sample-datagridlist-circle-imageitem.g-selection-overlay-support.selected .g-icon-button {
+		background-position: 0 -331px;
 
-	margin-top: 0;
-	margin-left: 5px;
-	margin-right: 0;
-}
-.g-sample-datagridlist-circle-imageitem .g-selection-overlay-support-scrim .g-selection-overlay-support-checkbox {
-	position: absolute;
-	width: 107px;
-	height: 88px;
-	margin-top: 0;
-	margin-left: 0;
+		margin-top: 0;
+		margin-left: 5px;
+		margin-right: 0;
+	}
+	.g-sample-datagridlist-circle-imageitem .g-selection-overlay-support-scrim .g-selection-overlay-support-checkbox {
+		position: absolute;
+		width: 107px;
+		height: 88px;
+		margin-top: 0;
+		margin-left: 0;
+	}
 }

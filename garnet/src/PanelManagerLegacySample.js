@@ -48,7 +48,7 @@ function viewSample (letter, outerCover, innerCover) {
 module.exports = kind({
 	name: 'g.sample.PanelManagerLegacySample',
 	horizontal: 'hidden',
-	classes: 'enyo-unselectable enyo-fit garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit enyo-fit garnet g-sample',
 	kind: Scroller,
 	components: [
 		{content: '< PanelManager (Legacy PanelSet port) Sample', classes: 'g-sample-header', ontap: 'goBack'},

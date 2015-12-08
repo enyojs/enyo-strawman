@@ -108,7 +108,7 @@ var RadioDataListPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DataListwithRadioButtonsSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-datalist-radiobuttons',
 	components: [
 		{content: '< DataList with Radio Buttons Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

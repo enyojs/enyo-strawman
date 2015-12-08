@@ -42,7 +42,7 @@ var WheelSliderPanelBrightness = kind({
 
 var WheelSliderPanelSample = module.exports = kind({
 	name: 'g.sample.WheelSliderPanelSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-wheelslider-panel',
 	components: [
 		{content: '< Wheel Slider Panel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

@@ -71,7 +71,7 @@ var DataListSmallCardsPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DataListwithCardsSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-datalist-cards',
 	components: [
 		{content: '< Data List with Cards Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

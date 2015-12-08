@@ -149,7 +149,7 @@ var FormPanel = kind({
 	components: [
 		{classes: 'g-common-width-height-fit', components: [
 			{kind: Scroller, circle: true, scrollIndicatorEnabled: true, classes: 'g-sample-panel g-common-width-height-fit', components: [
-				{kind: Title, classes: 'g-sample-form-title', content: 'Title: long text will fade out'},
+				{kind: Title, content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, classes: 'g-sample-form-top-label', content: '> Time Picker - current', allowHtml: 'true'},
 				{name: 'timePickerButton', kind: FormPickerButton, ontap: 'showPanel'},
@@ -383,7 +383,7 @@ module.exports = kind({
 	handlers: {
 		onResult: 'result'
 	},
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-form',
 	components: [
 		{content: '< Form Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

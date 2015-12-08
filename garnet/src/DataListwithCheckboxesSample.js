@@ -45,7 +45,7 @@ var CheckboxItem = kind({
 	name: 'g.sample.CheckboxItem',
 	kind: CheckboxItemBase,
 	mixins: [SelectionOverlaySupport],
-	selectionOverlayVerticalOffset: 53,
+	selectionOverlayVerticalOffset: 52,
 	selectionOverlayHorizontalOffset: 12,
 	bindings: [
 		{from: '.model.albumTitle', to: '.title'}
@@ -100,8 +100,8 @@ var CheckableDataListPanel = kind({
 	tapItem: function(inSender, inEvent) {
 		var
 			items = this.getCheckedItems(),
-			control = inEvent.originator.parent;
-		if (control.selected || control.parent.selected) {
+			control = inEvent.originator.owner;
+		if (control.selected) {
 			this.doResult({msg: 'The ' + inEvent.index + ' th item in the list is selected.'});
 			if (items.length > 0) {
 				this.$.ok.setDisabled(false);
@@ -117,7 +117,7 @@ var CheckableDataListPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.DataListwithCheckboxesSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-datalist-checkboxes',
 	components: [
 		{content: '< Data List with Checkboxes Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

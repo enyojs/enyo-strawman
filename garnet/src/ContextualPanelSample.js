@@ -117,7 +117,7 @@ module.exports = kind({
 		onResult: "result",
 		onPopPanel: "result"
 	},
-	classes: 'enyo-unselectable enyo-fit garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit enyo-fit garnet g-sample g-sample-contextual-panel',
 	components: [
 		{content: '< ContextualPanel Sample', classes: 'g-sample-header', ontap: 'goBack'},
 

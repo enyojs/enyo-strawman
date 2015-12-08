@@ -72,7 +72,8 @@ module.exports = kind({
 	classes: 'enyo-unselectable enyo-fit',
 	components: [
 		{kind: Header, title: 'Profile & goal', showBackButton: true, onBackButtonTapped: 'buttonTapped'},
-		{kind: Scroller, fit: true, style: 'height: 100%;', horizontal: 'hidden', components: [
+		{name: 'toastpopup', kind: ToastPopup, showDuration: 2000, content: 'key pressed!'},
+		{kind: Scroller, fit: true, horizontal: 'hidden', components: [
 			{classes: 'general-index', content: 'PROFILE'},
 			{classes: 'profile-label', content: 'Gender'},
 			{name: 'gender', style: 'margin: 0 16px;', kind: ContextualButton, content: 'Test', components: [
@@ -168,8 +169,7 @@ module.exports = kind({
 				{content: 'Stemp : 6500 steps'},
 				{content: 'Distance : 5.51 km'}
 			]}
-		]},
-		{name: 'toastpopup', kind: ToastPopup, showDuration: 2000, content: 'key pressed!'}
+		]}
 	],
 	rendered: kind.inherit(function (sup) {
 		return function() {
