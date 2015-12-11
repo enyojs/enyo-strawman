@@ -9,13 +9,6 @@
 		position: relative;
 		overflow: hidden;
 	}
-	.g-sample-circle-panel {
-		background-color: #000000;
-
-		position: relative;
-		border-radius: 50%;
-		overflow: hidden;
-	}
 	.g-sample-result {
 		background-color: #EDEDED;
 
@@ -44,11 +37,16 @@
 		font-size: 100px;
 
 		pointer-events: auto;
+
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
 	}
 	.g-sample-wheelslider-panel-text {
+		position: relative;
 		display: block;
 		width: 80%;
 		margin-left: 10%;
+		top: 20px;
 
 		text-align: center;
 		font-weight: 800;
