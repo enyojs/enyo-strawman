@@ -9,6 +9,7 @@ var samples = {
 	CheckboxSample                  : require('./CheckboxSample'),
 	CommandBarSample                : require('./CommandBarSample'),
 	ConfirmPanelSample              : require('./ConfirmPanelSample'),
+	ConfirmToastPanelSample         : require('./ConfirmToastPanelSample'),
 	ContextualPanelSample           : require('./ContextualPanelSample'),
 	DataGridListSample              : require('./DataGridListSample'),
 	DataGridListwithCardsSample     : require('./DataGridListwithCardsSample'),
