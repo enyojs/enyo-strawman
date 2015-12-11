@@ -44,7 +44,7 @@ var ConfirmToastBasePanel = kind({
 			kind: ToastPanel,
 			allowHtml: true,
 			content: 'Toast<br><br>Saved'
-		},
+		}
 	},
 	showPanel: function(inSender, inEvent) {
 		var
