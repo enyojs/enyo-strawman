@@ -17,10 +17,6 @@ var ConfirmBasePanel = kind({
 	events: {
 		onResult: ''
 	},
-	handlers: {
-		onOK: 'okHandler',
-		onCancel: 'cancelHandler'
-	},
 	components: [
 		{name: 'button1', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Only text'},
 		{name: 'button2', kind: Button, classes: 'g-sample-confirm-panel-button', ontap: 'showPanel', content: 'Scroll + Text'},
@@ -45,9 +41,6 @@ var ConfirmBasePanel = kind({
 		button2: {
 			name: 'confirmPanelWithScrollNoIcon',
 			kind: ConfirmPanel,
-			events: {
-				onOK: ''
-			},
 			buttonComponents: [
 				{name: 'ok', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image'}
 			],
@@ -58,17 +51,11 @@ var ConfirmBasePanel = kind({
 						{content: 'Garnet is a UI library built for wearable devices and is based on Enyo. Garnet supports LG smart watch'}
 					]
 				}
-			],
-			okHandler: function(inSender, inEvent) {
-				this.doOK();
-			}
+			]
 		},
 		button3: {
 			name: 'confirmPanelWithIconNoScroll',
 			kind: ConfirmPanel,
-			events: {
-				onOK: ''
-			},
 			buttonComponents: [
 				{name: 'ok2', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image'}
 			],
@@ -83,10 +70,7 @@ var ConfirmBasePanel = kind({
 						{content: 'All the labels follow guideline.'}
 					]
 				}
-			],
-			okHandler: function(inSender, inEvent) {
-				this.doOK();
-			}
+			]
 		},
 		button4: {
 			name: 'confirmPanelWithIconAndScroll',

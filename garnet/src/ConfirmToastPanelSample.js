@@ -17,10 +17,6 @@ var ConfirmToastBasePanel = kind({
 	events: {
 		onResult: ''
 	},
-	handlers: {
-		onOK: 'okHandler',
-		onCancel: 'cancelHandler'
-	},
 	components: [
 		{name: 'button1', kind: Button, classes: 'g-sample-confirm-toast-panel-container g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPanel', content: 'Click here'}
 	],
