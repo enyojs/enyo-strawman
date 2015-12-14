@@ -75,7 +75,7 @@ var DataListPanel = kind({
 		{
 			name: 'list',
 			kind: DataList,
-			controlsPerPage: 3,
+			fixedChildSize: 137,
 			classes: 'g-sample-datalist-list',
 			headerComponents: [
 				{name: 'title', kind: Title, content: 'Title: long text will fade out'}
