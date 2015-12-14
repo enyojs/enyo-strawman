@@ -79,7 +79,6 @@ module.exports = kind({
 		});
 	},
 	handleMethodTapped: function (sender, event) {
-		this.$.fixedFloatingList.$.list.stopMarquee();
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'method',
 			owner: this,
@@ -90,7 +89,6 @@ module.exports = kind({
 		});
 	},
 	handleMoreTapped: function (sender, event) {
-		this.$.fixedFloatingList.$.list.stopMarquee();
 		this.$.fixedFloating.replaceFloatingPanel({
 			name: 'more',
 			owner: this,
@@ -103,7 +101,6 @@ module.exports = kind({
 		});
 	},
 	handlePushTapped: function (sender, event) {
-		this.$.fixedFloatingList.$.list.stopMarquee();
 		var panel = this.$.fixedFloating.createComponent({
 			owner: this,
 			components: [
