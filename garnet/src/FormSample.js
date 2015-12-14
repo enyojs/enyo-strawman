@@ -149,7 +149,7 @@ var FormPanel = kind({
 	components: [
 		{classes: 'g-common-width-height-fit', components: [
 			{kind: Scroller, circle: true, scrollIndicatorEnabled: true, classes: 'g-sample-panel g-common-width-height-fit', components: [
-				{kind: Title, content: 'Title: long text will fade out'},
+				{name: 'title', kind: Title, content: 'Title: long text will fade out'},
 				//
 				{kind: FormLabel, classes: 'g-sample-form-top-label', content: '> Time Picker - current', allowHtml: 'true'},
 				{name: 'timePickerButton', kind: FormPickerButton, ontap: 'showPanel'},
@@ -306,6 +306,7 @@ var FormPanel = kind({
 		utils.mixin(panel, options);
 
 		if (panel) {
+			this.$.title.stopMarquee();
 			this.bubbleUp('onPushPanel', {panel: panel, owner: this});
 		}
 	},
