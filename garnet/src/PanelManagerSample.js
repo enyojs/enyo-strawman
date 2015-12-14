@@ -67,6 +67,7 @@ module.exports = kind({
 	],
 	handleShareTapped: function (sender, event) {
 		this.$.fixedFloatingList.$.list.stopMarquee();
+		this.$.fixedFloatingList.$.title.stopMarquee();
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'share',
 			owner: this,
