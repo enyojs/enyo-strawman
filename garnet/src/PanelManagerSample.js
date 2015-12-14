@@ -8,7 +8,7 @@ var
 	Button = require('garnet/Button'),
 	Item = require('garnet/Item'),
 	Scroller = require('garnet/Scroller'),
-	PanelManager = require('garnet/PanelManager')
+	PanelManager = require('garnet/PanelManager');
 
 var SampleDataListPanel = require('./DataListSample').DataListPanel;
 
