@@ -66,8 +66,7 @@ module.exports = kind({
 		{from: 'collection', to: '$.fixedFloatingList.collection'}
 	],
 	handleShareTapped: function (sender, event) {
-		this.$.fixedFloatingList.$.list.stopMarquee();
-		this.$.fixedFloatingList.$.title.stopMarquee();
+		this.$.fixedFloatingList.stopMarquee();
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'share',
 			owner: this,

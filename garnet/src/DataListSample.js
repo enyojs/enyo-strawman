@@ -93,6 +93,10 @@ var DataListPanel = kind({
 	bindings: [
 		{from: '.collection', to: '.$.list.collection'}
 	],
+	stopMarquee: function() {
+		this.$.title.stopMarquee();
+		this.$.list.stopMarquee();
+	},
 	itemTap: function() {
 		if (data[arguments[1].index].subject === 'Back') {
 			global.history.go(-1);
