@@ -9,19 +9,18 @@ var
 	Button = require('garnet/Button'),
 	Item = require('garnet/Item'),
 	Scroller = require('garnet/Scroller'),
-	PanelManager = require('garnet/PanelManager');
+	PanelManager = require('garnet/PanelManager'),
+	Title = require('garnet/Title');
 
 var
 	SampleDataListPanel = require('./DataListSample').DataListPanel;
 
 var
 	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; margin: ' + ri.scale(20) + 'px',
-	buttonStyle = 'margin: ' + ri.scale(30) + 'px ' + ri.scale(10) + 'px;';
+	buttonStyle = 'margin: ' + ri.scale(30) + 'px ' + ri.scale(36) + 'px;';
 
 var List = kind({
 	kind: SampleDataListPanel,
-	title: true,
-	titleContent: 'Fixed Floating',
 	events: {
 		onShare: ''
 	},
@@ -46,7 +45,7 @@ var List = kind({
 module.exports = kind({
 	name: 'g.sample.PanelManagerSample',
 	horizontal: 'hidden',
-	classes: 'enyo-unselectable enyo-fit enyo-fit garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit enyo-fit garnet g-sample g-sample-panelmanager',
 	kind: Scroller,
 	components: [
 		{content: '< PanelManager Sample', classes: 'g-sample-header', ontap: 'goBack'},
@@ -67,40 +66,44 @@ module.exports = kind({
 		{from: 'collection', to: '$.fixedFloatingList.collection'}
 	],
 	handleShareTapped: function (sender, event) {
+		this.$.fixedFloatingList.$.list.stopMarquee();
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'share',
 			owner: this,
 			components: [
-				{kind: Item, content: 'Facebook', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Twitter', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Email', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'More ... (Replace View)', ontap: 'handleMoreTapped'}
+				{kind: Item, classes: 'g-sample-submenu', content: 'Facebook', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Twitter', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Email', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'More ... (Replace View)', ontap: 'handleMoreTapped'}
 			]
 		});
 	},
 	handleMethodTapped: function (sender, event) {
+		this.$.fixedFloatingList.$.list.stopMarquee();
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'method',
 			owner: this,
 			components: [
-				{content: 'Enter message here ...'},
+				{classes: 'g-sample-submenu', content: 'Enter message here ...'},
 				{kind: Button, content: 'Done', ontap: 'handleDismissTapped'}
 			]
 		});
 	},
 	handleMoreTapped: function (sender, event) {
+		this.$.fixedFloatingList.$.list.stopMarquee();
 		this.$.fixedFloating.replaceFloatingPanel({
 			name: 'more',
 			owner: this,
 			components: [
-				{kind: Item, content: 'LinkedIn', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Instagram', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Friendster', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'MySpace', ontap: 'handleMethodTapped'}
+				{kind: Item, classes: 'g-sample-submenu', content: 'LinkedIn', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Instagram', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Friendster', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'MySpace', ontap: 'handleMethodTapped'}
 			]
 		});
 	},
 	handlePushTapped: function (sender, event) {
+		this.$.fixedFloatingList.$.list.stopMarquee();
 		var panel = this.$.fixedFloating.createComponent({
 			owner: this,
 			components: [
@@ -146,9 +149,8 @@ module.exports = kind({
 
 		for (; records.length < 500; ++idx) {
 			records.push({
-				iconUrl: '@../assets/ic_dialog_alert.svg',
-				albumTitle: title[idx % title.length] + ((idx % 8 === 0) ? ' with long title' : ''),
-				albumGenre: genre[idx % genre.length]
+				subject: title[idx % title.length] + ((idx % 8 === 0) ? ' with long title' : ''),
+				time: genre[idx % genre.length]
 			});
 		}
 		return records;
