@@ -2,22 +2,15 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection');
 
 var
 	Button = require('garnet/Button'),
 	Item = require('garnet/Item'),
 	Scroller = require('garnet/Scroller'),
-	PanelManager = require('garnet/PanelManager'),
-	Title = require('garnet/Title');
+	PanelManager = require('garnet/PanelManager')
 
-var
-	SampleDataListPanel = require('./DataListSample').DataListPanel;
-
-var
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; margin: ' + ri.scale(20) + 'px',
-	buttonStyle = 'margin: ' + ri.scale(30) + 'px ' + ri.scale(36) + 'px;';
+var SampleDataListPanel = require('./DataListSample').DataListPanel;
 
 var List = kind({
 	kind: SampleDataListPanel,
@@ -51,12 +44,12 @@ module.exports = kind({
 		{content: '< PanelManager Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Fixed + Push Floating', classes: 'g-sample-subheader'},
-		{style: panelStyle, components: [
+		{classes: 'g-sample-panel', components: [
 			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', pageIndicator: true, components: [
 				{name: 'fixedFloatingList', kind: List, onShare: 'handleShareTapped'},
 				{components: [
 					{kind: Scroller, classes: 'enyo-fit', components: [
-						{kind: Button, content: 'Push Another Panel', style: buttonStyle, ontap: 'handlePushTapped'}
+						{kind: Button, content: 'Push Another Panel', classes: 'g-sample-button', ontap: 'handlePushTapped'}
 					]}
 				]}
 			]}
@@ -105,7 +98,7 @@ module.exports = kind({
 			owner: this,
 			components: [
 				{kind: Scroller, classes: 'enyo-fit', components: [
-					{kind: Button, content: 'Remove This Panel', style: buttonStyle, ontap: 'handleRemoveTapped'}
+					{kind: Button, content: 'Remove This Panel', classes: 'g-sample-button', ontap: 'handleRemoveTapped'}
 				]}
 			]
 		});
