@@ -73,7 +73,7 @@ module.exports = kind({
 	setLocale: function (sender, event){
 		if (ilib) {
 			var locale = event.selected.content,
-				val = (locale == 'Use Default Locale') ? null : locale;
+				val = (locale == 'Use Default Locale') ? '' : locale;
 			i18n.updateLocale(val);
 			this.$.pickerDateLinked.setLocale(val);
 			this.$.pickerTimeLinked.setLocale(val);
