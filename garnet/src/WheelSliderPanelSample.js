@@ -14,9 +14,8 @@ var WheelSliderPanelBrightness = kind({
 	maximumValue: 100,
 	stepValue: 5,
 	value: 50,
-	classes: 'g-sample-circle-panel',
 	components: [
-		{classes: 'g-common-width-height-fit g-sample-pointer-events-none', components: [
+		{classes: 'g-sample-pointer-events-none', components: [
 			{name: 'sampleValue', content: '', classes: 'g-sample-wheelslider-panel-value'},
 			{content: 'Brightness', classes: 'g-sample-wheelslider-panel-text'}
 		]}

@@ -5,10 +5,10 @@
   "paths": [],
   "libraries": [
     "enyo",
+    "garnet",
     "layout",
     "canvas",
     "svg",
-    "moonstone",
     "onyx",
     "spotlight",
     "enyo-webos",
@@ -17,10 +17,10 @@
   ],
   "sources": {
     "enyo": "https://github.com/enyojs/enyo.git",
+    "garnet": "https://github.com/enyojs/garnet.git",
     "layout": "https://github.com/enyojs/layout.git",
     "canvas": "https://github.com/enyojs/canvas.git",
     "svg": "https://github.com/enyojs/svg.git",
-    "moonstone": "https://github.com/enyojs/moonstone.git",
     "onyx": "https://github.com/enyojs/onyx.git",
     "spotlight": "https://github.com/enyojs/spotlight.git",
     "enyo-webos": "https://github.com/enyojs/enyo-webos.git",
@@ -29,6 +29,7 @@
   },
   "targets": {
     "enyo": "2.6.0-dev",
+    "garnet": "1.5.0-pre.2",
     "layout": "2.6.0-dev",
     "canvas": "2.6.0-dev",
     "svg": "master",

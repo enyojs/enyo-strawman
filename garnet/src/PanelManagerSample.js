@@ -2,7 +2,6 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	ri = require('enyo/resolution'),
 	Collection = require('enyo/Collection');
 
 var
@@ -11,17 +10,10 @@ var
 	Scroller = require('garnet/Scroller'),
 	PanelManager = require('garnet/PanelManager');
 
-var
-	SampleDataListPanel = require('./DataListSample').DataListPanel;
-
-var
-	panelStyle = 'width: ' + ri.scale(320) + 'px; height: ' + ri.scale(320) + 'px; position: relative; display: inline-block; margin: ' + ri.scale(20) + 'px',
-	buttonStyle = 'margin: ' + ri.scale(30) + 'px ' + ri.scale(10) + 'px;';
+var SampleDataListPanel = require('./DataListSample').DataListPanel;
 
 var List = kind({
 	kind: SampleDataListPanel,
-	title: true,
-	titleContent: 'Fixed Floating',
 	events: {
 		onShare: ''
 	},
@@ -46,18 +38,18 @@ var List = kind({
 module.exports = kind({
 	name: 'g.sample.PanelManagerSample',
 	horizontal: 'hidden',
-	classes: 'enyo-unselectable enyo-fit enyo-fit garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit enyo-fit garnet g-sample g-sample-panelmanager',
 	kind: Scroller,
 	components: [
 		{content: '< PanelManager Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Fixed + Push Floating', classes: 'g-sample-subheader'},
-		{style: panelStyle, components: [
+		{classes: 'g-sample-panel', components: [
 			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', pageIndicator: true, components: [
 				{name: 'fixedFloatingList', kind: List, onShare: 'handleShareTapped'},
 				{components: [
 					{kind: Scroller, classes: 'enyo-fit', components: [
-						{kind: Button, content: 'Push Another Panel', style: buttonStyle, ontap: 'handlePushTapped'}
+						{kind: Button, content: 'Push Another Panel', classes: 'g-sample-button', ontap: 'handlePushTapped'}
 					]}
 				]}
 			]}
@@ -67,14 +59,15 @@ module.exports = kind({
 		{from: 'collection', to: '$.fixedFloatingList.collection'}
 	],
 	handleShareTapped: function (sender, event) {
+		this.$.fixedFloatingList.stopMarquee();
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'share',
 			owner: this,
 			components: [
-				{kind: Item, content: 'Facebook', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Twitter', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Email', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'More ... (Replace View)', ontap: 'handleMoreTapped'}
+				{kind: Item, classes: 'g-sample-submenu', content: 'Facebook', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Twitter', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Email', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'More ... (Replace View)', ontap: 'handleMoreTapped'}
 			]
 		});
 	},
@@ -83,7 +76,7 @@ module.exports = kind({
 			name: 'method',
 			owner: this,
 			components: [
-				{content: 'Enter message here ...'},
+				{classes: 'g-sample-submenu', content: 'Enter message here ...'},
 				{kind: Button, content: 'Done', ontap: 'handleDismissTapped'}
 			]
 		});
@@ -93,10 +86,10 @@ module.exports = kind({
 			name: 'more',
 			owner: this,
 			components: [
-				{kind: Item, content: 'LinkedIn', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Instagram', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'Friendster', ontap: 'handleMethodTapped'},
-				{kind: Item, content: 'MySpace', ontap: 'handleMethodTapped'}
+				{kind: Item, classes: 'g-sample-submenu', content: 'LinkedIn', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Instagram', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'Friendster', ontap: 'handleMethodTapped'},
+				{kind: Item, classes: 'g-sample-submenu', content: 'MySpace', ontap: 'handleMethodTapped'}
 			]
 		});
 	},
@@ -105,7 +98,7 @@ module.exports = kind({
 			owner: this,
 			components: [
 				{kind: Scroller, classes: 'enyo-fit', components: [
-					{kind: Button, content: 'Remove This Panel', style: buttonStyle, ontap: 'handleRemoveTapped'}
+					{kind: Button, content: 'Remove This Panel', classes: 'g-sample-button', ontap: 'handleRemoveTapped'}
 				]}
 			]
 		});
@@ -146,9 +139,8 @@ module.exports = kind({
 
 		for (; records.length < 500; ++idx) {
 			records.push({
-				iconUrl: '@../assets/ic_dialog_alert.svg',
-				albumTitle: title[idx % title.length] + ((idx % 8 === 0) ? ' with long title' : ''),
-				albumGenre: genre[idx % genre.length]
+				subject: title[idx % title.length] + ((idx % 8 === 0) ? ' with long title' : ''),
+				time: genre[idx % genre.length]
 			});
 		}
 		return records;

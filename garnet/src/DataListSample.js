@@ -75,10 +75,10 @@ var DataListPanel = kind({
 		{
 			name: 'list',
 			kind: DataList,
-			controlsPerPage: 3,
+			fixedChildSize: 137,
 			classes: 'g-sample-datalist-list',
 			headerComponents: [
-				{kind: Title, content: 'Title: long text will fade out'}
+				{name: 'title', kind: Title, content: 'Title: long text will fade out'}
 			],
 			components: [
 				{kind: DataListItem, ontap: 'itemTap'}
@@ -93,6 +93,10 @@ var DataListPanel = kind({
 	bindings: [
 		{from: '.collection', to: '.$.list.collection'}
 	],
+	stopMarquee: function() {
+		this.$.title.stopMarquee();
+		this.$.list.stopMarquee();
+	},
 	itemTap: function() {
 		if (data[arguments[1].index].subject === 'Back') {
 			global.history.go(-1);
