@@ -208,6 +208,7 @@ module.exports = kind({
 					horizontal: 'hidden',
 					spotlightPagingControls: true
 				},
+				selectionProperty: 'selected',
 				components: [
 					{kind: GridSampleItem, overlayTransparent: this.transparency}
 				]
