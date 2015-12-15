@@ -23,7 +23,7 @@ var
 		ExpandableDataPickerSample			: require('./lib/ExpandableDataPickerSample'),
 		ExpandableInputSample				: require('./lib/ExpandableInputSample'),
 		ExpandableListItemSample			: require('./lib/ExpandableListItemSample'),
-		ExpandablePickerSample				: require('./lib/ExpandablePickerSample'),
+		// ExpandablePickerSample				: require('./lib/ExpandablePickerSample'),
 		ExpandableTextSample				: require('./lib/ExpandableTextSample'),
 		FontSample							: require('./lib/FontSample'),
 		FormCheckboxSample					: require('./lib/FormCheckboxSample'),
