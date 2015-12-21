@@ -42,6 +42,7 @@ var
 		RichTextSample: require('./lib/RichTextSample'),
 		ScrollerSample: require('./lib/ScrollerSample'),
 		SelectSample: require('./lib/SelectSample'),
+		ShowingTransitionSample: require('./lib/ShowingTransitionSample'),
 		SpriteAnimationSample: require('./lib/SpriteAnimationSample'),
 		StylesheetSupportSample: require('./lib/StylesheetSupportSample'),
 		TableSample: require('./lib/TableSample'),

@@ -3,10 +3,9 @@ var
 	Img = require('enyo/Image');
 
 var
-	Scroller = require('moonstone/Scroller'),
-	Divider = require('moonstone/Divider'),
-	Button = require('moonstone/Button'),
-	ShowingTransitionSupport = require('moonstone/ShowingTransitionSupport');
+	Scroller = require('enyo/Scroller'),
+	Button = require('enyo/Button'),
+	ShowingTransitionSupport = require('enyo/ShowingTransitionSupport');
 
 var Pane = kind({
 	name: 'Pane',
@@ -15,13 +14,13 @@ var Pane = kind({
 	hidingDuration: 500,
 	mixins: [ ShowingTransitionSupport ],
 	components: [
-		{name: 'client', classes: 'glass moon-neutral moon-3v moon-5h'}
+		{name: 'client', classes: 'glass'}
 	]
 });
 
 var PopupMockup = kind({
 	name: 'PopupMockup',
-	classes: 'popup-mockup moon-neutral',
+	classes: 'popup-mockup',
 	showingDuration: 500,
 	hidingDuration: 500,
 	showing: false,
@@ -31,20 +30,21 @@ var PopupMockup = kind({
 });
 
 module.exports = kind({
-	name: 'moon.sample.ShowingTransitionSample',
-	classes: 'moon enyo-unselectable enyo-fit showing-transition-sample',
+	name: 'enyo.sample.ShowingTransitionSample',
+	classes: 'enyo-unselectable enyo-fit showing-transition-sample',
 	components: [
 		{kind: Scroller, classes: 'enyo-fill', components: [
-			{kind: Divider, content: 'Showing Transitions'},
-			{kind: Button, content: 'Toggle Pane', ontap: 'togglePane'},
-			{kind: Button, content: 'Toggle Popup', ontap: 'togglePopup'},
-			{classes: 'moon-1v'},
+			{tag: 'h1', content: 'Showing Transitions'},
 			{components: [
-				{name: 'pane', kind: Pane, components: [{content: 'This looks like a card'}]}
+				{kind: Button, content: 'Toggle Pane', ontap: 'togglePane'},
+				{kind: Button, content: 'Toggle Popup', ontap: 'togglePopup'}
+			]},
+			{components: [
+				{name: 'pane', kind: Pane, components: [{content: 'This card has different out and in transitions.'}]}
 			]}
 		]},
 		{name: 'popup', kind: PopupMockup, components: [
-			{content: 'Commense the jiggling!'},
+			{tag: 'h1', content: 'Commense the jiggling!'},
 			{kind: Img, src: 'http://static.fjcdn.com/gifs/Shake+it_945873_5126044.gif'}
 		]}
 	],
