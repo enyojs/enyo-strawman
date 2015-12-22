@@ -40,6 +40,10 @@ var ConfirmToastBasePanel = kind({
 			kind: ToastPanel,
 			allowHtml: true,
 			content: 'Toast<br><br>Saved'
+		},
+		blankPanel: {
+			name: 'blankPanel',
+			kind: Panel
 		}
 	},
 	showPanel: function(inSender, inEvent) {
@@ -52,19 +56,24 @@ var ConfirmToastBasePanel = kind({
 		}
 	},
 	activated: function(inEvent) {
-		if (this.toast) {
-			this.bubbleUp('onPushPanel', {panel: this.toast, owner: this});
-			this.toast = null;
-		}
+		// if (this.toast) {
+		// 	this.bubbleUp('onPushPanel', {panel: this.toast, owner: this});
+		// 	this.toast = null;
+		// }
 	},
 	cancelHandler: function(inSender, inEvent) {
-		this.bubbleUp('onPopPanel');
+		//this.bubbleUp('onPopPanel');
 		this.doResult({msg: 'Confirm panel is hidden by Cancel button'});
+
+		var panel = this.popUpAndPickerPanelComponents['blankPanel'];
+		this.bubbleUp('onPushPanel', {panel: panel, owner: this});
 	},
 	okHandler: function(inSender, inEvent) {
-		this.bubbleUp('onPopPanel');
+		// this.bubbleUp('onPopPanel');
 		this.doResult({msg: 'Confirm panel is hidden by OK button'});
-		this.toast = this.popUpAndPickerPanelComponents['ok'];
+
+		var panel = this.popUpAndPickerPanelComponents['ok'];
+		this.bubbleUp('onPushPanel', {panel: panel, owner: this});
 	}
 });
 
