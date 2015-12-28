@@ -1,9 +1,8 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
-	Style = require('enyo/Style'),
 	StyleSheetSupport = require('enyo/StylesheetSupport'),
 	TextArea  = require('enyo/TextArea');
 

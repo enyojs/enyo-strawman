@@ -3,7 +3,7 @@ var
 	utils = require('enyo/utils');
 
 var
-	Image = require('enyo/Image');
+	EnyoImage = require('enyo/Image');
 
 var
 	Checkbox = require('onyx/Checkbox'),
@@ -25,7 +25,7 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, components: [
 				{kind: Input, placeholder: 'Search term', onchange: 'inputChanged'},
-				{kind: Image, src: '@../assets/search-input-search.png'}
+				{kind: EnyoImage, src: '@../assets/search-input-search.png'}
 			]},
 			{kind: InputDecorator, components: [
 				{kind: Input, type: 'password', placeholder: 'Enter password', onchange: 'inputChanged'}

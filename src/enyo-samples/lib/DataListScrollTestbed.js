@@ -1,13 +1,10 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Anchor = require('enyo/Anchor'),
+var
 	Button = require('enyo/Button'),
-	Collection = require('enyo/Collection'),
 	Component = require('enyo/Component'),
 	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater'),
 	ScrollStrategy = require('enyo/ScrollStrategy'),
 	TouchScrollStrategy = require('enyo/TouchScrollStrategy'),
 	TranslateScrollStrategy = require('enyo/TranslateScrollStrategy'),
@@ -36,7 +33,9 @@ var TestMixin = {
 	strategy: 'Native',
 	addTestControls: function() {
 		this.createComponent({
-			style: 'position: absolute; top: 0; left: 0; right: 0; padding: 0.5em', defaultKind: Button, components: [
+			style: 'position: absolute; top: 0; left: 0; right: 0; padding: 0.5em',
+			defaultKind: Button,
+			components: [
 				{kind: Select, onchange: 'sampleChanged', components: this.buildMenu(samples, 'sample')},
 				{kind: Select, onchange: 'strategyChanged', components: this.buildMenu(strategies, 'strategy')},
 				{content: 'Scroll to Random Pos', ontap: 'scrollToRandomPos'},
