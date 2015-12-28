@@ -27,7 +27,6 @@ var
 		ExpandableTextSample				: require('./lib/ExpandableTextSample'),
 		FontSample							: require('./lib/FontSample'),
 		FormCheckboxSample					: require('./lib/FormCheckboxSample'),
-		// HeaderAutoCollapsingSample			: require('./lib/HeaderAutoCollapsingSample'),
 		HeaderSample						: require('./lib/HeaderSample'),
 		HighlightTextSample					: require('./lib/HighlightTextSample'),
 		// HistorySample						: require('./lib/HistorySample'),
