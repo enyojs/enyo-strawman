@@ -124,17 +124,17 @@ module.exports = kind({
 						{name: "lastNameLetter", classes: "name last-letter", tag: "span"}
 					]}
 				], bindings: [
-					{from: ".index", to: ".$.index.content"},
-					{from: ".model.firstName", to: ".$.firstName.content"},
-					{from: ".model.lastName", to: ".$.lastName.content"},
-					{from: ".model.lastName", to: ".$.lastNameLetter.content", transform: function (v) { return v.charAt(0); }},
-					{from: ".model.classes", to: ".classes"}
+					{from: "index", to: "$.index.content"},
+					{from: "model.firstName", to: "$.firstName.content"},
+					{from: "model.lastName", to: "$.lastName.content"},
+					{from: "model.lastName", to: "$.lastNameLetter.content", transform: function (v) { return v.charAt(0); }},
+					{from: "model.classes", to: "classes"}
 				]}
 			]}
 		]}
 	],
 	bindings: [
-		{from: ".collection", to: ".$.repeater.collection"}
+		{from: "collection", to: "$.repeater.collection"}
 	],
 	populateList: function () {
 		this.collection = new Collection(data);
