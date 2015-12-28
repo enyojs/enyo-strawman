@@ -15,7 +15,7 @@ var
 
 var
 	AudioPlayback = require('moonstone-extra/AudioPlayback'),
-	Playlist = require('moonstone-extra/PlaylistSupport');
+	PlaylistSupport = require('moonstone-extra/PlaylistSupport');
 
 var audioQueue = kind({
 	name: 'sample.AudioQueue',
@@ -80,7 +80,7 @@ module.exports = kind({
 	},
 	components: [
 		{kind: Drawers, drawers:[
-			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ Playlist.Support ], components: [
+			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ PlaylistSupport ], components: [
 				{name: 'queue', kind: audioQueue}
 			], moreComponents: [
 				{name: 'btnShuffle', kind: Button, ontap: 'toggleShuffle'},
