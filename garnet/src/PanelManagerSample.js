@@ -46,12 +46,12 @@ module.exports = kind({
 		{content: 'Fixed + Push Floating', classes: 'g-sample-subheader'},
 		{classes: 'g-sample-panel', components: [
 			{name: 'fixedFloating', kind: PanelManager, classes: 'enyo-fit', pageIndicator: true, components: [
-				{name: 'fixedFloatingList', kind: List, onShare: 'handleShareTapped'},
+				{name: 'fixedFloatingList', kind: List, onShare: 'handleShareTapped', accessibilityLabel: 'Panel0'},
 				{components: [
 					{kind: Scroller, classes: 'enyo-fit', components: [
 						{kind: Button, content: 'Push Another Panel', classes: 'g-sample-button', ontap: 'handlePushTapped'}
 					]}
-				]}
+				], accessibilityLabel: 'Panel1'}
 			]}
 		]}
 	],
@@ -63,6 +63,7 @@ module.exports = kind({
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'share',
 			owner: this,
+			accessibilityLabel: 'PanelShare',
 			components: [
 				{kind: Item, classes: 'g-sample-submenu', content: 'Facebook', ontap: 'handleMethodTapped'},
 				{kind: Item, classes: 'g-sample-submenu', content: 'Twitter', ontap: 'handleMethodTapped'},
@@ -75,6 +76,7 @@ module.exports = kind({
 		this.$.fixedFloating.pushFloatingPanel({
 			name: 'method',
 			owner: this,
+			accessibilityLabel: 'Message Panel',
 			components: [
 				{classes: 'g-sample-submenu', content: 'Enter message here ...'},
 				{kind: Button, content: 'Done', ontap: 'handleDismissTapped'}
@@ -85,6 +87,7 @@ module.exports = kind({
 		this.$.fixedFloating.replaceFloatingPanel({
 			name: 'more',
 			owner: this,
+			accessibilityLabel: 'PanelReplaced',
 			components: [
 				{kind: Item, classes: 'g-sample-submenu', content: 'LinkedIn', ontap: 'handleMethodTapped'},
 				{kind: Item, classes: 'g-sample-submenu', content: 'Instagram', ontap: 'handleMethodTapped'},
@@ -96,6 +99,7 @@ module.exports = kind({
 	handlePushTapped: function (sender, event) {
 		var panel = this.$.fixedFloating.createComponent({
 			owner: this,
+			accessibilityLabel: 'Panel2',
 			components: [
 				{kind: Scroller, classes: 'enyo-fit', components: [
 					{kind: Button, content: 'Remove This Panel', classes: 'g-sample-button', ontap: 'handleRemoveTapped'}
