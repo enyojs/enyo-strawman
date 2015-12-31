@@ -24,7 +24,8 @@ module.exports = kind({
 					{kind: CheckboxItem, content: 'Option 2', onchange: 'itemChanged'},
 					{kind: CheckboxItem, disabled: true, content: 'Disabled', onchange: 'itemChanged'},
 					{kind: CheckboxItem, content: 'Option 4', checked: true, onchange: 'itemChanged'},
-					{kind: CheckboxItem, content: 'This is a verrry long option 5 with a custom checkmark', icon: '', src: '@../assets/icon-button-enyo-logo.png', onchange: 'itemChanged'}
+					{kind: CheckboxItem, content: 'This is a verrry long option 5 with a custom checkmark', icon: '', src: '@../assets/icon-button-enyo-logo.png', onchange: 'itemChanged'},
+					{kind: CheckboxItem, content: 'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها.', onchange: 'itemChanged'}
 				]},
 				{components: [
 					{kind: Divider, content: 'Right-Handed Checkbox Items'},
@@ -32,7 +33,8 @@ module.exports = kind({
 					{kind: CheckboxItem, content: 'Option 2', checkboxOnRight: true, onchange: 'itemChanged'},
 					{kind: CheckboxItem, disabled: true, content: 'Disabled', checkboxOnRight: true, onchange: 'itemChanged'},
 					{kind: CheckboxItem, content: 'Option 4', checked: true, checkboxOnRight: true, onchange: 'itemChanged'},
-					{kind: CheckboxItem, content: 'This is a verrry long option 5', checkboxOnRight: true, onchange: 'itemChanged'}
+					{kind: CheckboxItem, content: 'This is a verrry long option 5', checkboxOnRight: true, onchange: 'itemChanged'},
+					{kind: CheckboxItem, content: 'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها.', checkboxOnRight: true, onchange: 'itemChanged'}
 				]},
 				{components: [
 					{kind: Divider, content: 'Checkbox Item Group'},
