@@ -33,12 +33,28 @@
 
 		> .caption,
 		> .sub-caption {
-			text-align: center;
 			width: auto;
 			overflow: hidden;
 		}
 	}
 }
+
+.enyo-locale-right-to-left .moon-gridlist-imageitem.horizontal-gridList-item {
+
+	.moon-overlay-container {
+		right: auto;
+		left: 0;
+	}
+
+	&.horizontal-gridList-image-item {
+		.moon-image {
+			margin-left: 12px;
+			margin-right: auto;
+			float: right;
+		}
+	}
+}
+
 
 // When inside a selection-enabled container, pad the content to make space for the checkbox
 .moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem {
