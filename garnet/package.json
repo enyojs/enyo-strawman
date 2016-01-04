@@ -1,11 +1,28 @@
 {
   "name": "enyo-strawman-garnet",
+  "assets": [
+    "../appinfo.json",
+    "../icon.png",
+    "../largeIcon.png",
+    "assets/**/*.*",
+    "../resources/**/*.*"
+  ],
+  "devAssets": [],
+  "styles": [
+    "css/*.css",
+    "css/*.less",
+    "../css/*.css",
+    "../css/*.less",
+    "src/*.css",
+    "src/*.less"
+  ],
+  "main": "index.js",
+  "moduleDir": "src",
   "filename": "index.js",
   "version": "0.0.1",
   "description": "Collection of Enyo lib samples for Quality Assurance with Garnet",
   "homepage": "http://enyojs.com/",
   "bugs": "http://jira.enyojs.com/",
-  "main": "index.js",
   "keywords": [],
   "maintainers": [
     {
@@ -24,19 +41,5 @@
     "type": "git",
     "url": "http://github.com/enyojs/enyo-strawman"
   },
-  "devDependencies": {},
-  "styles": [
-    "css/*.css",
-    "css/*.less",
-    "../css/*.css",
-    "../css/*.less",
-    "src/*.css",
-    "src/*.less"
-  ],
-  "assets": [
-    "../appinfo.json",
-    "../icon.png",
-    "../largeIcon.png",
-    "assets/**/*.*"
-  ]
+  "devDependencies": {}
 }

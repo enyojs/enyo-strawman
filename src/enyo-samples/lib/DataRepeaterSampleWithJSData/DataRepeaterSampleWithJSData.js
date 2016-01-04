@@ -21,8 +21,8 @@ module.exports = kind({
 	destroy: kind.inherit(function (sup) {
 		return function () {
 			Binding.defaultBindingKind = Binding;
-			sup.apply(this.arguments);
-		}
+			sup.apply(this ,arguments);
+		};
 	})
 
 });

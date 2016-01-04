@@ -1,0 +1,24 @@
+.spinner-sample {
+	margin: 8px;
+}
+.spinner-content {
+	font-size : 18px;
+	line-height: 48px;
+}
+.sample-button {
+	margin: 8px;
+}
+.spinner-sample-label {
+	font-size: 20px;
+	width: 95%;
+	border-bottom: 2px solid black;
+	margin: 10px;
+}
+.spinner-sample-search-content {
+	float: left;
+	margin: 10px;
+	line-height: 24px;
+}
+.spinner-sample-small-spinner {
+	margin: 10px;
+}

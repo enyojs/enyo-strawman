@@ -1,7 +1,8 @@
-var 
-	kind = require('enyo/kind');
+var
+	kind = require('enyo/kind'),
+	pageVisibility = require('enyo/pageVisibility');
 
-var 
+var
 	Control = require('enyo/Control'),
 	Signals = require('enyo/Signals');
 
@@ -17,6 +18,6 @@ module.exports = kind({
 		this.visibilitychanged();
 	},
 	visibilitychanged: function(){
-		this.$.text.setContent(this.$.text.content + (Date().toString()) + (enyo.hidden ? ": hidden" : ": visible") + "<br>");
+		this.$.text.setContent(this.$.text.content + (Date().toString()) + (pageVisibility.hidden ? ": hidden" : ": visible") + "<br>");
 	}
 });

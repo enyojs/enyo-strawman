@@ -4,7 +4,6 @@ var
 	EmptyBinding = require('enyo/EmptyBinding');
 
 var
-	Button = require('moonstone/Button'),
 	CheckboxItem = require('moonstone/CheckboxItem'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupButton = require('moonstone/ContextualPopupButton'),
@@ -13,7 +12,7 @@ var
 	DataGridList = require('moonstone/DataGridList'),
 	GridListImageItem = require('moonstone/GridListImageItem'),
 	IconButton = require('moonstone/IconButton'),
-	Image = require('moonstone/Image'),
+	MoonImage = require('moonstone/Image'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
@@ -66,7 +65,7 @@ var HorizontalGridListImageItem = kind({
 	kind: HorizontalGridListItem,
 	classes: 'horizontal-gridList-image-item',
 	components: [
-		{name: 'img', kind: Image},
+		{name: 'img', kind: MoonImage},
 		{name: 'caption', classes: 'caption'},
 		{name: 'subCaption', classes: 'sub-caption'}
 	],

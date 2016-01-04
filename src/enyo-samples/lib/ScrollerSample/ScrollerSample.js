@@ -1,14 +1,10 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Button = require('enyo/Button'),
+var
 	Control = require('enyo/Control'),
-	OptionGroup = require('enyo/OptionGroup'),
 	Scroller = require('enyo/Scroller'),
-	ScrollThumb = require('enyo/ScrollThumb'),
 	Select = require('enyo/Select'),
-	Table = require('enyo/Table'), 
 	TranslateScrollStrategy = require('enyo/TranslateScrollStrategy'),
 	TransitionScrollStrategy = require('enyo/TransitionScrollStrategy'),
 	TouchScrollStrategy = require('enyo/TouchScrollStrategy');
@@ -78,7 +74,7 @@ module.exports = kind({
 	],
 	create: function() {
 		this.inherited(arguments);
-		
+
 		//hide other scrollers
 		this.$.force.hide();
 		this.$.horizontal.hide();

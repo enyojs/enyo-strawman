@@ -2,8 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('./strawman/SampleList'),
-	History = request('moonstone/History');
+	SampleList = require('./strawman/SampleList');
 
 var
 	samples = {
@@ -28,6 +27,5 @@ var
 
 module.exports = {
 	samples: samples,
-	List: List,
-	History: History
+	List: List
 };

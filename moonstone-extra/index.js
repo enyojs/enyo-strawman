@@ -5,8 +5,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../src/strawman/SampleList'),
-	History = require('moonstone/History');
+	SampleList = require('../src/strawman/SampleList');
 
 require('../src/moonstone-samples');	// Included for its assets and CSS
 
@@ -30,8 +29,6 @@ var
 		listType: 'grid',
 		samples: samples
 	});
-
-History.set('enableBackHistoryAPI', false);
 
 ready(function () {
 	var names = window.document.location.search.substring(1).split('&'),

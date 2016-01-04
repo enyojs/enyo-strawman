@@ -1,0 +1,111 @@
+/* VolumnSetting patten Sample */
+
+.volumnsetting-sample .general-index {
+	height: 48px;
+	line-height: 48px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #797979;
+	padding: 0 16px;
+	background-color: #fafafa;
+}
+
+.volume-table {
+	display: table;
+	height: 40px;
+}
+
+.volume-table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.iconButtonSample_custom {
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background-position: center 0;
+	background-size: 40px 80px; /* will be removed when normal/pressed image is ready */
+	line-height: 40px;
+}
+
+.iconButtonSample_custom.pressed:not([disabled]) {
+	background-position: center 0;
+}
+
+.volumnsetting-sample .divider {
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.bottom-volume-table {
+	display: table;
+	height: 56px;
+	background-color: #f8f9fa;
+	table-layout: fixed;
+}
+
+.button-divider {
+	background-color: #aaaaaa;
+	margin: 8px 0;
+	height: 40px;
+}
+
+.sun-sample-popup {
+	max-height: 800px;
+	width: 80%;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.sun-sample-spaced-button {
+	margin: 6px 10px;
+}
+
+.text-style {
+	font-size: 20px;
+	margin: 12px 24px 0 24px;
+}
+
+.text-style2 {
+	font-size: 14px;
+	padding-left: 10px;
+}
+
+.popup-label {
+	height: 56px;
+	padding: 0 24px;
+	font-size: 20px;
+}
+
+.dialog_title {
+	font-size: 20px;
+	color: #000000;
+	height: 56px;
+	line-height: 56px;
+	padding: 0 24px;
+}
+
+.bottom-okcancle-button {
+	background-color: #ffffff;
+	font-size: 18px;
+	color : #2eb6cf;
+	font-weight: bold;
+	height: 36px;
+	padding: 0 8px;
+	margin-left: 8px;
+}
+
+.command_buttons_wrapper {
+	position: relative;
+	height: 56px;
+}
+
+.command_buttons {
+	position: absolute;
+	right: 0;
+	margin: 10px 16px;
+}
+
+.command_buttons .sun-button.pressed:not([disabled]){
+  background-color: #e5e5e5;
+}
