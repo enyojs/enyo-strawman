@@ -14,7 +14,6 @@ var
 	CaptionDecorator = require('moonstone/CaptionDecorator'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	BodyText = require('moonstone/BodyText'),
-	Control = require('enyo/Control'),
 	Group = require('enyo/Group'),
 	FittableRows = require('layout/FittableRows');
 

@@ -13,7 +13,7 @@ var
 	LeftRightArranger = require('layout/LeftRightArranger'),
 	Panels = require('layout/Panels'),
 	SpiralArranger = require('layout/SpiralArranger'),
-	TopBottomArranger = require('layout/TopBottomArranger');
+	TopBottomArranger = require('layout/TopBottomArranger'),
 	Select = require('enyo/Select'),
 	Button = require('enyo/Button'),
 	ToolDecorator = require('enyo/ToolDecorator'),

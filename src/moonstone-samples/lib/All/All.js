@@ -20,7 +20,6 @@ var
 	Scroller = require('moonstone/Scroller'),
 	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	Anchor = require('enyo/Anchor'),
 	Collection = require('enyo/Collection'),
 	DataRepeater = require('enyo/DataRepeater'),
 	Router = require('enyo/Router');
