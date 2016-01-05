@@ -36,8 +36,8 @@ module.exports = kind({
 			]}
 		]}
 	],
-	setupItem: function (sender, event) {
-		this.$[sender.item].setContent('This is row number: ' + event.index);
+	setupItem: function (sender, ev) {
+		this.$[sender.item].setContent('This is row number: ' + ev.index);
 		return true;
 	},
 	checkboxChange: function (sender) {

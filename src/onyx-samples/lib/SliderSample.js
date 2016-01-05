@@ -101,16 +101,16 @@ module.exports = kind({
 		this.$.input.setValue(Math.max(parseInt(this.$.input.getValue() || 0, 10) - tGap, 0));
 		this.changeValue();
 	},
-	sliderChanging: function (sender, event) {
+	sliderChanging: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' changing: ' + Math.round(sender.getValue()));
 	},
-	sliderChanged: function (sender, event) {
+	sliderChanged: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' changed to ' + Math.round(sender.getValue()) + '.');
 	},
-	rangeSliderIncrementChanged: function (sender, event) {
+	rangeSliderIncrementChanged: function (sender, ev) {
 		this.$.rangeSlider.setIncrement(sender.getValue() ? 20 : 0);
 	},
-	sliderIncrementChanged: function (sender, event) {
+	sliderIncrementChanged: function (sender, ev) {
 		this.$.slider2.setIncrement(sender.getValue() ? 7 : 0);
 		this.$.slider.setIncrement(sender.getValue() ? 7 : 0);
 	},
@@ -118,11 +118,11 @@ module.exports = kind({
 		slider.setStartLabel('--> ' + Math.floor(slider.getRangeStart()));
 		slider.setEndLabel(Math.ceil(slider.getRangeEnd()) + '<--');
 	},
-	rangeSliderChanging: function (sender, event) {
+	rangeSliderChanging: function (sender, ev) {
 		this.updateRangeLabels(sender);
 		this.$.rangeSliderResult.setContent('Range changing: $' + Math.round(sender.getRangeStart()) + ' - $' + Math.round(sender.getRangeEnd()));
 	},
-	rangeSliderChanged: function (sender, event) {
+	rangeSliderChanged: function (sender, ev) {
 		this.updateRangeLabels(sender);
 		this.$.rangeSliderResult.setContent('Range changed to $' + Math.round(sender.getRangeStart()) + ' - $' + Math.round(sender.getRangeEnd()) + '.');
 	},

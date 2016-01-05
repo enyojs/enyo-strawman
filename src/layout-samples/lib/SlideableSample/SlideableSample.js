@@ -41,8 +41,8 @@ var SlideableInfo = kind({
 			}
 		}
 	},
-	updateInfo: function (inSender, inEvent) {
-		this.setInfo(inEvent);
+	updateInfo: function (sender, ev) {
+		this.setInfo(ev);
 		return true;
 	}
 });
@@ -73,10 +73,10 @@ module.exports = kind({
 			this.populate(slideables);
 		};
 	}),
-	populate: function (inSlideables) {
+	populate: function (slideables) {
 		var slideable;
-		for (var i = 0; i < inSlideables.length; i++) {
-			slideable = inSlideables[i];
+		for (var i = 0; i < slideables.length; i++) {
+			slideable = slideables[i];
 			slideable.createComponents([
 				{style: slideable.axis === 'h' ? 'height: 38%;' : ''}, // cheating here for the horizontal Slideables to make everything nice and (almost) centered vertically
 				{
@@ -95,14 +95,14 @@ module.exports = kind({
 			]);
 		}
 	},
-	updateInfo: function (inSender) {
-		inSender.waterfallDown('onUpdateInfo', {
-			name: inSender.name,
-			axis: inSender.axis,
-			unit: inSender.unit,
-			min: inSender.min,
-			max: inSender.max,
-			value: Math.round(inSender.value)
+	updateInfo: function (sender) {
+		sender.waterfallDown('onUpdateInfo', {
+			name: sender.name,
+			axis: sender.axis,
+			unit: sender.unit,
+			min: sender.min,
+			max: sender.max,
+			value: Math.round(sender.value)
 		});
 		return true;
 	},

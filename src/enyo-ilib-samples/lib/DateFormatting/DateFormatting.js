@@ -107,7 +107,7 @@ module.exports = kind({
 		]}
 	],
 
-	calcFormat: function (inSender, inEvent) {
+	calcFormat: function (sender, ev) {
 		var options = {};
 		options['locale'] = this.$.localeSelector.getValue();
 		options['length'] = this.$.length.getActive().content;

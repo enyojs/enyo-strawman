@@ -51,22 +51,22 @@ module.exports = kind({
 		this.inherited(arguments);
 		this.loadAudio(this.$.selectAudio.getSelected());
 	},
-	metaDataLoaded: function (inSender, inEvent) {
-		this.timeChanged(inSender, utils.mixin(inEvent, {duration: this.$.audio.getDuration(), currentTime: this.$.audio.getCurrentTime()}));
+	metaDataLoaded: function (sender, ev) {
+		this.timeChanged(sender, utils.mixin(ev, {duration: this.$.audio.getDuration(), currentTime: this.$.audio.getCurrentTime()}));
 	},
-	playbackChanged: function (inSender, inEvent) {
-		if (inEvent.type === 'onPause') {
+	playbackChanged: function (sender, ev) {
+		if (ev.type === 'onPause') {
 			this.displayPopup('Pause');
-		} else if (inEvent.originator.playbackRate > 1) {
+		} else if (ev.originator.playbackRate > 1) {
 			this.displayPopup('Fast-Forward');
-		} else if (inEvent.originator.playbackRate < -1) {
+		} else if (ev.originator.playbackRate < -1) {
 			this.displayPopup('Rewind');
-		} else if (inEvent.originator.playbackRate == 1) {
+		} else if (ev.originator.playbackRate == 1) {
 			this.displayPopup('Play');
 		}
 	},
-	loadAudio: function (inIndex) {
-		this.$.audio.setSrc(this.sounds[inIndex]);
+	loadAudio: function (index) {
+		this.$.audio.setSrc(this.sounds[index]);
 		this.$.button.setContent('Play');
 	},
 	playAudio: function () {
@@ -77,43 +77,43 @@ module.exports = kind({
 		this.$.audio.pause();
 		this.$.button.setContent('Play');
 	},
-	togglePlay: function (inSender, inResponse) {
+	togglePlay: function (sender, res) {
 		if (this.$.audio.getPaused()) {
 			this.playAudio();
 		} else {
 			this.pauseAudio();
 		}
 	},
-	buttonRewindTapped: function (inSender, inEvent) {
+	buttonRewindTapped: function (sender, ev) {
 		this.$.audio.rewind();
 	},
-	buttonFastForwardTapped: function (inSender, inEvent) {
+	buttonFastForwardTapped: function (sender, ev) {
 		this.$.audio.fastForward();
 	},
-	buttonJumpBackwardTapped: function (inSender, inEvent) {
+	buttonJumpBackwardTapped: function (sender, ev) {
 		this.$.audio.jumpBackward();
 		this.displayPopup('Jump Backward ' + this.$.audio.getJumpSec() + 's');
 	},
-	buttonJumpForwardTapped: function (inSender, inEvent) {
+	buttonJumpForwardTapped: function (sender, ev) {
 		this.$.audio.jumpForward();
 		this.displayPopup('Jump Forward ' + this.$.audio.getJumpSec() + 's');
 	},
-	buttonLoopTapped: function (inSender, inEvent) {
+	buttonLoopTapped: function (sender, ev) {
 		this.$.audio.setLoop(!this.$.audio.getLoop());
 		this.displayPopup('Looping ' + (this.$.audio.getLoop() ? 'Enabled' : 'Disabled'));
 	},
-	rateChanged: function (inSender, inEvent) {
-		this.displayPopup('Playback ' + inEvent.playbackRate + 'x');
+	rateChanged: function (sender, ev) {
+		this.displayPopup('Playback ' + ev.playbackRate + 'x');
 	},
-	timeChanged: function (inSender, inEvent) {
-		this.$.results.setContent('Duration: ' + Math.floor(inEvent.duration) + 's, Current Position: ' + Math.floor(inEvent.currentTime) + 's');
+	timeChanged: function (sender, ev) {
+		this.$.results.setContent('Duration: ' + Math.floor(ev.duration) + 's, Current Position: ' + Math.floor(ev.currentTime) + 's');
 	},
-	selectChanged: function (inSender, inEvent) {
-		this.loadAudio(inSender.selected);
+	selectChanged: function (sender, ev) {
+		this.loadAudio(sender.selected);
 	},
-	displayPopup: function (inContent) {
+	displayPopup: function (content) {
 		var popup = this.$.popupStatus;
-		popup.setContent(inContent);
+		popup.setContent(content);
 		popup.setShowing(true);
 		job('autoHidePopup', function() {
 			popup.hide();

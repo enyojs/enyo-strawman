@@ -35,9 +35,9 @@ module.exports = kind({
 		this.printItemLocale(ilib.getLocale());
 	},
 
-	setLocale: function (inSender, inEvent) {
+	setLocale: function (sender, ev) {
 		/* Fill in info on selected locale */
-		this.printItemLocale(inEvent.content);
+		this.printItemLocale(ev.content);
 	},
 
 	printItemLocale: function (locale) {

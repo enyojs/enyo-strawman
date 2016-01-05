@@ -75,7 +75,7 @@ module.exports = kind({
 		{kind: Button, name: 'buttonApply', content: 'Change Background Color', classes: 'button-apply', ontap: 'buttonApplyTapped'},
 		{name: 'results', classes: 'results'}
 	],
-	buttonApplyTapped: function (inSender, inEvent) {
+	buttonApplyTapped: function (sender, ev) {
 		this.$.results.destroyClientControls();
 		this.applyStyle('transition-timing-function', this.$.selectTransitionTiming.getValue());
 		this.applyStyle('transition-duration', this.$.selectTransitionDuration.getValue());
@@ -87,8 +87,8 @@ module.exports = kind({
 		]);
 		this.$.results.render();
 	},
-	selectChanged: function (inSender, inEvent) {
-		this.$.results.setContent('The \'' + inSender.getName() + '\' value is \'' + inSender.getValue() + '\'.');
+	selectChanged: function (sender, ev) {
+		this.$.results.setContent('The \'' + sender.getName() + '\' value is \'' + sender.getValue() + '\'.');
 	},
 	logSelectChanged: function (was, is, prop) {
 		this.log(prop, 'was', was, 'and is now', is);

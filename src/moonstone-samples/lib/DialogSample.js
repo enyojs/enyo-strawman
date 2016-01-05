@@ -18,11 +18,11 @@ module.exports = kind({
 		{kind: ToggleButton, content: 'Animate', name: 'animateToggle'},
 		{kind: ToggleButton, content: 'SpotlightModal', ontap: 'buttonToggled'},
 		{
-			name: 'dialog', 
+			name: 'dialog',
 			kind: Dialog,
 			title: 'You\'ve been watching TV for a very long time so let\'s do a quick check-in.',
 			subTitle: 'This TV has been active for 10 hours.',
-			message: 'Perhaps it is time to take a break and get some fresh air. There is a nice coffee shop around the corner', 
+			message: 'Perhaps it is time to take a break and get some fresh air. There is a nice coffee shop around the corner',
 			components: [
 				{kind: Button, content: 'Go get a coffee', ontap: 'hideDialog'},
 				{kind: Button, content: 'Keep watching TV', ontap: 'addMessage'}
@@ -33,14 +33,14 @@ module.exports = kind({
 		{from: '.$.showingToggle.value', to: '.$.dialog.showing', oneWay:false},
 		{from: '.$.dialog.animate', to: '.$.animateToggle.value', oneWay:false}
 	],
-	buttonToggled: function (sender, event) {
+	buttonToggled: function (sender, ev) {
 		this.$.dialog.setSpotlightModal(sender.getActive());
 		this.$.dialog.setAutoDismiss(!sender.getActive());
 	},
 	showDialog: function (sender) {
 		this.$.dialog.show();
 	},
-	hideDialog: function (sender, event) {
+	hideDialog: function (sender, ev) {
 		this.$.dialog.hide();
 	},
 	addMessage: function () {

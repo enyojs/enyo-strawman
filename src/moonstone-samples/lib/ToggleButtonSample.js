@@ -58,7 +58,7 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'notice', content: 'No action yet.'}
 	],
-	buttonTapped: function (sender, event) {
+	buttonTapped: function (sender, ev) {
 		var labeltext = sender.get('uppercase') ? utils.toUpperCase(sender.getContent()) : sender.getContent();
 		var postString = sender.value ? ' is selected' : ' is unselected';
 		if (!sender.toggleOnLabel || !sender.toggleOffLabel) {

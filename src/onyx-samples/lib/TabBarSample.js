@@ -34,9 +34,9 @@ var SimpleTabBar = kind({
 		);
 	},
 
-	switchStuff: function (sender, event) {
-		this.log('Tapped tab with caption ' + event.caption + ' and message ' + event.data.msg);
-		this.$.stuff.setContent(event.data.msg);
+	switchStuff: function (sender, ev) {
+		this.log('Tapped tab with caption ' + ev.caption + ' and message ' + ev.data.msg);
+		this.$.stuff.setContent(ev.data.msg);
 	}
 });
 
@@ -66,7 +66,7 @@ var DynamicTabBar = kind({
 			this.addATab() ;
 		},
 
-		addATab: function (sender, event) {
+		addATab: function (sender, ev) {
 			this.log('adding a tab');
 			var date = new Date();
 			var delta = (date.getTime() - this.creationTime) / 1000;
@@ -75,11 +75,11 @@ var DynamicTabBar = kind({
 			}});
 		},
 
-		switchStuff: function (sender, event) {
-			this.log('Tapped tab with caption ' + event.caption + ' and message ' + event.data.msg );
-			this.$.stuff.setContent( event.data.msg);
+		switchStuff: function (sender, ev) {
+			this.log('Tapped tab with caption ' + ev.caption + ' and message ' + ev.data.msg );
+			this.$.stuff.setContent( ev.data.msg);
 		},
-		killTab: function (sender, event) {
+		killTab: function (sender, ev) {
 			this.log('killing tab');
 			this.$.bar.removeTab({index: this.number-- - 2});
 		}
@@ -125,18 +125,18 @@ var DelayedTabBar = kind({
 		utils.forEach(names, add, this);
 	},
 
-	delayAction: function (sender, event) {
-		this.log('Tapped tab with caption ' + event.caption + ' and message ' + event.data.msg );
+	delayAction: function (sender, ev) {
+		this.log('Tapped tab with caption ' + ev.caption + ' and message ' + ev.data.msg );
 		this.$.delayPopup.show();
-		setTimeout(this.bindSafely(this.resumeAction, sender, event), 500);
+		setTimeout(this.bindSafely(this.resumeAction, sender, ev), 500);
 	},
-	resumeAction: function (sender, event) {
+	resumeAction: function (sender, ev) {
 		this.$.delayPopup.hide();
-		this.$.stuff.setContent(event.data.msg);
-		event.next(); // call event.next(error) is abort is needed
+		this.$.stuff.setContent(ev.data.msg);
+		ev.next(); // call ev.next(error) is abort is needed
 	},
-	updateContent: function (sender, event) {
-		this.$.stuff.setContent( event.data.msg);
+	updateContent: function (sender, ev) {
+		this.$.stuff.setContent( ev.data.msg);
 	}
 });
 

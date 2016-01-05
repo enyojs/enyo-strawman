@@ -31,13 +31,13 @@ module.exports = kind({
 			{name: 'result', classes: 'onyx-sample-result', content: 'No button tapped yet.'}
 		]}
 	],
-	toggleChanged: function (sender, event) {
+	toggleChanged: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' was ' + (sender.getValue() ? ' selected.' : 'deselected.'));
 	},
 	ordinals: ['1st', '2nd', '3rd'],
-	groupActivated: function (sender, event) {
-		if (event.originator.getActive()) {
-			var selected = event.originator.indexInContainer();
+	groupActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			var selected = ev.originator.indexInContainer();
 			this.$.result.setContent('The ' + this.ordinals[selected] + ' toggle button in the group is selected.');
 		}
 	}

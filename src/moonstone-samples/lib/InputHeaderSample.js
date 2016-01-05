@@ -50,12 +50,12 @@ module.exports = kind({
 		{kind: Divider, content: 'Result', classes: 'moon-input-header-sample-result'},
 		{kind: BodyText, name: 'console', content: 'Input: '}
 	],
-	handleInput: function (sender, event) {
-		this.$.console.setContent('Input: ' + event.originator.getValue());
+	handleInput: function (sender, ev) {
+		this.$.console.setContent('Input: ' + ev.originator.getValue());
 		return true;
 	},
-	handleChange: function (sender, event) {
-		this.$.console.setContent('Change: ' + event.originator.getValue());
+	handleChange: function (sender, ev) {
+		this.$.console.setContent('Change: ' + ev.originator.getValue());
 		return true;
 	}
 });

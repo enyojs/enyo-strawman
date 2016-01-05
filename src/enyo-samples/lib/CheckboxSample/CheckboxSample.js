@@ -1,4 +1,4 @@
-var 
+var
 	kind = require('enyo/kind');
 
 var
@@ -21,17 +21,17 @@ module.exports = kind({
 		]},
 		{name: 'results', classes: 'results'}
 	],
-	checkboxChanged: function (inSender, inEvent) {
-		this.updateResult({content: 'The \'' + inEvent.originator.getContent() + '\' checkbox is ' + (inSender.getChecked() ? 'checked': 'unchecked') + '.'});
+	checkboxChanged: function (sender, ev) {
+		this.updateResult({content: 'The \'' + ev.originator.getContent() + '\' checkbox is ' + (sender.getChecked() ? 'checked': 'unchecked') + '.'});
 	},
-	groupActivated: function (inSender, inEvent) {
-		if (inEvent.originator.getActive()) {
-			this.updateResult({content: 'The \'' + inEvent.originator.getContent() + '\' checkbox is selected.'});
+	groupActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			this.updateResult({content: 'The \'' + ev.originator.getContent() + '\' checkbox is selected.'});
 		}
 	},
-	updateResult: function (inComponents) {
+	updateResult: function (comps) {
 		this.$.results.destroyClientControls();
-		this.$.results.createComponent(inComponents);
+		this.$.results.createComponent(comps);
 		this.$.results.render();
 	}
 });

@@ -122,20 +122,20 @@ module.exports = kind({
 		]},
 		{name: 'result', style: 'height: 50px;'}
 	],
-	itemTapped: function (sender, event) {
+	itemTapped: function (sender, ev) {
 		this.$.result.set('content', 'Item Tapped: ' + sender.id);
 	},
-	badgeTapped: function (sender, event) {
+	badgeTapped: function (sender, ev) {
 		this.$.result.set('content', 'Badge Tapped: ' + sender.id);
 		return true;
 	},
-	toggleSelected: function (sender, event) {
+	toggleSelected: function (sender, ev) {
 		sender.set('selected', !sender.selected);
 	},
-	showOverlay: function (sender, event) {
+	showOverlay: function (sender, ev) {
 		this.$.tapOverlay.set('overlayShowing', true);
 	},
-	hideOverlay: function (sender, event) {
+	hideOverlay: function (sender, ev) {
 		this.$.tapOverlay.set('overlayShowing', false);
 		return true;
 	}

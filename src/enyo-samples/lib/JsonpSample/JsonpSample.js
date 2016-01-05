@@ -1,4 +1,4 @@
-var 
+var
 	kind = require('enyo/kind');
 
 var
@@ -32,8 +32,8 @@ module.exports = kind({
 		// attach responders to the transaction object
 		jsonp.response(this, 'processResponse');
 	},
-	processResponse: function (inSender, inResponse) {
+	processResponse: function (sender, res) {
 		// do something with it
-		this.$.textArea.setValue(JSON.stringify(inResponse, null, 2));
+		this.$.textArea.setValue(JSON.stringify(res, null, 2));
 	}
 });

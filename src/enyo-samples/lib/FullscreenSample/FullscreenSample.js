@@ -1,4 +1,4 @@
-var 
+var
 	kind = require('enyo/kind');
 
 var
@@ -18,13 +18,13 @@ module.exports = kind({
 		]}
 	],
 	//* Set/unset _this.$.sampleContent_ as fullscreen control
-	toggleFullscreen: function (inSender, inEvent) {
+	toggleFullscreen: function (sender, ev) {
 		var targetControl = this.$.sampleContent;
-		
+
 		// If _targetControl_ is currently fullscreen, cancel fullscreen
 		if (targetControl.isFullscreen()) {
 			targetControl.cancelFullscreen();
-		
+
 		// If _targetControl_ is not currently fullscreen, request fullscreen
 		} else {
 			targetControl.requestFullscreen();

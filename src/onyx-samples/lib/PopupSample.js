@@ -55,10 +55,10 @@ module.exports = kind({
 			p.show();
 		}
 	},
-	showPopupAtEvent: function (sender, event) {
+	showPopupAtEvent: function (sender, ev) {
 		var p = this.$[sender.popup];
 		if (p) {
-			p.showAtEvent(event);
+			p.showAtEvent(ev);
 		}
 	},
 	popupHidden: function () {

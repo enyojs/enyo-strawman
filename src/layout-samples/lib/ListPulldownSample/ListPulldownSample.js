@@ -11,7 +11,7 @@ var
 	Input = require('enyo/Input'),
 	JsonpRequest = require('enyo/Jsonp');
 
-	
+
 module.exports = kind({
 	name: 'enyo.sample.ListPulldownSample',
 	classes: 'enyo-unselectable enyo-fit onyx',
@@ -58,14 +58,14 @@ module.exports = kind({
 		}
 		this.searchFlickr(searchText);
 	},
-	searchFlickr: function (inSearchText) {
+	searchFlickr: function (searchText) {
 		var params = {
 			method: 'flickr.photos.search',
 			format: 'json',
 			api_key: '2a21b46e58d207e4888e1ece0cb149a5',
 			per_page: 50,
 			page: 0,
-			text: inSearchText,
+			text: searchText,
 			sort: 'date-posted-desc',
 			extras: 'url_m'
 		}, url = 'https://api.flickr.com/services/rest/';
@@ -81,12 +81,12 @@ module.exports = kind({
 				.go(params);
 		}
 	},
-	processAjaxSearchResults: function (inRequest, inResponse) {
-		inResponse = json.parse(inResponse);
-		this.processSearchResults(inRequest, inResponse);
+	processAjaxSearchResults: function (req, res) {
+		res = json.parse(res);
+		this.processSearchResults(req, res);
 	},
-	processSearchResults: function (inRequest, inResponse) {
-		this.results = inResponse.photos.photo;
+	processSearchResults: function (req, res) {
+		this.results = res.photos.photo;
 		this.$.list.setCount(this.results.length);
 		if (this.pulled) {
 			this.$.list.completePull();
@@ -94,8 +94,8 @@ module.exports = kind({
 			this.$.list.reset();
 		}
 	},
-	setupItem: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupItem: function (sender, ev) {
+		var i = ev.index;
 		var item = this.results[i];
 		if (!item.url_m) {
 			return true;

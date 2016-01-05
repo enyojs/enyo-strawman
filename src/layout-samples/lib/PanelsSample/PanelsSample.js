@@ -73,7 +73,7 @@ module.exports = kind({
 			this.panelCount=this.$.samplePanels.getPanels().length;
 		};
 	}),
-	arrangerSelected: function (sender, event) {
+	arrangerSelected: function (sender, ev) {
 		var sp = this.$.samplePanels;
 		var p = this.panelArrangers[sender.selected - 1];
 		if (this.currentClass) {

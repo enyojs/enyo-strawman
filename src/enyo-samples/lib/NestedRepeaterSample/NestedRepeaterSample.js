@@ -22,15 +22,15 @@ module.exports = kind({
 	create: function () {
 		this.inherited(arguments);
 	},
-	setupGroup: function (inSender, inEvent) {
-		var item = inEvent.item;
+	setupGroup: function (sender, ev) {
+		var item = ev.item;
 		item.$.inner.setCount(this.people.length);
 		return true;
 	},
-	setupItem: function (inSender, inEvent) {
-		var group = inEvent.indices[1];
-		var index = inEvent.index;
-		var item = inEvent.item;
+	setupItem: function (sender, ev) {
+		var group = ev.indices[1];
+		var index = ev.index;
+		var item = ev.item;
 		var person = this.people[index];
 		item.$.personNumber.setContent((group + 1) + ':' + (index+1) + '. ');
 		item.$.personName.setContent(person.name);

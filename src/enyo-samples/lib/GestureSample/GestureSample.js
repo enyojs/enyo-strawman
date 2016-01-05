@@ -9,7 +9,7 @@ var
 	Group = require('enyo/Group'),
 	Select = require('enyo/Select');
 
-var 
+var
 	EventItem = kind({
 		name:'enyo.sample.EventItem',
 		published: {
@@ -33,7 +33,7 @@ var
 		truncateChanged: function () {
 			this.$.eventProps.addRemoveClass('gesture-sample-truncate', this.truncate);
 		},
-		eventChanged: function (inOld) {
+		eventChanged: function (old) {
 			if (this.event) {
 				if (this.timeout) {
 					clearTimeout(this.timeout);
@@ -44,8 +44,8 @@ var
 				this.$.animator.play();
 			}
 		},
-		stepAnimation: function (inSender, inEvent) {
-			var v = Math.floor(inSender.value);
+		stepAnimation: function (sender, ev) {
+			var v = Math.floor(sender.value);
 			this.applyStyle('background-color', 'rgb(' + v + ',255,' + v + ');');
 			return true;
 		},
@@ -177,8 +177,8 @@ module.exports = kind({
 		restoreHoldPulseConfig();
 		this.inherited(arguments);
 	},
-	handleEvent: function(inSender, inEvent) {
-		var event = utils.clone(inEvent);
+	handleEvent: function(sender, ev) {
+		var event = utils.clone(ev);
 		if (this.monitorEvent && (event.type != this.monitorEvent)) {
 			return true;
 		}
@@ -210,10 +210,10 @@ module.exports = kind({
 	doubleTapChanged: function () {
 		this.$.gestureSamplePad.doubleTapEnabled = this.$.enableDoubleTap.checked;
 	},
-	removeEvent: function (inSender, inEvent) {
+	removeEvent: function (sender, ev) {
 		this.eventCount--;
-		this.eventList[inEvent.type].destroy();
-		delete this.eventList[inEvent.type];
+		this.eventList[ev.type].destroy();
+		delete this.eventList[ev.type];
 		if (this.eventCount === 0) {
 			this.$.waiting.show();
 		}
@@ -236,12 +236,12 @@ module.exports = kind({
 	preventDefault: function () {
 		return true;
 	},
-	monitorEventSelected: function (inSender, inEvent) {
+	monitorEventSelected: function (sender, ev) {
 		this.removeAllEvents();
-		if (inEvent.originator.content == 'All events') {
+		if (ev.originator.content == 'All events') {
 			this.monitorEvent = null;
 		} else {
-			this.monitorEvent = inEvent.originator.content;
+			this.monitorEvent = ev.originator.content;
 		}
 	}
 });

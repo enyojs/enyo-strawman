@@ -58,39 +58,39 @@ module.exports = kind({
 			]}
 		]}
 	],
-	describeLarge: function (sender, event) {
+	describeLarge: function (sender, ev) {
 		this.$.largeHeader.setTitleBelow('This is the default header.');
 	},
-	howToUseLarge: function (sender, event) {
+	howToUseLarge: function (sender, ev) {
 		this.$.largeHeader.setSubTitleBelow('Large (default) header will be used if you don\'t specify the `type` property.');
 	},
-	describeMedium: function (sender, event) {
+	describeMedium: function (sender, ev) {
 		this.$.mediumHeader.setTitleBelow('Medium header flattens the button area and the titleBelow areas together for a more compact header.');
 	},
-	howToUseMedium: function (sender, event) {
+	howToUseMedium: function (sender, ev) {
 		this.$.mediumHeader.setSubTitleBelow('Set `type` property to \'medium\' to use the medium header and long very subTitleBelow.');
 	},
-	describeSmall: function (sender, event) {
+	describeSmall: function (sender, ev) {
 		this.$.smallHeader.setTitle('Small header flattens the buttons down to the title area, uses a smaller title font, and has no `titleBelow`.');
 	},
-	howToUseSmall: function (sender, event) {
+	howToUseSmall: function (sender, ev) {
 		this.$.smallHeader.setTitle('Set `type` property to \'small\' to use the small header.');
 	},
-	rtlSmall: function (sender, event) {
+	rtlSmall: function (sender, ev) {
 		this.$.smallHeader.set('title', 'כותרת Small Header');
 		this.$.smallHeader.set('titleBelow', 'כתוביות למטה');
 	},
-	handleToggle: function (sender, event) {
+	handleToggle: function (sender, ev) {
 		this.$.imageHeader.setFullBleedBackground(sender.value);
 	},
-	resizeImageHeader: function (sender, event) {
+	resizeImageHeader: function (sender, ev) {
 		this.$.imageHeader.setType(sender.content);
 	},
-	switchMode: function (sender, event) {
+	switchMode: function (sender, ev) {
 		var header = this.$[sender.header];
 		header.setInputMode(!header.getInputMode());
 	},
-	handleChange: function (sender, event) {
+	handleChange: function (sender, ev) {
 		this.$.inputHeaderDismiss.set('subTitleBelow', 'Changed: ' + sender.getValue());
 	}
 });

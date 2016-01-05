@@ -131,26 +131,26 @@ module.exports = kind({
 	bindings: [
 		{from: '$.toggleDisabledListActions.value', to: '$.listActions.disabled'}
 	],
-	activateHandler: function (sender, event) {
-		if (event && event.action) {
-			if (event.originator instanceof SelectableItem) {
+	activateHandler: function (sender, ev) {
+		if (ev && ev.action) {
+			if (ev.originator instanceof SelectableItem) {
 				this.$.console.setContent(
-					event.action + ': ' +
-					event.originator.getContent() + ' was ' +
-					(event.originator.getSelected() ? 'selected' : 'unselected')
+					ev.action + ': ' +
+					ev.originator.getContent() + ' was ' +
+					(ev.originator.getSelected() ? 'selected' : 'unselected')
 				);
 			} else {	// moon.CheckboxItem or moon.ToggleItem
 				this.$.console.setContent(
-					event.action + ': ' +
-					event.toggledControl.getContent() + ' was ' +
-					(event.originator.getChecked() ? 'selected' : 'unselected')
+					ev.action + ': ' +
+					ev.toggledControl.getContent() + ' was ' +
+					(ev.originator.getChecked() ? 'selected' : 'unselected')
 				);
 			}
 		}
 
 		// Log the active state of the ListAction drawer
-		if (event.originator instanceof ListActions) {
-			this.$.console.setContent(event.originator.name + ' is now ' + (event.originator.getOpen() ? 'open' : 'closed'));
+		if (ev.originator instanceof ListActions) {
+			this.$.console.setContent(ev.originator.name + ' is now ' + (ev.originator.getOpen() ? 'open' : 'closed'));
 		}
 	},
 	addToStatic: function () {

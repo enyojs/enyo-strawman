@@ -33,7 +33,7 @@ module.exports = kind({
 			{label: 'third'}
 		]));
 	},
-	checked: function (sender, event) {
+	checked: function (sender, ev) {
 		this.$.picker.set(sender.prop, sender.checked);
 	}
 });

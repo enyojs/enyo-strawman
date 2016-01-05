@@ -235,9 +235,9 @@ module.exports = kind({
 			return val;
 		}}
 	],
-	buttonToggled: function (inSender, inEvent) {
-		this.$.buttonPopup.setSpotlightModal(inSender.getActive());
-		this.$.buttonPopup.setAutoDismiss(!inSender.getActive());
+	buttonToggled: function (sender, ev) {
+		this.$.buttonPopup.setSpotlightModal(sender.getActive());
+		this.$.buttonPopup.setAutoDismiss(!sender.getActive());
 	},
 	dismissRadioSelection: function () {
 		if(this.$.nestedRadioDismissButton.value) this.$.nestedRadioPopup.hide();
@@ -246,9 +246,9 @@ module.exports = kind({
 		this.$.directionButton.applyStyle('left', this.$.leftInput.getValue() === '' ? '40%' : this.$.leftInput.getValue());
 		this.$.directionButton.applyStyle('top', this.$.topInput.getValue() === '' ? '70%' : this.$.topInput.getValue());
 	},
-	groupChanged: function (inSender, inEvent) {
-		if(inEvent.originator.getActive() && inEvent.originator.kind === RadioItem) {
-			var selected = inEvent.originator.getContent();
+	groupChanged: function (sender, ev) {
+		if(ev.originator.getActive() && ev.originator.kind === RadioItem) {
+			var selected = ev.originator.getContent();
 			this.$.directionContext.set('direction', selected);
 		}
 	}

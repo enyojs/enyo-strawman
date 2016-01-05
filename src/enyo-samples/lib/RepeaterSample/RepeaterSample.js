@@ -21,9 +21,9 @@ module.exports = kind({
 		this.inherited(arguments);
 		this.$.repeater.setCount(this.people.length);
 	},
-	setupItem: function (inSender, inEvent) {
-		var index = inEvent.index;
-		var item = inEvent.item;
+	setupItem: function (sender, ev) {
+		var index = ev.index;
+		var item = ev.item;
 		var person = this.people[index];
 		item.$.personNumber.setContent((index+1) + '. ');
 		item.$.personName.setContent(person.name);

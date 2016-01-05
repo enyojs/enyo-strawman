@@ -98,14 +98,14 @@ module.exports = kind({
 	preventMenuActivate: function () {
 		return true;
 	},
-	itemSelected: function (sender, event) {
+	itemSelected: function (sender, ev) {
 		// Menu items send an onSelect event with a reference to themselves & any directly displayed content
-		if (event.originator.content) {
-			this.$.menuSelection.setContent(event.originator.content + ' Selected');
-		} else if (event.selected) {
+		if (ev.originator.content) {
+			this.$.menuSelection.setContent(ev.originator.content + ' Selected');
+		} else if (ev.selected) {
 			//	Since some of the menu items do not have directly displayed content (they are kinds with subcomponents),
 			//	we have to handle those items differently here.
-			this.$.menuSelection.setContent(event.selected.controlAtIndex(1).content + ' Selected');
+			this.$.menuSelection.setContent(ev.selected.controlAtIndex(1).content + ' Selected');
 		}
 	}
 });

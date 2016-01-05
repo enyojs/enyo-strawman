@@ -16,13 +16,13 @@ module.exports = kind({
 		{kind: Button, name: 'buttonTextAreaToggle', ontap: 'buttonTextAreaToggleTapped', content: 'Toggle Text Area State'},
 		{name: 'results', classes: 'results'}
 	],
-	inputChanged: function (inSender, inEvent) {
-		this.$.results.setContent('The value of \'' + inSender.getName() + '\' has been changed to: \'' + inSender.getValue() + '\'.');
+	inputChanged: function (sender, ev) {
+		this.$.results.setContent('The value of \'' + sender.getName() + '\' has been changed to: \'' + sender.getValue() + '\'.');
 	},
-	inputOccurred: function (inSender, inEvent) {
-		this.$.results.setContent('The current value of \'' + inSender.getName() + '\' is: \'' + inSender.getValue() + '\'.');
+	inputOccurred: function (sender, ev) {
+		this.$.results.setContent('The current value of \'' + sender.getName() + '\' is: \'' + sender.getValue() + '\'.');
 	},
-	buttonTextAreaToggleTapped: function (inSender, inEvent) {
+	buttonTextAreaToggleTapped: function (sender, ev) {
 		this.$.textAreaDisabled.setDisabled(!this.$.textAreaDisabled.getDisabled()).setValue(this.$.textAreaDisabled.getDisabled() ? 'Disabled' : 'Enabled');
 		this.$.results.setContent('The current state of \'textAreaDisabled\' is \'' + (this.$.textAreaDisabled.getDisabled() ? 'disabled' : 'enabled') + '\'.');
 	}

@@ -43,15 +43,15 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No item tapped yet.'}
 	],
-	setupItem: function (sender, event) {
-		var imageUrl = 'http://placehold.it/%./' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + event.index;
-		event.item.$.image.setSrc({
+	setupItem: function (sender, ev) {
+		var imageUrl = 'http://placehold.it/%./' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + ev.index;
+		ev.item.$.image.setSrc({
 			'hd' : utils.format(imageUrl, '132x132'),
 			'fhd': utils.format(imageUrl, '198x198')
 		});
 	},
-	ontap: function (sender, event) {
-		this.$.result.setContent(event.originator.name + ' tapped.');
+	ontap: function (sender, ev) {
+		this.$.result.setContent(ev.originator.name + ' tapped.');
 	}
 });
 

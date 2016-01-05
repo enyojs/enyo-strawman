@@ -52,21 +52,21 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '.isPlaying', to: '.$.playOverlay.showing', transform: function(inValue) {
-			return !inValue;
+		{from: '.isPlaying', to: '.$.playOverlay.showing', transform: function(value) {
+			return !value;
 		}}
 	],
-	playbackChanged: function (inSender, inEvent) {
-		if (inEvent.playbackRate > 1) {
+	playbackChanged: function (sender, ev) {
+		if (ev.playbackRate > 1) {
 			this.$.videoAction.setContent('Fast-Forward');
-		} else if (inEvent.playbackRate < -1) {
+		} else if (ev.playbackRate < -1) {
 			this.$.videoAction.setContent('Rewind');
-		} else if (inEvent.playbackRate == 1) {
+		} else if (ev.playbackRate == 1) {
 			this.$.videoAction.setContent('Play');
 		}
 		return true;
 	},
-	togglePlayback: function (inSender, inEvent) {
+	togglePlayback: function (sender, ev) {
 		if (this.get('isPlaying')) {
 			this.pauseVideo(arguments);
 		} else {
@@ -74,48 +74,48 @@ module.exports = kind({
 		}
 		return true;
 	},
-	playVideo: function (inSender, inEvent) {
+	playVideo: function (sender, ev) {
 		this.set('isPlaying', true);
 		this.$.video.play();
 		this.$.videoAction.setContent('Play');
 		return true;
 	},
-	pauseVideo: function (inSender, inEvent) {
+	pauseVideo: function (sender, ev) {
 		this.set('isPlaying', false);
 		this.$.video.pause();
 		this.$.videoAction.setContent('Pause');
 		return true;
 	},
-	buttonRewindTapped: function(inSender, inEvent) {
+	buttonRewindTapped: function(sender, ev) {
 		this.set("isPlaying", true);
 		this.$.video.rewind();
 		return true;
 	},
-	buttonFastForwardTapped: function(inSender, inEvent) {
+	buttonFastForwardTapped: function(sender, ev) {
 		this.set('isPlaying', true);
 		this.$.video.fastForward();
 		return true;
 	},
-	buttonJumpBackwardTapped: function (inSender, inEvent) {
+	buttonJumpBackwardTapped: function (sender, ev) {
 		this.$.video.jumpBackward();
 		this.$.videoAction.setContent('Jump Backward ' + this.$.video.getJumpSec() + 's');
 		return true;
 	},
-	buttonJumpForwardTapped: function (inSender, inEvent) {
+	buttonJumpForwardTapped: function (sender, ev) {
 		this.$.video.jumpForward();
 		this.$.videoAction.setContent('Jump Forward ' + this.$.video.getJumpSec() + 's');
 		return true;
 	},
-	buttonToggleLoopTapped: function (inSender, inEvent) {
+	buttonToggleLoopTapped: function (sender, ev) {
 		this.$.video.setLoop(!this.$.video.getLoop());
 		this.$.videoAction.setContent('Looping ' + (this.$.video.getLoop() ? 'Enabled' : 'Disabled'));
 		return true;
 	},
-	buttonUseSrcTapped: function (inSender, inEvent) {
+	buttonUseSrcTapped: function (sender, ev) {
 		this.pauseVideo();
 		this.$.video.set('src', 'http://media.w3.org/2010/05/bunny/movie.mp4');
 	},
-	buttonUseSourceComponentsTapped: function (inSender, inEvent) {
+	buttonUseSourceComponentsTapped: function (sender, ev) {
 		this.pauseVideo();
 		this.$.video.set('sourceComponents', [
 		 	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'},
@@ -123,16 +123,16 @@ module.exports = kind({
 			{src: 'http://media.w3.org/2010/05/bunny/movie.webm', type: 'video/webm'}
 		]);
 	},
-	rateChanged: function (inSender, inEvent) {
-		this.$.videoAction.setContent('Playback ' + inEvent.playbackRate + 'x');
+	rateChanged: function (sender, ev) {
+		this.$.videoAction.setContent('Playback ' + ev.playbackRate + 'x');
 		return true;
 	},
-	timeChanged: function (inSender, inEvent) {
-		this.$.videoPosition.setContent(Math.floor(inEvent.currentTime) + 's');
+	timeChanged: function (sender, ev) {
+		this.$.videoPosition.setContent(Math.floor(ev.currentTime) + 's');
 		return true;
 	},
-	durationChanged: function (inSender, inEvent) {
-		this.$.videoDuration.setContent((inEvent.target && inEvent.target.duration ? Math.floor(inEvent.target.duration) : 0) + 's');
+	durationChanged: function (sender, ev) {
+		this.$.videoDuration.setContent((ev.target && ev.target.duration ? Math.floor(ev.target.duration) : 0) + 's');
 		return true;
 	}
 });

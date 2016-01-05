@@ -77,11 +77,11 @@ var TestMixin = {
 			this.addTestControls();
 		};
 	}),
-	strategyChanged: function (sender, event) {
-		this.rebuild({strategy: event.originator.value}, samples[this.sample]);
+	strategyChanged: function (sender, ev) {
+		this.rebuild({strategy: ev.originator.value}, samples[this.sample]);
 	},
-	sampleChanged: function (sender, event) {
-		this.rebuild({strategy: this.strategy}, samples[event.originator.value]);
+	sampleChanged: function (sender, ev) {
+		this.rebuild({strategy: this.strategy}, samples[ev.originator.value]);
 	},
 	rebuild: function (props, Ctor) {
 		var pn = this.hasNode().parentNode;

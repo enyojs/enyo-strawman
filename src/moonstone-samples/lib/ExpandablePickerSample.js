@@ -160,17 +160,17 @@ module.exports = kind({
 		this.$.expandableDataPicker.set('collection', c);
 		this.$.expandableDataPicker2.set('collection', c);
 	},
-	pickerChanged: function (sender, event) {
+	pickerChanged: function (sender, ev) {
 		var value,
-			picker = event.originator.getContent();
-		if (event.originator instanceof ExpandablePicker) {
-			value = event.content;
+			picker = ev.originator.getContent();
+		if (ev.originator instanceof ExpandablePicker) {
+			value = ev.content;
 			sender.setSubTitleBelow(picker + ' changed to \'' + value + '\'');
-		} else if ((event.originator instanceof ExpandableIntegerPicker) ||
-					(event.originator instanceof DatePicker) ||
-					(event.originator instanceof TimePicker) ||
-					(event.originator instanceof ExpandableInput)) {
-			value = event.originator.getValue();
+		} else if ((ev.originator instanceof ExpandableIntegerPicker) ||
+					(ev.originator instanceof DatePicker) ||
+					(ev.originator instanceof TimePicker) ||
+					(ev.originator instanceof ExpandableInput)) {
+			value = ev.originator.getValue();
 			sender.setSubTitleBelow(picker + ' changed to \'' + value + '\'');
 		}
 	},

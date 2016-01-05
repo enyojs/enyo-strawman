@@ -82,11 +82,11 @@ module.exports = kind({
 		this.$.libPicker.setSelected(0);
 		this.$.libPickerButton.setContent(this.libs[this.$.libPicker.getSelected()]);
 	},
-	setupLibs: function (sender, event) {
-		this.$.lib.setContent(this.libs.length > event.index ? this.libs[event.index] : 'JS Library ' + (event.index-this.libs.length));
+	setupLibs: function (sender, ev) {
+		this.$.lib.setContent(this.libs.length > ev.index ? this.libs[ev.index] : 'JS Library ' + (ev.index-this.libs.length));
 		return true;
 	},
-	itemSelected: function (sender, event) {
-		this.$.pickerSelection.setContent(event.selected.content);
+	itemSelected: function (sender, ev) {
+		this.$.pickerSelection.setContent(ev.selected.content);
 	}
 });

@@ -65,8 +65,8 @@ module.exports = kind({
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function (inSender, inEvent){
-		var locale = inEvent.selected.content;
+	setLocale: function (sender, ev){
+		var locale = ev.selected.content;
 		locale = locale == 'Use Default Locale' ? null : locale;
 		updateLocale(locale);
 		return true;

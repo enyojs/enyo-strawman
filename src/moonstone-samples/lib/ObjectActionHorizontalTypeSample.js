@@ -34,12 +34,12 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No item tapped yet.'}
 	],
-	setupItem: function (sender, event) {
-		event.item.$.imageItem.setSource('http://placehold.it/200x300/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + event.index);
-		event.item.$.imageItem.setText('Item ' + event.index + ': Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
+	setupItem: function (sender, ev) {
+		ev.item.$.imageItem.setSource('http://placehold.it/200x300/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + ev.index);
+		ev.item.$.imageItem.setText('Item ' + ev.index + ': Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
 	},
-	ontap: function (sender, event) {
-		this.$.result.setContent(event.originator.name + ' tapped.');
+	ontap: function (sender, ev) {
+		this.$.result.setContent(ev.originator.name + ' tapped.');
 	}
 });
 

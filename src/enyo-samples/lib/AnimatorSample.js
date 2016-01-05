@@ -1,4 +1,4 @@
-var 
+var
 	kind = require('enyo/kind'),
 	animation = require('enyo/animation');
 
@@ -13,8 +13,8 @@ module.exports = kind({
 		{name: 'dot', style: 'width: 10px; height: 10px; background-color: red;'},
 		{kind: Animator, duration: 3000, startValue: 0, endValue: 10000, onStep: 'stepAnimation', onEnd: 'animationEnded', easingFunction: animation.easing.linear }
 	],
-	stepAnimation: function (inSender, inEvent) {
-		var v = inSender.value/100;
+	stepAnimation: function (sender, ev) {
+		var v = sender.value/100;
 		this.$.dot.applyStyle('width', v + '%');
 	},
 	/* an expensive operation: */

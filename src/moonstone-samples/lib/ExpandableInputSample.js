@@ -27,10 +27,10 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'Input:', allowHtml: true}
 	],
-	inputChanging: function (inSender, inEvent) {
-		this.$.console.setContent('<em>'+inSender.getContent() + '</em> changing: \'' + inEvent.originator.getValue() + '\'');
+	inputChanging: function (sender, ev) {
+		this.$.console.setContent('<em>'+sender.getContent() + '</em> changing: \'' + ev.originator.getValue() + '\'');
 	},
-	inputChanged: function (inSender, inEvent) {
-		this.$.console.setContent('<em>'+inSender.getContent() + '</em> changed to: \'' + inSender.getValue() + '\'');
+	inputChanged: function (sender, ev) {
+		this.$.console.setContent('<em>'+sender.getContent() + '</em> changed to: \'' + sender.getValue() + '\'');
 	}
 });

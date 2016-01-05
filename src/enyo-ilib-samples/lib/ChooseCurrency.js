@@ -51,8 +51,8 @@ module.exports = kind({
 		this.$.currencies.setSelected(selected);
 	},
 
-	setCurrency: function (inSender, inEvent) {
-		this.setValue(inEvent.selected.content);
-		this.bubble('onSelectedCurrency', {content: inEvent.selected.content});
+	setCurrency: function (sender, ev) {
+		this.setValue(ev.selected.content);
+		this.bubble('onSelectedCurrency', {content: ev.selected.content});
 	}
 });

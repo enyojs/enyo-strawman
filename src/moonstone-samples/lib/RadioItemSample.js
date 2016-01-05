@@ -41,17 +41,17 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No action yet.'}
 	],
-	buttonActivated: function (sender, event) {
-		var originator = event.originator,
+	buttonActivated: function (sender, ev) {
+		var originator = ev.originator,
 			str = 'The \'';
-		
+
 		if (!originator || !this.hasNode()) {
 			return;
 		}
-			
-		str += (event.originator.getActive() && event.originator.kind === 'moon.RadioItem') ? originator.getContent() : originator.name;
+
+		str += (ev.originator.getActive() && ev.originator.kind === 'moon.RadioItem') ? originator.getContent() : originator.name;
 		str +=  '\' item is selected.';
-		
+
 		this.$.result.setContent(str);
 	}
 });

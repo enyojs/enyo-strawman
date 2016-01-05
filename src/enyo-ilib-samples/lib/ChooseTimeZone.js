@@ -36,8 +36,8 @@ module.exports = kind({
 			this.$.timeZones.createComponent({content: timeZones[i]});
 	},
 
-	setTimeZone: function (inSender, inEvent) {
-		this.setValue(inEvent.selected.content);
-		this.bubble('onSelectedTimeZone', {content: inEvent.selected.content});
+	setTimeZone: function (sender, ev) {
+		this.setValue(ev.selected.content);
+		this.bubble('onSelectedTimeZone', {content: ev.selected.content});
 	}
 });

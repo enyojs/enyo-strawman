@@ -56,23 +56,23 @@ module.exports = kind({
 		]},
 		{name: 'results', classes: 'results'}
 	],
-	handleActiveChanged: function (inSender, inEvent) {
+	handleActiveChanged: function (sender, ev) {
 		this.updateResults([
-			{content: 'The \'' + inEvent.active.getContent() + '\' control is active.'}
+			{content: 'The \'' + ev.active.getContent() + '\' control is active.'}
 		]);
 		return true;
 	},
-	handleActivate: function (inSender, inEvent) {
-		if (inEvent.originator.getActive()) {
+	handleActivate: function (sender, ev) {
+		if (ev.originator.getActive()) {
 			this.updateResults([
-				{content: 'The \'' + inEvent.originator.getContent() + '\' control is newly active in the group.'}
+				{content: 'The \'' + ev.originator.getContent() + '\' control is newly active in the group.'}
 			]);
 		}
 		return true;
 	},
-	updateResults: function (inComponents) {
+	updateResults: function (comps) {
 		this.$.results.destroyClientControls();
-		this.$.results.createComponents(inComponents);
+		this.$.results.createComponents(comps);
 		this.$.results.render();
 	}
 });

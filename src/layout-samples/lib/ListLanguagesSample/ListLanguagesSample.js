@@ -77,13 +77,13 @@ module.exports = kind({
 			this.populateList();
 		};
 	}),
-	listReorder: function (inSender, inEvent) {
-		var movedItem = utils.clone(this.data[inEvent.reorderFrom]);
-		this.data.splice(inEvent.reorderFrom,1);
-		this.data.splice((inEvent.reorderTo),0,movedItem);
+	listReorder: function (sender, ev) {
+		var movedItem = utils.clone(this.data[ev.reorderFrom]);
+		this.data.splice(ev.reorderFrom,1);
+		this.data.splice((ev.reorderTo),0,movedItem);
 	},
-	setupItem: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupItem: function (sender, ev) {
+		var i = ev.index;
 		if(!this.data[i]) {
 			return;
 		}
@@ -95,8 +95,8 @@ module.exports = kind({
 		this.$.text.setContent(number);
 		this.$.serial.setContent('#' + serial);
 	},
-	setupReorderComponents: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupReorderComponents: function (sender, ev) {
+		var i = ev.index;
 		if(!this.data[i]) {
 			return;
 		}
@@ -106,8 +106,8 @@ module.exports = kind({
 		this.$.reorderTitle.setContent(number);
 		return true;
 	},
-	/* setupPinnedReorderComponents: function(inSender, inEvent) {
-		var i = inEvent.index;
+	/* setupPinnedReorderComponents: function(sender, ev) {
+		var i = ev.index;
 		if(!this.data[i]) {
 			return;
 		}
@@ -117,27 +117,27 @@ module.exports = kind({
 		this.$.pinnedReorderTitle.setContent(number);
 	}, */
 	//* Called when the 'Drop' button is pressed on the pinned placeholder row
-	/* dropPinnedRow: function(inSender, inEvent) {
-		this.$.list.dropPinnedRow(inEvent);
+	/* dropPinnedRow: function(sender, ev) {
+		this.$.list.dropPinnedRow(ev);
 	}, */
 	//* Called when the 'Cancel' button is pressed on the pinned placeholder row
-	/* cancelPinnedMode: function(inSender, inEvent) {
-		this.$.list.cancelPinnedMode(inEvent);
+	/* cancelPinnedMode: function(sender, ev) {
+		this.$.list.cancelPinnedMode(ev);
 	}, */
-	setupSwipeItem: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupSwipeItem: function (sender, ev) {
+		var i = ev.index;
 		if(!this.data[i]) {
 			return;
 		}
-		var newLang = (inEvent.xDirection == 1)
+		var newLang = (ev.xDirection == 1)
 			? this.getNextLang(i)
 			: this.getPrevLang(i);
 		this.$.swipeTitle.setContent(this.data[i].langs[newLang]);
 		return true;
 	},
-	swipeComplete: function (inSender, inEvent) {
-		var i = inEvent.index;
-		this.data[i].currentIndex = (inEvent.xDirection == 1)
+	swipeComplete: function (sender, ev) {
+		var i = ev.index;
+		this.data[i].currentIndex = (ev.xDirection == 1)
 			? this.getNextLang(i)
 			: this.getPrevLang(i);
 		this.$.list.renderRow(i);

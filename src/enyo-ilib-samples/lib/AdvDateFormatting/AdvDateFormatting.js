@@ -126,9 +126,9 @@ module.exports = kind({
 		]}
 	],
 
-	changedDate: function (inSender, inEvent) {
-		if (inEvent.value)
-			this.$.calendar.setValue(inEvent.value);
+	changedDate: function (sender, ev) {
+		if (ev.value)
+			this.$.calendar.setValue(ev.value);
 	},
 
 	create: function () {
@@ -146,7 +146,7 @@ module.exports = kind({
 			this.$.calendarType.createComponent({content: calendarList[i], active: (calendarList[i] === 'gregorian')});
 	},
 
-	changedParameters: function (inSender, inEvent) {
+	changedParameters: function (sender, ev) {
 		this.updateParameters();
 	},
 
@@ -203,7 +203,7 @@ module.exports = kind({
 	},
 	updateParametersProcessing: false,
 
-	calcFormat: function (inSender, inEvent) {
+	calcFormat: function (sender, ev) {
 		var options = {};
 		var calendar = this.$.calendarType.selected.content || 'gregorian';
 		var inputTimeZone = 'local';

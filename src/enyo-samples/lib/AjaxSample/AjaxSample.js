@@ -38,13 +38,13 @@ module.exports = kind({
 		// handle error
 		ajax.error(this, 'processError');
 	},
-	processResponse: function (inSender, inResponse) {
+	processResponse: function (sender, res) {
 		// do something with it
-		this.$.textArea.setValue(JSON.stringify(inResponse, null, 2));
+		this.$.textArea.setValue(JSON.stringify(res, null, 2));
 	},
-	processError: function (inSender, inResponse) {
-		var errorLog = 'Error' + ': ' + inResponse + '! ' + (JSON.parse(inSender.xhrResponse.body)).error.description;
-		this.$.textArea.setValue(JSON.stringify(inSender.xhrResponse, null, 2));
+	processError: function (sender, res) {
+		var errorLog = 'Error' + ': ' + res + '! ' + (JSON.parse(sender.xhrResponse.body)).error.description;
+		this.$.textArea.setValue(JSON.stringify(sender.xhrResponse, null, 2));
 		this.$.basicPopup.setContent(errorLog);
 		this.$.basicPopup.show();
 	}

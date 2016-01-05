@@ -46,7 +46,7 @@ module.exports = kind({
 		this.creationTime = date.getTime();
 	},
 
-	addATab: function (sender, event) {
+	addATab: function (sender, ev) {
 		this.log('adding a tab');
 		var date = new Date();
 		var delta = (date.getTime() - this.creationTime) / 1000 ;
@@ -65,7 +65,7 @@ module.exports = kind({
 		this.render();
 		this.$.dynamicTP.addTab(added);
 	},
-	killTab: function (sender, event) {
+	killTab: function (sender, ev) {
 		this.log('killing tab');
 		this.$.dynamicTP.removeTab({index: this.number-- - 2});
 	}

@@ -55,40 +55,40 @@ module.exports = kind({
 	handlers: {
 		ontap: 'tap'
 	},
-	tap: function (inSender, inEvent) {
+	tap: function (sender, ev) {
 		this.$.results.destroyClientControls();
 		this.$.results.createComponent({
-			content: 'Event  \'' + inEvent.type + '\' from \'' + inEvent.originator.getName() + '\'.'
+			content: 'Event  \'' + ev.type + '\' from \'' + ev.originator.getName() + '\'.'
 		});
 		this.$.results.render();
 	},
-	closeModal: function (inSender, inEvent) {
+	closeModal: function (sender, ev) {
 		this.$.popupModal.setShowing(false);
 	},
-	hideFloating: function (inSender, inEvent) {
+	hideFloating: function (sender, ev) {
 		this.$.priority.hide();
 	},
-	showPopup: function (inSender, inEvent) {
-		var p = this.$[inSender.popup];
+	showPopup: function (sender, ev) {
+		var p = this.$[sender.popup];
 		if (p) {
 			// toggle the visibility of the popup
 			p.setShowing(!p.getShowing());
 		}
 	},
-	showPopupAtEventPosition: function (inSender, inEvent) {
-		var p = this.$[inSender.popup];
+	showPopupAtEventPosition: function (sender, ev) {
+		var p = this.$[sender.popup];
 		if (p) {
-			p.showAtEvent(inEvent);
+			p.showAtEvent(ev);
 		}
 	},
-	showPopupAtPosition: function (inSender, inEvent) {
-		var p = this.$[inSender.popup];
+	showPopupAtPosition: function (sender, ev) {
+		var p = this.$[sender.popup];
 		if (p) {
 			p.showAtPosition({right: 0, top: 0});
 		}
 	},
-	showPopupAutoHide: function (inSender, inEvent) {
-		var p = this.$[inSender.popup];
+	showPopupAutoHide: function (sender, ev) {
+		var p = this.$[sender.popup];
 		if (p) {
 			p.setShowing(true);
 			job.job('autoHidePopup', function() {
@@ -96,11 +96,11 @@ module.exports = kind({
 			}, 2000);
 		}
 	},
-	showPopupFloating: function (inSender, inEvent) {
+	showPopupFloating: function (sender, ev) {
 		this.$.priority.setShowing(true);
-		var p = this.$[inSender.popup];
+		var p = this.$[sender.popup];
 		if (p) {
-			p.showAtEvent(inEvent);
+			p.showAtEvent(ev);
 		}
 	}
 });

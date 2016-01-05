@@ -36,17 +36,17 @@ module.exports = kind({
 			]}
 		]}
 	],
-	nodeExpand: function (sender, event) {
+	nodeExpand: function (sender, ev) {
 		sender.setIcon('@../../assets/' + (sender.expanded ? 'folder-open.png' : 'folder.png'));
 	},
-	nodeTap: function (sender, event) {
-		var node = event.originator;
+	nodeTap: function (sender, ev) {
+		var node = ev.originator;
 		this.$.selection.select(node.id, node);
 	},
-	select: function (sender, event) {
-		event.data.$.caption.applyStyle('background-color', 'lightblue');
+	select: function (sender, ev) {
+		ev.data.$.caption.applyStyle('background-color', 'lightblue');
 	},
-	deselect: function (sender, event) {
-		event.data.$.caption.applyStyle('background-color', null);
+	deselect: function (sender, ev) {
+		ev.data.$.caption.applyStyle('background-color', null);
 	}
 });

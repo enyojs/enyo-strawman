@@ -50,15 +50,15 @@ module.exports = kind({
 			{name: 'result', content: 'Nothing selected'}
 		]}
 	],
-	itemChanged: function (sender, event) {
+	itemChanged: function (sender, ev) {
 		if (!this.hasNode()) {
 			return;
 		}
 		this.$.result.setContent(sender.getContent() + ' was ' + (sender.getActive() ? ' selected.' : 'deselected.'));
 	},
-	groupChanged: function (sender, event) {
-		if (event.originator.getActive()) {
-			var selected = event.originator.getContent();
+	groupChanged: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			var selected = ev.originator.getContent();
 			this.$.result.setContent(selected + ' was selected.');
 		}
 	}

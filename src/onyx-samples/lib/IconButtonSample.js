@@ -57,17 +57,17 @@ module.exports = kind({
 		]}
 	],
 	iconTappedCounts: {},
-	iconTapped: function (sender, event) {
+	iconTapped: function (sender, ev) {
 		this.iconTappedCounts[sender.name] = this.iconTappedCounts[sender.name] || 0;
 		this.$.result.setContent('The icon button was tapped: ' + (++this.iconTappedCounts[sender.name]));
 	},
-	toggleChanged: function (sender, event) {
+	toggleChanged: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' was ' + (sender.getValue() ? ' selected.' : 'deselected.'));
 	},
 	ordinals: ['1st', '2nd', '3rd'],
-	iconGroupActivated: function (sender, event) {
-		if (event.originator.getActive()) {
-			var selected = event.originator.indexInContainer();
+	iconGroupActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			var selected = ev.originator.indexInContainer();
 			this.$.result.setContent('The ' + this.ordinals[selected] + ' icon button in the group is selected.');
 		}
 	}

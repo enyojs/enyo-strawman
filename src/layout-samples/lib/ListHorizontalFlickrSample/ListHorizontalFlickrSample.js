@@ -23,9 +23,9 @@ var ListHorizontalFlickrSearch = kind({
 	url: 'https://api.flickr.com/services/rest/',
 	pageSize: 200,
 	api_key: '2a21b46e58d207e4888e1ece0cb149a5',
-	search: function (inSearchText, inPage) {
-		this.searchText = inSearchText || this.searchText;
-		var i = (inPage || 0) * this.pageSize;
+	search: function (searchText, page) {
+		this.searchText = searchText || this.searchText;
+		var i = (page || 0) * this.pageSize;
 		var params = {
 			method: 'flickr.photos.search',
 			format: 'json',
@@ -38,8 +38,8 @@ var ListHorizontalFlickrSearch = kind({
 			.response(this, 'processResponse')
 			.go(params);
 	},
-	processResponse: function (inSender, inResponse) {
-		var photos = inResponse.photos ? inResponse.photos.photo || [] : [];
+	processResponse: function (sender, res) {
+		var photos = res.photos ? res.photos.photo || [] : [];
 		for (var i=0, p; (p=photos[i]); i++) {
 			var urlprefix = 'http://farm' + p.farm + '.static.flickr.com/' + p.server + '/' + p.id + '_' + p.secret;
 			p.thumbnail = urlprefix + '_s.jpg';
@@ -87,10 +87,10 @@ module.exports = kind({
 		this.$.searchSpinner.show();
 		this.$.flickrSearch.search(this.searchText);
 	},
-	searchResults: function (inSender, inResults) {
+	searchResults: function (sender, results) {
 		this.$.searchSpinner.hide();
 		this.$.moreSpinner.hide();
-		this.results = this.results.concat(inResults);
+		this.results = this.results.concat(results);
 		this.$.list.setCount(this.results.length);
 		if (this.page === 0) {
 			this.$.list.reset();
@@ -99,10 +99,10 @@ module.exports = kind({
 		}
 		return true;
 	},
-	setupItem: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupItem: function (sender, ev) {
+		var i = ev.index;
 		var item = this.results[i];
-		this.$.item.addRemoveClass('onyx-selected', inSender.isSelected(inEvent.index));
+		this.$.item.addRemoveClass('onyx-selected', sender.isSelected(ev.index));
 		this.$.thumbnail.setSrc(item.thumbnail);
 		this.$.more.canGenerate = !this.results[i+1];
 		return true;

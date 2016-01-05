@@ -25,9 +25,9 @@ module.exports = kind({
 			{tag: 'li', name: 'd3', allowHtml: true, idleContent: '<i>waiting for other events...</i>'}
 		]}
 	],
-	setConfigSpotlight: function (sender, event) {
-		if (event.keyCode === 13 && !Spotlight.Accelerator.isAccelerating()) {
-			event.configureHoldPulse({
+	setConfigSpotlight: function (sender, ev) {
+		if (ev.keyCode === 13 && !Spotlight.Accelerator.isAccelerating()) {
+			ev.configureHoldPulse({
 				frequency: 200, resume: true, endHold: 'onLeave',
 				events: [
 					{name: 'hold', time: 200},
@@ -46,16 +46,16 @@ module.exports = kind({
 			this.reset(display);
 		}, 2000);
 	},
-	tapped: function (sender, event) {
+	tapped: function (sender, ev) {
 		this.report(sender, 'tapped', 'd3');
 	},
-	pulse: function (sender, event) {
-		this.report(sender, 'pulsing (' + event.holdTime + ')', 'd2');
+	pulse: function (sender, ev) {
+		this.report(sender, 'pulsing (' + ev.holdTime + ')', 'd2');
 	},
-	held: function (sender, event) {
-		this.report(sender, event.type, 'd');
+	held: function (sender, ev) {
+		this.report(sender, ev.type, 'd');
 	},
-	released: function (sender, event) {
+	released: function (sender, ev) {
 		this.report(sender, 'released', 'd');
 	}
 });

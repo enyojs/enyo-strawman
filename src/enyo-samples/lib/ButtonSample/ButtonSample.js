@@ -9,7 +9,7 @@ var
 
 /*
 	Implementation notes:
-	-	We are utilizing inSender (as opposed to inEvent.originator) in our button tap handler
+	-	We are utilizing sender (as opposed to ev.originator) in our button tap handler
 		as we need to normalize for the case of the image button that has a child component, and
 		we are concerned with the top-level button itself.
 */
@@ -32,21 +32,21 @@ module.exports = kind({
 		]},
 		{name: 'results', classes: 'results'}
 	],
-	buttonTapped: function (inSender, inEvent) {
-		this.updateResult({content: 'The \'' + inSender.getContent() + '\' button is tapped.'});
+	buttonTapped: function (sender, ev) {
+		this.updateResult({content: 'The \'' + sender.getContent() + '\' button is tapped.'});
 	},
-	buttonToggleTapped: function (inSender, inEvent) {
-		this.buttonTapped(inSender, inEvent);
+	buttonToggleTapped: function (sender, ev) {
+		this.buttonTapped(sender, ev);
 		this.$.toggleButton.setDisabled(!this.$.toggleButton.getDisabled()).setContent(this.$.toggleButton.getDisabled() ? 'Disabled Button' : 'Enabled Button');
 	},
-	groupButtonsActivated: function (inSender, inEvent) {
-		if (inEvent.originator.getParent().getActive()) {
-			this.updateResult({content: 'The \'' + inEvent.originator.getParent().getActive().getContent() + '\' button is selected.'});
+	groupButtonsActivated: function (sender, ev) {
+		if (ev.originator.getParent().getActive()) {
+			this.updateResult({content: 'The \'' + ev.originator.getParent().getActive().getContent() + '\' button is selected.'});
 		}
 	},
-	updateResult: function (inComponent) {
+	updateResult: function (comp) {
 		this.$.results.destroyClientControls();
-		this.$.results.createComponent(inComponent);
+		this.$.results.createComponent(comp);
 		this.$.results.render();
 	}
 });

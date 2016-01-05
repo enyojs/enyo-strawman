@@ -14,7 +14,7 @@ var
 	Img = require('enyo/Image'),
 	Input = require('enyo/Input'),
 	JsonpRequest = require('enyo/Jsonp');
-	
+
 // A simple component to do a Flickr search.
 var PanelsFlickrSearch = kind({
 	kind: Component,
@@ -27,9 +27,9 @@ var PanelsFlickrSearch = kind({
 	url: 'https://api.flickr.com/services/rest/',
 	pageSize: 200,
 	api_key: '2a21b46e58d207e4888e1ece0cb149a5',
-	search: function (inSearchText, inPage) {
-		this.searchText = inSearchText || this.searchText;
-		var i = (inPage || 0) * this.pageSize;
+	search: function (searchText, page) {
+		this.searchText = searchText || this.searchText;
+		var i = (page || 0) * this.pageSize;
 		var params = {
 			method: 'flickr.photos.search',
 			format: 'json',
@@ -52,12 +52,12 @@ var PanelsFlickrSearch = kind({
 		}
 		return req;
 	},
-	processAjaxResponse: function (inSender, inResponse) {
-		inResponse = json.parse(inResponse);
-		this.processResponse(inSender, inResponse);
+	processAjaxResponse: function (sender, res) {
+		res = json.parse(res);
+		this.processResponse(sender, res);
 	},
-	processResponse: function (inSender, inResponse) {
-		var photos = inResponse.photos ? inResponse.photos.photo || [] : [];
+	processResponse: function (sender, res) {
+		var photos = res.photos ? res.photos.photo || [] : [];
 		for (var i=0, p; (p=photos[i]); i++) {
 			var urlprefix = 'http://farm' + p.farm + '.static.flickr.com/' + p.server + '/' + p.id + '_' + p.secret;
 			p.thumbnail = urlprefix + '_s.jpg';
@@ -127,10 +127,10 @@ module.exports = kind({
 		this.$.searchSpinner.show();
 		this.$.flickrSearch.search(this.searchText);
 	},
-	searchResults: function (inSender, inResults) {
+	searchResults: function (sender, results) {
 		this.$.searchSpinner.hide();
 		this.$.moreSpinner.hide();
-		this.results = this.results.concat(inResults);
+		this.results = this.results.concat(results);
 		this.$.list.setCount(this.results.length);
 		if (this.page === 0) {
 			this.$.list.reset();
@@ -138,10 +138,10 @@ module.exports = kind({
 			this.$.list.refresh();
 		}
 	},
-	setupItem: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupItem: function (sender, ev) {
+		var i = ev.index;
 		var item = this.results[i];
-		this.$.item.addRemoveClass('onyx-selected', inSender.isSelected(inEvent.index));
+		this.$.item.addRemoveClass('onyx-selected', sender.isSelected(ev.index));
 		this.$.thumbnail.setSrc(item.thumbnail);
 		this.$.title.setContent(item.title || 'Untitled');
 		this.$.more.canGenerate = !this.results[i+1];
@@ -152,12 +152,12 @@ module.exports = kind({
 		this.$.moreSpinner.show();
 		this.$.flickrSearch.search(this.searchText, this.page);
 	},
-	itemTap: function (inSender, inEvent) {
+	itemTap: function (sender, ev) {
 		if (Panels.isScreenNarrow()) {
 			this.setIndex(1);
 		}
 		this.$.imageSpinner.show();
-		var item = this.results[inEvent.index];
+		var item = this.results[ev.index];
 
 		if (item.original == this.$.flickrImage.getSrc()) {
 			this.imageLoaded();

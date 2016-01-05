@@ -152,7 +152,7 @@ module.exports = kind({
 		this.inherited(arguments);
 		this.spacingChanged();
 	},
-	spacingChanged: function (inSender, inEvent) {
+	spacingChanged: function (sender, ev) {
 		if (this.lastSpacingClass) {
 			this.$.wrapper.removeClass(this.lastSpacingClass);
 		}

@@ -53,7 +53,7 @@ module.exports = kind({
 			, add = []
 			, i = records.length
 			, len = (i + (!isNaN(amount)? amount: 0));
-		
+
 		for (; i<len; ++i) {
 			add.push({
 				on: false,
@@ -62,10 +62,10 @@ module.exports = kind({
 				label: 'Label ' + i
 			});
 		}
-		
+
 		return add;
 	},
-	scrollToIndex: function (sender, event) {
+	scrollToIndex: function (sender, ev) {
 		var newIndex = sender.getValue();
 		if (this.isScrolled || newIndex !== this.currentIndex) {
 			this.currentIndex = newIndex;

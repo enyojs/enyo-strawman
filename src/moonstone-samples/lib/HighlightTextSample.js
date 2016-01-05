@@ -82,12 +82,12 @@ module.exports = kind({
 		});
 		this.inherited(arguments);
 	},
-	search: function (sender, event) {
+	search: function (sender, ev) {
 		this.filteredController.reset();
-		this.filteredController.text = event.originator.getValue();
+		this.filteredController.text = ev.originator.getValue();
 		this.filteredController.filter();
 
-		sender.waterfall('onHighlight', {highlight: event.originator.getValue()});
+		sender.waterfall('onHighlight', {highlight: ev.originator.getValue()});
 	},
 	changeContent: function () {
 		this.$.dynamic.setContent('Dynamic content change test, this text should be highlighted.');

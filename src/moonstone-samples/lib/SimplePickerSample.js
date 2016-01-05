@@ -115,10 +115,10 @@ module.exports = kind({
 	toggleShowing: function () {
 		this.$.picker6.setShowing(!this.$.picker6.showing);
 	},
-	changed: function (sender, event) {
-		this.$.result.setContent(sender.name + ' changed to ' + event.content + ' (' + event.index + ')');
+	changed: function (sender, ev) {
+		this.$.result.setContent(sender.name + ' changed to ' + ev.content + ' (' + ev.index + ')');
 	},
-	changeItem: function (sender, event) {
+	changeItem: function (sender, ev) {
 		var picker = this.$['picker' + (this.$.which.getSelectedIndex()+1)];
 		var val = parseInt(this.$.changeInput.getValue(),10);
 		var len = picker.getClientControls().length - 1;
@@ -128,7 +128,7 @@ module.exports = kind({
 			picker.setSelectedIndex(val);
 		}
 	},
-	addItem: function (sender, event) {
+	addItem: function (sender, ev) {
 		if (!this.$.addInput.getValue()) {
 			this.$.result.setContent('Please insert content value.');
 			return;
@@ -137,7 +137,7 @@ module.exports = kind({
 		picker.createComponent({content:this.$.addInput.getValue()}).render();
 		this.$.result.setContent('\'' + this.$.addInput.getValue() + '\' is added to ' + picker.name);
 	},
-	destroyItem: function (sender, event) {
+	destroyItem: function (sender, ev) {
 		var picker = this.$['picker' + (this.$.which.getSelectedIndex()+1)];
 		var sel = picker.getSelected();
 		if (sel) {

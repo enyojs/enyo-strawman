@@ -112,7 +112,7 @@ module.exports = kind({
 			}
 		}
 	},
-	ballsChanged: function (inOldBalls) {
+	ballsChanged: function (oldBalls) {
 		this.setupBalls();
 	}
 });

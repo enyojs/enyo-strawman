@@ -1,7 +1,7 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
 	Input = require('enyo/Input'),
 	Popup = require('enyo/Popup'),
@@ -34,13 +34,13 @@ module.exports = kind({
 			jsonp: (this.$.picker.getSelected()=='JSON-P')
 		});
 	},
-	processResponse: function (inSender, inEvent) {
+	processResponse: function (sender, ev) {
 		// do something with it
-		this.$.textArea.setValue(JSON.stringify(inEvent.data, null, 2));
+		this.$.textArea.setValue(JSON.stringify(ev.data, null, 2));
 	},
-	processError: function (inSender, inEvent) {
-		var errorLog = 'Error' + ': ' + inEvent.data + '! ' + (JSON.parse(inEvent.ajax.xhrResponse.body)).error.description;
-		this.$.textArea.setValue(JSON.stringify(inEvent.ajax.xhrResponse, null, 2));
+	processError: function (sender, ev) {
+		var errorLog = 'Error' + ': ' + ev.data + '! ' + (JSON.parse(ev.ajax.xhrResponse.body)).error.description;
+		this.$.textArea.setValue(JSON.stringify(ev.ajax.xhrResponse, null, 2));
 		this.$.basicPopup.setContent(errorLog);
 		this.$.basicPopup.show();
 	}

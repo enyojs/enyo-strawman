@@ -1,7 +1,7 @@
 var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control'),
 	Input = require('enyo/Input');
@@ -28,13 +28,13 @@ module.exports = kind({
 		{kind: Button, name: 'buttonInputToggle', ontap: 'buttonInputToggleTapped', content: 'Toggle Input State'},
 		{name: 'results', classes: 'results'}
 	],
-	inputChanged: function (inSender, inEvent) {
-		this.$.results.setContent('The value of \'' + inSender.getName() + '\' has been changed to: \'' + inSender.getValue() + '\'.');
+	inputChanged: function (sender, ev) {
+		this.$.results.setContent('The value of \'' + sender.getName() + '\' has been changed to: \'' + sender.getValue() + '\'.');
 	},
-	inputOccurred: function (inSender, inEvent) {
-		this.$.results.setContent('The current value of \'' + inSender.getName() + '\' is: \'' + inSender.getValue() + '\'.');
+	inputOccurred: function (sender, ev) {
+		this.$.results.setContent('The current value of \'' + sender.getName() + '\' is: \'' + sender.getValue() + '\'.');
 	},
-	buttonInputToggleTapped: function (inSender, inEvent) {
+	buttonInputToggleTapped: function (sender, ev) {
 		this.$.inputDisabled.setDisabled(!this.$.inputDisabled.getDisabled()).setValue(this.$.inputDisabled.getDisabled() ? 'Disabled' : 'Enabled');
 		this.$.results.setContent('The current state of \'inputDisabled\' is \'' + (this.$.inputDisabled.getDisabled() ? 'disabled' : 'enabled') + '\'.');
 	}

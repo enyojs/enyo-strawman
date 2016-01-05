@@ -6,7 +6,7 @@ var
 	Animator = require('enyo/Animator'),
 	Button = require('enyo/Button'),
 	Select = require('enyo/Select');
-	
+
 
 module.exports = kind({
 	name: 'moon.sample.EasingSample',
@@ -30,7 +30,7 @@ module.exports = kind({
 			this.buildMenu();
 		};
 	}),
-	itemSelected: function (sender, event) {
+	itemSelected: function (sender, ev) {
 		var item = Object.keys(easing)[sender.selected - 1];
 		this.$.animator.setEasingFunction(easing[item] || easing.linear);
 		this.play();

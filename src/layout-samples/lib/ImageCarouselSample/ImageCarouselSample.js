@@ -39,29 +39,29 @@ module.exports = kind({
 			this.$.carousel.setImages(this.urls);
 		};
 	}),
-	load: function (sender, event) {
-		//enyo.log('image loaded: ' + event.originator.src);
+	load: function (sender, ev) {
+		//enyo.log('image loaded: ' + ev.originator.src);
 	},
-	zoom: function (sender, event) {
-		//enyo.log('image zoomed: ' + event.scale + ' scale on ' + event.originator.src);
+	zoom: function (sender, ev) {
+		//enyo.log('image zoomed: ' + ev.scale + ' scale on ' + ev.originator.src);
 	},
-	error: function (sender, event) {
-		//enyo.log('image error: ' + event.originator.src);
+	error: function (sender, ev) {
+		//enyo.log('image error: ' + ev.originator.src);
 	},
-	transitionStart: function (sender, event) {
-		//enyo.log('image now transitioning from: ' + this.$.carousel.getImageByIndex(event.fromIndex).src
-		//		+ ' to ' + this.$.carousel.getImageByIndex(event.toIndex).src);
+	transitionStart: function (sender, ev) {
+		//enyo.log('image now transitioning from: ' + this.$.carousel.getImageByIndex(ev.fromIndex).src
+		//		+ ' to ' + this.$.carousel.getImageByIndex(ev.toIndex).src);
 	},
-	transitionFinish: function (sender, event) {
+	transitionFinish: function (sender, ev) {
 		//enyo.log('image transitioned to: ' + this.$.carousel.getActiveImage().src);
 		if (this.$.carouselIndexInput) {
-			this.$.carouselIndexInput.setValue(event.toIndex);
+			this.$.carouselIndexInput.setValue(ev.toIndex);
 		}
 	},
-	previous: function (sender, event) {
+	previous: function (sender, ev) {
 		this.$.carousel.previous();
 	},
-	next: function (sender, event) {
+	next: function (sender, ev) {
 		this.$.carousel.next();
 	},
 	getRandomIndex: function () {
@@ -71,7 +71,7 @@ module.exports = kind({
 		}
 		return i;
 	},
-	updateIndex: function (sender, event) {
+	updateIndex: function (sender, ev) {
 		var index = this.trimWhitespace(this.$.carouselIndexInput.getValue());
 		if (index === '' || isNaN(index)) {
 			//enyo.log('Numbers only please.')

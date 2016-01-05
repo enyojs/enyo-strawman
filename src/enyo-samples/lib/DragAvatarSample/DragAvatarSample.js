@@ -18,10 +18,10 @@ module.exports = kind({
 		ondrag: 'drag',
 		ondragfinish: 'dragFinish'
 	},
-	drag: function (inSender, inEvent) {
-		this.$.dragAvatar.drag(inEvent);
+	drag: function (sender, ev) {
+		this.$.dragAvatar.drag(ev);
 	},
-	dragFinish: function (inSender, inEvent) {
+	dragFinish: function (sender, ev) {
 		this.$.dragAvatar.hide();
 	}
 });

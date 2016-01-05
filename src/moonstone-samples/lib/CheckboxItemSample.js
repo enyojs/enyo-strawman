@@ -49,12 +49,12 @@ module.exports = kind({
 			{kind: BodyText, name: 'result', content: 'Nothing selected'}
 		]}
 	],
-	itemChanged: function (inSender, inEvent) {
-		this.$.result.setContent(inSender.getContent() + ' was ' + (inSender.getChecked() ? ' selected.' : 'deselected.'));
+	itemChanged: function (sender, ev) {
+		this.$.result.setContent(sender.getContent() + ' was ' + (sender.getChecked() ? ' selected.' : 'deselected.'));
 	},
-	groupChanged: function (inSender, inEvent) {
-		if (inEvent.toggledControl.getChecked()) {
-			var selected = inEvent.toggledControl.getContent();
+	groupChanged: function (sender, ev) {
+		if (ev.toggledControl.getChecked()) {
+			var selected = ev.toggledControl.getContent();
 			this.$.result.setContent(selected + ' was selected.');
 		}
 	}

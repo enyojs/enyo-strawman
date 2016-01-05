@@ -17,9 +17,9 @@ module.exports = kind({
 		]}
 	],
 	NameGenerator: [],
-	setupItem: function (sender, event) {
+	setupItem: function (sender, ev) {
 		// this is the row we're setting up
-		var i = event.index;
+		var i = ev.index;
 		// make some mock data if we have none for this row
 		if (!this.NameGenerator[i]) {
 			this.NameGenerator[i] = NameGenerator.makeName(5, 10, '', '');

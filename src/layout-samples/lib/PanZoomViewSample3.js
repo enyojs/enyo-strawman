@@ -28,14 +28,14 @@ var ImagesView = kind({
 		this.$.image.setSrc(this.src);
 		this.$.image2.setSrc(this.src);
 	},
-	load: function (inSender, inEvent) {
-		this.width += inEvent.originator.node.clientWidth;
-		this.height = Math.max(this.height, inEvent.originator.node.clientHeight);
+	load: function (sender, ev) {
+		this.width += ev.originator.node.clientWidth;
+		this.height = Math.max(this.height, ev.originator.node.clientHeight);
 		this.bubble('onSetDimensions', { width: this.width, height: this.height });
 	},
-	down: function (inSender, inEvent) {
+	down: function (sender, ev) {
 		// Fix to prevent image drag in Firefox
-		inEvent.preventDefault();
+		ev.preventDefault();
 	}
 });
 

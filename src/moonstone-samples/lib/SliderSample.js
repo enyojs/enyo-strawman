@@ -118,7 +118,7 @@ module.exports = kind({
 		this.updateSlider4Popup(this.$.slider4.getValue());
 	},
 	//* @protected
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		var v = this.$.valueInput.getValue();
 
 		for (var i in this.$) {
@@ -135,7 +135,7 @@ module.exports = kind({
 		this.$.valueInput.setValue(Math.max(parseInt(this.$.valueInput.getValue() || 0, 10) - 10, 0));
 		this.changeValue();
 	},
-	changeProgress: function (sender, event) {
+	changeProgress: function (sender, ev) {
 		var v = parseInt(this.$.progressInput.getValue(), 10);
 
 		for (var i in this.$) {
@@ -144,7 +144,7 @@ module.exports = kind({
 			}
 		}
 	},
-	changeIncrement: function (sender, event) {
+	changeIncrement: function (sender, ev) {
 		var v = parseInt(this.$.incrementInput.getValue(), 10);
 
 		for (var i in this.$) {
@@ -161,29 +161,29 @@ module.exports = kind({
 		this.$.progressInput.setValue(Math.max(parseInt(this.$.progressInput.getValue() || 0, 10) - 10, 0));
 		this.changeProgress();
 	},
-	sliderChanging: function (sender, event) {
-		this.$.result.setContent(sender.name + ' changing: ' + Math.round(event.value));
+	sliderChanging: function (sender, ev) {
+		this.$.result.setContent(sender.name + ' changing: ' + Math.round(ev.value));
 	},
-	sliderChanged: function (sender, event) {
+	sliderChanged: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' changed to ' + Math.round(sender.getValue()) + '.');
 	},
-	customChanging: function (sender, event) {
-		this.updateSlider4Popup(event.value);
-		this.sliderChanging(sender, event);
+	customChanging: function (sender, ev) {
+		this.updateSlider4Popup(ev.value);
+		this.sliderChanging(sender, ev);
 	},
-	customChanged: function (sender, event) {
+	customChanged: function (sender, ev) {
 		this.updateSlider4Popup(sender.getValue());
-		this.sliderChanged(sender, event);
+		this.sliderChanged(sender, ev);
 	},
-	customAnimateFinish: function (sender, event) {
-		this.updateSlider4Popup(event.value);
+	customAnimateFinish: function (sender, ev) {
+		this.updateSlider4Popup(ev.value);
 	},
 	updateSlider4Popup: function (inValue) {
 		var color = 'rgb(0, 0, ' + Math.round(inValue) + ')';
 		this.$.slider4.setPopupContent(color);
 		this.$.slider4.setPopupColor(color);
 	},
-	changeLockbar: function (sender, event) {
+	changeLockbar: function (sender, ev) {
 		var ck = this.$.lockBarSetting.getChecked();
 
 		for (var i in this.$) {
@@ -193,7 +193,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	animateActivate: function (sender, event) {
+	animateActivate: function (sender, ev) {
 		var ck = this.$.animateSetting.getChecked();
 
 		for (var i in this.$) {
@@ -203,7 +203,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeStatusBubble: function (sender, event) {
+	changeStatusBubble: function (sender, ev) {
 		var ck = this.$.popupSetting.getChecked();
 
 		for (var i in this.$) {
@@ -213,7 +213,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeTappable: function (sender, event) {
+	changeTappable: function (sender, ev) {
 		var ck = this.$.tappableSetting.getChecked();
 
 		for (var i in this.$) {
@@ -223,7 +223,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeConstrain: function (sender, event) {
+	changeConstrain: function (sender, ev) {
 		var ck = this.$.constrainSetting.getChecked();
 
 		for (var i in this.$) {
@@ -233,7 +233,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeElastic: function (sender, event) {
+	changeElastic: function (sender, ev) {
 		var ck = this.$.elasticSetting.getChecked();
 
 		for (var i in this.$) {
@@ -243,7 +243,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changePercentage: function (sender, event) {
+	changePercentage: function (sender, ev) {
 		var ck = this.$.showPercentageSetting.getChecked();
 
 		for (var i in this.$) {

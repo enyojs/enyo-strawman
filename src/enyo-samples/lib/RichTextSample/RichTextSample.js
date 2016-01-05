@@ -1,13 +1,13 @@
 /*
 	Implementation notes:
-	-	The RichText methods involving selection (HTML5 selection object) require 
+	-	The RichText methods involving selection (HTML5 selection object) require
 		that the RichText object have focus first.
 */
 
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control'),
 	RichText = require('enyo/RichText');
@@ -35,28 +35,28 @@ module.exports = kind({
 		{kind: Button, content: 'Show RichText Value', classes: 'button-value', ontap: 'buttonValueTapped'},
 		{name: 'results', classes: 'results'}
 	],
-	buttonSelectAllTapped: function (inSender, inEvent) {
+	buttonSelectAllTapped: function (sender, ev) {
 		this.$.richText.focus();
 		this.$.richText.selectAll();
 	},
-	buttonDeselectAllTapped: function (inSender, inEvent) {
+	buttonDeselectAllTapped: function (sender, ev) {
 		this.$.richText.focus();
 		this.$.richText.removeSelection();
 	},
-	buttonHomeTapped: function (inSender, inEvent) {
+	buttonHomeTapped: function (sender, ev) {
 		this.$.richText.focus();
 		this.$.richText.moveCursorToStart();
 	},
-	buttonEndTapped: function (inSender, inEvent) {
+	buttonEndTapped: function (sender, ev) {
 		this.$.richText.focus();
 		this.$.richText.moveCursorToEnd();
 	},
-	buttonFormatTapped: function (inSender, inEvent) {
+	buttonFormatTapped: function (sender, ev) {
 		this.$.richText.focus();
-		document.execCommand(inSender.action, false, this.$.richText.getSelection());
+		document.execCommand(sender.action, false, this.$.richText.getSelection());
 		this.$.richText.updateValue();
 	},
-	buttonValueTapped: function (inSender, inEvent) {
+	buttonValueTapped: function (sender, ev) {
 		this.$.results.setContent(this.$.richText.getValue());
 	}
 });
