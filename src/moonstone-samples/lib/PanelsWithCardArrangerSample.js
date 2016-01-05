@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	CardArranger = require('layout/CardArranger');
-
-var
+	CardArranger = require('layout/CardArranger'),
 	Panels = require('moonstone/Panels'),
 	Item = require('moonstone/Item');
 
@@ -64,7 +62,7 @@ module.exports = kind({
 			]}
 		]}
 	],
-	next: function (sender, event) {
+	next: function (sender, ev) {
 		this.$.panels.next();
 		return true;
 	}

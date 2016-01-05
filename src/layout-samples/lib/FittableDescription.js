@@ -1,10 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
+	FittableRows = require('layout/FittableRows'),
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'enyo.sample.FittableDescription',

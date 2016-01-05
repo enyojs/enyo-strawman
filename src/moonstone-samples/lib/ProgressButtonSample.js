@@ -38,7 +38,7 @@ module.exports = kind({
 		{from: '$.animateSetting.checked', to: '$.autoDownload.animated'},
 		{from: '$.animateSetting.checked', to: '$.progressButton.animated'}
 	],
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		if (this.$.animateSetting.getChecked()) {
 			this.$.progressButton.animateProgressTo(this.$.input.getValue());
 		} else {

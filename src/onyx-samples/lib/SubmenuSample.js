@@ -51,7 +51,7 @@ module.exports = kind({
 			{name: 'menuSelection', classes: 'onyx-sample-result', content: 'No menu selection yet.'}
 		]}
 	],
-	itemSelected: function (sender, event) {
-		this.$.menuSelection.setContent(event.originator.content + ' Selected');
+	itemSelected: function (sender, ev) {
+		this.$.menuSelection.setContent(ev.originator.content + ' Selected');
 	}
 });

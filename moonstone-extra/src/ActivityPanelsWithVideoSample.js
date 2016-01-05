@@ -19,7 +19,7 @@ module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-        {name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
+		{name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
 			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 				{
 					kind: ChannelInfo,
@@ -107,42 +107,42 @@ module.exports = kind({
 			]}
 		]}
 	],
-	rendered: function() {
+	rendered: function () {
 		this.inherited(arguments);
 		Spotlight.spot(this.$.panels);
 	},
 	// custom next handler for each panel to avoid switching from one active panel
 	// to another with no visible change for demo
-	next1: function(inSender, inEvent) {
+	next1: function (sender, ev) {
 		this.$.panels.setIndex(1);
 		return true;
 	},
-	next2: function(inSender, inEvent) {
+	next2: function (sender, ev) {
 		this.$.panels.setIndex(2);
 		return true;
 	},
-	next3: function(inSender, inEvent) {
+	next3: function (sender, ev) {
 		this.$.panels.setIndex(3);
 		return true;
 	},
-	next4: function(inSender, inEvent) {
+	next4: function (sender, ev) {
 		this.$.panels.setIndex(4);
 		return true;
 	},
-	next5: function(inSender, inEvent) {
+	next5: function (sender, ev) {
 		this.$.panels.setIndex(5);
 		return true;
 	},
-	next6: function(inSender, inEvent) {
+	next6: function (sender, ev) {
 		this.$.panels.setIndex(6);
 		return true;
 	},
-	handleShowingChanged: function(inSender, inEvent) {
-		this.$.panels.setHandleShowing(inSender.getChecked());
+	handleShowingChanged: function (sender, ev) {
+		this.$.panels.setHandleShowing(sender.getChecked());
 	},
-	panelsShowingChanged: function (sender, event) {
+	panelsShowingChanged: function (sender, ev) {
 		// Hiding the VideoPlayer when it would be obscured by the Panels avoids UI performance
 		// issues caused by the GPU being occupied rendering video frames that aren't visible.
-		this.$.player.set('showing', !event.showing);
+		this.$.player.set('showing', !ev.showing);
 	}
 });

@@ -4,9 +4,7 @@ var
 var
 	CardArranger = require('layout/CardArranger'),
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
@@ -37,7 +35,7 @@ module.exports = kind({
 		{name: 'basicPopup', kind: Popup, content: 'Popup...'},
 		// The directPopup only works when we programmatically call 'showDirect' or 'hideDirect'. So, we set autoDismiss as false here.
 		{name: 'directPopup', kind: Popup, autoDismiss: false, components: [
-			{content: 'Direct Popup'},	
+			{content: 'Direct Popup'},
 			{kind: Button, content: 'Hide Direct', ontap: 'hidePopup', popup: 'directPopup', direct: true}
 		]},
 		{name: 'longPopup', kind: Popup, allowHtml: true, content: 'Don\'t go changing, to try and please me  <br>You never let me down before  <br>Don\'t imagine you\'re too familiar  <br>And I don\'t see you anymore  <br>I wouldn\'t leave you in times of trouble  <br>We never could have come this far I took the good times, I\'ll take the bad times I\'ll take you just the way you are Don\'t go trying some new fashion Don\'t change the color of your hair You always have my unspoken passion Although I might not seem to care I don\'t want clever conversation I never want to work that hard I just want someone that I can talk to I want you just the way you are. I need to know that you will always be The same old someone that I knew What will it take till you believe in me The way that I believe in you.'},
@@ -114,11 +112,11 @@ module.exports = kind({
 		this.$.longPopup.hide();
 		this.$.buttonPopup.hide();
 	},
-	buttonToggled: function (sender, event) {
+	buttonToggled: function (sender, ev) {
 		this.$.buttonPopup.setSpotlightModal(sender.getActive());
 		this.$.buttonPopup.setAutoDismiss(!sender.getActive());
 	},
-	panelsToggled: function (sender, event) {
+	panelsToggled: function (sender, ev) {
 		this.$.panelsPopup.setSpotlightModal(sender.getActive());
 		this.$.panelsPopup.setAutoDismiss(!sender.getActive());
 	},

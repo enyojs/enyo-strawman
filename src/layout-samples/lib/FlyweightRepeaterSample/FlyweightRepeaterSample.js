@@ -1,8 +1,8 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
+	Scroller = require('enyo/Scroller'),
 	FittableRows = require('layout/FittableRows'),
 	FlyweightRepeater = require('layout/FlyweightRepeater');
 
@@ -52,16 +52,16 @@ module.exports = kind({
 		{name: 'Yulia'},
 		{name: 'Zoltan'}
 	],
-	setupItem: function(sender, event) {
-		var index = event.index;
+	setupItem: function (sender, ev) {
+		var index = ev.index;
 		this.$.item.setContent((index+1) + '. ' + this.people[index].name);
-		this.$.item.applyStyle('background', (event.selected? 'dodgerblue':'lightgray'));
+		this.$.item.applyStyle('background', (ev.selected? 'dodgerblue':'lightgray'));
 		/* stop propogation */
 		return true;
 	},
-	itemSelected: function(sender, event) {
-		var index = event.index;
-		var count = event.flyweight.count;
+	itemSelected: function (sender, ev) {
+		var index = ev.index;
+		var count = ev.flyweight.count;
 		if(index>=0 && index<count){
 			this.$.result.setContent(' [' + (index+1) + '. ' + this.people[index].name + '] is selected');
 		}

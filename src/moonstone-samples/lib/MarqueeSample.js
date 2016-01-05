@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
 	Input = require('moonstone/Input'),
@@ -55,7 +53,7 @@ module.exports = kind({
 
 				]},
 				{kind: Button, content: 'Start marquee', ontap: 'start'},
-				{kind: Button, content: 'Stop marquee', ontap: 'stop'},	
+				{kind: Button, content: 'Stop marquee', ontap: 'stop'},
 				{name: 'marqueeContent1', marqueeOnRender: true, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This is long text for marquee content change test for separate marquee case'},
 				{name: 'marqueeContent2', marqueeOnRender: true, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-render', centered: true, content: 'Centered text for separate marquee case'},
 				{name: 'marqueeContainer1', mixins: [MarqueeSupport], marqueeOnRender: true, components: [
@@ -102,19 +100,19 @@ module.exports = kind({
 			]}
 		]}
 	],
-	contentChange: function (sender, event) {
+	contentChange: function (sender, ev) {
 		this.$.marqueeContent1.setContent(sender.getValue());
 		this.$.marqueeContent2.setContent(sender.getValue());
 		this.$.marqueeContent3.setContent(sender.getValue());
 	},
-	start: function (sender, event) {
+	start: function (sender, ev) {
 		this.$.marqueeContent1.startMarquee();
 		this.$.marqueeContent2.startMarquee();
 		this.$.marqueeContainer1.startMarquee();
 	},
-	stop: function (sender, event) {
+	stop: function (sender, ev) {
 		this.$.marqueeContent1.stopMarquee();
 		this.$.marqueeContent2.stopMarquee();
-		this.$.marqueeContainer1.stopMarquee();	
+		this.$.marqueeContainer1.stopMarquee();
 	}
 });

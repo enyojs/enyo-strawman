@@ -92,7 +92,7 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'No changes yet'}
 	],
-	buttonTapped: function (sender, event) {
+	buttonTapped: function (sender, ev) {
 		var result;
 		if (sender.get('accessibilityDisabled')) {
 			result = 'accessibility disabled';
@@ -103,7 +103,7 @@ module.exports = kind({
 		}
 		this.$.console.setContent(result);
 	},
-	labelButtonTapped: function (sender, event) {
+	labelButtonTapped: function (sender, ev) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityLabel to \'Label\'');
 		var i,
 			control = this.$.container.components;
@@ -113,7 +113,7 @@ module.exports = kind({
 			}
 		}
 	},
-	hintButtonTapped: function (sender, event) {
+	hintButtonTapped: function (sender, ev) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityHint to \'Hint\'');
 		var i,
 			control = this.$.container.components;
@@ -123,7 +123,7 @@ module.exports = kind({
 			}
 		}
 	},
-	disabledTapped: function (sender, event) {
+	disabledTapped: function (sender, ev) {
 		this.$.header.setTitleBelow('Set all control\'s accessibilityDisabled to ' + sender.value);
 		var i,
 			control = this.$.container.components;

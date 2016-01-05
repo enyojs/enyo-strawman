@@ -1,12 +1,10 @@
 var
 	kind = require('enyo/kind'),
-	dom = require('enyo/dom'),
-	Control = require('enyo/Control');
+	dom = require('enyo/dom');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
+	Control = require('enyo/Control'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	FormCheckbox = require('moonstone/FormCheckbox'),
@@ -34,10 +32,10 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No action yet.'}
 	],
-	change: function (sender, event) {
-		this.$.result.setContent(sender.name + ' changed to ' + event.content + ' (' + event.value + ')');
+	change: function (sender, ev) {
+		this.$.result.setContent(sender.name + ' changed to ' + ev.content + ' (' + ev.value + ')');
 	},
-	buttonTapped: function (sender, event) {
+	buttonTapped: function (sender, ev) {
 		if (sender.getActive()) {
 			Control.prototype.rtl = true;
 			dom.addBodyClass('enyo-locale-right-to-left');
@@ -46,14 +44,14 @@ module.exports = kind({
 			dom.removeClass(document.body, 'enyo-locale-right-to-left');
 		}
 	},
-	checked: function (sender, event) {
+	checked: function (sender, ev) {
 		this.$.picker1.set(sender.prop, sender.checked);
 	},
-	paddingChecked: function (sender, event) {
+	paddingChecked: function (sender, ev) {
 		this.$.picker1.set('digits', sender.checked? 3 : null);
 		this.$.picker1.render();
 	},
-	labelChecked: function (sender, event) {
+	labelChecked: function (sender, ev) {
 		this.$.picker1.set('unit', sender.checked? 'sec' : null);
 		this.$.picker1.render();
 	}

@@ -20,124 +20,124 @@ var
 	rb = require('../ResBundle');
 
 module.exports = kind({
-	name: "ilib.sample.AdvDateFormatting",
-	classes: "onyx ilib-onyx-sample enyo-fit",
+	name: 'ilib.sample.AdvDateFormatting',
+	classes: 'onyx ilib-onyx-sample enyo-fit',
 
 	components: [
 		{kind: Scroller, fit: true, components: [
-			{kind: ChooseTimeZone, name: "timeZonesSelector", label: rb.getString("Input Time Zone")},
+			{kind: ChooseTimeZone, name: 'timeZonesSelector', label: rb.getString('Input Time Zone')},
 
-			{content: rb.getString("Input Calendar"), classes: "ilib-onyx-sample-divider"},
-			{name: "calendarType", kind: Select, onChange: "changedParameters"},
-			{name: "datetimeParameters", components: [
-				{name: "regularDate", components: [
-					{style: "margin: 4px 6px 5px;", components: [
-						{content: rb.getString("Year"), classes: "ilib-onyx-sample-divider"},
-						{kind: Input, name: "year", placeholder: rb.getString("Enter year")}
+			{content: rb.getString('Input Calendar'), classes: 'ilib-onyx-sample-divider'},
+			{name: 'calendarType', kind: Select, onChange: 'changedParameters'},
+			{name: 'datetimeParameters', components: [
+				{name: 'regularDate', components: [
+					{style: 'margin: 4px 6px 5px;', components: [
+						{content: rb.getString('Year'), classes: 'ilib-onyx-sample-divider'},
+						{kind: Input, name: 'year', placeholder: rb.getString('Enter year')}
 					]},
-					{style: "margin: 4px 6px 5px;", components: [
-							{content: rb.getString("Month"), classes: "ilib-onyx-sample-divider"},
-							{name: "month", kind: Select, onChange: "changedParameters"}
+					{style: 'margin: 4px 6px 5px;', components: [
+							{content: rb.getString('Month'), classes: 'ilib-onyx-sample-divider'},
+							{name: 'month', kind: Select, onChange: 'changedParameters'}
 					]},
-					{style: "margin: 4px 6px 5px;", components: [
-						{content: rb.getString("Day"), classes: "ilib-onyx-sample-divider"},
-						{name: "day", kind:Select}
+					{style: 'margin: 4px 6px 5px;', components: [
+						{content: rb.getString('Day'), classes: 'ilib-onyx-sample-divider'},
+						{name: 'day', kind:Select}
 					]}
 				]},
-				{style: "margin: 4px 6px 5px;", name: "julianDate", components: [
-					{content: rb.getString("Julian Day"), classes: "ilib-onyx-sample-divider"},
-					{kind: Input, name: "julianDay", placeholder: rb.getString("Enter julian day")}
+				{style: 'margin: 4px 6px 5px;', name: 'julianDate', components: [
+					{content: rb.getString('Julian Day'), classes: 'ilib-onyx-sample-divider'},
+					{kind: Input, name: 'julianDay', placeholder: rb.getString('Enter julian day')}
 				]},
-				{style: "width: 20px"},
+				{style: 'width: 20px'},
 				{components: [
-					{content: rb.getString("Time"), classes: "ilib-onyx-sample-divider"},
-					{kind: TimePicker, name: "timePicker", style: "margin-top: -4px;"}
+					{content: rb.getString('Time'), classes: 'ilib-onyx-sample-divider'},
+					{kind: TimePicker, name: 'timePicker', style: 'margin-top: -4px;'}
 				]},
-				{style: "margin: 4px 6px 5px;", components: [
-					{content: rb.getString("Millisecond"), classes: "ilib-onyx-sample-divider"},
-					{kind: Input, name: "millisecond", placeholder: rb.getString("Enter milliseconds")}
+				{style: 'margin: 4px 6px 5px;', components: [
+					{content: rb.getString('Millisecond'), classes: 'ilib-onyx-sample-divider'},
+					{kind: Input, name: 'millisecond', placeholder: rb.getString('Enter milliseconds')}
 				]},
 				{fit: true}
 			]},
 
 			/* Header with selecting locale */
-			{kind: "ilib.sample.ChooseLocale", name: "localeSelector"},
-			{kind: "ilib.sample.ChooseTimeZone", name: "formatZonesSelector", label: rb.getString("Format Time Zone")},
-			{content: rb.getString("Length"), classes: "ilib-onyx-sample-divider"},
-			{kind: Group, defaultKind: Button, name: "length", components: [
-				{content: "short"},
-				{content: "medium"},
-				{content: "long", active: true},
-				{content: "full"}
+			{kind: 'ilib.sample.ChooseLocale', name: 'localeSelector'},
+			{kind: 'ilib.sample.ChooseTimeZone', name: 'formatZonesSelector', label: rb.getString('Format Time Zone')},
+			{content: rb.getString('Length'), classes: 'ilib-onyx-sample-divider'},
+			{kind: Group, defaultKind: Button, name: 'length', components: [
+				{content: 'short'},
+				{content: 'medium'},
+				{content: 'long', active: true},
+				{content: 'full'}
 			]},
-		   {content: rb.getString("Type"), classes: "ilib-onyx-sample-divider"},
-		   {kind: Group, defaultKind: Button, name: "type", components: [
-				{content: "date"},
-				{content: "time"},
-				{content: "datetime", active: true}
+		   {content: rb.getString('Type'), classes: 'ilib-onyx-sample-divider'},
+		   {kind: Group, defaultKind: Button, name: 'type', components: [
+				{content: 'date'},
+				{content: 'time'},
+				{content: 'datetime', active: true}
 			]},
-			{content: rb.getString("Date"), classes: "ilib-onyx-sample-divider"},
-			{kind: Group, defaultKind: Button, name: "date", components: [
-				{content: "dmwy"},
-				{content: "dmy", active: true},
-				{content: "dmw"},
-				{content: "dm"},
-				{content: "my"},
-				{content: "dw"},
-				{content: "d"},
-				{content: "m"},
-				{content: "n"},
-				{content: "y"}
+			{content: rb.getString('Date'), classes: 'ilib-onyx-sample-divider'},
+			{kind: Group, defaultKind: Button, name: 'date', components: [
+				{content: 'dmwy'},
+				{content: 'dmy', active: true},
+				{content: 'dmw'},
+				{content: 'dm'},
+				{content: 'my'},
+				{content: 'dw'},
+				{content: 'd'},
+				{content: 'm'},
+				{content: 'n'},
+				{content: 'y'}
 			]},
-			{content: rb.getString("Time"), classes: "ilib-onyx-sample-divider"},
-			{kind: Group, defaultKind: Button, name: "time", components: [
-				{content: "ahmsz"},
-				{content: "ahms"},
-				{content: "hmsz"},
-				{content: "hms"},
-				{content: "ahmz"},
-				{content: "ahm"},
-				{content: "hmz", active: true},
-				{content: "ah"},
-				{content: "hm"},
-				{content: "ms"},
-				{content: "h"},
-				{content: "m"},
-				{content: "s"}
+			{content: rb.getString('Time'), classes: 'ilib-onyx-sample-divider'},
+			{kind: Group, defaultKind: Button, name: 'time', components: [
+				{content: 'ahmsz'},
+				{content: 'ahms'},
+				{content: 'hmsz'},
+				{content: 'hms'},
+				{content: 'ahmz'},
+				{content: 'ahm'},
+				{content: 'hmz', active: true},
+				{content: 'ah'},
+				{content: 'hm'},
+				{content: 'ms'},
+				{content: 'h'},
+				{content: 'm'},
+				{content: 's'}
 			]},
-			{content: rb.getString("Clock"), classes: "ilib-onyx-sample-divider"},
-			{kind: Group, defaultKind: Button, name: "clock", components: [
-				{content: "12"},
-				{content: "24"},
-				{content: "locale", active: true}
+			{content: rb.getString('Clock'), classes: 'ilib-onyx-sample-divider'},
+			{kind: Group, defaultKind: Button, name: 'clock', components: [
+				{content: '12'},
+				{content: '24'},
+				{content: 'locale', active: true}
 			]},
-			{content: rb.getString("Native Digits"), classes: "ilib-onyx-sample-divider"},
-			{kind: Group, defaultKind: Button, name: "useNative", components: [
-				{content: "false", active: true},
-				{content: "true"}
+			{content: rb.getString('Native Digits'), classes: 'ilib-onyx-sample-divider'},
+			{kind: Group, defaultKind: Button, name: 'useNative', components: [
+				{content: 'false', active: true},
+				{content: 'true'}
 			]},
-			{content: " "},
-			{kind: Button, content: rb.getString("Apply"), ontap: "calcFormat", style: "vertical-align: bottom;", classes: "onyx-affirmative"}
+			{content: ' '},
+			{kind: Button, content: rb.getString('Apply'), ontap: 'calcFormat', style: 'vertical-align: bottom;', classes: 'onyx-affirmative'}
 		]},
 
-		{kind: Group, classes:"onyx-sample-result-box", components: [
-			{content: rb.getString("Format result:")},
-			{name: "rtlResult", fit: true, content: "-", style: "padding: 10px"}
+		{kind: Group, classes:'onyx-sample-result-box', components: [
+			{content: rb.getString('Format result:')},
+			{name: 'rtlResult', fit: true, content: '-', style: 'padding: 10px'}
 		]}
 	],
 
-	changedDate: function(inSender, inEvent) {
-		if (inEvent.value)
-			this.$.calendar.setValue(inEvent.value);
+	changedDate: function (sender, ev) {
+		if (ev.value)
+			this.$.calendar.setValue(ev.value);
 	},
 
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 		this.initCalendars();
 		this.updateParameters();
 	},
 
-	initCalendars: function() {
+	initCalendars: function () {
 		var calendarList = Calendar.getCalendars();
 		if (calendarList.indexOf('julianday') < 0)
 			calendarList.push('julianday');
@@ -146,11 +146,11 @@ module.exports = kind({
 			this.$.calendarType.createComponent({content: calendarList[i], active: (calendarList[i] === 'gregorian')});
 	},
 
-	changedParameters: function(inSender, inEvent) {
+	changedParameters: function (sender, ev) {
 		this.updateParameters();
 	},
 
-	updateParameters: function() {
+	updateParameters: function () {
 		if (this.updateParametersProcessing)
 			return;
 		this.updateParametersProcessing = true;
@@ -161,10 +161,10 @@ module.exports = kind({
 		var calendar = this.$.calendarType.selected.content || 'gregorian';
 		var cal = Calendar.newInstance({
 			locale: this.$.localeSelector.getValue(),
-			type: (calendar === "julianday") ? "gregorian" : calendar
+			type: (calendar === 'julianday') ? 'gregorian' : calendar
 		});
 		var sysres = new ResBundle({
-			name: "sysres",
+			name: 'sysres',
 			locale: this.$.localeSelector.getValue()
 		});
 		// Init Year
@@ -179,7 +179,7 @@ module.exports = kind({
 		this.$.month.destroyClientControls();
 		var selected;
 		for (var i = 1; i <= numMonths; ++i) {
-			var monthName = sysres.getString(undefined, "MMMM"+ i +"-"+ calendar) || sysres.getString(undefined, "MMMM"+ i);
+			var monthName = sysres.getString(undefined, 'MMMM'+ i +'-'+ calendar) || sysres.getString(undefined, 'MMMM'+ i);
 			var component = this.$.month.createComponent({content: i +' '+ monthName, value: i});
 			if ((i === 1) || (i === prevSelectedValue))
 				selected = component;
@@ -203,10 +203,10 @@ module.exports = kind({
 	},
 	updateParametersProcessing: false,
 
-	calcFormat: function(inSender, inEvent) {
+	calcFormat: function (sender, ev) {
 		var options = {};
 		var calendar = this.$.calendarType.selected.content || 'gregorian';
-		var inputTimeZone = "local";
+		var inputTimeZone = 'local';
 		options['locale'] = this.$.localeSelector.getValue();
 		options['length'] = this.$.length.getActive().content;
 		options['length'] = this.$.length.getActive().content;
@@ -224,7 +224,7 @@ module.exports = kind({
 		// processing
 		var cal = Calendar.newInstance({
 			locale: options['locale'],
-			type: (calendar === "julianday") ? "gregorian" : calendar
+			type: (calendar === 'julianday') ? 'gregorian' : calendar
 		});
 		var date;
 		if (calendar === 'julianday')

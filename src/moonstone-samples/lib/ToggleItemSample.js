@@ -1,15 +1,13 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	Scroller = require('moonstone/Scroller'),
-	ToggleItem = require('moonstone/ToggleItem');
+	ToggleItem = require('moonstone/ToggleItem'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.ToggleItemSample',
@@ -44,12 +42,12 @@ module.exports = kind({
 			{kind: BodyText, name: 'result', content: 'Nothing selected'}
 		]}
 	],
-	itemChanged: function (sender, event) {
+	itemChanged: function (sender, ev) {
 		this.$.result.setContent(sender.getContent() + ' is ' + (sender.getChecked() ? ' selected.' : 'deselected.'));
 	},
-	groupChanged: function (sender, event) {
-		if (event.toggledControl.getChecked()) {
-			var selected = event.toggledControl.getContent();
+	groupChanged: function (sender, ev) {
+		if (ev.toggledControl.getChecked()) {
+			var selected = ev.toggledControl.getContent();
 			this.$.result.setContent(selected + ' is selected.');
 		}
 	}

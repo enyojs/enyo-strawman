@@ -1,20 +1,18 @@
 var
 	kind = require('enyo/kind'),
 	job = require('enyo/job'),
-	utils = require('enyo/utils'),
-	Button = require('enyo/Button'),
-	Checkbox = require('enyo/Checkbox'),
-	Img = require('enyo/Image'),
-	Input = require('enyo/Input'),
-	Popup = require('enyo/Popup');
+	utils = require('enyo/utils');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
-	List = require('layout/List');
-
-var
-	names = require('../NameGenerator');
+	List = require('layout/List'),
+	Button = require('enyo/Button'),
+	Checkbox = require('enyo/Checkbox'),
+	Img = require('enyo/Image'),
+	Input = require('enyo/Input'),
+	Popup = require('enyo/Popup'),
+	NameGenerator = require('../NameGenerator');
 
 
 // It's convenient to create a kind for the item we'll render in the contacts list.
@@ -59,8 +57,8 @@ var ContactItem = kind({
 			break;
 		}
 	},
-	removeTap: function (inSender, inEvent) {
-		this.doRemove({index: inEvent.index});
+	removeTap: function (sender, ev) {
+		this.doRemove({index: ev.index});
 		return true;
 	}
 });
@@ -134,20 +132,20 @@ module.exports = kind({
 			]
 		}
 	],
-	rendered: kind.inherit(function (sup) {
+	rendered: kind.inherit (function (sup) {
 		return function () {
 			sup.apply(this, arguments);
 			this.populateList();
 		};
 	}),
-	setupItem: function (inSender, inEvent) {
-		var i = inEvent.index;
+	setupItem: function (sender, ev) {
+		var i = ev.index;
 		var data = this.filter ? this.filtered : this.db;
 		var item = data[i];
 		// content
 		this.$.item.setContact(item);
 		// selection
-		this.$.item.setSelected(inSender.isSelected(i));
+		this.$.item.setSelected(sender.isSelected(i));
 		// divider
 		if (!this.hideDivider) {
 			var d = item.name[0];
@@ -184,17 +182,17 @@ module.exports = kind({
 		this.refreshList();
 		this.$.list.scrollToRow(i);
 	},
-	removeItem: function (inIndex) {
-		this._removeItem(inIndex);
-		this.$.list.getSelection().remove(inIndex);
+	removeItem: function (index) {
+		this._removeItem(index);
+		this.$.list.getSelection().remove(index);
 		this.refreshList();
 	},
-	_removeItem: function (inIndex) {
-		var i = this.filter ? this.filtered[inIndex].dbIndex : inIndex;
+	_removeItem: function (index) {
+		var i = this.filter ? this.filtered[index].dbIndex : index;
 		this.db.splice(i, 1);
 	},
-	removeTap: function (inSender, inEvent) {
-		this.removeItem(inEvent.index);
+	removeTap: function (sender, ev) {
+		this.removeItem(ev.index);
 		return true;
 	},
 	removeSelected: function () {
@@ -221,16 +219,16 @@ module.exports = kind({
 		//
 		this.$.list.reset();
 	},
-	createDb: function (inCount) {
+	createDb: function (count) {
 		this.db = [];
-		for (var i=0; i<inCount; i++) {
-			this.db.push(this.generateItem(names.makeName(4, 6) + ' ' + names.makeName(5, 10)));
+		for (var i=0; i<count; i++) {
+			this.db.push(this.generateItem(NameGenerator.makeName(4, 6) + ' ' + NameGenerator.makeName(5, 10)));
 		}
 		this.sortDb();
 	},
-	generateItem: function (inName) {
+	generateItem: function (name) {
 		return {
-			name: inName,
+			name: name,
 			avatar: '@../../assets/avatars/' + avatars[utils.irand(avatars.length)],
 			title: titles[utils.irand(titles.length)],
 			importance: 0
@@ -252,19 +250,19 @@ module.exports = kind({
 	showSetupPopup: function () {
 		this.$.popup.show();
 	},
-	searchInputChange: function (inSender) {
-		job(this.id + ':search', this.bindSafely('filterList', inSender.getValue()), 200);
+	searchInputChange: function (sender) {
+		job(this.id + ':search', this.bindSafely('filterList', sender.getValue()), 200);
 	},
-	filterList: function (inFilter) {
-		if (inFilter != this.filter) {
-			this.filter = inFilter;
-			this.filtered = this.generateFilteredData(inFilter);
+	filterList: function (filter) {
+		if (filter != this.filter) {
+			this.filter = filter;
+			this.filtered = this.generateFilteredData(filter);
 			this.$.list.setCount(this.filtered.length);
 			this.$.list.reset();
 		}
 	},
-	generateFilteredData: function (inFilter) {
-		var re = new RegExp('^' + inFilter, 'i');
+	generateFilteredData: function (filter) {
+		var re = new RegExp('^' + filter, 'i');
 		var r = [];
 		for (var i=0, d; (d=this.db[i]); i++) {
 			if (d.name.match(re)) {
@@ -274,11 +272,11 @@ module.exports = kind({
 		}
 		return r;
 	},
-	countChanging: function (inSender, inEvent){
-		this.$.countOutput.setContent(Math.round(inSender.getValue()) * 50);
+	countChanging: function (sender, ev) {
+		this.$.countOutput.setContent(Math.round(sender.getValue()) * 50);
 	},
-	rowsChanging: function (inSender, inEvent){
-		this.$.rowsPerPageOutput.setContent(Math.round(inSender.getValue()) * 5);
+	rowsChanging: function (sender, ev) {
+		this.$.rowsPerPageOutput.setContent(Math.round(sender.getValue()) * 5);
 	}
 });
 

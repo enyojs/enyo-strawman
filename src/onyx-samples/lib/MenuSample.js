@@ -1,7 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller'),
-	TouchScrollStrategy = require('enyo/TouchScrollStrategy');
+	kind = require('enyo/kind');
 
 var
 	Button = require('onyx/Button'),
@@ -11,7 +9,9 @@ var
 	Menu = require('onyx/Menu'),
 	MenuDecorator = require('onyx/MenuDecorator'),
 	MenuItem = require('onyx/MenuItem'),
-	Toolbar = require('onyx/Toolbar');
+	Toolbar = require('onyx/Toolbar'),
+	Scroller = require('enyo/Scroller'),
+	TouchScrollStrategy = require('enyo/TouchScrollStrategy');
 
 module.exports = kind({
 	name: 'onyx.sample.MenuSample',
@@ -98,14 +98,14 @@ module.exports = kind({
 	preventMenuActivate: function () {
 		return true;
 	},
-	itemSelected: function (sender, event) {
+	itemSelected: function (sender, ev) {
 		// Menu items send an onSelect event with a reference to themselves & any directly displayed content
-		if (event.originator.content) {
-			this.$.menuSelection.setContent(event.originator.content + ' Selected');
-		} else if (event.selected) {
+		if (ev.originator.content) {
+			this.$.menuSelection.setContent(ev.originator.content + ' Selected');
+		} else if (ev.selected) {
 			//	Since some of the menu items do not have directly displayed content (they are kinds with subcomponents),
 			//	we have to handle those items differently here.
-			this.$.menuSelection.setContent(event.selected.controlAtIndex(1).content + ' Selected');
+			this.$.menuSelection.setContent(ev.selected.controlAtIndex(1).content + ' Selected');
 		}
 	}
 });

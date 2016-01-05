@@ -71,10 +71,10 @@ module.exports = kind({
 			{name: 'result', classes: 'onyx-sample-result', content: 'No input entered yet.'}
 		]}
 	],
-	inputChanged: function (sender, event) {
+	inputChanged: function (sender, ev) {
 		this.$.result.setContent('Input: ' + sender.getValue());
 	},
-	changeFocus: function (sender, event) {
+	changeFocus: function (sender, ev) {
 		utils.forEach([this.$.inputDecorator, this.$.inputDecorator2, this.$.inputDecorator3], function(inItem) {
 			inItem.setAlwaysLooksFocused(sender.getValue());
 			// If disabling alwaysLooksFocused, we need to blur the

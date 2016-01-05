@@ -76,7 +76,7 @@ module.exports = kind({
 		{from: '$.iterationPicker.value', to: '$.sprite3.iterationCount'},
 		{from: '$.iterationPicker.value', to: '$.sprite1.iterationCount'}
 	],
-	animationEndHandler: function(sender, ev) {
+	animationEndHandler: function (sender, ev) {
 		logger.log('onEnd', sender.id, sender.useCssAnimation, sender.iterationCount);
 	}
 });

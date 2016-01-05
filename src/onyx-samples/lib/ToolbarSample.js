@@ -1,6 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
 	Button = require('onyx/Button'),
@@ -8,7 +7,8 @@ var
 	Input = require('onyx/Input'),
 	InputDecorator = require('onyx/InputDecorator'),
 	MoreToolbar = require('onyx/MoreToolbar'),
-	Toolbar = require('onyx/Toolbar');
+	Toolbar = require('onyx/Toolbar'),
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'onyx.sample.ToolbarSample',

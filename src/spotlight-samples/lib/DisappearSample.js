@@ -1,5 +1,7 @@
 var
-	kind = require('enyo/kind'),
+	kind = require('enyo/kind');
+
+var
 	Button = require('enyo/Button');
 
 require('spotlight');

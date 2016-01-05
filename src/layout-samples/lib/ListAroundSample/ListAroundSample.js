@@ -1,12 +1,7 @@
 var
 	kind = require('enyo/kind'),
 	job = require('enyo/job'),
-	utils = require('enyo/utils'),
-	Button = require('enyo/Button'),
-	Checkbox = require('enyo/Checkbox'),
-	Img = require('enyo/Image'),
-	Input = require('enyo/Input'),
-	Popup = require('enyo/Popup');
+	utils = require('enyo/utils');
 
 var
 	Icon = require('onyx/Icon');
@@ -14,10 +9,13 @@ var
 var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
-	AroundList = require('layout/AroundList');
-
-var
-	names = require('../NameGenerator');
+	AroundList = require('layout/AroundList'),
+	Button = require('enyo/Button'),
+	Checkbox = require('enyo/Checkbox'),
+	Img = require('enyo/Image'),
+	Input = require('enyo/Input'),
+	Popup = require('enyo/Popup'),
+	NameGenerator = require('../NameGenerator');
 
 // It's convenient to create a kind for the item we'll render in the contacts list.
 var AroundListContactItem = kind({
@@ -42,8 +40,8 @@ var AroundListContactItem = kind({
 		this.addRemoveClass('list-sample-around-item-selected', selected);
 		this.$.remove.applyStyle('display', selected ? 'inline-block' : 'none');
 	},
-	removeTap: function (sender, event) {
-		this.doRemove({index: event.index});
+	removeTap: function (sender, ev) {
+		this.doRemove({index: ev.index});
 		return true;
 	}
 });
@@ -86,20 +84,20 @@ module.exports = kind({
 			]}
 		]}
 	],
-	rendered: kind.inherit(function(sup) {
+	rendered: kind.inherit(function (sup) {
 		return function() {
 			sup.apply(this, arguments);
 			this.populateList();
 		};
 	}),
-	setupItem: function(inSender, inEvent) {
-		var i = inEvent.index;
+	setupItem: function (sender, ev) {
+		var i = ev.index;
 		var data = this.filter ? this.filtered : this.db;
 		var item = data[i];
 		// content
 		this.$.item.setContact(item);
 		// selection
-		this.$.item.setSelected(inSender.isSelected(i));
+		this.$.item.setSelected(sender.isSelected(i));
 		// divider
 		if (!this.hideDivider) {
 			var d = item.name[0];
@@ -111,7 +109,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	refreshList: function() {
+	refreshList: function () {
 		if (this.filter) {
 			this.filtered = this.generateFilteredData(this.filter);
 			this.$.list.setCount(this.filtered.length);
@@ -120,7 +118,7 @@ module.exports = kind({
 		}
 		this.$.list.refresh();
 	},
-	addItem: function() {
+	addItem: function () {
 		var item = this.generateItem(utils.cap(this.$.newContactInput.getValue()));
 		var i = 0;
 		for (var di; (di=this.db[i]); i++) {
@@ -132,20 +130,20 @@ module.exports = kind({
 		this.refreshList();
 		this.$.list.scrollToRow(i);
 	},
-	removeItem: function(inIndex) {
-		this._removeItem(inIndex);
+	removeItem: function (index) {
+		this._removeItem(index);
 		this.refreshList();
-		this.$.list.getSelection().deselect(inIndex);
+		this.$.list.getSelection().deselect(index);
 	},
-	_removeItem: function(inIndex) {
-		var i = this.filter ? this.filtered[inIndex].dbIndex : inIndex;
+	_removeItem: function (index) {
+		var i = this.filter ? this.filtered[index].dbIndex : index;
 		this.db.splice(i, 1);
 	},
-	removeTap: function(inSender, inEvent) {
-		this.removeItem(inEvent.index);
+	removeTap: function (sender, ev) {
+		this.removeItem(ev.index);
 		return true;
 	},
-	populateList: function() {
+	populateList: function () {
 		this.$.popup.hide();
 		this.createDb(this.$.countInput.getValue());
 		this.$.list.setCount(this.db.length);
@@ -157,22 +155,22 @@ module.exports = kind({
 		this.$.list.reset();
 		this.$.list.scrollToContentStart();
 	},
-	createDb: function(inCount) {
+	createDb: function (count) {
 		this.db = [];
-		for (var i=0; i<inCount; i++) {
-			this.db.push(this.generateItem(names.makeName(4, 6) + ' ' + names.makeName(5, 10)));
+		for (var i=0; i<count; i++) {
+			this.db.push(this.generateItem(NameGenerator.makeName(4, 6) + ' ' + NameGenerator.makeName(5, 10)));
 		}
 		this.sortDb();
 	},
-	generateItem: function(inName) {
+	generateItem: function (name) {
 		return {
-			name: inName,
+			name: name,
 			avatar: '@../../assets/avatars' + '/' + avatars[utils.irand(avatars.length)],
 			title: titles[utils.irand(titles.length)]
 		};
 	},
-	sortDb: function() {
-		this.db.sort(function(a, b) {
+	sortDb: function () {
+		this.db.sort(function (a, b) {
 			if (a.name < b.name) {
 				return -1;
 			}
@@ -184,23 +182,23 @@ module.exports = kind({
 			}
 		});
 	},
-	showSetupPopup: function() {
+	showSetupPopup: function () {
 		this.$.popup.show();
 	},
-	searchInputChange: function(inSender) {
-		job(this.id + ':search', this.bindSafely('filterList', inSender.getValue()), 200);
+	searchInputChange: function (sender) {
+		job(this.id + ':search', this.bindSafely('filterList', sender.getValue()), 200);
 		return true;
 	},
-	filterList: function(inFilter) {
-		if (inFilter != this.filter) {
-			this.filter = inFilter;
-			this.filtered = this.generateFilteredData(inFilter);
+	filterList: function (filter) {
+		if (filter != this.filter) {
+			this.filter = filter;
+			this.filtered = this.generateFilteredData(filter);
 			this.$.list.setCount(this.filtered.length);
 			this.$.list.reset();
 		}
 	},
-	generateFilteredData: function(inFilter) {
-		var re = new RegExp('^' + inFilter, 'i');
+	generateFilteredData: function (filter) {
+		var re = new RegExp('^' + filter, 'i');
 		var r = [];
 		for (var i=0, d; (d=this.db[i]); i++) {
 			if (d.name.match(re)) {

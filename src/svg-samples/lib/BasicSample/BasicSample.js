@@ -3,9 +3,7 @@ var
 
 var
 	Scroller = require('enyo/Scroller'),
-	Button = require('enyo/Button');
-
-var
+	Button = require('enyo/Button'),
 	Root = require('svg/Root'),
 	Rectangle = require('svg/Rectangle'),
 	Circle = require('svg/Circle'),
@@ -65,7 +63,7 @@ module.exports = kind({
 		this.$.arc5.set('endAngle', startAngle + (Math.random() * 360) );
 		this.$.arc6.set('endAngle', startAngle + (Math.random() * 360) );
 	},
-	buttonTapped: function(sender, ev) {
+	buttonTapped: function (sender, ev) {
 		this.$.result.set('content', '&quot;' + sender.name + '&quot; pressed.');
 	}
 });

@@ -1,12 +1,12 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Button = require('onyx/Button'),
 	Groupbox = require('onyx/Groupbox'),
 	GroupboxHeader = require('onyx/GroupboxHeader'),
-	RadioGroup = require('onyx/RadioGroup');
+	RadioGroup = require('onyx/RadioGroup'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'onyx.sample.ButtonGroupSample',
@@ -37,19 +37,19 @@ module.exports = kind({
 			{name: 'result', classes: 'onyx-sample-result', content: 'No button tapped yet.'}
 		]}
 	],
-	radioActivated: function (sender, event) {
-		if (event.originator.getActive()) {
-			this.$.result.setContent('The \'' + event.originator.getContent() + '\' radio button is selected.');
+	radioActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			this.$.result.setContent('The \'' + ev.originator.getContent() + '\' radio button is selected.');
 		}
 	},
-	tabActivated: function (sender, event) {
-		if (event.originator.getActive()) {
-			this.$.result.setContent('The \'' + event.originator.getContent() + '\' tab button is selected.');
+	tabActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			this.$.result.setContent('The \'' + ev.originator.getContent() + '\' tab button is selected.');
 		}
 	},
-	buttonActivated: function (sender, event) {
-		if (event.originator.getActive()) {
-			this.$.result.setContent('The \'' + event.originator.getContent() + '\' button is selected.');
+	buttonActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			this.$.result.setContent('The \'' + ev.originator.getContent() + '\' button is selected.');
 		}
 	}
 });

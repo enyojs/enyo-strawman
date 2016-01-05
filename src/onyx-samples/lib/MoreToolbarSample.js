@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	Button = require('onyx/Button'),
 	Input = require('onyx/Input'),
 	InputDecorator = require('onyx/InputDecorator'),

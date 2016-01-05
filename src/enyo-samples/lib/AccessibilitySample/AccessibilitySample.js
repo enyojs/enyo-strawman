@@ -75,10 +75,10 @@ module.exports = kind({
 	toggleHint: function () {
 		this.$.dyn.set('accessibilityHint', this.$.dyn.accessibilityHint ? '' : 'Hint');
 	},
-	toggleDynDisabled: function (sender, e) {
+	toggleDynDisabled: function (sender, ev) {
 		this.$.dyn.set('accessibilityDisabled', !this.$.dyn.accessibilityDisabled);
 	},
-	toggleDisabled: function (sender, e) {
+	toggleDisabled: function (sender, ev) {
 		this.$.popup.set('accessibilityDisabled', !this.$.popup.accessibilityDisabled);
 		this.$.checkbox.set('accessibilityDisabled', !this.$.checkbox.accessibilityDisabled);
 		this.$.btn.set('accessibilityDisabled', !this.$.btn.accessibilityDisabled);

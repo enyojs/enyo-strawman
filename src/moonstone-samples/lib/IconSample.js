@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	Icon = require('moonstone/Icon'),
@@ -149,7 +147,7 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'console', content: 'No changes yet'}
 	],
-	buttonTapped: function (sender, event) {
+	buttonTapped: function (sender, ev) {
 		this.$.console.setContent(sender.name + ' tapped.');
 	}
 });

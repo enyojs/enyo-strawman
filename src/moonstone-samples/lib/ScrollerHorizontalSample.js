@@ -1,9 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Img = require('enyo/Image'),
-	Repeater = require('enyo/Repeater');
+	kind = require('enyo/kind');
 
 var
+	Img = require('enyo/Image'),
+	Repeater = require('enyo/Repeater'),
 	Divider = require('moonstone/Divider'),
 	Item = require('moonstone/Item'),
 	Scroller = require('moonstone/Scroller');

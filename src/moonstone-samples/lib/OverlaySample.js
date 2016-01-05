@@ -1,11 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Img = require('enyo/Image');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	Img = require('enyo/Image'),
+	FittableRows = require('layout/FittableRows'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
 	ClampedText = require('moonstone/ClampedText'),
@@ -124,20 +122,20 @@ module.exports = kind({
 		]},
 		{name: 'result', style: 'height: 50px;'}
 	],
-	itemTapped: function (sender, event) {
+	itemTapped: function (sender, ev) {
 		this.$.result.set('content', 'Item Tapped: ' + sender.id);
 	},
-	badgeTapped: function (sender, event) {
+	badgeTapped: function (sender, ev) {
 		this.$.result.set('content', 'Badge Tapped: ' + sender.id);
 		return true;
 	},
-	toggleSelected: function (sender, event) {
+	toggleSelected: function (sender, ev) {
 		sender.set('selected', !sender.selected);
 	},
-	showOverlay: function (sender, event) {
+	showOverlay: function (sender, ev) {
 		this.$.tapOverlay.set('overlayShowing', true);
 	},
-	hideOverlay: function (sender, event) {
+	hideOverlay: function (sender, ev) {
 		this.$.tapOverlay.set('overlayShowing', false);
 		return true;
 	}

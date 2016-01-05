@@ -28,17 +28,17 @@ module.exports = kind({
 		]}
 	],
 
-	buttonFocused: function (sender, event) {
-		this.log('Button Focused', event.originator.id);
+	buttonFocused: function (sender, ev) {
+		this.log('Button Focused', ev.originator.id);
 	},
 
-	enterContainer: function (sender, event) {
-		this.log('Container Entered:', event.originator.id);
+	enterContainer: function (sender, ev) {
+		this.log('Container Entered:', ev.originator.id);
 		sender.applyStyle('border', '2px solid red');
 	},
 
-	leaveContainer: function (sender, event) {
-		this.log('Container Left:', event.originator.id);
+	leaveContainer: function (sender, ev) {
+		this.log('Container Left:', ev.originator.id);
 		sender.applyStyle('border', null);
 	}
 });

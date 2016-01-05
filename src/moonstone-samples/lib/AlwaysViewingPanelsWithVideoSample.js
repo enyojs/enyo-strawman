@@ -124,11 +124,11 @@ module.exports = kind({
 			]}
 		]}
 	],
-	next: function(inSender, inEvent) {
+	next: function (sender, ev) {
 		this.$.panels.next();
 		return true;
 	},
-	handleShowingChanged: function(inSender, inEvent) {
-		this.$.panels.setHandleShowing(inSender.getChecked());
+	handleShowingChanged: function (sender, ev) {
+		this.$.panels.setHandleShowing(sender.getChecked());
 	}
 });

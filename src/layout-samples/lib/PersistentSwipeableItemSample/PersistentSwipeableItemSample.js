@@ -44,20 +44,20 @@ module.exports = kind({
 		this.$.list.setCount(this.data.length);
 		this.$.list.reset();
 	},
-	setupItem: function (sender, event) {
-		if(!this.data[event.index]) {
+	setupItem: function (sender, ev) {
+		if(!this.data[ev.index]) {
 			return;
 		}
 
-		this.$.text.setContent(this.data[event.index]);
+		this.$.text.setContent(this.data[ev.index]);
 		return true;
 	},
-	setupSwipeItem: function (sender, event) {
-		if(!this.data[event.index]) {
+	setupSwipeItem: function (sender, ev) {
+		if(!this.data[ev.index]) {
 			return true;
 		}
 
-		if(event.xDirection === -1) {
+		if(ev.xDirection === -1) {
 			// Persist swipeable item if swiped from right to left
 			this.$.list.setPersistSwipeableItem(true);
 			this.$.swipeTitle.setContent('This is a persistent item');
@@ -72,6 +72,6 @@ module.exports = kind({
 		}
 		return true;
 	},
-	swipeComplete: function (sender, event) {
+	swipeComplete: function (sender, ev) {
 	}
 });
