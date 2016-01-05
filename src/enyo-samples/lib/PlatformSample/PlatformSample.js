@@ -1,12 +1,11 @@
-var 
+var
 	enyo = require('enyo'),
 	kind = require('enyo/kind'),
 	platform = require('enyo/platform');
 
-var 
-	Button = require('enyo/Button'),
+var
 	Control = require('enyo/Control');
-	
+
 module.exports = kind({
 	name: 'enyo.sample.PlatformSample',
 	kind: Control,

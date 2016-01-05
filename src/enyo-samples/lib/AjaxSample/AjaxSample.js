@@ -1,8 +1,8 @@
-var 
+var
 	kind = require('enyo/kind');
 
 var
-	Ajax = require('enyo/Ajax')
+	Ajax = require('enyo/Ajax'),
 	Button = require('enyo/Button'),
 	Input = require('enyo/Input'),
 	Popup = require('enyo/Popup'),

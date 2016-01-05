@@ -19,32 +19,37 @@ module.exports = kind({
 	components: [
 		{kind: Divider, content: 'Inputs'},
 		{kind: Scroller, horizontal: 'hidden', fit: true, components: [
-			{kind: InputDecorator, components: [
-				{kind: Input, placeholder: 'JUST TYPE', oninput: 'handleInput', onchange: 'handleChange'}
+			{components: [
+				{kind: InputDecorator, components: [
+					{kind: Input, placeholder: "JUST TYPE", oninput:"handleInput", onchange:"handleChange"}
+				]},
+				{kind: InputDecorator, components: [
+					{kind: Input, placeholder: "Search term", oninput:"handleInput", onchange:"handleChange"},
+					{kind: Icon, icon: "search"}
+				]}
 			]},
-			{kind: InputDecorator, components: [
-				{kind: Input, placeholder: 'Search term', oninput: 'handleInput', onchange: 'handleChange'},
-				{kind: Icon, icon: 'search'}
+			{components: [
+				{kind: InputDecorator, components: [
+					{kind: Input, type:"password", placeholder: "Enter password", oninput:"handleInput", onchange:"handleChange"}
+				]},
+				{kind: InputDecorator, components: [
+					{kind: Input, type:"number", placeholder: "Enter number", oninput:"handleInput", onchange:"handleChange"}
+				]},
+				{kind: InputDecorator, components: [
+					{kind: Input, placeholder: "Placeholder for initial value", value: "This is the initial value", oninput:"handleInput", onchange:"handleChange"}
+				]}
 			]},
-			{kind: InputDecorator, components: [
-				{kind: Input, type: 'password', placeholder: 'Enter password', oninput: 'handleInput', onchange: 'handleChange'}
+			{components: [
+				{kind: InputDecorator, components: [
+					{kind: Input, placeholder: "Placeholder for value with ellipsis", value: "This is the initial value that is of a certain length to display an ellipsis.", oninput:"handleInput", onchange:"handleChange"}
+				]},
+				{kind: InputDecorator, components: [
+					{kind: Input, placeholder: "Dismiss on Enter", dismissOnEnter:true, oninput:"handleInput", onchange:"handleChange"}
+				]},
+				{kind: InputDecorator, disabled: true, components: [
+					{kind: Input, disabled: true, placeholder: "Disabled input"}
+				]}
 			]},
-			{kind: InputDecorator, components: [
-				{kind: Input, type: 'number', placeholder: 'Enter number', oninput: 'handleInput', onchange: 'handleChange'}
-			]},
-			{kind: InputDecorator, components: [
-				{kind: Input, placeholder: 'Placeholder for initial value', value: 'This is the initial value', oninput: 'handleInput', onchange: 'handleChange'}
-			]},
-			{kind: InputDecorator, components: [
-				{kind: Input, placeholder: 'Placeholder for value with ellipsis', value: 'This is the initial value that is of a certain length to display an ellipsis.', oninput: 'handleInput', onchange: 'handleChange'}
-			]},
-			{kind: InputDecorator, components: [
-				{kind: Input, placeholder: 'Dismiss on Enter', dismissOnEnter:true, oninput: 'handleInput', onchange: 'handleChange'}
-			]},
-			{kind: InputDecorator, disabled: true, components: [
-				{kind: Input, disabled: true, placeholder: 'Disabled input'}
-			]},
-
 			{kind: Divider, content: 'TextAreas'},
 			{kind: InputDecorator, components: [
 				{kind: TextArea, placeholder: 'Enter text here', oninput: 'handleInput', onchange: 'handleChange'}

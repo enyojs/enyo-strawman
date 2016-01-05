@@ -23,7 +23,7 @@ module.exports = kind({
 		{kind: Scroller, fit: true, components: [
 			{kind: Repeater, count:20, onSetupItem: 'setupItem', components: [
 				{kind: ObjectActionDecorator, orientation: 'horizontal', components: [
-					{kind: ImageItem, source: 'assets/default-music.png'}
+					{kind: ImageItem, source: '@../assets/default-music.png'}
 				], actionComponents: [
 					{kind: IconButton, name: 'Icon1'},
 					{kind: IconButton, name: 'Icon2'},

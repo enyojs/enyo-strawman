@@ -1,12 +1,16 @@
 var
 	kind = require('enyo/kind'),
-	hooks = require('enyo/hooks'),
-	updateLocale = hooks.updateLocale,
-	ilib = require('enyo-ilib'),
-	$L = require('moonstone/i18n');
+	i18n = require('enyo/i18n'),
+	updateLocale = i18n.updateLocale;
 
 var
 	FittableRows = require('layout/FittableRows');
+
+var
+	ilib = require('enyo-ilib');
+
+var
+	$L = require('moonstone/i18n'),
 	Button = require('moonstone/Button'),
 	Clock = require('moonstone/Clock'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
@@ -61,11 +65,10 @@ module.exports = kind({
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function (inSender, inEvent) {
-		var locale = inEvent.selected.content,
-			val = (locale == 'Use Default Locale') ? null : locale;
+	setLocale: function (inSender, inEvent){
+		var locale = inEvent.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
 		updateLocale(locale);
-		this.$.clock.setLocale(val);
 		return true;
 	},
 	setTime: function () {

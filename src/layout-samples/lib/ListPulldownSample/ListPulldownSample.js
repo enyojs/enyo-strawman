@@ -20,7 +20,7 @@ module.exports = kind({
 		{classes: 'layout-sample-toolbar', components: [
 			{label: 'label', components: [
 				{name: 'searchInput', kind: Input, value: 'nature', placeholder: 'Enter seach term'},
-				{kind: Img, src: 'assets/search-input-search.png', style: 'width: 20px;'}
+				{kind: Img, src: '@../../assets/search-input-search.png', style: 'width: 20px;'}
 			]},
 			{kind: Button, content: 'search', ontap: 'search'}
 		]},

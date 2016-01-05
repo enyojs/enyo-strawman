@@ -1,7 +1,7 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Anchor = require('enyo/Anchor'),
 	Button = require('enyo/Button'),
 	Video = require('enyo/Video');
@@ -13,11 +13,11 @@ module.exports = kind({
 		{content: 'Video', classes: 'section'},
 		{classes: 'container-video', components: [
 			{
-				kind: Video, 
-				poster: 'http://media.w3.org/2010/05/bunny/poster.png', 
-				preload: 'auto', 
-				src: 'http://vjs.zencdn.net/v/oceans.mp4', 
-				onratechange: 'rateChanged', 
+				kind: Video,
+				poster: 'http://media.w3.org/2010/05/bunny/poster.png',
+				preload: 'auto',
+				src: 'http://vjs.zencdn.net/v/oceans.mp4',
+				onratechange: 'rateChanged',
 				ontimeupdate: 'timeChanged',
 				ondurationchange: 'durationChanged',
 				onFastforward: 'playbackChanged',
@@ -58,7 +58,7 @@ module.exports = kind({
 	],
 	playbackChanged: function (inSender, inEvent) {
 		if (inEvent.playbackRate > 1) {
-			this.$.videoAction.setContent('Fast-Forward');			
+			this.$.videoAction.setContent('Fast-Forward');
 		} else if (inEvent.playbackRate < -1) {
 			this.$.videoAction.setContent('Rewind');
 		} else if (inEvent.playbackRate == 1) {
@@ -86,11 +86,13 @@ module.exports = kind({
 		this.$.videoAction.setContent('Pause');
 		return true;
 	},
-	buttonRewindTapped: function (inSender, inEvent) {
+	buttonRewindTapped: function(inSender, inEvent) {
+		this.set("isPlaying", true);
 		this.$.video.rewind();
 		return true;
 	},
-	buttonFastForwardTapped: function (inSender, inEvent) {
+	buttonFastForwardTapped: function(inSender, inEvent) {
+		this.set('isPlaying', true);
 		this.$.video.fastForward();
 		return true;
 	},

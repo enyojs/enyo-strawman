@@ -1,0 +1,13 @@
+/* DataGridListSample */
+
+.data-grid-sample .caption{
+	color: #000000;
+}
+
+.data-grid-sample .sun-gridlist-imageitem {
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.data-grid-sample .sun-gridlist-imageitem.pressed {
+	background-color: #dfe0e1;
+}

@@ -8,7 +8,7 @@ var
 	Rectangle = require('svg/Rectangle'),
 	Circle = require('svg/Circle'),
 	Path = require('svg/Path'),
-	Text = require('svg/Text'),
+	SvgText = require('svg/Text'),
 	TextPath = require('svg/TextPath'),
 	Arc = require('svg/Arc');
 
@@ -24,9 +24,9 @@ module.exports = kind({
 			{kind: Circle, cx: 30, cy: 30, r: 15, style: 'fill: #FFCB00;'},
 			{name: 'path', kind: Path, style: 'fill: #459652;', d: 'M100,50c-10.6,11.9-36.5,16.5-50,0S14.4,35.1,0,50v50h100V50z'},
 			{kind: Rectangle, width: 20, height: 40, x: 75, y: 30, transform: 'rotate(10,70,40)', style: 'fill: #3E57BA;'},
-			{kind: Text, content: 'SVG Text', x: 20, y: 55, style: 'fill: #BF4C41;', classes: 'svg-sample-header-text'},
+			{kind: SvgText, content: 'SVG Text', x: 20, y: 55, style: 'fill: #BF4C41;', classes: 'svg-sample-header-text'},
 			{name: 'textPath', kind: Path, stroke: '#D9965B', d: 'M10,90c10.4-11.6,30.4-20,40-10c13.3,13.8,29,6.7,40,0'},
-			{kind: Text, classes: 'svg-sample-header-text', components: [
+			{kind: SvgText, classes: 'svg-sample-header-text', components: [
 				{kind: TextPath, content: 'Text on a path!', style: 'fill: blanchedalmond;', target: 'textPath'}
 			]}
 		]},

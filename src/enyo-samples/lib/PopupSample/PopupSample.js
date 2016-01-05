@@ -1,22 +1,18 @@
 /*
 	Implementation notes:
-	-	The Popup At Event Position popup has property floating:true to mitigate the sampler's 
-		horizontal scroll offset (the control that allows the side navigation to be dragged 
+	-	The Popup At Event Position popup has property floating:true to mitigate the sampler's
+		horizontal scroll offset (the control that allows the side navigation to be dragged
 		closed and open).
 */
 
-var 
+var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
 	job = require('enyo/job');
 
-var 
-	Anchor = require('enyo/Anchor'),
+var
 	Button = require('enyo/Button'),
-	Control = require('enyo/Control'),
 	Popup = require('enyo/Popup'),
-	Scroller = require('enyo/Scroller'),
-	Table = require('enyo/Table')
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'enyo.sample.PopupSample',
@@ -95,8 +91,8 @@ module.exports = kind({
 		var p = this.$[inSender.popup];
 		if (p) {
 			p.setShowing(true);
-			job.job('autoHidePopup', function() { 
-				p.hide(); 
+			job.job('autoHidePopup', function() {
+				p.hide();
 			}, 2000);
 		}
 	},

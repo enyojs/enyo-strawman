@@ -1,10 +1,9 @@
-var 
+var
 	kind = require('enyo/kind'),
 	logger = require('enyo/logger');
 
-var 
+var
 	Select = require('enyo/Select'),
-	StylesheetSupport = require('enyo/StylesheetSupport'),
 	SpriteAnimation = require('enyo/SpriteAnimation');
 
 module.exports = kind({

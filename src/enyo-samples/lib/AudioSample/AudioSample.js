@@ -1,10 +1,10 @@
-var 
+var
 	kind = require('enyo/kind'),
 	job = require('enyo/job'),
 	utils = require('enyo/utils');
 
-var 
-	Audio = require('enyo/Audio'),
+var
+	EnyoAudio = require('enyo/Audio'),
 	Button = require('enyo/Button'),
 	Popup = require('enyo/Popup'),
 	Select = require('enyo/Select');
@@ -15,7 +15,7 @@ module.exports = kind({
 	classes: 'audio-sample',
 	components: [
 		{
-			kind: Audio,
+			kind: EnyoAudio,
 			onratechange: 'rateChanged',
 			ontimeupdate: 'timeChanged',
 			onFastforward: 'playbackChanged',
@@ -42,10 +42,10 @@ module.exports = kind({
 		{kind: Popup, name: 'popupStatus', floating: true, centered: true, classes: 'popup'}
 	],
 	sounds: [
-		'http://www.noiseaddicts.com/samples/3828.mp3',
-		'http://www.noiseaddicts.com/samples/2514.mp3',
-		'http://www.noiseaddicts.com/samples/4353.mp3',
-		'http://www.noiseaddicts.com/samples/134.mp3'
+		'http://www.noiseaddicts.com/samples_1w72b820/3828.mp3',
+		'http://www.noiseaddicts.com/samples_1w72b820/2514.mp3',
+		'http://www.noiseaddicts.com/samples_1w72b820/4353.mp3',
+		'http://www.noiseaddicts.com/samples_1w72b820/134.mp3'
 	],
 	rendered: function () {
 		this.inherited(arguments);

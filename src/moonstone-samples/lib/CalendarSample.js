@@ -1,12 +1,19 @@
 var
 	kind = require('enyo/kind'),
-	hooks = require('enyo/hooks'),
-	updateLocale = hooks.updateLocale,
-	ilib = require('enyo-ilib');
+	i18n = require('enyo/i18n'),
+	updateLocale = i18n.updateLocale;
+
+var
+	Locale = require('enyo-ilib/Locale');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows'),
+	FittableRows = require('layout/FittableRows');
+
+var
+	DateFmt = require('enyo-ilib/DateFmt');
+
+var
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Calendar = require('moonstone/Calendar'),
@@ -87,19 +94,13 @@ module.exports = kind({
 	],
 	create: function () {
 		this.inherited(arguments);
-		if (!ilib) {
-			this.$.localePicker.hide();
-			this.$.dowLengthPicker.hide();
-			this.log('iLib not present -- hiding locale & dow length picker');
-		} else {
-			this.df = new ilib.DateFmt({
-				type: 'datetime',
-				time: 'hmsa',
-				date: 'dmy',
-				useNative: false,
-				length: 'short'
-			});
-		}
+		this.df = new DateFmt({
+			type: 'datetime',
+			time: 'hmsa',
+			date: 'dmy',
+			useNative: false,
+			length: 'short'
+		});
 
 		if (this.$.localePicker.selected) {
 			this.setLocale(null, {selected: this.$.localePicker.selected});
@@ -107,41 +108,39 @@ module.exports = kind({
 	},
 
 	updateCurrentString: function (date) {
-		var formatted = ilib ? this.df.format(date) : date.toDateString();
+		var formatted = this.df.format(date);
 		this.$.result.setContent('Current Date' + ' changed to ' + formatted);
 	},
 
-	setLocale: function (inSender, inEvent) {
-		if (ilib) {
-			var locale = inEvent.selected.content,
-				val = (locale == 'Use Default Locale') ? null : locale;
-			updateLocale(locale);
-			this.$.calendar.setLocale(val);
-			this.$.picker.setLocale(val);
+	setLocale: function (inSender, inEvent){
+		var locale = inEvent.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
+		// auto-triggers update to correctly configured/written widgets
+		updateLocale(locale);
+		// egregious misuse of now-deprecated widget/api to avoid needing to rewrite the entire
+		// widget at this time
+		this.$.calendar.set('locale', new Locale());
 
-			this.df = new ilib.DateFmt({
-				type: 'datetime',
-				time: 'hmsa',
-				date: 'dmy',
-				useNative: false,
-				length: this.$.dowLengthPicker.selected.content
-			});
-			this.updateCurrentString(this.$.calendar.getValue());
-		}
+		this.df = new DateFmt({
+			type: 'datetime',
+			time: 'hmsa',
+			date: 'dmy',
+			useNative: false,
+			length: this.$.dowLengthPicker.selected.content
+		});
+		this.updateCurrentString(this.$.calendar.getValue());
 		return true;
 	},
 	setLabelLength: function (inSender, inEvent) {
 		if (inEvent.content){
 			this.$.calendar.setDayOfWeekLength(inEvent.content);
-			if (ilib) {
-				this.df = new ilib.DateFmt({
-					type: 'datetime',
-					time: 'hmsa',
-					date: 'dmy',
-					useNative: false,
-					length: inEvent.content
-				});
-			}
+			this.df = new DateFmt({
+				type: 'datetime',
+				time: 'hmsa',
+				date: 'dmy',
+				useNative: false,
+				length: inEvent.content
+			});
 			this.updateCurrentString(this.$.calendar.getValue());
 			this.removeLabelItem(this.$.dowLabelClass, inEvent, 'Divider', 'full');
 		}

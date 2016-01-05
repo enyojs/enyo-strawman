@@ -1,10 +1,8 @@
-var 
+var
 	kind = require('enyo/kind'),
 	utils = require('enyo/utils');
 
-var 
-	Anchor = require('enyo/Anchor'),
-	Button = require('enyo/Button'),
+var
 	Table = require('enyo/Table');
 
 module.exports = kind({
@@ -27,7 +25,7 @@ module.exports = kind({
 	monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 	create: function () {
 		this.inherited(arguments);
-		
+
 		var currentRow,
 			dateObj = new Date();
 

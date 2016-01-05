@@ -20,7 +20,8 @@ module.exports = kind({
 				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with Value', noneText: 'No Input', placeholder: 'Placeholder', value: 'Initial value'},
 				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Disabled Input', noneText: 'No Input', disabled: true, value: 'I am disabled.'},
 				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with loooooooooooooooong text truncation', noneText: 'No Input with loooooooooooooooooong text truncation'},
-				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with no value or noneText'}
+				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with no value or noneText'},
+				{kind: ExpandableInput, oninput:'inputChanging', onChange:'inputChanged', content: 'Input with password type', type: 'password'}
 			]}
 		]},
 		{kind: Divider, content: 'Result'},

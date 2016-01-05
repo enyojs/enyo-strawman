@@ -1,11 +1,15 @@
 var
 	kind = require('enyo/kind'),
-	$L = require('enyo/hooks').$L,
-	ilib = require('enyo-ilib');
+	$L = require('enyo/i18n').$L;
 
 var
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows'),
+	FittableRows = require('layout/FittableRows');
+
+var
+	DateFmt = require('enyo-ilib/DateFmt');
+
+var
 	Button = require('onyx/Button'),
 	DatePicker = require('onyx/DatePicker'),
 	Groupbox = require('onyx/Groupbox'),
@@ -117,16 +121,12 @@ module.exports = kind({
 		this.$[event.name + 'Value'].setContent(fmt.format(event.value));
 	},
 	format: function (dateComponents) {
-		if (ilib) {
-			var fmt = new ilib.DateFmt({
-				dateComponents: dateComponents || undefined,
-				date: 'short',
-				locale: this.locale,
-				timezone: 'local'
-			});
-			return fmt;
-		} else {
-			return function (v) { return v ? v.toString() : ''; };
-		}
+		var fmt = new DateFmt({
+			dateComponents: dateComponents || undefined,
+			date: 'short',
+			locale: this.locale,
+			timezone: 'local'
+		});
+		return fmt;
 	}
 });

@@ -20,19 +20,20 @@ module.exports = kind({
 			drawers: [
 				{
 					name: 'partialDrawer',
+					classes: 'sample-drawers-partial',
 					open: false,
 					controlsOpen: false,
 					onActivate: 'partialDrawerChanged',
 					onDeactivate: 'partialDrawerChanged',
 					handle: {name: 'handleButton', content: 'Partial drawer with long text truncation'},
 					components: [
-						{kind: Panel, classes: 'enyo-fit', title: 'Partial Drawer', components: [
+						{name: 'partialPanel', kind: Panel, classes: 'enyo-fit', renderOnShow: true, showing: false, title: 'Partial Drawer', components: [
 							{kind: Item, content: 'Item One'},
 							{kind: Item, content: 'Item Two'}
 						]}
 					],
 					controlDrawerComponents: [
-						{classes: 'moon-hspacing', components: [
+						{name: 'partialControls', renderOnShow: true, showing: false, classes: 'moon-hspacing', components: [
 							{kind: Button, name: 'openMoreButton', content: 'Open More', ontap: 'openMainDrawer'},
 							{kind: Button, content: 'Close', ontap: 'close'}
 						]}
@@ -59,10 +60,10 @@ module.exports = kind({
 						{title: 'First Panel', classes: 'moon-7h', components: [
 							{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [
 								{kind: ExpandablePicker, onChange: 'pickerChangedImg', content: 'Select Image', components: [
-									{content: 'Music',value: 'assets/drawer_icon.png'},
-									{content: 'LG', value: 'assets/lg.png'},
-									{content: 'HTML5', value: 'assets/html5.png'},
-									{content: 'CSS3', value: 'assets/css3.png'},
+									{content: 'Music',value: '@../assets/drawer_icon.png'},
+									{content: 'LG', value: '@../assets/lg.png'},
+									{content: 'HTML5', value: '@../assets/html5.png'},
+									{content: 'CSS3', value: '@../assets/css3.png'},
 									{content: 'Default', value: '', active: true}
 								]},
 								{kind: ExpandablePicker, onChange: 'pickerChangedIcon', content: 'Select Icon', components: [
@@ -117,17 +118,28 @@ module.exports = kind({
 		return true;
 	},
 	openMainDrawer: function () {
-		this.$.partialDrawer.setOpen(true);
+		this.$.partialDrawer.set('open', true);
 	},
 	close: function () {
-		if (this.$.partialDrawer.getOpen()) {
-			this.$.partialDrawer.setOpen(false);
+		if (this.$.partialDrawer.get('open')) {
+			this.$.partialDrawer.set('open', false);
 		} else {
-			this.$.partialDrawer.setControlsOpen(false);
+			this.$.partialDrawer.set('controlsOpen', false);
 		}
 	},
 	partialDrawerChanged: function () {
-		this.$.openMoreButton.setShowing(!this.$.partialDrawer.getOpen());
+		var open = this.$.partialDrawer.get('open'),
+			controlsOpen = this.$.partialDrawer.get('controlsOpen');
+
+		// This sample defers the rendering of partial drawer components to illustrate that feature.
+		// Explicitly show drawer controls to render it the first time. For the drawers to function
+		// correctly, the height of the control drawer has to be set via CSS. In this sample, that
+		// has been done via the moon-partial-drawer-client class. The height of the drawer content
+		// need not be explicitly set as it will fill the remaining space.
+		if (open || controlsOpen) this.$.partialControls.show();
+		if (open) this.$.partialPanel.show();
+
+		this.$.openMoreButton.set('showing', !open);
 	},
 	pickerChangedImg:function (sender, event) {
 		this.$.drawers.set('src', event.selected.value);

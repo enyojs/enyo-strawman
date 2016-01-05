@@ -78,9 +78,9 @@ module.exports = kind({
 			{components: [
 				{kind: FittableColumns, tag: 'label', style: 'width: 90%;', components: [
 					{name: 'searchInput', fit: true, kind: Input, value: 'Japan', onchange: 'search'},
-					{kind: Img, src: 'assets/search-input-search.png', style: 'width: 20px; height: 20px;'}
+					{kind: Img, src: '@../../assets/search-input-search.png', style: 'width: 20px; height: 20px;'}
 				]},
-				{name: 'searchSpinner', kind: Img, src: 'assets/spinner.gif', showing: false}
+				{name: 'searchSpinner', kind: Img, src: '@../../assets/spinner.gif', showing: false}
 			]},
 			{kind: List, fit: true, touch: true, onSetupItem: 'setupItem', components: [
 				{name: 'item', style: 'padding: 10px;', classes: 'panels-sample-flickr-item enyo-border-box', ontap: 'itemTap', components: [
@@ -89,7 +89,7 @@ module.exports = kind({
 				]},
 				{name: 'more', style: 'background-color: #323232;', components: [
 					{kind: Button, content: 'more photos', classes: 'onyx-dark panels-sample-flickr-more-button', ontap: 'more'},
-					{name: 'moreSpinner', kind: Img, src: 'assets/spinner.gif', classes: 'panels-sample-flickr-more-spinner'}
+					{name: 'moreSpinner', kind: Img, src: '@../../assets/spinner.gif', classes: 'panels-sample-flickr-more-spinner'}
 				]}
 			]}
 		]},
@@ -99,7 +99,7 @@ module.exports = kind({
 			]},
 			{fit: true, style: 'position: relative;', components: [
 				{name: 'flickrImage', kind: Img, classes: 'enyo-fit panels-sample-flickr-center panels-sample-flickr-image', showing: false, onload: 'imageLoaded', onerror: 'imageLoaded'},
-				{name: 'imageSpinner', kind: Img, src: 'assets/spinner-large.gif', classes: 'enyo-fit panels-sample-flickr-center', showing: false}
+				{name: 'imageSpinner', kind: Img, src: '@../../assets/spinner-large.gif', classes: 'enyo-fit panels-sample-flickr-center', showing: false}
 			]}
 		]},
 		{name: 'flickrSearch', kind: PanelsFlickrSearch, onResults: 'searchResults'}

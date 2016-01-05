@@ -1,7 +1,7 @@
 var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control'),
 	TextArea = require('enyo/TextArea');
@@ -21,7 +21,7 @@ module.exports = kind({
 		{tag: 'h2', content: 'Configuration'},
 		{name: 'config', kind: TextArea, style: 'display: block; width: 100%; height: 25em;'},
 		{tag: 'h2', content: 'Hold This...'},
-		{name: 'aButton', mixins: [h], kind: Button, minWidth: false, content: 'Button A', },
+		{name: 'aButton', mixins: [h], kind: Button, minWidth: false, content: 'Button A'},
 		{tag: 'h2', content: 'Display'},
 		{tag: 'ul', components: [
 			{tag: 'li', name: 'd', allowHtml: true, idleContent: '<i>waiting for hold events...</i>'},
@@ -48,7 +48,7 @@ module.exports = kind({
 			i,
 			evt;
 		if (evts) {
-			for (i = 0; evt = evts[i]; i++) {
+			for (i = 0; (evt = evts[i]) && evt; i++) {
 				this.handlers['on' + evt.name] = 'held';
 			}
 		}
@@ -61,8 +61,8 @@ module.exports = kind({
 		this.$.config.set('value', JSON.stringify(this.config1, undefined, 2));
 	},
 	reset: function (display) {
-		d = this.$[display];
-		d.set('content', d.get('idleContent'))
+		var d = this.$[display];
+		d.set('content', d.get('idleContent'));
 	},
 	resetSoon: function (display) {
 		this.startJob('reset_' + display, function() {
@@ -89,7 +89,9 @@ module.exports = kind({
 		this.report(sender, 'released', 'd');
 	},
 	config1: {
-		frequency: 200, resume: true, endHold: 'onLeave',
+		frequency: 200,
+		resume: true,
+		endHold: 'onLeave',
 		events: [
 			{name: 'hold', time: 200},
 			{name: 'longpress', time: 1000},

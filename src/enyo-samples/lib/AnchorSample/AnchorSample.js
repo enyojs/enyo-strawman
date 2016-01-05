@@ -1,9 +1,9 @@
-var 
+var
 	kind = require('enyo/kind');
 
 var
 	Anchor = require('enyo/Anchor'),
-	Image = require('enyo/Image'),
+	EnyoImage = require('enyo/Image'),
 	Input = require('enyo/Input');
 
 module.exports = kind({
@@ -17,7 +17,7 @@ module.exports = kind({
 		{kind: Input, name: 'inputTextContent', type: 'text', placeholder: 'Anchor Content'},
 		{content: 'Image Anchor', classes: 'section'},
 		{kind: Anchor, name: 'anchorImage', href: 'http://www.enyojs.com', title: 'EnyoJS Framework Website', components: [
-			{kind: Image, name: 'anchorImageItem', src: 'http://enyojs.com/img/enyo-logo.png', alt: 'Enyo Logo'}
+			{kind: EnyoImage, name: 'anchorImageItem', src: 'http://enyojs.com/img/enyo-logo.png', alt: 'Enyo Logo'}
 		]},
 		{kind: Input, name: 'inputImageHref', type: 'text', placeholder: 'Anchor URL'},
 		{kind: Input, name: 'inputImageTitle', type: 'text', placeholder: 'Anchor Title'},

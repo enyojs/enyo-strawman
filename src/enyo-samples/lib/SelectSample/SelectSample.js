@@ -1,12 +1,11 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control'),
 	OptionGroup = require('enyo/OptionGroup'),
-	Select = require('enyo/Select'),
-	Table = require('enyo/Table');
+	Select = require('enyo/Select');
 
 module.exports = kind({
 	name: 'enyo.sample.SelectSample',
@@ -18,7 +17,7 @@ module.exports = kind({
 		{from: '$.selectTransitionDuration.selected', to: 'durationIndex'},
 		{from: '$.selectTransitionDuration.value', to: 'durationValue'},
 		{from: '$.selectColor.selected', to: 'colorIndex'},
-		{from: '$.selectColor.value', to: 'colorValue'},
+		{from: '$.selectColor.value', to: 'colorValue'}
 	],
 	observers: {
 		'logSelectChanged': ['timingIndex', 'timingValue', 'durationIndex', 'durationValue',

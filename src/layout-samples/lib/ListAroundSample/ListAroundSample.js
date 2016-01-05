@@ -4,6 +4,9 @@ var
 	utils = require('enyo/utils');
 
 var
+	Icon = require('onyx/Icon');
+
+var
 	FittableColumns = require('layout/FittableColumns'),
 	FittableRows = require('layout/FittableRows'),
 	AroundList = require('layout/AroundList'),
@@ -26,7 +29,7 @@ var AroundListContactItem = kind({
 			{name: 'title', classes: 'list-sample-around-description'},
 			{content: '(415) 711-1234', classes: 'list-sample-around-description'}
 		]},
-		{name: 'remove', kind: Img, classes: 'list-sample-around-remove-button', src: 'assets/remove-icon.png', ontap: 'removeTap'}
+		{name: 'remove', kind: Icon, classes: 'list-sample-around-remove-button', src: '@../../assets/remove-icon.png', ontap: 'removeTap'}
 	],
 	setContact: function (contact) {
 		this.$.name.setContent(contact.name);
@@ -52,7 +55,7 @@ module.exports = kind({
 			{kind: FittableColumns, classes: 'layout-sample-toolbar', components: [
 				{kind: FittableColumns, tag: 'label', fit: true, noStretch: true, components: [
 					{kind: Input, placeholder: 'Search...', fit: true, oninput: 'searchInputChange'},
-					{kind: Img, src: 'assets/search-input-search.png', style: 'height: 20px; width: 20px;'}
+					{kind: Img, src: '@../../assets/search-input-search.png', style: 'height: 20px; width: 20px;'}
 				]}
 			]}
 		], components: [
@@ -162,7 +165,7 @@ module.exports = kind({
 	generateItem: function (inName) {
 		return {
 			name: inName,
-			avatar: 'assets/avatars/' + avatars[utils.irand(avatars.length)],
+			avatar: '@../../assets/avatars' + '/' + avatars[utils.irand(avatars.length)],
 			title: titles[utils.irand(titles.length)]
 		};
 	},

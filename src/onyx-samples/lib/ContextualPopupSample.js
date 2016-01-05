@@ -21,7 +21,7 @@ module.exports = kind({
 		{kind: Toolbar, name: 'topToolbar', classes: 'onyx-menu-toolbar', style: 'background-color:lightgray', components: [
 			{kind: FittableColumns, style: 'width:100%;', components: [
 				{kind: MenuDecorator, components: [
-					{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+					{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 					{kind: ContextualPopup, title: 'Toolbar Button', floating: true, actionButtons: [
 						{content: 'test1',	classes: 'onyx-button-warning'},
 						{content: 'test2'}
@@ -31,7 +31,7 @@ module.exports = kind({
 					]}
 				]},
 				{kind: MenuDecorator, fit: true, style: 'position:absolute;right:0;', components: [
-					{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+					{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 					{kind: ContextualPopup, title: 'Toolbar Button', floating: true, actionButtons: [
 						{content: 'test1', classes: 'onyx-button-warning'},
 						{content: 'test2'}
@@ -158,7 +158,7 @@ module.exports = kind({
 		{kind: Toolbar, name: 'bottomToolbar', classes: 'onyx-menu-toolbar', style: 'background-color:lightgray', components: [
 			{kind: FittableColumns, style: 'width:100%;', components: [
 				{kind: MenuDecorator, components: [
-					{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+					{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 					{kind: ContextualPopup, title: 'Toolbar Button', floating: true, actionButtons: [
 						{content: 'test1', classes: 'onyx-button-warning'},
 						{content: 'test2'}
@@ -172,7 +172,7 @@ module.exports = kind({
 					]}
 				]},
 				{kind: MenuDecorator, fit: true, style: 'position:absolute;right:0;', components: [
-					{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+					{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 					{kind: ContextualPopup, name: 'facebook', title: 'Toolbar Button', floating: true, actionButtons: [
 						{content: 'test1', classes: 'onyx-button-warning'},
 						{content: 'Dismiss', name: 'dismiss_button'}

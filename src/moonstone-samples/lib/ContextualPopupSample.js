@@ -163,7 +163,7 @@ module.exports = kind({
 			{
 				kind: ContextualPopup,
 				name: 'buttonPopup',
-				classes: 'moon-8h moon-8v',
+				classes: 'moon-10h moon-8v',
 				modal: true,
 				autoDismiss: false,
 				spotlightModal: true,
@@ -184,7 +184,7 @@ module.exports = kind({
 			{content: 'Spottable', small:true},
 			{
 				kind: ContextualPopup,
-				classes: 'moon-9h moon-4v',
+				classes: 'moon-10h moon-4v',
 				components: [
 					{kind: Scroller, horizontal: 'auto', classes: 'enyo-fill', components: [
 						{kind: Button, content: 'Button 1'},

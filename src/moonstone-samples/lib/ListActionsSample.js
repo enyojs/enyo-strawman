@@ -63,7 +63,7 @@ module.exports = kind({
 				{kind: Tooltip, position: 'above', content: 'Dummy List Actions'},
 
 				//* List actions with proportional width
-				{kind: ListActions, proportionalWidth: true, iconSrc: 'assets/icon-list.png', listActions: [
+				{kind: ListActions, proportionalWidth: true, iconSrc: '@../assets/icon-list.png', listActions: [
 					{action: 'Cost', components: [
 						{kind: Divider, content: 'Cost'},
 						{kind: Scroller, defaultKind: ToggleItem, fit: true, components: [
@@ -91,7 +91,7 @@ module.exports = kind({
 				{kind: Tooltip, position: 'above', content: 'Test Auto Collapse'},
 
 				//* List actions with auto-collapsing
-				{kind: ListActions, autoCollapse: true, iconSrc: 'assets/icon-list.png', listActions: [
+				{kind: ListActions, autoCollapse: true, iconSrc: '@../assets/icon-list.png', listActions: [
 					{action: 'AutoCollapseTest', components: [
 						{kind: Divider, content: 'Try Auto-collapse'},
 						{kind: Scroller, fit: true, components: [

@@ -28,7 +28,7 @@ module.exports = kind({
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{kind: Divider, content: 'Action Overlay'},
-			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, placeholder: Img.placeholder, caption: 'position-bottom', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'position-bottom', ontap: 'itemTapped',
 				overlayShowing: 'spotlight', overlayPosition: 'bottom', overlayComponents: [
 					{kind: Icon, icon: 'play', ontap: 'badgeTapped'}
 				]
@@ -71,16 +71,16 @@ module.exports = kind({
 			// enyo/DataRepeater adds the `selection-enabled` class when selection is enabled
 			// (appropriately enough). Simulating the same here.
 			{classes: 'selection-enabled', components: [
-				{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
+				{kind: GridListImageItem, source: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection], overlayTransparent: false
 				},
-				{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Transparent', ontap: 'toggleSelected',
+				{kind: GridListImageItem, source: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Transparent', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection]
 				},
-				{kind: GridListImageItem, selected: true, source: img(300, 300), placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
+				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection], overlayTransparent: false
 				},
-				{kind: GridListImageItem, selected: true, source: img(300, 300), placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Transparent', ontap: 'toggleSelected',
+				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Transparent', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection]
 				}
 			]},

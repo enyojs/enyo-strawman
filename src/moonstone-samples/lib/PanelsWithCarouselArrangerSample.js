@@ -10,7 +10,7 @@ module.exports = kind({
 	name: 'moon.sample.PanelsWithCarouselArrangerSample',
 	classes: 'moon enyo-fit',
 	components: [
-		{name: 'panels', kind: Panels, arrangerKind: CarouselArranger, classes: 'enyo-fit full', components: [
+		{name: 'panels', kind: Panels, arrangerKind: CarouselArranger, classes: 'enyo-arranger-fit', components: [
 			{title: 'First', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},

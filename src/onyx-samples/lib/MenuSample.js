@@ -20,10 +20,10 @@ module.exports = kind({
 		{classes: 'onyx-sample-divider', content: 'Menus in Toolbars'},
 		{kind: Toolbar, classes: 'onyx-menu-toolbar', components: [
 			{kind: MenuDecorator, onSelect: 'itemSelected', components: [
-				{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+				{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 				{kind: Menu, components: [
 					{components: [
-						{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+						{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 						{content: 'Bookmarks'}
 					]},
 					{content: 'Favorites'},
@@ -35,7 +35,7 @@ module.exports = kind({
 				{content: 'Bookmarks menu'},
 				{kind: Menu, components: [
 					{components: [
-						{kind: IconButton, src: 'assets/menu-icon-bookmark.png'},
+						{kind: IconButton, src: '@../assets/menu-icon-bookmark.png'},
 						{content: 'Bookmarks'}
 					]},
 					{content: 'Favorites'},

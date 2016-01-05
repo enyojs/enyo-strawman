@@ -1,15 +1,15 @@
 var
 	animation = require('enyo/animation'),
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils');
+	utils = require('enyo/utils'),
+	Input = require('enyo/Input');
 
 var
 	Canvas = require('canvas/Canvas'),
-	CanvasControl = require('canvas/CanvasControl'),
+	CanvasControl = require('canvas/Control'),
 	Circle = require('canvas/Circle'),
 	Rectangle = require('canvas/Rectangle'),
-	Text = require('canvas/Text'),
-	Input = require('enyo/Input');
+	CanvasText = require('canvas/Text');
 
 
 module.exports = kind({
@@ -22,7 +22,7 @@ module.exports = kind({
 			// a visible shelf to bounce off of
 			{kind: Rectangle, bounds: {l: 0, t: 290, w: 300, h: 10}},
 			// an FPS counter
-			{name:'fpsCounter', kind: Text, bounds: {l: 0, t: 15}, color: 'black'}
+			{name:'fpsCounter', kind: CanvasText, bounds: {l: 0, t: 15}, color: 'black'}
 		]},
 		{tag: 'br'},
 		// Reset the balls / change the number

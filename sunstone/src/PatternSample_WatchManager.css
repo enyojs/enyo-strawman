@@ -1,0 +1,93 @@
+/* WatchManager patten Sample */
+
+.watchmanager-sample .imageArea {
+	height: 128px;
+	line-height: 128px;
+	text-align: center;
+}
+
+.watchmanager-sample .imageArea img {
+	vertical-align: middle;
+	width: 72px;
+}
+
+.watchmanager-sample .general-index {
+	height: 48px;
+	line-height: 48px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #797979;
+	padding: 0 16px;
+	background-color: #fafafa;
+}
+
+.watchmanager-sample .checkbox-sample {
+	height: 64px;
+	line-height: 64px;
+	margin-left: 12px;
+}
+
+.watchmanager-sample .setting-container {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.watchmanager-sample .content-area {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 17.5px 16px;
+}
+
+.watchmanager-sample .main-content {
+	font-size: 18px;
+	color: #000000;
+}
+
+.watchmanager-sample .sub-content {
+	font-size: 14px;
+	color: #5b6770;
+}
+
+.watchmanager-sample .setting-checkbox {
+	display: table-cell;
+	vertical-align: middle;
+	width: 40px;
+}
+
+.watchmanager-sample .divider {
+	width: 100%;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.watchmanager-sample .setting-toggle {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	width: 70px;
+}
+
+.watchmanager-sample .setting-slider {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	width: 150px;
+}
+
+.watchmanager-sample .setting4-checkbox {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+	width: 44px;
+}
+
+.watchmanager-sample .setting4-iconbutton {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: right;
+	width: 48px;
+}
+
+.watchmanager-sample .divider {
+	border-bottom: 1px solid #e6e6e6;
+}
