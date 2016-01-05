@@ -27,8 +27,8 @@ var WheelSliderPanelBrightness = kind({
 		return function() {
 			sup.apply(this, arguments);
 
-			// Accessibility : add aria-live attribute to read value whenever it changes.
-			this.$.sampleValue.setAttribute('aria-live', 'assertive');
+			// Accessibility : Set accessibilityLive to true for reading value whenever it changes.
+			this.$.sampleValue.set('accessibilityLive', true);
 		};
 	}),
 	valueChanged: kind.inherit(function(sup) {
