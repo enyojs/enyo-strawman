@@ -18,8 +18,7 @@
 		{"name": "Form Checkbox", "path":"$lib/moonstone/samples/FormCheckboxSample"},
 		{"name": "Headers", "samples": [
 			{"name": "Header", "path":"$lib/moonstone/samples/HeaderSample"},
-			{"name": "Input Header", "path":"$lib/moonstone/samples/InputHeaderSample"},
-			{"name": "Auto-collapsing Header", "path":"$lib/moonstone/samples/HeaderAutoCollapsingSample"}
+			{"name": "Input Header", "path":"$lib/moonstone/samples/InputHeaderSample"}
 		]},
 		{"name": "Icon", "path":"$lib/moonstone/samples/IconSample"},
 		{"name": "Icon Button", "path":"$lib/moonstone/samples/IconButtonSample"},
