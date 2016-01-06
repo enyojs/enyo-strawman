@@ -116,9 +116,9 @@ module.exports = kind({
 		fmt = this.format('my');
 		this.$.datePicker3Value.setContent(fmt.format(this.$.datePicker3.getValue()));
 	},
-	updateDateValues: function (sender, event){
-		var fmt = event.name != 'datePicker3' ? this.format() :  this.format('my');
-		this.$[event.name + 'Value'].setContent(fmt.format(event.value));
+	updateDateValues: function (sender, ev){
+		var fmt = ev.name != 'datePicker3' ? this.format() :  this.format('my');
+		this.$[ev.name + 'Value'].setContent(fmt.format(ev.value));
 	},
 	format: function (dateComponents) {
 		var fmt = new DateFmt({

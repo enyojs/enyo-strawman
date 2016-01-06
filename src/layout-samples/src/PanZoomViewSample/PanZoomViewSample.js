@@ -1,10 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button');
+	kind = require('enyo/kind');
 
 var
 	FittableColumns = require('layout/FittableColumns'),
-	PanZoomView = require('layout/PanZoomView');
+	PanZoomView = require('layout/PanZoomView'),
+	Button = require('enyo/Button');
 
 module.exports = kind({
 	name: 'enyo.sample.PanZoomViewSample',
@@ -40,41 +40,41 @@ module.exports = kind({
 			]}
 		]}
 	],
-	create: kind.inherit(function (sup) {
+	create: kind.inherit (function (sup) {
 		return function () {
 			sup.apply(this, arguments);
 			this.scale = 'auto';
 		};
 	}),
-	handleResize: function (sender, event) {
+	handleResize: function (sender, ev) {
 		this.inherited(arguments);
 		this.$.panZoomView.setScale(this.scale);
 	},
-	autoScale: function (sender, event) {
+	autoScale: function (sender, ev) {
 		this.scale = 'auto';
 		this.$.panZoomView.setScale(this.scale);
 	},
-	widthScale: function (sender, event) {
+	widthScale: function (sender, ev) {
 		this.scale = 'width';
 		this.$.panZoomView.setScale(this.scale);
 	},
-	heightScale: function (sender, event) {
+	heightScale: function (sender, ev) {
 		this.scale = 'height';
 		this.$.panZoomView.setScale(this.scale);
 	},
-	fitScale: function (sender, event) {
+	fitScale: function (sender, ev) {
 		this.scale = 'fit';
 		this.$.panZoomView.setScale(this.scale);
 	},
-	halfScale: function (sender, event) {
+	halfScale: function (sender, ev) {
 		this.scale = 0.5;
 		this.$.panZoomView.setScale(this.scale);
 	},
-	normalScale: function (sender, event) {
+	normalScale: function (sender, ev) {
 		this.scale = 1.0;
 		this.$.panZoomView.setScale(this.scale);
 	},
-	doubleScale: function (sender, event) {
+	doubleScale: function (sender, ev) {
 		this.scale = 2.0;
 		this.$.panZoomView.setScale(this.scale);
 	}

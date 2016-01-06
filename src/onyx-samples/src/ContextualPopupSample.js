@@ -1,16 +1,14 @@
 var
-	kind = require('enyo/kind'),
-	Scroller = require('enyo/Scroller');
+	kind = require('enyo/kind');
 
 var
 	FittableRows = require('layout/FittableRows'),
-	FittableColumns = require('layout/FittableColumns');
-
-var
+	FittableColumns = require('layout/FittableColumns'),
 	ContextualPopup = require('onyx/ContextualPopup'),
 	IconButton = require('onyx/IconButton'),
 	MenuDecorator = require('onyx/MenuDecorator'),
-	Toolbar = require('onyx/Toolbar');
+	Toolbar = require('onyx/Toolbar'),
+	Scroller = require('enyo/Scroller');
 
 module.exports = kind({
 	name: 'onyx.sample.ContextualPopupSample',
@@ -190,18 +188,18 @@ module.exports = kind({
 			]}
 		]}
 	],
-	dismissTap: function (sender, event) {
+	dismissTap: function (sender, ev) {
 		this.log(sender.name, 'action button tapped');
 		sender.popup.hide();
 		return true;
 	},
-	tapHandler: function (sender, event) {
-		if (event.originator.actionButton) {
-			this.log(event.originator.popup); //info about popup it's coming from
-			this.log('action button name: ' + event.originator.name); //name of action button (you can set this - see example use below)
+	tapHandler: function (sender, ev) {
+		if (ev.originator.actionButton) {
+			this.log(ev.originator.popup); //info about popup it's coming from
+			this.log('action button name: ' + ev.originator.name); //name of action button (you can set this - see example use below)
 
-			if (event.originator.name == 'dismiss_button') {
-				event.originator.popup.hide();
+			if (ev.originator.name == 'dismiss_button') {
+				ev.originator.popup.hide();
 			}
 		}
 	}

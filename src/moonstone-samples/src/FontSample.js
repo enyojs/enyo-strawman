@@ -1,10 +1,10 @@
 var
-	kind = require('enyo/kind'),
-	Table = require('enyo/Table');
+	kind = require('enyo/kind');
 
 var
 	Scroller = require('moonstone/Scroller'),
-	Divider = require('moonstone/Divider');
+	Divider = require('moonstone/Divider'),
+	Table = require('enyo/Table');
 
 module.exports = kind({
 	name: 'moon.sample.FontSample',

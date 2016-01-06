@@ -1,8 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	Img = require('enyo/Image');
+	kind = require('enyo/kind');
 
 var
 	GridListImageItem = require('moonstone/GridListImageItem'),
@@ -12,7 +9,10 @@ var
 	Overlay = require('moonstone/Overlay'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
-	Scroller = require('moonstone/Scroller');
+	Scroller = require('moonstone/Scroller'),
+	Collection = require('enyo/Collection'),
+	Control = require('enyo/Control'),
+	Img = require('enyo/Image');
 
 var ImageItem = kind({
 	kind: GridListImageItem,
@@ -33,8 +33,8 @@ var NoImageItem = kind({
 	componentOverrides: {
 		image: {kind: Control, mixins: [Overlay.Support, Overlay.Selection], style: 'width: 194px; height: 194px; background: gray;'}
 	},
-	imageSizingChanged: function(){},
-	bgColorChanged: function() {
+	imageSizingChanged: function () {},
+	bgColorChanged: function () {
 		this.$.image.applyStyle('background', this.bgColor);
 	}
 });

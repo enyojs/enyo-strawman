@@ -44,7 +44,7 @@ module.exports = kind({
 			{name: 'animateSetting', kind: CheckboxItem, checked: true, content: 'Animated'}
 		]}
 	],
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		for (var i in this.$) {
 			if (this.$[i].kind == ProgressBar) {
 				if (this.$.animateSetting.getChecked()) {

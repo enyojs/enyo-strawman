@@ -19,7 +19,10 @@ var
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	ToggleButton = require('moonstone/ToggleButton'),
-	ToggleItem = require('moonstone/ToggleItem');
+	ToggleItem = require('moonstone/ToggleItem'),
+	Collection = require('enyo/Collection'),
+	DataRepeater = require('enyo/DataRepeater'),
+	Router = require('enyo/Router');
 
 var
 	LinkSupport = require('../../../strawman/LinkSupport');
@@ -42,7 +45,7 @@ var LocaleItem = kind({
 	observers: {
 		updateTitle: ['locale', 'title']
 	},
-	updateTitle: function() {
+	updateTitle: function () {
 		this.set('content', this.locale + ' ' + this.title);
 	}
 });

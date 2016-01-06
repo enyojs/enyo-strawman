@@ -1,8 +1,8 @@
 var
-	kind = require('enyo/kind'),
-	Button = require('enyo/Button');
+	kind = require('enyo/kind');
 
 var
+	Button = require('enyo/Button'),
 	FittableColumns = require('layout/FittableColumns'),
 	FittableHeaderLayout = require('layout/FittableHeaderLayout'),
 	FittableRows = require('layout/FittableRows');

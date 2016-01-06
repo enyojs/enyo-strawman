@@ -72,7 +72,7 @@ module.exports = kind({
 			{classes: 'scroller-sample-content', content: text, allowHtml: true}
 		]}
 	],
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 
 		//hide other scrollers
@@ -84,19 +84,19 @@ module.exports = kind({
 		this.$.translatescroll.hide();
 		this.lastScroller = 'default';
 	},
-	sampleChanged: function(inSender, inEvent) {
+	sampleChanged: function (sender, ev) {
 		var lastScroller = this.lastScroller;
-		var scrollerName = inSender.getValue().substr(1);
+		var scrollerName = sender.getValue().substr(1);
 		this.$[scrollerName].show();
 		this.$[lastScroller].hide();
 		this.lastScroller = scrollerName;
 	},
 	// The following are used when this sample is called from the Sampler app
-	mouseDown: function(inSender, inEvent) {
-		inEvent.preventDefault();
+	mouseDown: function (sender, ev) {
+		ev.preventDefault();
 	},
-	dragStart: function(inSender, inEvent) {
-		if (inEvent.horizontal) {
+	dragStart: function (sender, ev) {
+		if (ev.horizontal) {
 			// Prevent drag propagation on horizontal drag events
 			return true;
 		}

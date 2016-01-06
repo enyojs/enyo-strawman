@@ -37,7 +37,7 @@ module.exports = kind({
 		// number of balls to show
 		balls: 10
 	},
-	setupBalls: function() {
+	setupBalls: function () {
 		// pause loop to update the balls
 		if (this.cancel) {
 			animation.cancelRequestAnimationFrame(this.cancel);
@@ -66,16 +66,16 @@ module.exports = kind({
 		// (re)start loop
 		utils.asyncMethod(this.bindSafely('loop'));
 	},
-	rendered: function() {
+	rendered: function () {
 		this.setupBalls();
 	},
-	destroy: function() {
+	destroy: function () {
 		if (this.cancel) {
 			animation.cancelRequestAnimationFrame(this.cancel);
 		}
 		this.inherited(arguments);
 	},
-	loop: function() {
+	loop: function () {
 		this.frame++;
 		// update ball positions
 		for (var i = 0, b; (b = this.$.ballpit.children[i]); i++) {
@@ -98,7 +98,7 @@ module.exports = kind({
 		// draw the framerate
 		this.$.fpsCounter.setText(Math.floor(this.frame / ((Date.now() - this.loopStart) / 1000)));
 	},
-	reset: function() {
+	reset: function () {
 		var inode = this.$.balls.hasNode();
 		var newballs = inode ? parseInt(inode.value,0) : this.balls;
 		if (isFinite(newballs) && newballs >= 0 && newballs != this.balls) {
@@ -112,7 +112,7 @@ module.exports = kind({
 			}
 		}
 	},
-	ballsChanged: function(inOldBalls) {
+	ballsChanged: function (oldBalls) {
 		this.setupBalls();
 	}
 });

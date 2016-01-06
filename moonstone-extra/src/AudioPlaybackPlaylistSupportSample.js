@@ -36,7 +36,7 @@ var audioQueue = kind({
 					], observers: [
 						{method: 'playingHandler', path: ['playing']}
 					],
-					playingHandler: function (sender, event) {
+					playingHandler: function (sender, ev) {
 						this.addRemoveClass('playing', this.get('playing'));
 					}}
 				]}
@@ -117,8 +117,8 @@ module.exports = kind({
 		this.model1 = this.collection.at(0);
 		this.model2 = this.collection.at(1);
 	},
-	playAudio: function (sender, event) {
-		this.$.audioPlayback.set('model', event.model);
+	playAudio: function (sender, ev) {
+		this.$.audioPlayback.set('model', ev.model);
 	},
 	setAudio1: function () {
 		this.$.audioPlayback.set('model', this.model1);

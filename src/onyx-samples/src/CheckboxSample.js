@@ -1,11 +1,11 @@
 var
-	kind = require('enyo/kind'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	Checkbox = require('onyx/Checkbox'),
 	Groupbox = require('onyx/Groupbox'),
-	GroupboxHeader = require('onyx/GroupboxHeader');
+	GroupboxHeader = require('onyx/GroupboxHeader'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'onyx.sample.CheckboxSample',
@@ -30,13 +30,13 @@ module.exports = kind({
 			{name: 'result', classes: 'onyx-sample-result', content: 'No button tapped yet.'}
 		]}
 	],
-	checkboxChanged: function (sender, event) {
+	checkboxChanged: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' was ' + (sender.getValue() ? ' selected.' : 'deselected.'));
 	},
 	ordinals: ['1st', '2nd', '3rd'],
-	groupActivated: function (sender, event) {
-		if (event.originator.getActive()) {
-			var selected = event.originator.indexInContainer();
+	groupActivated: function (sender, ev) {
+		if (ev.originator.getActive()) {
+			var selected = ev.originator.indexInContainer();
 			this.$.result.setContent('The ' + this.ordinals[selected] + ' checkbox in the group is selected.');
 		}
 	}

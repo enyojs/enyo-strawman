@@ -71,36 +71,36 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
-	create: function(){
+	create: function () {
 		this.inherited(arguments);
 		if (!ilib) {
 			this.$.localePicker.hide();
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function(sender, event){
-		var locale = event.selected.content;
+	setLocale: function (sender, ev){
+		var locale = ev.selected.content;
 		locale = locale == 'Use Default Locale' ? null : locale;
 		i18n.updateLocale(locale);
-		this.$.result.setContent(event.originator.name + ' changed to ' + ilib.getLocale());
+		this.$.result.setContent(ev.originator.name + ' changed to ' + ilib.getLocale());
 		return true;
 	},
-	setDate: function() {
+	setDate: function () {
 		var current = this.$.picker.value || new Date();
 		var year = isNaN(parseInt(this.$.yearInput.getValue(), 0)) ? current.getFullYear() : parseInt(this.$.yearInput.getValue(), 0);
 		var month = isNaN(parseInt(this.$.monthInput.getValue(), 0)) ? current.getMonth() : parseInt(this.$.monthInput.getValue(), 0) - 1;
 		var day = isNaN(parseInt(this.$.dayInput.getValue(), 0)) ? current.getDate() : parseInt(this.$.dayInput.getValue(), 0);
 		this.$.picker.set('value', new Date(year, month, day));
 	},
-	resetDate: function() {
+	resetDate: function () {
 		this.$.picker.set('value', new Date());
 	},
-	changed: function(sender, event) {
-		if (this.$.result && event.value){
-			this.$.result.setContent(event.name + ' changed to ' + event.value.toDateString());
+	changed: function (sender, ev) {
+		if (this.$.result && ev.value){
+			this.$.result.setContent(ev.name + ' changed to ' + ev.value.toDateString());
 		}
 	},
-	resetTapped: function(sender, event) {
+	resetTapped: function (sender, ev) {
 		this.$.picker.set('value', null);
 		this.$.picker.set('open', false);
 		return true;

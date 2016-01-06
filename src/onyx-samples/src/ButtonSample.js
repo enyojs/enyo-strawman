@@ -44,7 +44,7 @@ module.exports = kind({
 			{name:'result', classes:'onyx-sample-result', content:'No button tapped yet.'}
 		]}
 	],
-	buttonTapped: function (sender, event) {
+	buttonTapped: function (sender, ev) {
 		if (sender.content){
 			this.$.result.setContent('The \'' + sender.getContent() + '\' button was tapped');
 		} else {

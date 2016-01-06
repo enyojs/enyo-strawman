@@ -102,6 +102,7 @@ module.exports = kind({
 					{kind: Item, content: 'Item Seven', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Eight', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Nine', ontap: 'nextTapped'},
+					{kind: Item, content: 'Item Ten', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Eleven', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Twelve', ontap: 'nextTapped'},
 					{kind: Item, content: 'Item Thirteen', ontap: 'nextTapped'},

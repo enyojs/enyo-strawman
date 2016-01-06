@@ -25,7 +25,7 @@ module.exports = kind({
 			{kind: Line, bounds: {start_x: 175, start_y: 450, finish_x: 450 , finish_y: 550, width: 5, Style: 'red', cap: 'miter'}}
 		]}
 	],
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 		// Code to monitor image and redraw once loaded
 		var img = new Image();
@@ -42,7 +42,7 @@ var BlinkyTriangle = kind({
 	published: {
 		highlightColor:'yellow'
 	},
-	renderSelf: function(ctx) {
+	renderSelf: function (ctx) {
 		ctx.beginPath();
 		ctx.moveTo(this.bounds.l + this.bounds.w/2, this.bounds.t);
 		ctx.lineTo(this.bounds.l, this.bounds.t + this.bounds.h);
@@ -50,16 +50,16 @@ var BlinkyTriangle = kind({
 		ctx.lineTo(this.bounds.l + this.bounds.w/2, this.bounds.t);
 		this.draw(ctx);
 	},
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
 		this.jobName = 'blinkMe_' + this.id;
 		this.blinkMe();
 	},
-	destroy: function() {
+	destroy: function () {
 		job.stop(this.jobName);
 		this.inherited(arguments);
 	},
-	blinkMe: function() {
+	blinkMe: function () {
 		var color = this.color;
 		this.color = this.highlightColor;
 		this.highlightColor = color;

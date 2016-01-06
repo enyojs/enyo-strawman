@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableColumns = require('layout/FittableColumns');
-
-var
+	FittableColumns = require('layout/FittableColumns'),
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),

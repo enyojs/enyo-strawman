@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	FormCheckbox = require('moonstone/FormCheckbox'),
@@ -24,20 +22,20 @@ module.exports = kind({
 			{kind: FormCheckbox, content: 'Animate', checked: true, prop: 'animate', onchange: 'checked'},
 			{kind: FormCheckbox, content: 'Wrap', prop: 'wrap', onchange: 'checked'},
 			{kind: FormCheckbox, content: 'Padding (5 digits)', onchange: 'paddingChecked'},
-			{kind: FormCheckbox, content: 'Disabled', prop: 'disabled', onchange: 'checked'}			
+			{kind: FormCheckbox, content: 'Disabled', prop: 'disabled', onchange: 'checked'}
 		]},
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'value', content: 'No change yet'}
 	],
-	changed: function (sender, event) {
+	changed: function (sender, ev) {
 		if (this.$.value) {
-			this.$.value.setContent(event.name + ' changed to ' + event.value);
+			this.$.value.setContent(ev.name + ' changed to ' + ev.value);
 		}
 	},
-	checked: function (sender, event) {
+	checked: function (sender, ev) {
 		this.$.picker.set(sender.prop, sender.checked);
 	},
-	paddingChecked: function (sender, event) {
+	paddingChecked: function (sender, ev) {
 		this.$.picker.set('digits', sender.checked? 5 : null);
 		this.$.picker.render();
 	}
