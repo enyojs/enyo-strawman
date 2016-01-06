@@ -6,6 +6,12 @@ var
 	Button = require('enyo/Button'),
 	Video = require('enyo/Video');
 
+var sources = [
+	{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie_hd.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'}
+];
+
 module.exports = kind({
 	name: 'enyo.sample.VideoSample',
 	classes: 'video-sample',
@@ -16,7 +22,7 @@ module.exports = kind({
 				kind: Video,
 				poster: 'http://media.w3.org/2010/05/bunny/poster.png',
 				preload: 'auto',
-				src: 'http://vjs.zencdn.net/v/oceans.mp4',
+				src: sources[0].src,
 				onratechange: 'rateChanged',
 				ontimeupdate: 'timeChanged',
 				ondurationchange: 'durationChanged',
@@ -87,7 +93,7 @@ module.exports = kind({
 		return true;
 	},
 	buttonRewindTapped: function(sender, ev) {
-		this.set("isPlaying", true);
+		this.set('isPlaying', true);
 		this.$.video.rewind();
 		return true;
 	},
@@ -113,15 +119,11 @@ module.exports = kind({
 	},
 	buttonUseSrcTapped: function (sender, ev) {
 		this.pauseVideo();
-		this.$.video.set('src', 'http://media.w3.org/2010/05/bunny/movie.mp4');
+		this.$.video.set('src', sources[0].src);
 	},
 	buttonUseSourceComponentsTapped: function (sender, ev) {
 		this.pauseVideo();
-		this.$.video.set('sourceComponents', [
-		 	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'},
-			{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
-			{src: 'http://media.w3.org/2010/05/bunny/movie.webm', type: 'video/webm'}
-		]);
+		this.$.video.set('sourceComponents', sources);
 	},
 	rateChanged: function (sender, ev) {
 		this.$.videoAction.setContent('Playback ' + ev.playbackRate + 'x');
