@@ -14,7 +14,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.TooltipSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable',
 	components: [
 		{name: 'dragContainer', kind: TooltipDecorator, classes: 'draggable',
 			ondragstart: 'dragstart', ondrag: 'drag', ondragfinish: 'dragfinish', components: [
@@ -22,7 +22,7 @@ module.exports = kind({
 				{kind: Tooltip, content: 'I\'m a Draggble tooltip.', position: 'above'}
 			]
 		},
-		{kind: FittableRows, components: [
+		{kind: FittableRows, classes: 'enyo-fit',  components: [
 			//Top row of buttons
 			{classes: 'moon-5v', components:[
 				{kind: TooltipDecorator, components: [
