@@ -20,7 +20,7 @@ module.exports = kind({
 	components: [
 		{name: 'drawers', kind: Drawers, drawers: [
 			{handle: {}, controlsOpen: true, controlDrawerComponents: [
-				{classes: 'moon-hspacing', controlClasses: 'moon-4h', components: [
+				{classes: 'moon-hspacing', controlClasses: 'moon-5h', components: [
 					{name: 'orientation', kind: ExpandablePicker, selectedIndex: 0, content: 'Orientation', components: [
 						{content: 'vertical'},
 						{content: 'horizontal'}
