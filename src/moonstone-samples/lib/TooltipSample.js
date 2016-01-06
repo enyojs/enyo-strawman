@@ -1,6 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	dom = require('enyo/dom');
+	kind = require('enyo/kind');
 
 var
 	FittableRows = require('layout/FittableRows');
@@ -99,12 +98,7 @@ module.exports = kind({
 		this.$.dragBtn.spotlight = false;
 	},
 	drag: function(sender, ev) {
-		var x = parseInt(this.rtl? ev.clientX - 1920 + 162 : ev.clientX - 162, 10),
-			y = parseInt(ev.clientY - 42, 10);
-
-
-		dom.transform(this.$.dragContainer, {translateX: x + 'px'});
-		dom.transform(this.$.dragContainer, {translateY: y + 'px'});
+		this.$.dragContainer.setBounds({top: ev.pageY, left: ev.pageX});
 	},
 	dragfinish: function() {
 		this.$.dragBtn.spotlight = true;
