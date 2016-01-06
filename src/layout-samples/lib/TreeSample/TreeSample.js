@@ -23,7 +23,7 @@ module.exports = kind({
 					{icon: '@../../assets/file.png', content: 'Bravo-Charlie'}
 				]},
 				{icon: '@../../assets/folder.png', content: 'Charlie', expandable: true, components: [
-					{icon: '@../assets/file.png', content: 'Charlie-Alpha'},
+					{icon: '@../../assets/file.png', content: 'Charlie-Alpha'},
 					{icon: '@../../assets/file.png', content: 'Charlie-Bravo'},
 					{icon: '@../../assets/file.png', content: 'Charlie-Charlie'}
 				]},

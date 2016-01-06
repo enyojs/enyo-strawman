@@ -72,11 +72,11 @@ module.exports = kind({
 		{name: 'topToolbar', style: 'background-color: lightgray', components: [
 			{kind: FittableColumns, style: 'width:100%;', components:[
 				{components: [
-					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(assets/menu-icon-bookmark.png)'},
+					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(' + '@../../assets/menu-icon-bookmark.png' + ')'},
 					{kind: ContextualPopup, count: 2}
 				]},
 				{fit:true, style: 'position:absolute;right:0;', components: [
-					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(assets/menu-icon-bookmark.png)'},
+					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(' + '@../../assets/menu-icon-bookmark.png' + ')'},
 					{kind: ContextualPopup, count: 6}
 				]}
 			]}
@@ -127,11 +127,11 @@ module.exports = kind({
 		{name: 'bottomToolbar', classes: 'onyx-menu-toolbar', style: 'background-color:lightgray', components: [
 			{kind: FittableColumns, style: 'width:100%;', components:[
 				{components: [
-					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(assets/menu-icon-bookmark.png)'},
+					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(' + '@../../assets/menu-icon-bookmark.png' + ')'},
 					{kind: ContextualPopup, count: 6}
 				]},
 				{fit: true, style: 'position:absolute;right:0;', components: [
-					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(assets/menu-icon-bookmark.png)'},
+					{kind: Control, classes: 'sample-popup-button icon-button', ontap: 'showPopup', style: 'background-image: url(' + '@../../assets/menu-icon-bookmark.png' + ')'},
 					{kind: ContextualPopup, name: 'facebook', count: 6}
 				]}
 			]}
