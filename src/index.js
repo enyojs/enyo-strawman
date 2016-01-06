@@ -7,7 +7,7 @@ var
 var
 	samples = {
 		Enyo: require('./enyo-samples'),
-		Moonstone: require('./moonstone-samples'), //router blocking
+		Moonstone: request('./moonstone-samples'), //router blocking
 		Layout: require('./layout-samples'),
 		Spotlight: require('./spotlight-samples'),
 		iLib: require('./enyo-ilib-samples'),
