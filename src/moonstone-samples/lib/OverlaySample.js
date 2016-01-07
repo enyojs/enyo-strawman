@@ -71,16 +71,16 @@ module.exports = kind({
 			// enyo/DataRepeater adds the `selection-enabled` class when selection is enabled
 			// (appropriately enough). Simulating the same here.
 			{classes: 'selection-enabled', components: [
-				{kind: GridListImageItem, source: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
+				{kind: GridListImageItem, source: 'http://lorempixel.com/640/480/city/9/', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection], overlayTransparent: false
 				},
-				{kind: GridListImageItem, source: 'http://lorempixel.com/output/city-q-c-640-480-9.jpg', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Transparent', ontap: 'toggleSelected',
+				{kind: GridListImageItem, source: 'http://lorempixel.com/640/480/city/9/', placeholder: Img.placeholder, caption: 'Unselected', subCaption: 'Transparent', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection]
 				},
-				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
+				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/640/480/nature/5/', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Scrimmed', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection], overlayTransparent: false
 				},
-				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/output/nature-q-c-640-480-5.jpg', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Transparent', ontap: 'toggleSelected',
+				{kind: GridListImageItem, selected: true, source: 'http://lorempixel.com/640/480/nature/5/', placeholder: Img.placeholder, caption: 'Selected', subCaption: 'Transparent', ontap: 'toggleSelected',
 					mixins: [Overlay.Selection]
 				}
 			]},
