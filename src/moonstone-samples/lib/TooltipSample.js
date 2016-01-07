@@ -6,6 +6,7 @@ var
 
 var
 	Button = require('moonstone/Button'),
+	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
@@ -19,9 +20,23 @@ module.exports = kind({
 		{name: 'dragContainer', kind: TooltipDecorator, classes: 'draggable',
 			ondragstart: 'dragstart', ondrag: 'drag', ondragfinish: 'dragfinish', components: [
 				{name: 'dragBtn', kind: Button, content: 'Draggble Tooltip'},
-				{kind: Tooltip, content: 'I\'m a Draggble tooltip.', position: 'above'}
+				{kind: Tooltip, position: 'above', components: [
+					{name: 'dragTooltip', content: 'I\'m a Draggble tooltip.', style: 'white-space: normal'}
+				]}
 			]
 		},
+		{style: 'position: absolute; left: 40%; top: 60%; z-index:1', components: [
+			{kind: Divider, content: 'Content'},
+			{kind: InputDecorator, components: [
+				{name: 'dragInput', kind: Input, onchange: 'setContent'}
+			]}
+		]},
+		{style: 'position: absolute; left: 40%; top: 80%; z-index:1', components: [
+			{kind: Divider, content: 'Width'},
+			{kind: InputDecorator, components: [
+				{name: 'widthInput', kind: Input, type: 'number', onchange: 'setWidth'}
+			]}
+		]},
 		{kind: FittableRows, classes: 'enyo-fit',  components: [
 			//Top row of buttons
 			{classes: 'moon-5v', components:[
@@ -94,6 +109,12 @@ module.exports = kind({
 			]}
 		]}
 	],
+	setContent: function() {
+		this.$.dragTooltip.set('content', this.$.dragInput.getValue());
+	},
+	setWidth: function() {
+		this.$.dragTooltip.applyStyle('width', this.$.widthInput.getValue() + 'px');
+	},
 	dragstart: function() {
 		this.$.dragBtn.spotlight = false;
 	},
