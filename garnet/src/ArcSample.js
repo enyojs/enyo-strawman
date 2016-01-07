@@ -1,26 +1,23 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
 	Arc = require('garnet/Arc'),
 	Panel = require('garnet/Panel');
 
-kind({
-	name: "g.sample.ArcPanel",
+var ArcPanel = kind({
+	name: 'g.sample.ArcPanel',
 	kind: Panel,
-	style: "position: relative; border-radius: 50%; background-color: #000000;",
+	style: 'position: relative; border-radius: 50%; background-color: #000000;',
 	components: [
-		{name: "arc1", kind: Arc, color: "#FF3300", width: 10, diameter: 30},
-		{name: "arc2", kind: Arc, color: "#FF6600", width: 11, diameter: 70},
-		{name: "arc3", kind: Arc, color: "#FF9900", width: 12, diameter: 110},
-		{name: "arc4", kind: Arc, color: "#FFFF00", width: 13, diameter: 150},
-		{name: "arc5", kind: Arc, color: "#CCFF00", width: 14, diameter: 190},
-		{name: "arc6", kind: Arc, color: "#99FF00", width: 15, diameter: 230},
-		{name: "arc7", kind: Arc, color: "#66FF00", width: 16, diameter: 270},
-		{name: "arc8", kind: Arc, color: "#33FF00", width: 17, diameter: 310}
+		{name: 'arc1', kind: Arc, color: '#FF3300', width: 10, diameter: 30},
+		{name: 'arc2', kind: Arc, color: '#FF6600', width: 11, diameter: 70},
+		{name: 'arc3', kind: Arc, color: '#FF9900', width: 12, diameter: 110},
+		{name: 'arc4', kind: Arc, color: '#FFFF00', width: 13, diameter: 150},
+		{name: 'arc5', kind: Arc, color: '#CCFF00', width: 14, diameter: 190},
+		{name: 'arc6', kind: Arc, color: '#99FF00', width: 15, diameter: 230},
+		{name: 'arc7', kind: Arc, color: '#66FF00', width: 16, diameter: 270},
+		{name: 'arc8', kind: Arc, color: '#33FF00', width: 17, diameter: 310}
 	],
 	create: kind.inherit(function(sup) {
 		return function() {
@@ -39,16 +36,16 @@ kind({
 });
 
 module.exports = kind({
-	name: "g.sample.ArcSample",
-	classes: "enyo-unselectable garnet g-sample",
+	name: 'g.sample.ArcSample',
+	classes: 'enyo-unselectable garnet g-sample',
 	components: [
-		{content: "< Arc Sample", classes: "g-sample-header", ontap: "goBack"},
+		{content: '< Arc Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
-		{content: "Arc", classes: "g-sample-subheader"},
-		{kind: "g.sample.ArcPanel"}
+		{content: 'Arc', classes: 'g-sample-subheader'},
+		{kind: ArcPanel}
 	],
 	goBack: function(inSender, inEvent) {
-		global.location.href = "./index.html?Garnet"; // global.history.go(-1);
+		global.history.go(-1);
 		return false;
 	}
 });

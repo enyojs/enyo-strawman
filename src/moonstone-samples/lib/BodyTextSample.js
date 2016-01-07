@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	Scroller = require('moonstone/Scroller'),
@@ -27,7 +25,7 @@ module.exports = kind({
 			{kind: BodyText, content: 'بيكسار عبقرية يسود في هذه الكوميديا ​​الرومانسية مضحك، التي النجوم الروبوت الذي يقول شيئا على الإطلاق للحصول على كامل خمسة وعشرين دقيقة بعد تولي بطريقة أو بأخرى تماما ويسحر نفسه للجمهور في غضون الدقائق القليلة الأولى من الفيلم. عندما خرج الروبوت الماضي على وجه الأرض، الحائط-E (التي عبر عنها بن بيرت) هو روبوت صغير واحد - مع كبير، القلب الكبير - الذي يخبئه المستقبل من الأرض والجنس البشري بشكل مباشر في كف يده المعدنية. انه تغلب جميع \'تحميل النفايات تخصيص كهربائية الدرجة الأرض الروبوتات التي تم تعيينها قبل بعض سبعمائة سنوات لتنظيف الفوضى البيئية التي من صنع الإنسان من الأرض في حين اجازتها رجل على متن سفينة الفضاء اكسيوم الفاخرة.'}
 		]}
 	],
-	largeTapped: function (sender, event) {
+	largeTapped: function (sender, ev) {
 		var enabled = sender.value;
 		this.$.scroller.getClientControls().forEach(function (control) {
 			if (control.kind === BodyText) {

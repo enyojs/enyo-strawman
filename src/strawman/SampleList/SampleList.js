@@ -2,7 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/Anchor'),
+	Link = require('../Link'),
 	List = require('../List'),
 	Title = require('../Title');
 
@@ -10,7 +10,7 @@ module.exports = kind({
 	title: 'Samples',
 	listComponents: [
 		{name: 'title', kind: Title},
-		{name: 'back', kind: Anchor, classes: 'back-button', content: 'Back', href: './'},
+		{name: 'back', kind: Link, classes: 'back-button', content: 'Back', href: 'index.html'},
 		{name: 'list', kind: List}
 	],
 	_libList: false,

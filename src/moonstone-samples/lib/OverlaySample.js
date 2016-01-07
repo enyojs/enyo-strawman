@@ -1,11 +1,9 @@
 var
-	kind = require('enyo/kind'),
-	Img = require('enyo/Image');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	Img = require('enyo/Image'),
+	FittableRows = require('layout/FittableRows'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
 	ClampedText = require('moonstone/ClampedText'),
@@ -30,7 +28,7 @@ module.exports = kind({
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{kind: Divider, content: 'Action Overlay'},
-			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, placeholder: Img.placeholder, caption: 'position-bottom', ontap: 'itemTapped',
+			{kind: GridListImageItem, source: img(300, 300), placeholder: Img.placeholder, caption: 'position-bottom', ontap: 'itemTapped',
 				overlayShowing: 'spotlight', overlayPosition: 'bottom', overlayComponents: [
 					{kind: Icon, icon: 'play', ontap: 'badgeTapped'}
 				]
@@ -124,20 +122,20 @@ module.exports = kind({
 		]},
 		{name: 'result', style: 'height: 50px;'}
 	],
-	itemTapped: function (sender, event) {
+	itemTapped: function (sender, ev) {
 		this.$.result.set('content', 'Item Tapped: ' + sender.id);
 	},
-	badgeTapped: function (sender, event) {
+	badgeTapped: function (sender, ev) {
 		this.$.result.set('content', 'Badge Tapped: ' + sender.id);
 		return true;
 	},
-	toggleSelected: function (sender, event) {
+	toggleSelected: function (sender, ev) {
 		sender.set('selected', !sender.selected);
 	},
-	showOverlay: function (sender, event) {
+	showOverlay: function (sender, ev) {
 		this.$.tapOverlay.set('overlayShowing', true);
 	},
-	hideOverlay: function (sender, event) {
+	hideOverlay: function (sender, ev) {
 		this.$.tapOverlay.set('overlayShowing', false);
 		return true;
 	}

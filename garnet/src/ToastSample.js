@@ -1,26 +1,23 @@
-var
-	enyo = require('enyo'),
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	dom = require('enyo/dom.js'),
-	ri = require('enyo/resolution'),
+require('garnet');
 
-	g = require('garnet'),
+var
+	kind = require('enyo/kind'),
+	ri = require('enyo/resolution'),
 	Button = require('garnet/Button'),
 	Toast = require('garnet/Toast'),
 	Panel = require('garnet/Panel');
 
-kind({
-	name: "g.sample.ToastPanel",
+var ToastPanel = kind({
+	name: 'g.sample.ToastPanel',
 	kind: Panel,
-	classes: "g-layout-absolute-wrapper", // for button
+	classes: 'g-layout-absolute-wrapper', // for button
 	components: [
-		{kind: Button, style: "position: absolute; width: " + ri.scale(310) + "px; margin: auto;", classes: "g-layout-absolute-center g-layout-absolute-middle", ontap: "showPopup", content: "Click here"},
+		{kind: Button, style: 'position: absolute; width: ' + ri.scale(310) + 'px; margin: auto;', classes: 'g-layout-absolute-center g-layout-absolute-middle', ontap: 'showPopup', content: 'Click here'},
 		{
-			name: "toast",
+			name: 'toast',
 			kind: Toast,
 			allowHtml: true,
-			content: "Toast<br><br>Saved"
+			content: 'Toast<br><br>Saved'
 		}
 	],
 	showPopup: function(inSender, inEvent) {
@@ -30,16 +27,16 @@ kind({
 });
 
 module.exports = kind({
-	name: "g.sample.ToastSample",
-	classes: "enyo-unselectable garnet g-sample",
+	name: 'g.sample.ToastSample',
+	classes: 'enyo-unselectable garnet g-sample',
 	components: [
-		{content: "< Toast Sample", classes: "g-sample-header", ontap: "goBack"},
+		{content: '< Toast Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
-		{content: "Toast", classes: "g-sample-subheader"},
-		{kind: "g.sample.ToastPanel", style: "position: relative;"}
+		{content: 'Toast', classes: 'g-sample-subheader'},
+		{kind: ToastPanel, style: 'position: relative;'}
 	],
 	goBack: function(inSender, inEvent) {
-		global.location.href = "./index.html?Garnet"; // global.history.go(-1);
+		global.history.go(-1);
 		return false;
 	}
 });

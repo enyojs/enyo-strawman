@@ -113,7 +113,7 @@ module.exports = kind({
 			]
 		}
 	],
-	next: function (sender, event) {
+	next: function (sender, ev) {
 		this.$.panels.next();
 		return true;
 	},
@@ -141,10 +141,10 @@ module.exports = kind({
 
 		this.$.openMoreButton.set('showing', !open);
 	},
-	pickerChangedImg:function (sender, event){
-		this.$.drawers.set('src', event.selected.value);
+	pickerChangedImg:function (sender, ev) {
+		this.$.drawers.set('src', ev.selected.value);
 	},
-	pickerChangedIcon:function (sender, event){
-		this.$.drawers.set('icon', event.selected.value);
+	pickerChangedIcon:function (sender, ev) {
+		this.$.drawers.set('icon', ev.selected.value);
 	}
 });

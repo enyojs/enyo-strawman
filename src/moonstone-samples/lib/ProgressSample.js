@@ -18,22 +18,33 @@ module.exports = kind({
 		{kind: ProgressBar, progress: 25, bgProgress: 75},
 		{kind: ProgressBar, progress: 50, barClasses: 'moon-sample-green'},
 		{kind: ProgressBar, progress: 50, barClasses: 'moon-sample-red'},
+
 		{kind: Divider, content: 'Progress Bars with Popup'},
 		{kind: ProgressBar, progress: 25, popup: true},
-		{tag: 'br'},
+
+		{kind: Divider, content: 'Vertical Orientation Progress Bars'},
+		{classes: 'moon-hspacing', components: [
+			{kind: ProgressBar, progress: 25, orientation: 'vertical', popup: true},
+			{classes: 'moon-3h'},
+			{kind: ProgressBar, progress: 25, orientation: 'vertical', style: 'height: 200px'},
+			{classes: 'moon-3h'},
+			{kind: ProgressBar, progress: 25, orientation: 'vertical', popup: true, popupSide: 'left', style: 'width: 60px; '}
+		]},
+		{classes: 'moon-1v'},
+
 		{kind: InputDecorator, style: 'margin-right:10px;', components: [
 			{kind: Input, placeholder: 'Value'}
 		]},
 		{kind: Button, content: 'Set', small: true, classes: 'moon-sample-spaced-button', ontap: 'changeValue'},
 		{kind: Button, content: '-', small: true, classes: 'moon-sample-spaced-button', ontap: 'decValue'},
 		{kind: Button, content: '+', small: true, classes: 'moon-sample-spaced-button', ontap: 'incValue'},
-		{tag: 'br'},
-		{tag: 'br'},
+		{classes: 'moon-2v'},
+
 		{style: 'width:240px;', components: [
 			{name: 'animateSetting', kind: CheckboxItem, checked: true, content: 'Animated'}
 		]}
 	],
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		for (var i in this.$) {
 			if (this.$[i].kind == ProgressBar) {
 				if (this.$.animateSetting.getChecked()) {

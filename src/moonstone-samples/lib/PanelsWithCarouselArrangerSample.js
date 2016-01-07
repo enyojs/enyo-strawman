@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	CarouselArranger = require('layout/CarouselArranger');
-
-var
+	CarouselArranger = require('layout/CarouselArranger'),
 	Panels = require('moonstone/Panels'),
 	Item = require('moonstone/Item');
 
@@ -12,7 +10,7 @@ module.exports = kind({
 	name: 'moon.sample.PanelsWithCarouselArrangerSample',
 	classes: 'moon enyo-fit',
 	components: [
-		{name: 'panels', kind: Panels, arrangerKind: CarouselArranger, classes: 'enyo-fit full', components: [
+		{name: 'panels', kind: Panels, arrangerKind: CarouselArranger, classes: 'enyo-arranger-fit', components: [
 			{title: 'First', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
@@ -64,7 +62,7 @@ module.exports = kind({
 			]}
 		]}
 	],
-	next: function(inSender, inEvent) {
+	next: function (sender, ev) {
 		this.$.panels.next();
 		return true;
 	}

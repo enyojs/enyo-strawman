@@ -6,7 +6,8 @@ var
 	FittableRows = require('layout/FittableRows');
 
 var
-	ilib = require('enyo-ilib');
+	ilib = require('enyo-ilib'),
+	dateFactory = require('enyo-ilib/DateFactory');
 
 var
 	BodyText = require('moonstone/BodyText'),
@@ -29,8 +30,9 @@ module.exports = kind({
 				{kind: TimePicker, name: 'pickerTime', noneText: 'Pick a Time', content: 'Time', meridiemEnable: true, onChange: 'timeChanged'},
 				{kind: Button, name: 'buttonReset', content: 'Reset Time', small: true, ontap: 'resetTapped'},
 				{kind: TimePicker, name: 'pickerDisabled', meridiemEnable: true, disabled: true, noneText: 'Disabled Time Picker', content: 'Disabled Time'},
-				{kind: ExpandablePicker, name: 'pickerLocale', noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
+				{kind: ExpandablePicker, name: 'localePicker', noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
 					{content: 'Use Default Locale', active: true},
+					{content: 'am-ET'},
 					{content: 'ko-KR'},
 					{content: 'zh-TW'},
 					{content: 'fa-IR'},
@@ -57,42 +59,47 @@ module.exports = kind({
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
 	bindings: [
-		{from: '.value', to: '.$.pickerDateLinked.value', oneWay:false},
-		{from: '.value', to: '.$.pickerTimeLinked.value', oneWay:false}
+		{from: 'value', to: '$.pickerDateLinked.value', oneWay:false},
+		{from: 'value', to: '$.pickerTimeLinked.value', oneWay:false}
 	],
-	create: function (){
+	create: function () {
 		FittableRows.prototype.create.apply(this, arguments);
 		if (!ilib) {
-			this.$.pickerLocale.hide();
+			this.$.localePicker.hide();
 			this.log('iLib not present -- hiding locale picker');
 		}
 		this.set('value', new Date('Mar 09 2014 01:59'));
 	},
-	setLocale: function (sender, event){
+	setLocale: function (sender, ev) {
 		if (ilib) {
-			var locale = event.selected.content,
+			var locale = ev.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
-			i18n.updateLocale(locale);
+			i18n.updateLocale(val);
 			this.$.pickerDateLinked.setLocale(val);
 			this.$.pickerTimeLinked.setLocale(val);
 			this.$.pickerTime.setLocale(val);
 			this.$.pickerDisabled.setLocale(val);
-			this.$.result.setContent('locale changed to ' + locale);
+			this.$.result.setContent(ev.originator.name + ' changed to ' + locale);
 		}
 		return true;
 	},
-	timeChanged: function (sender, event) {
-		if (this.$.result && event.value){
-			var timeArray = event.value.toTimeString().split(': ');
-			this.$.result.setContent(event.name + ' changed to ' + timeArray[0] + ': ' + timeArray[1]);
+	timeChanged: function (sender, ev) {
+		var time;
+		if (this.$.result && ev.value){
+			if (sender.localeValue) {
+				time = sender._tf.format(dateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();
+			} else {
+				time = ev.value.toTimeString();
+			}
+			this.$.result.setContent(ev.name + ' changed to ' + time);
 		}
 	},
-	dateChanged: function (sender, event) {
-		if (this.$.result && event.value){
-			this.$.result.setContent(event.name + ' changed to ' + event.value.toDateString());
+	dateChanged: function (sender, ev) {
+		if (this.$.result && ev.value){
+			this.$.result.setContent(ev.name + ' changed to ' + ev.value.toDateString());
 		}
 	},
-	resetTapped: function (sender, event) {
+	resetTapped: function (sender, ev) {
 		this.$.pickerTime.set('open', false);
 		this.$.pickerTime.set('value', null);
 		return true;

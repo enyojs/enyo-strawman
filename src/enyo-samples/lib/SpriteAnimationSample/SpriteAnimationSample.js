@@ -1,10 +1,9 @@
-var 
+var
 	kind = require('enyo/kind'),
 	logger = require('enyo/logger');
 
-var 
+var
 	Select = require('enyo/Select'),
-	StylesheetSupport = require('enyo/StylesheetSupport'),
 	SpriteAnimation = require('enyo/SpriteAnimation');
 
 module.exports = kind({
@@ -77,7 +76,7 @@ module.exports = kind({
 		{from: '$.iterationPicker.value', to: '$.sprite3.iterationCount'},
 		{from: '$.iterationPicker.value', to: '$.sprite1.iterationCount'}
 	],
-	animationEndHandler: function(sender, ev) {
+	animationEndHandler: function (sender, ev) {
 		logger.log('onEnd', sender.id, sender.useCssAnimation, sender.iterationCount);
 	}
 });

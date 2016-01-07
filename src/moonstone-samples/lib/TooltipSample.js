@@ -1,11 +1,8 @@
 var
-	kind = require('enyo/kind'),
-	utils = require('enyo/utils');
+	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	Button = require('moonstone/Button'),
 	IconButton = require('moonstone/IconButton'),
 	Input = require('moonstone/Input'),

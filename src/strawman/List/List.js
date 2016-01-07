@@ -2,11 +2,12 @@ var
 	kind = require('enyo/kind');
 
 var
-	// Control = require('enyo/Control'),
 	Collection = require('enyo/Collection'),
 	Scroller = require('enyo/Scroller'),
-	Anchor = require('enyo/Anchor'),
 	DataRepeater = require('enyo/DataRepeater');
+
+var
+	Link = require('../Link');
 
 module.exports = kind({
 	kind: Scroller,
@@ -16,25 +17,15 @@ module.exports = kind({
 	listType: '',
 	components: [
 		{name: 'repeater', classes: 'list-frame', kind: DataRepeater, components: [
-			{classes: 'item', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				// {from: 'model.name', to: '$.a.href', transform: 'buildLink'},
-				{from: 'model.name', to: '$.a.href', transform: function (v) {
+			{kind: Link, classes: 'item', bindings: [
+				{from: 'model.name', to: 'href', transform: function (v) {
 						var lib = this.owner.libraryName || '';
 						if (lib) { lib+= '&'; }
-						// console.log("this:", this, lib);
 						return '?' + lib + v;
 					}
 				},
-				{from: 'model.name', to: '$.a.content'}//, transform: function (v) { return v + ' Sample'; }}
+				{from: 'model.name', to: 'content'}
 			]
-			// buildLink: function (v) {
-			// 	var lib = this.owner.libraryName;
-			// 	if (lib) { lib+= '&'; }
-			// 	// console.log("this:", this, lib);
-			// 	return '?' + lib + v;
-			// }}
 			}
 		]}
 	],
@@ -49,11 +40,6 @@ module.exports = kind({
 	],
 	create: function () {
 		this.inherited(arguments);
-		// Control.prototype.create.apply(this, arguments);
-		console.log("List:", this, this.samples);
-		// this.$.repeater.set('collection', (this.samples instanceof Collection) ? this.samples : new Collection(Object.keys(this.samples).map(function (key) {
-		// 	return {name: key};
-		// })));
 		this.listTypeChanged();
 	},
 	listTypeChanged: function (old) {

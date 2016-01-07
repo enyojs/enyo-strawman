@@ -1,6 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Repeater = require('enyo/Repeater');
+	kind = require('enyo/kind');
 
 var
 	Divider = require('moonstone/Divider'),
@@ -9,7 +8,8 @@ var
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	Tooltip = require('moonstone/Tooltip'),
-	TooltipDecorator = require('moonstone/TooltipDecorator');
+	TooltipDecorator = require('moonstone/TooltipDecorator'),
+	Repeater = require('enyo/Repeater');
 
 module.exports = kind({
 	name: 'moon.sample.DynamicPanelsSample',
@@ -21,7 +21,7 @@ module.exports = kind({
 		this.inherited(arguments);
 		this.pushSinglePanel();
 	},
-	pushSinglePanel: function() {
+	pushSinglePanel: function () {
 		this.$.panels.pushPanels([
 			{title: 'Panel ' + this.$.panels.getPanels().length, classes: 'moon-7h', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Scroller, fit:true, components: [
@@ -43,7 +43,7 @@ module.exports = kind({
 			]}
 		], {owner: this});
 	},
-	pushJoinedPanels: function() {
+	pushJoinedPanels: function () {
 		this.$.panels.pushPanels([
 			{title: 'Panel ' + this.$.panels.getPanels().length, classes: 'moon-7h', titleBelow: 'Joined Panel 1', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Scroller, fit:true, components: [
@@ -61,7 +61,7 @@ module.exports = kind({
 			]}
 		], {owner: this});
 	},
-	pushSeveralPanels: function() {
+	pushSeveralPanels: function () {
 		this.$.panels.pushPanels([
 			{title: 'Panel ' + this.$.panels.getPanels().length, titleBelow: '1 of 3 Panels', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Scroller, fit:true, components: [
@@ -89,7 +89,7 @@ module.exports = kind({
 			// wrap around and start counting again from the beginning.
 		], {owner: this}, {targetIndex: -1});
 	},
-	next: function() {
+	next: function () {
 		var index = this.$.panels.getIndex();
 		var length = this.$.panels.getPanels().length;
 		if (index < (length-1)) {

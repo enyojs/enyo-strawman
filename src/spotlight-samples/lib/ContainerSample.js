@@ -1,19 +1,18 @@
+require('spotlight');
+
 var
 	kind = require('enyo/kind'),
 	Button = require('enyo/Button');
-
-var
-	Spotlight = require('spotlight');
 
 module.exports = kind({
 	name    : 'enyo.Spotlight.ContainerSample',
 	classes : 'spotlight-sample',
 	fit     : true,
-	
+
 	handlers: {
 		onSpotlightFocused: 'buttonFocused'
 	},
-	
+
 	components: [
 		{name: 'c1', spotlight: 'container', onSpotlightContainerEnter: 'enterContainer', onSpotlightContainerLeave: 'leaveContainer', components: [
 			{name: 'c1b1', kind: Button, spotlight: true, content: 'c1b1'},
@@ -29,17 +28,17 @@ module.exports = kind({
 		]}
 	],
 
-	buttonFocused: function (sender, event) {
-		this.log('Button Focused', event.originator.id);
+	buttonFocused: function (sender, ev) {
+		this.log('Button Focused', ev.originator.id);
 	},
 
-	enterContainer: function (sender, event) {
-		this.log('Container Entered:', event.originator.id);
+	enterContainer: function (sender, ev) {
+		this.log('Container Entered:', ev.originator.id);
 		sender.applyStyle('border', '2px solid red');
 	},
 
-	leaveContainer: function (sender, event) {
-		this.log('Container Left:', event.originator.id);
+	leaveContainer: function (sender, ev) {
+		this.log('Container Left:', ev.originator.id);
 		sender.applyStyle('border', null);
 	}
 });

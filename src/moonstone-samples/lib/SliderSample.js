@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	Button = require('moonstone/Button'),
 	CheckboxItem = require('moonstone/CheckboxItem'),
 	Divider = require('moonstone/Divider'),
@@ -30,16 +28,36 @@ module.exports = kind({
 			{kind: Divider, content: 'Slider 2: Disabled, Bound to Slider 1'},
 			{name: 'slider2', kind: Slider, disabled: true},
 
-			{kind: Divider, content: 'Slider 3: Custom Popup Content'},
-			{name: 'slider3', kind: Slider, classes: 'rgb-sample-slider',
+			{kind: Divider, content: 'Slider 3: Enable JumpIncrement'},
+			{name: 'slider3', kind: Slider, showPercentage: false, enableJumpIncrement: true, value: 25, bgProgress: 35, onChanging: 'sliderChanging', onChange: 'sliderChanged'},
+
+			{kind: Divider, content: 'Slider 4: Custom Popup Content'},
+			{name: 'slider4', kind: Slider, classes: 'rgb-sample-slider',
 				popupColor: 'rgb(0, 0, 25)', value: 25, bgProgress: 150, min: 0, max: 255,
 				onChanging: 'customChanging', onChange: 'customChanged', onAnimateFinish: 'customAnimateFinish'
 			},
 
-			{kind: Divider, content: 'Slider 4: Negative Values'},
-			{name: 'slider4', kind: Slider,
-				value: 0, min: -100, max: 100, showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
+			{kind: Divider, content: 'Slider 5: Negative Values'},
+			{name: 'slider5', kind: Slider,
+				value: 0, min: -100, max: 100, showPercentage: false, enableJumpIncrement: true, onChanging: 'sliderChanging', onChange: 'sliderChanged'
 			},
+
+			{kind: Divider, content: 'Slider 6, 7, 8, 9: Vertical Orientation'},
+			{classes: 'moon-hspacing', components: [
+				{name: 'slider6', kind: Slider, orientation: 'vertical', style: 'height: 300px', onChanging: 'sliderChanging', onChange: 'sliderChanged'},
+				{classes: 'moon-2h'},
+				{name: 'slider7', kind: Slider,
+					value: 0, min: -100, max: 100, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, decrementIcon: 'arrowlargedown', incrementIcon: 'arrowlargeup', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
+				},
+				{classes: 'moon-2h'},
+				{name: 'slider8', kind: Slider,
+					value: 5, min: 1, max: 10, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, jumpIncrement: '10%', decrementIcon: 'minus', incrementIcon: 'plus', popupSide: 'left', showPercentage: false, onChanging: 'sliderChanging', onChange: 'sliderChanged'
+				},
+				{classes: 'moon-2h'},
+				{name: 'slider9', kind: Slider,
+					value: 5, min: 0, max: 7, orientation: 'vertical', style: 'height: 300px', enableJumpIncrement: true, jumpIncrement: 2, decrementIcon: 'minus', incrementIcon: 'plus', onChanging: 'sliderChanging', onChange: 'sliderChanged'
+				}
+			]},
 
 			{kind: Divider, content: 'Change Value'},
 			{classes: 'moon-hspacing', components: [
@@ -77,7 +95,7 @@ module.exports = kind({
 				{name: 'lockBarSetting',        checked: true,     content: 'Lock Bar to Knob', onchange: 'changeLockbar'},
 				{name: 'animateSetting',        checked: true,     content: 'Animated',        onchange: 'animateActivate'},
 				{name: 'popupSetting',          checked: true,     content: 'Show Popup',      onchange: 'changeStatusBubble'},
-				{name: 'tapableSetting',        checked: true,     content: 'Tapable',         onchange: 'changeTapable'},
+				{name: 'tappableSetting',        checked: true,     content: 'Tappable',         onchange: 'changeTappable'},
 				{name: 'constrainSetting',      checked: false,    content: 'Constrain to Background Progress', onchange: 'changeConstrain'},
 				{name: 'elasticSetting',        checked: false,    content: 'Elastic Effect',  onchange: 'changeElastic'},
 				{name: 'showPercentageSetting', checked: false,    content: 'Show Percentage', onchange: 'changePercentage'}
@@ -91,16 +109,16 @@ module.exports = kind({
 		this.changeLockbar();
 		this.animateActivate();
 		this.changeStatusBubble();
-		this.changeTapable();
+		this.changeTappable();
 		this.changeConstrain();
 		this.changeElastic();
 	},
 	rendered: function () {
 		FittableRows.prototype.rendered.apply(this, arguments);
-		this.updateSlider3Popup(this.$.slider3.getValue());
+		this.updateSlider4Popup(this.$.slider4.getValue());
 	},
 	//* @protected
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		var v = this.$.valueInput.getValue();
 
 		for (var i in this.$) {
@@ -117,7 +135,7 @@ module.exports = kind({
 		this.$.valueInput.setValue(Math.max(parseInt(this.$.valueInput.getValue() || 0, 10) - 10, 0));
 		this.changeValue();
 	},
-	changeProgress: function (sender, event) {
+	changeProgress: function (sender, ev) {
 		var v = parseInt(this.$.progressInput.getValue(), 10);
 
 		for (var i in this.$) {
@@ -126,7 +144,7 @@ module.exports = kind({
 			}
 		}
 	},
-	changeIncrement: function (sender, event) {
+	changeIncrement: function (sender, ev) {
 		var v = parseInt(this.$.incrementInput.getValue(), 10);
 
 		for (var i in this.$) {
@@ -143,29 +161,29 @@ module.exports = kind({
 		this.$.progressInput.setValue(Math.max(parseInt(this.$.progressInput.getValue() || 0, 10) - 10, 0));
 		this.changeProgress();
 	},
-	sliderChanging: function (sender, event) {
-		this.$.result.setContent(sender.name + ' changing: ' + Math.round(event.value));
+	sliderChanging: function (sender, ev) {
+		this.$.result.setContent(sender.name + ' changing: ' + Math.round(ev.value));
 	},
-	sliderChanged: function (sender, event) {
+	sliderChanged: function (sender, ev) {
 		this.$.result.setContent(sender.name + ' changed to ' + Math.round(sender.getValue()) + '.');
 	},
-	customChanging: function (sender, event) {
-		this.updateSlider3Popup(event.value);
-		this.sliderChanging(sender, event);
+	customChanging: function (sender, ev) {
+		this.updateSlider4Popup(ev.value);
+		this.sliderChanging(sender, ev);
 	},
-	customChanged: function (sender, event) {
-		this.updateSlider3Popup(sender.getValue());
-		this.sliderChanged(sender, event);
+	customChanged: function (sender, ev) {
+		this.updateSlider4Popup(sender.getValue());
+		this.sliderChanged(sender, ev);
 	},
-	customAnimateFinish: function (sender, event) {
-		this.updateSlider3Popup(event.value);
+	customAnimateFinish: function (sender, ev) {
+		this.updateSlider4Popup(ev.value);
 	},
-	updateSlider3Popup: function (inValue) {
+	updateSlider4Popup: function (inValue) {
 		var color = 'rgb(0, 0, ' + Math.round(inValue) + ')';
-		this.$.slider3.setPopupContent(color);
-		this.$.slider3.setPopupColor(color);
+		this.$.slider4.setPopupContent(color);
+		this.$.slider4.setPopupColor(color);
 	},
-	changeLockbar: function (sender, event) {
+	changeLockbar: function (sender, ev) {
 		var ck = this.$.lockBarSetting.getChecked();
 
 		for (var i in this.$) {
@@ -175,7 +193,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	animateActivate: function (sender, event) {
+	animateActivate: function (sender, ev) {
 		var ck = this.$.animateSetting.getChecked();
 
 		for (var i in this.$) {
@@ -185,7 +203,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeStatusBubble: function (sender, event) {
+	changeStatusBubble: function (sender, ev) {
 		var ck = this.$.popupSetting.getChecked();
 
 		for (var i in this.$) {
@@ -195,8 +213,8 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeTapable: function (sender, event) {
-		var ck = this.$.tapableSetting.getChecked();
+	changeTappable: function (sender, ev) {
+		var ck = this.$.tappableSetting.getChecked();
 
 		for (var i in this.$) {
 			if (this.$[i].kind == Slider) {
@@ -205,7 +223,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeConstrain: function (sender, event) {
+	changeConstrain: function (sender, ev) {
 		var ck = this.$.constrainSetting.getChecked();
 
 		for (var i in this.$) {
@@ -215,7 +233,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changeElastic: function (sender, event) {
+	changeElastic: function (sender, ev) {
 		var ck = this.$.elasticSetting.getChecked();
 
 		for (var i in this.$) {
@@ -225,7 +243,7 @@ module.exports = kind({
 		}
 		return true;
 	},
-	changePercentage: function (sender, event) {
+	changePercentage: function (sender, ev) {
 		var ck = this.$.showPercentageSetting.getChecked();
 
 		for (var i in this.$) {

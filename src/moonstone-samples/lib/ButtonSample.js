@@ -13,7 +13,9 @@ var
 	Button = require('moonstone/Button'),
 	CaptionDecorator = require('moonstone/CaptionDecorator'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	BodyText = require('moonstone/BodyText');
+	BodyText = require('moonstone/BodyText'),
+	Group = require('enyo/Group'),
+	FittableRows = require('layout/FittableRows');
 
 module.exports = kind({
 	name: 'moon.sample.ButtonSample',
@@ -112,14 +114,14 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', allowHtml: true, content: 'No button pressed yet.'}
 	],
-	buttonTapped: function(inSender, inEvent) {
-		this.$.result.setContent('&quot;' + inSender.name + '&quot; pressed.');
+	buttonTapped: function (sender, ev) {
+		this.$.result.setContent('&quot;' + sender.name + '&quot; pressed.');
 	},
 	showButtonTapped: function () {
 		this.$.hiddenButton.show();
 	},
-	showSmallButtonTapArea: function(inSender, inEvent) {
-		if (inEvent.checked) {
+	showSmallButtonTapArea: function (sender, ev) {
+		if (ev.checked) {
 			this.addClass('visible-tap-area');
 		} else {
 			this.removeClass('visible-tap-area');

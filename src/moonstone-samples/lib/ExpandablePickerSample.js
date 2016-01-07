@@ -1,8 +1,5 @@
 var
-	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	Group = require('enyo/Group');
+	kind = require('enyo/kind');
 
 var
 	DatePicker = require('moonstone/DatePicker'),
@@ -14,7 +11,10 @@ var
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	TimePicker = require('moonstone/TimePicker'),
-	DayPicker = require('moonstone/DayPicker');
+	DayPicker = require('moonstone/DayPicker'),
+	Collection = require('enyo/Collection'),
+	Control = require('enyo/Control'),
+	Group = require('enyo/Group');
 
 module.exports = kind({
 	name: 'moon.sample.ExpandablePickerSample',
@@ -62,7 +62,7 @@ module.exports = kind({
 						{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
 						{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 						{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
-						{kind: DayPicker, noneText: "Pick a Day", content: "Day Picker"},
+						{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
 						{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 						{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
 							{bindings: [
@@ -72,6 +72,11 @@ module.exports = kind({
 						{kind: ExpandablePicker, content: 'Initially Hidden Items Picker', renderItemsOnShow: true, components: [
 							{content: 'Item 1'},
 							{content: 'Item 2', active: true},
+							{content: 'Item 3'}
+						]},
+						{kind: ExpandablePicker, content: 'No None Text', noneText: '', components: [
+							{content: 'Item 1'},
+							{content: 'Item 2'},
 							{content: 'Item 3'}
 						]}
 					]}
@@ -118,7 +123,7 @@ module.exports = kind({
 							{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
 							{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 							{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
-							{kind: DayPicker, noneText: "Pick a Day", content: "Day Picker"},
+							{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
 							{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 							{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
 								{bindings: [
@@ -128,6 +133,11 @@ module.exports = kind({
 							{kind: ExpandablePicker, content: 'Initially Hidden Items Picker', renderItemsOnShow: true, components: [
 								{content: 'Item 1'},
 								{content: 'Item 2', active: true},
+								{content: 'Item 3'}
+							]},
+							{kind: ExpandablePicker, content: 'No None Text', noneText: '', components: [
+								{content: 'Item 1'},
+								{content: 'Item 2'},
 								{content: 'Item 3'}
 							]}
 						]}
@@ -150,17 +160,17 @@ module.exports = kind({
 		this.$.expandableDataPicker.set('collection', c);
 		this.$.expandableDataPicker2.set('collection', c);
 	},
-	pickerChanged: function (sender, event) {
+	pickerChanged: function (sender, ev) {
 		var value,
-			picker = event.originator.getContent();
-		if (event.originator instanceof ExpandablePicker) {
-			value = event.content;
+			picker = ev.originator.getContent();
+		if (ev.originator instanceof ExpandablePicker) {
+			value = ev.content;
 			sender.setSubTitleBelow(picker + ' changed to \'' + value + '\'');
-		} else if ((event.originator instanceof ExpandableIntegerPicker) ||
-					(event.originator instanceof DatePicker) ||
-					(event.originator instanceof TimePicker) ||
-					(event.originator instanceof ExpandableInput)) {
-			value = event.originator.getValue();
+		} else if ((ev.originator instanceof ExpandableIntegerPicker) ||
+					(ev.originator instanceof DatePicker) ||
+					(ev.originator instanceof TimePicker) ||
+					(ev.originator instanceof ExpandableInput)) {
+			value = ev.originator.getValue();
 			sender.setSubTitleBelow(picker + ' changed to \'' + value + '\'');
 		}
 	},
@@ -194,7 +204,7 @@ module.exports = kind({
 		];
 		var index = 0;
 		var opened = false;
-		setInterval(this.bindSafely(function() {
+		setInterval(this.bindSafely(function () {
 			if (opened) {
 				this.$[pickers[index++]].setOpen(false);
 			} else {

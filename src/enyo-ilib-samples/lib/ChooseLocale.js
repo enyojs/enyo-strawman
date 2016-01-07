@@ -1,9 +1,10 @@
 var
     kind = require('enyo/kind'),
-    Select = require('enyo/Select');
+    ilib = require('enyo-ilib');
 
 var
-    ilib = require('enyo-ilib');
+    Select = require('enyo/Select');
+
 
 module.exports = kind({
     name: 'ilib.sample.ChooseLocale',
@@ -194,7 +195,7 @@ module.exports = kind({
         {locale: 'ur-IN', label: 'Urdu - India', label_ol: 'بھارت -  اُردُو'},
         {locale: 'ur-PK', label: 'Urdu - Pakistan', label_ol: 'پاکستان -  اُردُو'}
     ],
-    
+
     components: [
         {name: 'switcherLocale', kind: Select, onchange: 'setLocale'}
     ],
@@ -207,7 +208,7 @@ module.exports = kind({
         }
     },
 
-    setLocale: function (sender, event) {
+    setLocale: function (sender, ev) {
         this.setValue(this.$.switcherLocale.value);
         this.bubble('onSelectedLocale', {content: this.$.switcherLocale.value});
     }

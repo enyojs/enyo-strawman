@@ -2,8 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('./strawman/SampleList'),
-	History = require('moonstone/History');
+	SampleList = require('./strawman/SampleList');
 
 var
 	samples = {
@@ -25,8 +24,6 @@ var
 		listType: 'grid',
 		samples: samples
 	});
-
-History.set('enableBackHistoryAPI', false);
 
 module.exports = {
 	samples: samples,

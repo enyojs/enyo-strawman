@@ -1,7 +1,6 @@
 var
 	i18n = require('enyo/i18n'),
 	kind = require('enyo/kind'),
-	Anchor = require('enyo/Anchor'),
 	Collection = require('enyo/Collection'),
 	DataRepeater = require('enyo/DataRepeater'),
 	Router = require('enyo/Router');
@@ -15,13 +14,18 @@ var
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	DataList = require('moonstone/DataList'),
 	Divider = require('moonstone/Divider'),
-	MoonHistory = require('moonstone/History'),
 	Item = require('moonstone/Item'),
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	ToggleButton = require('moonstone/ToggleButton'),
-	ToggleItem = require('moonstone/ToggleItem');
+	ToggleItem = require('moonstone/ToggleItem'),
+	Collection = require('enyo/Collection'),
+	DataRepeater = require('enyo/DataRepeater'),
+	Router = require('enyo/Router');
+
+var
+	LinkSupport = require('../../../strawman/LinkSupport');
 
 var locales = [
 	{locale: 'local', title: '', selected: true},
@@ -31,7 +35,8 @@ var locales = [
 	{locale: 'ar-SA', title: '<span class="light">- Arabic, RTL and standard font</span>'},
 	{locale: 'ur-PK', title: '<span class="light">- Urdu, RTL and custom Urdu font</span>'},
 	{locale: 'zh-Hant-HK', title: '<span class="light">- Traditional Chinese, custom Hant font</span>'},
-	{locale: 'ja-JP', title: '<span class="light">- Japanese, custom Japanese font</span>'}
+	{locale: 'ja-JP', title: '<span class="light">- Japanese, custom Japanese font</span>'},
+	{locale: 'en-JP', title: '<span class="light">- English, custom Japanese font</span>'}
 ];
 
 var LocaleItem = kind({
@@ -40,14 +45,14 @@ var LocaleItem = kind({
 	observers: {
 		updateTitle: ['locale', 'title']
 	},
-	updateTitle: function() {
+	updateTitle: function () {
 		this.set('content', this.locale + ' ' + this.title);
 	}
 });
 
 var appRouter = kind({
 	kind: Router,
-	history: true,
+	useHistory: true,
 	routes: [
 		{path: ':sampleName/:locale', handler: 'handleRoute'},
 		{path: ':sampleName', handler: 'handleRoute'},
@@ -65,12 +70,10 @@ var appRouter = kind({
 });
 
 var SampleListItem = kind({
-	kind: Anchor,
+	kind: Item,
 	classes: 'moon-sample-list-item enyo-border-box',
 	'new': false,
-	components: [
-		{name: 'item', kind: Item}
-	],
+	mixins: [LinkSupport],
 	create: function () {
 		this.inherited(arguments);
 		this.newChanged();
@@ -156,11 +159,14 @@ module.exports = kind({
 	listTools: [
 		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
+				headerComponents: [
+					{kind: Button, content: 'Back', small: true, href: 'index.html', mixins: [LinkSupport]}
+				],
 				components: [
-					{name: 'list', kind: DataList, components: [
+					{name: 'list', kind: DataList, fixedChildSize: 62, components: [
 						{kind: SampleListItem, bindings: [
 							{from: 'model.new', to: 'new'},
-							{from: 'model.label', to: '$.item.content'},
+							{from: 'model.label', to: 'content'},
 							{from: 'model.name', to: 'href', transform: function (v) {
 								return '#' + v;
 							}}
@@ -189,7 +195,6 @@ module.exports = kind({
 			sup.apply(this, arguments);
 
 			this.initializeThemes();
-			MoonHistory.set('enableBackHistoryAPI', true);
 		};
 	}),
 	createList: function () {
@@ -214,11 +219,15 @@ module.exports = kind({
 		var locale = ev.model.get('locale');
 		if (locale) {
 			this.set('locale', locale);
+			this.$.router.trigger({location: this.get('location'), change: true});
 		}
 	},
 	handleRoute: function (sender, ev) {
-		this.set('sample', ev.sampleName);
 		this.set('locale', ev.locale);
+		this.set('sample', ev.sampleName);
+	},
+	updateTitle: function (title) {
+		document.title = (title ? title + ' - ' : '') + this.get('title');
 	},
 	localeChanged: function (oldLocale, newLocale) {
 		console.log('Setting Locale:', newLocale);
@@ -226,8 +235,7 @@ module.exports = kind({
 			this.$.localePopup.hide();
 		}
 		this.locales.find(function(elem) { return elem.get('locale') == newLocale; }).set('selected', true);
-		i18n.updateLocale(newLocale);
-		this.$.router.trigger({location: this.get('location'), change: true});
+		i18n.updateLocale(newLocale == 'local' ? null : newLocale);
 	},
 	sampleChanged: function (was, is) {
 		if (was) {
@@ -243,6 +251,8 @@ module.exports = kind({
 	},
 	activateList: function () {
 		console.log('%cList all of the Samples', 'color:green');
+		this.updateTitle();
+
 		this.disableAllStylesheets();
 		if (this.$.sample) {
 			this.$.sample.destroy();
@@ -255,9 +265,13 @@ module.exports = kind({
 		this.render();
 	},
 	backToList: function () {
-		this.set('sample', null);
-		this.$.router.trigger({location: this.get('location'), change: true});
-		this.checkLocale();
+		if (this.get('sample')) {
+			this.set('sample', null);
+			this.$.router.trigger({location: this.get('location'), change: true});
+			this.checkLocale();
+		} else {
+			window.location.href = 'index.html';
+		}
 	},
 	reload: function () {
 		window.location.reload();
@@ -267,8 +281,7 @@ module.exports = kind({
 		this.checkLocale();
 	},
 	openSample: function () {
-		var s = this.get('sample'),
-			loc;
+		var s = this.get('sample');
 
 		// this.disableAllStylesheets();
 
@@ -276,11 +289,10 @@ module.exports = kind({
 			// Enable the stylesheet
 			// this.enableStylesheet(s);
 
-			loc = this.get('location');
-			this.$.router.trigger({location: loc, change: true});
 			this.$.home.hide();
 			global.sample = this.createComponent({name: s, kind: this.samples[s]}).render();
 			console.log('%c%s Created and Launched', 'color:green;', s);
+			this.updateTitle(s);
 
 		} else {
 			this.createList();

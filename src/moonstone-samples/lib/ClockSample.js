@@ -58,29 +58,28 @@ module.exports = kind({
 			]}
 		]}
 	],
-	create: function(){
+	create: function () {
 		this.inherited(arguments);
 		if (!ilib) {
 			this.$.localePicker.hide();
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function(inSender, inEvent){
-		var locale = inEvent.selected.content,
-			val = (locale == 'Use Default Locale') ? null : locale;
+	setLocale: function (sender, ev){
+		var locale = ev.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
 		updateLocale(locale);
-		this.$.clock.setLocale(val);
 		return true;
 	},
-	setTime: function() {
+	setTime: function () {
 		this.$.clock.setDate(new Date(this.$.input.getValue()));
 	},
-	setStaticTime: function() {
+	setStaticTime: function () {
 		var d = this.$.input.getValue() ? new Date(this.$.input.getValue()) : new Date();
 		// We increment the JS month value so that it is 1-based
 		this.$.clock.setDate({year: d.getFullYear(), month: d.getMonth()+1, day: d.getDate(), hour: d.getHours(), min: d.getMinutes(), sec: d.getSeconds()});
 	},
-	resetTime: function() {
+	resetTime: function () {
 		this.$.clock.setDate(null);
 	}
 });

@@ -1,14 +1,10 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Button = require('enyo/Button'),
+var
 	Control = require('enyo/Control'),
-	OptionGroup = require('enyo/OptionGroup'),
 	Scroller = require('enyo/Scroller'),
-	ScrollThumb = require('enyo/ScrollThumb'),
 	Select = require('enyo/Select'),
-	Table = require('enyo/Table'), 
 	TranslateScrollStrategy = require('enyo/TranslateScrollStrategy'),
 	TransitionScrollStrategy = require('enyo/TransitionScrollStrategy'),
 	TouchScrollStrategy = require('enyo/TouchScrollStrategy');
@@ -76,9 +72,9 @@ module.exports = kind({
 			{classes: 'scroller-sample-content', content: text, allowHtml: true}
 		]}
 	],
-	create: function() {
+	create: function () {
 		this.inherited(arguments);
-		
+
 		//hide other scrollers
 		this.$.force.hide();
 		this.$.horizontal.hide();
@@ -88,19 +84,19 @@ module.exports = kind({
 		this.$.translatescroll.hide();
 		this.lastScroller = 'default';
 	},
-	sampleChanged: function(inSender, inEvent) {
+	sampleChanged: function (sender, ev) {
 		var lastScroller = this.lastScroller;
-		var scrollerName = inSender.getValue().substr(1);
+		var scrollerName = sender.getValue().substr(1);
 		this.$[scrollerName].show();
 		this.$[lastScroller].hide();
 		this.lastScroller = scrollerName;
 	},
 	// The following are used when this sample is called from the Sampler app
-	mouseDown: function(inSender, inEvent) {
-		inEvent.preventDefault();
+	mouseDown: function (sender, ev) {
+		ev.preventDefault();
 	},
-	dragStart: function(inSender, inEvent) {
-		if (inEvent.horizontal) {
+	dragStart: function (sender, ev) {
+		if (ev.horizontal) {
 			// Prevent drag propagation on horizontal drag events
 			return true;
 		}

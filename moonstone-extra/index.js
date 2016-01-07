@@ -5,13 +5,13 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../src/strawman/SampleList'),
-	History = require('moonstone/History');
+	SampleList = require('../src/strawman/SampleList');
+
+require('../src/moonstone-samples');	// Included for its assets and CSS
 
 var
 	samples = {
 		Enyo: require('../src/enyo-samples'),
-		// Moonstone: require('../src/moonstone-samples'), //router blocking
 		Moonstone: require('./src'), //router blocking
 		Layout: require('../src/layout-samples'),
 		Spotlight: require('../src/spotlight-samples'),
@@ -29,8 +29,6 @@ var
 		listType: 'grid',
 		samples: samples
 	});
-
-History.set('enableBackHistoryAPI', false);
 
 ready(function () {
 	var names = window.document.location.search.substring(1).split('&'),

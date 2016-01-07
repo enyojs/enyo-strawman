@@ -45,6 +45,7 @@ module.exports = kind({
 				]},
 				{name: 'localePicker', kind: ExpandablePicker, noneText: 'No Locale Selected', content: 'Choose Locale', onChange: 'setLocale', components: [
 					{content: 'Use Default Locale', active: true},
+					{content: 'am-ET'},
 					{content: 'ko-KR'},
 					{content: 'zh-TW'},
 					{content: 'fa-IR'},
@@ -70,39 +71,36 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
-	create: function(){
+	create: function () {
 		this.inherited(arguments);
 		if (!ilib) {
 			this.$.localePicker.hide();
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function(inSender, inEvent){
-		if (ilib) {
-			var locale = inEvent.selected.content,
-				val = (locale == 'Use Default Locale') ? null : locale;
-			i18n.updateLocale(locale);
-			this.$.picker.setLocale(val);
-			this.$.disabledPicker.setLocale(val);
-		}
+	setLocale: function (sender, ev){
+		var locale = ev.selected.content;
+		locale = locale == 'Use Default Locale' ? null : locale;
+		i18n.updateLocale(locale);
+		this.$.result.setContent(ev.originator.name + ' changed to ' + ilib.getLocale());
 		return true;
 	},
-	setDate: function() {
+	setDate: function () {
 		var current = this.$.picker.value || new Date();
 		var year = isNaN(parseInt(this.$.yearInput.getValue(), 0)) ? current.getFullYear() : parseInt(this.$.yearInput.getValue(), 0);
 		var month = isNaN(parseInt(this.$.monthInput.getValue(), 0)) ? current.getMonth() : parseInt(this.$.monthInput.getValue(), 0) - 1;
 		var day = isNaN(parseInt(this.$.dayInput.getValue(), 0)) ? current.getDate() : parseInt(this.$.dayInput.getValue(), 0);
-		this.$.picker.setValue(new Date(year, month, day));
+		this.$.picker.set('value', new Date(year, month, day));
 	},
-	resetDate: function() {
-		this.$.picker.setValue(new Date());
+	resetDate: function () {
+		this.$.picker.set('value', new Date());
 	},
-	changed: function(inSender, inEvent) {
-		if (this.$.result && inEvent.value){
-			this.$.result.setContent(inEvent.name + ' changed to ' + inEvent.value.toDateString());
+	changed: function (sender, ev) {
+		if (this.$.result && ev.value){
+			this.$.result.setContent(ev.name + ' changed to ' + ev.value.toDateString());
 		}
 	},
-	resetTapped: function(inSender, inEvent) {
+	resetTapped: function (sender, ev) {
 		this.$.picker.set('value', null);
 		this.$.picker.set('open', false);
 		return true;

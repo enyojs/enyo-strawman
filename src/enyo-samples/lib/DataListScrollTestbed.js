@@ -1,13 +1,10 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
-	Anchor = require('enyo/Anchor'),
+var
 	Button = require('enyo/Button'),
-	Collection = require('enyo/Collection'),
 	Component = require('enyo/Component'),
 	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater'),
 	ScrollStrategy = require('enyo/ScrollStrategy'),
 	TouchScrollStrategy = require('enyo/TouchScrollStrategy'),
 	TranslateScrollStrategy = require('enyo/TranslateScrollStrategy'),
@@ -36,7 +33,9 @@ var TestMixin = {
 	strategy: 'Native',
 	addTestControls: function() {
 		this.createComponent({
-			style: 'position: absolute; top: 0; left: 0; right: 0; padding: 0.5em', defaultKind: Button, components: [
+			style: 'position: absolute; top: 0; left: 0; right: 0; padding: 0.5em',
+			defaultKind: Button,
+			components: [
 				{kind: Select, onchange: 'sampleChanged', components: this.buildMenu(samples, 'sample')},
 				{kind: Select, onchange: 'strategyChanged', components: this.buildMenu(strategies, 'strategy')},
 				{content: 'Scroll to Random Pos', ontap: 'scrollToRandomPos'},
@@ -46,24 +45,24 @@ var TestMixin = {
 			]
 		});
 	},
-	scrollToRandomPos: function() {
+	scrollToRandomPos: function () {
 		var max = this.s.getScrollBounds().maxTop,
 			pos = Math.random() * max;
 		this.s.scrollTo(0, pos);
 	},
-	scrollToTop: function() {
+	scrollToTop: function () {
 		this.s.scrollToTop();
 	},
-	scrollToBottom: function() {
+	scrollToBottom: function () {
 		this.s.scrollToBottom();
 	},
-	scrollToRandomItem: function() {
+	scrollToRandomItem: function () {
 		var n = this.r.collection.length,
 			i = Math.floor(Math.random() * n);
 		this.r.scrollToIndex(i);
 	},
-	create: kind.inherit(function(sup) {
-		return function() {
+	create: kind.inherit(function (sup) {
+		return function () {
 			var ov = {repeater: {scrollerOptions: strategies[this.strategy]}};
 			this.kindComponents = Component.overrideComponents(this.kindComponents, ov, Control);
 			sup.apply(this, arguments);
@@ -78,18 +77,18 @@ var TestMixin = {
 			this.addTestControls();
 		};
 	}),
-	strategyChanged: function(sender, event) {
-		this.rebuild({strategy: event.originator.value}, samples[this.sample]);
+	strategyChanged: function (sender, ev) {
+		this.rebuild({strategy: ev.originator.value}, samples[this.sample]);
 	},
-	sampleChanged: function(sender, event) {
-		this.rebuild({strategy: this.strategy}, samples[event.originator.value]);
+	sampleChanged: function (sender, ev) {
+		this.rebuild({strategy: this.strategy}, samples[ev.originator.value]);
 	},
-	rebuild: function(props, Ctor) {
+	rebuild: function (props, Ctor) {
 		var pn = this.hasNode().parentNode;
 		this.destroy();
 		new Ctor(props).renderInto(pn);
 	},
-	buildMenu: function(opts, val) {
+	buildMenu: function (opts, val) {
 		var ss = Object.keys(opts), c = [], i, s;
 		for (i = 0; !!(s = ss[i]); i++) {
 			c.push({content: s, selected: s == this[val]});

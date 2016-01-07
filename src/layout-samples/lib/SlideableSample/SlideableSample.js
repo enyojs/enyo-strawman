@@ -1,14 +1,14 @@
 var
 	kind = require('enyo/kind'),
-	utils = require('enyo/utils'),
-	Control = require('enyo/Control');
+	utils = require('enyo/utils');
 
 var
 	FittableLayout = require('layout/FittableLayout'),
 	FittableRows = require('layout/FittableRows'),
 	Slideable = require('layout/Slideable'),
 	FittableColumnsLayout = FittableLayout.Columns,
-	FittableRowsLayout = FittableLayout.Rows;
+	FittableRowsLayout = FittableLayout.Rows,
+	Control = require('enyo/Control');
 
 var SlideableInfo = kind({
 	kind: Control,
@@ -28,21 +28,21 @@ var SlideableInfo = kind({
 	handlers: {
 		onUpdateInfo: 'updateInfo'
 	},
-	create: kind.inherit(function(sup) {
-		return function() {
+	create: kind.inherit(function (sup) {
+		return function () {
 			sup.apply(this, arguments);
 			this.infoChanged();
 		};
 	}),
-	infoChanged: function() {
+	infoChanged: function () {
 		for (var p in this.info) {
 			if (this.$[p]) {
 				this.$[p].setContent(utils.cap(p) + ': ' + this.info[p]);
 			}
 		}
 	},
-	updateInfo: function(inSender, inEvent) {
-		this.setInfo(inEvent);
+	updateInfo: function (sender, ev) {
+		this.setInfo(ev);
 		return true;
 	}
 });
@@ -60,8 +60,8 @@ module.exports = kind({
 	handlers: {
 		ondragstart: 'suppressPanelDrag'
 	},
-	create: kind.inherit(function(sup) {
-		return function() {
+	create: kind.inherit(function (sup) {
+		return function () {
 			sup.apply(this, arguments);
 			var slideables = [];
 
@@ -73,10 +73,10 @@ module.exports = kind({
 			this.populate(slideables);
 		};
 	}),
-	populate: function(inSlideables) {
+	populate: function (slideables) {
 		var slideable;
-		for (var i = 0; i < inSlideables.length; i++) {
-			slideable = inSlideables[i];
+		for (var i = 0; i < slideables.length; i++) {
+			slideable = slideables[i];
 			slideable.createComponents([
 				{style: slideable.axis === 'h' ? 'height: 38%;' : ''}, // cheating here for the horizontal Slideables to make everything nice and (almost) centered vertically
 				{
@@ -95,19 +95,19 @@ module.exports = kind({
 			]);
 		}
 	},
-	updateInfo: function(inSender) {
-		inSender.waterfallDown('onUpdateInfo', {
-			name: inSender.name,
-			axis: inSender.axis,
-			unit: inSender.unit,
-			min: inSender.min,
-			max: inSender.max,
-			value: Math.round(inSender.value)
+	updateInfo: function (sender) {
+		sender.waterfallDown('onUpdateInfo', {
+			name: sender.name,
+			axis: sender.axis,
+			unit: sender.unit,
+			min: sender.min,
+			max: sender.max,
+			value: Math.round(sender.value)
 		});
 		return true;
 	},
 	// keeps the view panel from moving in Sampler app while dragging the Slideable
-	suppressPanelDrag: function() {
+	suppressPanelDrag: function () {
 		return true;
 	}
 });

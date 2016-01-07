@@ -1,11 +1,5 @@
 {
   "name": "enyo-strawman-garnet",
   "filename": "index.js",
-  "main": "index.js",
-  "styles": [
-    "../*.css"
-  ],
-  "assets": [
-    "../assets/*"
-  ]
+  "main": "index.js"
 }

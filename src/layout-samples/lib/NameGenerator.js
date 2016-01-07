@@ -5,7 +5,7 @@
 module.exports = {
 	makeName: function (minlength, maxlength, prefix, suffix) {
 
-		function rnd(minv, maxv) {
+		function rnd (minv, maxv) {
 			if (maxv < minv) {
 				return 0;
 			}

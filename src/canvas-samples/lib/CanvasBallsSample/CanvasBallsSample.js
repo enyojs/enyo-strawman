@@ -9,27 +9,27 @@ var
 	CanvasControl = require('canvas/Control'),
 	Circle = require('canvas/Circle'),
 	Rectangle = require('canvas/Rectangle'),
-	Text = require('canvas/Text');
+	CanvasText = require('canvas/Text');
 
 
 module.exports = kind({
-	name:"enyo.sample.CanvasBallsSample",
-	style:"padding:15px;",
+	name:'enyo.sample.CanvasBallsSample',
+	style:'padding:15px;',
 	components: [
-		{kind: Canvas, style: "border: 1px solid black;", attributes: {width: 280, height: 300}, components: [
+		{kind: Canvas, style: 'border: 1px solid black;', attributes: {width: 280, height: 300}, components: [
 			// a container for the balls
-			{name: "ballpit", kind: CanvasControl},
+			{name: 'ballpit', kind: CanvasControl},
 			// a visible shelf to bounce off of
 			{kind: Rectangle, bounds: {l: 0, t: 290, w: 300, h: 10}},
 			// an FPS counter
-			{name:"fpsCounter", kind: Text, bounds: {l: 0, t: 15}, color: "black"}
+			{name:'fpsCounter', kind: CanvasText, bounds: {l: 0, t: 15}, color: 'black'}
 		]},
-		{tag: "br"},
+		{tag: 'br'},
 		// Reset the balls / change the number
-		{tag: "button", content: "Reset", ontap: "reset"},
-		{tag: "br"},
-		{tag: "span", content:"Balls: "},
-		{kind: Input, name: "balls", value: "10", placeholder: "Number of Balls"}
+		{tag: 'button', content: 'Reset', ontap: 'reset'},
+		{tag: 'br'},
+		{tag: 'span', content:'Balls: '},
+		{kind: Input, name: 'balls', value: '10', placeholder: 'Number of Balls'}
 	],
 	published: {
 		// force of gravity
@@ -37,7 +37,7 @@ module.exports = kind({
 		// number of balls to show
 		balls: 10
 	},
-	setupBalls: function() {
+	setupBalls: function () {
 		// pause loop to update the balls
 		if (this.cancel) {
 			animation.cancelRequestAnimationFrame(this.cancel);
@@ -46,7 +46,7 @@ module.exports = kind({
 		this.frame = 0;
 		this.start = Date.now();
 		this.$.ballpit.destroyClientControls();
-		var colors = [ "green", "blue", "black", "brown", "red", "orange"];
+		var colors = [ 'green', 'blue', 'black', 'brown', 'red', 'orange'];
 		var bounce, color, t, l;
 		for (var i = 0; i < this.balls; i++) {
 			// bounce from 0.30 to 0.99
@@ -64,18 +64,18 @@ module.exports = kind({
 			});
 		}
 		// (re)start loop
-		utils.asyncMethod(this.bindSafely("loop"));
+		utils.asyncMethod(this.bindSafely('loop'));
 	},
-	rendered: function() {
+	rendered: function () {
 		this.setupBalls();
 	},
-	destroy: function() {
+	destroy: function () {
 		if (this.cancel) {
 			animation.cancelRequestAnimationFrame(this.cancel);
 		}
 		this.inherited(arguments);
 	},
-	loop: function() {
+	loop: function () {
 		this.frame++;
 		// update ball positions
 		for (var i = 0, b; (b = this.$.ballpit.children[i]); i++) {
@@ -94,11 +94,11 @@ module.exports = kind({
 		}
 		this.$.canvas.update();
 		this.start = Date.now();
-		this.cancel = animation.requestAnimationFrame(this.bindSafely("loop"));
+		this.cancel = animation.requestAnimationFrame(this.bindSafely('loop'));
 		// draw the framerate
 		this.$.fpsCounter.setText(Math.floor(this.frame / ((Date.now() - this.loopStart) / 1000)));
 	},
-	reset: function() {
+	reset: function () {
 		var inode = this.$.balls.hasNode();
 		var newballs = inode ? parseInt(inode.value,0) : this.balls;
 		if (isFinite(newballs) && newballs >= 0 && newballs != this.balls) {
@@ -112,7 +112,7 @@ module.exports = kind({
 			}
 		}
 	},
-	ballsChanged: function(inOldBalls) {
+	ballsChanged: function (oldBalls) {
 		this.setupBalls();
 	}
 });

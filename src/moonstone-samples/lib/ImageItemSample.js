@@ -1,11 +1,11 @@
 var
-	kind = require('enyo/kind'),
-	Img = require('enyo/Image');
+	kind = require('enyo/kind');
 
 var
 	Divider = require('moonstone/Divider'),
 	ImageItem = require('moonstone/ImageItem'),
-	Scroller = require('moonstone/Scroller');
+	Scroller = require('moonstone/Scroller'),
+	Img = require('enyo/Image');
 
 module.exports = kind({
 	name: 'moon.sample.ImageItemSample',

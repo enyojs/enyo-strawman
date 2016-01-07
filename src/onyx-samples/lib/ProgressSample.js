@@ -52,7 +52,7 @@ module.exports = kind({
 		{name: 'progressSlider', kind: Slider, lockBar: false, value: 75},
 		{kind: Button, content: 'Toggle Progress', ontap: 'toggleProgress'}
 	],
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		for (var i in this.$) {
 			if (this.$[i].kind == ProgressBar || this.$[i].kind == ProgressButton) {
 				if (this.$.animateSetting.getValue()) {
@@ -71,7 +71,7 @@ module.exports = kind({
 		this.$.input.setValue(Math.max(parseInt(this.$.input.getValue() || 0, 10) - 10, 0));
 		this.changeValue();
 	},
-	clearValue: function (sender, event) {
+	clearValue: function (sender, ev) {
 		sender.setProgress(0);
 	},
 	toggleProgress: function () {

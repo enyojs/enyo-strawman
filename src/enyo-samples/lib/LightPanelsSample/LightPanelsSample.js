@@ -5,7 +5,8 @@ var
 	Button = require('enyo/Button'),
 	Checkbox = require('enyo/Checkbox'),
 	Control = require('enyo/Control'),
-	LightPanels = require('enyo/LightPanels');
+	LightPanels = require('enyo/LightPanels'),
+	Orientation = LightPanels.Orientation;
 
 module.exports = kind({
 	name: 'enyo.sample.LightPanelsSample',
@@ -26,7 +27,7 @@ module.exports = kind({
 		]},
 		{classes: 'light-panels-set', components: [
 			{kind: LightPanels, name: 'lightHorizontal'},
-			{kind: LightPanels, name: 'lightVertical', orientation: 'vertical'}
+			{kind: LightPanels, name: 'lightVertical', orientation: Orientation.VERTICAL}
 		]}
 	],
 	bindings: [
@@ -39,64 +40,52 @@ module.exports = kind({
 	],
 	rendered: kind.inherit(function (sup) {
 		return function () {
+			var startIndex = 0,
+				infoHorizontal, infoVertical;
+
 			sup.apply(this, arguments);
-			this.pushSinglePanel(this.$.lightHorizontal);
-			this.pushSinglePanel(this.$.lightVertical);
+
+			infoHorizontal = this.generatePanelInfo(startIndex);
+			infoVertical = this.generatePanelInfo(startIndex);
+
+			this.$.lightHorizontal.createComponent(infoHorizontal, {owner: this});
+			this.$.lightVertical.createComponent(infoVertical, {owner: this});
+
+			this.$.lightHorizontal.set('index', startIndex);
+			this.$.lightVertical.set('index', startIndex);
 		};
 	}),
-	pushSinglePanel: function (panels) {
-		panels.pushPanel({
+	generatePanelInfo: function (id) {
+		return {
 			classes: 'light-panel',
-			panelId: 'panel-' + panels.getPanels().length,
+			panelId: 'panel-' + id,
 			style: 'background-color: ' + this.bgcolors[Math.floor(Math.random() * this.bgcolors.length)],
 			components: [
-				{content: panels.getPanels().length, classes: 'label'},
+				{content: id, classes: 'label'},
 				{content: 'Prev', kind: Button, classes: 'previous', ontap: 'prevTapped'},
 				{content: 'Next', kind: Button, classes: 'next', ontap: 'nextTapped'}
 			]
-		}, {owner: this});
+		};
+	},
+	pushSinglePanel: function (panels) {
+		var info = this.generatePanelInfo(panels.getPanels().length);
+		panels.pushPanel(info, {owner: this});
 	},
 	pushMultiplePanels: function (panels) {
-		panels.pushPanels([
-			{
-				classes: 'light-panel',
-				panelId: 'panel-' + panels.getPanels().length,
-				style: 'background-color: ' + this.bgcolors[Math.floor(Math.random() * this.bgcolors.length)],
-				components: [
-					{content: panels.getPanels().length, classes: 'label'},
-					{content: 'Prev', kind: Button, classes: 'previous', ontap: 'prevTapped'},
-					{content: 'Next', kind: Button, classes: 'next', ontap: 'nextTapped'}
-				]
-			},
-			{
-				classes: 'light-panel',
-				panelId: 'panel-' + (panels.getPanels().length + 1),
-				style: 'background-color: ' + this.bgcolors[Math.floor(Math.random() * this.bgcolors.length)],
-				components: [
-					{content: panels.getPanels().length + 1, classes: 'label'},
-					{content: 'Prev', kind: Button, classes: 'previous', ontap: 'prevTapped'},
-					{content: 'Next', kind: Button, classes: 'next', ontap: 'nextTapped'}
-				]
-			},
-			{
-				classes: 'light-panel',
-				panelId: 'panel-' + (panels.getPanels().length + 2),
-				style: 'background-color: ' + this.bgcolors[Math.floor(Math.random() * this.bgcolors.length)],
-				components: [
-					{content: panels.getPanels().length + 2, classes: 'label'},
-					{content: 'Prev', kind: Button, classes: 'previous', ontap: 'prevTapped'},
-					{content: 'Next', kind: Button, classes: 'next', ontap: 'nextTapped'}
-				]
-			}
-		], {owner: this});
+		var panelLength = panels.getPanels().length,
+			info1 = this.generatePanelInfo(panelLength),
+			info2 = this.generatePanelInfo(panelLength + 1),
+			info3 = this.generatePanelInfo(panelLength + 2);
+
+		panels.pushPanels([info1, info2, info3], {owner: this});
 	},
 	prevTapped: function (sender, ev) {
-		var panels = ev.originator.parent.parent;
+		var panels = ev.originator.isDescendantOf(this.$.lightHorizontal) ? this.$.lightHorizontal : this.$.lightVertical;
 		panels.previous();
 		return true;
 	},
 	nextTapped: function (sender, ev) {
-		var panels = ev.originator.parent.parent;
+		var panels = ev.originator.isDescendantOf(this.$.lightHorizontal) ? this.$.lightHorizontal : this.$.lightVertical;
 		if ((panels.name == 'lightHorizontal' && this.multipleHorizontal) || (panels.name == 'lightVertical' && this.multipleVertical)) {
 			this.pushMultiplePanels(panels);
 		} else {
