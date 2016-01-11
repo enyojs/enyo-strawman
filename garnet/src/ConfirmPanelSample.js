@@ -42,7 +42,7 @@ var ConfirmBasePanel = kind({
 			name: 'confirmPanelWithScrollNoIcon',
 			kind: ConfirmPanel,
 			buttonComponents: [
-				{name: 'ok', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image'}
+				{name: 'ok', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image', accessibilityLabel: 'ok'}
 			],
 			components: [
 				{
@@ -57,7 +57,7 @@ var ConfirmBasePanel = kind({
 			name: 'confirmPanelWithIconNoScroll',
 			kind: ConfirmPanel,
 			buttonComponents: [
-				{name: 'ok2', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image'}
+				{name: 'ok2', kind: IconButton, ontap: 'okHandler', classes: 'g-ok-image', accessibilityLabel: 'ok'}
 			],
 			components: [
 				{
