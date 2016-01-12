@@ -29,7 +29,8 @@ var ContextualBasePanel = kind({
 					name: '1rd Contextual 1st button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_delete.svg',
-					title: 'Delete'
+					title: 'Delete',
+					accessibilityLabel: 'Delete'
 				}
 			]
 		},
@@ -41,13 +42,15 @@ var ContextualBasePanel = kind({
 					name: '2rd Contextual 1st button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_edit.svg',
-					title: 'Edit'
+					title: 'Edit',
+					accessibilityLabel: 'Edit'
 				},
 				{
 					name: '2nd Contextual 2nd button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_delete.svg',
-					title: 'Delete'
+					title: 'Delete',
+					accessibilityLabel: 'Delete'
 				}
 			]
 		},
@@ -59,19 +62,22 @@ var ContextualBasePanel = kind({
 					name: '3rd Contextual 1st button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_favorite.svg',
-					title: 'Favorite'
+					title: 'Favorite',
+					accessibilityLabel: 'Favorite'
 				},
 				{
 					name: '3nd Contextual 2nd button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_edit.svg',
-					title: 'Edit'
+					title: 'Edit',
+					accessibilityLabel: 'Edit'
 				},
 				{
 					name: '3rd Contextual 3rd button',
 					ontap: 'tapHandler',
 					src: '@../assets/btn_context_delete.svg',
-					title: 'Delete'
+					title: 'Delete',
+					accessibilityLabel: 'Delete'
 				}
 			]
 		}
