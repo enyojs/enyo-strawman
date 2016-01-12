@@ -18,11 +18,12 @@ var
 	Button = require('enyo/Button'),
 	ToolDecorator = require('enyo/ToolDecorator'),
 	Input = require('enyo/Input'),
+	TextArea = require('enyo/TextArea'),
 	MyGridArranger = kind({
-	kind: GridArranger,
-	colHeight: '150',
-	colWidth: '150'
-});
+		kind: GridArranger,
+		colHeight: '150',
+		colWidth: '150'
+	});
 
 module.exports = kind({
 	name: 'enyo.sample.PanelsSample',
@@ -43,13 +44,27 @@ module.exports = kind({
 			{kind: Button, content: 'Delete', ontap: 'deletePanel'}
 		]},
 		{kind: Panels, name: 'samplePanels', fit: true, realtimeFit: true, classes: 'panels-sample-panels enyo-border-box', components: [
-			{content: 0, style: 'background:red;'},
-			{content: 1, style: 'background:orange;'},
-			{content: 2, style: 'background:yellow;'},
-			{content: 3, style: 'background:green;'},
-			{content: 4, style: 'background:blue;'},
-			{content: 5, style: 'background:indigo;'},
-			{content: 6, style: 'background:violet;'}
+			{content: 0, style: 'background:red;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]},
+			{content: 1, style: 'background:orange;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]},
+			{content: 2, style: 'background:yellow;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]},
+			{content: 3, style: 'background:green;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]},
+			{content: 4, style: 'background:blue;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]},
+			{content: 5, style: 'background:indigo;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]},
+			{content: 6, style: 'background:violet;', components: [
+				{kind: TextArea, type: 'text', placeholder: 'TextArea', value: 'Initial TextArea Value'}
+			]}
 		]}
 	],
 	panelArrangers: [
@@ -86,7 +101,7 @@ module.exports = kind({
 			}
 			sp.setArrangerKind(p.arrangerKind);
 			if (Panels.isScreenNarrow()) {
-				this.setIndex(1);
+				this.$.samplePanels.setIndex(1);
 			}
 		}
 	},
