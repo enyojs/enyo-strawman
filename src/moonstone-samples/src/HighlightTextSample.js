@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	$L = require('moonstone/i18n');
+	$L = require('enyo/i18n').$L;
 
 var
 	Collection = require('enyo/Collection'),

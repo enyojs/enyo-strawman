@@ -6,8 +6,8 @@ var
 
 var
 	samples = {
-		CanvasBallsSample: require('./lib/CanvasBallsSample')
-		// CanvasPrimitivesSample: require('./lib/CanvasPrimitivesSample')
+		CanvasBallsSample: require('./src/CanvasBallsSample')
+		// CanvasPrimitivesSample: require('./src/CanvasPrimitivesSample')
 	};
 
 module.exports = kind({
