@@ -6,11 +6,11 @@ var
 
 var
 	samples = {
-		Container			: require('./src/ContainerSample'),
-		Disappear			: require('./src/DisappearSample'),
-		Hold				: require('./src/HoldSample'),
-		Sandbox				: require('./src/SpotlightSandboxSample'),
-		TestPage			: require('./src/TestPage')
+		ContainerSample			: require('./src/ContainerSample'),
+		DisappearSample			: require('./src/DisappearSample'),
+		HoldSample				: require('./src/HoldSample'),
+		SandboxSample			: require('./src/SpotlightSandboxSample'),
+		TestPage				: require('./src/TestPage')
 	};
 
 module.exports = kind({

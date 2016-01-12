@@ -6,7 +6,7 @@ var
 
 var
 	samples = {
-		Basic: require('./src/BasicSample')
+		BasicSample: require('./src/BasicSample')
 	};
 
 module.exports = kind({
