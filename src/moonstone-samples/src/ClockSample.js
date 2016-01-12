@@ -1,7 +1,8 @@
 var
 	kind = require('enyo/kind'),
 	i18n = require('enyo/i18n'),
-	updateLocale = i18n.updateLocale;
+	updateLocale = i18n.updateLocale,
+	$L = i18n.$L;
 
 var
 	FittableRows = require('layout/FittableRows');
@@ -10,7 +11,6 @@ var
 	ilib = require('enyo-ilib');
 
 var
-	$L = require('moonstone/i18n'),
 	Button = require('moonstone/Button'),
 	Clock = require('moonstone/Clock'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
