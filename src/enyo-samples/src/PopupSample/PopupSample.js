@@ -91,7 +91,7 @@ module.exports = kind({
 		var p = this.$[sender.popup];
 		if (p) {
 			p.setShowing(true);
-			job.job('autoHidePopup', function() {
+			job('autoHidePopup', function() {
 				p.hide();
 			}, 2000);
 		}
