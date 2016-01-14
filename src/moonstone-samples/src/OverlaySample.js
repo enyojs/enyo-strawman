@@ -17,7 +17,7 @@ var
 
 function img (w, h, text, color) {
 	text = text || 'Image';
-	color = color || Math.floor(Math.random()*0x1000000).toString(16);
+	color = color || ('00000' + Math.floor(Math.random()*16777216).toString(16)).slice(-6);
 	return 'http://placehold.it/' + w + 'x' + h + '/' + color + '/ffffff&text=' + text;
 }
 
