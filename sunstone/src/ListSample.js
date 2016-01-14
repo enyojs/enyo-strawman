@@ -103,6 +103,7 @@ module.exports = kind({
 		var n = this.names[i];
 		// apply selection style if inSender (the list) indicates that this row is selected.
 		this.$.item.addRemoveClass('list-sample-selected', inSender.isSelected(i));
+		this.$.item.removeClass('pressed'); // For Preventing pressed state when page is generated.
 		this.$.name.setContent(n.name);
 		this.$.checkbox.setChecked(n.checked);
 		return true;

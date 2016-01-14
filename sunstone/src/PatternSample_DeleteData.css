@@ -1,0 +1,75 @@
+/* DeleteData patten Sample */
+
+.deletedata-sample .checkbox-divider {
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.deletedata-sample .general-index {
+	height: 48px;
+	line-height: 48px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #797979;
+	padding: 0 16px;
+	background-color: #fafafa;
+}
+
+.deletedata-sample .checkbox-sample {
+	margin: 12px 0;
+}
+
+.deletedata-sample .checkbox-table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.deletedata-sample .checkbox-table {
+	background-color: #f8f9fa;
+	height: 48px;
+	display: table;
+	table-layout: fixed;
+}
+
+.deletedata-sample .button-divider {
+	background-color: #aaaaaa;
+	margin: 8px 0;
+	height: 32px;
+}
+
+.deletedata-sample .checkbox-sample-header {
+	display: table;
+	width: 100%;
+	padding: 12px 0;
+	color: #ffffff;
+	background-color: #36bfd2;
+}
+
+.deletedata-sample .checkbox-sample-header-allCheck {
+	display: table-cell;
+}
+
+.deletedata-sample .checkbox-sample-checked-count {
+	display: table-cell;
+	text-align: right;
+	padding: 0 10px;
+}
+
+.deletedata-sample .checkbox-sample-header .sun-checkbox-item {
+	color: #ffffff;
+}
+
+.deletedata-sample .checkbox-sample-header .sun-checkbox[checked] {
+   background: url("../assets/btn_check_on_action.svg") no-repeat;
+}
+
+.deletedata-sample .checkbox-sample-header .sun-checkbox[checked][pressed] {
+   background: url("../assets/btn_check_on_action.svg") no-repeat;
+}
+
+.deletedata-sample .checkbox-sample-header .sun-checkbox[checked][disabled] {
+   background: url("../assets/btn_check_on_action.svg") no-repeat;
+}
+
+.deletedata-sample .checkbox-sample-header.sun-checkbox-item.left-handed .sun-checkbox-item-label-wrapper {
+	margin-left: 80px;
+}

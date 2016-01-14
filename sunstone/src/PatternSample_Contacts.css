@@ -1,0 +1,29 @@
+/* ContactsSample */
+
+.contact-sample .divider {
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.contact-sample .contacts-table-cell {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.contact-sample .contacts-table {
+	display: table;
+	height: 56px;
+}
+
+.contact-sample .two-line {
+	height: 72px;
+}
+
+.contact-sample .general-index {
+	height: 48px;
+	line-height: 48px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #797979;
+	padding: 0 16px;
+	background-color: #ffffff;
+}

@@ -11,14 +11,14 @@ var
 
 var
 	samples = {
-		AddressFormatting	: require('./lib/AddressFormatting'),
-		AddressParsing		: require('./lib/AddressParsing'),
-		// AdvDateFormatting	: require('./lib/AdvDateFormatting'), //still has onyx timepicker
-		// DateFormatting: require('./lib/DateFormatting'),
-		LocaleInfo: require('./lib/LocaleInfo'),
-		NameFormatting: require('./lib/NameFormatting'),
-		NameParsing: require('./lib/NameParsing'),
-		NumberFormatting: require('./lib/NumberFormatting')
+		AddressFormatting	: require('./src/AddressFormatting'),
+		AddressParsing		: require('./src/AddressParsing'),
+		// AdvDateFormatting	: require('./src/AdvDateFormatting'), //still has onyx timepicker
+		// DateFormatting: require('./src/DateFormatting'),
+		LocaleInfo: require('./src/LocaleInfo'),
+		NameFormatting: require('./src/NameFormatting'),
+		NameParsing: require('./src/NameParsing'),
+		NumberFormatting: require('./src/NumberFormatting')
 	};
 
 module.exports = kind({
