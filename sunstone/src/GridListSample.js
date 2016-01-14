@@ -61,24 +61,24 @@ module.exports = kind({
 		var movedItem = utils.clone(this.names[inEvent.reorderFrom]);
 		var lastSelected = this.$.list.getSelection().lastSelected;
 
-		this.names.splice(inEvent.reorderFrom,1);
-		this.names.splice((inEvent.reorderTo),0,movedItem);
+		this.names.splice(inEvent.reorderFrom, 1);
+		this.names.splice(inEvent.reorderTo, 0, movedItem);
 
-		if(this.$.list.isSelected(inEvent.reorderFrom)) { //reorder selected Item
+		if (this.$.list.isSelected(inEvent.reorderFrom)) { //reorder selected Item
 			this.$.list.deselect(inEvent.reorderFrom);
 			this.$.list.select(inEvent.reorderTo);
-		}else if(this.$.list.isSelected(inEvent.reorderTo)) { //reorder to selected Item
+		} else if (this.$.list.isSelected(inEvent.reorderTo)) { //reorder to selected Item
 			this.$.list.deselect(inEvent.reorderTo);
-			if(inEvent.reorderFrom > inEvent.reorderTo) {
-				this.$.list.select(inEvent.reorderTo+1);
-			}else {
-				this.$.list.select(inEvent.reorderTo-1);
+			if (inEvent.reorderFrom > inEvent.reorderTo) {
+				this.$.list.select(inEvent.reorderTo + 1);
+			} else {
+				this.$.list.select(inEvent.reorderTo - 1);
 			}
-		}else { // when selected item is between reorderFrom and reorderTo
-			if(inEvent.reorderFrom < lastSelected && inEvent.reorderTo > lastSelected) {
-				this.$.list.select(lastSelected-1);
-			}else if(inEvent.reorderFrom > lastSelected && inEvent.reorderTo < lastSelected) {
-				this.$.list.select(lastSelected+1);
+		} else { // when selected item is between reorderFrom and reorderTo
+			if (inEvent.reorderFrom < lastSelected && inEvent.reorderTo > lastSelected) {
+				this.$.list.select(lastSelected - 1);
+			} else if (inEvent.reorderFrom > lastSelected && inEvent.reorderTo < lastSelected) {
+				this.$.list.select(lastSelected + 1);
 			}
 		}
 		this.$.list.refresh();
@@ -97,6 +97,7 @@ module.exports = kind({
 		var i = inEvent.index,
 			item = this.names[i];
 		this.$.tile.setCaption(item.name);
+		this.$.tile.removeClass('pressed'); // For Preventing pressed state when page is generated.
 		this.$.tile.setSelected(this.$.list.isSelected(i));
 		return true;
 	},

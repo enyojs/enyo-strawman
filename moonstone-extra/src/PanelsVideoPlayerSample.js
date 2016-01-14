@@ -112,8 +112,8 @@ module.exports = kind({
 		this.$.player.unload();
 		this.$.player.setSources(this.sources);
 	},
-	webMovieCounter: function (sender, event) {
-		if (!event.originator.active) {
+	webMovieCounter: function (sender, ev) {
+		if (!ev.originator.active) {
 			return;
 		}
 		// Set source by sources array
@@ -125,8 +125,8 @@ module.exports = kind({
 		this.$.player.setSources(this.sources);
 		this.$.videoInfoHeader.setTitle('Ticking Counter Video');
 	},
-	webMovieBunny: function (sender, event) {
-		if (!event.originator.active) {
+	webMovieBunny: function (sender, ev) {
+		if (!ev.originator.active) {
 			return;
 		}
 		// Set source by sources array
@@ -137,8 +137,8 @@ module.exports = kind({
 		this.$.player.setSources(this.sources);
 		this.$.videoInfoHeader.setTitle('Bunny Video');
 	},
-	webMovieSintel: function (sender, event) {
-		if (!event.originator.active) {
+	webMovieSintel: function (sender, ev) {
+		if (!ev.originator.active) {
 			return;
 		}
 		// Set source by sources array
@@ -150,8 +150,8 @@ module.exports = kind({
 		this.$.player.setSources(this.sources);
 		this.$.videoInfoHeader.setTitle('The Sintel Video');
 	},
-	error: function (sender, event) {
-		if (!event.originator.active) {
+	error: function (sender, ev) {
+		if (!ev.originator.active) {
 			return;
 		}
 		this.src = 'http://foo.bar';

@@ -15,7 +15,7 @@ var
 
 var
 	AudioPlayback = require('moonstone-extra/AudioPlayback'),
-	Playlist = require('moonstone-extra/PlaylistSupport');
+	PlaylistSupport = require('moonstone-extra/PlaylistSupport');
 
 var audioQueue = kind({
 	name: 'sample.AudioQueue',
@@ -36,7 +36,7 @@ var audioQueue = kind({
 					], observers: [
 						{method: 'playingHandler', path: ['playing']}
 					],
-					playingHandler: function (sender, event) {
+					playingHandler: function (sender, ev) {
 						this.addRemoveClass('playing', this.get('playing'));
 					}}
 				]}
@@ -80,7 +80,7 @@ module.exports = kind({
 	},
 	components: [
 		{kind: Drawers, drawers:[
-			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ Playlist.Support ], components: [
+			{name: 'audioPlayback', kind: AudioPlayback, mixins: [ PlaylistSupport ], components: [
 				{name: 'queue', kind: audioQueue}
 			], moreComponents: [
 				{name: 'btnShuffle', kind: Button, ontap: 'toggleShuffle'},
@@ -117,8 +117,8 @@ module.exports = kind({
 		this.model1 = this.collection.at(0);
 		this.model2 = this.collection.at(1);
 	},
-	playAudio: function (sender, event) {
-		this.$.audioPlayback.set('model', event.model);
+	playAudio: function (sender, ev) {
+		this.$.audioPlayback.set('model', ev.model);
 	},
 	setAudio1: function () {
 		this.$.audioPlayback.set('model', this.model1);
