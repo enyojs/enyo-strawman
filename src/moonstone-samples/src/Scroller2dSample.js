@@ -13,7 +13,7 @@ module.exports = kind({
 			kind: Scroller,
 			classes: 'moon-scroller-sample-2d-scroller enyo-fill',
 			components: [
-				{style: 'width: 2300px; height: 1300px;', components: [
+				{style: 'width: 2350px; height: 1300px;', components: [
 					{kind: Button, content: 'Button 1'},
 					{kind: Button, content: 'Button 2'},
 					{kind: Button, content: 'Button 3'},
