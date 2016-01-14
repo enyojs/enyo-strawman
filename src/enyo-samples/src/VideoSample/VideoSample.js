@@ -4,7 +4,8 @@ var
 var
 	Anchor = require('enyo/Anchor'),
 	Button = require('enyo/Button'),
-	Video = require('enyo/Video');
+	Video = require('enyo/Video'),
+	platform = require('enyo/platform');
 
 var sources = [
 	{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
@@ -22,7 +23,7 @@ module.exports = kind({
 				kind: Video,
 				poster: 'http://media.w3.org/2010/05/bunny/poster.png',
 				preload: 'auto',
-				src: sources[0].src,
+				src: getPrimarySource(),
 				onratechange: 'rateChanged',
 				ontimeupdate: 'timeChanged',
 				ondurationchange: 'durationChanged',
@@ -119,7 +120,7 @@ module.exports = kind({
 	},
 	buttonUseSrcTapped: function (sender, ev) {
 		this.pauseVideo();
-		this.$.video.set('src', sources[0].src);
+		this.$.video.set('src', getPrimarySource());
 	},
 	buttonUseSourceComponentsTapped: function (sender, ev) {
 		this.pauseVideo();
@@ -138,3 +139,15 @@ module.exports = kind({
 		return true;
 	}
 });
+
+function getPrimarySource () {
+		if(['ie', 'edge', 'safari'].filter(
+			function (browser) {
+				return platform[browser];
+			}
+		).length > 0) {
+			return sources[2].src;	// IE and Safari don't support OGV
+		} else {
+			return sources[0].src;
+		}
+}
