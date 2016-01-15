@@ -18,7 +18,6 @@ var
 	Panel = require('moonstone/Panel'),
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
-	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	Collection = require('enyo/Collection'),
 	DataRepeater = require('enyo/DataRepeater'),
@@ -113,15 +112,10 @@ module.exports = kind({
 	name: 'moon.sample.All',
 	title: 'Moonstone Samples',
 	classes: 'moon enyo-unselectable enyo-fit',
-	themes: {
-		'dark': 'moonstone-dark.css',
-		'light': 'moonstone-light.css'
-	},
 	published: {
 		sample: null,
 		samples: null,
 		locale: 'local',
-		theme: 'dark',
 		location: function () {
 			var s = this.get('sample') || ''	,
 				locale = this.get('locale');
@@ -145,8 +139,7 @@ module.exports = kind({
 							]}
 						]}
 					]}
-				]},
-				{kind: ToggleButton, toggleOffLabel: 'Dark Theme', toggleOnLabel: 'Light Theme', small: true, spotlight: false, ontap: 'handleThemeTap'}
+				]}
 			]}
 		]},
 		{name: 'home'},
@@ -182,19 +175,11 @@ module.exports = kind({
 	computed: {
 		location: ['sample', 'locale']
 	},
-	initComponents: kind.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			this.themeNodeStore = {};
-		};
-	}),
 	create: kind.inherit(function (sup) {
 		return function () {
 			this.locales = new Collection(locales);
 			this.samples = this.samples || this.ctor.samples;
 			sup.apply(this, arguments);
-
-			this.initializeThemes();
 		};
 	}),
 	createList: function () {
@@ -310,42 +295,6 @@ module.exports = kind({
 		for (var i = 0; i < sheets.length; i++) {
 			sheets[i].disabled = true;
 		}
-	},
-	// Theme detection and acquisition is not presently working and must be refactored to allow
-	// integration with the modular system, but is left in as a reminder and a starting point.
-	initializeThemes: function () {
-		var i,
-			theme = this.get('theme'),
-			cs = document.getElementsByTagName('link');
-
-		for (i = 0; i < cs.length; i++) {
-			if (cs[i].href.indexOf(this.themes[theme]) > 0) {
-				// Save our current theme's node
-				this.themeNodeStore[theme] = cs[i];
-				// Setup the other themes' nodes
-				for (var t in this.themes) {
-					if (t != theme) {
-						// Generate the new theme paths based on the existing (found) theme path
-						var tn = this.createNode('link', {
-							href: cs[i].href.replace(this.themes[theme], this.themes['light']),
-							rel: 'stylesheet',
-							disabled: true
-						});
-						// Add it to the store and append to the head, already disabled
-						this.themeNodeStore[t] = tn;
-						this.appendToHead(tn);
-					}
-				}
-				return this.themeNodeStore[theme];
-			}
-		}
-	},
-	themeChanged: function (oldTheme, newTheme) {
-		if (this.themeNodeStore[oldTheme]) { this.themeNodeStore[oldTheme].disabled = true; }
-		if (this.themeNodeStore[newTheme]) { this.themeNodeStore[newTheme].disabled = false; }
-	},
-	handleThemeTap: function (sender, ev) {
-		this.set('theme', ev.originator.owner.get('value') ? 'light' : 'dark');
 	},
 	createNode: function (tagName, attrs) {
 		var key, node = document.createElement(tagName);
