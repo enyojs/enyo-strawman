@@ -25,7 +25,7 @@ module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{name: 'player', kind: VideoPlayer, soures: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
+		{name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
 			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 				{
 					kind: ChannelInfo,
