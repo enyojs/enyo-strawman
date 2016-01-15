@@ -166,11 +166,10 @@ module.exports = kind({
 	},
 	transparencyChanged: function () {
 		var isDataTypeJS = this.dataType === 'JS',
-			items = isDataTypeJS ? this.collection : this.collection.models,
-			item, idx;
+			item, len, idx;
 
-		for (idx = 0; idx < items.length; idx++) {
-			item = items[idx];
+		for (idx = 0, len = this.collection.length; idx < len; idx++) {
+			item = this.collection.at(idx);
 			if (isDataTypeJS) item.overlayTransparent = this.transparency;
 			else item.set('overlayTransparent', this.transparency);
 		}
