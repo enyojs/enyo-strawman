@@ -112,15 +112,10 @@ module.exports = kind({
 	name: 'moon.sample.All',
 	title: 'Moonstone Samples',
 	classes: 'moon enyo-unselectable enyo-fit',
-	themes: {
-		'dark': 'moonstone-dark.css',
-		'light': 'moonstone-light.css'
-	},
 	published: {
 		sample: null,
 		samples: null,
 		locale: 'local',
-		theme: 'dark',
 		location: function () {
 			var s = this.get('sample') || ''	,
 				locale = this.get('locale');
