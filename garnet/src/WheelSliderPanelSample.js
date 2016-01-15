@@ -16,7 +16,8 @@ var WheelSliderPanelBrightness = kind({
 	value: 50,
 	components: [
 		{classes: 'g-sample-pointer-events-none', components: [
-			{name: 'sampleValue', content: '', classes: 'g-sample-wheelslider-panel-value'},
+			// Accessibility : Add tabIndex for reading value, which is zero.
+			{name: 'sampleValue', tabIndex: -1, content: '', classes: 'g-sample-wheelslider-panel-value'},
 			{content: 'Brightness', classes: 'g-sample-wheelslider-panel-text'}
 		]}
 	],
