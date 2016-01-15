@@ -1,0 +1,42 @@
+/* DataListwithIconBadgeSample.less */
+
+.g-datalist-icon-badge-item{
+	height: 72px;
+	line-height: 72px;
+	position: relative; /* Do not omit this. It's critical */
+}
+.g-datalist-icon-badge-item .icon-badge-item-title {
+	width: 186px;
+	height: 72px;
+	margin-left: 96px;
+	font-size: 28px;
+	color: #FAFAFA;
+	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
+}
+.g-datalist-icon-badge-item.disabled {
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+.g-datalist-icon-badge-item .icon-badge-item-icon {
+	position: absolute;
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	margin-left: 38px;
+	margin-top: 15px;
+}
+.g-datalist-icon-badge-item .icon-badge-item-new-icon {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	margin-left: 62px;
+	margin-top: 15px;
+}
+.g-datalist-icon-badge-item .icon-badge-item-info-icon {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	margin-left: 62px;
+	margin-top: 38px;
+}

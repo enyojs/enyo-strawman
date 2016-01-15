@@ -1,0 +1,5 @@
+.moon-toggle-button-sample-wrapper .moon-button-caption-decorator,
+.moon-toggle-button-sample-group .moon-button,
+.moon-toggle-button-sample-wrapper > .moon-button {
+	margin: 20px;
+}

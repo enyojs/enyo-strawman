@@ -15,10 +15,19 @@
 		text-transform: lowercase;
 		opacity: 0.6;
 		transition: opacity 0.25s;
-		font-family: @moon-button-font-family;
+		font-family: @strawman-font-family-button;
 
-		&:hover {
+		&.spotlight {
 			opacity: 1;
+		}
+
+		@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+			opacity: 0.01;
+			width: 100%;
+			margin: 0;
+			line-height: 2em;
+			font-size: 3em;
+			border-radius: 0;
 		}
 	}
 }

@@ -1,0 +1,14 @@
+.moon-light-panels-sample .control-container > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.moon-light-panels-sample .control-panel {
+	position: static;
+	height: 60px;
+	width: 400px;
+}
+
+.moon-light-panels-sample .panel-scroller {
+	height: 750px;
+}
