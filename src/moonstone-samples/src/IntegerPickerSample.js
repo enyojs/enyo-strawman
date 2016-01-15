@@ -16,7 +16,7 @@ module.exports = kind({
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{kind: Divider, content: 'Integer Picker'},
-			{name: 'picker', kind: IntegerPicker, value: 2013, min: 1900, max: 2100, minWidth: 84, onChange: 'changed'},
+			{name: 'picker', kind: IntegerPicker, value: 2016, min: 1900, max: 2100, minWidth: 84, onChange: 'changed'},
 
 			{kind: Divider, content: 'Options'},
 			{kind: FormCheckbox, content: 'Animate', checked: true, prop: 'animate', onchange: 'checked'},

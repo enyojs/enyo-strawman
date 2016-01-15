@@ -1,4 +1,3 @@
-
 var
 	kind = require('enyo/kind');
 
@@ -17,12 +16,14 @@ var
 	Select = require('enyo/Select'),
 	Button = require('enyo/Button'),
 	ToolDecorator = require('enyo/ToolDecorator'),
-	Input = require('enyo/Input'),
+	Input = require('enyo/Input');
+
+var
 	MyGridArranger = kind({
-	kind: GridArranger,
-	colHeight: '150',
-	colWidth: '150'
-});
+		kind: GridArranger,
+		colHeight: '150',
+		colWidth: '150'
+	});
 
 module.exports = kind({
 	name: 'enyo.sample.PanelsSample',
@@ -86,7 +87,7 @@ module.exports = kind({
 			}
 			sp.setArrangerKind(p.arrangerKind);
 			if (Panels.isScreenNarrow()) {
-				this.setIndex(1);
+				this.$.samplePanels.setIndex(1);
 			}
 		}
 	},

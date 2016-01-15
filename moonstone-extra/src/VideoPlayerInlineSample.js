@@ -10,6 +10,12 @@ var
 	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
+var sources = [
+	{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie_hd.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.VideoPlayerInlineSample',
 	classes: 'moon enyo-fit enyo-unselectable moon-video-player-sample',
@@ -18,7 +24,7 @@ module.exports = kind({
 		{
 			name: 'player',
 			kind: VideoPlayer,
-			src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+			sources: sources,
 			poster: '@../assets/video-poster.png',
 			inline: true,
 			classes: 'moon-8h',

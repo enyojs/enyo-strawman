@@ -4,7 +4,14 @@ var
 var
 	Anchor = require('enyo/Anchor'),
 	Button = require('enyo/Button'),
-	Video = require('enyo/Video');
+	Video = require('enyo/Video'),
+	platform = require('enyo/platform');
+
+var sources = [
+	{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie_hd.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'}
+];
 
 module.exports = kind({
 	name: 'enyo.sample.VideoSample',
@@ -16,7 +23,7 @@ module.exports = kind({
 				kind: Video,
 				poster: 'http://media.w3.org/2010/05/bunny/poster.png',
 				preload: 'auto',
-				src: 'http://vjs.zencdn.net/v/oceans.mp4',
+				src: getPrimarySource(),
 				onratechange: 'rateChanged',
 				ontimeupdate: 'timeChanged',
 				ondurationchange: 'durationChanged',
@@ -87,7 +94,7 @@ module.exports = kind({
 		return true;
 	},
 	buttonRewindTapped: function(sender, ev) {
-		this.set("isPlaying", true);
+		this.set('isPlaying', true);
 		this.$.video.rewind();
 		return true;
 	},
@@ -113,15 +120,11 @@ module.exports = kind({
 	},
 	buttonUseSrcTapped: function (sender, ev) {
 		this.pauseVideo();
-		this.$.video.set('src', 'http://media.w3.org/2010/05/bunny/movie.mp4');
+		this.$.video.set('src', getPrimarySource());
 	},
 	buttonUseSourceComponentsTapped: function (sender, ev) {
 		this.pauseVideo();
-		this.$.video.set('sourceComponents', [
-		 	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'},
-			{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
-			{src: 'http://media.w3.org/2010/05/bunny/movie.webm', type: 'video/webm'}
-		]);
+		this.$.video.set('sourceComponents', sources);
 	},
 	rateChanged: function (sender, ev) {
 		this.$.videoAction.setContent('Playback ' + ev.playbackRate + 'x');
@@ -136,3 +139,15 @@ module.exports = kind({
 		return true;
 	}
 });
+
+function getPrimarySource () {
+		if(['ie', 'edge', 'safari'].filter(
+			function (browser) {
+				return platform[browser];
+			}
+		).length > 0) {
+			return sources[2].src;	// IE and Safari don't support OGV
+		} else {
+			return sources[0].src;
+		}
+}
