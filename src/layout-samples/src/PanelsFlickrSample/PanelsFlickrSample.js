@@ -74,7 +74,7 @@ module.exports = kind({
 	classes: 'panels-sample-flickr-panels enyo-unselectable enyo-fit',
 	arrangerKind: CollapsingArranger,
 	components: [
-		{kind: FittableRows, components: [
+		{kind: FittableRows, classes: 'enyo-fit', components: [
 			{components: [
 				{kind: FittableColumns, tag: 'label', style: 'width: 90%;', components: [
 					{name: 'searchInput', fit: true, kind: Input, value: 'Japan', onchange: 'search'},
