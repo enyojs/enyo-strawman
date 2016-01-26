@@ -19,7 +19,7 @@ var
 		iLib: require('../src/enyo-ilib-samples'),
 		Onyx: require('../src/onyx-samples'),
 		Canvas: require('../src/canvas-samples'),
-		Svg: require('../src/svg-samples'),
+		Svg: require('../src/svg-samples')
 	},
 	webOS = require('../src/enyo-webos-samples');
 
