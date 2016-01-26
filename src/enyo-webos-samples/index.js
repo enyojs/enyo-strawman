@@ -12,6 +12,6 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'enyo-webos Samples',
-	libraryName: 'WebOS',
+	libraryName: 'webOS',
 	samples: samples
 });
