@@ -11,7 +11,7 @@ var
 
 var
 	Button = require('onyx/Button'),
-	DatePicker = require('onyx/DatePicker'),
+	DatePicker = require('onyx/IntlDatePicker'),
 	Groupbox = require('onyx/Groupbox'),
 	GroupboxHeader = require('onyx/GroupboxHeader'),
 	Picker = require('onyx/Picker'),

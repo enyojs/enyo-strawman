@@ -15,7 +15,7 @@ var
 	GroupboxHeader = require('onyx/GroupboxHeader'),
 	Picker = require('onyx/Picker'),
 	PickerDecorator = require('onyx/PickerDecorator'),
-	TimePicker = require('onyx/TimePicker'),
+	TimePicker = require('onyx/IntlTimePicker'),
 	Toolbar = require('onyx/Toolbar');
 
 module.exports = kind({
