@@ -18,7 +18,7 @@ var
 	},
 	webOS = request('./enyo-webos-samples');
 
-if(platform.webos) {
+if (platform.webos) {
 	samples.webOS = webOS;
 }
 
