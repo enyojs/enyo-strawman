@@ -1,3 +1,5 @@
+require('spotlight');
+
 var
 	kind = require('enyo/kind'),
 	platform = require('enyo/platform');
