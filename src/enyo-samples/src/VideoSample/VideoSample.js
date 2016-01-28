@@ -4,13 +4,12 @@ var
 var
 	Anchor = require('enyo/Anchor'),
 	Button = require('enyo/Button'),
-	Video = require('enyo/Video'),
-	platform = require('enyo/platform');
+	Video = require('enyo/Video');
 
 var sources = [
-	{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
-	{src: 'http://media.w3.org/2010/05/bunny/movie_hd.ogv', type: 'video/ogg'},
-	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'}
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
 ];
 
 module.exports = kind({
@@ -23,7 +22,7 @@ module.exports = kind({
 				kind: Video,
 				poster: 'http://media.w3.org/2010/05/bunny/poster.png',
 				preload: 'auto',
-				src: getPrimarySource(),
+				src: sources[0].src,
 				onratechange: 'rateChanged',
 				ontimeupdate: 'timeChanged',
 				ondurationchange: 'durationChanged',
@@ -120,7 +119,7 @@ module.exports = kind({
 	},
 	buttonUseSrcTapped: function (sender, ev) {
 		this.pauseVideo();
-		this.$.video.set('src', getPrimarySource());
+		this.$.video.set('src', sources[0].src);
 	},
 	buttonUseSourceComponentsTapped: function (sender, ev) {
 		this.pauseVideo();
@@ -139,15 +138,3 @@ module.exports = kind({
 		return true;
 	}
 });
-
-function getPrimarySource () {
-		if(['ie', 'edge', 'safari'].filter(
-			function (browser) {
-				return platform[browser];
-			}
-		).length > 0) {
-			return sources[2].src;	// IE and Safari don't support OGV
-		} else {
-			return sources[0].src;
-		}
-}
