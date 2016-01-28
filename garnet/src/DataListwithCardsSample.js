@@ -21,7 +21,7 @@ var DataListCardsPanel = kind({
 			components: [
 				{ontap: 'showPopup', components: [
 					{name: 'listItem', classes: 'g-sample-datalist-cards-item', components: [
-						{name: 'iconUrl', kind: EnyoImage, classes: 'g-common-width-height-fit'}
+						{name: 'iconUrl', kind: EnyoImage, classes: 'g-common-width-height-fit', accessibilityLabel: 'photo'}
 					]}
 				], bindings: [
 					{from: '.model.iconUrl', to: '.$.iconUrl.src'}
@@ -55,7 +55,7 @@ var DataListSmallCardsPanel = kind({
 			components: [
 				{ontap: 'showPopup', components: [
 					{name: 'listItem', classes: 'g-sample-datalist-smallcards-item', components: [
-						{name: 'iconUrl', kind: EnyoImage},
+						{name: 'iconUrl', kind: EnyoImage, accessibilityLabel: 'photo'},
 						{classes: 'g-sample-datalist-smallcards-title', content: 'title'}
 					]}
 				], bindings: [

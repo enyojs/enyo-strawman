@@ -27,8 +27,8 @@ var DefaultCommandBarPanel = kind({
 		}
 	],
 	commandBarComponents: [
-		{name: 'cancel', classes: 'g-common-cancel', ontap: 'tapButton'},
-		{name: 'ok', classes: 'g-common-ok', disabled: true}
+		{name: 'cancel', classes: 'g-common-cancel', ontap: 'tapButton', accessibilityLabel: 'cancel'},
+		{name: 'ok', classes: 'g-common-ok', disabled: true, accessibilityLabel: 'ok'}
 	],
 	tapButton: function(inSender, inEvent) {
 		this.doResult({msg: inSender.name});
@@ -55,7 +55,7 @@ var SingleCommandBarPanel = kind({
 		}
 	],
 	commandBarComponents: [
-		{name: 'done', classes: 'g-common-ok', ontap: 'tapButton'}
+		{name: 'done', classes: 'g-common-ok', ontap: 'tapButton', accessibilityLabel: 'done'}
 	],
 	tapButton: function(inSender, inEvent) {
 		this.doResult({msg: inSender.name});
@@ -83,8 +83,8 @@ var CustomCommandBarPanel = kind({
 	],
 	commandBarComponents: [
 		// TODO: Update this legacy example to work
-		{name: 'previous', src: '@../assets/btn_command_previous.svg', ontap: 'previousTap'},
-		{name: 'next', src: '@../assets/btn_command_next.svg', ontap: 'nextTap'}
+		{name: 'previous', src: '@../assets/btn_command_previous.svg', ontap: 'previousTap', accessibilityLabel: 'previous'},
+		{name: 'next', src: '@../assets/btn_command_next.svg', ontap: 'nextTap', accessibilityLabel: 'next'}
 	],
 	previousTap: function(inSender, inEvent) {
 		this.doResult({msg: inSender.name});

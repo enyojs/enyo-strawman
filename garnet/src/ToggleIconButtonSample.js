@@ -20,16 +20,16 @@ var ToggleIconButtonPanel = kind({
 		{classes: 'g-sample-toggle-icon-button-container g-layout-absolute-center', components: [
 			{content: 'Toggle Icon Buttons : ', classes: 'g-sample-toggle-icon-button-text'},
 			{tag: 'br'},
-			{kind: ToggleIconButton, src: '@../assets/switch_default_oi_transparent.svg', classes: 'g-sample-toggle-icon-button-size', active: true},
-			{kind: ToggleIconButton, src: '@../assets/switch_default_transparent.svg', classes: 'g-sample-toggle-icon-button-size'},
-			{kind: ToggleIconButton, src: '@../assets/switch_default_oi_transparent.svg', classes: 'g-sample-toggle-icon-button-size', pending: true, ontap: 'togglePending'},
-			{kind: ToggleIconButton, src: '@../assets/switch_default_transparent.svg', classes: 'g-sample-toggle-icon-button-size', disabled: true},
- 			{content: 'Grouped Icon Buttons : ', classes: 'g-sample-toggle-icon-button-group-text'},
+			{kind: ToggleIconButton, accessibilityLabel: 'toggle icon button 1', src: '@../assets/switch_default_oi_transparent.svg', classes: 'g-sample-toggle-icon-button-size', active: true},
+			{kind: ToggleIconButton, accessibilityLabel: 'toggle icon button 2', src: '@../assets/switch_default_transparent.svg', classes: 'g-sample-toggle-icon-button-size'},
+			{kind: ToggleIconButton, accessibilityLabel: 'toggle icon button 3', src: '@../assets/switch_default_oi_transparent.svg', classes: 'g-sample-toggle-icon-button-size', pending: true, ontap: 'togglePending'},
+			{kind: ToggleIconButton, accessibilityLabel: 'toggle icon button 4', src: '@../assets/switch_default_transparent.svg', classes: 'g-sample-toggle-icon-button-size', disabled: true},
+			{content: 'Grouped Icon Buttons : ', classes: 'g-sample-toggle-icon-button-group-text'},
 			{kind: Group, onActivate:'iconGroupActivated', components: [
-				{kind: ToggleIconButton, src: '@../assets/switch_default_transparent.svg', classes: 'g-common-toggle-icon-button-size-normal', active: true},
-				{kind: ToggleIconButton, src: '@../assets/switch_default_oi_transparent.svg', classes: 'g-common-toggle-icon-button-size-normal'},
-				{kind: ToggleIconButton, src: '@../assets/switch_list_transparent.svg', classes: 'g-common-toggle-icon-button-size-small'},
-				{kind: ToggleIconButton, src: '@../assets/switch_list_oi_transparent.svg', classes: 'g-common-toggle-icon-button-size-small'}
+				{kind: ToggleIconButton, accessibilityLabel: 'group toggle icon button 1', src: '@../assets/switch_default_transparent.svg', classes: 'g-common-toggle-icon-button-size-normal', active: true},
+				{kind: ToggleIconButton, accessibilityLabel: 'group toggle icon button 2', src: '@../assets/switch_default_oi_transparent.svg', classes: 'g-common-toggle-icon-button-size-normal'},
+				{kind: ToggleIconButton, accessibilityLabel: 'group toggle icon button 3', src: '@../assets/switch_list_transparent.svg', classes: 'g-common-toggle-icon-button-size-small'},
+				{kind: ToggleIconButton, accessibilityLabel: 'group toggle icon button 4', src: '@../assets/switch_list_oi_transparent.svg', classes: 'g-common-toggle-icon-button-size-small'}
 			]}
 		]}
 	],

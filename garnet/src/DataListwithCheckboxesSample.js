@@ -38,7 +38,26 @@ var CheckboxItemBase = kind({
 	},
 	disabledChanged: function() {
 		this.addRemoveClass('disabled', this.disabled);
-	}
+	},
+
+	// Accessibility
+
+	/**
+	* @private
+	*/
+	tabIndex: -1,
+	
+	/**
+	* @private
+	*/
+	accessibilityRole: 'checkbox',
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{from: 'selected', to: 'aria-checked'}
+	]
 });
 
 var CheckboxItem = kind({

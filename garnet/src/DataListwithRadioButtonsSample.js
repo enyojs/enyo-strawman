@@ -39,7 +39,25 @@ var RadioButtonItemBase = kind({
 	},
 	disabledChanged: function() {
 		this.addRemoveClass('disabled', this.disabled);
-	}
+	},
+	// Accessibility
+
+	/**
+	* @private
+	*/
+	tabIndex: -1,
+	
+	/**
+	* @private
+	*/
+	accessibilityRole: 'radio',
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{from: 'selected', to: 'aria-checked'}
+	]
 });
 
 var RadioButtonItem = kind({

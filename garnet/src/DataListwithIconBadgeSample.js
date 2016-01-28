@@ -22,8 +22,8 @@ var IconBadgeItem = kind({
 	},
 	components: [
 		{name: 'icon', kind: Icon, src: '@../assets/ic_list_message_60x60.svg', classes: 'icon-badge-item-icon', components: [
-			{name: 'newIconBadge', kind: Icon, src: '@../assets/badge_unread.svg', classes: 'icon-badge-item-new-icon'},
-			{name: 'infoIconBadge', kind: Icon, src: '@../assets/badge_extra_info.svg', classes: 'icon-badge-item-info-icon'}
+			{name: 'newIconBadge', kind: Icon, src: '@../assets/badge_unread.svg', classes: 'icon-badge-item-new-icon', accessibilityLabel: 'new'},
+			{name: 'infoIconBadge', kind: Icon, src: '@../assets/badge_extra_info.svg', classes: 'icon-badge-item-info-icon', accessibilityLabel: 'information'}
 		]},
 		{name: 'title', classes: 'icon-badge-item-title', mixins: [MarqueeSupport]}
 	],
