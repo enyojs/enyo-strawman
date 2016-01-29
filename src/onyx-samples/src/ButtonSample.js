@@ -4,7 +4,8 @@ var
 var
 	Button = require('onyx/Button'),
 	Groupbox = require('onyx/Groupbox'),
-	GroupboxHeader = require('onyx/GroupboxHeader');
+	GroupboxHeader = require('onyx/GroupboxHeader'),
+	Icon = require('onyx/Icon');
 
 module.exports = kind({
 	name: 'onyx.sample.ButtonSample',
@@ -36,7 +37,7 @@ module.exports = kind({
 				{content: 'There is an image here'}
 			]},
 			{kind: Button, name:'Fishbowl Button', ontap:'buttonTapped', components: [
-				{kind: 'onyx.Icon', src: '@../assets/fish_bowl.png'}
+				{kind: Icon, src: '@../assets/fish_bowl.png'}
 			]}
 		]},
 		{kind: Groupbox, classes:'onyx-sample-result-box', components: [

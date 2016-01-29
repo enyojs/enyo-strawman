@@ -13,7 +13,7 @@ var SimpleTabBar = kind({
 	kind: Control,
 	fit: true,
 	components: [
-		{name: 'bar',kind: 'onyx.TabBar'},
+		{name: 'bar',kind: TabBar},
 		{style: 'border: 2px solid grey; ', components: [
 			{content: 'Only the content of this kind is changed', style: 'padding: 1em'},
 			{name: 'stuff', content: 'empty', style: 'padding: 1em'}
@@ -45,7 +45,7 @@ var DynamicTabBar = kind({
 		kind: Control,
 		fit: true,
 		components: [
-			{name: 'bar', kind: 'onyx.TabBar', maxMenuHeight: 200},
+			{name: 'bar', kind: TabBar, maxMenuHeight: 200},
 			{style: 'border: 2px solid grey; ', components: [
 				{content: 'create many tabs and reduce the width of the browser'},
 				{name: 'stuff', content: 'empty', style: 'padding: 1em'},

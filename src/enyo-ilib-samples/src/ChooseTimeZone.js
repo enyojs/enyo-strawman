@@ -3,6 +3,9 @@ var
 	Select = require('enyo/Select');
 
 var
+	TimePicker = require('onyx/TimePicker');
+
+var
 	TimeZone = require('enyo-ilib/TimeZone');
 
 var
@@ -21,7 +24,7 @@ module.exports = kind({
 		{name: 'timeZones', kind: Select, onselect: 'setTimeZone', components: [
 			{content: rb.getString('local'), active: true}
 		]},
-		{kind: 'onyx.TimePicker', name: 'timePickerFake', content: rb.getString('Time'), showing: false}
+		{kind: TimePicker, name: 'timePickerFake', content: rb.getString('Time'), showing: false}
 	],
 
 	create: function () {
