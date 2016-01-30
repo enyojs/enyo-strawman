@@ -24,7 +24,10 @@ module.exports = kind({
 						return '?' + lib + v;
 					}
 				},
-				{from: 'model.name', to: 'content'}
+				{from: 'model.name', to: 'title', transform: function (name) {
+					return name.replace(/(.*)Sample$/i, '$1');
+				}},
+				{from: 'model.wip', to: 'wip'}
 			]
 			}
 		]}
@@ -33,7 +36,7 @@ module.exports = kind({
 		{from: 'samples', to: '$.repeater.collection', transform: function (v) {
 				if (!v) { return v; }
 				return (v instanceof Collection) ? v : new Collection(Object.keys(v).map(function (key) {
-					return {name: key};
+					return {name: key, wip: v[key].wip};
 				}));
 			}
 		}

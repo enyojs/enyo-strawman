@@ -50,11 +50,11 @@
 	text-decoration: none;
 	color: @moon-text-color;
 
-	&.new {
+	&.new,
+	&.wip {
 		padding-left: 48px;
 
 		&:before {
-			content: 'New!';
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -70,6 +70,18 @@
 		&.spotlight:before {
 			background-color: @moon-spotlight-text-color;
 			color: @moon-spotlight-background-color;
+		}
+	}
+
+	&.new {
+		&:before {
+			content: 'New!';
+		}
+	}
+
+	&.wip {
+		&:before {
+			content: 'WIP!';
 		}
 	}
 }

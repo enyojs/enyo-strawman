@@ -113,6 +113,16 @@ for (var s in moonstoneSamples) {
 	}
 }
 
+// Mark wip samples
+samples.AnimatedButtonSample.wip = true;
+samples.AudioPlaybackSample.wip = true;
+samples.AudioPlaybackPlaylistSupportSample.wip = true;
+samples.LightPanelsSample.wip = true;
+samples.NewDataListSample.wip = true;
+
+// Mark deprecated samples
+samples.InputHeaderSample.deprecated = true;
+
 var newSampler = kind({
 	kind: oldSampler,
 	title: 'Moonstone Extra Samples',

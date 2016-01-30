@@ -75,6 +75,7 @@ var SampleListItem = kind({
 	kind: Item,
 	classes: 'moon-sample-list-item enyo-border-box',
 	'new': false,
+	wip: false,
 	mixins: [LinkSupport],
 	create: function () {
 		this.inherited(arguments);
@@ -82,6 +83,9 @@ var SampleListItem = kind({
 	},
 	newChanged: function () {
 		this.addRemoveClass('new', this.get('new'));
+	},
+	wipChanged: function () {
+		this.addRemoveClass('wip', this.get('wip'));
 	}
 });
 
@@ -103,13 +107,12 @@ var SampleListItem = kind({
 *
 * **Example:** _ContextualPopupSample.js_
 * ```
-* enyo.kind({
+* kind({
 *     name: 'moon.sample.ContextualPopupSample',
 *     ...
 * });
 * ```
 *
-* @namespace moon.sample
 */
 module.exports = kind({
 	name: 'moon.sample.All',
@@ -163,6 +166,7 @@ module.exports = kind({
 					{name: 'list', kind: DataList, fixedChildSize: 62, components: [
 						{kind: SampleListItem, bindings: [
 							{from: 'model.new', to: 'new'},
+							{from: 'model.wip', to: 'wip'},
 							{from: 'model.label', to: 'content'},
 							{from: 'model.name', to: 'href', transform: function (v) {
 								return '#' + v;
@@ -194,7 +198,7 @@ module.exports = kind({
 		for (var i = 0; i < sorted.length; i++) {
 			var sampleName = sorted[i],
 				sample = samples[sampleName];
-			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1'), 'new': sample['new']});
+			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1'), 'new': sample['new'], wip: sample.wip, deprecated: sample.deprecated});
 		}
 		if (!this.$.list) {
 			this.$.home.createComponents(this.listTools, {owner: this});
