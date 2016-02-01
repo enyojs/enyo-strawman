@@ -149,3 +149,5 @@ module.exports = kind({
 		return shuffle ? 'shuffle' : 'normal';
 	}
 });
+
+module.exports.badgeClasses = 'new wip';

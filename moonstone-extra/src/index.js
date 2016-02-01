@@ -27,11 +27,6 @@ var samples = {
 	VideoPlayerSample                    : require('./VideoPlayerSample')
 };
 
-// Mark all of the above samples as "new"
-for (var s in samples) {
-	samples[s]['new'] = true;
-}
-
 // Add in all of the moonstone samples
 var moonstoneSamples = {
 	AccessibilitySample                  : require('../../src/moonstone-samples/src/AccessibilitySample'),
@@ -112,16 +107,6 @@ for (var s in moonstoneSamples) {
 		samples[s] = moonstoneSamples[s];
 	}
 }
-
-// Mark wip samples
-samples.AnimatedButtonSample.wip = true;
-samples.AudioPlaybackSample.wip = true;
-samples.AudioPlaybackPlaylistSupportSample.wip = true;
-samples.LightPanelsSample.wip = true;
-samples.NewDataListSample.wip = true;
-
-// Mark deprecated samples
-samples.InputHeaderSample.deprecated = true;
 
 var newSampler = kind({
 	kind: oldSampler,

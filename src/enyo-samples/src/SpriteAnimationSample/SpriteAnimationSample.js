@@ -80,3 +80,5 @@ module.exports = kind({
 		logger.log('onEnd', sender.id, sender.useCssAnimation, sender.iterationCount);
 	}
 });
+
+module.exports.badgeClasses = 'new';

@@ -13,8 +13,14 @@ var
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	DataList = require('moonstone/DataList'),
+	DatePicker = require('moonstone/DatePicker'),
+	DayPicker = require('moonstone/DayPicker'),
 	Divider = require('moonstone/Divider'),
 	Drawers = require('moonstone/Drawers'),
+	ExpandableInput = require('moonstone/ExpandableInput'),
+	ExpandableIntegerPicker = require('moonstone/ExpandableIntegerPicker'),
+	ExpandableListItem = require('moonstone/ExpandableListItem'),
+	ExpandablePicker = require('moonstone/ExpandablePicker'),
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	ListActions = require('moonstone/ListActions'),
@@ -22,6 +28,7 @@ var
 	Panels = require('moonstone-extra/Panels'),
 	Popup = require('moonstone/Popup'),
 	Scroller = require('moonstone/Scroller'),
+	TimePicker = require('moonstone/TimePicker'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
 	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
@@ -113,9 +120,19 @@ module.exports = kind({
 						{kind: Item, content: 'Item Two', ontap: 'next1'},
 						{kind: Item, content: 'Item Three', ontap: 'next1'},
 						{kind: Item, content: 'Item Four', ontap: 'next1'},
+						{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
 						{kind: ToggleItem, content: 'Show/Hide Side Handle', checked: true,  onchange: 'handleShowingChanged'}
 					]},
 					{title: 'Second Panel', components: [
+						{kind: ExpandablePicker, noneText: 'Nothing selected', content: 'Expandable Picker', allowHtml:true, components: [
+							{content: 'English'},
+							{content: 'Spanish'},
+							{content: 'French'},
+							{content: 'German'},
+							{content: 'Italian'},
+							{content: 'Japanese'},
+							{content: 'Symbols <span style=\'color:orange;\'>&#x2620; &#x2764; &#x2619;</span>', allowHtml:true}
+						]},
 						{kind: Item, content: 'Item One', ontap: 'next2'},
 						{kind: Item, content: 'Item Two', ontap: 'next2'},
 						{kind: Item, content: 'Item Three', ontap: 'next2'},
@@ -126,6 +143,12 @@ module.exports = kind({
 						{kind: Item, content: 'Item One', ontap: 'next3'},
 						{kind: Item, content: 'Item Two', ontap: 'next3'},
 						{kind: Item, content: 'Item Three', ontap: 'next3'},
+						{kind: ExpandablePicker, content: 'Non-auto-collapsing', autoCollapseOnSelect: false, components: [
+							{content: 'Item 1'},
+							{content: 'Item 2', active: true},
+							{content: 'Item 3'}
+						]},
+						{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
 						{kind: Item, content: 'Item Four', ontap: 'next3'},
 						{kind: Item, content: 'Item Five', ontap: 'next3'}
 					]},
@@ -153,6 +176,7 @@ module.exports = kind({
 						{kind: Item, content: 'Item Three', ontap: 'next4'},
 						{kind: Item, content: 'Item Four', ontap: 'next4'},
 						{kind: Item, content: 'Item Five', ontap: 'next4'},
+						{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
 						{name: 'basicPopup', kind: Popup, content: 'Popup...'},
 						{name: 'directPopup', kind: Popup, autoDismiss: false, components: [
 							{content: 'Direct Popup'},
@@ -163,6 +187,11 @@ module.exports = kind({
 						{kind: Item, content: 'Item One', ontap: 'next5'},
 						{kind: Item, content: 'Item Two', ontap: 'next5'},
 						{kind: Item, content: 'Item Three', ontap: 'next5'},
+						{kind: ExpandableListItem, content: 'Expandable ListItem', components: [
+							{content: 'Item 1'},
+							{content: 'Item 2'},
+							{content: 'Item 3'}
+						]},
 						{kind: Item, content: 'Item Four', ontap: 'next5'},
 						{kind: Item, content: 'Item Five', ontap: 'next5'}
 					]},
@@ -183,6 +212,7 @@ module.exports = kind({
 							]}
 						]}
 					], components: [
+						{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
 						{kind: Item, content: 'Item One', ontap: 'next6'},
 						{kind: Item, content: 'Item Two', ontap: 'next6'},
 						{kind: Item, content: 'Item Three', ontap: 'next6'},
@@ -194,7 +224,8 @@ module.exports = kind({
 						{kind: Item, content: 'Item Two'},
 						{kind: Item, content: 'Item Three'},
 						{kind: Item, content: 'Item Four'},
-						{kind: Item, content: 'Item Five'}
+						{kind: Item, content: 'Item Five'},
+						{kind: ExpandableIntegerPicker, autoCollapse: true, content: 'Integer Picker', value: 7, min: 3, max: 15, step: 1, unit: 'elephants'}
 					]}
 				]}
 			]
@@ -275,3 +306,5 @@ module.exports = kind({
 		}
 	}
 });
+
+module.exports.badgeClasses = 'new';

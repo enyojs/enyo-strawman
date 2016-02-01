@@ -116,3 +116,5 @@ module.exports = kind({
 		this.setIndex(0);
 	}
 });
+
+module.exports.badgeClasses = 'new';

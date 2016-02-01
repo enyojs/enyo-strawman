@@ -79,3 +79,5 @@ module.exports = kind({
 		this.$.panZoomView.setScale(this.scale);
 	}
 });
+
+module.exports.badgeClasses = 'new';

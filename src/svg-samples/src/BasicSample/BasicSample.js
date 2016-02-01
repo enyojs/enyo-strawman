@@ -67,3 +67,5 @@ module.exports = kind({
 		this.$.result.set('content', '&quot;' + sender.name + '&quot; pressed.');
 	}
 });
+
+module.exports.badgeClasses = 'new';

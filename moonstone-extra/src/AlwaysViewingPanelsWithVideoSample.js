@@ -137,3 +137,5 @@ module.exports = kind({
 		this.$.panels.setHandleShowing(sender.getChecked());
 	}
 });
+
+module.exports.badgeClasses = 'new';

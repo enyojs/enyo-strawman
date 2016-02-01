@@ -175,3 +175,5 @@ module.exports = kind({
 		this.$.towerC.clear();
 	}
 });
+
+module.exports.badgeClasses = 'new wip';

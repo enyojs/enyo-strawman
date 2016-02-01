@@ -70,3 +70,5 @@ module.exports = kind({
 		{name: 'Zoltan'}
 	]
 });
+
+module.exports.badgeClasses = 'new';

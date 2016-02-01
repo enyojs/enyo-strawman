@@ -11,5 +11,17 @@ module.exports = kind({
 	tag: 'span',
 	classes: 'link',
 	spotlight: true,
-	mixins: [LinkSupport]
+	mixins: [LinkSupport],
+	badgeClassesChanged: function (was, is) {
+		if (was) this.addRemoveClasses(was, false);
+		if (is) this.addRemoveClasses(is, true);
+	},
+	addRemoveClasses: function (classes, state) {
+		if (classes) {
+			classes = classes.split(/\s+/);
+			for (var i = 0; i < classes.length; i++) {
+				this.addRemoveClass(classes[i], state);
+			}
+		}
+	}
 });

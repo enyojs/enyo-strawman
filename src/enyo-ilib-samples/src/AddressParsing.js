@@ -62,3 +62,5 @@ module.exports = kind({
 		this.$.rtlResult.setContent(output);
 	}
 });
+
+module.exports.badgeClasses = 'new';

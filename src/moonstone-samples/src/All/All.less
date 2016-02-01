@@ -51,7 +51,8 @@
 	color: @moon-text-color;
 
 	&.new,
-	&.wip {
+	&.wip,
+	&.deprecated {
 		padding-left: 48px;
 
 		&:before {
@@ -80,8 +81,24 @@
 	}
 
 	&.wip {
+		@wip-color: #2196F3;
 		&:before {
-			content: 'WIP!';
+			content: 'WIP';
+			background-color: @wip-color;
+		}
+		&.spotlight:before {
+			color: @wip-color;
+		}
+	}
+
+	&.deprecated {
+		@dep-color: purple;
+		&:before {
+			content: 'Dep ✕';
+			background-color: @dep-color;
+		}
+		&.spotlight:before {
+			color: @dep-color;
 		}
 	}
 }

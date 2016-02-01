@@ -53,10 +53,6 @@ var
 		WebServiceSample				: require('./src/WebServiceSample')
 	};
 
-// Assign wip to samples
-samples.LightPanelsSample.wip = true;
-samples.NewDrawerSample.wip = true;
-
 module.exports = kind({
 	kind: SampleList,
 	title: 'Enyo Samples',

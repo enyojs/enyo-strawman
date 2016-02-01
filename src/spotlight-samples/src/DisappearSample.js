@@ -10,11 +10,11 @@ module.exports = kind({
 	name    : 'enyo.Spotlight.DisappearSample',
 	classes : 'spotlight-sample',
 	fit     : true,
-	
+
 	handlers: {
 		onSpotlightFocus: 'onSpotlightFocus'
 	},
-	
+
 	components: [
 		{name: 'c1', spotlight: 'container', classes: 'container', components: [
 			{name: 'button01', spotlight: true, kind: Button, content: 'I am first spottable of the app'},
@@ -35,7 +35,7 @@ module.exports = kind({
 			]}
 		]}
 	],
-	
+
 	restore         : function() { location.reload(); },
 	disableButton1  : function() { this.$.button1.setDisabled(true); },
 	destroyButton2  : function() { this.$.button2.destroy(); },
@@ -44,3 +44,5 @@ module.exports = kind({
 	destroyAnsestor : function() { this.$.c11.destroy(); },
 	hideAnsestor    : function() { this.$.c11.hide(); }
 });
+
+module.exports.badgeClasses = 'new';

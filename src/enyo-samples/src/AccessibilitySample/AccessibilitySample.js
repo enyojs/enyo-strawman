@@ -109,3 +109,5 @@ module.exports = kind({
 		VoiceReadout.readAlert(this.$.inputText.getValue());
 	}
 });
+
+module.exports.badgeClasses = 'new';

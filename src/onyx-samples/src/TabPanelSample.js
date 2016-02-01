@@ -70,3 +70,5 @@ module.exports = kind({
 		this.$.dynamicTP.removeTab({index: this.number-- - 2});
 	}
 });
+
+module.exports.badgeClasses = 'wip';
