@@ -17,15 +17,15 @@ var CheckboxPanel = kind({
 		{classes: 'g-sample-checkbox-container g-layout-absolute-center g-sample-setting', components: [
 			{content: 'Checkboxes : ', classes: 'g-sample-text'},
 			{tag: 'br'},
-			{kind: Checkbox, onchange:'checkboxChanged'},
-			{kind: Checkbox, onchange:'checkboxChanged', checked: true},
-			{kind: Checkbox, onchange:'checkboxChanged', disabled: true},
-			{kind: Checkbox, onchange:'checkboxChanged', checked: true, disabled: true},
+			{kind: Checkbox, accessibilityLabel: 'checkbox 1', onchange:'checkboxChanged'},
+			{kind: Checkbox, accessibilityLabel: 'checkbox 2', onchange:'checkboxChanged', checked: true},
+			{kind: Checkbox, accessibilityLabel: 'checkbox 3', onchange:'checkboxChanged', disabled: true},
+			{kind: Checkbox, accessibilityLabel: 'checkbox 4', onchange:'checkboxChanged', checked: true, disabled: true},
 			{content: 'Grouped Checkboxes : ', classes: 'g-sample-text'},
 			{kind: Group, onActivate:'groupActivated', components: [
-				{kind: Checkbox, checked: true},
-				{kind: Checkbox},
-				{kind: Checkbox}
+				{kind: Checkbox, accessibilityLabel: 'group checkbox 1', checked: true},
+				{kind: Checkbox, accessibilityLabel: 'group checkbox 2'},
+				{kind: Checkbox, accessibilityLabel: 'group checkbox 3'}
 			]}
 		]}
 	],

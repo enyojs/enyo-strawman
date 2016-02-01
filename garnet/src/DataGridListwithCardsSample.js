@@ -14,7 +14,7 @@ var DataGridListCardsImageItem = kind({
 	name: 'g.sample.DataGridListCardsImageItem',
 	classes: 'g-sample-datagridlist-cards-imageitem',
 	components: [
-		{name: 'image', kind: EnyoImage},
+		{name: 'image', kind: EnyoImage, accessibilityLabel: 'image'},
 		{name: 'caption', classes: 'caption'}
 	],
 	published: {
@@ -37,7 +37,25 @@ var DataGridListCardsImageItem = kind({
 	},
 	disabledChanged: function() {
 		this.addRemoveClass('disabled', this.disabled);
-	}
+	},
+	// Accessibility
+
+	/**
+	* @private
+	*/
+	tabIndex: -1,
+	
+	/**
+	* @private
+	*/
+	accessibilityRole: 'checkbox',
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{from: 'selected', to: 'aria-checked'}
+	]
 });
 
 var DataGridListCardsItem = kind({

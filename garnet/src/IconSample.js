@@ -13,12 +13,12 @@ var IconPanel = kind({
 		{classes: 'g-sample-icon-container g-layout-absolute-center', components: [
 			{content: 'Icons : ', classes: 'g-sample-text'},
 			{tag: 'br'},
-			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small', accessibilityLabel: 'Icon label'},
-			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-normal'},
-			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-large'},
+			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-small', accessibilityLabel: 'Icon cancel 1'},
+			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-normal', accessibilityLabel: 'Icon cancel 2'},
+			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-large', accessibilityLabel: 'Icon cancel 3'},
 			{tag: 'br'},
-			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-large', disabled: true},
-			{kind: Icon, src: '@../assets/ic_warning.svg', classes: 'g-sample-button-warning'}
+			{kind: Icon, src: '@../assets/btn_cancel.svg', classes: 'g-common-button-size-large', disabled: true, accessibilityLabel: 'Icon disabled'},
+			{kind: Icon, src: '@../assets/ic_warning.svg', classes: 'g-sample-button-warning', accessibilityLabel: 'Icon warning'}
 		]}
 	]
 });

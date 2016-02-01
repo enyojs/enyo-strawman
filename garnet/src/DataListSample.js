@@ -48,7 +48,7 @@ var DataListItem = kind({
 	border: true,
 	classes: 'g-sample-datalist-item',
 	components: [
-		{name: 'icon', kind: Icon, style: 'background-image: url(' + svg + ');', classes: 'g-sample-datalist-item-icon'},
+		{name: 'icon', kind: Icon, style: 'background-image: url(' + svg + ');', classes: 'g-sample-datalist-item-icon', accessibilityLabel: 'message icon'},
 		{name: 'subject', mixins: [MarqueeSupport], classes: 'g-sample-datalist-item-subject'},
 		{name: 'time', mixins: [MarqueeSupport], classes: 'g-sample-datalist-item-time'}
 	],
