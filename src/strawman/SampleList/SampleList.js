@@ -24,6 +24,7 @@ module.exports = kind({
 		this._libList = !name;
 
 		if (this.samples[name]) {
+			console.log("Enyo Strawman - " + name + " - " + this.libraryName + ": " + this.version);
 			global.sample = this.createComponent({kind: this.samples[name]});
 		} else {
 			if (!this._libList && this.version) {
