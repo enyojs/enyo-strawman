@@ -1,5 +1,6 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	layout = require('layout');
 
 var
 	SampleList = require('../strawman/SampleList');
@@ -39,6 +40,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'Layout Samples',
+	version: layout.version,
 	libraryName: 'Layout',
 	samples: samples
 });

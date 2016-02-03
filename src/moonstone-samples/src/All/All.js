@@ -6,7 +6,8 @@ var
 	Router = require('enyo/Router');
 
 var
-	ilib = require('enyo-ilib');
+	ilib = require('enyo-ilib'),
+	moonstone = require('moonstone');
 
 var
 	Button = require('moonstone/Button'),
@@ -111,6 +112,7 @@ var SampleListItem = kind({
 module.exports = kind({
 	name: 'moon.sample.All',
 	title: 'Moonstone Samples',
+	version: moonstone.version,
 	classes: 'moon enyo-unselectable enyo-fit',
 	published: {
 		sample: null,
@@ -179,6 +181,7 @@ module.exports = kind({
 		return function () {
 			this.locales = new Collection(locales);
 			this.samples = this.samples || this.ctor.samples;
+			console.log("Enyo Strawman - Moonstone: " + this.version);
 			sup.apply(this, arguments);
 		};
 	}),

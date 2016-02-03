@@ -1,5 +1,6 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	canvas = require('canvas');
 
 var
 	SampleList = require('../strawman/SampleList');
@@ -13,6 +14,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'Canvas Samples',
+	version: canvas.version,
 	libraryName: 'Canvas',
 	samples: samples
 });

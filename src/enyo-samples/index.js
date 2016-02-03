@@ -1,5 +1,6 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	enyolib = require('enyo');
 
 var
 	SampleList = require('../strawman/SampleList');
@@ -53,6 +54,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'Enyo Samples',
+	version: enyolib.version,
 	libraryName: 'Enyo',
 	samples: samples
 });
