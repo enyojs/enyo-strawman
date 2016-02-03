@@ -2,6 +2,7 @@
     "globals": {
       "global": false,
       "require": false,
+      "request": false,
       "exports": true,
       "module": true,
       "module.exports": true,

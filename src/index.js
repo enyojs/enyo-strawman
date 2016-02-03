@@ -1,20 +1,28 @@
+require('spotlight');
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	platform = require('enyo/platform');
 
 var
 	SampleList = require('./strawman/SampleList');
 
 var
 	samples = {
-		Enyo: require('./enyo-samples'),
-		Moonstone: require('./moonstone-samples'), //router blocking
-		Layout: require('./layout-samples'),
-		Spotlight: require('./spotlight-samples'),
-		iLib: require('./enyo-ilib-samples'),
-		Onyx: require('./onyx-samples'),
-		Canvas: require('./canvas-samples'),
-		Svg: require('./svg-samples')
-	};
+		Enyo: request('./enyo-samples'),
+		Moonstone: request('./moonstone-samples'), //router blocking
+		Layout: request('./layout-samples'),
+		Spotlight: request('./spotlight-samples'),
+		iLib: request('./enyo-ilib-samples'),
+		Onyx: request('./onyx-samples'),
+		Canvas: request('./canvas-samples'),
+		Svg: request('./svg-samples')
+	},
+	webOS = request('./enyo-webos-samples');
+
+if (platform.webos) {
+	samples.webOS = webOS;
+}
 
 var
 	List = kind({
