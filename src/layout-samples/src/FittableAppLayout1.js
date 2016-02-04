@@ -6,7 +6,8 @@ var
 	FittableRows = require('layout/FittableRows'),
 	Button = require('enyo/Button'),
 	Control = require('enyo/Control'),
-	Input = require('enyo/Input');
+	Input = require('enyo/Input'),
+	ToolDecorator = require('enyo/ToolDecorator');
 
 module.exports = kind({
 	name: 'enyo.sample.FittableAppLayout1',
@@ -16,7 +17,7 @@ module.exports = kind({
 		{kind: Control, classes: 'layout-sample-toolbar', components: [
 			{content: 'Header'},
 			{kind: Button, content: 'Button'},
-			{kind: 'enyo.ToolDecorator', tag: 'label', components: [
+			{kind: ToolDecorator, tag: 'label', components: [
 				{kind: Input}
 			]}
 		]},
