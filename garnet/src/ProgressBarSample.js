@@ -17,7 +17,7 @@ var ProgressBarPanel = kind({
 		{classes: 'g-sample-progressbar-header'},
 		{kind: FormLabel, classes: 'g-sample-progressbar-top-label', content: 'Progress Bar: set value '},
 		{name: 'progressBar1', kind: ProgressBar, progress: 25, max: 100, classes: 'g-sample-progressbar-progressbar1'},
-		{name: 'progressBar2', kind: ProgressBar, progress: 25, bgProgress: 75, max: 100, classes: 'g-sample-progressbar-progressbar2'},
+		{name: 'progressBar2', kind: ProgressBar, accessibilityDisabled: false, progress: 25, bgProgress: 75, max: 100, classes: 'g-sample-progressbar-progressbar2'},
 		{kind: FormToolDecorator, components: [
 			{kind: FormInputDecorator, classes: 'g-sample-form-input', components: [
 				{name: 'input', kind: FormInput, value: 25}
@@ -33,6 +33,9 @@ var ProgressBarPanel = kind({
 		this.$.input.setValue(Math.min(parseInt(this.$.input.getValue() || 0, 10), 100));
 		this.$.progressBar1.animateProgressTo(this.$.input.getValue());
 		this.$.progressBar2.animateProgressTo(this.$.input.getValue());
+		
+		// Accessibility - Set accessibilityValueText for reading value whenever it changes.
+		this.$.progressBar2.set('accessibilityValueText', this.$.input.getValue());
 	},
 	incValue: function() {
 		this.$.input.setValue(Math.min(parseInt(this.$.input.getValue() || 0, 10) + 10, 100));
