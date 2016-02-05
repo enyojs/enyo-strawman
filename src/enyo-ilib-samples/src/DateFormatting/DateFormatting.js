@@ -6,6 +6,7 @@ var
 
 var
 	DatePicker = require('onyx/i18n/DatePicker'),
+	GroupboxHeader = require('onyx/GroupboxHeader'),
 	TimePicker = require('onyx/i18n/TimePicker');
 
 var
@@ -102,7 +103,7 @@ module.exports = kind({
 		]},
 
 		{kind: Group, classes:'onyx-sample-result-box', components: [
-			{kind: 'onyx.GroupboxHeader', content: rb.getString('Format result:')},
+			{kind: GroupboxHeader, content: rb.getString('Format result:')},
 			{name: 'rtlResult', fit: true, content: '-', style: 'padding: 10px'}
 		]}
 	],

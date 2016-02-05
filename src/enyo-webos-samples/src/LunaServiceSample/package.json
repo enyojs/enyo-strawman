@@ -1,0 +1,6 @@
+{
+  "main": "LunaServiceSample.js",
+  "styles": [
+    "LunaServiceSample.less"
+  ]
+}

@@ -1,5 +1,8 @@
+require('spotlight');
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	platform = require('enyo/platform');
 
 var
 	SampleList = require('./strawman/SampleList');
@@ -14,7 +17,12 @@ var
 		Onyx: request('./onyx-samples'),
 		Canvas: request('./canvas-samples'),
 		Svg: request('./svg-samples')
-	};
+	},
+	webOS = request('./enyo-webos-samples');
+
+if (platform.webos) {
+	samples.webOS = webOS;
+}
 
 var
 	List = kind({
