@@ -7,7 +7,7 @@ var
 	Select = require('enyo/Select');
 
 var
-	TimePicker = require('onyx/TimePicker');
+	TimePicker = require('onyx/i18n/TimePicker');
 
 var
 	Calendar = require('enyo-ilib/Calendar'),
