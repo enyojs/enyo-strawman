@@ -5,9 +5,9 @@ var
 	Scroller = require('enyo/Scroller');
 
 var
-	DatePicker = require('onyx/DatePicker'),
+	DatePicker = require('onyx/i18n/DatePicker'),
 	GroupboxHeader = require('onyx/GroupboxHeader'),
-	TimePicker = require('onyx/TimePicker');
+	TimePicker = require('onyx/i18n/TimePicker');
 
 var
 	Calendar = require('enyo-ilib/Calendar'),
