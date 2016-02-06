@@ -2,6 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
+	Garnet = require('garnet');
+
+var
 	SampleList = require('../../src/strawman/SampleList');
 
 // Define all of the extras samples
@@ -48,6 +51,7 @@ var samples = {
 module.exports = kind({
 	kind: SampleList,
 	title: 'Garnet Samples',
+	version: Garnet.version,
 	libraryName: 'Garnet',
 	samples: samples
 });
