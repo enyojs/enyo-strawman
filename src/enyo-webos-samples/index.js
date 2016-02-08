@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	enyo_webos = require('enyo-webos');
+	Enyo_webOS = require('enyo-webos');
 
 var
 	SampleList = require('../strawman/SampleList');
@@ -13,7 +13,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'enyo-webos Samples',
-	version: enyo_webos.version,
+	version: Enyo_webOS.version,
 	libraryName: 'webOS',
 	samples: samples
 });

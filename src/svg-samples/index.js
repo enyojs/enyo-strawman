@@ -1,6 +1,8 @@
 var
-	kind = require('enyo/kind'),
-	svg = require('svg');
+	kind = require('enyo/kind');
+
+var
+	Svg = require('svg');
 
 var
 	SampleList = require('../strawman/SampleList');
@@ -13,7 +15,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'SVG Samples',
-	version: svg.version,
+	version: Svg.version,
 	libraryName: 'Svg',
 	samples: samples
 });

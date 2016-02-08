@@ -1,6 +1,8 @@
 var
-	kind = require('enyo/kind'),
-	moonstone_extra = require('moonstone-extra');
+	kind = require('enyo/kind');
+
+var
+	MoonstoneExtra = require('moonstone-extra');
 
 var
 	oldSampler = require('../../src/moonstone-samples/src/All');
@@ -118,7 +120,7 @@ var newSampler = kind({
 	create: kind.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
-			console.log("Enyo Strawman - Moonstone-Extra: " + moonstone_extra.version);
+			console.log('%cMoonstone-Extra: %s', 'color:blue', MoonstoneExtra.version);
 		};
 	})
 });

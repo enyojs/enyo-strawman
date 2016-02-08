@@ -24,12 +24,10 @@ module.exports = kind({
 		this._libList = !name;
 
 		if (this.samples[name]) {
-			console.log("Enyo Strawman - " + name + " - " + this.libraryName + ": " + this.version);
 			global.sample = this.createComponent({kind: this.samples[name]});
 		} else {
-			if (!this._libList && this.version) {
-				console.log("Enyo Strawman - " + this.libraryName + ": " + this.version);
-			}
+			name = null; // not a valid sample name
+
 			this.addClass('strawman');
 			this.createComponents(this.listComponents);
 			this.binding({from: 'title',       to: '$.title.content'});
@@ -39,6 +37,10 @@ module.exports = kind({
 
 			// Don't show back if we're at home.
 			this.$.back.set('showing', !this._libList);
+		}
+
+		if (!this._libList && this.version) { // only display version information for individual libraries that are versioned
+			console.log('%c%s%s: %s', 'color:blue', (name ? name + ' - ' : ''), this.libraryName, this.version);
 		}
 	}
 });
