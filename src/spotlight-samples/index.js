@@ -1,6 +1,6 @@
 var
 	kind = require('enyo/kind'),
-	spotlight = require('spotlight');
+	Spotlight = require('spotlight');
 
 var
 	SampleList = require('../strawman/SampleList');
@@ -17,7 +17,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'Spotlight Samples',
-	version: spotlight.version,
+	version: Spotlight.version,
 	libraryName: 'Spotlight',
 	samples: samples
 });

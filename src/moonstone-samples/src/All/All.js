@@ -6,8 +6,10 @@ var
 	Router = require('enyo/Router');
 
 var
-	ilib = require('enyo-ilib'),
-	moonstone = require('moonstone');
+	Enyo_iLib = require('enyo-ilib');
+
+var
+	Moonstone = require('moonstone');
 
 var
 	Button = require('moonstone/Button'),
@@ -112,7 +114,7 @@ var SampleListItem = kind({
 module.exports = kind({
 	name: 'moon.sample.All',
 	title: 'Moonstone Samples',
-	version: moonstone.version,
+	version: Moonstone.version,
 	classes: 'moon enyo-unselectable enyo-fit',
 	published: {
 		sample: null,
@@ -181,7 +183,7 @@ module.exports = kind({
 		return function () {
 			this.locales = new Collection(locales);
 			this.samples = this.samples || this.ctor.samples;
-			console.log("Enyo Strawman - Moonstone: " + this.version);
+			console.log('%cMoonstone: %s', 'color:blue', this.version);
 			sup.apply(this, arguments);
 		};
 	}),
@@ -323,8 +325,8 @@ module.exports = kind({
 	},
 	checkLocale: function () {
 		// Reset locale in the event one of the samples changes it
-		if (ilib && ilib.getLocale() != this.locale) {
-			this.localeChanged(ilib.getLocale(), this.locale);
+		if (Enyo_iLib && Enyo_iLib.getLocale() != this.locale) {
+			this.localeChanged(Enyo_iLib.getLocale(), this.locale);
 		}
 	}
 });
