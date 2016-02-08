@@ -36,5 +36,13 @@ module.exports = kind({
 			// Don't show back if we're at home.
 			this.$.back.set('showing', !this._libList);
 		}
+	},
+	ownerChanged: function () {
+		var className = 'strawman';
+		// move the "strawman" class to our new owner
+		if (this.hasClass(className)) {
+			this.removeClass(className);
+			this.owner.addClass(className);
+		}
 	}
 });

@@ -5,7 +5,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../src/strawman/SampleList');
+	strawman = require('../src');
 
 var
 	samples = {
@@ -21,10 +21,7 @@ var
 
 var
 	List = kind({
-		kind: SampleList,
-		title: 'Enyo Strawman - Samples Gallery',
-		classes: 'home',
-		listType: 'grid',
+		kind: strawman.List,
 		samples: samples
 	});
 
@@ -32,7 +29,8 @@ ready(function () {
 	var names = window.document.location.search.substring(1).split('&'),
 		name = names[0],
 		Sample = samples[name] || List;
-	new Sample().renderInto(document.body);
+
+	strawman.utils.renderSample(Sample);
 });
 
 module.exports = {

@@ -11,12 +11,12 @@ var
 
 var
 	Button = require('enyo/Button'),
-	Popup = require('enyo/Popup'),
-	Scroller = require('enyo/Scroller');
+	Control = require('enyo/Control'),
+	Popup = require('enyo/Popup');
 
 module.exports = kind({
 	name: 'enyo.sample.PopupSample',
-	kind: Scroller,
+	kind: Control,
 	classes: 'popup-sample',
 	components: [
 		{content: 'Popups', classes: 'section'},

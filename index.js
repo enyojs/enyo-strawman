@@ -15,11 +15,10 @@ ready(function () {
 	if (request.isRequest(Sample)) {
 		//check to see if the sample is wrapped in
 		//request instead of being required into the build
-
 		Sample.then(function(res){
-			new res().renderInto(document.body);
+			strawman.utils.renderSample(res);
 		});
 	} else {
-		new Sample().renderInto(document.body);
+		strawman.utils.renderSample(Sample);
 	}
 });

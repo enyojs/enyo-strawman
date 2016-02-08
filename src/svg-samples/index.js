@@ -13,5 +13,6 @@ module.exports = kind({
 	kind: SampleList,
 	title: 'SVG Samples',
 	libraryName: 'Svg',
+	useScroller: true,
 	samples: samples
 });

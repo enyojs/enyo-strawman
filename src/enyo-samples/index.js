@@ -54,5 +54,6 @@ module.exports = kind({
 	kind: SampleList,
 	title: 'Enyo Samples',
 	libraryName: 'Enyo',
+	useScroller: true,
 	samples: samples
 });

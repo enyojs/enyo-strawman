@@ -34,5 +34,6 @@ module.exports = kind({
 	kind: SampleList,
 	title: 'Onyx Samples',
 	libraryName: 'Onyx',
+	useScroller: true,
 	samples: samples
 });

@@ -25,5 +25,6 @@ module.exports = kind({
 	kind: SampleList,
 	title: 'iLib Samples',
 	libraryName: 'iLib',
+	useScroller: true,
 	samples: samples
 });

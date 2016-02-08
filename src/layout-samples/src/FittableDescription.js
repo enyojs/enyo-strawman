@@ -2,15 +2,17 @@ var
 	kind = require('enyo/kind');
 
 var
+	Control = require('enyo/Control');
+
+var
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows'),
-	Scroller = require('enyo/Scroller');
+	FittableRows = require('layout/FittableRows');
 
 module.exports = kind({
 	name: 'enyo.sample.FittableDescription',
-	classes: 'fittable-sample-box enyo-fit',
+	kind: Control,
+	classes: 'fittable-sample-box',
 	style: 'padding:10px;',
-	kind: Scroller,
 	components: [
 		{tag: 'p', allowHtml: true, content: 'FittableColumns, no margin on boxes (all divs have some padding). By default, boxes "stretch" to fit the container (which must have a height).'},
 		{kind: FittableColumns, classes: 'fittable-sample-height fittable-sample-box fittable-sample-o fittable-sample-mlr fittable-sample-mtb', components: [

@@ -1,8 +1,8 @@
 var
 	kind = require('enyo/kind'),
 	Button = require('enyo/Button'),
-	Input = require('enyo/Input'),
-	Scroller = require('enyo/Scroller');
+	Control = require('enyo/Control'),
+	Input = require('enyo/Input');
 
 var
 	Address = require('enyo-ilib/Address'),
@@ -14,7 +14,7 @@ var
 
 module.exports = kind({
 	name: 'ilib.sample.AddressFormatting',
-	kind: Scroller,
+	kind: Control,
 
 	components: [
 		{style: 'margin: 10px;', components: [
