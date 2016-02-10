@@ -22,6 +22,7 @@ var
 	webOS = request('./enyo-webos-samples');
 
 if (platform.webos) {
+	require('enyo-webos');
 	samples.webOS = webOS;
 }
 

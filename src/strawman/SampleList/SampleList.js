@@ -26,6 +26,8 @@ module.exports = kind({
 		if (this.samples[name]) {
 			global.sample = this.createComponent({kind: this.samples[name]});
 		} else {
+			name = null; // not a valid sample name
+
 			this.addClass('strawman');
 			this.createComponents(this.listComponents);
 			this.binding({from: 'title',       to: '$.title.content'});
@@ -35,6 +37,10 @@ module.exports = kind({
 
 			// Don't show back if we're at home.
 			this.$.back.set('showing', !this._libList);
+		}
+
+		if (!this._libList && this.version) { // only display version information for individual libraries that are versioned
+			console.log('%c%s%s: %s', 'color:blue', (name ? name + ' - ' : ''), this.libraryName, this.version);
 		}
 	},
 	ownerChanged: function () {

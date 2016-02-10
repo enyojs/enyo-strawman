@@ -7,6 +7,9 @@ var
 	kind = require('enyo/kind');
 
 var
+	Enyo_iLib = require('enyo-ilib');
+
+var
 	SampleList = require('../strawman/SampleList');
 
 var
@@ -24,6 +27,7 @@ var
 module.exports = kind({
 	kind: SampleList,
 	title: 'iLib Samples',
+	version: Enyo_iLib.enyo.version,
 	libraryName: 'iLib',
 	useScroller: true,
 	samples: samples
