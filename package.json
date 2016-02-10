@@ -24,12 +24,7 @@
       "web": "http://enyojs.com/"
     }
   ],
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
+  "license": "Apache-2.0",
   "scripts": {
     "test": "./node_modules/.bin/gulp"
   },
@@ -38,8 +33,9 @@
     "url": "http://github.com/enyojs/enyo-strawman"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-jshint": "^1.10.0",
-    "jshint-stylish": "^1.0.1"
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
   }
 }

@@ -2,6 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
+	Sunstone = require('sunstone');
+
+var
 	SampleList = require('../../src/strawman/SampleList');
 
 // Define all of the extras samples
@@ -38,6 +41,7 @@ var samples = {
 module.exports = kind({
 	kind: SampleList,
 	title: 'Sunstone Samples',
+	version: Sunstone.version,
 	libraryName: 'Sunstone',
 	samples: samples
 });

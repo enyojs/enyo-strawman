@@ -17,11 +17,17 @@ var
 	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
+var sources = [
+	{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie_hd.ogv', type: 'video/ogg'},
+	{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'}
+];
+
 module.exports = kind({
     name: 'moon.sample.AlwaysViewingPanelsWithVideoSample',
     classes: 'moon enyo-fit enyo-unselectable',
     components: [
-        {name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
+        {name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
 			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 				{
 					kind: ChannelInfo,
@@ -123,11 +129,11 @@ module.exports = kind({
 			]}
 		]}
 	],
-	next: function (inSender, inEvent) {
+	next: function (sender, ev) {
 		this.$.panels.next();
 		return true;
 	},
-	handleShowingChanged: function (inSender, inEvent) {
-		this.$.panels.setHandleShowing(inSender.getChecked());
+	handleShowingChanged: function (sender, ev) {
+		this.$.panels.setHandleShowing(sender.getChecked());
 	}
 });

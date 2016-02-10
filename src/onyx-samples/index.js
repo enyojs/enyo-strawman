@@ -2,37 +2,41 @@ var
 	kind = require('enyo/kind');
 
 var
+	Onyx = require('onyx');
+
+var
 	SampleList = require('../strawman/SampleList');
 
 var
 	samples = {
-		ButtonGroup			: require('./lib/ButtonGroupSample'),
-		Button				: require('./lib/ButtonSample'),
-		Checkbox			: require('./lib/CheckboxSample'),
-		ContextualPopup		: require('./lib/ContextualPopupSample'),
-		DatePicker			: require('./lib/DatePickerSample'),
-		Groupbox			: require('./lib/GroupboxSample'),
-		IconButton			: require('./lib/IconButtonSample'),
-		Input				: require('./lib/InputSample'),
-		Menu				: require('./lib/MenuSample'),
-		MoreToolbar			: require('./lib/MoreToolbarSample'),
-		Picker				: require('./lib/PickerSample'),
-		Popup				: require('./lib/PopupSample'),
-		Progress			: require('./lib/ProgressSample'),
-		Slider				: require('./lib/SliderSample'),
-		Spinner				: require('./lib/SpinnerSample'),
-		Submenu				: require('./lib/SubmenuSample'),
-		TabBar				: require('./lib/TabBarSample'),
-		TabPanel			: require('./lib/TabPanelSample'),
-		TimePicker			: require('./lib/TimePickerSample'),
-		ToggleButton		: require('./lib/ToggleButtonSample'),
-		Toolbar				: require('./lib/ToolbarSample'),
-		Tooltip				: require('./lib/TooltipSample')
+		ButtonGroupSample		: require('./src/ButtonGroupSample'),
+		ButtonSample			: require('./src/ButtonSample'),
+		CheckboxSample			: require('./src/CheckboxSample'),
+		ContextualPopupSample	: require('./src/ContextualPopupSample'),
+		DatePickerSample		: require('./src/DatePickerSample'),
+		GroupboxSample			: require('./src/GroupboxSample'),
+		IconButtonSample		: require('./src/IconButtonSample'),
+		InputSample				: require('./src/InputSample'),
+		MenuSample				: require('./src/MenuSample'),
+		MoreToolbarSample		: require('./src/MoreToolbarSample'),
+		PickerSample			: require('./src/PickerSample'),
+		PopupSample				: require('./src/PopupSample'),
+		ProgressSample			: require('./src/ProgressSample'),
+		SliderSample			: require('./src/SliderSample'),
+		SpinnerSample			: require('./src/SpinnerSample'),
+		SubmenuSample			: require('./src/SubmenuSample'),
+		TabBarSample			: require('./src/TabBarSample'),
+		TabPanelSample			: require('./src/TabPanelSample'),
+		TimePickerSample		: require('./src/TimePickerSample'),
+		ToggleButtonSample		: require('./src/ToggleButtonSample'),
+		ToolbarSample			: require('./src/ToolbarSample'),
+		TooltipSample			: require('./src/TooltipSample')
 	};
 
 module.exports = kind({
 	kind: SampleList,
 	title: 'Onyx Samples',
+	version: Onyx.version,
 	libraryName: 'Onyx',
 	samples: samples
 });

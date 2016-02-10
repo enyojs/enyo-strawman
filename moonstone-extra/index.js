@@ -2,7 +2,8 @@ require('enyo/options').accessibility = true;
 
 var
 	ready = require('enyo/ready'),
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	platform = require('enyo/platform');
 
 var
 	SampleList = require('../src/strawman/SampleList');
@@ -19,7 +20,12 @@ var
 		Onyx: require('../src/onyx-samples'),
 		Canvas: require('../src/canvas-samples'),
 		Svg: require('../src/svg-samples')
-	};
+	},
+	webOS = require('../src/enyo-webos-samples');
+
+if (platform.webos) {
+	samples.webOS = webOS;
+}
 
 var
 	List = kind({
