@@ -2,9 +2,12 @@ var platform = require('enyo/platform');
 
 module.exports = {
 	"enyo": "Enyo",
-	"garnet": "Garnet",
+	"moonstone": "Moonstone",
+	"moonstone-light": "Moonstone Light",
 	"layout": "Layout",
+	"spotlight": "Spotlight",
 	"enyo-ilib": "iLib",
+	"onyx": "Onyx",
 	"canvas": "Canvas",
 	"svg": "Svg"
 };
