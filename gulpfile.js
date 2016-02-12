@@ -130,7 +130,7 @@ function buildStrawman(samples) {
 		};
 		if(item!=='.') {
 			target = './src/' + target + '-samples';
-			opts.outdir = '../../dist/' + item;
+			opts.outdir = '../../dist/' + item.replace('-extra', '');
 			console.log('Building ' + item + ' samples...');
 		}
 		process.chdir(target);
