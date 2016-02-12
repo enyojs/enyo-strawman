@@ -21,7 +21,7 @@ var args = nom
 gulp.task('default', ['build']);
 gulp.task('build', build);
 gulp.task('build-all', buildAll);
-gulp.task('moonstone', moonstone);
+gulp.task('moonstone-extra', moonstone);
 gulp.task('garnet', garnet);
 gulp.task('sunstone', sunstone);
 gulp.task('clean', clean);
