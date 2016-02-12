@@ -29,5 +29,6 @@ module.exports = kind({
 	title: 'iLib Samples',
 	version: Enyo_iLib.enyo.version,
 	libraryName: 'iLib',
+	useScroller: true,
 	samples: samples
 });

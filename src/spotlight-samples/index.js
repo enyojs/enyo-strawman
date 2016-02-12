@@ -19,5 +19,6 @@ module.exports = kind({
 	title: 'Spotlight Samples',
 	version: Spotlight.version,
 	libraryName: 'Spotlight',
+	useScroller: true,
 	samples: samples
 });

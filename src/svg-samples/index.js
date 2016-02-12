@@ -17,5 +17,6 @@ module.exports = kind({
 	title: 'SVG Samples',
 	version: Svg.version,
 	libraryName: 'Svg',
+	useScroller: true,
 	samples: samples
 });

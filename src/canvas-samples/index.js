@@ -18,5 +18,6 @@ module.exports = kind({
 	title: 'Canvas Samples',
 	version: Canvas.version,
 	libraryName: 'Canvas',
+	useScroller: true,
 	samples: samples
 });

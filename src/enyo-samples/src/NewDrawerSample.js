@@ -5,32 +5,29 @@ var
 	Collection = require('enyo/Collection'),
 	Control = require('enyo/Control'),
 	NewDrawer = require('enyo/NewDrawer'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Scroller = require('enyo/Scroller');
+	DataRepeater = require('enyo/DataRepeater');
 
 module.exports = kind({
 	name: 'enyo.sample.NewDrawerSample',
 	kind: Control,
 	components: [
-		{kind: Scroller, classes: 'enyo-fit', components: [
-			{
-				kind: NewDrawer,
-				components: [
-					{
-						name: 'r',
-						kind: DataRepeater,
-						components: [
-							{
-								bindings: [
-									{from: 'model.label', to: 'content'}
-								]
-							}
-						]
-					}
-				]
-			},
-			{content: 'foo'}
-		]}
+		{
+			kind: NewDrawer,
+			components: [
+				{
+					name: 'r',
+					kind: DataRepeater,
+					components: [
+						{
+							bindings: [
+								{from: 'model.label', to: 'content'}
+							]
+						}
+					]
+				}
+			]
+		},
+		{content: 'foo'}
 	],
 	create: kind.inherit(function (sup) {
 		return function () {

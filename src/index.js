@@ -5,7 +5,8 @@ var
 	platform = require('enyo/platform');
 
 var
-	SampleList = require('./strawman/SampleList');
+	SampleList = require('./strawman/SampleList'),
+	utils = require('./strawman/utils');
 
 var
 	samples = {
@@ -36,5 +37,6 @@ var
 
 module.exports = {
 	samples: samples,
-	List: List
+	List: List,
+	utils: utils
 };

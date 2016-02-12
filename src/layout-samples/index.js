@@ -44,5 +44,6 @@ module.exports = kind({
 	title: 'Layout Samples',
 	version: Layout.version,
 	libraryName: 'Layout',
+	useScroller: true,
 	samples: samples
 });

@@ -15,5 +15,6 @@ module.exports = kind({
 	title: 'enyo-webos Samples',
 	version: Enyo_webOS.version,
 	libraryName: 'webOS',
+	useScroller: true,
 	samples: samples
 });
