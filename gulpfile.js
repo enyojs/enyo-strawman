@@ -3,7 +3,6 @@
 var
 	gulp = require('gulp'),
 	fs = require('fs'),
-	enyo = require('enyo-dev'),
 	Promise = require('bluebird'),
 	del = require('del'),
 	jshint = require('gulp-jshint'),
@@ -89,6 +88,11 @@ function writeConfig(samples) {
 }
 
 function buildStrawman(samples) {
+	require("babel-register")({
+		// allow babel usage in node_modules/enyo_dev
+		only: /node_modules\/enyo-dev\/(?!(node_modules))/
+	});
+	var enyo = require('enyo-dev');
 	var cwd = process.cwd();
 	var mI = samples.indexOf('moonstone');
 	var meI = samples.indexOf('moonstone-extra');
@@ -105,9 +109,9 @@ function buildStrawman(samples) {
 	}
 	writeConfig(samples);
 	samples.unshift('.');
-	
+
 	console.log('Building Enyo-Strawman...');
-	
+
 	return Promise.reduce(samples, function(_, item, index, length) {
 		process.chdir(cwd);
 		var target = item.replace('-light', '');
@@ -130,11 +134,11 @@ function buildStrawman(samples) {
 		};
 		if(item!=='.') {
 			target = './src/' + target + '-samples';
-			opts.outdir = '../../dist/' + item.replace('-extra', '');
+			opts.outDir = '../../dist/' + item.replace('-extra', '');
 			console.log('Building ' + item + ' samples...');
 		}
 		process.chdir(target);
-		return enyo.package(opts);
+		return enyo.packager(opts);
 	}, null);
 }
 

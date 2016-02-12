@@ -38,7 +38,8 @@
     "jshint-stylish": "^1.0.1",
     "nomnom": "^1.8.1",
     "bluebird": "^3.2.2",
-    "enyo-dev": "^0.5.2",
+    "babel-register": "^6.5.2",
+    "enyo-dev": "enyojs/enyo-dev",
     "del": "^2.2.0"
   }
 }

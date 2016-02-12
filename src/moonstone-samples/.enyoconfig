@@ -52,8 +52,8 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outdir": "../../dist/moonstone",
-  "outfile": "index.html",
+  "outDir": "../../dist/moonstone",
+  "outFile": "index.html",
   "lessPlugins": [{
     "name": "resolution-independence",
     "options": {"baseSize":24}
