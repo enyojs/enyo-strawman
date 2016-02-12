@@ -49,7 +49,7 @@ ready(function () {
 	} else {
 		Sample = samples[name] || List;
 	}
-	strawman.utils.renderSample(Sample);
+	new Sample().renderInto(document.body);
 });
 
 module.exports = {

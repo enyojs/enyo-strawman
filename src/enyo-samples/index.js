@@ -5,7 +5,7 @@ var
 	Enyo = require('enyo');
 
 var
-	SampleList = require('../strawman/SampleList');
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -54,10 +54,9 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Enyo Samples',
 	version: Enyo.version,
 	libraryName: 'Enyo',
-	useScroller: true,
 	samples: samples
 });

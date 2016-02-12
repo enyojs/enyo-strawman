@@ -5,7 +5,7 @@ var
 	Canvas = require('canvas');
 
 var
-	SampleList = require('../strawman/SampleList');
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -14,10 +14,9 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Canvas Samples',
 	version: Canvas.version,
 	libraryName: 'Canvas',
-	useScroller: true,
 	samples: samples
 });
