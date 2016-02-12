@@ -55,7 +55,7 @@ module.exports = kind({
 					components: [
 						{content: '<', classes: 'strawman-sample-back', ontap: 'goBack'},
 						{kind:Scroller, style: 'width:100%; height:100%;', components:[
-							{kind:this.samples[is], classes:'strawman-sample'},
+							{kind:this.samples[is], classes:'strawman-sample'}
 						]}
 					]
 				});
