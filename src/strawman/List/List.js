@@ -19,12 +19,19 @@ module.exports = kind({
 		{name: 'repeater', classes: 'list-frame', kind: DataRepeater, components: [
 			{kind: Link, classes: 'item', bindings: [
 				{from: 'model.name', to: 'href', transform: function (v) {
-						var lib = this.owner.libraryName || '';
-						if (lib) { lib+= '&'; }
-						return '?' + lib + v;
+						var href = "#" + v;
+						if (!this.owner.libraryName) { href = v + "/"; }
+						return href;
 					}
 				},
-				{from: 'model.name', to: 'content'}
+				{from: 'model.name', to: 'content', transform: function (v) {
+						var name = v;
+						if (!this.owner.libraryName) {
+							name = this.owner.samples[v] || name;
+						}
+						return name;
+					}
+				}
 			]
 			}
 		]}

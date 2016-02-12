@@ -1,7 +1,7 @@
 {
-  "title": "enyo-strawman-moon-extra",
-  "name": "enyo-strawman-moon-extra",
-  "libDir": "../lib",
+  "title": "canvas-samples",
+  "name": "canvas-samples",
+  "libDir": "../../lib",
   "paths": [],
   "libraries": [
     "enyo",
@@ -52,7 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outdir": "../dist",
+  "outdir": "../../dist/canvas",
   "outfile": "index.html",
   "lessPlugins": [],
   "assetRoots": [],

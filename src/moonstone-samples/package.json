@@ -1,12 +1,41 @@
 {
-	"main": "index.js",
-	"libPath": "../../lib",
-	"title": "Moonstone Samples",
-	"styles": [
-		"src/*.less",
-		"src/*.css"
-	],
-	"assets": [
-		"assets/**/*.*"
-	]
+  "main": "index.js",
+  "title": "Moonstone Samples",
+  "styles": [
+    "src/*.less",
+    "src/*.css",
+    "../../css/*.css",
+    "../../css/*.less"
+  ],
+  "assets": [
+    "assets/**/*.*",
+    "resources/**/*.*"
+  ],
+  "main": "index.js",
+  "moduleDir": "src",
+  "filename": "index.js",
+  "version": "0.0.1",
+  "description": "Collection of Enyo lib samples for Quality Assurance with Moonstone",
+  "homepage": "http://enyojs.com/",
+  "bugs": "http://jira.enyojs.com/",
+  "keywords": [],
+  "maintainers": [
+    {
+      "name": "Enyo JS Framework Team",
+      "web": "http://enyojs.com/"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/enyojs/enyo-strawman"
+  },
+  "devDependencies": {}
 }
+

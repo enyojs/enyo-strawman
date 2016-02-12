@@ -1,5 +1,8 @@
+require('enyo/options').accessibility = true;
+
 var
-	Sampler = require('./src/All'),
+	ready = require('enyo/ready'),
+	Sample = require('./src/All'),
 	samples = {
 		AccessibilitySample					: require('./src/AccessibilitySample'),
 		AccordionSample						: require('./src/AccordionSample'),
@@ -73,6 +76,8 @@ var
 		// VideoPlayerSample					: require('./src/VideoPlayerSample')
 	};
 
-Sampler.samples = samples;
+Sample.samples = samples;
 
-module.exports = Sampler;
+ready(function() {
+	new Sample().renderInto(document.body);
+});

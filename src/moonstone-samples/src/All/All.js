@@ -157,7 +157,7 @@ module.exports = kind({
 		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
 				headerComponents: [
-					{kind: Button, content: 'Back', small: true, href: 'index.html', mixins: [LinkSupport]}
+					{kind: Button, content: 'Back', small: true, href: '../index.html', mixins: [LinkSupport]}
 				],
 				components: [
 					{name: 'list', kind: DataList, fixedChildSize: 62, components: [
