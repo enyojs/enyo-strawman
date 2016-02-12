@@ -38,7 +38,7 @@ ready(function () {
 		name = names[0],
 		Sample = samples[name] || List;
 
-	strawman.utils.renderSample(Sample);
+	new Sample().renderInto(document.body);
 });
 
 module.exports = {
