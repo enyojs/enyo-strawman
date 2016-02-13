@@ -28,6 +28,7 @@ module.exports = kind({
 	name: 'smoon.sample.CalendarSample',
 	classes: 'moon enyo-unselectable enyo-fit',
 	kind: FittableColumns,
+	_locale: 'local',
 	components: [
 		{components: [
 			{kind: Calendar, name: 'calendar', onChange: 'changed'}
@@ -70,7 +71,12 @@ module.exports = kind({
 						{content: 'fr-CA'},
 						{content: 'it-IT'}, // Italy, firstDayOfWeek: 1
 						{content: 'es-ES'}, // Spain, firstDayOfWeek: 1
-						{content: 'es-MX'}
+						{content: 'es-MX'},
+						{content: 'ar-SA'},
+						{content: 'ur-PK'},
+						{content: 'zh-Hant-HK'},
+						{content: 'ja-JP'},
+						{content: 'en-JP'}
 					]},
 					{name: 'dowLengthPicker', kind: ExpandablePicker, content: 'Choose DOW Label Length', onChange: 'setLabelLength', components: [
 						{content: 'short', active: true},
@@ -102,8 +108,11 @@ module.exports = kind({
 			length: 'short'
 		});
 
-		if (this.$.localePicker.selected) {
-			this.setLocale(null, {selected: this.$.localePicker.selected});
+		for(var i = 0; i < this.$.localePicker.components.length; i++) {
+			if(this.$.localePicker.components[i].content === this._locale) {
+				this.$.localePicker.setSelectedIndex(i);
+				break;
+			}
 		}
 	},
 
@@ -114,7 +123,7 @@ module.exports = kind({
 
 	setLocale: function (sender, ev){
 		var locale = ev.selected.content;
-		locale = locale == 'Use Default Locale' ? null : locale;
+		locale = (locale == 'Use Default Locale' || locale === 'local') ? null : locale;
 		// auto-triggers update to correctly configured/written widgets
 		updateLocale(locale);
 		// egregious misuse of now-deprecated widget/api to avoid needing to rewrite the entire
