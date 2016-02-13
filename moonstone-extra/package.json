@@ -5,6 +5,7 @@
     "../appinfo.json",
     "../icon.png",
     "../largeIcon.png",
+    "../fonts/**/*.ttf",
     "../resources/**/*.*"
   ],
   "devAssets": [],
