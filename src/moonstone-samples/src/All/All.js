@@ -247,7 +247,7 @@ module.exports = kind({
 			this.$.router.trigger({location: this.get('location'), change: true});
 			this.checkLocale();
 		} else {
-			window.location.href = 'index.html';
+			window.location.href = '../index.html';
 		}
 	},
 	reload: function () {
