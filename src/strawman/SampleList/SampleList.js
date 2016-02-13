@@ -42,13 +42,5 @@ module.exports = kind({
 		if (!this._libList && this.version) { // only display version information for individual libraries that are versioned
 			console.log('%c%s%s: %s', 'color:blue', (name ? name + ' - ' : ''), this.libraryName, this.version);
 		}
-	},
-	ownerChanged: function () {
-		var className = 'strawman';
-		// move the "strawman" class to our new owner
-		if (this.hasClass(className)) {
-			this.removeClass(className);
-			this.owner.addClass(className);
-		}
 	}
 });
