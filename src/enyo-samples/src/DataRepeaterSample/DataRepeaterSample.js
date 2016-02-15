@@ -3,8 +3,7 @@ var
 
 var
 	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Scroller = require('enyo/Scroller');
+	DataRepeater = require('enyo/DataRepeater');
 
 var
 	data = [
@@ -114,22 +113,20 @@ module.exports = kind({
 	name: 'enyo.sample.DataRepeaterSample',
 	classes: 'data-repeater-sample enyo-border-box',
 	components: [
-		{kind: Scroller, classes: 'enyo-fit', components: [
-			{name: 'repeater', kind: DataRepeater, components: [
-				{components: [
-					{classes: 'name-wrapper', components: [
-						{name: 'index', classes: 'index', tag: 'span'},
-						{name: 'firstName', classes: 'name', tag: 'span'},
-						{name: 'lastName', classes: 'name last', tag: 'span'},
-						{name: 'lastNameLetter', classes: 'name last-letter', tag: 'span'}
-					]}
-				], bindings: [
-					{from: 'index', to: '$.index.content'},
-					{from: 'model.firstName', to: '$.firstName.content'},
-					{from: 'model.lastName', to: '$.lastName.content'},
-					{from: 'model.lastName', to: '$.lastNameLetter.content', transform: function (v) { return v.charAt(0); }},
-					{from: 'model.classes', to: 'classes'}
+		{name: 'repeater', kind: DataRepeater, components: [
+			{components: [
+				{classes: 'name-wrapper', components: [
+					{name: 'index', classes: 'index', tag: 'span'},
+					{name: 'firstName', classes: 'name', tag: 'span'},
+					{name: 'lastName', classes: 'name last', tag: 'span'},
+					{name: 'lastNameLetter', classes: 'name last-letter', tag: 'span'}
 				]}
+			], bindings: [
+				{from: 'index', to: '$.index.content'},
+				{from: 'model.firstName', to: '$.firstName.content'},
+				{from: 'model.lastName', to: '$.lastName.content'},
+				{from: 'model.lastName', to: '$.lastNameLetter.content', transform: function (v) { return v.charAt(0); }},
+				{from: 'model.classes', to: 'classes'}
 			]}
 		]}
 	],

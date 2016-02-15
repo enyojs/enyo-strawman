@@ -5,7 +5,7 @@ var
 	Svg = require('svg');
 
 var
-	SampleList = require('../strawman/SampleList');
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -13,7 +13,7 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'SVG Samples',
 	version: Svg.version,
 	libraryName: 'Svg',

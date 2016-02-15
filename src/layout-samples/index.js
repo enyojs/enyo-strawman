@@ -5,7 +5,7 @@ var
 	Layout = require('layout');
 
 var
-	SampleList = require('../strawman/SampleList');
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -40,7 +40,7 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Layout Samples',
 	version: Layout.version,
 	libraryName: 'Layout',

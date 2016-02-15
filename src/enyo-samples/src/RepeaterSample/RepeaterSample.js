@@ -3,20 +3,17 @@ var
 
 var
 	Control = require('enyo/Control'),
-	Repeater = require('enyo/Repeater'),
-	Scroller = require('enyo/Scroller');
+	Repeater = require('enyo/Repeater');
 
 module.exports = kind({
 	name: 'enyo.sample.RepeaterSample',
 	classes: 'enyo-fit repeater-sample',
 	kind: Control,
 	components: [
-		{kind: Scroller, classes: 'enyo-fit', components: [
-			{kind: Repeater, onSetupItem:'setupItem', components: [
-				{name:'item', classes:'repeater-sample-item', components: [
-					{tag:'span', name: 'personNumber'},
-					{tag:'span', name: 'personName'}
-				]}
+		{kind: Repeater, onSetupItem:'setupItem', components: [
+			{name:'item', classes:'repeater-sample-item', components: [
+				{tag:'span', name: 'personNumber'},
+				{tag:'span', name: 'personName'}
 			]}
 		]}
 	],
