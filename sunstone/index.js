@@ -1,9 +1,9 @@
 var
-	ready = require('enyo/ready'),
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
-	strawman = require('../src');
+	SampleList = require('../src/strawman/SampleList');
 
 var
 	samples = {
@@ -19,7 +19,10 @@ var
 
 var
 	List = kind({
-		kind: strawman.List,
+		kind: SampleList,
+		title: 'Enyo Strawman - Samples Gallery',
+		classes: 'home',
+		listType: 'grid',
 		samples: samples
 	});
 

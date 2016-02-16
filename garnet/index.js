@@ -1,12 +1,14 @@
 require('enyo/options').accessibility = true;
 
 var
-	ready = require('enyo/ready'),
-	Scroller = require('garnet/Scroller'),
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
-	strawman = require('../src');
+	Scroller = require('garnet/Scroller');
+
+var
+	SampleList = require('../src/strawman/SampleList');
 
 var
 	samples = {
@@ -22,7 +24,10 @@ var
 
 var
 	List = kind({
-		kind: strawman.List,
+		kind: SampleList,
+		title: 'Enyo Strawman - Samples Gallery',
+		classes: 'home',
+		listType: 'grid',
 		samples: samples
 	});
 
@@ -37,8 +42,8 @@ ready(function () {
 			style: 'background:white;',
 			components: [
 				{content: '<', classes: 'g-sample-header g-back-enyo', ontap: 'goBack'},
-				{kind:Scroller, style: 'width:100%; height:100%;', components:[
-					{kind:samples[name], style: 'padding-bottom: 60px;'},
+				{kind: Scroller, style: 'width:100%; height:100%;', components: [
+					{kind: samples[name], style: 'padding-bottom: 60px;'}
 				]}
 			],
 			goBack: function() {
