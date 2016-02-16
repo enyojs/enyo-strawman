@@ -160,3 +160,5 @@ module.exports = kind({
 		this.$.videoInfoHeader.setTitle('Error video');
 	}
 });
+
+module.exports.badgeClasses = 'new';

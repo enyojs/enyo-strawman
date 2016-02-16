@@ -59,3 +59,5 @@ module.exports = kind({
 		return true;
 	}
 });
+
+module.exports.badgeClasses = 'deprecated';

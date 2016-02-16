@@ -114,3 +114,5 @@ module.exports = kind({
 		this.$.player.setSources(this.sources);
 	}
 });
+
+module.exports.badgeClasses = 'new';

@@ -68,3 +68,5 @@ module.exports = kind({
 		}
 	]
 });
+
+module.exports.badgeClasses = 'new';

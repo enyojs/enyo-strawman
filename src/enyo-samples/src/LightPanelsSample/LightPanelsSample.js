@@ -95,3 +95,5 @@ module.exports = kind({
 	},
 	bgcolors: ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
 });
+
+module.exports.badgeClasses = 'new wip';

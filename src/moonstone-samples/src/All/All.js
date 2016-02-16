@@ -74,14 +74,18 @@ var appRouter = kind({
 var SampleListItem = kind({
 	kind: Item,
 	classes: 'moon-sample-list-item enyo-border-box',
-	'new': false,
 	mixins: [LinkSupport],
-	create: function () {
-		this.inherited(arguments);
-		this.newChanged();
+	badgeClassesChanged: function (was, is) {
+		if (was) this.addRemoveClasses(was, false);
+		if (is) this.addRemoveClasses(is, true);
 	},
-	newChanged: function () {
-		this.addRemoveClass('new', this.get('new'));
+	addRemoveClasses: function (classes, state) {
+		if (classes) {
+			classes = classes.split(/\s+/);
+			for (var i = 0; i < classes.length; i++) {
+				this.addRemoveClass(classes[i], state);
+			}
+		}
 	}
 });
 
@@ -103,13 +107,12 @@ var SampleListItem = kind({
 *
 * **Example:** _ContextualPopupSample.js_
 * ```
-* enyo.kind({
+* kind({
 *     name: 'moon.sample.ContextualPopupSample',
 *     ...
 * });
 * ```
 *
-* @namespace moon.sample
 */
 module.exports = kind({
 	name: 'moon.sample.All',
@@ -162,7 +165,7 @@ module.exports = kind({
 				components: [
 					{name: 'list', kind: DataList, fixedChildSize: 62, components: [
 						{kind: SampleListItem, bindings: [
-							{from: 'model.new', to: 'new'},
+							{from: 'model.badgeClasses', to: 'badgeClasses'},
 							{from: 'model.label', to: 'content'},
 							{from: 'model.name', to: 'href', transform: function (v) {
 								return '#' + v;
@@ -194,7 +197,7 @@ module.exports = kind({
 		for (var i = 0; i < sorted.length; i++) {
 			var sampleName = sorted[i],
 				sample = samples[sampleName];
-			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1'), 'new': sample['new']});
+			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1'), badgeClasses: sample.badgeClasses});
 		}
 		if (!this.$.list) {
 			this.$.home.createComponents(this.listTools, {owner: this});

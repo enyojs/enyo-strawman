@@ -177,3 +177,5 @@ module.exports = kind({
 		this.$.calendar.setValue(null);
 	}
 });
+
+module.exports.badgeClasses = 'deprecated';

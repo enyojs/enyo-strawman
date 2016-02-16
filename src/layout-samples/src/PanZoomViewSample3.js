@@ -39,7 +39,6 @@ var ImagesView = kind({
 	}
 });
 
-
 module.exports = kind({
 	name: 'enyo.sample.PanZoomViewSample3',
 	classes: 'enyo-unselectable',
@@ -56,3 +55,5 @@ module.exports = kind({
 		imageview.setSrc( this.planets[ (utils.indexOf(imageview.src, this.planets)+1)%this.planets.length ] );
 	}
 });
+
+module.exports.badgeClasses = 'new';

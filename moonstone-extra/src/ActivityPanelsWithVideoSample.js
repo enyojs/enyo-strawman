@@ -152,3 +152,5 @@ module.exports = kind({
 		this.$.player.set('showing', !ev.showing);
 	}
 });
+
+module.exports.badgeClasses = 'new';

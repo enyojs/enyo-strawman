@@ -77,3 +77,5 @@ module.exports = kind({
 		this.$.rtlResult.setContent(postFmtData);
 	}
 });
+
+module.exports.badgeClasses = 'new';

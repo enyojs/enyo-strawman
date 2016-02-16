@@ -148,3 +148,5 @@ module.exports = kind({
 		this.$.drawers.set('icon', ev.selected.value);
 	}
 });
+
+module.exports.badgeClasses = 'new';
