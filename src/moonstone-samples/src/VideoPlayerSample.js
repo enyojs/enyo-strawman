@@ -110,9 +110,9 @@ module.exports = kind({
 		this.$.player.unload();
 		// We can set source by sources array
 		this.sources = [
-			{src: 'http://media.w3.org/2010/05/bunny/movie.mp4', type: 'video/mp4'},
-			{src: 'http://media.w3.org/2010/05/bunny/movie.ogv', type: 'video/ogg'},
-			{src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm'}
+			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
 	}
