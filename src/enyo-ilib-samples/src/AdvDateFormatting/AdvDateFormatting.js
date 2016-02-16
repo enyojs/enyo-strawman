@@ -7,7 +7,7 @@ var
 	Select = require('enyo/Select');
 
 var
-	TimePicker = require('onyx/TimePicker');
+	TimePicker = require('onyx/i18n/TimePicker');
 
 var
 	Calendar = require('enyo-ilib/Calendar'),
@@ -16,6 +16,7 @@ var
 	ResBundle = require('enyo-ilib/ResBundle')  ;
 
 var
+	ChooseLocale = require('../ChooseLocale'),
 	ChooseTimeZone = require('../ChooseTimeZone'),
 	rb = require('../ResBundle');
 
@@ -61,8 +62,8 @@ module.exports = kind({
 			]},
 
 			/* Header with selecting locale */
-			{kind: 'ilib.sample.ChooseLocale', name: 'localeSelector'},
-			{kind: 'ilib.sample.ChooseTimeZone', name: 'formatZonesSelector', label: rb.getString('Format Time Zone')},
+			{kind: ChooseLocale, name: 'localeSelector'},
+			{kind: ChooseTimeZone, name: 'formatZonesSelector', label: rb.getString('Format Time Zone')},
 			{content: rb.getString('Length'), classes: 'ilib-onyx-sample-divider'},
 			{kind: Group, defaultKind: Button, name: 'length', components: [
 				{content: 'short'},

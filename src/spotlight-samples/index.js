@@ -1,8 +1,9 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	Spotlight = require('spotlight');
 
 var
-	SampleList = require('../strawman/SampleList');
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -14,8 +15,9 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Spotlight Samples',
+	version: Spotlight.version,
 	libraryName: 'Spotlight',
 	samples: samples
 });

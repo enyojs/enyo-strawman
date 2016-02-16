@@ -1,7 +1,6 @@
 var
 	kind = require('enyo/kind'),
 	Group = require('enyo/Group'),
-	Scroller = require('enyo/Scroller'),
 	TextArea = require('enyo/TextArea');
 
 var
@@ -18,14 +17,12 @@ module.exports = kind({
 	classes: 'onyx ilib-onyx-sample enyo-fit',
 
 	components: [
-		{kind: Scroller, fit: true, components: [
-			/* Header with selecting locale */
-			{kind: ChooseLocale, onSelectedLocale: 'setLocale'},
-			{tag: 'br'},
-			{kind: Group, classes: 'onyx-sample-result-box', components: [
-				{content: rb.getString('Current Locale')},
-				{name: 'currentLocateData', kind: TextArea, style: 'box-sizing: border-box; width: 100%; height: 600px;'}
-			]}
+		/* Header with selecting locale */
+		{kind: ChooseLocale, onSelectedLocale: 'setLocale'},
+		{tag: 'br'},
+		{kind: Group, classes: 'onyx-sample-result-box', components: [
+			{content: rb.getString('Current Locale')},
+			{name: 'currentLocateData', kind: TextArea, style: 'box-sizing: border-box; width: 100%; height: 600px;'}
 		]}
 	],
 

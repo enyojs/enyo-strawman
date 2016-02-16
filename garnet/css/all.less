@@ -1,21 +1,19 @@
-/* sample.less */
+/* sample */
 
 // PC
 @media all and (min-width: 800px) {
-
-body {
-	background-color: #EDEDED;
-}
-hr {
-	border-width: 1px 0px 0px 0px;
-	border-color: #EDEDED;
-	margin: 0;
-}
-table {
-	margin-bottom: 30px;
-}
 .g-sample {
-	margin: 20px 10px 10px;;
+	background-color: #EDEDED;
+	padding: 20px 10px 10px;
+
+	hr {
+		border-width: 1px 0px 0px 0px;
+		border-color: #EDEDED;
+		margin: 0;
+	}
+	table {
+		margin-bottom: 30px;
+	}
 }
 .g-sample .g-sample-header {
 	margin-bottom: 40px;
@@ -57,32 +55,35 @@ table {
 .g-sample .g-panel {
 	background-color: #000000;
 }
-
+.g-sample .g-back-enyo {
+	display: none;
+}
 }
 
 // 320
 @media all and (max-width: 799px) {
-
-body {
-	background-color: #000000;
-}
-body .enyo-scroller {
-	overflow-y: hidden !important;
-	overflow-x: hidden !important;
-}
-hr {
-	border-width: 1px 0px 0px 0px;
-	border-color: #EDEDED;
-	margin: 0;
-}
-table {
-	margin-bottom: 30px;
-}
 .g-sample {
+	background-color: #000000;
+
 	position: relative;
 	width: 320px;
 	height: 320px;
 	overflow: hidden;
+
+	transform: scale3d(1, 1, 1);
+
+	.enyo-scroller {
+		overflow-y: hidden !important;
+		overflow-x: hidden !important;
+	}
+	hr {
+		border-width: 1px 0px 0px 0px;
+		border-color: #EDEDED;
+		margin: 0;
+	}
+	table {
+		margin-bottom: 30px;
+	}
 }
 .g-sample .g-sample-header {
 	position: absolute;
@@ -121,5 +122,10 @@ table {
 .g-sample .g-panel {
 	background-color: #000000;
 }
-
+.g-sample .platform-sample {
+	padding: 2rem;
+	& > :last-child {
+		padding-bottom: 60px;
+	}
+}
 }

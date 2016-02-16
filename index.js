@@ -6,6 +6,10 @@ var
 var
 	strawman = require('./src');
 
+function renderSample (Sample) {
+	new Sample().renderInto(document.body);
+}
+
 ready(function () {
 
 	var names = window.document.location.search.substring(1).split('&'),
@@ -15,11 +19,8 @@ ready(function () {
 	if (request.isRequest(Sample)) {
 		//check to see if the sample is wrapped in
 		//request instead of being required into the build
-
-		Sample.then(function(res){
-			new res().renderInto(document.body);
-		});
+		Sample.then(renderSample);
 	} else {
-		new Sample().renderInto(document.body);
+		renderSample(Sample);
 	}
 });

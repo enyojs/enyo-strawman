@@ -2,6 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
+	MoonstoneExtra = require('moonstone-extra');
+
+var
 	oldSampler = require('../../src/moonstone-samples/src/All');
 
 // Define all of the extras samples
@@ -113,7 +116,13 @@ for (var s in moonstoneSamples) {
 var newSampler = kind({
 	kind: oldSampler,
 	title: 'Moonstone Extra Samples',
-	samples: samples
+	samples: samples,
+	create: kind.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			console.log('%cMoonstone-Extra: %s', 'color:blue', MoonstoneExtra.version);
+		};
+	})
 });
 
 module.exports = newSampler;

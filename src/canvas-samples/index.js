@@ -2,7 +2,10 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../strawman/SampleList');
+	Canvas = require('canvas');
+
+var
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -11,8 +14,9 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Canvas Samples',
+	version: Canvas.version,
 	libraryName: 'Canvas',
 	samples: samples
 });

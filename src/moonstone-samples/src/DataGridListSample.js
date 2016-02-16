@@ -6,7 +6,6 @@ var
 var
 	CheckboxItem = require('moonstone/CheckboxItem'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
-	ContextualPopupButton = require('moonstone/ContextualPopupButton'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	DataList = require('moonstone/DataList'),
 	DataGridList = require('moonstone/DataGridList'),
@@ -95,7 +94,7 @@ module.exports = kind({
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},
 			{kind: ToggleButton, content: 'Transparency', name: 'transparencyToggle', onChange: 'transparencyTypeChanged', value: true, disabled: true},
 			{kind: ContextualPopupDecorator, components: [
-				{kind: ContextualPopupButton, content: 'Selection Type'},
+				{content: 'Selection Type'},
 				{kind: ContextualPopup, classes: 'moon-4h', components: [
 					{kind: RadioItemGroup, name: 'selectionTypeGroup', onActiveChanged: 'selectionTypeChanged', components: [
 						{content: 'Single', value: 'single', selected: true},
@@ -105,19 +104,19 @@ module.exports = kind({
 				]}
 			]},
 			{kind: ContextualPopupDecorator, components: [
-				{kind: ContextualPopupButton, content:'Item Type'},
+				{content:'Item Type'},
 				{kind: ContextualPopup, classes:'moon-6h', components: [
 					{kind: RadioItemGroup, name: 'itemTypeGroup', onActiveChanged: 'itemTypeChanged'}
 				]}
 			]},
 			{kind: ContextualPopupDecorator, components: [
-				{kind: ContextualPopupButton, content:'Data Type'},
+				{content:'Data Type'},
 				{kind: ContextualPopup, classes:'moon-6h', components: [
 					{kind: RadioItemGroup, name: 'dataTypeGroup', onActiveChanged: 'dataTypeMenuChanged'}
 				]}
 			]},
 			{kind: ContextualPopupDecorator, components: [
-				{kind: ContextualPopupButton, content: 'Popup List'},
+				{content: 'Popup List'},
 				{kind: ContextualPopup, classes: 'moon-6h moon-8v', components: [
 					{kind:DataList, components: [
 						{kind:CheckboxItem, bindings: [

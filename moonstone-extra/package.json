@@ -4,7 +4,8 @@
     "moonstone-extra/assets/*.png",
     "../appinfo.json",
     "../icon.png",
-    "../largeIcon.png",
+    "../icon-mini.png",
+    "../icon-large.png",
     "../resources/**/*.*"
   ],
   "devAssets": [],
