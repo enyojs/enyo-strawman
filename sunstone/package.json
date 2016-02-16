@@ -3,7 +3,8 @@
   "assets": [
     "../appinfo.json",
     "../icon.png",
-    "../largeIcon.png",
+    "../icon-mini.png",
+    "../icon-large.png",
     "assets/**/*.*",
     "../resources/**/*.*"
   ],
