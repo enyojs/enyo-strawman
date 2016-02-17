@@ -43,4 +43,4 @@ module.exports = kind({
 	}
 });
 
-// Spotlight.verbose();
+module.exports.badgeClasses = 'new';

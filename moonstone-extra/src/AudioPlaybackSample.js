@@ -67,3 +67,5 @@ module.exports = kind({
 		this.$.audioPlayback.set('model', null);
 	}
 });
+
+module.exports.badgeClasses = 'new wip';

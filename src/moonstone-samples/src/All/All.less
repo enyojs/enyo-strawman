@@ -50,11 +50,12 @@
 	text-decoration: none;
 	color: @moon-text-color;
 
-	&.new {
+	&.new,
+	&.wip,
+	&.deprecated {
 		padding-left: 48px;
 
 		&:before {
-			content: 'New!';
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -70,6 +71,34 @@
 		&.spotlight:before {
 			background-color: @moon-spotlight-text-color;
 			color: @moon-spotlight-background-color;
+		}
+	}
+
+	&.new {
+		&:before {
+			content: 'New!';
+		}
+	}
+
+	&.wip {
+		@wip-color: #2196F3;
+		&:before {
+			content: 'WIP';
+			background-color: @wip-color;
+		}
+		&.spotlight:before {
+			color: @wip-color;
+		}
+	}
+
+	&.deprecated {
+		@dep-color: purple;
+		&:before {
+			content: 'Dep ✕';
+			background-color: @dep-color;
+		}
+		&.spotlight:before {
+			color: @dep-color;
 		}
 	}
 }

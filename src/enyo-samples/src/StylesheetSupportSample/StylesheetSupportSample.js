@@ -36,3 +36,5 @@ module.exports = kind({
 		this.$.myContainer.set('stylesheetContent', '');
 	}
 });
+
+module.exports.badgeClasses = 'new';

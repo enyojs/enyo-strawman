@@ -1,9 +1,9 @@
-var 
+var
 	kind = require('enyo/kind');
 
-var 
+var
 	Button = require('enyo/Button');
-	
+
 var samplekind = kind({
 	name: 'enyo.sample.SampleKind',
 	components: [

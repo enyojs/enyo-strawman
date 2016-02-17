@@ -3,6 +3,9 @@ var
 	utils = require('enyo/utils');
 
 var
+	Control = require('enyo/Control');
+
+var
 	Slider = require('onyx/Slider'),
 	InputDecorator = require('onyx/InputDecorator'),
 	Input = require('onyx/Input'),
@@ -10,12 +13,11 @@ var
 	GroupboxHeader = require('onyx/GroupboxHeader'),
 	RangeSlider = require('onyx/RangeSlider'),
 	Checkbox = require('onyx/Checkbox'),
-	Button = require('onyx/Button'),
-	Scroller = require('enyo/Scroller');
+	Button = require('onyx/Button');
 
 module.exports = kind({
 	name: 'onyx.sample.SliderSample',
-	kind: Scroller,
+	kind: Control,
 	classes: 'onyx onyx-sample',
 	components: [
 		{classes: 'onyx-sample-divider', content: 'Sliders'},
@@ -127,7 +129,7 @@ module.exports = kind({
 		this.$.rangeSliderResult.setContent('Range changed to $' + Math.round(sender.getRangeStart()) + ' - $' + Math.round(sender.getRangeEnd()) + '.');
 	},
 	create: function () {
-		Scroller.prototype.create.apply(this, arguments);
+		Control.prototype.create.apply(this, arguments);
 		this.updateRangeLabels(this.$.rangeSlider);
 	}
 });

@@ -27,11 +27,6 @@ var samples = {
 	VideoPlayerSample                    : require('./VideoPlayerSample')
 };
 
-// Mark all of the above samples as "new"
-for (var s in samples) {
-	samples[s]['new'] = true;
-}
-
 // Add in all of the moonstone samples
 var moonstoneSamples = {
 	AccessibilitySample                  : require('../../src/moonstone-samples/src/AccessibilitySample'),

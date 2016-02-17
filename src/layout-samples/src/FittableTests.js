@@ -2,14 +2,16 @@ var
 	kind = require('enyo/kind');
 
 var
+	Control = require('enyo/Control');
+
+var
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows'),
-	Scroller = require('enyo/Scroller');
+	FittableRows = require('layout/FittableRows');
 
 module.exports = kind({
 	name: 'enyo.sample.FittableTests',
-	classes: 'fittable-sample-box enyo-fit',
-	kind: Scroller,
+	kind: Control,
+	classes: 'fittable-sample-box',
 	components: [
 		{classes: 'fittable-sample-section', content: 'Rows/Columns using a combination of css units and highlighting margin collapse'},
 		{kind: FittableRows, classes: 'fittable-sample-box fittable-sample-test', style: 'height: 400px;', components: [

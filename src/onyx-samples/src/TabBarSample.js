@@ -152,3 +152,5 @@ module.exports = kind({
 		{kind: DelayedTabBar}
 	]
 });
+
+module.exports.badgeClasses = 'wip';
