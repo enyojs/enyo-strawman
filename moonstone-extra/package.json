@@ -6,6 +6,7 @@
     "../icon.png",
     "../icon-mini.png",
     "../icon-large.png",
+    "../fonts/**/*.ttf",
     "../resources/**/*.*"
   ],
   "devAssets": [],
