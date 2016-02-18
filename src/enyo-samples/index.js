@@ -1,89 +1,62 @@
 var
-	kind = require('enyo/kind'),
-	ready = require('enyo/ready');
+	kind = require('enyo/kind');
 
 var
-	Anchor = require('enyo/Anchor'),
-	Collection = require('enyo/Collection'),
-	Control = require('enyo/Control'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Scroller = require('enyo/Scroller');
-	
-var	
+	Enyo = require('enyo');
+
+var
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
+
+var
 	samples = {
-		AjaxSample: require('./lib/AjaxSample'),
-		AnchorSample: require('./lib/AnchorSample'),
-		AnimatorSample: require('./lib/AnimatorSample'),
-		AudioSample: require('./lib/AudioSample'),
-		ButtonSample: require('./lib/ButtonSample'),
-		CheckboxSample: require('./lib/CheckboxSample'),
-		ComponentOverrideSample: require('./lib/ComponentOverrideSample'),
-		DataGridListSample: require('./lib/DataGridListSample'),
-		DataListSample: require('./lib/DataListSample'),
-		DataListScrollTestbed: require('./lib/DataListScrollTestbed'), //has test variations that don't work for list atm
-		DataRepeaterSample: require('./lib/DataRepeaterSample'),
-		DragAvatarSample: require('./lib/DragAvatarSample'),
-		DrawerSample: require('./lib/DrawerSample'),
-		FullscreenSample: require('./lib/FullscreenSample'),
-		GestureSample: require('./lib/GestureSample'),
-		GroupSample: require('./lib/GroupSample'),
-		HoldSample: require('./lib/HoldSample'), 
-		ImageSample: require('./lib/ImageSample'),
-		InputSample: require('./lib/InputSample'),
-		JsonpSample: require('./lib/JsonpSample'),
-		LightPanelsSample: require('./lib/LightPanelsSample'),
-		NestedRepeaterSample: require('./lib/NestedRepeaterSample'),
-		NewDrawerSample: require('./lib/NewDrawerSample'),
-		PageVisibilitySample: require('./lib/PageVisibilitySample'),
-		PlatformSample: require('./lib/PlatformSample'),
-		PopupSample: require('./lib/PopupSample'),
-		PositionSample: require('./lib/PositionSample'),
-		RepeaterSample: require('./lib/RepeaterSample'),
-		RichTextSample: require('./lib/RichTextSample'),
-		ScrollerSample: require('./lib/ScrollerSample'),
-		SelectSample: require('./lib/SelectSample'),
-		SpriteAnimationSample: require('./lib/SpriteAnimationSample'),
-		StylesheetSupportSample: require('./lib/StylesheetSupportSample'),
-		TableSample: require('./lib/TableSample'),
-		TextAreaSample: require('./lib/TextAreaSample'),
-		VideoSample: require('./lib/VideoSample'),
-		WebServiceSample: require('./lib/WebServiceSample')
+		AccessibilitySample				: require('./src/AccessibilitySample'),
+		AjaxSample						: require('./src/AjaxSample'),
+		AnchorSample					: require('./src/AnchorSample'),
+		AnimatorSample					: require('./src/AnimatorSample'),
+		AudioSample						: require('./src/AudioSample'),
+		BackgroundTaskManagerSample		: require('./src/BackgroundTaskManagerSample'),
+		ButtonSample					: require('./src/ButtonSample'),
+		CheckboxSample					: require('./src/CheckboxSample'),
+		ComponentOverrideSample			: require('./src/ComponentOverrideSample'),
+		DataGridListSample				: require('./src/DataGridListSample'),
+		DataGridListSampleWithJSData	: require('./src/DataGridListSampleWithJSData'),
+		DataListSample					: require('./src/DataListSample'),
+		DataListSampleWithJSData		: require('./src/DataListSampleWithJSData'),
+		DataListScrollTestbed			: require('./src/DataListScrollTestbed'), //has test variations that don't work for list atm
+		DataRepeaterSample				: require('./src/DataRepeaterSample'),
+		DataRepeaterSampleWithJSData	: require('./src/DataRepeaterSampleWithJSData'),
+		DragAvatarSample				: require('./src/DragAvatarSample'),
+		DrawerSample					: require('./src/DrawerSample'),
+		FullscreenSample				: require('./src/FullscreenSample'),
+		GestureSample					: require('./src/GestureSample'),
+		GroupSample						: require('./src/GroupSample'),
+		HoldSample						: require('./src/HoldSample'),
+		ImageSample						: require('./src/ImageSample'),
+		InputSample						: require('./src/InputSample'),
+		JsonpSample						: require('./src/JsonpSample'),
+		LightPanelsSample				: require('./src/LightPanelsSample'),
+		NestedRepeaterSample			: require('./src/NestedRepeaterSample'),
+		NewDrawerSample					: require('./src/NewDrawerSample'),
+		PageVisibilitySample			: require('./src/PageVisibilitySample'),
+		PlatformSample					: require('./src/PlatformSample'),
+		PopupSample						: require('./src/PopupSample'),
+		PositionSample					: require('./src/PositionSample'),
+		RepeaterSample					: require('./src/RepeaterSample'),
+		RichTextSample					: require('./src/RichTextSample'),
+		ScrollerSample					: require('./src/ScrollerSample'),
+		SelectSample					: require('./src/SelectSample'),
+		SpriteAnimationSample			: require('./src/SpriteAnimationSample'),
+		StylesheetSupportSample			: require('./src/StylesheetSupportSample'),
+		TableSample						: require('./src/TableSample'),
+		TextAreaSample					: require('./src/TextAreaSample'),
+		VideoSample						: require('./src/VideoSample'),
+		WebServiceSample				: require('./src/WebServiceSample')
 	};
 
-var List = kind({
-	kind: Scroller,
-	classes: 'enyo-fit',
-	components: [
-		{name: 'list', kind: DataRepeater, components: [
-			{style: 'margin: 10px;', components: [
-				{name: 'a', kind: Anchor}
-			], bindings: [
-				{from: 'model.name', to: '$.a.href', transform: function (v) { return '?Enyo&' + v; }},
-				{from: 'model.name', to: '$.a.content', transform: function (v) { return v + ' Sample'; }}
-			]}
-		]}
-	],
-	create: function () {
-		Control.prototype.create.apply(this, arguments);
-		this.$.list.set('collection', new Collection(Object.keys(samples).map(function (key) {
-			return {name: key};
-		})));
-	}
-});
-
 module.exports = kind({
-	create: function() {
-		
-		this.inherited(arguments);
-		
-		var names = window.document.location.search.substring(1).split('&');
-		var name = names[1] || names[0];
-		
-		var sample = samples[name] || List;
-		
-		this.createComponent({kind:sample});
-	}
+	kind: ScrollingSampleList,
+	title: 'Enyo Samples',
+	version: Enyo.version,
+	libraryName: 'Enyo',
+	samples: samples
 });
-
-
-

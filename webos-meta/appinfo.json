@@ -1,0 +1,18 @@
+{
+	"id": "com.palm.app.enyo2sampler",
+	"version": "2.6.0-pre.7",
+	"vendor": "LGE-SVL",
+	"type": "web",
+	"main": "index.html",
+	"title": "Enyo 2 Sampler",
+	"icon": "icon.png",
+	"miniicon": "icon-mini.png",
+	"largeIcon": "icon-large.png",
+	"iconColor": "#305b6e",
+	"transparent": false,
+	"visible": true,
+	"uiRevision": 2,
+	"class": {
+		"hidden": false
+	}
+}

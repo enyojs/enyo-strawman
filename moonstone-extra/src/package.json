@@ -1,0 +1,11 @@
+{
+  "name": "enyo-strawman-moon-extra",
+  "filename": "index.js",
+  "main": "index.js",
+  "styles": [
+    "../*.css"
+  ],
+  "assets": [
+    "../assets/*"
+  ]
+}

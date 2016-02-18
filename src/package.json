@@ -1,0 +1,11 @@
+{
+  "filename": "index.js",
+  "main": "index.js",
+  "styles": [
+    "../css/*.less",
+    "../css/*.css"
+  ],
+  "assets": [
+    "../assets/*"
+  ]
+}

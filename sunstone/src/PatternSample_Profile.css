@@ -1,0 +1,85 @@
+/* Profile patten Sample */
+
+.profile-divider {
+	height: 1px;
+	background-color: gray;
+	opacity: 0.5;
+}
+
+.profile-table-cell {
+	display: table-cell;
+	vertical-align:middle;
+}
+
+.profile-table {
+	width: 100%;
+	display: table;
+	table-layout: fixed;
+}
+
+.contextual-popup {
+	background-color: white;
+}
+
+.select-item {
+	font-size: 20px;
+	padding: 5px;
+}
+
+.profile-label {
+	color: #8ca5b0;
+	font-size: 14px;
+	height: 24px;
+	line-height: 24px;
+	margin: 12px 16px 4px 16px;
+}
+
+.sun-selectiveItem {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	align-items: center;
+	-webkit-align-items: center;
+	-webkit-box-align: center;
+	white-space: nowrap;
+	width: 100%;
+	padding: 0px 16px;
+	font-size: 18px;
+	color: #000000;
+	min-height: 48px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.sun-selectiveItem-contentWrapper {
+}
+
+.sun-selectiveItem.pressed {
+	background-color: #e5e5e5;
+}
+
+.sun-first-item {
+	border-radius: 3px 3px 0 0;
+}
+
+.sun-last-item {
+	border: none;
+	border-radius: 0 0 3px 3px;
+}
+
+.sun-first-item.sun-last-item {
+	border-radius: 3px;
+}
+
+.general-index {
+	height: 48px;
+	line-height: 48px;
+	font-weight: bold;
+	font-size: 14px;
+	color: #797979;
+	padding: 0 16px;
+	background-color: #fafafa;
+}

@@ -1,0 +1,37 @@
+// Strawman Globals //
+//////// Variables ////////
+@strawman-screen-max-size-wearable: 400px;
+
+@strawman-font-family: "Helvetica Neue", sans-serif;
+
+@strawman-font-family-body: @strawman-font-family;
+@strawman-font-family-button: @strawman-font-family;
+@strawman-font-family-header: @strawman-font-family;
+@strawman-font-family-list-badge: @strawman-font-family;
+
+//////// Colors ////////
+@strawman-enyo-blue: #08F;
+
+
+
+// Strawman Global Rules //
+.strawman {
+	background-color: white;
+	font-family: @strawman-font-family-body;
+
+	&.home {
+		padding: 5%;
+		text-align: center;
+
+		.strawman-list {
+			top: initial;
+			bottom: initial;
+		}
+	}
+	
+	@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+		&.home {
+			padding: 0;
+		}
+	}
+}
