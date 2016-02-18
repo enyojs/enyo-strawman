@@ -1,7 +1,37 @@
+// Strawman Globals //
+//////// Variables ////////
+@strawman-screen-max-size-wearable: 400px;
+
+//////// Fonts ////////
+@strawman-font-family: "EnyoMuseoSans", sans-serif;
+
+@strawman-body-font-family: @strawman-font-family;
+@strawman-body-font-weight: normal;
+@strawman-body-font-style:  normal;
+
+@strawman-header-font-family: @strawman-font-family;
+@strawman-header-font-weight: 900;
+@strawman-header-font-style:  italic;
+
+@strawman-button-font-family: @strawman-font-family;
+@strawman-button-font-weight: bold;
+@strawman-button-font-style:  normal;
+
+@strawman-list-badge-font-family: @strawman-font-family;
+@strawman-list-badge-font-weight: normal;
+@strawman-list-badge-font-style:  normal;
+
+//////// Colors ////////
 @strawman-enyo-blue: #08F;
 
+
+
+// Strawman Global Rules //
 .strawman {
-	font-family: @moon-body-font-family, Helvetica, sans-serif;
+	background-color: white;
+	font-family: @strawman-body-font-family;
+	font-weight: @strawman-body-font-weight;
+	font-style: @strawman-body-font-style;
 
 	&.home {
 		padding: 5%;
@@ -10,6 +40,12 @@
 		.strawman-list {
 			top: initial;
 			bottom: initial;
+		}
+	}
+
+	@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+		&.home {
+			padding: 0;
 		}
 	}
 }

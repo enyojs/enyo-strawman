@@ -2,43 +2,47 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../strawman/SampleList');
+	Layout = require('layout');
+
+var
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
-		ContextualLayout			: require('./lib/ContextualLayoutSample'),
-		Easing						: require('./lib/EasingSample'),
-		FittableAppLayout1			: require('./lib/FittableAppLayout1'),
-		FittableAppLayout2			: require('./lib/FittableAppLayout2'),
-		FittableAppLayout3			: require('./lib/FittableAppLayout3'),
-		FittableAppLayout4			: require('./lib/FittableAppLayout4'),
-		FittableDescription			: require('./lib/FittableDescription'),
-		FittableTests				: require('./lib/FittableTests'),
-		Fittable					: require('./lib/FittableSample'),
-		FlyweightRepeater			: require('./lib/FlyweightRepeaterSample'),
-		ImageCarousel				: require('./lib/ImageCarouselSample'),
-		ImageView					: require('./lib/ImageViewSample'),
-		ListAround					: require('./lib/ListAroundSample'),
-		ListBasic					: require('./lib/ListBasicSample'),
-		ListContacts				: require('./lib/ListContactsSample'),
-		ListHorizontalFlickr		: require('./lib/ListHorizontalFlickrSample'),
-		ListLanguages				: require('./lib/ListLanguagesSample'),
-		ListNoSelect				: require('./lib/ListNoSelectSample'),
-		ListPulldown				: require('./lib/ListPulldownSample'),
-		PersistentSwipeableItem		: require('./lib/PersistentSwipeableItemSample'),
-		Panels						: require('./lib/PanelsSample'),
-		PanelsFlickr				: require('./lib/PanelsFlickrSample'),
-		PanelsSliding				: require('./lib/PanelsSlidingSample'),
-		PanZoomView1				: require('./lib/PanZoomViewSample'),
-		PanZoomView2				: require('./lib/PanZoomViewSample2'),
-		PanZoomView3				: require('./lib/PanZoomViewSample3'),
-		Slideable					: require('./lib/SlideableSample'),
-		Tree						: require('./lib/TreeSample')
+		ContextualLayoutSample			: require('./src/ContextualLayoutSample'),
+		EasingSample					: require('./src/EasingSample'),
+		FittableAppLayout1				: require('./src/FittableAppLayout1'),
+		FittableAppLayout2				: require('./src/FittableAppLayout2'),
+		FittableAppLayout3				: require('./src/FittableAppLayout3'),
+		FittableAppLayout4				: require('./src/FittableAppLayout4'),
+		FittableDescription				: require('./src/FittableDescription'),
+		FittableTests					: require('./src/FittableTests'),
+		FittableSample					: require('./src/FittableSample'),
+		FlyweightRepeaterSample			: require('./src/FlyweightRepeaterSample'),
+		ImageCarouselSample				: require('./src/ImageCarouselSample'),
+		ImageViewSample					: require('./src/ImageViewSample'),
+		ListAroundSample				: require('./src/ListAroundSample'),
+		ListBasicSample					: require('./src/ListBasicSample'),
+		ListContactsSample				: require('./src/ListContactsSample'),
+		ListHorizontalFlickrSample		: require('./src/ListHorizontalFlickrSample'),
+		ListLanguagesSample				: require('./src/ListLanguagesSample'),
+		ListNoSelectSample				: require('./src/ListNoSelectSample'),
+		ListPulldownSample				: require('./src/ListPulldownSample'),
+		PersistentSwipeableItemSample	: require('./src/PersistentSwipeableItemSample'),
+		PanelsSample					: require('./src/PanelsSample'),
+		PanelsFlickrSample				: require('./src/PanelsFlickrSample'),
+		PanelsSlidingSample				: require('./src/PanelsSlidingSample'),
+		PanZoomView1Sample				: require('./src/PanZoomViewSample'),
+		PanZoomView2Sample				: require('./src/PanZoomViewSample2'),
+		PanZoomView3Sample				: require('./src/PanZoomViewSample3'),
+		SlideableSample					: require('./src/SlideableSample'),
+		TreeSample						: require('./src/TreeSample')
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Layout Samples',
+	version: Layout.version,
 	libraryName: 'Layout',
 	samples: samples
 });

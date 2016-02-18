@@ -10,6 +10,12 @@ var
 	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
+var sources = [
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.VideoPlayerInlineSample',
 	classes: 'moon enyo-fit enyo-unselectable moon-video-player-sample',
@@ -18,8 +24,8 @@ module.exports = kind({
 		{
 			name: 'player',
 			kind: VideoPlayer,
-			src: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-			poster: 'assets/video-poster.png',
+			sources: sources,
+			poster: '@../assets/video-poster.png',
 			inline: true,
 			classes: 'moon-8h',
 			autoplay: true,
@@ -40,7 +46,7 @@ module.exports = kind({
 						title: 'Downton Abbey',
 						subTitle: 'Mon June 21, 7:00 - 8:00pm',
 						subSubTitle: 'R - TV 14, V, L, SC',
-						description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
+						description: 'The series, set in the Yorukshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
 					}
 				]},
 				{kind: VideoInfoBackground, orient: 'right', components: [
@@ -62,3 +68,5 @@ module.exports = kind({
 		}
 	]
 });
+
+module.exports.badgeClasses = 'new';

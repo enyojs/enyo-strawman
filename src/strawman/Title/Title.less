@@ -1,4 +1,12 @@
 .strawman h1 {
-	padding: 0 2em;
-	font-family: @moon-header-font-family, "Helvetica Neue Bold", Helvetica, sans-serif;
+	padding: 0 3%;
+	font-family: @strawman-header-font-family;
+	font-weight: @strawman-header-font-weight;
+	font-style: @strawman-header-font-style;
+
+	@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+		text-align: center;
+		font-size: 1.5rem;
+		padding: 4%;
+	}
 }

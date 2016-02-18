@@ -1,11 +1,24 @@
 {
   "name": "enyo-strawman",
+  "assets": [
+    "appinfo.json",
+    "icon.png",
+    "icon-mini.png",
+    "icon-large.png",
+    "fonts/**/*.ttf",
+    "resources/**/*.*"
+  ],
+  "devAssets": [],
+  "styles": [
+    "*.css"
+  ],
+  "main": "index.js",
+  "moduleDir": "src",
   "filename": "index.js",
   "version": "0.0.1",
   "description": "Collection of Enyo lib samples for Quality Assurance",
   "homepage": "http://enyojs.com/",
   "bugs": "http://jira.enyojs.com/",
-  "main": "index.js",
   "keywords": [],
   "maintainers": [
     {
@@ -13,24 +26,18 @@
       "web": "http://enyojs.com/"
     }
   ],
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
-  "scripts": {},
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "./node_modules/.bin/gulp"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/enyojs/enyo-strawman"
   },
-  "devDependencies": {},
-  "styles": [
-    "*.css"
-  ],
-  "assets": [
-    "appinfo.json",
-    "icon.png",
-    "largeIcon.png"
-  ]
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
+  }
 }

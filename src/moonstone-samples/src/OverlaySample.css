@@ -1,0 +1,13 @@
+.samples-moon-overlay {
+	.moon-gridlist-imageitem {
+		height: 408px;
+		width: 312px;
+		margin: 10px;
+		position: relative;
+
+		.moon-image {
+			height: 300px;
+			width: 300px;
+		}
+	}
+}

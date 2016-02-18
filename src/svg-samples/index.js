@@ -2,16 +2,20 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../strawman/SampleList');
+	Svg = require('svg');
+
+var
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
-		Basic: require('./lib/BasicSample')
+		BasicSample: require('./src/BasicSample')
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'SVG Samples',
+	version: Svg.version,
 	libraryName: 'Svg',
 	samples: samples
 });

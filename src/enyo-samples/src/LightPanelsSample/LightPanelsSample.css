@@ -1,0 +1,83 @@
+.light-panels-sample .light-panels-options {
+	position: fixed;
+	margin: 0 30%;
+	height: 50px;
+	width: 40%;
+	background-color: white;
+	border-radius: 0 0 100px 100px;
+	z-index: 1;
+	font-size: 16px;
+}
+
+.light-panels-sample .vertical-options, .light-panels-sample .horizontal-options {
+	display: inline-block;
+	margin-top: 10px;
+	width: 50%;
+	text-align: center;
+}
+
+.light-panels-sample .vertical-options .enyo-checkbox, .light-panels-sample .horizontal-options .enyo-checkbox {
+	margin-left: 15px;
+}
+
+.light-panels-sample .enyo-light-panels {
+	width: 50%;
+}
+
+.light-panels-sample .enyo-light-panels.vertical {
+	left: 50%;
+}
+
+.light-panels-sample .light-panel {
+	border: 2px solid white;
+}
+
+.light-panels-sample .light-panel > * {
+	text-align: center;
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.light-panels-sample .light-panel > * {
+	position: absolute;
+}
+
+/* horizontal orientation */
+.light-panels-sample .enyo-light-panels.horizontal .light-panel > * {
+	bottom: 50%;
+}
+
+.light-panels-sample .enyo-light-panels.horizontal .light-panel .label {
+	left: 50%;
+}
+
+.light-panels-sample .enyo-light-panels.horizontal .light-panel .enyo-tool-decorator.previous {
+	left: 0;
+}
+
+.light-panels-sample .enyo-light-panels.horizontal .light-panel .enyo-tool-decorator.next {
+	right: 0;
+}
+
+/* vertical orientation */
+.light-panels-sample .enyo-light-panels.vertical .light-panel > * {
+	left: 50%;
+}
+
+.light-panels-sample .enyo-light-panels.vertical .light-panel .label {
+	margin-left: 32px;
+	bottom: 50%;
+}
+
+.light-panels-sample .enyo-light-panels.vertical .light-panel .enyo-tool-decorator {
+	position: absolute;
+	left: 50%;
+}
+
+.light-panels-sample .enyo-light-panels.vertical .light-panel .enyo-tool-decorator.previous {
+	top: 0;
+}
+
+.light-panels-sample .enyo-light-panels.vertical .light-panel .enyo-tool-decorator.next {
+	bottom: 0;
+}

@@ -2,31 +2,99 @@
 	top: 5em;
 
 	// All items
-	.item {
+	.link {
 		margin: 0.5em;
-		border-radius: 0.2em;
-		background-image: linear-gradient(to right, rgba(125,185,232,1) 0%,rgba(125,185,232,0.1) 1%,rgba(125,185,232,0.1) 99%,rgba(125,185,232,1) 100%);
+		height: 2em;
+		line-height: 2em;
+		color: @strawman-enyo-blue;
+		background-color: fade(@strawman-enyo-blue, 10%);
+		display: block;
+		padding: 0 1.3em;
+		text-decoration: none;
+		overflow: hidden;
+		position: relative;
 
-		a {
-			height: 2em;
-			line-height: 2em;
-			color: @strawman-enyo-blue;
-			display: block;
-			padding: 0 1em;
-			text-decoration: none;
+		&.spotlight {
+			background-color: fade(@strawman-enyo-blue, 20%);
+		}
+
+		&.new,
+		&.wip,
+		&.deprecated {
+			&:before {
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: @strawman-enyo-blue;
+				color: white;
+				transform: rotateZ(-90deg) translateY(0%) translateX(-50%) scale(0.5);
+				line-height: 1.3em;
+				transform-origin: top left;
+				font-family: @strawman-list-badge-font-family;
+				font-weight: @strawman-list-badge-font-weight;
+				font-style: @strawman-list-badge-font-style;
+				font-size: 27px;
+				width: 81px;
+				text-align: center;
+			}
+		}
+
+		&.new {
+			@badge-color: #E53935;
+			&:before {
+				content: 'New!';
+				background-color: @badge-color;
+			}
+		}
+
+		&.wip {
+			@badge-color: #2196F3;
+			&:before {
+				content: 'WIP';
+				background-color: @badge-color;
+			}
+		}
+
+		&.deprecated {
+			@badge-color: purple;
+			&:before {
+				content: 'Dep ✕';
+				background-color: @badge-color;
+			}
 		}
 	}
 
+	// Items inside a vertical list
+	.list a {
+
+	}
+
 	// Items inside a grid
-	.grid .item {
+	.grid .link {
 		display: inline-block;
 		background-color: @strawman-enyo-blue;
 		background-image: none;
+		height: 3em;
+		line-height: 3em;
+		color: #FFF;
+		border-radius: 0.2em;
 
-		a {
-			height: 3em;
-			line-height: 3em;
-			color: #FFF;
+		&.spotlight {
+			background-color: lighten(@strawman-enyo-blue, 10%);
+		}
+	}
+
+	@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+		// Items inside a grid
+		.grid .link {
+			height: 2.4em;
+			line-height: 2.4em;
+			margin: 0.2em;
+			padding: 0 0.8em;
+		}
+
+		.list-frame:not(.grid) .link {
+			font-size: 1.5rem;
 		}
 	}
 }

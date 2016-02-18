@@ -1,21 +1,23 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	Spotlight = require('spotlight');
 
 var
-	SampleList = require('../strawman/SampleList');
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
-		Container			: require('./lib/ContainerSample'),
-		Disappear			: require('./lib/DisappearSample'),
-		Hold				: require('./lib/HoldSample'),
-		Sandbox				: require('./lib/SpotlightSandboxSample'),
-		TestPage			: require('./lib/TestPage')
+		ContainerSample			: require('./src/ContainerSample'),
+		DisappearSample			: require('./src/DisappearSample'),
+		HoldSample				: require('./src/HoldSample'),
+		SandboxSample			: require('./src/SpotlightSandboxSample'),
+		TestPage				: require('./src/TestPage')
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Spotlight Samples',
+	version: Spotlight.version,
 	libraryName: 'Spotlight',
 	samples: samples
 });

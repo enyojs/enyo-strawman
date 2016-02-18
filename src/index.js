@@ -1,21 +1,29 @@
-var
-	kind = require('enyo/kind');
+require('spotlight');
 
 var
-	SampleList = require('./strawman/SampleList'),
-	History = require('moonstone/History');
+	kind = require('enyo/kind'),
+	platform = require('enyo/platform');
+
+var
+	SampleList = require('./strawman/SampleList');
 
 var
 	samples = {
-		Enyo: require('./enyo-samples'),
-		Layout: require('./layout-samples'),
-		Onyx: require('./onyx-samples'),
-		Moonstone: require('./moonstone-samples'), //router blocking
-		Spotlight: require('./spotlight-samples'),
-	  	iLib: require('./enyo-ilib-samples'),
-	  	Canvas: require('./canvas-samples'),
-	  	Svg: require('./svg-samples')
-	};
+		Enyo: request('./enyo-samples'),
+		Moonstone: request('./moonstone-samples'), //router blocking
+		Layout: request('./layout-samples'),
+		Spotlight: request('./spotlight-samples'),
+		iLib: request('./enyo-ilib-samples'),
+		Onyx: request('./onyx-samples'),
+		Canvas: request('./canvas-samples'),
+		Svg: request('./svg-samples')
+	},
+	webOS = request('./enyo-webos-samples');
+
+if (platform.webos) {
+	require('enyo-webos');
+	samples.webOS = webOS;
+}
 
 var
 	List = kind({
@@ -25,8 +33,6 @@ var
 		listType: 'grid',
 		samples: samples
 	});
-
-History.set('enableBackHistoryAPI', false);
 
 module.exports = {
 	samples: samples,

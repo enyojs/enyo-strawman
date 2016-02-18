@@ -64,8 +64,10 @@ module.exports = kind({
 			]}
 		]}
 	],
-	next: function (sender, event) {
+	next: function (sender, ev) {
 		this.$.panels.next();
 		return true;
 	}
 });
+
+module.exports.badgeClasses = 'new';

@@ -84,39 +84,39 @@ module.exports = kind({
 	],
 	// custom next handler for each panel to avoid switching from one active panel
 	// to another with no visible change for demo
-	next1: function(inSender, inEvent) {
+	next1: function (sender, ev) {
+		this.$.panels.setIndex(1);
+		return true;
+	},
+	next2: function (sender, ev) {
 		this.$.panels.setIndex(2);
 		return true;
 	},
-	next2: function(inSender, inEvent) {
-		this.$.panels.setIndex(2);
+	next3: function (sender, ev) {
+		this.$.panels.setIndex(3);
 		return true;
 	},
-	next3: function(inSender, inEvent) {
+	next4: function (sender, ev) {
+		this.$.panels.setIndex(4);
+		return true;
+	},
+	next5: function (sender, ev) {
 		this.$.panels.setIndex(5);
 		return true;
 	},
-	next4: function(inSender, inEvent) {
-		this.$.panels.setIndex(5);
+	next6: function (sender, ev) {
+		this.$.panels.setIndex(6);
 		return true;
 	},
-	next5: function(inSender, inEvent) {
-		this.$.panels.setIndex(7);
-		return true;
-	},
-	next6: function(inSender, inEvent) {
-		this.$.panels.setIndex(7);
-		return true;
-	},
-	inputChanged: function(inSender, inEvent) {
-		if (inEvent.originator.getValue() == 'go') {
+	inputChanged: function (sender, ev) {
+		if (ev.originator.getValue() == 'go') {
 			this.next3();
 		}
 	},
-	typeTapped: function(inSender, inEvent) {
+	typeTapped: function (sender, ev) {
 		var i,
-			val = inSender.get('value'),
-			buttonType = inSender.content.toLowerCase(),
+			val = sender.get('value'),
+			buttonType = sender.content.toLowerCase(),
 			types = ['large', 'medium', 'small'];
 
 		// If our button was `true`, use that type, otherwise revert to large.
@@ -129,3 +129,5 @@ module.exports = kind({
 		}
 	}
 });
+
+module.exports.badgeClasses = 'new';
