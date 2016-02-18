@@ -55,3 +55,5 @@ module.exports = kind({
 		this.$.popup.set('showing', !this.$.popup.get('showing'));
 	}
 });
+
+module.exports.badgeClasses = 'new wip';
