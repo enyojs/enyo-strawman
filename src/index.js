@@ -16,7 +16,8 @@ var
 		iLib: request('./enyo-ilib-samples'),
 		Onyx: request('./onyx-samples'),
 		Canvas: request('./canvas-samples'),
-		Svg: request('./svg-samples')
+		Svg: request('./svg-samples'),
+		Animation: request('./animation-samples')
 	},
 	webOS = request('./enyo-webos-samples');
 

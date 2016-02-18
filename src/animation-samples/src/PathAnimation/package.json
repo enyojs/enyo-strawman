@@ -1,0 +1,6 @@
+{
+  "main": "PathAnimation.js",
+  "styles": [
+    "PathAnimation.css"
+  ]
+}

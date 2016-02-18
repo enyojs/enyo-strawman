@@ -26,7 +26,7 @@
     "enyo-ilib": "https://github.com/enyojs/enyo-ilib.git"
   },
   "targets": {
-    "enyo": "2.6.0-dev",
+    "enyo": "ENYO-2174-directorapproach",
     "layout": "2.6.0-dev",
     "canvas": "2.6.0-dev",
     "svg": "master",

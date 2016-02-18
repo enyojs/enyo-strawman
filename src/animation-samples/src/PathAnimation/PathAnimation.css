@@ -1,0 +1,11 @@
+.path-sample .dot{
+  width:20px;
+  height:20px;
+  border-radius:50% 50%;
+  transform-origin:6% 28%;
+  background:red;
+  background-size:100% 100%;
+  top:50%;
+  position:absolute;
+  left:22%;
+}
