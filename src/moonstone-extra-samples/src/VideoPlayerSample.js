@@ -3,8 +3,6 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	Dialog = require('moonstone/Dialog'),
@@ -13,8 +11,6 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -35,35 +31,21 @@ module.exports = kind({
 			poster: '@../assets/video-poster.png',
 			autoplay: true,
 			onPlaybackControlsTapped: 'controlsTapped',
+			title: 'Downton Abbey',
 			infoComponents: [
-				{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
-					{
-						kind: ChannelInfo,
-						channelNo: '789-123',
-						channelName: 'AMC',
-						channelDesc: 'KRON-HD',
-						channelMoreDesc: '4:30 - 5:30PM',
-						components: [
-							{content: 'DTV'},
-							{content: 'Cinema'},
-							{content: '3D'}
-						]
-					},
-					{
-						kind: VideoInfoHeader,
-						title: 'Downton Abbey',
-						uppercase: false,
-						// Todo, we can remove below comment out after policy of samples is decided.
-						// In latest tag like 2.6.0-pre.5, we don't have samples.
-						// src: '$lib/moonstone/samples/assets/default-music.png',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-					}
-				]},
-				{kind: VideoInfoBackground, orient: 'right', background: true, components: [
-					{kind: Clock}
-				]}
+				{content: 'DTV'},
+				{content: 'REC 08:22', classes: 'redicon'},
+				{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+				{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
 			],
-	   		components: [
+			leftComponents: [
+				{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, icon: 'search', small: false, backgroundOpacity: 'translucent'}
+			],
+			rightComponents: [
+				{kind: IconButton, icon: 'hollowstar', small: false, backgroundOpacity: 'translucent'}
+			],
+			components: [
 				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls', backgroundOpacity: 'translucent'},
 				{kind: Button, content: 'Unload', backgroundOpacity: 'translucent', ontap: 'unload'},

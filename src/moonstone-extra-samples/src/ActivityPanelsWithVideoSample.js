@@ -5,14 +5,10 @@ var
 	Spotlight = require('spotlight');
 
 var
-	ChannelInfo = require('moonstone/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone/Panels'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -25,30 +21,12 @@ module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
-			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
-				{
-					kind: ChannelInfo,
-					channelNo: '13',
-					channelName: 'AMC',
-					components: [
-						{content: '3D'},
-						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'redicon'}
-					]
-				},
-				{
-					kind: VideoInfoHeader,
-					title: 'Downton Abbey - Extra Title',
-					subTitle: 'Mon June 21, 7:00 - 8:00pm',
-					subSubTitle: 'R - TV 14, V, L, SC',
-					description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-				}
-			]},
-			{kind: VideoInfoBackground, orient: 'right', background: true, components: [
-				{kind: Clock}
-			]}
-		], components: [
+		{name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, title: 'Downton Abbey', infoComponents: [
+				{content: 'DTV'},
+				{content: 'REC 08:22', classes: 'redicon'},
+				{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+				{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
+			], components: [
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
