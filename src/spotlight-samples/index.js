@@ -1,5 +1,8 @@
+require('enyo/options').accessibility = true;
+
 var
 	kind = require('enyo/kind'),
+	ready = require('enyo/ready'),
 	Spotlight = require('spotlight');
 
 var
@@ -14,10 +17,15 @@ var
 		TestPage				: require('./src/TestPage')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'Spotlight Samples',
 	version: Spotlight.version,
 	libraryName: 'Spotlight',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+

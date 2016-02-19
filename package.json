@@ -28,7 +28,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "test": "./node_modules/.bin/gulp"
+    "test": "./node_modules/.bin/gulp jshint"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,11 @@
     "gulp": "^3.9.0",
     "gulp-jshint": "^2.0.0",
     "jshint": "^2.9.1",
-    "jshint-stylish": "^2.1.0"
+    "jshint-stylish": "^2.1.0",
+    "nomnom": "^1.8.1",
+    "bluebird": "^3.2.2",
+    "babel-register": "^6.5.2",
+    "enyo-dev": "enyojs/enyo-dev",
+    "del": "^2.2.0"
   }
 }

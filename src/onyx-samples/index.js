@@ -1,5 +1,9 @@
+require('enyo/options').accessibility = true;
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready'),
+	dom = require('enyo/dom');
 
 var
 	Onyx = require('onyx');
@@ -33,10 +37,16 @@ var
 		TooltipSample			: require('./src/TooltipSample')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'Onyx Samples',
 	version: Onyx.version,
 	libraryName: 'Onyx',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+	dom.removeClass(document.body, 'onyx');
+});
+
