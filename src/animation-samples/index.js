@@ -8,7 +8,8 @@ var
 	samples = {
 		HeartAnimation: require('./src/HeartAnimation'),
 		PathAnimation: require('./src/PathAnimation'),
-		EaseAnimation: require('./src/EaseAnimation')
+		EaseAnimation: require('./src/EaseAnimation'),
+		HierarchicalAnimation: require('./src/HierarchicalAnimation')
 		// CanvasPrimitivesSample: require('./src/CanvasPrimitivesSample')
 	};
 
