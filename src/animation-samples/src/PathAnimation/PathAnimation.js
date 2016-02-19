@@ -1,10 +1,10 @@
 var
 	kind = require('enyo/kind'),
-	Button = require('enyo/Button'),
-	SceneActor = require('enyo/AnimationSupport/SceneActor'),
-	Scene = require('enyo/AnimationSupport/Scene');
+	Control = require('enyo/Control'),
+	sceneActor = require('enyo/AnimationSupport/SceneActor'),
+	scene = require('enyo/AnimationSupport/Scene');
 
-var path = SceneActor({
+var path = sceneActor({
 	animation: [{
 		path:[[0,0,0], [0,-200,0], [200,-200,0], [200,200,0], [0,200,0], [0,0,0]]
 	}],
@@ -18,6 +18,7 @@ var path = SceneActor({
 	
 module.exports = kind({
 	name: "pathsample",
+	kind: Control,
 	classes: "enyo-fit path-sample",
 	components: [
 		{ name: 'dot1', classes: "dot", style: "background:black;", delay: 0   },
@@ -29,7 +30,7 @@ module.exports = kind({
 		return function() {
 			sup.apply(this, arguments);
 			for (var c, i = 0; (c = this.controls[i]); i++) {
-				Scene.link(c, path);
+				scene.link(c, path);
 				path.play(c);
 			}
 		};

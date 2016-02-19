@@ -1,0 +1,6 @@
+{
+  "main": "EaseAnimation.js",
+  "styles": [
+    "EaseAnimation.css"
+  ]
+}

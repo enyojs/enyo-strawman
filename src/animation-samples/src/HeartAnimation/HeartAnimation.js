@@ -1,17 +1,17 @@
 var
 	kind = require('enyo/kind'),
-	Image = require('enyo/Image'),
+	IMG = require('enyo/Image'),
 	Button = require('enyo/Button'),
 	Input = require('enyo/Input'),
 	CheckBox = require('enyo/Checkbox'),
 	Slider = require('onyx/Slider'),
-	Scene = require('enyo/AnimationSupport/Scene');
+	scene = require('enyo/AnimationSupport/Scene');
 
 /*
  Scene added here to create a fly animation for motion
  along a curved path i.e. a shape of reverse S.
 */
-var flyScene = Scene({
+var flyScene = scene({
 	//Path added as an animation, other animations can be added here.
 	animation: {
 		path:[[0,0,0], [400,-100,0],[-400,-200,0], [0,-300,0]]
@@ -42,14 +42,14 @@ module.exports = kind({
 	components: [
 		{
 			name: 'heartFlyIcon',
-			kind: Image,
+			kind: IMG,
 			classes: 'heart-icon heart-tick-icon heart-fly-icon',
 			src: '@../../assets/heart-fly.png',
 			ontap: "fly"
 		},
 		{
 			name: 'heartFlyIcon2',
-			kind: Image,
+			kind: IMG,
 			classes: 'heart-icon heart-tick-icon heart-fly-icon',
 			style: 'left: 60%;',
 			src: '@../../assets/heart-fly.png',
@@ -80,8 +80,8 @@ module.exports = kind({
 		};
 	}),
 	createFlyAnimation: function (argument) {
-		Scene.link(this.$.heartFlyIcon, flyScene);
-		Scene.link(this.$.heartFlyIcon2, flyScene);
+		scene.link(this.$.heartFlyIcon, flyScene);
+		scene.link(this.$.heartFlyIcon2, flyScene);
 	},
 	playAnimation: function(sender, ev) {
 		flyScene.play();
