@@ -3,8 +3,6 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	IconButton = require('moonstone/IconButton'),
@@ -13,8 +11,7 @@ var
 	ToggleItem = require('moonstone/ToggleItem'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -28,27 +25,10 @@ module.exports = kind({
     classes: 'moon enyo-fit enyo-unselectable',
     components: [
         {name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
-			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
-				{
-					kind: ChannelInfo,
-					channelNo: '13',
-					channelName: 'AMC',
-					components: [
-						{content: '3D'},
-						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'redicon'}
-					]
-				},
-				{
-					kind: VideoInfoHeader,
-					title: 'Downton Abbey - Extra Title',
-					subTitle: 'Mon June 21, 7:00 - 8:00pm',
-					subSubTitle: 'R - TV 14, V, L, SC',
-					description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-				}
-			]},
-			{kind: VideoInfoBackground, orient: 'right', background: true, components: [
-				{kind: Clock}
+			{kind: VideoTitle, title: 'Downton Abbey', components: [
+				{content: 'DTV'},
+				{content: 'Cinema'},
+				{content: '3D'}
 			]}
 		], components: [
 			{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
