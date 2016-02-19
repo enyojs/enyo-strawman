@@ -1,0 +1,6 @@
+{
+  "main": "EqualizerAnimation.js",
+  "styles": [
+    "EqualizerAnimation.css"
+  ]
+}

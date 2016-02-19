@@ -1,0 +1,46 @@
+* {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* prevent tap highlight color / shadow */
+    -webkit-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+/* Main.css */
+
+.equalizer {
+    background-color: #000;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    position: absolute;
+    width: 250px;
+    height: 75%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;    
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.container-background {
+    background-color: #000;
+}
+
+.bar {
+    height: 1%;
+    width: 9%;
+    background-color: orange;
+    transform-origin: 50% 100%;
+}

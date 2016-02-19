@@ -9,7 +9,8 @@ var
 		HeartAnimation: require('./src/HeartAnimation'),
 		PathAnimation: require('./src/PathAnimation'),
 		EaseAnimation: require('./src/EaseAnimation'),
-		HierarchicalAnimation: require('./src/HierarchicalAnimation')
+		HierarchicalAnimation: require('./src/HierarchicalAnimation'),
+		EqualizerAnimation: require('./src/EqualizerAnimation')
 		// CanvasPrimitivesSample: require('./src/CanvasPrimitivesSample')
 	};
 
