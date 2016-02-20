@@ -118,3 +118,5 @@ module.exports = kind({
 		b.applyStyle('z-index:'+this.$.container.getClientControls().length+';');
 	}
 });
+
+module.exports.badgeClasses = 'new';

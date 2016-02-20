@@ -1,16 +1,16 @@
 var
 	kind = require('enyo/kind'),
 	Button = require('enyo/Button'),
+	Control = require('enyo/Control'),
 	Checkbox = require('enyo/Checkbox'),
 	Input = require('enyo/Input'),
-	Popup = require('enyo/Popup'),
-	Scroller = require('enyo/Scroller');
+	Popup = require('enyo/Popup');
 var
 	VoiceReadout = require('enyo-webos/VoiceReadout');
 
 module.exports = kind({
-	kind: Scroller,
-	classes: 'accessibility-sample enyo-fit enyo-unselectable',
+	kind: Control,
+	classes: 'accessibility-sample',
 	components: [
 		{tag: 'h3', content: 'Fixed Examples'},
 		{classes: 'aria-samples', components: [
@@ -109,3 +109,5 @@ module.exports = kind({
 		VoiceReadout.readAlert(this.$.inputText.getValue());
 	}
 });
+
+module.exports.badgeClasses = 'new';

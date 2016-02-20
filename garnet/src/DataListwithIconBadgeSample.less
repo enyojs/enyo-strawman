@@ -1,42 +1,58 @@
-/* DataListwithIconBadgeSample.less */
+/* DataListwithIconBadgeSample */
 
-.g-datalist-icon-badge-item{
-	height: 72px;
-	line-height: 72px;
-	position: relative; /* Do not omit this. It's critical */
-}
-.g-datalist-icon-badge-item .icon-badge-item-title {
-	width: 186px;
-	height: 72px;
-	margin-left: 96px;
-	font-size: 28px;
-	color: #FAFAFA;
-	-webkit-mask-image: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-	-webkit-mask-image: linear-gradient(right, rgba(0, 0, 0, 0), #FFFFFF 28px, #FFFFFF);
-}
-.g-datalist-icon-badge-item.disabled {
-	opacity: 0.4;
-	filter: alpha(opacity=40);
-}
-.g-datalist-icon-badge-item .icon-badge-item-icon {
-	position: absolute;
-	display: inline-block;
-	width: 48px;
-	height: 48px;
-	margin-left: 38px;
-	margin-top: 15px;
-}
-.g-datalist-icon-badge-item .icon-badge-item-new-icon {
-	position: absolute;
-	width: 24px;
-	height: 24px;
-	margin-left: 62px;
-	margin-top: 15px;
-}
-.g-datalist-icon-badge-item .icon-badge-item-info-icon {
-	position: absolute;
-	width: 24px;
-	height: 24px;
-	margin-left: 62px;
-	margin-top: 38px;
+.g-datalist-iconbadge {
+	// Common classes
+
+	.g-sample-panel {
+		background-color: #000000;
+
+		position: relative;
+		overflow: hidden;
+	}
+
+	// Sample specific classes
+
+	.g-datalist-iconbadge-item {
+		position: relative;
+		height: 134px;
+		overflow: hidden;
+
+		cursor: pointer;
+	}
+	.g-datalist-iconbadge-item .icon-badge-item-icon {
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		margin: auto 0;
+		top: 0;
+		bottom: 0;
+		left: 38px;
+	}
+	.g-datalist-iconbadge-item .icon-badge-item-new-icon {
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		top: 0;
+		right: 0;
+	}
+	.g-datalist-iconbadge-item .icon-badge-item-info-icon {
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		bottom: 0;
+		right: 0;
+	}
+	.g-datalist-iconbadge-item .icon-badge-item-title {
+		position: absolute;
+		width: 170px;
+		height: 47px;
+		top: 50%;
+		left: 112px;
+
+		transform: translateY(-50%);
+
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 40px;
+	}
 }

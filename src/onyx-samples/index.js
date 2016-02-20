@@ -2,7 +2,10 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../strawman/SampleList');
+	Onyx = require('onyx');
+
+var
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -31,8 +34,9 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Onyx Samples',
+	version: Onyx.version,
 	libraryName: 'Onyx',
 	samples: samples
 });

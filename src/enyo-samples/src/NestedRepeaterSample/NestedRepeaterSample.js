@@ -3,21 +3,18 @@ var
 
 var
 	Control = require('enyo/Control'),
-	Repeater = require('enyo/Repeater'),
-	Scroller = require('enyo/Scroller');
+	Repeater = require('enyo/Repeater');
 
 module.exports = kind({
 	name: 'enyo.sample.NestedRepeaterSample',
 	classes: 'enyo-fit nested-repeater-sample',
 	kind: Control,
 	components: [
-		{kind: Scroller, classes: 'enyo-fit', components: [
-			{kind: Repeater, name: 'outer', onSetupItem:'setupGroup', count: 3, components: [
-				{kind: Repeater, name: 'inner', onSetupItem:'setupItem', components: [
-					{name:'item', classes:'nested-repeater-sample-item', components: [
-						{tag:'span', name: 'personNumber'},
-						{tag:'span', name: 'personName'}
-					]}
+		{kind: Repeater, name: 'outer', onSetupItem:'setupGroup', count: 3, components: [
+			{kind: Repeater, name: 'inner', onSetupItem:'setupItem', components: [
+				{name:'item', classes:'nested-repeater-sample-item', components: [
+					{tag:'span', name: 'personNumber'},
+					{tag:'span', name: 'personName'}
 				]}
 			]}
 		]}
@@ -70,3 +67,5 @@ module.exports = kind({
 		{name: 'Zoltan'}
 	]
 });
+
+module.exports.badgeClasses = 'new';

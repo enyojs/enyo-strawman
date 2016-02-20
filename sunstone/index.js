@@ -1,6 +1,6 @@
 var
-	ready = require('enyo/ready'),
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
 	SampleList = require('../src/strawman/SampleList');
@@ -30,6 +30,7 @@ ready(function () {
 	var names = window.document.location.search.substring(1).split('&'),
 		name = names[0],
 		Sample = samples[name] || List;
+
 	new Sample().renderInto(document.body);
 });
 

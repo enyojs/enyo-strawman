@@ -2,7 +2,10 @@ var
 	kind = require('enyo/kind');
 
 var
-	SampleList = require('../strawman/SampleList');
+	Layout = require('layout');
+
+var
+	ScrollingSampleList = require('../strawman/ScrollingSampleList');
 
 var
 	samples = {
@@ -37,8 +40,9 @@ var
 	};
 
 module.exports = kind({
-	kind: SampleList,
+	kind: ScrollingSampleList,
 	title: 'Layout Samples',
+	version: Layout.version,
 	libraryName: 'Layout',
 	samples: samples
 });

@@ -31,7 +31,7 @@ var NoImageItem = kind({
 		{from: 'model.bgColor', to: 'bgColor'}
 	],
 	componentOverrides: {
-		image: {kind: Control, mixins: [Overlay.Support, Overlay.Selection], style: 'width: 194px; height: 194px; background: gray;'}
+		image: {kind: Control, mixins: [Overlay.Support, Overlay.Selection], style: 'padding-top: 100%; background: gray;'}
 	},
 	imageSizingChanged: function () {},
 	bgColorChanged: function () {
@@ -214,3 +214,5 @@ module.exports = kind({
 		}
 	}
 });
+
+module.exports.badgeClasses = 'new wip';

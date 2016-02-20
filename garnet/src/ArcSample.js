@@ -8,7 +8,6 @@ var
 var ArcPanel = kind({
 	name: 'g.sample.ArcPanel',
 	kind: Panel,
-	style: 'position: relative; border-radius: 50%; background-color: #000000;',
 	components: [
 		{name: 'arc1', kind: Arc, color: '#FF3300', width: 10, diameter: 30},
 		{name: 'arc2', kind: Arc, color: '#FF6600', width: 11, diameter: 70},
@@ -37,12 +36,12 @@ var ArcPanel = kind({
 
 module.exports = kind({
 	name: 'g.sample.ArcSample',
-	classes: 'enyo-unselectable garnet g-sample',
+	classes: 'enyo-unselectable enyo-fit garnet g-sample g-sample-arc',
 	components: [
 		{content: '< Arc Sample', classes: 'g-sample-header', ontap: 'goBack'},
 
 		{content: 'Arc', classes: 'g-sample-subheader'},
-		{kind: ArcPanel}
+		{kind: ArcPanel, classes: 'g-sample-circle-panel'}
 	],
 	goBack: function(inSender, inEvent) {
 		global.history.go(-1);

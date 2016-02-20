@@ -133,3 +133,5 @@ module.exports = kind({
 		return true;
 	}
 });
+
+module.exports.badgeClasses = 'new wip';

@@ -1,8 +1,8 @@
 var
 	kind = require('enyo/kind'),
 	Button = require('enyo/Button'),
-	Input = require('enyo/Input'),
-	Scroller = require('enyo/Scroller');
+	Control = require('enyo/Control'),
+	Input = require('enyo/Input');
 
 var
 	Address = require('enyo-ilib/Address');
@@ -13,7 +13,7 @@ var
 
 module.exports = kind({
 	name: 'ilib.sample.AddressParsing',
-	kind: Scroller,
+	kind: Control,
 	components: [
 		{style: 'margin: 10px;', components: [
 			{kind: ChooseLocale, name: 'localeSelector'},
@@ -62,3 +62,5 @@ module.exports = kind({
 		this.$.rtlResult.setContent(output);
 	}
 });
+
+module.exports.badgeClasses = 'new';

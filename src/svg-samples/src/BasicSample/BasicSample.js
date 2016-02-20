@@ -2,7 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	Scroller = require('enyo/Scroller'),
+	Control = require('enyo/Control'),
 	Button = require('enyo/Button'),
 	Root = require('svg/Root'),
 	Rectangle = require('svg/Rectangle'),
@@ -15,8 +15,8 @@ var
 
 module.exports = kind({
 	name: 'SvgSample',
-	kind: Scroller,
-	classes: 'enyo-fit sample svg-sample',
+	kind: Control,
+	classes: 'sample svg-sample',
 	components: [
 		{content: 'Many Stacked SVG Element:', classes: 'divider'},
 		{kind: Root, viewBox: '0 0 100 100', style: 'height: 250px; width: 250px;', components: [
@@ -67,3 +67,5 @@ module.exports = kind({
 		this.$.result.set('content', '&quot;' + sender.name + '&quot; pressed.');
 	}
 });
+
+module.exports.badgeClasses = 'new';

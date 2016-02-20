@@ -41,3 +41,5 @@ module.exports = kind({
 		this.$.result.setContent('&quot;' + sender.name + '&quot; pressed.');
 	}
 });
+
+module.exports.badgeClasses = 'new wip';
