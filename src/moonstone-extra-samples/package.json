@@ -14,7 +14,9 @@
     "../../css/*.css",
     "../../css/*.less",
     "src/*.css",
-    "src/*.less"
+    "src/*.less",
+    "../moonstone-samples/src/*.less",
+    "../moonstone-samples/src/*.css"
   ],
   "main": "index.js",
   "moduleDir": "src",

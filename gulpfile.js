@@ -88,10 +88,6 @@ function writeConfig(samples) {
 }
 
 function buildStrawman(samples) {
-	require("babel-register")({
-		// allow babel usage in node_modules/enyo_dev
-		only: /node_modules\/enyo-dev\/(?!(node_modules))/
-	});
 	var enyo = require('enyo-dev');
 	var cwd = process.cwd();
 	var mI = samples.indexOf('moonstone');
