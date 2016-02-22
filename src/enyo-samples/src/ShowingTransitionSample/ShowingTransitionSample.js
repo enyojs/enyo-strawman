@@ -26,6 +26,8 @@ var PopupMockup = kind({
 	showing: false,
 	showingClass: 'shown',
 	shownClass: 'shown',
+	shownMethod: 'popupIsShown',
+	hiddenMethod: 'popupIsHidden',
 	mixins: [ ShowingTransitionSupport ]
 });
 
@@ -41,7 +43,8 @@ module.exports = kind({
 			]},
 			{components: [
 				{name: 'pane', kind: Pane, components: [{content: 'This card has different out and in transitions.'}]}
-			]}
+			]},
+			{name: 'results', classes: 'results'}
 		]},
 		{name: 'popup', kind: PopupMockup, components: [
 			{tag: 'h1', content: 'Commense the jiggling!'},
@@ -52,7 +55,14 @@ module.exports = kind({
 		this.$.pane.set('showing', !this.$.pane.get('showing'));
 	},
 	togglePopup: function (sender, ev) {
+		this.$.results.set('content', 'Popup started ' + (!this.$.popup.get('showing') ? 'showing' : 'hiding') + '.');
 		this.$.popup.set('showing', !this.$.popup.get('showing'));
+	},
+	popupIsShown: function () {
+		this.$.results.set('content', 'Popup finished showing.');
+	},
+	popupIsHidden: function () {
+		this.$.results.set('content', 'Popup finished hiding.');
 	}
 });
 
