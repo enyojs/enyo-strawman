@@ -1,18 +1,19 @@
 {
-  "name": "enyo-strawman-moon-extra",
+  "name": "enyo-strawman",
   "assets": [
-    "moonstone-extra/assets/*.png",
-    "../appinfo.json",
-    "../icon.png",
-    "../icon-mini.png",
-    "../icon-large.png",
-    "../fonts/**/*.ttf",
-    "../resources/**/*.*"
+    "../../appinfo.json",
+    "../../icon.png",
+    "../../icon-mini.png",
+    "../../icon-large.png",
+    "assets/**/*.*",
+    "resources/**/*.*"
   ],
   "devAssets": [],
   "styles": [
-    "../css/*.css",
-    "../css/*.less",
+    "css/*.css",
+    "css/*.less",
+    "../../css/*.css",
+    "../../css/*.less",
     "src/*.css",
     "src/*.less"
   ],
@@ -20,7 +21,7 @@
   "moduleDir": "src",
   "filename": "index.js",
   "version": "0.0.1",
-  "description": "Collection of Enyo lib samples for Quality Assurance with Moonstone Extras",
+  "description": "Collection of Enyo lib samples for Quality Assurance with Sunstone",
   "homepage": "http://enyojs.com/",
   "bugs": "http://jira.enyojs.com/",
   "keywords": [],

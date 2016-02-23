@@ -3,8 +3,11 @@
 // registered which version it wanted.
 // require('enyo-ilib/full');
 
+require('enyo/options').accessibility = true;
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
 	Enyo_iLib = require('enyo-ilib');
@@ -24,10 +27,15 @@ var
 		NumberFormatting: require('./src/NumberFormatting')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'iLib Samples',
 	version: Enyo_iLib.enyo.version,
 	libraryName: 'iLib',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+
