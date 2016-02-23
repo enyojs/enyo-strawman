@@ -12,7 +12,7 @@ var
 	BodyText = require('moonstone/BodyText');
 
 var
-	AnimatedButton = require('moonstone-extra/AnimatedButton');
+	AnimatedButton = require('moonstone/AnimatedButton');
 
 module.exports = kind({
 	name: 'moon.sample.AnimatedButtonSample',

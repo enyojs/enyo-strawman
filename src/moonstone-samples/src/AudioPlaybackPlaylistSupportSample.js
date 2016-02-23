@@ -14,8 +14,8 @@ var
 	Scroller = require('moonstone/Scroller');
 
 var
-	AudioPlayback = require('moonstone-extra/AudioPlayback'),
-	PlaylistSupport = require('moonstone-extra/PlaylistSupport');
+	AudioPlayback = require('moonstone/AudioPlayback'),
+	PlaylistSupport = require('moonstone/PlaylistSupport');
 
 var audioQueue = kind({
 	name: 'sample.AudioQueue',
