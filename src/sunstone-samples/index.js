@@ -33,12 +33,12 @@ var samples = {
 	TabSample                         : require('./src/TabSample'),
 	ToastPopupSample                  : require('./src/ToastPopupSample'),
 	ToggleButtonSample                : require('./src/ToggleButtonSample'),
-	PatternSample_Contacts            : require('./src/PatternSample_Contacts'),
-	PatternSample_DeleteData          : require('./src/PatternSample_DeleteData'),
-	PatternSample_GridListFlickr      : require('./src/PatternSample_GridListFlickr'),
-	PatternSample_Profile             : require('./src/PatternSample_Profile'),
-	PatternSample_WatchManager        : require('./src/PatternSample_WatchManager'),
-	PatternSample_VolumeSetting       : require('./src/PatternSample_VolumeSetting')
+	PatternSampleContacts            : require('./src/PatternSample_Contacts'),
+	PatternSampleDeleteData          : require('./src/PatternSample_DeleteData'),
+	PatternSampleGridListFlickr      : require('./src/PatternSample_GridListFlickr'),
+	PatternSampleProfile             : require('./src/PatternSample_Profile'),
+	PatternSampleWatchManager        : require('./src/PatternSample_WatchManager'),
+	PatternSampleVolumeSetting       : require('./src/PatternSample_VolumeSetting')
 };
 
 var Sample = kind({
