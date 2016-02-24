@@ -12,6 +12,8 @@ var Pane = kind({
 	classes: 'pane',
 	showingDuration: 1000,
 	hidingDuration: 500,
+	shownMethod: 'paneIsShown',
+	hiddenMethod: 'paneIsHidden',
 	mixins: [ ShowingTransitionSupport ],
 	components: [
 		{name: 'client', classes: 'glass'}
@@ -26,9 +28,11 @@ var PopupMockup = kind({
 	showing: false,
 	showingClass: 'shown',
 	shownClass: 'shown',
-	shownMethod: 'popupIsShown',
 	hiddenMethod: 'popupIsHidden',
-	mixins: [ ShowingTransitionSupport ]
+	mixins: [ ShowingTransitionSupport ],
+	popupIsHidden: function () {
+		console.log('Popup finished hidden!');
+	}
 });
 
 module.exports = kind({
@@ -46,8 +50,8 @@ module.exports = kind({
 			]},
 			{name: 'results', classes: 'results'}
 		]},
-		{name: 'popup', kind: PopupMockup, components: [
-			{tag: 'h1', content: 'Commense the jiggling!'},
+		{name: 'popup', kind: PopupMockup, shownMethod: 'popupIsShown', components: [
+			{tag: 'h1', content: 'Commence the jiggling!'},
 			{kind: Img, src: 'http://static.fjcdn.com/gifs/Shake+it_945873_5126044.gif'}
 		]}
 	],
@@ -60,9 +64,6 @@ module.exports = kind({
 	},
 	popupIsShown: function () {
 		this.$.results.set('content', 'Popup finished showing.');
-	},
-	popupIsHidden: function () {
-		this.$.results.set('content', 'Popup finished hiding.');
 	}
 });
 
