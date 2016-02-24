@@ -31,7 +31,7 @@ var NoImageItem = kind({
 		{from: 'model.bgColor', to: 'bgColor'}
 	],
 	componentOverrides: {
-		image: {kind: Control, mixins: [Overlay.Support, Overlay.Selection], style: 'padding-top: 100%; background: gray;'}
+		image: {kind: Control, mixins: [Overlay.Support, Overlay.Selection]}
 	},
 	imageSizingChanged: function () {},
 	bgColorChanged: function () {
