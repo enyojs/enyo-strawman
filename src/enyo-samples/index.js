@@ -1,5 +1,8 @@
+require('enyo/options').accessibility = true;
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
 	Enyo = require('enyo');
@@ -53,10 +56,15 @@ var
 		WebServiceSample				: require('./src/WebServiceSample')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'Enyo Samples',
 	version: Enyo.version,
 	libraryName: 'Enyo',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+
