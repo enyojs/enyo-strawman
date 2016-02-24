@@ -3,8 +3,6 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
 	Dialog = require('moonstone/Dialog'),
@@ -13,8 +11,7 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -36,31 +33,10 @@ module.exports = kind({
 			autoplay: true,
 			onPlaybackControlsTapped: 'controlsTapped',
 			infoComponents: [
-				{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
-					{
-						kind: ChannelInfo,
-						channelNo: '789-123',
-						channelName: 'AMC',
-						channelDesc: 'KRON-HD',
-						channelMoreDesc: '4:30 - 5:30PM',
-						components: [
-							{content: 'DTV'},
-							{content: 'Cinema'},
-							{content: '3D'}
-						]
-					},
-					{
-						kind: VideoInfoHeader,
-						title: 'Downton Abbey',
-						uppercase: false,
-						// Todo, we can remove below comment out after policy of samples is decided.
-						// In latest tag like 2.6.0-pre.5, we don't have samples.
-						// src: '$lib/moonstone/samples/assets/default-music.png',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-					}
-				]},
-				{kind: VideoInfoBackground, orient: 'right', background: true, components: [
-					{kind: Clock}
+				{kind: VideoTitle, title: 'Downton Abbey', components: [
+					{content: 'DTV'},
+					{content: 'Cinema'},
+					{content: '3D'}
 				]}
 			],
 	   		components: [

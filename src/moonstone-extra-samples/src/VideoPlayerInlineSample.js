@@ -2,12 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
 	VideoFullscreenToggleButton = require('moonstone-extra/VideoFullscreenToggleButton'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -30,27 +27,10 @@ module.exports = kind({
 			classes: 'moon-8h',
 			autoplay: true,
 			infoComponents: [
-				{kind: VideoInfoBackground, orient: 'left', fit: true, components: [
-					{
-						kind: ChannelInfo,
-						channelNo: '13',
-						channelName: 'AMC',
-						components: [
-							{content: 'DTV'},
-							{content: 'Cinema'},
-							{content: '3D'}
-						]
-					},
-					{
-						kind: VideoInfoHeader,
-						title: 'Downton Abbey',
-						subTitle: 'Mon June 21, 7:00 - 8:00pm',
-						subSubTitle: 'R - TV 14, V, L, SC',
-						description: 'The series, set in the Yorukshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-					}
-				]},
-				{kind: VideoInfoBackground, orient: 'right', components: [
-					{kind: Clock}
+				{kind: VideoTitle, title: 'Downton Abbey', components: [
+					{content: 'DTV'},
+					{content: 'Cinema'},
+					{content: '3D'}
 				]}
 			],
 			components: [

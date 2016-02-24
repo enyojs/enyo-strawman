@@ -8,8 +8,6 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),
 	Panel = require('moonstone-extra/Panel'),
@@ -17,8 +15,7 @@ var
 	SelectableItem = require('moonstone/SelectableItem'),
 	ToggleButton = require('moonstone/ToggleButton'),
 	VideoFullscreenToggleButton = require('moonstone-extra/VideoFullscreenToggleButton'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
@@ -54,36 +51,13 @@ module.exports = kind({
 							inline:true,
 							classes: 'moon-8h',
 							poster: '@../assets/video-poster.png',
-							infoComponents: [{
-								kind: VideoInfoBackground,
-								orient: 'left',
-								fit: true,
-								components: [
-									{
-										kind: ChannelInfo,
-										channelNo: '13',
-										channelName: 'AMC',
-										components: [
-											{content: '3D'},
-											{content: 'Live'},
-											{content: 'REC 08:22', classes: 'redicon'}
-										]
-									},
-									{
-										kind: VideoInfoHeader,
-										title: 'Downton Abbey',
-										subTitle: 'Mon June 21, 7:00 - 8:00pm',
-										subSubTitle: 'R - TV 14, V, L, SC',
-										description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-									}
-								]
-							}, {
-								kind: VideoInfoBackground,
-								orient: 'right',
-								components: [
-									{kind: Clock}
-								]
-							}],
+							infoComponents: [
+								{kind: VideoTitle, title: 'Downton Abbey', components: [
+									{content: 'DTV'},
+									{content: 'Cinema'},
+									{content: '3D'}
+								]}
+							],
 							components: [
 								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
