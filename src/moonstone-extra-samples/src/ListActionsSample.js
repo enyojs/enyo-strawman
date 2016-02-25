@@ -91,7 +91,7 @@ module.exports = kind({
 				{kind: Tooltip, position: 'above', content: 'Test Auto Collapse'},
 
 				//* List actions with auto-collapsing
-				{kind: ListActions, autoCollapse: true, iconSrc: '@../../src/moonstone-samples/assets/icon-list.png', listActions: [
+				{kind: ListActions, autoCollapse: true, iconSrc: '@../../moonstone-samples/assets/icon-list.png', listActions: [
 					{action: 'AutoCollapseTest', components: [
 						{kind: Divider, content: 'Try Auto-collapse'},
 						{kind: Scroller, fit: true, components: [
