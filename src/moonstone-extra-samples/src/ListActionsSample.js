@@ -30,11 +30,21 @@ module.exports = kind({
 	},
 	components: [
 		{kind: Panel, headerType: 'medium', title: 'List Actions Sample', headerComponents: [
+			{name: 'disabledListAction', kind: ListActions, iconSrc: '@../../src/moonstone-samples/assets/icon-list.png', listActions: [
+				{components: [
+					{kind: Divider, content: 'divider 1'},
+					{kind: Scroller, defaultKind: CheckboxItem, components: [
+						{content: 'item 1'},
+						{content: 'item 2'},
+						{content: 'item 3'}
+					]}
+				]}
+			]},
 			{kind: TooltipDecorator, components: [
 				{kind: Tooltip, position: 'above', content: 'Test Dynamic Lists'},
 
 				//* List actions with default width
-				{kind: ListActions, disabled: true, name: 'listActions', icon: 'drawer', listActions: [
+				{kind: ListActions, name: 'listActions', icon: 'drawer', listActions: [
 					{action: 'category3', components: [
 						{kind: Divider, content: 'Category 3 (DataList)'},
 						{kind: DataList, name: 'list', fit:true, components: [
@@ -59,54 +69,57 @@ module.exports = kind({
 					]}
 				]}
 			]},
-			{kind: TooltipDecorator, components: [
-				{kind: Tooltip, position: 'above', content: 'Dummy List Actions'},
-
-				//* List actions with proportional width
-				{kind: ListActions, proportionalWidth: true, icon: 'denselist', listActions: [
-					{action: 'Cost', components: [
-						{kind: Divider, content: 'Cost'},
-						{kind: Scroller, defaultKind: ToggleItem, fit: true, components: [
-							{content: '$'},
-							{content: '$$'},
-							{content: '$$$'}
-						]}
-					]},
-					{action: 'Flavor', components: [
-						{kind: Divider, content: 'Flavor'},
-						{kind: Scroller, defaultKind: CheckboxItem, fit: true, components: [
-							{content: 'Spicy'},
-							{content: 'Sweet'},
-							{content: 'Sour'},
-							{content: 'Salty', checked: true},
-							{content: 'Savory'},
-							{content: 'Bland'},
-							{content: 'Umami'},
-							{content: 'Bitter'}
-						]}
+			{kind: ListActions, icon: 'search', backgroundOpacity: 'translucent', listActions: [
+				{action: 'one', components: [
+					{kind: Divider, content: 'divider 1 (7 items)'},
+					{kind: Scroller, fit: true, defaultKind: CheckboxItem, components: [
+						{content: 'item 1'},
+						{content: 'item 2'},
+						{content: 'item 3'},
+						{content: 'item 4'},
+						{content: 'item 5'},
+						{content: 'item 6'},
+						{content: 'item 7'}
+					]}
+				]},
+				{action: 'two', components: [
+					{kind: Divider, content: 'divider 2'},
+					{kind: Scroller, fit: true, defaultKind: SelectableItem, components: [
+						{content: 'item 1'},
+						{content: 'item 2'},
+						{content: 'item 3'},
+						{content: 'item 4'},
+						{content: 'item 5'}
+					]}
+				]},
+				{action: 'three', components: [
+					{kind: Divider, content: 'divider 3'},
+					{kind: Scroller, fit: true, defaultKind: ToggleItem, components: [
+						{content: 'item 1'},
+						{content: 'item 2'}
 					]}
 				]}
 			]},
-			{kind: TooltipDecorator, components: [
-				{kind: Tooltip, position: 'above', content: 'Test Auto Collapse'},
-
-				//* List actions with auto-collapsing
-				{kind: ListActions, autoCollapse: true, iconSrc: '@../../src/moonstone-samples/assets/icon-list.png', listActions: [
-					{action: 'AutoCollapseTest', components: [
-						{kind: Divider, content: 'Try Auto-collapse'},
-						{kind: Scroller, fit: true, components: [
-							{kind: Group, highlander: true, defaultKind: CheckboxItem, components: [
-								{content: 'Select'},
-								{content: 'One'},
-								{content: 'To'},
-								{content: 'Auto'},
-								{content: 'Collapse'},
-								{content: 'This'},
-								{content: 'List'},
-								{content: 'Actions'},
-								{content: 'Menu'}
-							]}
-						]}
+			{kind: ListActions, icon: 'denselist', actionWidthClasses: 'moon-4h', listActions: [
+				{action: 'Cost', components: [
+					{kind: Divider, content: 'Cost'},
+					{kind: Scroller, defaultKind: ToggleItem, fit: true, components: [
+						{content: '$'},
+						{content: '$$'},
+						{content: '$$$'}
+					]}
+				]},
+				{action: 'Flavor', components: [
+					{kind: Divider, content: 'Flavor'},
+					{kind: Scroller, defaultKind: CheckboxItem, fit: true, components: [
+						{content: 'Spicy'},
+						{content: 'Sweet'},
+						{content: 'Sour'},
+						{content: 'Salty', checked: true},
+						{content: 'Savory'},
+						{content: 'Bland'},
+						{content: 'Umami'},
+						{content: 'Bitter'}
 					]}
 				]}
 			]}
@@ -131,7 +144,7 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '$.toggleDisabledListActions.value', to: '$.listActions.disabled'}
+		{from: '$.toggleDisabledListActions.value', to: '$.disabledListAction.disabled'}
 	],
 	activateHandler: function (sender, ev) {
 		if (ev && ev.action) {
