@@ -52,6 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
+  "outdir": "../../dist/onyx",
   "outDir": "../../dist/onyx",
   "outFile": "index.html",
   "lessPlugins": [],

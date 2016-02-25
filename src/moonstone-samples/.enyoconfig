@@ -52,6 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
+  "outdir": "../../dist/moonstone",
   "outDir": "../../dist/moonstone",
   "outFile": "index.html",
   "lessPlugins": [{

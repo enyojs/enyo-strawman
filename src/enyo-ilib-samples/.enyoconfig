@@ -52,6 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
+  "outdir": "../../dist/enyo-ilib"
   "outDir": "../../dist/enyo-ilib",
   "outFile": "index.html",
   "lessPlugins": [],

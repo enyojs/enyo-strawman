@@ -52,6 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
+  "outdir": "../../dist/enyo-webos",
   "outDir": "../../dist/enyo-webos",
   "outFile": "index.html",
   "lessPlugins": [],
