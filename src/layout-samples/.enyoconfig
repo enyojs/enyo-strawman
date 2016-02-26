@@ -1,7 +1,7 @@
 {
-  "title": "enyo-strawman-moon-extra",
-  "name": "enyo-strawman-moon-extra",
-  "libDir": "../lib",
+  "title": "Layout Samples",
+  "name": "layout-samples",
+  "libDir": "../../lib",
   "paths": [],
   "libraries": [
     "enyo",
@@ -52,8 +52,9 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outdir": "../dist",
-  "outfile": "index.html",
+  "outdir": "../../dist/layout",
+  "outDir": "../../dist/layout",
+  "outFile": "index.html",
   "lessPlugins": [],
   "assetRoots": [],
   "lessOnlyLess": false,

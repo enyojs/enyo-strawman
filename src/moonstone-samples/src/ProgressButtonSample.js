@@ -38,6 +38,12 @@ module.exports = kind({
 		{from: '$.animateSetting.checked', to: '$.autoDownload.animated'},
 		{from: '$.animateSetting.checked', to: '$.progressButton.animated'}
 	],
+	destroy: kind.inherit(function (sup) {
+		return function () {
+			this.resetTimer();
+			sup.apply(this, arguments);
+		};
+	}),
 	changeValue: function (sender, ev) {
 		if (this.$.animateSetting.getChecked()) {
 			this.$.progressButton.animateProgressTo(this.$.input.getValue());
@@ -53,16 +59,22 @@ module.exports = kind({
 		this.$.input.setValue(Math.max(parseInt(this.$.input.getValue() || 0, 10) - 10, 0));
 		this.changeValue();
 	},
+	resetTimer: function () {
+		if (this._timerId) {
+			clearInterval(this._timerId);
+			this._timerId = null;
+		}
+	},
 	startDownloading: function () {
 		var _this = this;
 		if (_this.contentChange === false) {
 			_this.downloadProgress = 0;
 			_this.contentChange = true;
-			var timer = setInterval(function () {
+			this._timerId = setInterval(function () {
 				++_this.downloadProgress;
 				_this.$.autoDownload.animateProgressTo(_this.downloadProgress);
 				if (_this.downloadProgress >= 100) {
-					clearInterval(timer);
+					this.resetTimer();
 				}
 			}, 100);
 		}

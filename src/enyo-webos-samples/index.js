@@ -1,5 +1,8 @@
+require('enyo/options').accessibility = true;
+
 var
 	kind = require('enyo/kind'),
+	ready = require('enyo/ready'),
 	Enyo_webOS = require('enyo-webos');
 
 var
@@ -10,10 +13,15 @@ var
 		LunaServiceSample: require('./src/LunaServiceSample')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
-	title: 'enyo-webos Samples',
+	title: 'webOS Samples',
 	version: Enyo_webOS.version,
 	libraryName: 'webOS',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+

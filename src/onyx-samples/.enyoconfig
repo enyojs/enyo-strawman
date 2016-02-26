@@ -1,7 +1,7 @@
 {
-  "title": "enyo-strawman",
-  "name": "enyo-strawman",
-  "libDir": "lib",
+  "title": "Onyx Samples",
+  "name": "onyx-samples",
+  "libDir": "../../lib",
   "paths": [],
   "libraries": [
     "enyo",
@@ -52,7 +52,8 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outDir": "./dist",
+  "outdir": "../../dist/onyx",
+  "outDir": "../../dist/onyx",
   "outFile": "index.html",
   "lessPlugins": [],
   "assetRoots": [],
