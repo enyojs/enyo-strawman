@@ -52,6 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
+  "outdir": "../../dist/spotlight",
   "outDir": "../../dist/spotlight",
   "outFile": "index.html",
   "lessPlugins": [],

@@ -56,7 +56,8 @@
   "library": false,
   "wip": false,
   "outdir": "../../dist/garnet",
-  "outfile": "index.html",
+  "outDir": "../../dist/garnet",
+  "outFile": "index.html",
   "lessPlugins": [{
     "name": "resolution-independence",
     "options": {"baseSize":16, "minUnitSize":0}

@@ -52,6 +52,7 @@
   "skip": [],
   "library": false,
   "wip": false,
+  "outdir": "../../dist/canvas",
   "outDir": "../../dist/canvas",
   "outFile": "index.html",
   "lessPlugins": [],
