@@ -1,0 +1,73 @@
+.showing-transition-sample {
+	@nice-spacing: 1em;
+
+	background-color: lightslategray;
+	padding: @nice-spacing;
+
+	button {
+		margin: 0 @nice-spacing @nice-spacing;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
+	.results {
+		margin: 60px 0 21px 0;
+		padding: 21px;
+		min-height: 24px;
+		border-radius: 9px;
+		color: #fff;
+		background-color: rgba(0,0,0, 0.3);
+	}
+
+	.pane {
+		overflow: hidden;
+
+		&.hiding .glass {
+			transition: transform 500ms ease-out;
+			transform-origin: bottom left;
+			transform: rotate(-90deg);
+		}
+		&.hidden .glass {
+			transform-origin: top left;
+			transform: rotate(-90deg);
+		}
+		&.showing .glass {
+			transition: transform 1s ease-in;
+			transform-origin: top left;
+			transform: rotate(0deg);
+		}
+
+		.glass {
+			background-color: rgba(255, 100, 0, 0.5);
+			color: white;
+			width: 40%;
+			padding: @nice-spacing;
+			border: 3px solid transparent;
+			border-color: inherit;
+			font-size: 200%;
+		}
+	}
+
+	.popup-mockup {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: transform 500ms ease-in-out;
+		padding: (@nice-spacing * 2);
+		text-align: center;
+		background-color: darkslategray;
+		color: orange;
+
+		&.hiding,
+		&.hidden {
+			transform: translateY(100%);
+		}
+		&.showing,
+		&.shown {
+			transform: translateY(0%);
+		}
+	}
+}
