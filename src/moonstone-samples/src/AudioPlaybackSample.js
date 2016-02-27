@@ -11,7 +11,7 @@ var
 	Scroller = require('moonstone/Scroller');
 
 var
-	AudioPlayback = require('moonstone-extra/AudioPlayback');
+	AudioPlayback = require('moonstone/AudioPlayback');
 
 module.exports = kind({
 	name: 'moon.sample.AudioPlaybackSample',
