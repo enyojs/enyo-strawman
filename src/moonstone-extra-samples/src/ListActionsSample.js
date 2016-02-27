@@ -31,9 +31,9 @@ module.exports = kind({
 	components: [
 		{kind: Panel, headerType: 'medium', title: 'List Actions Sample', headerComponents: [
 			{name: 'disabledListAction', kind: ListActions, iconSrc: '@../../src/moonstone-samples/assets/icon-list.png', listActions: [
-				{components: [
+				{action: 'No scroller', components: [
 					{kind: Divider, content: 'divider 1'},
-					{kind: Scroller, defaultKind: CheckboxItem, components: [
+					{kind: Group, defaultKind: CheckboxItem, components: [
 						{content: 'item 1'},
 						{content: 'item 2'},
 						{content: 'item 3'}
@@ -47,7 +47,7 @@ module.exports = kind({
 				{kind: ListActions, name: 'listActions', icon: 'drawer', listActions: [
 					{action: 'category3', components: [
 						{kind: Divider, content: 'Category 3 (DataList)'},
-						{kind: DataList, name: 'list', fit:true, components: [
+						{kind: DataList, name: 'list', components: [
 							{kind: CheckboxItem, bindings: [{from: '.model.name', to: '.content'}]}
 						]}
 					]},
@@ -59,7 +59,7 @@ module.exports = kind({
 					]},
 					{action: 'category1', components: [
 						{kind: Divider, content: 'Category 1 (Static)'},
-						{kind: Scroller, fit: true, components: [
+						{kind: Scroller, components: [
 							{kind: Group, name: 'group', highlander: true, defaultKind: SelectableItem, components: [
 								{content: 'Just Released'},
 								{content: 'Recommended'},
@@ -72,7 +72,7 @@ module.exports = kind({
 			{kind: ListActions, icon: 'search', backgroundOpacity: 'translucent', listActions: [
 				{action: 'one', components: [
 					{kind: Divider, content: 'divider 1 (7 items)'},
-					{kind: Scroller, fit: true, defaultKind: CheckboxItem, components: [
+					{kind: Scroller, defaultKind: CheckboxItem, components: [
 						{content: 'item 1'},
 						{content: 'item 2'},
 						{content: 'item 3'},
@@ -84,7 +84,7 @@ module.exports = kind({
 				]},
 				{action: 'two', components: [
 					{kind: Divider, content: 'divider 2'},
-					{kind: Scroller, fit: true, defaultKind: SelectableItem, components: [
+					{kind: Scroller, defaultKind: SelectableItem, components: [
 						{content: 'item 1'},
 						{content: 'item 2'},
 						{content: 'item 3'},
@@ -94,32 +94,35 @@ module.exports = kind({
 				]},
 				{action: 'three', components: [
 					{kind: Divider, content: 'divider 3'},
-					{kind: Scroller, fit: true, defaultKind: ToggleItem, components: [
+					{kind: Scroller, defaultKind: ToggleItem, components: [
 						{content: 'item 1'},
 						{content: 'item 2'}
 					]}
 				]}
 			]},
-			{kind: ListActions, icon: 'denselist', actionWidthClasses: 'moon-4h', listActions: [
-				{action: 'Cost', components: [
-					{kind: Divider, content: 'Cost'},
-					{kind: Scroller, defaultKind: ToggleItem, fit: true, components: [
-						{content: '$'},
-						{content: '$$'},
-						{content: '$$$'}
-					]}
-				]},
-				{action: 'Flavor', components: [
-					{kind: Divider, content: 'Flavor'},
-					{kind: Scroller, defaultKind: CheckboxItem, fit: true, components: [
-						{content: 'Spicy'},
-						{content: 'Sweet'},
-						{content: 'Sour'},
-						{content: 'Salty', checked: true},
-						{content: 'Savory'},
-						{content: 'Bland'},
-						{content: 'Umami'},
-						{content: 'Bitter'}
+			{kind: TooltipDecorator, components: [
+				{kind: Tooltip, position: 'above', content: 'Test Action Width'},
+				{kind: ListActions, icon: 'denselist', actionWidthClasses: 'moon-4h', listActions: [
+					{action: 'Cost', components: [
+						{kind: Divider, content: 'Cost'},
+						{kind: Scroller, defaultKind: ToggleItem, components: [
+							{content: '$'},
+							{content: '$$'},
+							{content: '$$$'}
+						]}
+					]},
+					{action: 'Flavor', components: [
+						{kind: Divider, content: 'Flavor'},
+						{kind: Scroller, defaultKind: CheckboxItem, components: [
+							{content: 'Spicy'},
+							{content: 'Sweet'},
+							{content: 'Sour'},
+							{content: 'Salty', checked: true},
+							{content: 'Savory'},
+							{content: 'Bland'},
+							{content: 'Umami'},
+							{content: 'Bitter'}
+						]}
 					]}
 				]}
 			]}
