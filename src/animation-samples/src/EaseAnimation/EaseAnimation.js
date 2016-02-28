@@ -5,7 +5,7 @@ var
 	control = require('enyo/Control');
 
 
-var easeAnim = scene({ animation: [{ translate: "0,-500, 0" }], duration: 3000 });
+var easeAnim = scene({ /*animation: [{ translate: "0,-500, 0" }], duration: 3000*/ threshold: 3000 });
 
 module.exports = kind({
 	name: "EasingSample",
@@ -22,88 +22,75 @@ module.exports = kind({
 		{
 			//No ease define, i.e. linear animation
 			name: "linear",
-			animate: true,
 			content: "linear",
 			style: "left: 2%;",
+			scene: { translate: "0,-500, 0", duration: 3000 },
 			classes: "balloon red"
 		}, {
 			name: "easeInBounce",
-			animate: true,
-			ease: easings.easeInBounce,
 			content: "easeInBounce",
 			style: "left: 11%;",
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInBounce },
 			classes: "balloon blue"
 		}, {
 			name: "easeOutBounce",
-			animate: true,
-			ease: easings.easeOutBounce,
 			content: "easeOutBounce",
 			style: "left: 20%;",
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeOutBounce },
 			classes: "balloon red"
 		}, {
 			name: "easeInOutBounce",
-			animate: true,
-			ease: easings.easeInOutBounce,
 			content: "easeInOutBounce",
 			style: "left: 29%;",
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInOutBounce },
 			classes: "balloon blue"
 		}, {
 			name: "easeInElastic",
-			animate: true,
-			ease: easings.easeInElastic,
 			content: "easeInElastic",
 			style: "left: 38%;",
+			scene: { translate: "0,-500, 0", duration: 3000,ease: easings.easeInElastic },
 			classes: "balloon red"
 		}, {
 			name: "easeOutElastic",
-			animate: true,
-			ease: easings.easeOutElastic,
 			content: "easeOutElastic",
 			style: "left: 47%;",
+			scene: { translate: "0,-500, 0", duration: 3000,ease: easings.easeOutElastic },
 			classes: "balloon blue"
 		}, {
 			name: "easeInOutElastic",
-			animate: true,
-			ease: easings.easeInOutElastic,
 			content: "easeInOutElastic",
 			style: "left: 56%;",
+			scene: { translate: "0,-500, 0", duration: 3000,ease: easings.easeInOutElastic },
 			classes: "balloon red"
 		}, {
 			name: "easeInExpo",
-			animate: true,
-			ease: easings.easeInExpo,
 			content: "easeInExpo",
 			style: "left: 65%;",
+			scene: { translate: "0,-500, 0", duration: 3000,ease: easings.easeInExpo },
 			classes: "balloon blue"
 		}, {
 			name: "easeOutExpo",
-			animate: true,
-			ease: easings.easeOutExpo,
 			content: "easeOutExpo",
 			style: "left: 74%;",
+			scene: { translate: "0,-500, 0", duration: 3000,ease: easings.easeOutExpo },
 			classes: "balloon red"
 		}, {
 			name: "easeInOutExpo",
-			animate: true,
-			ease: easings.easeInOutExpo,
 			content: "easeInOutExpo",
 			style: "left: 83%;",
+			scene: { translate: "0,-500, 0", duration: 3000,ease: easings.easeInOutExpo },
 			classes: "balloon blue"
 		}, {
 			name: "cubicBezier",
-			animate: true,
+			content: "custom",
+			style: "left: 92%;",
 			/**
 			* Points on bezier-curve as at x% of time y% of distance cover
 			* Here, the bezier-curve should be as defined
 			* On 30% of time, 50% of distance should cover
 			* On 80% of time, 10% of distance in opposite direction should cover
 			*/
-			ease: {
-				30: 50,
-				80: -10
-			},
-			content: "custom",
-			style: "left: 92%;",
+			scene: { translate: "0,-500, 0", duration: 3000, ease: { 30: 50, 80: -10 } },
 			classes: "balloon red"
 		}
 	],
