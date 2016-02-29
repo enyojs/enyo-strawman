@@ -85,19 +85,15 @@ module.exports = kind({
 	},
 	timeChanged: function (sender, ev) {
 		var time;
-		if (this.$.result && ev.value){
-			if (sender.localeValue) {
-				time = sender._tf.format(dateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();
-			} else {
-				time = ev.value.toTimeString();
-			}
-			this.$.result.setContent(ev.name + ' changed to ' + time);
+		if (sender.localeValue) {
+			time = sender._tf.format(dateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();
+		} else {
+			time = ev.value && ev.value.toTimeString();
 		}
+		this.$.result.setContent(ev.name + ' changed to ' + time);
 	},
 	dateChanged: function (sender, ev) {
-		if (this.$.result && ev.value){
-			this.$.result.setContent(ev.name + ' changed to ' + ev.value.toDateString());
-		}
+		this.$.result.setContent(ev.name + ' changed to ' + (ev.value && ev.value.toDateString()));
 	},
 	resetTapped: function (sender, ev) {
 		this.$.pickerTime.set('open', false);
