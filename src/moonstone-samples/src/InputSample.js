@@ -8,6 +8,7 @@ var
 	Icon = require('moonstone/Icon'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
+	Slider = require('moonstone/Slider'),
 	RichText = require('moonstone/RichText'),
 	Scroller = require('moonstone/Scroller'),
 	TextArea = require('moonstone/TextArea');
@@ -71,6 +72,19 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, disabled: true, components: [
 				{kind: RichText, disabled: true, style: 'width: 240px;'}
+			]},
+
+			{kind: Divider, content: 'Range inputs'},
+			{kind: InputDecorator, components: [
+				{name: 'rangeInput', kind: Input, placeholder: 'Fill out number', type: 'number', validity: true, min: 25, max: 90, style: 'width: 300px;'}
+			]},
+			{classes: 'moon-vspacing', components: [
+				{name: 'minMaxValue', content: '', style: 'padding: 0px 10px 0px 10px'},
+				{classes: 'moon-1v'},
+				{kind: Divider, content: 'Minimum Value'},
+				{name: 'minSlider', kind: Slider, enableJumpIncrement: true, constrainToBgProgress: true, value: 25, bgProgress: 90, step: 1, onChange: 'handleSliderChange'},
+				{kind: Divider, content: 'Maximum Value'},
+				{name: 'maxSlider', kind: Slider, enableJumpIncrement: true, value: 90, step: 1, onChange: 'handleSliderChange'}
 			]}
 		]},
 		{kind: Divider, content: 'Result', classes: 'moon-input-sample-result'},
@@ -88,10 +102,22 @@ module.exports = kind({
 			]}
 		]}
 	],
+	bindings: [
+		{from: '.$.minSlider.value', to: '.$.rangeInput.min', transform: function(v) {return v.toFixed(0)}},
+		{from: '.$.maxSlider.value', to: '.$.rangeInput.max', transform: function(v) {return v.toFixed(0)}},
+		{from: '.$.maxSlider.value', to: '.$.minSlider.bgProgress'},
+		{from: '.$.maxSlider.value', to: '.$.minSlider.value', transform: 'boundToMax'}
+	],
 	handleInput: function (sender, ev) {
 		this.$.console.setContent('Input: ' + sender.getValue());
 	},
 	handleChange: function (sender, ev) {
 		this.$.console.setContent('Changed: ' + sender.getValue());
+	},
+	boundToMax: function (val) {
+		return val < this.$.minSlider.value ? val: this.$.minSlider.value;
+	},
+	handleSliderChange: function () {
+		this.$.minMaxValue.set('content', 'Min: ' + this.$.rangeInput.min + ', Max: ' + this.$.rangeInput.max);
 	}
 });
