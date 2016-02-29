@@ -62,7 +62,7 @@ module.exports = kind({
 		{from: 'value', to: '$.pickerDateLinked.value', oneWay:false},
 		{from: 'value', to: '$.pickerTimeLinked.value', oneWay:false}
 	],
-	create: function (){
+	create: function () {
 		FittableRows.prototype.create.apply(this, arguments);
 		if (!ilib) {
 			this.$.localePicker.hide();
@@ -70,36 +70,32 @@ module.exports = kind({
 		}
 		this.set('value', new Date('Mar 09 2014 01:59'));
 	},
-	setLocale: function (sender, event){
+	setLocale: function (sender, ev) {
 		if (ilib) {
-			var locale = event.selected.content,
+			var locale = ev.selected.content,
 				val = (locale == 'Use Default Locale') ? null : locale;
 			i18n.updateLocale(val);
 			this.$.pickerDateLinked.setLocale(val);
 			this.$.pickerTimeLinked.setLocale(val);
 			this.$.pickerTime.setLocale(val);
 			this.$.pickerDisabled.setLocale(val);
-			this.$.result.setContent(event.originator.name + ' changed to ' + locale);
+			this.$.result.setContent(ev.originator.name + ' changed to ' + locale);
 		}
 		return true;
 	},
-	timeChanged: function (sender, event) {
+	timeChanged: function (sender, ev) {
 		var time;
-		if (this.$.result && event.value){
-			if (sender.localeValue) {
-				time = sender._tf.format(dateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();	
-			} else {
-				time = event.value.toTimeString();
-			}
-			this.$.result.setContent(event.name + ' changed to ' + time);
+		if (sender.localeValue) {
+			time = sender._tf.format(dateFactory({unixtime: sender.localeValue.getTime(), timezone:'Etc/UTC'})).toString();
+		} else {
+			time = ev.value && ev.value.toTimeString();
 		}
+		this.$.result.setContent(ev.name + ' changed to ' + time);
 	},
-	dateChanged: function (sender, event) {
-		if (this.$.result && event.value){
-			this.$.result.setContent(event.name + ' changed to ' + event.value.toDateString());
-		}
+	dateChanged: function (sender, ev) {
+		this.$.result.setContent(ev.name + ' changed to ' + (ev.value && ev.value.toDateString()));
 	},
-	resetTapped: function (sender, event) {
+	resetTapped: function (sender, ev) {
 		this.$.pickerTime.set('open', false);
 		this.$.pickerTime.set('value', null);
 		return true;
