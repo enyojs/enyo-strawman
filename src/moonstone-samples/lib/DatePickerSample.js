@@ -78,11 +78,11 @@ module.exports = kind({
 			this.log('iLib not present -- hiding locale picker');
 		}
 	},
-	setLocale: function(sender, event){
-		var locale = event.selected.content;
+	setLocale: function(sender, ev){
+		var locale = ev.selected.content;
 		locale = locale == 'Use Default Locale' ? null : locale;
 		i18n.updateLocale(locale);
-		this.$.result.setContent(event.originator.name + ' changed to ' + ilib.getLocale());
+		this.$.result.setContent(ev.originator.name + ' changed to ' + ilib.getLocale());
 		return true;
 	},
 	setDate: function() {
@@ -95,12 +95,10 @@ module.exports = kind({
 	resetDate: function() {
 		this.$.picker.set('value', new Date());
 	},
-	changed: function(sender, event) {
-		if (this.$.result && event.value){
-			this.$.result.setContent(event.name + ' changed to ' + event.value.toDateString());
-		}
+	changed: function(sender, ev) {
+		this.$.result.setContent(ev.name + ' changed to ' + (ev.value && ev.value.toDateString()));
 	},
-	resetTapped: function(sender, event) {
+	resetTapped: function(sender, ev) {
 		this.$.picker.set('value', null);
 		this.$.picker.set('open', false);
 		return true;
