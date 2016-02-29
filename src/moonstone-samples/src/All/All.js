@@ -135,7 +135,7 @@ module.exports = kind({
 		{from: 'title', to: '$.listpanel.title'}
 	],
 	listTools: [
-		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
+		{kind: Panels, pattern: 'activity', hasCloseButton: false, classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
 				headerComponents: [
 					{kind: Button, content: 'Back', small: true, href: '../index.html', mixins: [LinkSupport]}
