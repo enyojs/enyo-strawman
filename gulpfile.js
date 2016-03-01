@@ -7,15 +7,19 @@ var
 	del = require('del'),
 	jshint = require('gulp-jshint'),
 	nom = require('nomnom'),
+	exec = require('child_process').exec,
 	stylish = require('jshint-stylish');
 
 var args = nom
-	.option('P', {
-		full: 'production',
-		flag: true
-	})
+	.script('gulp')
+	.option('task', {position:0, default:'build', help:'Optional specific gulp task to execute. Defaults to "build".'})
+	.option('production', {abbr:'P', flag:true, default:false, help:'Build in production mode.'})
+	.option('source-maps', {flag:true, default:true, help:'Whether or not to build source-maps.'})
+	.option('cache', {flag:true, default:true, help:'Enables the use of a cache-file.'})
+	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
+	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
+			'an environment where a user-environment should not be used.'})
 	.parse();
-
 
 gulp.task('default', ['build']);
 gulp.task('build', build);
@@ -83,14 +87,13 @@ function writeConfig(samples) {
 }
 
 function buildStrawman(samples) {
-	var enyo = require('enyo-dev');
 	var cwd = process.cwd();
 	var mI = samples.indexOf('moonstone');
 	var meI = samples.indexOf('moonstone-extra');
 	if(meI > -1) {
 		if(mI > -1) {
 			samples.splice(mI, 1);
-			meI = samples.indexOf('moonstone-extra');
+			meI = samples.indexOf('moonsstone-extra');
 		}
 		samples.splice(meI+1, 0, 'moonstone-extra-light');
 	} else {
@@ -110,31 +113,22 @@ function buildStrawman(samples) {
 		if(item.indexOf('-light') > -1) {
 			theme = 'light'
 		}
-		var opts = {
-			package: '.',
-			sourceMaps: false,
-			clean: true,
-			cache: false,
-			production: args.P,
-			lessVars: [{
-				name: '@moon-theme',
-				value: theme
-			}],
-			title: 'Sampler',
-			logLevel: 'error',
-			
-		};
+		var cmd = 'enyo pack . --title=\"Sampler\" -l error --less-var=@moon-theme:' + theme;
+		cmd += (args.production) ? ' -P' : '';
+		cmd += (args['source-maps']) ? ' --source-maps' : ' --no-source-maps';
+		cmd += (args.cache) ? ' --cache' : ' --no-cache';
+		cmd += (args.clean) ? ' --clean' : ' --no-clean';
+		cmd += (args.user) ? ' --user' : ' --no-user';
+		
 		if(item!=='.') {
 			target = './src/' + target + '-samples';
-			opts.outDir = '../../dist/' + item.replace('-extra', '');
+			cmd += ' -d ../../dist/' + item.replace('-extra', '');
 			console.log('Building ' + item + ' samples...');
 		} else {
-			opts.headScripts = ['./config.js'];
+			cmd += ' --head-scripts=./config.js';
 		}
 		process.chdir(target);
-		var packager = enyo.packager(opts);
-		var promiseOn = Promise.promisify(packager.on, {context:packager});
-		return promiseOn('end');
+		return promiseExec(cmd);
 	}, null);
 }
 
@@ -148,4 +142,18 @@ function lint () {
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish, {verbose: true}))
 		.pipe(jshint.reporter('fail'));
+}
+
+
+function promiseExec(cmd, opts) {
+	return new Promise(function(resolve, reject) {
+		var child = exec(cmd, {cwd:process.cwd()}, function(err, stdout, stderr) {
+			if(err)
+				reject(err);
+			else
+				resolve();
+		});
+		child.stdout.pipe(process.stdout);
+		child.stderr.pipe(process.stderr);
+	});
 }
