@@ -17,6 +17,9 @@ var args = nom
 	.option('source-maps', {flag:true, default:true, help:'Whether or not to build source-maps.'})
 	.option('cache', {flag:true, default:true, help:'Enables the use of a cache-file.'})
 	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
+	.option('log-level', {abbr:'l', default:'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
+	.option('log-json', {flag:true, default:false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
+			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
 	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
 	.option('script-safe', {flag:false, default:true, help:'Similar "user" option, except for older versions of enyo-dev'})
@@ -114,11 +117,13 @@ function buildStrawman(samples) {
 		if(item.indexOf('-light') > -1) {
 			theme = 'light'
 		}
-		var cmd = 'enyo pack . --title=\"Sampler\" -l error --less-var=@moon-theme:' + theme;
+		var cmd = 'enyo pack . --title=\"Sampler\" --less-var=@moon-theme:' + theme +
+			' -l ' + args['log-level'];
 		cmd += (args.production) ? ' -P' : '';
 		cmd += (args['source-maps']) ? ' --source-maps' : ' --no-source-maps';
 		cmd += (args.cache) ? ' --cache' : ' --no-cache';
 		cmd += (args.clean) ? ' --clean' : ' --no-clean';
+		cmd += (args['log-json']) ? ' --log-json ' : '';
 		cmd += (args.user) ? '' : ' --no-user';
 		cmd += (args['script-safe']) ? ' --script-safe' : '';
 		
