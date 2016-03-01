@@ -5,6 +5,7 @@ var
  	FittableRows = require('layout/FittableRows'),
  	BodyText = require('moonstone/BodyText'),
  	Divider = require('moonstone/Divider'),
+ 	Item = require('moonstone/Item'),
  	IconButton = require('moonstone/IconButton'),
  	InputHeader = require('moonstone/InputHeader'),
  	Panel = require('moonstone/Panel'),
@@ -15,10 +16,9 @@ module.exports = kind({
 	kind: FittableRows,
 	classes: 'moon enyo-unselectable enyo-fit moon-input-header-sample',
 	components: [
-		{kind: Panels, pattern: 'none', fit: true, components: [
+		{name: 'panels', kind: Panels, pattern: 'activity', fit: true, components: [
 			{
 				kind: Panel,
-				classes: 'moon-10h',
 				headerOptions: {kind: InputHeader, components: [
 					{kind: IconButton, icon: 'check'},
 					{kind: IconButton, icon: 'arrowlargeright'}
@@ -28,12 +28,13 @@ module.exports = kind({
 				title:'Input Header',
 				titleAbove: '01',
 				titleBelow: 'Sub Header',
-				subTitleBelow: 'Sub-sub Header'
+				subTitleBelow: 'Sub-sub Header',
+				components: [
+					{kind: Item, content: 'Small Header Panel', ontap: 'nextPanel'}
+				]
 			},
 			{
 				kind: Panel,
-				classes: 'moon-8h',
-				joinToPrev: true,
 				headerOptions: {kind: InputHeader, components: [
 					{kind: IconButton, icon: 'check'},
 					{kind: IconButton, icon: 'arrowlargeright'}
@@ -50,6 +51,9 @@ module.exports = kind({
 		{kind: Divider, content: 'Result', classes: 'moon-input-header-sample-result'},
 		{kind: BodyText, name: 'console', content: 'Input: '}
 	],
+	nextPanel: function () {
+		this.$.panels.next();
+	},
 	handleInput: function (sender, ev) {
 		this.$.console.setContent('Input: ' + ev.originator.getValue());
 		return true;
