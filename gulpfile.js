@@ -19,6 +19,7 @@ var args = nom
 	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
 	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
+	.option('script-safe', {flag:false, default:true, help:'Similar "user" option, except for older versions of enyo-dev'})
 	.parse();
 
 gulp.task('default', ['build']);
@@ -118,7 +119,8 @@ function buildStrawman(samples) {
 		cmd += (args['source-maps']) ? ' --source-maps' : ' --no-source-maps';
 		cmd += (args.cache) ? ' --cache' : ' --no-cache';
 		cmd += (args.clean) ? ' --clean' : ' --no-clean';
-		cmd += (args.user) ? ' --user' : ' --no-user';
+		cmd += (args.user) ? '' : ' --no-user';
+		cmd += (args['script-safe']) ? ' --script-safe' : '';
 		
 		if(item!=='.') {
 			target = './src/' + target + '-samples';
