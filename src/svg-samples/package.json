@@ -6,6 +6,9 @@
     "../../css/*.css",
     "../../css/*.less"
   ],
+  "assets": [
+    "../../fonts/**/*.*"
+  ],
   "main": "index.js",
   "moduleDir": "src",
   "filename": "index.js",
