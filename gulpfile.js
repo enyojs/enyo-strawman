@@ -65,26 +65,21 @@ function sunstone() {
 }
 
 function writeConfig(samples) {
-	var hasWebOS = (samples.indexOf('enyo-webos') > -1);
 	var output = '';
-	if(hasWebOS) {
-		output += 'var platform = require(\'enyo/platform\');\n\n';
-	}
 	var exportsObject = {};
 	for(var i=0; i<samples.length; i++) {
 		if(samples[i] === 'enyo-ilib') {
 			exportsObject[samples[i]] = 'iLib';
-		} else if(samples[i] !== 'enyo-webos') {
+		} else if(samples[i] === 'enyo-webos') {
+			exportsObject[samples[i]] = 'webOS';
+		} else {
 			var name = samples[i].replace('enyo-', '').replace('-extra', '').replace('-', ' ');
 			name = name.replace(/\w\S*/g, function(str){return str.slice(0, 1).toUpperCase() + str.slice(1);});
 			exportsObject[samples[i].replace('-extra', '')] = name;
 		}
 	}
-	output += 'module.exports = ' + JSON.stringify(exportsObject, null, '\t') + ';\n\n';
-	if(hasWebOS) {
-		output += 'if(platform.webos) {\n\tmodule.exports[\'enyo-webos\'] = \'webOS\';\n}\n';
-	}
-	fs.writeFileSync('./src/strawman/config.js', output, {encoding:'utf8'});
+	output += 'window.strawmanConfig = ' + JSON.stringify(exportsObject, null, '\t') + ';\n';
+	fs.writeFileSync('./config.js', output, {encoding:'utf8'});
 }
 
 function buildStrawman(samples) {
@@ -125,12 +120,15 @@ function buildStrawman(samples) {
 				value: theme
 			}],
 			title: 'Sampler',
-			logLevel: 'error'
+			logLevel: 'error',
+			
 		};
 		if(item!=='.') {
 			target = './src/' + target + '-samples';
 			opts.outDir = '../../dist/' + item.replace('-extra', '');
 			console.log('Building ' + item + ' samples...');
+		} else {
+			opts.headScripts = ['./config.js'];
 		}
 		process.chdir(target);
 		var packager = enyo.packager(opts);
