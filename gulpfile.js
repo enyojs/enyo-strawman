@@ -22,7 +22,7 @@ var args = nom
 			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
 	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
-	.option('script-safe', {flag:false, default:true, help:'Similar "user" option, except for older versions of enyo-dev'})
+	.option('script-safe', {flag:false, default:false, help:'Similar "user" option, except for older versions of enyo-dev'})
 	.parse();
 
 gulp.task('default', ['build']);
