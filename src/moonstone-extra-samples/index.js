@@ -12,12 +12,12 @@ var
 
 // Define all of the extras samples
 var samples = {
-	ActivityPanelsWithVideoSample        : require('./ActivityPanelsWithVideoSample'),
-	AlwaysViewingPanelsWithVideoSample   : require('./AlwaysViewingPanelsWithVideoSample'),
-	HistorySample                        : require('./HistorySample'),
-	PanelsVideoPlayerSample              : require('./PanelsVideoPlayerSample'),
-	VideoPlayerInlineSample              : require('./VideoPlayerInlineSample'),
-	VideoPlayerSample                    : require('./VideoPlayerSample')
+	ActivityPanelsWithVideoSample        : require('./src/ActivityPanelsWithVideoSample'),
+	AlwaysViewingPanelsWithVideoSample   : require('./src/AlwaysViewingPanelsWithVideoSample'),
+	HistorySample                        : require('./src/HistorySample'),
+	PanelsVideoPlayerSample              : require('./src/PanelsVideoPlayerSample'),
+	VideoPlayerInlineSample              : require('./src/VideoPlayerInlineSample'),
+	VideoPlayerSample                    : require('./src/VideoPlayerSample')
 };
 
 // Add in all of the moonstone samples
