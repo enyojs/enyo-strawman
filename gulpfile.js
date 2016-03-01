@@ -93,7 +93,7 @@ function buildStrawman(samples) {
 	if(meI > -1) {
 		if(mI > -1) {
 			samples.splice(mI, 1);
-			meI = samples.indexOf('moonsstone-extra');
+			meI = samples.indexOf('moonstone-extra');
 		}
 		samples.splice(meI+1, 0, 'moonstone-extra-light');
 	} else {
