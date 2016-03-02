@@ -27,14 +27,12 @@
 				left: 0;
 				background-color: @strawman-enyo-blue;
 				color: white;
-				transform: rotateZ(-90deg) translateY(0%) translateX(-50%) scale(0.5);
-				line-height: 1.3em;
+				transform: translateY(100%) rotate(-90deg) scale(0.5);
 				transform-origin: top left;
 				font-family: @strawman-list-badge-font-family;
 				font-weight: @strawman-list-badge-font-weight;
 				font-style: @strawman-list-badge-font-style;
-				font-size: 27px;
-				width: 81px;
+				width: 4em;
 				text-align: center;
 			}
 		}
@@ -81,6 +79,12 @@
 
 		&.spotlight {
 			background-color: lighten(@strawman-enyo-blue, 10%);
+		}
+	}
+
+	@media only screen and (min-width: @strawman-screen-min-size-tv) {
+		.link {
+			font-size: 2em;
 		}
 	}
 
