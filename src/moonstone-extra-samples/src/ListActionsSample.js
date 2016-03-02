@@ -125,6 +125,29 @@ module.exports = kind({
 						]}
 					]}
 				]}
+			]},
+			{kind: TooltipDecorator, components: [
+				{kind: Tooltip, position: 'above', content: 'Test Auto Collapse'},
+
+				//* List actions with auto-collapsing
+				{kind: ListActions, autoCollapse: true, iconSrc: '@../../src/moonstone-samples/assets/icon-list.png', listActions: [
+					{action: 'AutoCollapseTest', components: [
+						{kind: Divider, content: 'Try Auto-collapse'},
+						{kind: Scroller, components: [
+							{kind: Group, highlander: true, defaultKind: CheckboxItem, components: [
+								{content: 'Select'},
+								{content: 'One'},
+								{content: 'To'},
+								{content: 'Auto'},
+								{content: 'Collapse'},
+								{content: 'This'},
+								{content: 'List'},
+								{content: 'Actions'},
+								{content: 'Menu'}
+							]}
+						]}
+					]}
+				]}
 			]}
 		], components: [
 			{components: [
