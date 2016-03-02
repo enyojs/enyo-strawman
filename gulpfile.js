@@ -23,6 +23,7 @@ var args = nom
 	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
 	.option('script-safe', {flag:false, default:false, help:'Similar "user" option, except for older versions of enyo-dev'})
+	.option('samples', {flag:false, abbr: 's', help:'Comma-separated list of samples to build (e.g. enyo,moonstone,spotlight). Only usable on "build" task.'})
 	.parse();
 
 gulp.task('default', ['build']);
@@ -36,7 +37,7 @@ gulp.task('jshint', lint);
 
 
 function build() {
-	return buildStrawman([
+	return buildStrawman(args.samples ? args.samples.split(',') : [
 		'enyo', 'moonstone', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos'
 	]);
 }
