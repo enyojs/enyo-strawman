@@ -2,13 +2,15 @@ var
 	kind = require('enyo/kind');
 
 var
+	FittableColumns = require('layout/FittableColumns');
+
+var
 	GridListImageItem = require('moonstone/GridListImageItem'),
 	Button = require('moonstone/Button'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
 	NewDataList = require('moonstone/NewDataList'),
 	Overlay = require('moonstone/Overlay'),
 	Panel = require('moonstone/Panel'),
-	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	Collection = require('enyo/Collection'),
 	Control = require('enyo/Control'),
@@ -77,9 +79,9 @@ function selectedValue (selected) {
 
 module.exports = kind({
 	name: 'moon.sample.NewDataListSample',
-	kind: Panels,
-	pattern: 'activity',
+	kind: FittableColumns,
 	classes: 'moon enyo-fit enyo-unselectable',
+	style: 'padding: 0', // offsetting margin added by .moon
 	components: [
 		{
 			kind: Panel,
@@ -143,7 +145,7 @@ module.exports = kind({
 		},
 		{
 			kind: Panel,
-			joinToPrev: true,
+			fit: true,
 			title:'New Data List',
 			headerComponents: [
 				{kind: Button, content:'Refresh', ontap:'refreshItems'}
@@ -172,7 +174,7 @@ module.exports = kind({
 		{from: '$.selectionTypePicker.selected', to: '$.list.selectionType', transform: selectedValue}
 	],
 	create: function () {
-		Panels.prototype.create.apply(this, arguments);
+		FittableColumns.prototype.create.apply(this, arguments);
 		this.refreshItems(500);
 	},
 	generateRecords: function () {

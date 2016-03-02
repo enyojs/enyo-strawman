@@ -53,7 +53,7 @@ module.exports = kind({
 			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
 			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
 		]},
-		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, onShowingChanged: 'panelsShowingChanged', components: [
+		{name: 'panels', kind: Panels, pattern: 'activity', useHandle: true, hasCloseButton: false, onShowingChanged: 'panelsShowingChanged', components: [
 			{title: 'First Panel', classes: 'moon-7h', titleBelow:'Sub-title', subTitleBelow:'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next1'},
 				{kind: Item, content: 'Item Two', ontap: 'next1'},
