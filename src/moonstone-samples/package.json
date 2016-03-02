@@ -9,7 +9,8 @@
   ],
   "assets": [
     "assets/**/*.*",
-    "resources/**/*.*"
+    "resources/**/*.*",
+    "../../fonts/**/*.*"
   ],
   "main": "index.js",
   "moduleDir": "src",

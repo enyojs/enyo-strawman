@@ -6,7 +6,8 @@
     "../../icon-mini.png",
     "../../icon-large.png",
     "assets/**/*.*",
-    "resources/**/*.*"
+    "resources/**/*.*",
+    "../../fonts/**/*.*"
   ],
   "devAssets": [],
   "styles": [
