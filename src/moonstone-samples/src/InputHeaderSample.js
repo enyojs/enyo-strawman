@@ -48,8 +48,10 @@ module.exports = kind({
 				subTitleBelow: 'Sub-sub Header'
 			}
 		]},
-		{kind: Divider, content: 'Result', classes: 'moon-input-header-sample-result'},
-		{kind: BodyText, name: 'console', content: 'Input: '}
+		{classes: 'moon-input-header-sample-result', components: [
+			{kind: Divider, content: 'Result'},
+			{kind: BodyText, name: 'console', content: 'Input: '}
+		]}
 	],
 	nextPanel: function () {
 		this.$.panels.next();
