@@ -5,3 +5,10 @@
 .moon-input-sample-result {
 	padding-top:20px;
 }
+
+.moon-input-header-sample-result {
+	position: absolute;
+	right: 96px;
+	bottom: 12px;
+	left: 96px;
+}
