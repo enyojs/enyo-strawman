@@ -130,7 +130,7 @@ function lint () {
 }
 
 function promiseStrawman(samples) {
-	console.log('Building Enyo-Strawman for ' + samples.join(', ') + '...');
+	console.log('Building Enyo-Strawman for ' + samples.join(', '));
 	var samplers = [promiseSampler()];
 	for(var i=0; i<samples.length; i++) {
 		samplers.push(promiseSampler(samples[i]));
