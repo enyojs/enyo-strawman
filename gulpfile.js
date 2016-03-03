@@ -106,37 +106,15 @@ function buildStrawman(samples) {
 		}
 	}
 	writeConfig(samples);
-	samples.unshift('.');
 
-	console.log('Building Enyo-Strawman...');
-
-	return Promise.reduce(samples, function(_, item, index, length) {
-		process.chdir(cwd);
-		var target = item.replace('-light', '');
-		var theme = 'dark';
-		if(item.indexOf('-light') > -1) {
-			theme = 'light'
-		}
-		var cmd = 'enyo pack . --title=\"Sampler\" --less-var=@moon-theme:' + theme +
-			' -l ' + args['log-level'];
-		cmd += (args.production) ? ' -P' : '';
-		cmd += (args['source-maps']) ? ' --source-maps' : ' --no-source-maps';
-		cmd += (args.cache) ? ' --cache' : ' --no-cache';
-		cmd += (args.clean) ? ' --clean' : ' --no-clean';
-		cmd += (args['log-json']) ? ' --log-json ' : '';
-		cmd += (args.user) ? '' : ' --no-user';
-		cmd += (args['script-safe']) ? ' --script-safe' : '';
-		
-		if(item!=='.') {
-			target = './src/' + target + '-samples';
-			cmd += ' -d ../../dist/' + item.replace('-extra', '');
-			console.log('Building ' + item + ' samples...');
-		} else {
-			cmd += ' --head-scripts=./config.js';
-		}
-		process.chdir(target);
-		return promiseExec(cmd);
-	}, null);
+	
+	if(args.clean) {
+		return clean().then(function() {
+			return promiseStrawman(samples);
+		});
+	} else {
+		return promiseStrawman(samples);
+	}
 }
 
 function clean() {
@@ -151,10 +129,44 @@ function lint () {
 		.pipe(jshint.reporter('fail'));
 }
 
+function promiseStrawman(samples) {
+	console.log('Building Enyo-Strawman for ' + samples.join(', ') + '...');
+	var samplers = [promiseSampler()];
+	for(var i=0; i<samples.length; i++) {
+		samplers.push(promiseSampler(samples[i]));
+	}
+	return Promise.all(samplers);
+}
+
+function promiseSampler(item) {
+	var target = '.';
+	var cmd = 'enyo pack . --title=Sampler --no-clean -l ' + args['log-level'];
+	cmd += (args.production) ? ' -P' : '';
+	cmd += (args['source-maps']) ? ' --source-maps' : ' --no-source-maps';
+	cmd += (args.cache) ? ' --cache' : ' --no-cache';
+	cmd += (args['log-json']) ? ' --log-json ' : '';
+	cmd += (args.user) ? '' : ' --no-user';
+	cmd += (args['script-safe']) ? ' --script-safe' : '';
+	
+	if(item) {
+		target = './src/' + item.replace('-light', '') + '-samples';
+		cmd += ' -d ../../dist/' + item.replace('-extra', '');
+		if(item.indexOf('moonstone')>-1 && item.indexOf('-light')>-1) {
+			cmd += ' --less-var=@moon-theme:light';
+		}
+	} else {
+		cmd += ' --head-scripts=./config.js';
+	}
+	return promiseExec(cmd, {cwd:target});
+}
+
+process.stdout.setMaxListeners(0);
+process.stderr.setMaxListeners(0);
 
 function promiseExec(cmd, opts) {
+	opts = opts || {cwd:process.cwd()};
 	return new Promise(function(resolve, reject) {
-		var child = exec(cmd, {cwd:process.cwd()}, function(err, stdout, stderr) {
+		var child = exec(cmd, opts, function(err, stdout, stderr) {
 			if(err)
 				reject(err);
 			else
