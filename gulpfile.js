@@ -4,9 +4,9 @@ var
 	gulp = require('gulp'),
 	fs = require('fs'),
 	Promise = require('bluebird'),
-	del = require('del'),
 	jshint = require('gulp-jshint'),
 	nom = require('nomnom'),
+	rimraf = Promise.promisify(require('rimraf')),
 	exec = require('child_process').exec,
 	stylish = require('jshint-stylish');
 
@@ -22,7 +22,6 @@ var args = nom
 			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
 	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
-	.option('script-safe', {flag:false, default:false, help:'Similar "user" option, except for older versions of enyo-dev'})
 	.parse();
 
 gulp.task('default', ['build']);
@@ -36,6 +35,7 @@ gulp.task('jshint', lint);
 
 
 function build() {
+	console.log('Building Enyo-Strawman...');
 	return buildStrawman([
 		'enyo', 'moonstone', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos'
 	]);
@@ -51,22 +51,26 @@ function buildAll() {
 			i--;
 		}
 	}
+	console.log('Building Enyo-Strawman for ' + samples.join(', '));
 	return buildStrawman(samples);
 }
 
 function moonstone() {
+	console.log('Building moonstone-extra strawman...');
 	return buildStrawman([
 		'enyo', 'moonstone-extra', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos'
 	]);
 }
 
 function garnet() {
+	console.log('Building garnet strawman...');
 	return buildStrawman([
 		'enyo', 'garnet', 'layout', 'enyo-ilib', 'canvas', 'svg', 'enyo-webos'
 	]);
 }
 
 function sunstone() {
+	console.log('Building sunstone strawman...');
 	return buildStrawman([
 		'enyo', 'sunstone', 'layout', 'enyo-ilib', 'canvas', 'svg', 'enyo-webos'
 	]);
@@ -91,7 +95,6 @@ function writeConfig(samples) {
 }
 
 function buildStrawman(samples) {
-	var cwd = process.cwd();
 	var mI = samples.indexOf('moonstone');
 	var meI = samples.indexOf('moonstone-extra');
 	if(meI > -1) {
@@ -106,7 +109,6 @@ function buildStrawman(samples) {
 		}
 	}
 	writeConfig(samples);
-
 	
 	if(args.clean) {
 		return clean().then(function() {
@@ -118,7 +120,7 @@ function buildStrawman(samples) {
 }
 
 function clean() {
-	return del(['./dist']);
+	return rimraf('./dist', {disableGlob:true});
 }
 
 function lint () {
@@ -130,49 +132,41 @@ function lint () {
 }
 
 function promiseStrawman(samples) {
-	console.log('Building Enyo-Strawman for ' + samples.join(', '));
-	var samplers = [promiseSampler()];
+	var enyo = require('enyo-dev');
+	var samplers = [promiseSampler(enyo)];
 	for(var i=0; i<samples.length; i++) {
-		samplers.push(promiseSampler(samples[i]));
+		samplers.push(promiseSampler(enyo, samples[i]));
 	}
 	return Promise.all(samplers);
 }
 
-function promiseSampler(item) {
+function promiseSampler(enyo, item) {
+	var cwd = process.cwd();
 	var target = '.';
-	var cmd = 'enyo pack . --title=Sampler --no-clean -l ' + args['log-level'];
-	cmd += (args.production) ? ' -P' : '';
-	cmd += (args['source-maps']) ? ' --source-maps' : ' --no-source-maps';
-	cmd += (args.cache) ? ' --cache' : ' --no-cache';
-	cmd += (args['log-json']) ? ' --log-json ' : '';
-	cmd += (args.user) ? '' : ' --no-user';
-	cmd += (args['script-safe']) ? ' --script-safe' : '';
-	
+	var opts = {
+		package: '.',
+		sourceMaps: args['source-maps'],
+		clean: false,
+		cache: args.cache,
+		production: args.production,
+		title: 'Sampler',
+		logLevel: args['log-level'],
+		logJson: args['log-json'],
+		user: args.user
+	};
 	if(item) {
 		target = './src/' + item.replace('-light', '') + '-samples';
-		cmd += ' -d ../../dist/' + item.replace('-extra', '');
+		opts.outDir = '../../dist/' + item.replace('-extra', '');
 		if(item.indexOf('moonstone')>-1 && item.indexOf('-light')>-1) {
-			cmd += ' --less-var=@moon-theme:light';
+			opts.lessVars = [{name: '@moon-theme', value: 'light'}];
 		}
 	} else {
-		cmd += ' --head-scripts=./config.js';
+		opts.headScripts = ['./config.js'];
 	}
-	return promiseExec(cmd, {cwd:target});
+	process.chdir(target);
+	var packager = enyo.packager(opts);
+	var promiseOn = Promise.promisify(packager.on, {context:packager});
+	process.chdir(cwd);
+	return promiseOn('end');
 }
 
-process.stdout.setMaxListeners(0);
-process.stderr.setMaxListeners(0);
-
-function promiseExec(cmd, opts) {
-	opts = opts || {cwd:process.cwd()};
-	return new Promise(function(resolve, reject) {
-		var child = exec(cmd, opts, function(err, stdout, stderr) {
-			if(err)
-				reject(err);
-			else
-				resolve();
-		});
-		child.stdout.pipe(process.stdout);
-		child.stderr.pipe(process.stderr);
-	});
-}
