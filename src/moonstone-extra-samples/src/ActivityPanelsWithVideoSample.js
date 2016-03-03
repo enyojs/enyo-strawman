@@ -5,14 +5,14 @@ var
 	Spotlight = require('spotlight');
 
 var
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
+	ChannelInfo = require('moonstone/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
-	Panels = require('moonstone-extra/Panels'),
+	Panels = require('moonstone/Panels'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -60,7 +60,7 @@ module.exports = kind({
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 		]},
-		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, onShowingChanged: 'panelsShowingChanged', components: [
+		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, hasCloseButton: false, onShowingChanged: 'panelsShowingChanged', components: [
 			{title: 'First Panel', titleBelow:'Sub-title', subTitleBelow:'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next1'},
 				{kind: Item, content: 'Item Two', ontap: 'next1'},

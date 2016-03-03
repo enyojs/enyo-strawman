@@ -2,13 +2,15 @@ var
 	kind = require('enyo/kind');
 
 var
+	FittableColumns = require('layout/FittableColumns');
+
+var
 	DatePicker = require('moonstone/DatePicker'),
 	ExpandableDataPicker = require('moonstone/ExpandableDataPicker'),
 	ExpandableInput = require('moonstone/ExpandableInput'),
 	ExpandableIntegerPicker = require('moonstone/ExpandableIntegerPicker'),
 	ExpandablePicker = require('moonstone/ExpandablePicker'),
 	Panel = require('moonstone/Panel'),
-	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	TimePicker = require('moonstone/TimePicker'),
 	DayPicker = require('moonstone/DayPicker'),
@@ -18,11 +20,72 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.ExpandablePickerSample',
-	kind: Control,
+	kind: FittableColumns,
 	classes: 'moon enyo-unselectable enyo-fit',
+	style: 'padding: 0', // offsetting margin added by .moon
 	components: [
-		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
-			{kind: Panel, name: 'nonGroupedPanel', onChange: 'pickerChanged', title: 'Expandable', headerType: 'medium', titleBelow: 'Not grouped', style: 'width:50%;', components: [
+		{kind: Panel, name: 'nonGroupedPanel', onChange: 'pickerChanged', title: 'Expandable', headerType: 'medium', titleBelow: 'Not grouped', style: 'width: 50%;', components: [
+			{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [
+				{style: 'max-width: 500px;', components: [
+					{kind: ExpandablePicker, noneText: 'Nothing selected', content: 'Expandable Picker', allowHtml:true, components: [
+						{content: 'English'},
+						{content: 'Spanish'},
+						{content: 'French'},
+						{content: 'German'},
+						{content: 'Italian'},
+						{content: 'Japanese'},
+						{content: 'Symbols <span style=\'color:orange;\'>&#x2620; &#x2764; &#x2619;</span>', allowHtml:true}
+					]},
+					{kind: ExpandablePicker, content: 'Pre-selected Picker', components: [
+						{content: 'On', active: true},
+						{content: 'Off'}
+					]},
+					{kind: ExpandablePicker, multipleSelection: true, noneText: 'Nothing selected', content: 'Non-auto-collapsing', autoCollapseOnSelect: false, components: [
+						{content: 'Item 1'},
+						{content: 'Item 2', active: true},
+						{content: 'Item 3', active: true}
+					]},
+					{kind: ExpandablePicker, noneText: 'Nothing selected with loooooooooooooooooooooooooong text truncation', content: 'Expandable Picker with looooooooooooooooooooooooooong text truncation', components: [
+						{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 1'},
+						{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 2'},
+						{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 3'}
+					]},
+					{kind: ExpandablePicker, disabled:true, content: 'Disabled Picker', components: [
+						{content: 'Item 1'},
+						{content: 'Item 2', active: true},
+						{content: 'Item 3'}
+					]},
+					{kind: ExpandablePicker, content: 'Pre-expanded picker', open: true, components: [
+						{content: 'Item 1'},
+						{content: 'Item 2', active: true},
+						{content: 'Item 3'}
+					]},
+					{kind: ExpandableIntegerPicker, autoCollapse: true, content: 'Integer Picker', value: 7, min: 3, max: 15, step: 1, unit: 'elephants'},
+					{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
+					{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
+					{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
+					{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
+					{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
+					{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
+						{bindings: [
+							{from: '.model.label', to: '.content'}
+						]}
+					]},
+					{kind: ExpandablePicker, content: 'Initially Hidden Items Picker', renderItemsOnShow: true, components: [
+						{content: 'Item 1'},
+						{content: 'Item 2', active: true},
+						{content: 'Item 3'}
+					]},
+					{kind: ExpandablePicker, content: 'No None Text', noneText: '', components: [
+						{content: 'Item 1'},
+						{content: 'Item 2'},
+						{content: 'Item 3'}
+					]}
+				]}
+			]}
+		]},
+		{kind: Panel, name: 'groupedPanel', onChange: 'pickerChanged', title: 'Pickers', headerType: 'medium', titleBelow: 'Grouped', fit: true, components: [
+			{kind: Group, tag:null, highlander: true, components: [
 				{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [
 					{style: 'max-width: 500px;', components: [
 						{kind: ExpandablePicker, noneText: 'Nothing selected', content: 'Expandable Picker', allowHtml:true, components: [
@@ -38,10 +101,10 @@ module.exports = kind({
 							{content: 'On', active: true},
 							{content: 'Off'}
 						]},
-						{kind: ExpandablePicker, multipleSelection: true, noneText: 'Nothing selected', content: 'Non-auto-collapsing', autoCollapseOnSelect: false, components: [
+						{kind: ExpandablePicker, content: 'Non-auto-collapsing', autoCollapseOnSelect: false, components: [
 							{content: 'Item 1'},
 							{content: 'Item 2', active: true},
-							{content: 'Item 3', active: true}
+							{content: 'Item 3'}
 						]},
 						{kind: ExpandablePicker, noneText: 'Nothing selected with loooooooooooooooooooooooooong text truncation', content: 'Expandable Picker with looooooooooooooooooooooooooong text truncation', components: [
 							{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 1'},
@@ -78,68 +141,6 @@ module.exports = kind({
 							{content: 'Item 1'},
 							{content: 'Item 2'},
 							{content: 'Item 3'}
-						]}
-					]}
-				]}
-			]},
-			{kind: Panel, name: 'groupedPanel', onChange: 'pickerChanged', title: 'Pickers', headerType: 'medium', titleBelow: 'Grouped', joinToPrev:true, components: [
-				{kind: Group, tag:null, highlander: true, components: [
-					{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [
-						{style: 'max-width: 500px;', components: [
-							{kind: ExpandablePicker, noneText: 'Nothing selected', content: 'Expandable Picker', allowHtml:true, components: [
-								{content: 'English'},
-								{content: 'Spanish'},
-								{content: 'French'},
-								{content: 'German'},
-								{content: 'Italian'},
-								{content: 'Japanese'},
-								{content: 'Symbols <span style=\'color:orange;\'>&#x2620; &#x2764; &#x2619;</span>', allowHtml:true}
-							]},
-							{kind: ExpandablePicker, content: 'Pre-selected Picker', components: [
-								{content: 'On', active: true},
-								{content: 'Off'}
-							]},
-							{kind: ExpandablePicker, content: 'Non-auto-collapsing', autoCollapseOnSelect: false, components: [
-								{content: 'Item 1'},
-								{content: 'Item 2', active: true},
-								{content: 'Item 3'}
-							]},
-							{kind: ExpandablePicker, noneText: 'Nothing selected with loooooooooooooooooooooooooong text truncation', content: 'Expandable Picker with looooooooooooooooooooooooooong text truncation', components: [
-								{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 1'},
-								{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 2'},
-								{content: 'Looooooooooooooooooooooooooooooooooooooooooooong Item 3'}
-							]},
-							{kind: ExpandablePicker, disabled:true, content: 'Disabled Picker', components: [
-								{content: 'Item 1'},
-								{content: 'Item 2', active: true},
-								{content: 'Item 3'}
-							]},
-							{kind: ExpandablePicker, content: 'Pre-expanded picker', open: true, components: [
-								{content: 'Item 1'},
-								{content: 'Item 2', active: true},
-								{content: 'Item 3'}
-							]},
-							{kind: ExpandableIntegerPicker, autoCollapse: true, content: 'Integer Picker', value: 7, min: 3, max: 15, step: 1, unit: 'elephants'},
-							{kind: ExpandableIntegerPicker, disabled:true, autoCollapse: true, content: 'Disabled Integer Picker', value: 2, min: 1, max: 15, unit: 'sec'},
-							{kind: DatePicker, noneText: 'Pick a Date', content: 'Date Picker'},
-							{kind: TimePicker, noneText: 'Pick a Date', content: 'Time Picker'},
-							{kind: DayPicker, noneText: 'Pick a Day', content: 'Day Picker'},
-							{kind: ExpandableInput, noneText: 'Enter text', content: 'Expandable Input', placeholder: 'Enter text'},
-							{kind: ExpandableDataPicker, content: 'Expandable Data Picker', noneText: 'Nothing Selected', components: [
-								{bindings: [
-									{from: '.model.label', to: '.content'}
-								]}
-							]},
-							{kind: ExpandablePicker, content: 'Initially Hidden Items Picker', renderItemsOnShow: true, components: [
-								{content: 'Item 1'},
-								{content: 'Item 2', active: true},
-								{content: 'Item 3'}
-							]},
-							{kind: ExpandablePicker, content: 'No None Text', noneText: '', components: [
-								{content: 'Item 1'},
-								{content: 'Item 2'},
-								{content: 'Item 3'}
-							]}
 						]}
 					]}
 				]}

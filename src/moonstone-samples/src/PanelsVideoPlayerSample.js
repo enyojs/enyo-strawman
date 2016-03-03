@@ -1,10 +1,12 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	Group = require('enyo/Group');
 
 var
-	Group = require('enyo/Group'),
 	FittableLayout = require('layout/FittableLayout'),
-	FittableColumnsLayout = FittableLayout.Columns,
+	FittableColumnsLayout = FittableLayout.Columns;
+
+var
 	Button = require('moonstone/Button'),
 	ChannelInfo = require('moonstone/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
@@ -24,79 +26,84 @@ module.exports = kind({
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
 		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
-			{kind: Panel, title: 'Video', classes: 'moon-4h', components: [
-				{kind: Divider, content: 'Select video content'},
-				{name: 'vidContents', kind: Group, style: 'margin-top: 20px;', components: [
-					{kind: SelectableItem, content: 'Counter', onActivate: 'webMovieCounter'},
-					{kind: SelectableItem, selected: true, content: 'Bunny', onActivate: 'webMovieBunny'},
-					{kind: SelectableItem, content: 'Sintel', onActivate: 'webMovieSintel'},
-					{kind: SelectableItem, content: 'Error URL', onActivate: 'error'}
-				]},
-				{classes: 'moon-vspacing-m', components: [
-					{kind: Button, content: 'Unload', ontap: 'unload'},
-					{kind: Button, content: 'Reload', ontap: 'load'},
-					{kind: ToggleButton, name: 'autoplayToggle', content: 'AutoPlay'}
-				]}
-			]},
-			{kind: Panel, joinToPrev: true, title: 'Player', layoutKind: FittableColumnsLayout, classes: 'moon-7h', components: [
+			{kind: Panel, title: 'Video Player', layoutKind: FittableColumnsLayout, components: [
+				{
+					classes: 'moon-4h',
+					components: [
+						{kind: Divider, content: 'Select video content'},
+						{name: 'vidContents', kind: Group, style: 'margin-top: 20px;', components: [
+							{kind: SelectableItem, content: 'Counter', onActivate: 'webMovieCounter'},
+							{kind: SelectableItem, selected: true, content: 'Bunny', onActivate: 'webMovieBunny'},
+							{kind: SelectableItem, content: 'Sintel', onActivate: 'webMovieSintel'},
+							{kind: SelectableItem, content: 'Error URL', onActivate: 'error'}
+						]},
+						{classes: 'moon-vspacing-m', components: [
+							{kind: Button, content: 'Unload', ontap: 'unload'},
+							{kind: Button, content: 'Reload', ontap: 'load'},
+							{kind: ToggleButton, name: 'autoplayToggle', content: 'AutoPlay'}
+						]}
+					]
+				},
 				{
 					fit: true,
-					components: [{
-						name: 'player',
-						kind: VideoPlayer,
-						inline:true,
-						classes: 'moon-8h',
-						poster: '@../assets/video-poster.png',
-						infoComponents: [{
-							kind: VideoInfoBackground,
-							orient: 'left',
-							fit: true,
+					components: [
+						{kind: Divider, content: 'Inline video player'},
+						{
+							name: 'player',
+							kind: VideoPlayer,
+							inline:true,
+							classes: 'moon-8h',
+							poster: '@../assets/video-poster.png',
+							infoComponents: [{
+								kind: VideoInfoBackground,
+								orient: 'left',
+								fit: true,
+								components: [
+									{
+										kind: ChannelInfo,
+										channelNo: '13',
+										channelName: 'AMC',
+										components: [
+											{content: '3D'},
+											{content: 'Live'},
+											{content: 'REC 08:22', classes: 'redicon'}
+										]
+									},
+									{
+										kind: VideoInfoHeader,
+										title: 'Downton Abbey',
+										subTitle: 'Mon June 21, 7:00 - 8:00pm',
+										subSubTitle: 'R - TV 14, V, L, SC',
+										description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
+									}
+								]
+							}, {
+								kind: VideoInfoBackground,
+								orient: 'right',
+								components: [
+									{kind: Clock}
+								]
+							}],
 							components: [
-								{
-									kind: ChannelInfo,
-									channelNo: '13',
-									channelName: 'AMC',
-									classes: 'moon-2h',
-									components: [
-										{content: '3D'},
-										{content: 'Live'},
-										{content: 'REC 08:22', classes: 'moon-video-player-info-redicon'}
-									]
-								},
-								{
-									kind: VideoInfoHeader,
-									title: 'Downton Abbey',
-									subTitle: 'Mon June 21, 7:00 - 8:00pm',
-									subSubTitle: 'R - TV 14, V, L, SC',
-									description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-								}
+								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'},
+								{kind: IconButton, backgroundOpacity: 'translucent'}
 							]
-						}, {
-							kind: VideoInfoBackground,
-							orient: 'right',
-							components: [
-								{kind: Clock}
-							]
-						}],
-						components: [
-							{kind: VideoFullscreenToggleButton},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'},
-							{kind: IconButton, backgroundOpacity: 'translucent'}
-						]
-					}]
+						}
+					]
 				}
 			]}
 		]}
 	],
 	bindings: [
-		{from: '.$.autoplayToggle.value', to: '.$.player.autoplay'}
+		{from: '$.autoplayToggle.value', to: '$.player.autoplay'}
 	],
 	unload: function () {
 		this.$.player.unload();
@@ -153,3 +160,5 @@ module.exports = kind({
 		this.$.videoInfoHeader.setTitle('Error video');
 	}
 });
+
+module.exports.badgeClasses = 'new';

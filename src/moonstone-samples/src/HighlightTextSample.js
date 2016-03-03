@@ -3,6 +3,9 @@ var
 	$L = require('enyo/i18n').$L;
 
 var
+	FittableColumns = require('layout/FittableColumns');
+
+var
 	Collection = require('enyo/Collection'),
 	ProgressiveFilter = require('enyo/ProgressiveFilter'),
 	Button = require('moonstone/Button'),
@@ -15,7 +18,6 @@ var
 	MarqueeItem	= Marquee.Item,
 	MarqueeSupport = Marquee.Support,
 	Panel = require('moonstone/Panel'),
-	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller');
 
 // FIXME. RE-IMPLEMENT FILTERING.
@@ -26,7 +28,7 @@ module.exports = kind({
 	name: 'moon.sample.HighlightTextSample',
 	classes: 'moon enyo-unselectable enyo-fit',
 	components: [
-		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
+		{kind: FittableColumns, classes: 'enyo-fit', style: 'padding: 0', components: [
 			{kind: Panel, title: 'STATIC', titleBelow: 'Simple items', subTitleBelow: 'Case insensitive', classes: 'moon-6h', components: [
 				{kind: Scroller, fit: true, components: [
 					{kind: Divider, content: 'Standard highlight'},
@@ -56,7 +58,7 @@ module.exports = kind({
 					{kind: Button, content: 'Dynamic Content Change', ontap: 'changeContent'}
 				]}
 			]},
-			{name: 'inputPanel', kind: Panel, headerOptions: {kind: InputHeader}, classes: 'moon-6h', joinToPrev: true, oninput: 'search', components: [
+			{name: 'inputPanel', kind: Panel, headerOptions: {kind: InputHeader}, fit: true, oninput: 'search', components: [
 				{kind: DataList, fit: true, name: 'list', components: [
 					{kind: Item, bindings: [
 						{from: '.model.text', to: '.$.text.content'},

@@ -8,17 +8,17 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
+	ChannelInfo = require('moonstone/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),
-	Panel = require('moonstone-extra/Panel'),
-	Panels = require('moonstone-extra/Panels'),
+	Panel = require('moonstone/Panel'),
+	Panels = require('moonstone/Panels'),
 	SelectableItem = require('moonstone/SelectableItem'),
 	ToggleButton = require('moonstone/ToggleButton'),
-	VideoFullscreenToggleButton = require('moonstone-extra/VideoFullscreenToggleButton'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoFullscreenToggleButton = require('moonstone/VideoFullscreenToggleButton'),
+	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({

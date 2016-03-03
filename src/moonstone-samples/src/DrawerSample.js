@@ -54,8 +54,8 @@ module.exports = kind({
 				{
 					name: 'panels',
 					kind: Panels,
+					hasCloseButton: false,
 					pattern: 'activity',
-					classes: 'enyo-fit',
 					components: [
 						{title: 'First Panel', components: [
 							{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [

@@ -32,7 +32,7 @@ var
 	ToggleItem = require('moonstone/ToggleItem'),
 	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
 	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
-	VideoPlayer = require('moonstone-extra/VideoPlayer');
+	VideoPlayer = require('moonstone/VideoPlayer');
 
 module.exports = kind({
 	name: 'dmoon.sample.HistorySample',

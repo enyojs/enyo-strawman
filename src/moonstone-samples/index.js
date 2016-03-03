@@ -35,6 +35,7 @@ var
 		FormCheckboxSample					: require('./src/FormCheckboxSample'),
 		HeaderSample						: require('./src/HeaderSample'),
 		HighlightTextSample					: require('./src/HighlightTextSample'),
+		HistorySample						: require('./src/HistorySample'),
 		IconButtonSample					: require('./src/IconButtonSample'),
 		IconSample							: require('./src/IconSample'),
 		ImageBadgeSample					: require('./src/ImageBadgeSample'),

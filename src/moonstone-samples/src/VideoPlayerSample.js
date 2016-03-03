@@ -17,6 +17,12 @@ var
 	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone/VideoPlayer');
 
+var sources = [
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.VideoPlayerSample',
 	classes: 'moon enyo-fit enyo-unselectable moon-video-player-sample',
@@ -25,11 +31,7 @@ module.exports = kind({
 		{
 			name: 'player',
 			kind: VideoPlayer,
-			sources: [
-				{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
-				{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
-				{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
-			],
+			sources: sources,
 			poster: '@../assets/video-poster.png',
 			autoplay: true,
 			onPlaybackControlsTapped: 'controlsTapped',
@@ -37,46 +39,45 @@ module.exports = kind({
 				{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 					{
 						kind: ChannelInfo,
-						channelNo: '13',
+						channelNo: '789-123',
 						channelName: 'AMC',
-						classes: 'moon-2h',
+						channelDesc: 'KRON-HD',
+						channelMoreDesc: '4:30 - 5:30PM',
 						components: [
-							{content: '3D'},
-							{content: 'Live'},
-							{content: 'REC 08:22', classes: 'moon-video-player-info-redicon '}
+							{content: 'DTV'},
+							{content: 'Cinema'},
+							{content: '3D'}
 						]
 					},
 					{
 						kind: VideoInfoHeader,
-						title: 'Downton Abbey - Extra Title',
-						subTitle: 'Mon June 21, 7:00 - 8:00pm',
-						subSubTitle: 'R - TV 14, V, L, SC',
-						description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-						components: [
-							{content: 'Icon 1', classes: 'moon-video-player-info-icon'},
-							{content: 'Icon 2', classes: 'moon-video-player-info-icon'},
-							{content: 'Icon 3', classes: 'moon-video-player-info-icon'}
-						]
+						title: 'Downton Abbey',
+						uppercase: false,
+						// Todo, we can remove below comment out after policy of samples is decided.
+						// In latest tag like 2.6.0-pre.5, we don't have samples.
+						// src: '$lib/moonstone/samples/assets/default-music.png',
+						description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 					}
 				]},
 				{kind: VideoInfoBackground, orient: 'right', background: true, components: [
 					{kind: Clock}
 				]}
 			],
-			components: [
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls'},
-				{kind: Button, content: 'Unload', ontap: 'unload'},
-				{kind: Button, content: 'Reload', ontap: 'load'},
-				{kind: ToggleButton, content: 'FF/Rewind', name: 'ffrewToggleButton'},
+	   		components: [
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls', backgroundOpacity: 'translucent'},
+				{kind: Button, content: 'Unload', backgroundOpacity: 'translucent', ontap: 'unload'},
+				{kind: Button, content: 'Reload', backgroundOpacity: 'translucent', ontap: 'load'},
+				{kind: ToggleButton, content: 'FF/Rewind', name: 'ffrewToggleButton', backgroundOpacity: 'translucent'},
 				{kind: ContextualPopupDecorator, components: [
 					{kind: TooltipDecorator, components: [
-						{kind: Button, content: 'Popup'},
+						{kind: Button, content: 'Popup', backgroundOpacity: 'translucent'},
 						{kind: Tooltip, floating: true, content: 'I\'m a tooltip for a button.'}
 					]},
 					{
 						kind: ContextualPopup,
 						classes: 'moon-3h moon-6v',
+						backgroundOpacity: 'translucent',
 						components: [
 							{kind: Item, content: 'Item 1'},
 							{kind: Item, content: 'Item 2'},
@@ -84,9 +85,9 @@ module.exports = kind({
 						]
 					}
 				]},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 			]
 		},
 		{kind: Dialog, name: 'tapDialog', title: 'The controls were tapped.', message: 'Press OK to dismiss', components: [
@@ -94,8 +95,8 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '.$.player.disablePlaybackControls', to: '.$.controlsToggleButton.value', oneWay:false},
-		{from: '.$.player.showFFRewindControls', to: '.$.ffrewToggleButton.value', oneWay:false}
+		{from: '$.player.disablePlaybackControls', to: '$.controlsToggleButton.value', oneWay:false},
+		{from: '$.player.showFFRewindControls', to: '$.ffrewToggleButton.value', oneWay:false}
 	],
 	controlsTapped: function () {
 		this.$.tapDialog.show();
@@ -109,11 +110,9 @@ module.exports = kind({
 	load: function () {
 		this.$.player.unload();
 		// We can set source by sources array
-		this.sources = [
-			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
-			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
-			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
-		];
+		this.sources = sources;
 		this.$.player.setSources(this.sources);
 	}
 });
+
+module.exports.badgeClasses = 'new';
