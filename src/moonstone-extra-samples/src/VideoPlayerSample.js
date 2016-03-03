@@ -3,7 +3,7 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
+	ChannelInfo = require('moonstone/ChannelInfo'),
 	Clock = require('moonstone/Clock'),
 	ContextualPopup = require('moonstone/ContextualPopup'),
 	ContextualPopupDecorator = require('moonstone/ContextualPopupDecorator'),
@@ -13,8 +13,8 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
+	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
+	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
