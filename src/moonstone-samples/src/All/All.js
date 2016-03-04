@@ -1,9 +1,6 @@
 var
 	i18n = require('enyo/i18n'),
-	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Router = require('enyo/Router');
+	kind = require('enyo/kind');
 
 var
 	Enyo_iLib = require('enyo-ilib');
@@ -23,10 +20,10 @@ var
 	Scroller = require('moonstone/Scroller'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Router = require('enyo/Router');
+	DataRepeater = require('enyo/DataRepeater');
 
 var
+	AppRouter = require('../../../strawman/AppRouter'),
 	LinkSupport = require('../../../strawman/LinkSupport');
 
 var locales = [
@@ -49,25 +46,6 @@ var LocaleItem = kind({
 	},
 	updateTitle: function () {
 		this.set('content', this.locale + ' ' + this.title);
-	}
-});
-
-var appRouter = kind({
-	kind: Router,
-	useHistory: true,
-	routes: [
-		{path: ':sampleName/:locale', handler: 'handleRoute'},
-		{path: ':sampleName', handler: 'handleRoute'},
-		{path: '/:locale', handler: 'handleRouteLocaleOnly'}
-	],
-	events: {
-		onRouteChange: ''
-	},
-	handleRoute: function (sampleName, locale) {
-		this.doRouteChange({sampleName: sampleName, locale: locale || 'local'});
-	},
-	handleRouteLocaleOnly: function (locale) {
-		this.handleRoute({sampleName: null, locale: locale});
 	}
 });
 
@@ -150,26 +128,24 @@ module.exports = kind({
 			]}
 		]},
 		{name: 'home'},
-		{name: 'router', kind: appRouter, history: true, triggerOnStart: true}
+		{name: 'router', kind: AppRouter, history: true, triggerOnStart: true}
 	],
 	bindings: [
 		{from: 'locales', to: '$.localeRepeater.collection'},
 		{from: 'title', to: '$.listpanel.title'}
 	],
 	listTools: [
-		{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
+		{kind: Panels, pattern: 'activity', hasCloseButton: false, classes: 'enyo-fit', components: [
 			{kind: Panel, name: 'listpanel', headerType: 'small',
 				headerComponents: [
-					{kind: Button, content: 'Back', small: true, href: 'index.html', mixins: [LinkSupport]}
+					{kind: Button, content: 'Back', small: true, href: '../index.html', mixins: [LinkSupport]}
 				],
 				components: [
 					{name: 'list', kind: DataList, fixedChildSize: 62, components: [
 						{kind: SampleListItem, bindings: [
 							{from: 'model.badgeClasses', to: 'badgeClasses'},
 							{from: 'model.label', to: 'content'},
-							{from: 'model.name', to: 'href', transform: function (v) {
-								return '#' + v;
-							}}
+							{from: 'model.href', to: 'href'}
 						]}
 					]}
 				]
@@ -193,11 +169,19 @@ module.exports = kind({
 	createList: function () {
 		var samples = this.get('samples'),
 			sorted = Object.keys(samples).sort(),
-			dataList = [];
+			dataList = [],
+			loc = this.get('locale'),
+ 			ext = ((!loc || loc==='local') ? '' : ('/' + loc));
 		for (var i = 0; i < sorted.length; i++) {
 			var sampleName = sorted[i],
 				sample = samples[sampleName];
-			dataList.push({sample: sample, name: sampleName, label: sampleName.replace(/(.*)Sample$/i, '$1'), badgeClasses: sample.badgeClasses});
+			dataList.push({
+ 				sample: sample,
+ 				name: sampleName,
+ 				label: sampleName.replace(/(.*)Sample$/i, '$1'),
+ 				badgeClasses: sample.badgeClasses,
+ 				href: '#' + sampleName + ext
+ 			});
 		}
 		if (!this.$.list) {
 			this.$.home.createComponents(this.listTools, {owner: this});
@@ -229,6 +213,7 @@ module.exports = kind({
 		}
 		this.locales.find(function(elem) { return elem.get('locale') == newLocale; }).set('selected', true);
 		i18n.updateLocale(newLocale == 'local' ? null : newLocale);
+		this.createList();
 	},
 	sampleChanged: function (was, is) {
 		if (was) {
@@ -263,7 +248,7 @@ module.exports = kind({
 			this.$.router.trigger({location: this.get('location'), change: true});
 			this.checkLocale();
 		} else {
-			window.location.href = 'index.html';
+			window.location.href = '../index.html';
 		}
 	},
 	reload: function () {
@@ -283,7 +268,7 @@ module.exports = kind({
 			// this.enableStylesheet(s);
 
 			this.$.home.hide();
-			global.sample = this.createComponent({name: s, kind: this.samples[s]}).render();
+			global.sample = this.createComponent({name: s, kind: this.samples[s], _locale:this.get('locale')}).render();
 			console.log('%c%s Created and Launched', 'color:green;', s);
 			this.updateTitle(s);
 

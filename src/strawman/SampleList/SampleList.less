@@ -15,7 +15,9 @@
 		text-transform: lowercase;
 		opacity: 0.6;
 		transition: opacity 0.25s;
-		font-family: @strawman-font-family-button;
+		font-family: @strawman-button-font-family;
+		font-weight: @strawman-button-font-weight;
+		font-style: @strawman-button-font-style;
 
 		&.spotlight {
 			opacity: 1;
@@ -28,6 +30,48 @@
 			line-height: 1.5em;
 			font-size: 3em;
 			border-radius: 0;
+		}
+	}
+	
+	.strawman-sample-back {
+		display: none;
+	}
+	
+	&.wearable-sample {
+
+		@media only screen and (max-width: @strawman-screen-max-size-wearable) {
+			.strawman-sample {
+				background: white;
+				padding-bottom: 60px;
+
+				&.platform-sample {
+					padding: 2rem;
+					& > :last-child {
+						padding-bottom: 60px;
+					}
+				}
+			}
+			.strawman-sample-back {
+				display: block;
+				position: absolute;
+				width: 60px;
+				height: 320px;
+				top: 260px;
+				left: 0;
+				right: 0;
+				color: white;
+				margin: 0;
+				padding: 0 130px;
+				border-radius: 9999px;
+				font-size: 60px;
+				line-height: 60px;
+				z-index: 9999;
+				font-weight: bold;
+				background-color: gray;
+				opacity: 0.8;
+				text-align: center;
+				overflow: hidden;
+			}
 		}
 	}
 }

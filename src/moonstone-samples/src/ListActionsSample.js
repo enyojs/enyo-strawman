@@ -1,5 +1,8 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	Collection = require('enyo/Collection'),
+	DataRepeater = require('enyo/DataRepeater'),
+	Group = require('enyo/Group');
 
 var
 	BodyText = require('moonstone/BodyText'),
@@ -15,10 +18,7 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	Tooltip = require('moonstone/Tooltip'),
-	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Group = require('enyo/Group');
+	TooltipDecorator = require('moonstone/TooltipDecorator');
 
 module.exports = kind({
 	name: 'moon.sample.ListActionsSample',
@@ -63,7 +63,7 @@ module.exports = kind({
 				{kind: Tooltip, position: 'above', content: 'Dummy List Actions'},
 
 				//* List actions with proportional width
-				{kind: ListActions, proportionalWidth: true, iconSrc: '@../assets/icon-list.png', listActions: [
+				{kind: ListActions, proportionalWidth: true, icon: 'denselist', listActions: [
 					{action: 'Cost', components: [
 						{kind: Divider, content: 'Cost'},
 						{kind: Scroller, defaultKind: ToggleItem, fit: true, components: [
@@ -112,10 +112,12 @@ module.exports = kind({
 			]}
 		], components: [
 			{components: [
-				{kind: Button, small:true, content: 'Add Option to Category 1', ontap: 'addToStatic'},
-				{kind: Button, small:true, content: 'Add Option to Category 2', ontap: 'addToRepeater'},
-				{kind: Button, small:true, content: 'Add Option to Category 3', ontap: 'addToList'},
-				{classes: 'moon-1v'},
+				{kind: Divider, content: 'Add Option to:'},
+				{kind: Button, small:true, content: 'Category 1', ontap: 'addToStatic'},
+				{kind: Button, small:true, content: 'Category 2', ontap: 'addToRepeater'},
+				{kind: Button, small:true, content: 'Category 3', ontap: 'addToList'},
+				{classes: 'moon-2v'},
+				{kind: Divider, content: 'ListActions Modifications'},
 				{kind: Button, small:true, content: 'Breadcrumb Panel', ontap: 'toggleBreadcrumb'},
 				{kind: ToggleButton, small: true, toggleOnLabel: 'Header Type: Small', toggleOffLabel: 'Header Type: Medium', ontap: 'toggleHeaderSize'},
 				{name: 'toggleDisabledListActions', kind: ToggleButton, small: true, toggleOnLabel: 'ListActions: Disabled', toggleOffLabel: 'ListActions: Enabled', value: true}
@@ -190,3 +192,5 @@ module.exports = kind({
 		]));
 	}
 });
+
+module.exports.badgeClasses = 'new';
