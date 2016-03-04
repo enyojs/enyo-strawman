@@ -236,13 +236,6 @@ module.exports = kind({
 		{from: '$.btnSpotlightModal.value', to: '$.buttonPopup.autoDismiss', kind: InvertBooleanBinding, oneWay: false},
 		{from: '$.btnModal.value', to: '$.buttonPopup.modal', oneWay: false}
 	],
-	modelToggled: function(inSender, inEvent) {
-		this.$.buttonPopup.setModal(inSender.getActive());
-	},
-	buttonToggled: function (sender, ev) {
-		this.$.buttonPopup.setSpotlightModal(sender.getActive());
-		this.$.buttonPopup.setAutoDismiss(!sender.getActive());
-	},
 	dismissRadioSelection: function () {
 		if(this.$.nestedRadioDismissButton.value) this.$.nestedRadioPopup.hide();
 	},
