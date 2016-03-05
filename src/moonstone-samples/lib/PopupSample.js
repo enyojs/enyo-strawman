@@ -4,18 +4,16 @@ var
 var
 	CardArranger = require('layout/CardArranger'),
 	FittableColumns = require('layout/FittableColumns'),
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
+	CheckboxItem = require('moonstone/CheckboxItem'),
 	FormCheckbox = require('moonstone/FormCheckbox'),
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone/Panels'),
 	Popup = require('moonstone/Popup'),
-	Scroller = require('moonstone/Scroller'),
-	ToggleButton = require('moonstone/ToggleButton');
+	Scroller = require('moonstone/Scroller');
 
 module.exports = kind({
 	name: 'moon.sample.PopupSample',
@@ -31,13 +29,22 @@ module.exports = kind({
 		{classes: 'moon-hspacing moon-vspacing-s', components: [
 			{kind: Button, content: 'Scroller Popup', ontap: 'showPopup', popup: 'scrollerPopup'},
 			{kind: Button, content: 'Button in Popup', ontap: 'showPopup', popup: 'buttonPopup'},
-			{kind: Button, content: 'Panels in Popup', ontap: 'showPopup', popup: 'panelsPopup'}
+			{kind: Button, content: 'Panels in Popup', ontap: 'showPopup', popup: 'panelsPopup'},
+			{kind: Button, content: 'Test Popup', ontap: 'showPopup', popup: 'testPopup'}
 		]},
+		{classes: 'moon-1v'},
+		{kind: Divider, content: 'Options (these apply to Test Popup)'},
+		{kind: CheckboxItem, content: 'Tap outside to close (autoDismiss)', name: 'autoDismissToggle'},
+		{kind: CheckboxItem, content: 'Modal', name: 'modalToggle'},
+		{kind: CheckboxItem, content: 'Show Close Button', name: 'showCloseButtonToggle'},
+		{kind: CheckboxItem, content: 'Animate', name: 'animateToggle'},
+		{kind: CheckboxItem, content: 'Lock 5-way inside popup (spotlightModal)', name: 'spotlightModalToggle'},
+		{kind: CheckboxItem, content: 'Close by back key (allowBackKey)', name: 'allowBackKeyToggle'},
 
 		{name: 'basicPopup', kind: Popup, content: 'Popup...'},
 		// The directPopup only works when we programmatically call 'showDirect' or 'hideDirect'. So, we set autoDismiss as false here.
 		{name: 'directPopup', kind: Popup, autoDismiss: false, components: [
-			{content: 'Direct Popup'},	
+			{content: 'Direct Popup'},
 			{kind: Button, content: 'Hide Direct', ontap: 'hidePopup', popup: 'directPopup', direct: true}
 		]},
 		{name: 'longPopup', kind: Popup, allowHtml: true, content: 'Don\'t go changing, to try and please me  <br>You never let me down before  <br>Don\'t imagine you\'re too familiar  <br>And I don\'t see you anymore  <br>I wouldn\'t leave you in times of trouble  <br>We never could have come this far I took the good times, I\'ll take the bad times I\'ll take you just the way you are Don\'t go trying some new fashion Don\'t change the color of your hair You always have my unspoken passion Although I might not seem to care I don\'t want clever conversation I never want to work that hard I just want someone that I can talk to I want you just the way you are. I need to know that you will always be The same old someone that I knew What will it take till you believe in me The way that I believe in you.'},
@@ -56,16 +63,15 @@ module.exports = kind({
 				{kind: Item, content: 'Test Item 10'}
 			]}
 		]},
-		{name: 'buttonPopup', kind: Popup, floating: true, components: [
+		{name: 'buttonPopup', kind: Popup, components: [
 			{kind: Divider, content: 'Buttons in popup example'},
 			{classes: 'moon-hspacing', components: [
 				{kind: Button, content: 'Hello'},
-				{kind: Button, content: 'Goodbye'},
-				{kind: ToggleButton, content: 'SpotlightModal', ontap: 'buttonToggled'}
+				{kind: Button, content: 'Goodbye'}
 			]}
 		]},
-		{name: 'panelsPopup', kind: Popup, floating: true, components: [
-			{kind: Panels, name: 'panels', defaultKind: FittableRows, arrangerKind: CardArranger, animate:false, classes: 'moon-12v', components: [
+		{name: 'panelsPopup', kind: Popup, showCloseButton: true, classes: 'moon-12v', components: [
+			{kind: Panels, name: 'panels', defaultKind: FittableRows, arrangerKind: CardArranger, animate:false, hasCloseButton: false, components: [
 				{components: [
 					{kind: Divider, content: 'Step 1: Terms of Service'},
 					{kind: Scroller, fit: true, spotlightPagingControls: true, horizontal: 'hidden', style: 'margin-bottom:20px;', components: [
@@ -75,7 +81,6 @@ module.exports = kind({
 						{fit: true, components: [
 							{kind: FormCheckbox, content: 'I agree', style: 'display:inline-block;'}
 						]},
-						{kind: ToggleButton, content: 'SpotlightModal', ontap: 'panelsToggled'},
 						{kind: Button, content: 'Sign me Up!', ontap: 'panelNext'}
 					]}
 				]},
@@ -85,9 +90,22 @@ module.exports = kind({
 					{kind: Button, content: 'Previous', ontap: 'panelPrev'}
 				]}
 			]}
+		]},
+		{name: 'testPopup', kind: Popup, components: [
+			{kind: Button, content: 'Hide', ontap: 'hidePopup', popup: 'testPopup'}
 		]}
 	],
-	popupActivator: null,
+	bindings: [
+		{from: '$.testPopup.autoDismiss', to: '$.autoDismissToggle.checked', oneWay: false},
+		{from: '$.testPopup.modal', to: '$.modalToggle.checked', oneWay: false},
+		{from: '$.testPopup.showCloseButton', to: '$.showCloseButtonToggle.checked', oneWay: false},
+		{from: '$.testPopup.animate', to: '$.animateToggle.checked', oneWay: false},
+		{from: '$.testPopup.spotlightModal', to: '$.spotlightModalToggle.checked', oneWay: false},
+		{from: '$.testPopup.allowBackKey', to: '$.allowBackKeyToggle.checked', oneWay: false},
+		{from: '$.testPopup.useDivider', to: '$.useDivider.checked', oneWay: false},
+		{from: '$.testPopup.title', to: '$.inputTitle.value', oneWay: false},
+		{from: '$.testPopup.subTitle', to: '$.inputSubTitle.value', oneWay: false}
+	],
 	showPopup: function (sender) {
 		this.hidePopups();
 		var p = this.$[sender.popup];
@@ -113,14 +131,6 @@ module.exports = kind({
 		this.$.basicPopup.hide();
 		this.$.longPopup.hide();
 		this.$.buttonPopup.hide();
-	},
-	buttonToggled: function (sender, event) {
-		this.$.buttonPopup.setSpotlightModal(sender.getActive());
-		this.$.buttonPopup.setAutoDismiss(!sender.getActive());
-	},
-	panelsToggled: function (sender, event) {
-		this.$.panelsPopup.setSpotlightModal(sender.getActive());
-		this.$.panelsPopup.setAutoDismiss(!sender.getActive());
 	},
 	panelNext: function () {
 		this.$.panels.next();
