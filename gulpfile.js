@@ -35,7 +35,6 @@ gulp.task('jshint', lint);
 
 
 function build() {
-	console.log('Building Enyo-Strawman...');
 	return buildStrawman([
 		'enyo', 'moonstone', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos'
 	]);
@@ -51,26 +50,22 @@ function buildAll() {
 			i--;
 		}
 	}
-	console.log('Building Enyo-Strawman for ' + samples.join(', '));
 	return buildStrawman(samples);
 }
 
 function moonstone() {
-	console.log('Building moonstone-extra strawman...');
 	return buildStrawman([
 		'enyo', 'moonstone-extra', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos'
 	]);
 }
 
 function garnet() {
-	console.log('Building garnet strawman...');
 	return buildStrawman([
 		'enyo', 'garnet', 'layout', 'enyo-ilib', 'canvas', 'svg', 'enyo-webos'
 	]);
 }
 
 function sunstone() {
-	console.log('Building sunstone strawman...');
 	return buildStrawman([
 		'enyo', 'sunstone', 'layout', 'enyo-ilib', 'canvas', 'svg', 'enyo-webos'
 	]);
@@ -132,12 +127,14 @@ function lint () {
 }
 
 function promiseStrawman(samples) {
+	console.log('Building Enyo-Strawman...');
 	var enyo = require('enyo-dev');
-	var samplers = [promiseSampler(enyo)];
-	for(var i=0; i<samples.length; i++) {
-		samplers.push(promiseSampler(enyo, samples[i]));
-	}
-	return Promise.all(samplers);
+	return promiseSampler(enyo).then(function() {
+		return Promise.reduce(samples, function(_, item, index, length) {
+			console.log('Building ' + item + ' samples...');
+			return promiseSampler(enyo, item);
+		}, null);
+	});
 }
 
 function promiseSampler(enyo, item) {
