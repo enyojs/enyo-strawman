@@ -44,5 +44,3 @@ module.exports = kind({
 	destroyAnsestor : function() { this.$.c11.destroy(); },
 	hideAnsestor    : function() { this.$.c11.hide(); }
 });
-
-module.exports.badgeClasses = 'new';
