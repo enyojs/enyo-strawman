@@ -7,7 +7,7 @@ var
 
 module.exports = kind({
 	name: 'enyo.sample.DragAvatarSample',
-	classes: 'drag-avatar-sample',
+	classes: 'drag-avatar-sample enyo-fit',
 	components: [
 		{content: 'Start dragging anywhere on the screen (open sample in new tab).'},
 		{kind: DragAvatar, offsetX: 0, offsetY: 64, components: [
