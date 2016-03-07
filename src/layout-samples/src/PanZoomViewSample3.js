@@ -55,5 +55,3 @@ module.exports = kind({
 		imageview.setSrc( this.planets[ (utils.indexOf(imageview.src, this.planets)+1)%this.planets.length ] );
 	}
 });
-
-module.exports.badgeClasses = 'new';

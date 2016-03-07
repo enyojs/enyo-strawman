@@ -59,5 +59,3 @@ module.exports = kind({
 		this.report(sender, 'released', 'd');
 	}
 });
-
-module.exports.badgeClasses = 'new';

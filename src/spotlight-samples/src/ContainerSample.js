@@ -42,5 +42,3 @@ module.exports = kind({
 		sender.applyStyle('border', null);
 	}
 });
-
-module.exports.badgeClasses = 'new';
