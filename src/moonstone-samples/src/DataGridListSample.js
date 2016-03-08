@@ -87,7 +87,6 @@ var dataTypes = [
 module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
-	hasCloseButton: false,
 	pattern: 'activity',
 	classes: 'moon enyo-unselectable moon-datagridlist-sample',
 	components: [

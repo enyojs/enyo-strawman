@@ -11,7 +11,7 @@ module.exports = kind({
 	name: 'moon.sample.ActivityPanelsSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{name: 'panels', kind: Panels, pattern: 'activity', hasCloseButton: false, components: [
+		{name: 'panels', kind: Panels, pattern: 'activity', components: [
 			{title: 'First Panel', titleBelow:'Sub-title', subTitleBelow:'Sub-sub title', headerComponents: [
 				{kind: ToggleButton, small:true, content:'Medium', name:'mediumHeaderToggle', ontap: 'typeTapped'},
 				{kind: ToggleButton, small:true, content:'Small', name:'smallHeaderToggle', ontap: 'typeTapped'}

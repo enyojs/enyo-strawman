@@ -35,7 +35,7 @@ module.exports = kind({
 				]}
 			]}
 		], components: [
-			{kind: Panels, pattern: 'activity', hasCloseButton: false, components: [
+			{kind: Panels, pattern: 'activity', components: [
 				{name: 'repeaterContainer', kind: Control}
 			]}
 		]},

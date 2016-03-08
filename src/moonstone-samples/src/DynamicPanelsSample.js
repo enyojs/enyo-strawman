@@ -15,7 +15,7 @@ module.exports = kind({
 	name: 'moon.sample.DynamicPanelsSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{name: 'panels', kind: Panels, popOnBack:true, wrap: true, hasCloseButton: false, pattern: 'activity'}
+		{name: 'panels', kind: Panels, popOnBack:true, wrap: true, pattern: 'activity'}
 	],
 	rendered: function () {
 		this.inherited(arguments);
