@@ -29,8 +29,6 @@ module.exports = kind({
 		]},
 		{kind: Button, content: 'Select All', ontap: 'buttonSelectAllTapped'},
 		{kind: Button, content: 'Deselect All', ontap: 'buttonDeselectAllTapped'},
-		{kind: Button, content: 'Home', ontap: 'buttonHomeTapped'},
-		{kind: Button, content: 'End', ontap: 'buttonEndTapped'},
 		{kind: RichText, value: 'Input <em>any</em> text (HTML tags will be preserved)'},
 		{kind: Button, content: 'Show RichText Value', classes: 'button-value', ontap: 'buttonValueTapped'},
 		{name: 'results', classes: 'results'}
@@ -42,14 +40,6 @@ module.exports = kind({
 	buttonDeselectAllTapped: function (sender, ev) {
 		this.$.richText.focus();
 		this.$.richText.removeSelection();
-	},
-	buttonHomeTapped: function (sender, ev) {
-		this.$.richText.focus();
-		this.$.richText.moveCursorToStart();
-	},
-	buttonEndTapped: function (sender, ev) {
-		this.$.richText.focus();
-		this.$.richText.moveCursorToEnd();
 	},
 	buttonFormatTapped: function (sender, ev) {
 		this.$.richText.focus();
