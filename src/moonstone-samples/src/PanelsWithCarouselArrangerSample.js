@@ -2,7 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
-	CarouselArranger = require('layout/CarouselArranger'),
+	CarouselArranger = require('layout/CarouselArranger');
+
+var
 	Panels = require('moonstone/Panels'),
 	Item = require('moonstone/Item');
 
@@ -67,3 +69,5 @@ module.exports = kind({
 		return true;
 	}
 });
+
+module.exports.badgeClasses = 'new';

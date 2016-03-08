@@ -54,10 +54,10 @@ module.exports = kind({
 				{
 					name: 'panels',
 					kind: Panels,
+					hasCloseButton: false,
 					pattern: 'activity',
-					classes: 'enyo-fit',
 					components: [
-						{title: 'First Panel', classes: 'moon-7h', components: [
+						{title: 'First Panel', components: [
 							{kind: Scroller, horizontal: 'hidden', classes: 'enyo-fill', components: [
 								{kind: ExpandablePicker, onChange: 'pickerChangedImg', content: 'Select Image', components: [
 									{content: 'Music',value: '@../assets/drawer_icon.png'},
@@ -80,28 +80,28 @@ module.exports = kind({
 								{kind: Item, content: 'Item Two', ontap: 'next'}
 							]}
 						]},
-						{title: 'Second Panel', classes: 'moon-7h', components: [
+						{title: 'Second Panel', components: [
 							{kind: Item, content: 'Item One', ontap: 'next'},
 							{kind: Item, content: 'Item Two', ontap: 'next'},
 							{kind: Item, content: 'Item Three', ontap: 'next'},
 							{kind: Item, content: 'Item Four', ontap: 'next'},
 							{kind: Item, content: 'Item Five', ontap: 'next'}
 						]},
-						{title: 'Third Panel', classes: 'moon-7h', components: [
+						{title: 'Third Panel', components: [
 							{kind: Item, content: 'Item One', ontap: 'next'},
 							{kind: Item, content: 'Item Two', ontap: 'next'},
 							{kind: Item, content: 'Item Three', ontap: 'next'},
 							{kind: Item, content: 'Item Four', ontap: 'next'},
 							{kind: Item, content: 'Item Five', ontap: 'next'}
 						]},
-						{title: 'Fourth Panel', classes: 'moon-7h', components: [
+						{title: 'Fourth Panel', components: [
 							{kind: Item, content: 'Item One', ontap: 'next'},
 							{kind: Item, content: 'Item Two', ontap: 'next'},
 							{kind: Item, content: 'Item Three', ontap: 'next'},
 							{kind: Item, content: 'Item Four', ontap: 'next'},
 							{kind: Item, content: 'Item Five', ontap: 'next'}
 						]},
-						{title: 'Fifth Panel', classes: 'moon-7h', components: [
+						{title: 'Fifth Panel', components: [
 							{kind: Item, content: 'Item One', ontap: 'next'},
 							{kind: Item, content: 'Item Two', ontap: 'next'},
 							{kind: Item, content: 'Item Three', ontap: 'next'},

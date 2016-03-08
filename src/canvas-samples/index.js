@@ -1,5 +1,8 @@
+require('enyo/options').accessibility = true;
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
 	Canvas = require('canvas');
@@ -13,10 +16,15 @@ var
 		// CanvasPrimitivesSample: require('./src/CanvasPrimitivesSample')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'Canvas Samples',
 	version: Canvas.version,
 	libraryName: 'Canvas',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+

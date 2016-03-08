@@ -87,8 +87,9 @@ var dataTypes = [
 module.exports = kind({
 	name: 'moon.sample.DataGridListSample',
 	kind: Panels,
+	hasCloseButton: false,
 	pattern: 'activity',
-	classes: 'moon enyo-fit enyo-unselectable moon-datagridlist-sample',
+	classes: 'moon enyo-unselectable moon-datagridlist-sample',
 	components: [
 		{kind: Panel, name: 'listPanel', title: 'Data Grid List', headerComponents: [
 			{kind: ToggleButton, content: 'Selection', name: 'selectionToggle', onChange: 'selectionChanged'},

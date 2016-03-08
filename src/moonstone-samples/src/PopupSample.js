@@ -62,8 +62,8 @@ module.exports = kind({
 				{kind: ToggleButton, content: 'SpotlightModal', ontap: 'buttonToggled'}
 			]}
 		]},
-		{name: 'panelsPopup', kind: Popup, floating: true, components: [
-			{kind: Panels, name: 'panels', defaultKind: FittableRows, arrangerKind: CardArranger, animate:false, classes: 'moon-12v', components: [
+		{name: 'panelsPopup', kind: Popup, floating: true, classes: 'moon-12v', components: [
+			{kind: Panels, name: 'panels', defaultKind: FittableRows, arrangerKind: CardArranger, animate:false, hasCloseButton: false, components: [
 				{components: [
 					{kind: Divider, content: 'Step 1: Terms of Service'},
 					{kind: Scroller, fit: true, spotlightPagingControls: true, horizontal: 'hidden', style: 'margin-bottom:20px;', components: [

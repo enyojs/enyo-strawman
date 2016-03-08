@@ -1,5 +1,6 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	Repeater = require('enyo/Repeater');
 
 var
 	Divider = require('moonstone/Divider'),
@@ -8,14 +9,13 @@ var
 	Panels = require('moonstone/Panels'),
 	Scroller = require('moonstone/Scroller'),
 	Tooltip = require('moonstone/Tooltip'),
-	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	Repeater = require('enyo/Repeater');
+	TooltipDecorator = require('moonstone/TooltipDecorator');
 
 module.exports = kind({
 	name: 'moon.sample.DynamicPanelsSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{name: 'panels', kind: Panels, popOnBack:true, wrap: true, pattern: 'activity', classes: 'enyo-fit'}
+		{name: 'panels', kind: Panels, popOnBack:true, wrap: true, hasCloseButton: false, pattern: 'activity'}
 	],
 	rendered: function () {
 		this.inherited(arguments);
@@ -23,7 +23,7 @@ module.exports = kind({
 	},
 	pushSinglePanel: function () {
 		this.$.panels.pushPanels([
-			{title: 'Panel ' + this.$.panels.getPanels().length, classes: 'moon-7h', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
+			{title: 'Panel ' + this.$.panels.getPanels().length, titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Scroller, fit:true, components: [
 					{kind: Repeater, count: 30, components: [
 						{kind: Item, content: 'Dummy Item', ontap: 'next'}
@@ -45,14 +45,14 @@ module.exports = kind({
 	},
 	pushJoinedPanels: function () {
 		this.$.panels.pushPanels([
-			{title: 'Panel ' + this.$.panels.getPanels().length, classes: 'moon-7h', titleBelow: 'Joined Panel 1', subTitleBelow: 'Sub-sub title', components: [
+			{title: 'Panel ' + this.$.panels.getPanels().length, titleBelow: 'Joined Panel 1', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Scroller, fit:true, components: [
 					{kind: Repeater, count: 30, components: [
 						{kind: Item, content: 'Dummy Item', ontap: 'next'}
 					]}
 				]}
 			]},
-			{joinToPrev:true, title: 'Panel ' + (this.$.panels.getPanels().length+1), classes: 'moon-7h', titleBelow: 'Joined Panel 2', subTitleBelow: 'Sub-sub title', components: [
+			{joinToPrev:true, title: 'Panel ' + (this.$.panels.getPanels().length+1), titleBelow: 'Joined Panel 2', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Scroller, fit:true, components: [
 					{kind: Repeater, count: 30, components: [
 						{kind: Item, content: 'Dummy Item', ontap: 'next'}
@@ -103,3 +103,5 @@ module.exports = kind({
 		}
 	}
 });
+
+module.exports.badgeClasses = 'new';

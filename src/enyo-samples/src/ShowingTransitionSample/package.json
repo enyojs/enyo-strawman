@@ -1,0 +1,6 @@
+{
+  "main": "ShowingTransitionSample.js",
+  "styles": [
+    "ShowingTransitionSample.less"
+  ]
+}

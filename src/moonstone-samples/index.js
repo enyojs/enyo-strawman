@@ -1,12 +1,18 @@
+require('enyo/options').accessibility = true;
+
 var
-	Sampler = require('./src/All'),
+	ready = require('enyo/ready'),
+	Sample = require('./src/All'),
 	samples = {
 		AccessibilitySample					: require('./src/AccessibilitySample'),
 		AccordionSample						: require('./src/AccordionSample'),
-		// ActivityPanelsSample				: require('./src/ActivityPanelsSample'),
-		// ActivityPanelsWithVideoSample		: require('./src/ActivityPanelsWithVideoSample'),
-		// AlwaysViewingPanelsSample			: require('./src/AlwaysViewingPanelsSample'),
-		// AlwaysViewingPanelsWithVideoSample	: require('./src/AlwaysViewingPanelsWithVideoSample'),
+		ActivityPanelsSample				: require('./src/ActivityPanelsSample'),
+		ActivityPanelsWithVideoSample		: require('./src/ActivityPanelsWithVideoSample'),
+		AlwaysViewingPanelsSample			: require('./src/AlwaysViewingPanelsSample'),
+		AlwaysViewingPanelsWithVideoSample	: require('./src/AlwaysViewingPanelsWithVideoSample'),
+		AnimatedButtonSample				: require('./src/AnimatedButtonSample'),
+		AudioPlaybackSample					: require('./src/AudioPlaybackSample'),
+		AudioPlaybackPlaylistSupportSample	: require('./src/AudioPlaybackPlaylistSupportSample'),
 		BodyTextSample						: require('./src/BodyTextSample'),
 		ButtonSample						: require('./src/ButtonSample'),
 		CalendarSample						: require('./src/CalendarSample'),
@@ -18,8 +24,8 @@ var
 		DatePickerSample					: require('./src/DatePickerSample'),
 		DialogSample						: require('./src/DialogSample'),
 		DividerSample						: require('./src/DividerSample'),
-		// DrawerSample						: require('./src/DrawerSample'),
-		// DynamicPanelsSample					: require('./src/DynamicPanelsSample'),
+		DrawerSample						: require('./src/DrawerSample'),
+		DynamicPanelsSample					: require('./src/DynamicPanelsSample'),
 		ExpandableDataPickerSample			: require('./src/ExpandableDataPickerSample'),
 		ExpandableInputSample				: require('./src/ExpandableInputSample'),
 		ExpandableListItemSample			: require('./src/ExpandableListItemSample'),
@@ -29,7 +35,7 @@ var
 		FormCheckboxSample					: require('./src/FormCheckboxSample'),
 		HeaderSample						: require('./src/HeaderSample'),
 		HighlightTextSample					: require('./src/HighlightTextSample'),
-		// HistorySample						: require('./src/HistorySample'),
+		HistorySample						: require('./src/HistorySample'),
 		IconButtonSample					: require('./src/IconButtonSample'),
 		IconSample							: require('./src/IconSample'),
 		ImageBadgeSample					: require('./src/ImageBadgeSample'),
@@ -42,15 +48,15 @@ var
 		ItemOverlaySample					: require('./src/ItemOverlaySample'),
 		LabeledTextItemSample				: require('./src/LabeledTextItemSample'),
 		LightPanelsSample					: require('./src/LightPanelsSample'),
-		// ListActionsSample					: require('./src/ListActionsSample'),
+		ListActionsSample					: require('./src/ListActionsSample'),
 		MarqueeSample						: require('./src/MarqueeSample'),
 		NewDataListSample					: require('./src/NewDataListSample'),
 		ObjectActionHorizontalTypeSample	: require('./src/ObjectActionHorizontalTypeSample'),
 		ObjectActionVerticalTypeSample		: require('./src/ObjectActionVerticalTypeSample'),
 		OverlaySample						: require('./src/OverlaySample'),
-		// PanelsVideoPlayerSample				: require('./src/PanelsVideoPlayerSample'),
-		// PanelsWithCardArrangerSample		: require('./src/PanelsWithCardArrangerSample'),
-		// PanelsWithCarouselArrangerSample	: require('./src/PanelsWithCarouselArrangerSample'),
+		PanelsVideoPlayerSample				: require('./src/PanelsVideoPlayerSample'),
+		PanelsWithCardArrangerSample		: require('./src/PanelsWithCardArrangerSample'),
+		PanelsWithCarouselArrangerSample	: require('./src/PanelsWithCarouselArrangerSample'),
 		PopupSample							: require('./src/PopupSample'),
 		ProgressButtonSample				: require('./src/ProgressButtonSample'),
 		ProgressSample						: require('./src/ProgressSample'),
@@ -68,11 +74,14 @@ var
 		TimePickerSample					: require('./src/TimePickerSample'),
 		ToggleButtonSample					: require('./src/ToggleButtonSample'),
 		ToggleItemSample					: require('./src/ToggleItemSample'),
-		TooltipSample						: require('./src/TooltipSample')
-		// VideoPlayerInlineSample				: require('./src/VideoPlayerInlineSample'),
-		// VideoPlayerSample					: require('./src/VideoPlayerSample')
+		TooltipSample						: require('./src/TooltipSample'),
+		VideoPlayerInlineSample				: require('./src/VideoPlayerInlineSample'),
+		VideoPlayerSample					: require('./src/VideoPlayerSample')
 	};
 
-Sampler.samples = samples;
+Sample.samples = samples;
 
-module.exports = Sampler;
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+

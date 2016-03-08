@@ -1,5 +1,9 @@
+require('enyo/options').accessibility = true;
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready'),
+	dom = require('enyo/dom');
 
 var
 	Layout = require('layout');
@@ -39,10 +43,16 @@ var
 		TreeSample						: require('./src/TreeSample')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'Layout Samples',
 	version: Layout.version,
 	libraryName: 'Layout',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+	dom.removeClass(document.body, 'onyx');
+});
+

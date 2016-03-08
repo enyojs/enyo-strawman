@@ -10,6 +10,12 @@ var
 	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone/VideoPlayer');
 
+var sources = [
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
+];
+
 module.exports = kind({
 	name: 'moon.sample.VideoPlayerInlineSample',
 	classes: 'moon enyo-fit enyo-unselectable moon-video-player-sample',
@@ -18,7 +24,7 @@ module.exports = kind({
 		{
 			name: 'player',
 			kind: VideoPlayer,
-			src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+			sources: sources,
 			poster: '@../assets/video-poster.png',
 			inline: true,
 			classes: 'moon-8h',
@@ -29,11 +35,10 @@ module.exports = kind({
 						kind: ChannelInfo,
 						channelNo: '13',
 						channelName: 'AMC',
-						classes: 'moon-2h',
 						components: [
-							{content: '3D'},
-							{content: 'Live'},
-							{content: 'REC 08:22', classes: 'moon-video-player-info-redicon'}
+							{content: 'DTV'},
+							{content: 'Cinema'},
+							{content: '3D'}
 						]
 					},
 					{
@@ -41,7 +46,7 @@ module.exports = kind({
 						title: 'Downton Abbey',
 						subTitle: 'Mon June 21, 7:00 - 8:00pm',
 						subSubTitle: 'R - TV 14, V, L, SC',
-						description: 'The series, set in the Yorkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley family and'
+						description: 'The series, set in the Yorukshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
 					}
 				]},
 				{kind: VideoInfoBackground, orient: 'right', components: [
@@ -49,17 +54,19 @@ module.exports = kind({
 				]}
 			],
 			components: [
-				{kind: VideoFullscreenToggleButton},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-				{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+				{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 			]
 		}
 	]
 });
+
+module.exports.badgeClasses = 'new';
