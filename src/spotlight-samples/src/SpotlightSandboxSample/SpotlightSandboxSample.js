@@ -113,6 +113,10 @@ module.exports = kind({
 			}
 		}
 	},
+	destroy: function () {
+		Spotlight.TestMode.disable();
+		this.inherited(arguments);
+	},
 	addBarracuda: function () {
 		var b = this.$.container.createComponent({kind: Barracuda}).render();
 		b.applyStyle('z-index:'+this.$.container.getClientControls().length+';');
