@@ -1,6 +1,7 @@
 var
 	kind = require('enyo/kind'),
-	$L = require('enyo/i18n').$L;
+	i18n = require('enyo/i18n'),
+	$L = i18n.$L;
 
 var
 	FittableColumns = require('layout/FittableColumns'),
@@ -53,7 +54,6 @@ module.exports = kind({
 			]}
 		]},
 
-		{kind: Button, content: 'Get Times', style: 'margin: 10px;', ontap: 'getTimes'},
 		{kind: Button, content: 'Reset Times', ontap: 'resetTimes'},
 
 		{style: 'width: 100%;height: 5px;background-color: black;margin-bottom: 5px;'},
@@ -81,18 +81,15 @@ module.exports = kind({
 			]}
 		]}
 	],
-	bindings: [
-		{from: '.$.localePicker.selected.content', to: '.locale'}
-	],
 	rendered: function () {
 		FittableRows.prototype.rendered.apply(this, arguments);
 		this.localeChanged();
 	},
 	localeChanged: function () {
-		this.$.timePicker1.setLocale(this.locale);
-		this.$.timePicker2.setLocale(this.locale);
-		this.$.timePicker2.setIs24HrMode(true);
-		this.$.timePicker3.setLocale(this.locale);
+		this.fmt = null;
+		i18n.updateLocale(this.$.localePicker.get('selected').content);
+		this.$.timePicker2.set('is24HrMode', true);
+		this.getTimes();
 		return true;
 	},
 	resetTimes: function (date) {
@@ -104,24 +101,19 @@ module.exports = kind({
 		this.getTimes();
 	},
 	getTimes: function () {
-		var fmt = new DateFmt({
-			type: 'time',
-			length: 'short',
-			locale: this.locale,
-			timezone: 'local'
-		});
-
-		this.$.timePicker1Value.setContent(fmt.format(this.$.timePicker1.getValue()));
-		this.$.timePicker2Value.setContent(fmt.format(this.$.timePicker2.getValue()));
+		this.updateTimeValue(this.$.timePicker1);
+		this.updateTimeValue(this.$.timePicker2);
 	},
-	updateTimeValues: function (sender, date){
-		var fmt = new DateFmt({
+	updateTimeValues: function (sender, ev) {
+		this.updateTimeValue(ev);
+	},
+	updateTimeValue: function (picker) {
+		var fmt = this.fmt || new DateFmt({
 			type: 'time',
 			length: 'short',
-			locale: this.locale,
 			timezone: 'local'
 		});
 
-		this.$[date.name + 'Value'].setContent(fmt.format(date.value));
+		this.$[picker.name + 'Value'].set('content', fmt.format(picker.value));
 	}
 });
