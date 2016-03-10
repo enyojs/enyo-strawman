@@ -36,9 +36,6 @@ module.exports = kind({
 		{name: 'screenY'}
 	],
 	handlers: {'onmove': 'moved'},
-	rendered: function () {
-		this.inherited(arguments);
-	},
 	moved: function () {
 		var p = dispatcher.getPosition();
 		for (var k in p) {
