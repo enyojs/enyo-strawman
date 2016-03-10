@@ -18,7 +18,6 @@
 	background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
 	background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
 	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
 
 	background-color:#ffec64;
 

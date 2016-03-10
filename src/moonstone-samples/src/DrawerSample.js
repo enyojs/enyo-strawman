@@ -54,7 +54,6 @@ module.exports = kind({
 				{
 					name: 'panels',
 					kind: Panels,
-					hasCloseButton: false,
 					pattern: 'activity',
 					components: [
 						{title: 'First Panel', components: [

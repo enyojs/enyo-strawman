@@ -26,6 +26,7 @@ var PositionSampleNested = kind({
 module.exports = kind({
 	name: 'enyo.sample.PositionSample',
 	defaultKind: PositionSampleNested,
+	classes:'enyo-fit',
 	components: [
 		{name: 'clientX'},
 		{name: 'clientY'},
@@ -34,12 +35,8 @@ module.exports = kind({
 		{name: 'screenX'},
 		{name: 'screenY'}
 	],
-	handlers: {'onmousemove': 'mouseMoved'},
-	rendered: function () {
-		this.inherited(arguments);
-		dispatcher.makeBubble('mousemove', this);
-	},
-	mouseMoved: function () {
+	handlers: {'onmove': 'moved'},
+	moved: function () {
 		var p = dispatcher.getPosition();
 		for (var k in p) {
 			this.$[k].set('text', p[k]);

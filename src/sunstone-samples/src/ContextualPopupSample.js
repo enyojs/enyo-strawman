@@ -30,9 +30,7 @@ var SelectiveItem = kind({
 		onleave:'eventUp',
 		// prevent muli pressed
 		ongesturechange: 'eventUp',
-		ongestureend: 'eventUp',
-		// prevent double onchange bubble in IE
-		onclick: ''
+		ongestureend: 'eventUp'
 	},
 	tag: 'div',
 	classes: 'sun-selectiveItem',
