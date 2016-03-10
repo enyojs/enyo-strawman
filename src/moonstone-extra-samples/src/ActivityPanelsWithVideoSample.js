@@ -60,7 +60,7 @@ module.exports = kind({
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 		]},
-		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, hasCloseButton: false, onShowingChanged: 'panelsShowingChanged', components: [
+		{name: 'panels', kind: Panels, pattern: 'activity', classes: 'enyo-fit', useHandle: true, onShowingChanged: 'panelsShowingChanged', components: [
 			{title: 'First Panel', titleBelow:'Sub-title', subTitleBelow:'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next1'},
 				{kind: Item, content: 'Item Two', ontap: 'next1'},
