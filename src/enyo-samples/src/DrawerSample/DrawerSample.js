@@ -24,13 +24,11 @@ module.exports = kind({
 			{content: 'Vertical Drawer<br>Vertical Drawer<br>Vertical Drawer<br>Vertical Drawer', allowHtml: true, classes: 'drawer-sample-box drawer-sample-mtb'}
 		]},
 		{content: 'Foo<br>Foo', allowHtml: true, classes: 'drawer-sample-box drawer-sample-mtb'},
-		{ontap: 'activateColumnsDrawer', classes: 'drawer-sample-box drawer-sample-mtb drawer-sample-o', components: [
-			{content: 'Activate (H)', style: 'width:300px;float:left;', classes: 'drawer-sample-box drawer-sample-mlr'},
-			{name: 'columnsDrawer', style: 'width:300px;float:left;', orient: 'h', kind: Drawer, open: false, components: [
-				{content: 'H-Drawer',  style: 'width:300px', classes: 'drawer-sample-box drawer-sample-mlr'}
-			]},
-			{content: 'Foo', style:'float:left;', classes: 'drawer-sample-box drawer-sample-mlr drawer-sample-o'},
-			{content: 'Foo', classes: 'drawer-sample-box drawer-sample-mlr'}
+		{classes: 'drawer-sample-box drawer-sample-mtb drawer-sample-o', components: [
+			{content: 'Activate (H)', ontap: 'activateColumnsDrawer', classes: 'drawer-sample-box'},
+			{name: 'columnsDrawer', orient: 'h', kind: Drawer, open: false, components: [
+				{content: 'H-Drawer',  classes: 'drawer-sample-box'}
+			]}
 		]},
 		{content: 'Foo', classes: 'drawer-sample-box drawer-sample-mtb'}
 	],
