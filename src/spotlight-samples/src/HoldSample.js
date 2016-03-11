@@ -46,6 +46,10 @@ module.exports = kind({
 			this.reset(display);
 		}, 2000);
 	},
+	reset: function (display) {
+		var d = this.$[display];
+		d.set('content', d.get('idleContent'));
+	},
 	tapped: function (sender, ev) {
 		this.report(sender, 'tapped', 'd3');
 	},
