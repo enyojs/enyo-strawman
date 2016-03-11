@@ -51,7 +51,7 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, components: [
 				{kind: RichText, style: 'width: 200px;', placeholder: 'Search term', onchange: 'inputChanged'},
-				{kind: Image, src: '@../assets/search-input-search.png'}
+				{kind: EnyoImage, src: '@../assets/search-input-search.png'}
 			]}
 		]},
 		{tag: 'br'},
@@ -62,7 +62,7 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, components: [
 				{kind: TextArea, placeholder: 'Search term', onchange: 'inputChanged'},
-				{kind: Image, src: '@../assets/search-input-search.png'}
+				{kind: EnyoImage, src: '@../assets/search-input-search.png'}
 			]}
 		]},
 		{tag: 'br'},
