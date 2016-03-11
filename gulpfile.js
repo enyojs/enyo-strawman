@@ -117,7 +117,6 @@ function buildStrawman(samples) {
 		}
 		var opts = {
 			package: '.',
-			sourceMaps: false,
 			clean: true,
 			cache: false,
 			production: args.P,
