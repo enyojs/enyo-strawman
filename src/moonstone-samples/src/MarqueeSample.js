@@ -25,25 +25,25 @@ module.exports = kind({
 				{kind: Divider, content: 'Marquee on start:'},
 				{kind: MarqueeDecorator, marqueeOnRender: true, components: [
 					{name: 'marqueeStartOnRender1', kind: MarqueeText, classes: 'moon-marquee-start-on-render', content: 'This first long text for the marquee test starts the marquee on page render'},
-					{name: 'marqueeStartOnRender2', kind: MarqueeText, classes: 'moon-marquee-start-on-render', content: 'This second long text for the marquee test is syncronized with the first marquee text'}
+					{name: 'marqueeStartOnRender2', kind: MarqueeText, classes: 'moon-marquee-start-on-render', content: 'This second long text for the marquee test is synchronized with the first marquee text'}
 				]},
-				{name: 'marqueeStartOnRender3', marqueeOnRender: true, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This third long text for the marquee test is not syncronized with first and second marquee texts'},
+				{name: 'marqueeStartOnRender3', marqueeOnRender: true, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This third long text for the marquee test is not synchronized with first and second marquee texts'},
 				{tag: 'br'},
 
 				{kind: Divider, content: 'Marquee on focus:'},
 				{kind: MarqueeDecorator, marqueeOnSpotlight: true, components: [
 					{name: 'marqueeStartOnFocus1', kind: MarqueeText, spotlight: true, classes: 'moon-marquee-start-on-focus', content: 'This first long text for the marquee test starts the marquee on focus'},
-					{name: 'marqueeStartOnFocus2', kind: MarqueeText, spotlight: true, classes: 'moon-marquee-start-on-focus', content: 'This second long text for the marquee test is syncronized with the first marquee text'}
+					{name: 'marqueeStartOnFocus2', kind: MarqueeText, spotlight: true, classes: 'moon-marquee-start-on-focus', content: 'This second long text for the marquee test is synchronized with the first marquee text'}
 				]},
-				{name: 'marqueeStartOnFocus3', marqueeOnSpotlight: true, mixins: [MarqueeSupport, MarqueeItem], spotlight: true, classes: 'moon-marquee-start-on-focus', content: 'This third long text for the marquee test is not syncronized with first and second marquee texts'},
+				{name: 'marqueeStartOnFocus3', marqueeOnSpotlight: true, mixins: [MarqueeSupport, MarqueeItem], spotlight: true, classes: 'moon-marquee-start-on-focus', content: 'This third long text for the marquee test is not synchronized with first and second marquee texts'},
 				{tag: 'br'},
 
 				{kind: Divider, content: 'Marquee on Hover:'},
 				{kind: MarqueeDecorator, marqueeOnHover: true, marqueeOnSpotlight: false, components: [
 					{name: 'marqueeStartOnHover1', kind: MarqueeText, classes: 'moon-marquee-start-on-hover', content: 'This first long text for the marquee test starts the marquee on mouse hover'},
-					{name: 'marqueeStartOnHover2', kind: MarqueeText, classes: 'moon-marquee-start-on-hover', content: 'This second long text for the marquee test is syncronized with the first marquee text'}
+					{name: 'marqueeStartOnHover2', kind: MarqueeText, classes: 'moon-marquee-start-on-hover', content: 'This second long text for the marquee test is synchronized with the first marquee text'}
 				]},
-				{name: 'marqueeStartOnHover3', marqueeOnHover: true, marqueeOnSpotlight: false, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-hover', content: 'This third long text for the marquee test is not syncronized with first and second marquee texts'},
+				{name: 'marqueeStartOnHover3', marqueeOnHover: true, marqueeOnSpotlight: false, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-hover', content: 'This third long text for the marquee test is not synchronized with first and second marquee texts'},
 				{tag: 'br'},
 
 
@@ -57,7 +57,7 @@ module.exports = kind({
 				{name: 'marqueeContent1', marqueeOnRender: true, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This long text is for marquee content change test for the separate marquee case'},
 				{name: 'marqueeContent2', marqueeOnRender: true, mixins: [MarqueeSupport, MarqueeItem], classes: 'moon-marquee-start-on-render', centered: true, content: 'Centered text for separate marquee case'},
 				{name: 'marqueeContainer1', mixins: [MarqueeSupport], marqueeOnRender: true, components: [
-					{name: 'marqueeContent3', mixins: [MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This is long text for marquee content change test for syncronized case'},
+					{name: 'marqueeContent3', mixins: [MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This is long text for marquee content change test for synchronized case'},
 					{name: 'marqueeContent4', mixins: [MarqueeItem], classes: 'moon-marquee-start-on-render', content: 'This is short text for marquee'},
 					{name: 'marqueeContent5', mixins: [MarqueeItem], classes: 'moon-marquee-start-on-render', centered: true, content: 'This is centered text for marquee'}
 				]},
