@@ -17,6 +17,7 @@ var args = nom
 	.option('source-maps', {flag:true, default:true, help:'Whether or not to build source-maps.'})
 	.option('cache', {flag:true, default:true, help:'Enables the use of a cache-file.'})
 	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
+	.option('samples', {flag:false, abbr: 's', help:'Comma-separated list of samples to build overriding the standard (e.g. enyo,moonstone,spotlight).'})
 	.option('log-level', {abbr:'l', default:'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
 	.option('log-json', {flag:true, default:false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
 			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
@@ -90,6 +91,7 @@ function writeConfig(samples) {
 }
 
 function buildStrawman(samples) {
+	samples = (args.samples) ? args.samples.split(',') : samples;
 	var mI = samples.indexOf('moonstone');
 	var meI = samples.indexOf('moonstone-extra');
 	if(meI > -1) {
