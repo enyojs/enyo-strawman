@@ -1,6 +1,8 @@
 /* DataListSample */
 
 .g-sample-datalist {
+	background-color: #000000;
+
 	// Common classes
 
 	.g-sample-panel {
@@ -40,6 +42,8 @@
 		cursor: pointer;
 	}
 	.g-sample-datalist-item > .g-item-client {
+		background-color: #000000;
+
 		width: 320px; // should be 320px
 		height: 81px;
 		padding: 26px 0 27px 0;
@@ -79,10 +83,15 @@
 		white-space: nowrap;
 	}
 	.g-item.pressed-effect.g-sample-datalist-item > .g-item-client {
+		&,
 		.g-sample-datalist-item-icon,
 		.g-sample-datalist-item-subject,
 		.g-sample-datalist-item-time {
 			background-color: #2E2E2E; // rgba(230, 230, 230, 0.2), 'alpha' value could reduce performance
 		}
+	}
+	.page,
+	.stretch-client > div {
+		background: #000000;
 	}
 }
