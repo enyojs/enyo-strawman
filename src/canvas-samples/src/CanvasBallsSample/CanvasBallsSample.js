@@ -40,7 +40,7 @@ module.exports = kind({
 	setupBalls: function () {
 		// pause loop to update the balls
 		if (this.cancel) {
-			animation.cancelRequestAnimationFrame(this.cancel);
+			animation.cancelAnimationFrame(this.cancel);
 		}
 		this.loopStart = Date.now();
 		this.frame = 0;
@@ -71,7 +71,7 @@ module.exports = kind({
 	},
 	destroy: function () {
 		if (this.cancel) {
-			animation.cancelRequestAnimationFrame(this.cancel);
+			animation.cancelAnimationFrame(this.cancel);
 		}
 		this.inherited(arguments);
 	},
