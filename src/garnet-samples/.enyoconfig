@@ -55,14 +55,15 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outdir": "../../dist/garnet",
-  "outDir": "../../dist/garnet",
+  "outdir": "../../dist/garnet-samples",
+  "outDir": "../../dist/garnet-samples",
   "outFile": "index.html",
   "lessPlugins": [{
     "name": "resolution-independence",
     "options": {"baseSize":16, "minUnitSize":0}
   }],
   "assetRoots": [],
+  "assetDir": "../",
   "lessOnlyLess": false,
   "minifyCss": false,
   "inlineCss": true,

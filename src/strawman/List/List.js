@@ -20,7 +20,7 @@ module.exports = kind({
 			{kind: Link, classes: 'item', bindings: [
 				{from: 'model.name', to: 'href', transform: function (v) {
 						var href = "#" + v;
-						if (!this.owner.libraryName) { href = v + '/index.html'; }
+						if (!this.owner.libraryName) { href = v + '-samples/index.html'; }
 						return href;
 					}
 				},

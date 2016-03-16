@@ -52,14 +52,15 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outdir": "../../dist/moonstone",
-  "outDir": "../../dist/moonstone",
+  "outdir": "../../dist/moonstone-samples",
+  "outDir": "../../dist/moonstone-samples",
   "outFile": "index.html",
   "lessPlugins": [{
     "name": "resolution-independence",
     "options": {"baseSize":24}
   }],
   "assetRoots": [],
+  "assetDir": "../",
   "lessOnlyLess": false,
   "minifyCss": false,
   "inlineCss": true,
