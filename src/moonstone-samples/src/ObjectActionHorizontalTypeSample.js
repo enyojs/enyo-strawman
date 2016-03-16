@@ -36,6 +36,7 @@ module.exports = kind({
 	],
 	setupItem: function (sender, ev) {
 		ev.item.$.imageItem.setSource('http://placehold.it/200x300/' + Math.floor(Math.random()*0x1000000).toString(16) + '/ffffff&text=Image ' + ev.index);
+		ev.item.$.imageItem.setLabel('label ' + ev.index);
 		ev.item.$.imageItem.setText('Item ' + ev.index + ': Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.');
 	},
 	ontap: function (sender, ev) {

@@ -4,18 +4,26 @@ var
 	gulp = require('gulp'),
 	fs = require('fs'),
 	Promise = require('bluebird'),
-	del = require('del'),
 	jshint = require('gulp-jshint'),
 	nom = require('nomnom'),
+	rimraf = Promise.promisify(require('rimraf')),
+	exec = require('child_process').exec,
 	stylish = require('jshint-stylish');
 
 var args = nom
-	.option('P', {
-		full: 'production',
-		flag: true
-	})
+	.script('gulp')
+	.option('task', {position:0, default:'build', help:'Optional specific gulp task to execute. Defaults to "build".'})
+	.option('production', {abbr:'P', flag:true, default:false, help:'Build in production mode.'})
+	.option('source-maps', {flag:true, default:true, help:'Whether or not to build source-maps.'})
+	.option('cache', {flag:true, default:true, help:'Enables the use of a cache-file.'})
+	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
+	.option('samples', {flag:false, abbr: 's', help:'Comma-separated list of samples to build overriding the standard (e.g. enyo,moonstone,spotlight).'})
+	.option('log-level', {abbr:'l', default:'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
+	.option('log-json', {flag:true, default:false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
+			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
+	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
+			'an environment where a user-environment should not be used.'})
 	.parse();
-
 
 gulp.task('default', ['build']);
 gulp.task('build', build);
@@ -65,31 +73,25 @@ function sunstone() {
 }
 
 function writeConfig(samples) {
-	var hasWebOS = (samples.indexOf('enyo-webos') > -1);
 	var output = '';
-	if(hasWebOS) {
-		output += 'var platform = require(\'enyo/platform\');\n\n';
-	}
 	var exportsObject = {};
 	for(var i=0; i<samples.length; i++) {
 		if(samples[i] === 'enyo-ilib') {
 			exportsObject[samples[i]] = 'iLib';
-		} else if(samples[i] !== 'enyo-webos') {
+		} else if(samples[i] === 'enyo-webos') {
+			exportsObject[samples[i]] = 'webOS';
+		} else {
 			var name = samples[i].replace('enyo-', '').replace('-extra', '').replace('-', ' ');
 			name = name.replace(/\w\S*/g, function(str){return str.slice(0, 1).toUpperCase() + str.slice(1);});
 			exportsObject[samples[i].replace('-extra', '')] = name;
 		}
 	}
-	output += 'module.exports = ' + JSON.stringify(exportsObject, null, '\t') + ';\n\n';
-	if(hasWebOS) {
-		output += 'if(platform.webos) {\n\tmodule.exports[\'enyo-webos\'] = \'webOS\';\n}\n';
-	}
-	fs.writeFileSync('./src/strawman/config.js', output, {encoding:'utf8'});
+	output += 'window.strawmanConfig = ' + JSON.stringify(exportsObject, null, '\t') + ';\n';
+	fs.writeFileSync('./config.js', output, {encoding:'utf8'});
 }
 
 function buildStrawman(samples) {
-	var enyo = require('enyo-dev');
-	var cwd = process.cwd();
+	samples = (args.samples) ? args.samples.split(',') : samples;
 	var mI = samples.indexOf('moonstone');
 	var meI = samples.indexOf('moonstone-extra');
 	if(meI > -1) {
@@ -104,44 +106,18 @@ function buildStrawman(samples) {
 		}
 	}
 	writeConfig(samples);
-	samples.unshift('.');
-
-	console.log('Building Enyo-Strawman...');
-
-	return Promise.reduce(samples, function(_, item, index, length) {
-		process.chdir(cwd);
-		var target = item.replace('-light', '');
-		var theme = 'dark';
-		if(item.indexOf('-light') > -1) {
-			theme = 'light'
-		}
-		var opts = {
-			package: '.',
-			sourceMaps: false,
-			clean: true,
-			cache: false,
-			production: args.P,
-			lessVars: [{
-				name: '@moon-theme',
-				value: theme
-			}],
-			title: 'Sampler',
-			logLevel: 'error'
-		};
-		if(item!=='.') {
-			target = './src/' + target + '-samples';
-			opts.outDir = '../../dist/' + item.replace('-extra', '');
-			console.log('Building ' + item + ' samples...');
-		}
-		process.chdir(target);
-		var packager = enyo.packager(opts);
-		var promiseOn = Promise.promisify(packager.on, {context:packager});
-		return promiseOn('end');
-	}, null);
+	
+	if(args.clean) {
+		return clean().then(function() {
+			return promiseStrawman(samples);
+		});
+	} else {
+		return promiseStrawman(samples);
+	}
 }
 
 function clean() {
-	return del(['./dist']);
+	return rimraf('./dist', {disableGlob:true});
 }
 
 function lint () {
@@ -150,4 +126,45 @@ function lint () {
 		.pipe(jshint())
 		.pipe(jshint.reporter(stylish, {verbose: true}))
 		.pipe(jshint.reporter('fail'));
+}
+
+function promiseStrawman(samples) {
+	console.log('Building Enyo-Strawman...');
+	var enyo = require('enyo-dev');
+	return promiseSampler(enyo).then(function() {
+		return Promise.reduce(samples, function(_, item, index, length) {
+			console.log('Building ' + item + ' samples...');
+			return promiseSampler(enyo, item);
+		}, null);
+	});
+}
+
+function promiseSampler(enyo, item) {
+	var cwd = process.cwd();
+	var target = '.';
+	var opts = {
+		package: '.',
+		sourceMaps: args['source-maps'],
+		clean: false,
+		cache: args.cache,
+		production: args.production,
+		title: 'Sampler',
+		logLevel: args['log-level'],
+		logJson: args['log-json'],
+		user: args.user
+	};
+	if(item) {
+		target = './src/' + item.replace('-light', '') + '-samples';
+		opts.outDir = '../../dist/' + item.replace('-extra', '');
+		if(item.indexOf('moonstone')>-1 && item.indexOf('-light')>-1) {
+			opts.lessVars = [{name: '@moon-theme', value: 'light'}];
+		}
+	} else {
+		opts.headScripts = ['./config.js'];
+	}
+	process.chdir(target);
+	var packager = enyo.packager(opts);
+	var promiseOn = Promise.promisify(packager.on, {context:packager});
+	process.chdir(cwd);
+	return promiseOn('end');
 }

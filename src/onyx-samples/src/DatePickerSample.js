@@ -1,6 +1,7 @@
 var
 	kind = require('enyo/kind'),
-	$L = require('enyo/i18n').$L;
+	i18n = require('enyo/i18n'),
+	$L = i18n.$L;
 
 var
 	FittableColumns = require('layout/FittableColumns'),
@@ -52,7 +53,6 @@ module.exports = kind({
 				]}
 			]}
 		]},
-		{kind: Button, content: 'Get Dates', style: 'margin: 10px;', ontap: 'getDates'},
 		{kind: Button, content: 'Reset Dates', ontap: 'resetDates'},
 		{style: 'width: 100%;height: 5px;background-color: black;margin-bottom: 5px;'},
 		{caption: 'Dates', style: 'padding: 10px', components: [
@@ -86,18 +86,13 @@ module.exports = kind({
 			]}
 		]}
 	],
-	bindings: [
-		{from: '.$.localePicker.selected.content', to: '.locale'}
-	],
 	rendered: function () {
 		this.inherited(arguments);
 		this.localeChanged();
 	},
 	localeChanged: function () {
-		this.$.datePicker1.setLocale(this.locale);
-		this.$.datePicker2.setLocale(this.locale);
-		this.$.datePicker3.setLocale(this.locale);
-		this.$.datePicker4.setLocale(this.locale);
+		i18n.updateLocale(this.$.localePicker.get('selected').content);
+		this.getDates();
 		return true;
 	},
 	resetDates: function (date) {
@@ -109,22 +104,21 @@ module.exports = kind({
 		this.getDates();
 	},
 	getDates: function () {
-		var fmt = this.format();
-		this.$.datePicker1Value.setContent(fmt.format(this.$.datePicker1.getValue()));
-		this.$.datePicker2Value.setContent(fmt.format(this.$.datePicker2.getValue()));
-		// reformat the formatter to display the Date wiht only Month and year
-		fmt = this.format('my');
-		this.$.datePicker3Value.setContent(fmt.format(this.$.datePicker3.getValue()));
+		this.updateDateValue(this.$.datePicker1);
+		this.updateDateValue(this.$.datePicker2);
+		this.updateDateValue(this.$.datePicker3);
 	},
-	updateDateValues: function (sender, ev){
-		var fmt = ev.name != 'datePicker3' ? this.format() :  this.format('my');
-		this.$[ev.name + 'Value'].setContent(fmt.format(ev.value));
+	updateDateValues: function (sender, ev) {
+		this.updateDateValue(ev);
+	},
+	updateDateValue: function (picker) {
+		var fmt = picker.name != 'datePicker3' ? this.format() :  this.format('my');
+		this.$[picker.name + 'Value'].setContent(fmt.format(picker.value));
 	},
 	format: function (dateComponents) {
 		var fmt = new DateFmt({
 			dateComponents: dateComponents || undefined,
 			date: 'short',
-			locale: this.locale,
 			timezone: 'local'
 		});
 		return fmt;
