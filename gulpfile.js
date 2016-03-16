@@ -155,7 +155,7 @@ function promiseSampler(enyo, item) {
 	};
 	if(item) {
 		target = './src/' + item.replace('-light', '') + '-samples';
-		opts.outDir = '../../dist/' + item.replace('-extra', '');
+		opts.outDir = '../../dist/' + item.replace('-extra', '') + '-samples';
 		if(item.indexOf('moonstone')>-1 && item.indexOf('-light')>-1) {
 			opts.lessVars = [{name: '@moon-theme', value: 'light'}];
 		}
