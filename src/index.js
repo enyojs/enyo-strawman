@@ -1,13 +1,18 @@
 require('spotlight');
 
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	platform = require('enyo/platform');
 
 var
 	SampleList = require('./strawman/SampleList');
 
 var
-	samples = require('./strawman/config');
+	samples = window.strawmanConfig || require('./strawman/default-config');
+
+if(samples['enyo-webos'] && !platform.webos) {
+	delete samples['enyo-webos'];
+}
 
 var
 	List = kind({
