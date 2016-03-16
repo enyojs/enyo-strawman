@@ -8,12 +8,12 @@ var
 	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
+	CheckboxItem = require('moonstone/CheckboxItem'),
 	FormCheckbox = require('moonstone/FormCheckbox'),
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone/Panels'),
 	Popup = require('moonstone/Popup'),
-	Scroller = require('moonstone/Scroller'),
-	ToggleButton = require('moonstone/ToggleButton');
+	Scroller = require('moonstone/Scroller');
 
 module.exports = kind({
 	name: 'moon.sample.PopupSample',
@@ -29,8 +29,17 @@ module.exports = kind({
 		{classes: 'moon-hspacing moon-vspacing-s', components: [
 			{kind: Button, content: 'Scroller Popup', ontap: 'showPopup', popup: 'scrollerPopup'},
 			{kind: Button, content: 'Button in Popup', ontap: 'showPopup', popup: 'buttonPopup'},
-			{kind: Button, content: 'Panels in Popup', ontap: 'showPopup', popup: 'panelsPopup'}
+			{kind: Button, content: 'Panels in Popup', ontap: 'showPopup', popup: 'panelsPopup'},
+			{kind: Button, content: 'Test Popup', ontap: 'showPopup', popup: 'testPopup'}
 		]},
+		{classes: 'moon-1v'},
+		{kind: Divider, content: 'Options (these apply to Test Popup)'},
+		{kind: CheckboxItem, content: 'Tap outside to close (autoDismiss)', name: 'autoDismissToggle'},
+		{kind: CheckboxItem, content: 'Modal', name: 'modalToggle'},
+		{kind: CheckboxItem, content: 'Show Close Button', name: 'showCloseButtonToggle'},
+		{kind: CheckboxItem, content: 'Animate', name: 'animateToggle'},
+		{kind: CheckboxItem, content: 'Lock 5-way inside popup (spotlightModal)', name: 'spotlightModalToggle'},
+		{kind: CheckboxItem, content: 'Close by back key (allowBackKey)', name: 'allowBackKeyToggle'},
 
 		{name: 'basicPopup', kind: Popup, content: 'Popup...'},
 		// The directPopup only works when we programmatically call 'showDirect' or 'hideDirect'. So, we set autoDismiss as false here.
@@ -54,15 +63,14 @@ module.exports = kind({
 				{kind: Item, content: 'Test Item 10'}
 			]}
 		]},
-		{name: 'buttonPopup', kind: Popup, floating: true, components: [
+		{name: 'buttonPopup', kind: Popup, components: [
 			{kind: Divider, content: 'Buttons in popup example'},
 			{classes: 'moon-hspacing', components: [
 				{kind: Button, content: 'Hello'},
-				{kind: Button, content: 'Goodbye'},
-				{kind: ToggleButton, content: 'SpotlightModal', ontap: 'buttonToggled'}
+				{kind: Button, content: 'Goodbye'}
 			]}
 		]},
-		{name: 'panelsPopup', kind: Popup, floating: true, classes: 'moon-12v', components: [
+		{name: 'panelsPopup', kind: Popup, showCloseButton: true, classes: 'moon-12v', components: [
 			{kind: Panels, name: 'panels', defaultKind: FittableRows, arrangerKind: CardArranger, animate:false, hasCloseButton: false, components: [
 				{components: [
 					{kind: Divider, content: 'Step 1: Terms of Service'},
@@ -73,7 +81,6 @@ module.exports = kind({
 						{fit: true, components: [
 							{kind: FormCheckbox, content: 'I agree', style: 'display:inline-block;'}
 						]},
-						{kind: ToggleButton, content: 'SpotlightModal', ontap: 'panelsToggled'},
 						{kind: Button, content: 'Sign me Up!', ontap: 'panelNext'}
 					]}
 				]},
@@ -83,9 +90,22 @@ module.exports = kind({
 					{kind: Button, content: 'Previous', ontap: 'panelPrev'}
 				]}
 			]}
+		]},
+		{name: 'testPopup', kind: Popup, components: [
+			{kind: Button, content: 'Hide', ontap: 'hidePopup', popup: 'testPopup'}
 		]}
 	],
-	popupActivator: null,
+	bindings: [
+		{from: '$.testPopup.autoDismiss', to: '$.autoDismissToggle.checked', oneWay: false},
+		{from: '$.testPopup.modal', to: '$.modalToggle.checked', oneWay: false},
+		{from: '$.testPopup.showCloseButton', to: '$.showCloseButtonToggle.checked', oneWay: false},
+		{from: '$.testPopup.animate', to: '$.animateToggle.checked', oneWay: false},
+		{from: '$.testPopup.spotlightModal', to: '$.spotlightModalToggle.checked', oneWay: false},
+		{from: '$.testPopup.allowBackKey', to: '$.allowBackKeyToggle.checked', oneWay: false},
+		{from: '$.testPopup.useDivider', to: '$.useDivider.checked', oneWay: false},
+		{from: '$.testPopup.title', to: '$.inputTitle.value', oneWay: false},
+		{from: '$.testPopup.subTitle', to: '$.inputSubTitle.value', oneWay: false}
+	],
 	showPopup: function (sender) {
 		this.hidePopups();
 		var p = this.$[sender.popup];
@@ -111,14 +131,6 @@ module.exports = kind({
 		this.$.basicPopup.hide();
 		this.$.longPopup.hide();
 		this.$.buttonPopup.hide();
-	},
-	buttonToggled: function (sender, ev) {
-		this.$.buttonPopup.setSpotlightModal(sender.getActive());
-		this.$.buttonPopup.setAutoDismiss(!sender.getActive());
-	},
-	panelsToggled: function (sender, ev) {
-		this.$.panelsPopup.setSpotlightModal(sender.getActive());
-		this.$.panelsPopup.setAutoDismiss(!sender.getActive());
 	},
 	panelNext: function () {
 		this.$.panels.next();
