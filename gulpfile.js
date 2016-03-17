@@ -129,18 +129,23 @@ function lint () {
 }
 
 function promiseStrawman(samples) {
-	console.log('Building Enyo-Strawman...');
 	var enyo = require('enyo-dev');
-	return promiseSampler(enyo).then(function() {
-		return Promise.reduce(samples, function(_, item, index, length) {
-			console.log('Building ' + item + ' samples...');
-			return promiseSampler(enyo, item);
-		}, null);
-	});
+	var opts = samplerOpts().options;
+	opts.subpackage = [];
+	for(var i=0; i<samples.length; i++) {
+		opts.subpackage.push(samplerOpts(samples[i]));
+	}
+	console.log('Building Enyo-Strawman...');
+	var packager = enyo.packager(opts);
+	packager.on('subpackage', function(e) {
+		console.log('Building ' + e.options.outDir.replace('../../dist/', '') +
+			' samples...');
+	})
+	var promiseOn = Promise.promisify(packager.on, {context:packager});
+	return promiseOn('end');
 }
 
-function promiseSampler(enyo, item) {
-	var cwd = process.cwd();
+function samplerOpts(item) {
 	var target = '.';
 	var opts = {
 		package: '.',
@@ -162,9 +167,5 @@ function promiseSampler(enyo, item) {
 	} else {
 		opts.headScripts = ['./config.js'];
 	}
-	process.chdir(target);
-	var packager = enyo.packager(opts);
-	var promiseOn = Promise.promisify(packager.on, {context:packager});
-	process.chdir(cwd);
-	return promiseOn('end');
+	return {name:target, options:opts};
 }
