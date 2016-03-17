@@ -115,7 +115,10 @@ module.exports = kind({
 	],
 	rendered: function () {
 		this.inherited(arguments);
-		Spotlight.spot(this.$.panels);
+		// set delay in order to read focused item after reading a panel title
+		setTimeout(this.bindSafely(function () {
+			Spotlight.spot(this.$.panels);
+		}), 200);
 	},
 	// custom next handler for each panel to avoid switching from one active panel
 	// to another with no visible change for demo
