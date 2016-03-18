@@ -138,8 +138,11 @@ function promiseStrawman(samples) {
 	console.log('Building Enyo-Strawman...');
 	var packager = enyo.packager(opts);
 	packager.on('subpackage', function(e) {
-		console.log('Building ' + e.options.outDir.replace('../../dist/', '') +
-			' samples...');
+		var name = e.options.outDir.replace('../../dist/', '');
+		if(e.name.indexOf('-extra')>-1) {
+			name = name.replace('moonstone', 'moonstone-extra');
+		}
+		console.log('Building ' + name + ' samples...');
 	})
 	var promiseOn = Promise.promisify(packager.on, {context:packager});
 	return promiseOn('end');
