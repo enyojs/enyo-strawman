@@ -41,7 +41,7 @@
     "jshint-stylish": "^2.1.0",
     "nomnom": "^1.8.1",
     "bluebird": "^3.2.2",
-    "enyo-dev": "enyojs/enyo-dev",
+    "enyo-dev": "enyojs/enyo-dev#ENYO-3188-jasonrobitaille",
     "rimraf": "^2.5.2"
   }
 }
