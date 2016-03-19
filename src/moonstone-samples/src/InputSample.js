@@ -8,6 +8,7 @@ var
 	Icon = require('moonstone/Icon'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
+	Slider = require('moonstone/Slider'),
 	RichText = require('moonstone/RichText'),
 	Scroller = require('moonstone/Scroller'),
 	TextArea = require('moonstone/TextArea');
@@ -71,6 +72,21 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, disabled: true, components: [
 				{kind: RichText, disabled: true, style: 'width: 240px;'}
+			]},
+
+			{kind: Divider, content: 'Range input'},
+			{name: 'rangeInputDecorator', kind: InputDecorator, invalidMessage: 'Please enter a valid number.', components: [
+				{name: 'rangeInput', kind: Input, placeholder: 'Enter a number', type: 'number', min: 25, max: 90, style: 'width: 300px;', onchange:'handleChange', oninput:'handleInputToValidate'}
+			]},
+
+			{classes: 'moon-1v'},
+			{classes: 'moon-vspacing', components: [
+				{name: 'rangeValue', content: '', classes: 'moon-input-sample-value-padding'},
+				{classes: 'moon-1v'},
+				{kind: Divider, content: 'Minimum Value'},
+				{name: 'minSlider', kind: Slider, noPopup: true, showPercentage: false, enableJumpIncrement: true, constrainToBgProgress: true, value: 25, bgProgress: 90, step: 1, onChange: 'handleSliderChange'},
+				{kind: Divider, content: 'Maximum Value'},
+				{name: 'maxSlider', kind: Slider, noPopup: true, showPercentage: false, enableJumpIncrement: true, value: 90, step: 1, onChange: 'handleSliderChange'}
 			]}
 		]},
 		{kind: Divider, content: 'Result', classes: 'moon-input-sample-result'},
@@ -88,10 +104,25 @@ module.exports = kind({
 			]}
 		]}
 	],
+	bindings: [
+		{from: '$.minSlider.value', to: '$.rangeInput.min', transform: function(v) {return v.toFixed(0);}},
+		{from: '$.maxSlider.value', to: '$.rangeInput.max', transform: function(v) {return v.toFixed(0);}},
+		{from: '$.maxSlider.value', to: '$.minSlider.bgProgress'},
+		{from: '$.maxSlider.value', to: '$.minSlider.value', transform: 'boundToMax'}
+	],
 	handleInput: function (sender, ev) {
 		this.$.console.setContent('Input: ' + sender.getValue());
 	},
 	handleChange: function (sender, ev) {
 		this.$.console.setContent('Changed: ' + sender.getValue());
+	},
+	boundToMax: function (val) {
+		return val < this.$.minSlider.value ? val: this.$.minSlider.value;
+	},
+	handleSliderChange: function () {
+		this.$.rangeValue.set('content', 'Min: ' + this.$.rangeInput.min + ', Max: ' + this.$.rangeInput.max);
+	},
+	handleInputToValidate: function (sender, ev) {
+		this.$.rangeInputDecorator.set('invalid', !ev.target.validity.valid);
 	}
 });
