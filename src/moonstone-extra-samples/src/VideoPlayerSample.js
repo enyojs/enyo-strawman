@@ -11,7 +11,6 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -32,12 +31,11 @@ module.exports = kind({
 			poster: '@../assets/video-poster.png',
 			autoplay: true,
 			onPlaybackControlsTapped: 'controlsTapped',
+			title: 'Downton Abbey',
 			infoComponents: [
-				{kind: VideoTitle, title: 'Downton Abbey', components: [
-					{content: 'DTV'},
-					{content: 'Cinema'},
-					{content: '3D'}
-				]}
+				{content: 'DTV'},
+				{content: 'Cinema'},
+				{content: '3D'}
 			],
 	   		components: [
 				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
