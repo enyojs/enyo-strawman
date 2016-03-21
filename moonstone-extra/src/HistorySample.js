@@ -218,7 +218,9 @@ module.exports = kind({
 	},
 	rendered: function () {
 		Control.prototype.rendered.apply(this, arguments);
-		Spotlight.spot(this.$.panels);
+		setTimeout(this.bindSafely(function () {
+			Spotlight.spot(this.$.panels);
+		}), 200);
 	},
 	// custom next handler for each panel to avoid switching from one active panel
 	// to another with no visible change for demo
