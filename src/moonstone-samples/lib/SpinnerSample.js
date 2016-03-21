@@ -9,7 +9,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.SpinnerSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-spinner-sample',
 	kind: Scroller,
 	components: [
 		{kind: Divider, content: 'Spinner'},
