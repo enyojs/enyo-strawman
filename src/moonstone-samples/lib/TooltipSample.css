@@ -1,12 +1,11 @@
-.right {
+.moon-tooltip-sample .right {
 	float: right;
 }
-
-.enyo-locale-right-to-left .right {
+.enyo-locale-right-to-left .moon-tooltip-sample .right {
 	float: left;
 }
 
-.draggable {
+.moon-tooltip-sample .draggable {
 	position: absolute;
 	z-index: 2;
 

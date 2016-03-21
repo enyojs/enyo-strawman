@@ -25,9 +25,10 @@ var
 	Scroller = require('moonstone/Scroller');
 
 module.exports = kind({
-	name: 'smoon.sample.CalendarSample',
+	name: 'moon.sample.CalendarSample',
 	classes: 'moon enyo-unselectable enyo-fit',
 	kind: FittableColumns,
+	_locale: 'local',
 	components: [
 		{components: [
 			{kind: Calendar, name: 'calendar', onChange: 'changed'}
@@ -70,7 +71,12 @@ module.exports = kind({
 						{content: 'fr-CA'},
 						{content: 'it-IT'}, // Italy, firstDayOfWeek: 1
 						{content: 'es-ES'}, // Spain, firstDayOfWeek: 1
-						{content: 'es-MX'}
+						{content: 'es-MX'},
+ 						{content: 'ar-SA'},
+ 						{content: 'ur-PK'},
+ 						{content: 'zh-Hant-HK'},
+ 						{content: 'ja-JP'},
+ 						{content: 'en-JP'}
 					]},
 					{name: 'dowLengthPicker', kind: ExpandablePicker, content: 'Choose DOW Label Length', onChange: 'setLabelLength', components: [
 						{content: 'short', active: true},
@@ -92,7 +98,7 @@ module.exports = kind({
 	bindings: [
 		{from: '.$.calendar.value', to: '.$.picker.value', oneWay:false}
 	],
-	create: function(){
+	create: function () {
 		this.inherited(arguments);
 		this.df = new DateFmt({
 			type: 'datetime',
@@ -102,8 +108,11 @@ module.exports = kind({
 			length: 'short'
 		});
 
-		if (this.$.localePicker.selected) {
-			this.setLocale(null, {selected: this.$.localePicker.selected});
+		for(var i = 0; i < this.$.localePicker.components.length; i++) {
+ 			if(this.$.localePicker.components[i].content === this._locale) {
+ 				this.$.localePicker.setSelectedIndex(i);
+ 				break;
+ 			}
 		}
 	},
 
@@ -112,9 +121,9 @@ module.exports = kind({
 		this.$.result.setContent('Current Date' + ' changed to ' + formatted);
 	},
 
-	setLocale: function(inSender, inEvent){
-		var locale = inEvent.selected.content;
-		locale = locale == 'Use Default Locale' ? null : locale;
+	setLocale: function (sender, ev){
+		var locale = ev.selected.content;
+		locale = (locale == 'Use Default Locale' || locale === 'local') ? null : locale;
 		// auto-triggers update to correctly configured/written widgets
 		updateLocale(locale);
 		// egregious misuse of now-deprecated widget/api to avoid needing to rewrite the entire
@@ -131,49 +140,51 @@ module.exports = kind({
 		this.updateCurrentString(this.$.calendar.getValue());
 		return true;
 	},
-	setLabelLength: function(inSender, inEvent){
-		if (inEvent.content){
-			this.$.calendar.setDayOfWeekLength(inEvent.content);
+	setLabelLength: function (sender, ev) {
+		if (ev.content){
+			this.$.calendar.setDayOfWeekLength(ev.content);
 			this.df = new DateFmt({
 				type: 'datetime',
 				time: 'hmsa',
 				date: 'dmy',
 				useNative: false,
-				length: inEvent.content
+				length: ev.content
 			});
 			this.updateCurrentString(this.$.calendar.getValue());
-			this.removeLabelItem(this.$.dowLabelClass, inEvent, 'Divider', 'full');
+			this.removeLabelItem(this.$.dowLabelClass, ev, 'Divider', 'full');
 		}
 		return true;
 	},
-	setLabelStyle: function(inSender, inEvent){
-		if (inEvent.content){
-			this.$.calendar.setDayOfWeekClasses(inEvent.selected.className);
-			this.removeLabelItem(this.$.dowLengthPicker, inEvent, 'full', 'Divider');
+	setLabelStyle: function (sender, ev) {
+		if (ev.content){
+			this.$.calendar.setDayOfWeekClasses(ev.selected.className);
+			this.removeLabelItem(this.$.dowLengthPicker, ev, 'full', 'Divider');
 		}
 		return true;
 	},
-	removeLabelItem: function (inControl, inEvent, inLabelName1, inLabelName2) {
+	removeLabelItem: function (control, ev, labelName1, labelName2) {
 		var i,
-			c = inControl.getClientControls();
+			c = control.getClientControls();
 		for (i = 0; i < c.length; i++) {
-			if (c[i].content == inLabelName1) {
-				c[i].addRemoveClass('moon-calendar-dow-lable-nodisplay', Boolean(inEvent.content == inLabelName2));
+			if (c[i].content == labelName1) {
+				c[i].addRemoveClass('moon-calendar-dow-label-nodisplay', Boolean(ev.content == labelName2));
 			}
 		}
 	},
-	changed: function(inSender, inEvent) {
-		if (this.$.result && inEvent.value) {
-			this.updateCurrentString(inEvent.value);
+	changed: function (sender, ev) {
+		if (this.$.result && ev.value) {
+			this.updateCurrentString(ev.value);
 		}
 	},
-	setDate: function(inSender, inEvent){
+	setDate: function (sender, ev) {
 		var year = isNaN(parseInt(this.$.yearInput.getValue(), 0)) ? this.$.picker.value.getFullYear() : parseInt(this.$.yearInput.getValue(), 0);
 		var month = isNaN(parseInt(this.$.monthInput.getValue(), 0)) ? this.$.picker.value.getMonth() : parseInt(this.$.monthInput.getValue(), 0) - 1;
 		var day = isNaN(parseInt(this.$.dayInput.getValue(), 0)) ? this.$.picker.value.getDate() : parseInt(this.$.dayInput.getValue(), 0);
 		this.$.calendar.setValue(new Date(year, month, day));
 	},
-	resetDate: function() {
+	resetDate: function () {
 		this.$.calendar.setValue(null);
 	}
 });
+
+module.exports.badgeClasses = 'deprecated';
