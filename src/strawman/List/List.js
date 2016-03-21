@@ -38,10 +38,12 @@ module.exports = kind({
 			}
 		}
 	],
-	create: function () {
-		this.inherited(arguments);
-		this.listTypeChanged();
-	},
+	create: kind.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			this.listTypeChanged();
+		}
+	}),
 	listTypeChanged: function (old) {
 		this.$.repeater.removeClass(old);
 		this.$.repeater.addClass(this.get('listType'));
