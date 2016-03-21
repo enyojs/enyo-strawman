@@ -1,9 +1,9 @@
-.moon-sample-green {
-	background-color: green;
+.moon-progress-sample .green {
+	background-color: #6fbe44;
 }
-.moon-sample-red {
-	background-color: red;
+.moon-progress-sample .red {
+	background-color: #ff4a4a;
 }
-.moon-sample-spaced-button {
+.moon-progress-sample .spaced-button {
 	margin: 0px 6px;
 }

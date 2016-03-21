@@ -2,9 +2,7 @@ var
 	kind = require('enyo/kind');
 
 var
-	FittableRows = require('layout/FittableRows');
-
-var
+	FittableRows = require('layout/FittableRows'),
 	BodyText = require('moonstone/BodyText'),
 	Divider = require('moonstone/Divider'),
 	RadioItem = require('moonstone/RadioItem'),
@@ -12,7 +10,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.RadioItemSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-radio-item-sample',
 	kind: FittableRows,
 	components: [
 		{fit: true, components: [
@@ -43,17 +41,17 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No action yet.'}
 	],
-	buttonActivated: function (sender, event) {
-		var originator = event.originator,
+	buttonActivated: function (sender, ev) {
+		var originator = ev.originator,
 			str = 'The \'';
-		
+
 		if (!originator || !this.hasNode()) {
 			return;
 		}
-			
-		str += (event.originator.getActive() && event.originator.kind === 'moon.RadioItem') ? originator.getContent() : originator.name;
+
+		str += (ev.originator.getActive() && ev.originator.kind === 'moon.RadioItem') ? originator.getContent() : originator.name;
 		str +=  '\' item is selected.';
-		
+
 		this.$.result.setContent(str);
 	}
 });

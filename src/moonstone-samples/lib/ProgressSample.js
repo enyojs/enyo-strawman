@@ -7,44 +7,47 @@ var
 	Divider = require('moonstone/Divider'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
+	Scroller = require('moonstone/Scroller'),
 	ProgressBar = require('moonstone/ProgressBar');
 
 module.exports = kind({
 	name: 'moon.sample.ProgressSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-progress-sample',
 	components: [
-		{kind: Divider, content: 'Progress Bars'},
-		{kind: ProgressBar, progress: 25},
-		{kind: ProgressBar, progress: 25, bgProgress: 75},
-		{kind: ProgressBar, progress: 50, barClasses: 'moon-sample-green'},
-		{kind: ProgressBar, progress: 50, barClasses: 'moon-sample-red'},
+		{kind: Scroller, classes: "enyo-fit", components: [
+			{kind: Divider, content: 'Progress Bars'},
+			{kind: ProgressBar, progress: 25},
+			{kind: ProgressBar, progress: 25, bgProgress: 75},
+			{kind: ProgressBar, progress: 50, barClasses: 'moon-progress-bar-bar green'},
+			{kind: ProgressBar, progress: 50, barClasses: 'moon-progress-bar-bar red'},
 
-		{kind: Divider, content: 'Progress Bars with Popup'},
-		{kind: ProgressBar, progress: 25, popup: true},
+			{kind: Divider, content: 'Progress Bars with Popup'},
+			{kind: ProgressBar, progress: 25, popup: true},
 
-		{kind: Divider, content: 'Vertical Orientation Progress Bars'},
-		{classes: 'moon-hspacing', components: [
-			{kind: ProgressBar, progress: 25, orientation: 'vertical', popup: true},
-			{classes: 'moon-3h'},
-			{kind: ProgressBar, progress: 25, orientation: 'vertical', style: 'height: 200px'},
-			{classes: 'moon-3h'},
-			{kind: ProgressBar, progress: 25, orientation: 'vertical', popup: true, popupSide: 'left', style: 'width: 60px; '}
-		]},
-		{classes: 'moon-1v'},
+			{kind: Divider, content: 'Vertical Orientation Progress Bars'},
+			{classes: 'moon-hspacing', components: [
+				{kind: ProgressBar, progress: 25, orientation: 'vertical', popup: true},
+				{classes: 'moon-3h'},
+				{kind: ProgressBar, progress: 25, orientation: 'vertical', style: 'height: 200px'},
+				{classes: 'moon-3h'},
+				{kind: ProgressBar, progress: 25, orientation: 'vertical', popup: true, popupSide: 'left', style: 'width: 60px; '}
+			]},
+			{classes: 'moon-1v'},
 
-		{kind: InputDecorator, style: 'margin-right:10px;', components: [
-			{kind: Input, placeholder: 'Value'}
-		]},
-		{kind: Button, content: 'Set', small: true, classes: 'moon-sample-spaced-button', ontap: 'changeValue'},
-		{kind: Button, content: '-', small: true, classes: 'moon-sample-spaced-button', ontap: 'decValue'},
-		{kind: Button, content: '+', small: true, classes: 'moon-sample-spaced-button', ontap: 'incValue'},
-		{classes: 'moon-2v'},
+			{kind: InputDecorator, style: 'margin-right:10px;', components: [
+				{kind: Input, placeholder: 'Value'}
+			]},
+			{kind: Button, content: 'Set', small: true, classes: 'spaced-button', ontap: 'changeValue'},
+			{kind: Button, content: '-', small: true, classes: 'spaced-button', ontap: 'decValue'},
+			{kind: Button, content: '+', small: true, classes: 'spaced-button', ontap: 'incValue'},
+			{classes: 'moon-1v'},
 
-		{style: 'width:240px;', components: [
-			{name: 'animateSetting', kind: CheckboxItem, checked: true, content: 'Animated'}
+			{style: 'width:240px;', components: [
+				{name: 'animateSetting', kind: CheckboxItem, checked: true, content: 'Animated'}
+			]}
 		]}
 	],
-	changeValue: function (sender, event) {
+	changeValue: function (sender, ev) {
 		for (var i in this.$) {
 			if (this.$[i].kind == ProgressBar) {
 				if (this.$.animateSetting.getChecked()) {
