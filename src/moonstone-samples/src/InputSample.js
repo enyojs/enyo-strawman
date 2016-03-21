@@ -75,8 +75,8 @@ module.exports = kind({
 			]},
 
 			{kind: Divider, content: 'Range input'},
-			{kind: InputDecorator, components: [
-				{name: 'rangeInput', kind: Input, placeholder: 'Fill out number', type: 'number', min: 25, max: 90, invalidMessage: 'Please enter a valid number.', style: 'width: 300px;', oninput:'handleInvalidInput', onchange:'handleChange'}
+			{name: 'rangeInputDecorator', kind: InputDecorator, invalidMessage: 'Please enter a valid number.', components: [
+				{name: 'rangeInput', kind: Input, placeholder: 'Enter a number', type: 'number', min: 25, max: 90, style: 'width: 300px;', onchange:'handleChange', oninput:'handleInputToValidate'}
 			]},
 
 			{classes: 'moon-1v'},
@@ -122,7 +122,7 @@ module.exports = kind({
 	handleSliderChange: function () {
 		this.$.rangeValue.set('content', 'Min: ' + this.$.rangeInput.min + ', Max: ' + this.$.rangeInput.max);
 	},
-	handleInvalidInput: function (sender, ev) {
-		this.$.rangeInput.set('invalid', !ev.target.validity.valid);
+	handleInputToValidate: function (sender, ev) {
+		this.$.rangeInputDecorator.set('invalid', !ev.target.validity.valid);
 	}
 });
