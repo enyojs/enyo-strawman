@@ -7,21 +7,20 @@ var
 	jshint = require('gulp-jshint'),
 	nom = require('nomnom'),
 	rimraf = Promise.promisify(require('rimraf')),
-	exec = require('child_process').exec,
 	stylish = require('jshint-stylish');
 
 var args = nom
 	.script('gulp')
-	.option('task', {position:0, default:'build', help:'Optional specific gulp task to execute. Defaults to "build".'})
-	.option('production', {abbr:'P', flag:true, default:false, help:'Build in production mode.'})
-	.option('source-maps', {flag:true, default:true, help:'Whether or not to build source-maps.'})
-	.option('cache', {flag:true, default:true, help:'Enables the use of a cache-file.'})
-	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
+	.option('task', {position:0, 'default':'build', help:'Optional specific gulp task to execute. Defaults to "build".'})
+	.option('production', {abbr:'P', flag:true, 'default':false, help:'Build in production mode.'})
+	.option('source-maps', {flag:true, 'default':true, help:'Whether or not to build source-maps.'})
+	.option('cache', {flag:true, 'default':true, help:'Enables the use of a cache-file.'})
+	.option('clean', {flag:true, 'default':false, help:'This will empty the outdir before writing any new files to it.'})
 	.option('samples', {flag:false, abbr: 's', help:'Comma-separated list of samples to build overriding the standard (e.g. enyo,moonstone,spotlight).'})
-	.option('log-level', {abbr:'l', default:'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
-	.option('log-json', {flag:true, default:false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
+	.option('log-level', {abbr:'l', 'default':'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
+	.option('log-json', {flag:true, 'default':false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
 			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
-	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
+	.option('user', {flag:true, 'default':true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
 	.parse();
 
@@ -143,7 +142,7 @@ function promiseStrawman(samples) {
 			name = name.replace('moonstone', 'moonstone-extra');
 		}
 		console.log('Building ' + name + ' samples...');
-	})
+	});
 	var promiseOn = Promise.promisify(packager.on, {context:packager});
 	return promiseOn('end');
 }
@@ -151,7 +150,7 @@ function promiseStrawman(samples) {
 function samplerOpts(item) {
 	var target = '.';
 	var opts = {
-		package: '.',
+		'package': '.',
 		sourceMaps: args['source-maps'],
 		clean: false,
 		cache: args.cache,
