@@ -43,6 +43,6 @@ module.exports = kind({
 			if (!this._libList && this.version) { // only display version information for individual libraries that are versioned
 				console.log('%c%s%s: %s', 'color:blue', (name ? name + ' - ' : ''), this.libraryName, this.version);
 			}
-		}
-	}),
+		};
+	})
 });

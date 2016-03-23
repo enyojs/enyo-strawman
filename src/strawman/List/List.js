@@ -42,7 +42,7 @@ module.exports = kind({
 		return function () {
 			sup.apply(this, arguments);
 			this.listTypeChanged();
-		}
+		};
 	}),
 	listTypeChanged: function (old) {
 		this.$.repeater.removeClass(old);
