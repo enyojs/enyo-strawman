@@ -1,0 +1,25 @@
+.right {
+	float: right;
+}
+
+.enyo-locale-right-to-left .right {
+	float: left;
+}
+
+.draggable {
+	position: absolute;
+	z-index: 2;
+
+	left: 50%;
+	top: 20%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.column-center {
+	position: absolute;
+	left: 40%;
+	top: 40%;
+	z-index: 1;
+}
+
