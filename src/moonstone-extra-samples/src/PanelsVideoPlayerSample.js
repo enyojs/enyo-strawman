@@ -15,7 +15,6 @@ var
 	SelectableItem = require('moonstone/SelectableItem'),
 	ToggleButton = require('moonstone/ToggleButton'),
 	VideoFullscreenToggleButton = require('moonstone/VideoFullscreenToggleButton'),
-	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
@@ -51,12 +50,11 @@ module.exports = kind({
 							inline:true,
 							classes: 'moon-8h',
 							poster: '@../assets/video-poster.png',
+							title: 'Downton Abbey',
 							infoComponents: [
-								{kind: VideoTitle, title: 'Downton Abbey', components: [
-									{content: 'DTV'},
-									{content: 'REC 08:22', classes: 'redicon'},
-									{content: '3D'}
-								]}
+								{content: 'DTV'},
+								{content: 'Cinema'},
+								{content: '3D'}
 							],
 							components: [
 								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},

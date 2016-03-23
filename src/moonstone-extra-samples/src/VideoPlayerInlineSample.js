@@ -4,7 +4,6 @@ var
 var
 	IconButton = require('moonstone/IconButton'),
 	VideoFullscreenToggleButton = require('moonstone-extra/VideoFullscreenToggleButton'),
-	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -26,12 +25,11 @@ module.exports = kind({
 			inline: true,
 			classes: 'moon-8h',
 			autoplay: true,
+			title: 'Downton Abbey',
 			infoComponents: [
-				{kind: VideoTitle, title: 'Downton Abbey', components: [
-					{content: 'DTV'},
-					{content: 'Cinema'},
-					{content: '3D'}
-				]}
+				{content: 'DTV'},
+				{content: 'Cinema'},
+				{content: '3D'}
 			],
 			components: [
 				{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},

@@ -28,7 +28,6 @@ var
 	Scroller = require('moonstone/Scroller'),
 	TimePicker = require('moonstone/TimePicker'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
@@ -72,13 +71,11 @@ module.exports = kind({
 				}
 			],
 			components: [
-				{name: 'player', kind: VideoPlayer, src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
-					{kind: VideoTitle, title: 'Downton Abbey', components: [
-						{content: 'DTV'},
-						{content: 'Cinema'},
-						{content: '3D'}
-					]}
-				], components: [
+				{name: 'player', kind: VideoPlayer, src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', poster: '@../assets/video-poster.png', autoplay: true, showing: false, title: 'Downton Abbey', infoComponents: [
+				{content: 'DTV'},
+				{content: 'Cinema'},
+				{content: '3D'}
+			], components: [
 					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 					{kind: IconButton, small: false, backgroundOpacity: 'translucent'},

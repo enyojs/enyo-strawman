@@ -11,7 +11,6 @@ var
 	ToggleItem = require('moonstone/ToggleItem'),
 	Tooltip = require('moonstone/Tooltip'),
 	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -24,13 +23,11 @@ module.exports = kind({
     name: 'moon.sample.AlwaysViewingPanelsWithVideoSample',
     classes: 'moon enyo-fit enyo-unselectable',
     components: [
-        {name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
-			{kind: VideoTitle, title: 'Downton Abbey', components: [
+        {name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, title: 'Downton Abbey', infoComponents: [
 				{content: 'DTV'},
-				{content: 'REC 08:22', classes: 'redicon'},
+				{content: 'Cinema'},
 				{content: '3D'}
-			]}
-		], components: [
+			], components: [
 			{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
 			{kind: TooltipDecorator, components: [
 				{kind: ContextualPopupDecorator, components: [

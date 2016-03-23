@@ -9,7 +9,6 @@ var
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone/Panels'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoTitle = require('moonstone-extra/VideoTitle'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -22,13 +21,11 @@ module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-		{name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
-			{kind: VideoTitle, title: 'Downton Abbey', components: [
+		{name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, title: 'Downton Abbey', infoComponents: [
 				{content: 'DTV'},
-				{content: 'REC 08:22', classes: 'redicon'},
+				{content: 'Cinema'},
 				{content: '3D'}
-			]}
-		], components: [
+			], components: [
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
