@@ -40,10 +40,10 @@ module.exports = kind({
 			],
 			leftComponents: [
 				{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
-				{kind: IconButton, icon: 'search', small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, icon: 'search', small: false, backgroundOpacity: 'translucent'}
 			],
 			rightComponents: [
-				{kind: IconButton, icon: 'hollowstar', small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, icon: 'hollowstar', small: false, backgroundOpacity: 'translucent'}
 			],
 			components: [
 				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
