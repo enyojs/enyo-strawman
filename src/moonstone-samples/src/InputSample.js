@@ -71,6 +71,19 @@ module.exports = kind({
 			]},
 			{kind: InputDecorator, disabled: true, components: [
 				{kind: RichText, disabled: true, style: 'width: 240px;'}
+			]},
+
+			{kind: Divider, content: 'Range Inputs'},
+			{classes: 'range-inputs', components: [
+				{name: 'rangeInput', kind: InputDecorator, invalidMessage: 'Please enter a number between 25 and 100.', components: [
+					{kind: Input, placeholder: 'Enter a number', type: 'number', attributes: { min: 25, max: 100 }, style: 'width: 300px;', onchange:'handleChange', oninput:'handleRangeInput'}
+				]},
+				{name: 'zipCodeInput', kind: InputDecorator, invalidMessage: 'Please enter a 5 digit zip code.', components: [
+					{kind: Input, placeholder: 'Enter a zip code', type: 'number', style: 'width: 300px;', onchange:'handleChange', oninput:'handleZipInput'}
+				]},
+				{name: 'nameInput', kind: InputDecorator, invalid: true, invalidMessage: 'Please enter a name.', components: [
+					{kind: Input, style: 'width: 300px;', onchange:'handleChange', oninput:'handleNameInput'}
+				]}
 			]}
 		]},
 		{kind: Divider, content: 'Result', classes: 'moon-input-sample-result'},
@@ -93,5 +106,27 @@ module.exports = kind({
 	},
 	handleChange: function (sender, ev) {
 		this.$.console.setContent('Changed: ' + sender.getValue());
+	},
+	handleRangeInput: function (sender, ev) {
+		this.$.rangeInput.set('invalid', !ev.target.validity.valid);
+	},
+	handleZipInput: function (sender, ev) {
+		var value = ev.target.value,
+			length = value ? value.length : 0;
+		this.$.zipCodeInput.set('invalid', length !== 0 && length !== 5);
+	},
+	handleNameInput: function (sender, ev) {
+		var value = ev.target.value,
+			length = value && value.length,
+			control = this.$.nameInput;
+		if (!value) {
+			control.set('invalidMessage', 'Please enter a name.');
+			control.set('invalid', true);
+		} else if (length < 3) {
+			control.set('invalidMessage', 'Please enter a name that is at least 3 characters.');
+			control.set('invalid', true);
+		} else {
+			control.set('invalid', false);
+		}
 	}
 });

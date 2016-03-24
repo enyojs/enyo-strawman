@@ -5,3 +5,12 @@
 .moon-input-sample-result {
 	padding-top:20px;
 }
+
+.moon-input-sample-value-padding {
+	padding: 0px 10px;
+}
+
+.moon-input-sample .range-inputs {
+	/* clamping width to force each input onto its own line */
+	width: 300px;
+}
