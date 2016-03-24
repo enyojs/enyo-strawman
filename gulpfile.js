@@ -22,9 +22,13 @@ var args = nom
 			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
 	.option('user', {flag:true, 'default':true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
+	.option('init-libs', {abbr: 'i', flag: true, default: true, hidden:true})
+	.option('link-all-libs', {abbr: 'L', flag: true, default: false, hidden:true})
+	.option('link-available', {abbr: 'D', flag: true, default: false, hidden:true})
 	.parse();
 
 gulp.task('default', ['build']);
+gulp.task('init', init);
 gulp.task('build', build);
 gulp.task('build-all', buildAll);
 gulp.task('moonstone-extra', moonstone);
@@ -32,6 +36,17 @@ gulp.task('garnet', garnet);
 gulp.task('sunstone', sunstone);
 gulp.task('clean', clean);
 gulp.task('jshint', lint);
+
+function init() {
+	var enyo = require('enyo-dev');
+	var initializer = enyo.initialize({
+		initLibs: args['init-libs'],
+		linkAllLibs: args['link-all-libs'],
+		linkAvailLibs: args['link-available']
+	});
+	var promiseOn = Promise.promisify(initializer.on, {context:initializer});
+	return promiseOn('end');
+}
 
 
 function build() {
