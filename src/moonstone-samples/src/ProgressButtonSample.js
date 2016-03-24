@@ -11,7 +11,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.ProgressButtonSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-progress-button-sample',
 	contentChange: false,
 	components: [
 		{kind: Divider, content: 'Progress Button with Auto Download'},
@@ -19,15 +19,15 @@ module.exports = kind({
 		{tag: 'br'},
 		{tag: 'br'},
 		{kind: Divider, content: 'Simple Progress Button'},
-		{name: 'progressButton', kind: ProgressButton, progress: 0, content: 'Download', postContent: 'Launch', barClasses: 'moon-sample-blue', ontap: 'changeValue'},
+		{name: 'progressButton', kind: ProgressButton, progress: 0, content: 'Download', postContent: 'Launch', barClasses: 'blue', ontap: 'changeValue'},
 		{tag: 'br'},
 		{tag: 'br'},
 		{kind: InputDecorator, style: 'margin-right:10px;', components: [
 			{kind: Input, value: 10}
 		]},
-		{kind: Button, content: 'Set', small: true, classes: 'moon-sample-spaced-button', ontap: 'changeValue'},
-		{kind: Button, content: '-', small: true, classes: 'moon-sample-spaced-button', ontap: 'decValue'},
-		{kind: Button, content: '+', small: true, classes: 'moon-sample-spaced-button', ontap: 'incValue'},
+		{kind: Button, content: 'Set', small: true, classes: 'spaced-button', ontap: 'changeValue'},
+		{kind: Button, content: '-', small: true, classes: 'spaced-button', ontap: 'decValue'},
+		{kind: Button, content: '+', small: true, classes: 'spaced-button', ontap: 'incValue'},
 		{tag: 'br'},
 		{tag: 'br'},
 		{style: 'width:240px;', components: [
@@ -74,7 +74,7 @@ module.exports = kind({
 				++_this.downloadProgress;
 				_this.$.autoDownload.animateProgressTo(_this.downloadProgress);
 				if (_this.downloadProgress >= 100) {
-					this.resetTimer();
+					_this.resetTimer();
 				}
 			}, 100);
 		}
