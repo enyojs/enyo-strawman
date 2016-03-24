@@ -34,10 +34,18 @@ module.exports = kind({
 			title: 'Downton Abbey',
 			infoComponents: [
 				{content: 'DTV'},
-				{content: 'Cinema'},
-				{content: '3D'}
+				{content: 'REC 08:22', classes: 'redicon'},
+				{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+				{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
 			],
-	   		components: [
+			leftComponents: [
+				{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, icon: 'search', small: false, backgroundOpacity: 'translucent'},
+			],
+			rightComponents: [
+				{kind: IconButton, icon: 'hollowstar', small: false, backgroundOpacity: 'translucent'},
+			],
+			components: [
 				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls', backgroundOpacity: 'translucent'},
 				{kind: Button, content: 'Unload', backgroundOpacity: 'translucent', ontap: 'unload'},

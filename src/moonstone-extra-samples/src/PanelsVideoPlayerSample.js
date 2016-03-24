@@ -53,8 +53,9 @@ module.exports = kind({
 							title: 'Downton Abbey',
 							infoComponents: [
 								{content: 'DTV'},
-								{content: 'Cinema'},
-								{content: '3D'}
+								{content: 'REC 08:22', classes: 'redicon'},
+								{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+								{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
 							],
 							components: [
 								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
