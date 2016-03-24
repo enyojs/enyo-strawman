@@ -14,7 +14,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.TooltipSample',
-	classes: 'moon enyo-unselectable',
+	classes: 'moon enyo-unselectable moon-tooltip-sample',
 	components: [
 		{name: 'dragContainer', kind: TooltipDecorator, classes: 'draggable',
 			ondragstart: 'dragstart', ondrag: 'drag', ondragfinish: 'dragfinish', components: [

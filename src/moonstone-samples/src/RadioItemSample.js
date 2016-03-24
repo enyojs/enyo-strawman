@@ -10,7 +10,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.RadioItemSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-radio-item-sample',
 	kind: FittableRows,
 	components: [
 		{fit: true, components: [

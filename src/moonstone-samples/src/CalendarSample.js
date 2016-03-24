@@ -25,7 +25,7 @@ var
 	Scroller = require('moonstone/Scroller');
 
 module.exports = kind({
-	name: 'smoon.sample.CalendarSample',
+	name: 'moon.sample.CalendarSample',
 	classes: 'moon enyo-unselectable enyo-fit',
 	kind: FittableColumns,
 	_locale: 'local',
@@ -167,7 +167,7 @@ module.exports = kind({
 			c = control.getClientControls();
 		for (i = 0; i < c.length; i++) {
 			if (c[i].content == labelName1) {
-				c[i].addRemoveClass('moon-calendar-dow-lable-nodisplay', Boolean(ev.content == labelName2));
+				c[i].addRemoveClass('moon-calendar-dow-label-nodisplay', Boolean(ev.content == labelName2));
 			}
 		}
 	},

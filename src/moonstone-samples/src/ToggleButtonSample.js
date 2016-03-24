@@ -14,7 +14,7 @@ var
 module.exports = kind({
 	name: 'moon.sample.ToggleButtonSample',
 	kind: FittableRows,
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-toggle-button-sample',
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{classes: 'moon-toggle-button-sample-wrapper', components: [
