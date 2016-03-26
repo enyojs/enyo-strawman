@@ -57,8 +57,10 @@ module.exports = kind({
 								{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
 								{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
 							],
+							leftComponents: [
+								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'}
+							],
 							components: [
-								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
@@ -96,7 +98,7 @@ module.exports = kind({
 			{src: 'http://media.w3.org/2010/05/video/movie_300.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
-		this.$.videoInfoHeader.setTitle('Ticking Counter Video');
+		this.$.player.set('title', 'Ticking Counter Video');
 	},
 	webMovieBunny: function (sender, ev) {
 		if (!ev.originator.active) {
@@ -109,7 +111,7 @@ module.exports = kind({
 			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
-		this.$.videoInfoHeader.setTitle('Bunny Video');
+		this.$.player.set('title', 'Bunny Video');
 	},
 	webMovieSintel: function (sender, ev) {
 		if (!ev.originator.active) {
@@ -122,7 +124,7 @@ module.exports = kind({
 			{src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
-		this.$.videoInfoHeader.setTitle('The Sintel Video');
+		this.$.player.set('title', 'The Sintel Video');
 	},
 	error: function (sender, ev) {
 		if (!ev.originator.active) {
@@ -130,7 +132,7 @@ module.exports = kind({
 		}
 		this.src = 'http://foo.bar';
 		this.$.player.setSrc(this.src);
-		this.$.videoInfoHeader.setTitle('Error video');
+		this.$.player.set('title', 'Error video');
 	}
 });
 
