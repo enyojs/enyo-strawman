@@ -2,12 +2,8 @@ var
 	kind = require('enyo/kind');
 
 var
-	ChannelInfo = require('moonstone/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
-	VideoFullscreenToggleButton = require('moonstone/VideoFullscreenToggleButton'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
+	VideoFullscreenToggleButton = require('moonstone-extra/VideoFullscreenToggleButton'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 var sources = [
@@ -29,29 +25,12 @@ module.exports = kind({
 			inline: true,
 			classes: 'moon-8h',
 			autoplay: true,
+			title: 'Downton Abbey',
 			infoComponents: [
-				{kind: VideoInfoBackground, orient: 'left', fit: true, components: [
-					{
-						kind: ChannelInfo,
-						channelNo: '13',
-						channelName: 'AMC',
-						components: [
-							{content: 'DTV'},
-							{content: 'Cinema'},
-							{content: '3D'}
-						]
-					},
-					{
-						kind: VideoInfoHeader,
-						title: 'Downton Abbey',
-						subTitle: 'Mon June 21, 7:00 - 8:00pm',
-						subSubTitle: 'R - TV 14, V, L, SC',
-						description: 'The series, set in the Yorukshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-					}
-				]},
-				{kind: VideoInfoBackground, orient: 'right', components: [
-					{kind: Clock}
-				]}
+				{content: 'DTV'},
+				{content: 'REC 08:22', classes: 'redicon'},
+				{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+				{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
 			],
 			components: [
 				{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},

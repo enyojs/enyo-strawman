@@ -8,8 +8,6 @@ var
 
 var
 	Button = require('moonstone/Button'),
-	ChannelInfo = require('moonstone/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),
 	Panel = require('moonstone/Panel'),
@@ -17,8 +15,6 @@ var
 	SelectableItem = require('moonstone/SelectableItem'),
 	ToggleButton = require('moonstone/ToggleButton'),
 	VideoFullscreenToggleButton = require('moonstone/VideoFullscreenToggleButton'),
-	VideoInfoBackground = require('moonstone/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
 
 module.exports = kind({
@@ -54,38 +50,17 @@ module.exports = kind({
 							inline:true,
 							classes: 'moon-8h',
 							poster: '@../assets/video-poster.png',
-							infoComponents: [{
-								kind: VideoInfoBackground,
-								orient: 'left',
-								fit: true,
-								components: [
-									{
-										kind: ChannelInfo,
-										channelNo: '13',
-										channelName: 'AMC',
-										components: [
-											{content: '3D'},
-											{content: 'Live'},
-											{content: 'REC 08:22', classes: 'redicon'}
-										]
-									},
-									{
-										kind: VideoInfoHeader,
-										title: 'Downton Abbey',
-										subTitle: 'Mon June 21, 7:00 - 8:00pm',
-										subSubTitle: 'R - TV 14, V, L, SC',
-										description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-									}
-								]
-							}, {
-								kind: VideoInfoBackground,
-								orient: 'right',
-								components: [
-									{kind: Clock}
-								]
-							}],
+							title: 'Downton Abbey',
+							infoComponents: [
+								{content: 'DTV'},
+								{content: 'REC 08:22', classes: 'redicon'},
+								{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+								{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
+							],
+							leftComponents: [
+								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'}
+							],
 							components: [
-								{kind: VideoFullscreenToggleButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
 								{kind: IconButton, backgroundOpacity: 'translucent'},
@@ -123,7 +98,7 @@ module.exports = kind({
 			{src: 'http://media.w3.org/2010/05/video/movie_300.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
-		this.$.videoInfoHeader.setTitle('Ticking Counter Video');
+		this.$.player.set('title', 'Ticking Counter Video');
 	},
 	webMovieBunny: function (sender, ev) {
 		if (!ev.originator.active) {
@@ -136,7 +111,7 @@ module.exports = kind({
 			{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
-		this.$.videoInfoHeader.setTitle('Bunny Video');
+		this.$.player.set('title', 'Bunny Video');
 	},
 	webMovieSintel: function (sender, ev) {
 		if (!ev.originator.active) {
@@ -149,7 +124,7 @@ module.exports = kind({
 			{src: 'http://media.w3.org/2010/05/sintel/trailer.webm', type: 'video/webm'}
 		];
 		this.$.player.setSources(this.sources);
-		this.$.videoInfoHeader.setTitle('The Sintel Video');
+		this.$.player.set('title', 'The Sintel Video');
 	},
 	error: function (sender, ev) {
 		if (!ev.originator.active) {
@@ -157,7 +132,7 @@ module.exports = kind({
 		}
 		this.src = 'http://foo.bar';
 		this.$.player.setSrc(this.src);
-		this.$.videoInfoHeader.setTitle('Error video');
+		this.$.player.set('title', 'Error video');
 	}
 });
 
