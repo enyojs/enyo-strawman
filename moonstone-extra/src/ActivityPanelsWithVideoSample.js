@@ -5,44 +5,28 @@ var
 	Spotlight = require('spotlight');
 
 var
-	ChannelInfo = require('moonstone-extra/ChannelInfo'),
-	Clock = require('moonstone/Clock'),
 	IconButton = require('moonstone/IconButton'),
 	Item = require('moonstone/Item'),
 	Panels = require('moonstone-extra/Panels'),
 	ToggleItem = require('moonstone/ToggleItem'),
-	VideoInfoBackground = require('moonstone-extra/VideoInfoBackground'),
-	VideoInfoHeader = require('moonstone-extra/VideoInfoHeader'),
 	VideoPlayer = require('moonstone-extra/VideoPlayer');
+
+var sources = [
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
+];
 
 module.exports = kind({
 	name: 'moon.sample.ActivityPanelsWithVideoSample',
 	classes: 'moon enyo-fit enyo-unselectable',
 	components: [
-        {name: 'player', kind: VideoPlayer, src: 'http://media.w3.org/2010/05/bunny/movie.mp4', poster: '@../assets/video-poster.png', autoplay: true, showing: false, infoComponents: [
-			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
-				{
-					kind: ChannelInfo,
-					channelNo: '13',
-					channelName: 'AMC',
-					components: [
-						{content: '3D'},
-						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'redicon'}
-					]
-				},
-				{
-					kind: VideoInfoHeader,
-					title: 'Downton Abbey - Extra Title',
-					subTitle: 'Mon June 21, 7:00 - 8:00pm',
-					subSubTitle: 'R - TV 14, V, L, SC',
-					description: 'The series, set in the Youkshire country estate of Downton Abbey, depicts the lives of the aristocratic Crawley famiry and'
-				}
-			]},
-			{kind: VideoInfoBackground, orient: 'right', background: true, components: [
-				{kind: Clock}
-			]}
-		], components: [
+		{name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, showing: false, title: 'Downton Abbey', infoComponents: [
+				{content: 'DTV'},
+				{content: 'REC 08:22', classes: 'redicon'},
+				{content: '&#42279;', accessibilityLabel: 'THX Certified Audio', classes: 'font-lg-icons'},
+				{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
+			], components: [
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
@@ -107,44 +91,47 @@ module.exports = kind({
 			]}
 		]}
 	],
-	rendered: function() {
+	rendered: function () {
 		this.inherited(arguments);
+		// set delay in order to read focused item after reading a panel title
 		setTimeout(this.bindSafely(function () {
 			Spotlight.spot(this.$.panels);
 		}), 200);
 	},
 	// custom next handler for each panel to avoid switching from one active panel
 	// to another with no visible change for demo
-	next1: function(inSender, inEvent) {
+	next1: function (sender, ev) {
 		this.$.panels.setIndex(1);
 		return true;
 	},
-	next2: function(inSender, inEvent) {
+	next2: function (sender, ev) {
 		this.$.panels.setIndex(2);
 		return true;
 	},
-	next3: function(inSender, inEvent) {
+	next3: function (sender, ev) {
 		this.$.panels.setIndex(3);
 		return true;
 	},
-	next4: function(inSender, inEvent) {
+	next4: function (sender, ev) {
 		this.$.panels.setIndex(4);
 		return true;
 	},
-	next5: function(inSender, inEvent) {
+	next5: function (sender, ev) {
 		this.$.panels.setIndex(5);
 		return true;
 	},
-	next6: function(inSender, inEvent) {
+	next6: function (sender, ev) {
 		this.$.panels.setIndex(6);
 		return true;
 	},
-	handleShowingChanged: function(inSender, inEvent) {
-		this.$.panels.setHandleShowing(inSender.getChecked());
+	handleShowingChanged: function (sender, ev) {
+		this.$.panels.setHandleShowing(sender.getChecked());
 	},
-	panelsShowingChanged: function (sender, event) {
+	panelsShowingChanged: function (sender, ev) {
 		// Hiding the VideoPlayer when it would be obscured by the Panels avoids UI performance
 		// issues caused by the GPU being occupied rendering video frames that aren't visible.
-		this.$.player.set('showing', !event.showing);
+		this.$.player.set('showing', !ev.showing);
 	}
 });
+
+module.exports.badgeClasses = 'new';
