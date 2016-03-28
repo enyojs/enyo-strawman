@@ -19,7 +19,8 @@ Enyo projects.
 #### Initialization
 
 Before enyo-strawman can be built, all of the dependent libraries must be installed either by
-cloning or linking them into the project. Running `enyo init` will clone each required library from
+cloning or linking them into the project. The simplest way is running `npm run bundle init`. 
+Alternatively, running `gulp init` or `enyo init` will also clone each required library from
 git at the specified branch or tag into the `lib` folder.
 
 If you have multiple Enyo projects and want to share copies of the libraries, you can `enyo link`
