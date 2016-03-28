@@ -1,16 +1,53 @@
 ## QA/Samples Repository
 
-This application is intended to be used for testing purposes. It contains samples related to the various [EnyoJS](http://enyojs.com) [libraries](https://github.com/enyojs). Please follow the directions below to build and run the tests.
+This application is intended to be used for testing purposes. It contains samples related to the
+various [EnyoJS](http://enyojs.com) [libraries](https://github.com/enyojs). Please follow the
+directions below to build and run the tests.
 
-This application expects that you have the [enyo-dev](https://github.com/enyojs/enyo-dev) module installed.
+### Build
 
-> At this time, it is not released as an npm package thus you must clone it locally on the system, execute `npm install -g` for the eqivalent.
+#### enyo-dev Tooling
 
-Ensure all of the dependent libraries are installed by executing `egen init`. The `egen` executable is an alias to `enyo-gen` from the [enyo-dev](https://github.com/enyojs/enyo-dev) module. By default, this will install all of the required dependencies from their respective git repositories (will be slow on most connections, so be patient). If you already have a local copy of all of the libraries it will be faster with the `egen init --link-all-libs` flag.
+This application requires the [enyo-dev](https://github.com/enyojs/enyo-dev) tools installed in
+order to build and run. Once installed, the `enyo` command will be available to initialize and build
+Enyo projects.
 
-**Note: `--link-all-libs` can only be used if you have also executed `bower link` from within each of those repositories. You can also only link specific libraries if you do not have them all: `egen init --link-libs=enyo,moonstone`.**
+* [Installation](https://github.com/enyojs/enyo-dev#setup-install)
+* [Configuration](https://github.com/enyojs/enyo-dev#environment-configuration)
+* [Usage](https://github.com/enyojs/enyo-dev#commands)
 
-Once the dependent libraries are installed, the application can be built by simply executing `epack` from the project root. Unless otherwise specified, it will produce the packaged output in `./dist`. You can serve this directly from a web server or copy it to a root. Or, instead of using `epack` you can execute `eserve` which will build and automatically serve the output for you (default port is 8000). The `epack` and `eserve` executables are aliases to `enyo-pack` and `enyo-serve`, respectively, that come from the [enyo-dev](https://github.com/enyojs/enyo-dev) module.
+#### Initialization
+
+Before enyo-strawman can be built, all of the dependent libraries must be installed either by
+cloning or linking them into the project. The simplest way is running `npm run bundle init`. 
+Alternatively, running `gulp init` or `enyo init` will also clone each required library from
+git at the specified branch or tag into the `lib` folder.
+
+If you have multiple Enyo projects and want to share copies of the libraries, you can `enyo link`
+them into strawman. More details available in the
+[enyo-dev documentation](https://github.com/enyojs/enyo-dev#commands-link).
+
+#### Bundling
+
+While a normal Enyo application can be built using `enyo pack`, enyo-strawman has a more complex
+build process using `gulp` to enable more custom builds for engineering and QA teams.
+
+If you have `gulp` installed globally, you can run `gulp` in the root directory to initiate a build.
+If not, you can start a build using the `bundle` npm task.
+
+```bash
+# run a normal build using gulp
+gulp
+# run a normal build using npm
+npm run bundle
+
+# run a custom build (only enyo and onyx samples) using gulp
+gulp -s enyo,onyx
+# run a custom build (only enyo and onyx samples) using npm
+npm run bundle -- -s enyo,onyx
+```
+
+Once built, the application can be launched from `./dist/index.html` using your browser of choice.
 
 ## Copyright and License Information
 
