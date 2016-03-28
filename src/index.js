@@ -20,7 +20,11 @@ var
 		title: 'Enyo Strawman - Samples Gallery',
 		classes: 'home',
 		listType: 'grid',
-		samples: samples
+		samples: samples,
+		components: [{
+			classes: 'warning',
+			content: 'Moonstone samples were meant to be rendered at TV resolutions. The samples may not render correctly at lower resolutions.'
+		}]
 	});
 
 module.exports = {
