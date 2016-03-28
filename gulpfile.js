@@ -7,25 +7,28 @@ var
 	jshint = require('gulp-jshint'),
 	nom = require('nomnom'),
 	rimraf = Promise.promisify(require('rimraf')),
-	exec = require('child_process').exec,
 	stylish = require('jshint-stylish');
 
 var args = nom
 	.script('gulp')
-	.option('task', {position:0, default:'build', help:'Optional specific gulp task to execute. Defaults to "build".'})
-	.option('production', {abbr:'P', flag:true, default:false, help:'Build in production mode.'})
-	.option('source-maps', {flag:true, default:true, help:'Whether or not to build source-maps.'})
-	.option('cache', {flag:true, default:true, help:'Enables the use of a cache-file.'})
-	.option('clean', {flag:true, default:false, help:'This will empty the outdir before writing any new files to it.'})
+	.option('task', {position:0, 'default':'build', help:'Optional specific gulp task to execute. Defaults to "build".'})
+	.option('production', {abbr:'P', flag:true, 'default':false, help:'Build in production mode.'})
+	.option('source-maps', {flag:true, 'default':true, help:'Whether or not to build source-maps.'})
+	.option('cache', {flag:true, 'default':true, help:'Enables the use of a cache-file.'})
+	.option('clean', {flag:true, 'default':false, help:'This will empty the outdir before writing any new files to it.'})
 	.option('samples', {flag:false, abbr: 's', help:'Comma-separated list of samples to build overriding the standard (e.g. enyo,moonstone,spotlight).'})
-	.option('log-level', {abbr:'l', default:'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
-	.option('log-json', {flag:true, default:false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
+	.option('log-level', {abbr:'l', 'default':'error', help:'Log level; available options are [fatal, error, warn, info, debug, trace].'})
+	.option('log-json', {flag:true, 'default':false, help:'Enable this flag to ensure the output of the logging is the normal bunayn ' +
 			'"JSON" format to STDOUT that can be piped to their separate bunyan cli tool for filtering.'})
-	.option('user', {flag:true, default:true, help:'Set this to false when executing from an automated script or in ' +
+	.option('user', {flag:true, 'default':true, help:'Set this to false when executing from an automated script or in ' +
 			'an environment where a user-environment should not be used.'})
+	.option('init-libs', {abbr: 'i', flag: true, default: true, hidden:true})
+	.option('link-all-libs', {abbr: 'L', flag: true, default: false, hidden:true})
+	.option('link-available', {abbr: 'D', flag: true, default: false, hidden:true})
 	.parse();
 
 gulp.task('default', ['build']);
+gulp.task('init', init);
 gulp.task('build', build);
 gulp.task('build-all', buildAll);
 gulp.task('moonstone-extra', moonstone);
@@ -33,6 +36,17 @@ gulp.task('garnet', garnet);
 gulp.task('sunstone', sunstone);
 gulp.task('clean', clean);
 gulp.task('jshint', lint);
+
+function init() {
+	var enyo = require('enyo-dev');
+	var initializer = enyo.initialize({
+		initLibs: args['init-libs'],
+		linkAllLibs: args['link-all-libs'],
+		linkAvailLibs: args['link-available']
+	});
+	var promiseOn = Promise.promisify(initializer.on, {context:initializer});
+	return promiseOn('end');
+}
 
 
 function build() {
@@ -129,21 +143,29 @@ function lint () {
 }
 
 function promiseStrawman(samples) {
-	console.log('Building Enyo-Strawman...');
 	var enyo = require('enyo-dev');
-	return promiseSampler(enyo).then(function() {
-		return Promise.reduce(samples, function(_, item, index, length) {
-			console.log('Building ' + item + ' samples...');
-			return promiseSampler(enyo, item);
-		}, null);
+	var opts = samplerOpts().options;
+	opts.subpackage = [];
+	for(var i=0; i<samples.length; i++) {
+		opts.subpackage.push(samplerOpts(samples[i]));
+	}
+	console.log('Building Enyo-Strawman...');
+	var packager = enyo.packager(opts);
+	packager.on('subpackage', function(e) {
+		var name = e.options.outDir.replace('../../dist/', '');
+		if(e.name.indexOf('-extra')>-1) {
+			name = name.replace('moonstone', 'moonstone-extra');
+		}
+		console.log('Building ' + name + ' samples...');
 	});
+	var promiseOn = Promise.promisify(packager.on, {context:packager});
+	return promiseOn('end');
 }
 
-function promiseSampler(enyo, item) {
-	var cwd = process.cwd();
+function samplerOpts(item) {
 	var target = '.';
 	var opts = {
-		package: '.',
+		'package': '.',
 		sourceMaps: args['source-maps'],
 		clean: false,
 		cache: args.cache,
@@ -162,9 +184,5 @@ function promiseSampler(enyo, item) {
 	} else {
 		opts.headScripts = ['./config.js'];
 	}
-	process.chdir(target);
-	var packager = enyo.packager(opts);
-	var promiseOn = Promise.promisify(packager.on, {context:packager});
-	process.chdir(cwd);
-	return promiseOn('end');
+	return {name:target, options:opts};
 }
