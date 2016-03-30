@@ -141,7 +141,7 @@ module.exports = kind({
 					{kind: Button, content: 'Back', small: true, href: '../index.html', mixins: [LinkSupport]}
 				],
 				components: [
-					{name: 'list', kind: DataList, fixedChildSize: 62, components: [
+					{name: 'list', kind: DataList, components: [
 						{kind: SampleListItem, bindings: [
 							{from: 'model.badgeClasses', to: 'badgeClasses'},
 							{from: 'model.label', to: 'content'},
