@@ -1,4 +1,4 @@
-require('enyo/options').accessibility = true;
+//require('enyo/options').accessibility = true;
 
 var
 	ready = require('enyo/ready'),
@@ -12,18 +12,18 @@ var
 	samples = {
 		Enyo: require('../src/enyo-samples'),
 		Garnet: require('./src'),
-		Layout: require('../src/layout-samples'),
-		Spotlight: require('../src/spotlight-samples'),
-		iLib: require('../src/enyo-ilib-samples'),
-		Onyx: require('../src/onyx-samples'),
-		Canvas: require('../src/canvas-samples'),
-		Svg: require('../src/svg-samples')
+		//Layout: require('../src/layout-samples'),
+		//Spotlight: require('../src/spotlight-samples'),
+		iLib: require('../src/enyo-ilib-samples')
+		//Onyx: require('../src/onyx-samples'),
+		//Canvas: require('../src/canvas-samples'),
+		//Svg: require('../src/svg-samples')
 	};
 
 var
 	List = kind({
 		kind: SampleList,
-		title: 'Enyo Strawman - Samples Gallery',
+		title: 'Enyo Strawman Perf - Samples Gallery',
 		classes: 'home',
 		listType: 'grid',
 		samples: samples

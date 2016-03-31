@@ -1,5 +1,5 @@
 {
-  "name": "enyo-strawman-garnet",
+  "name": "enyo-strawman-garnet-perf",
   "assets": [
     "../appinfo.json",
     "../icon.png",
