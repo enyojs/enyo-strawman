@@ -28,16 +28,16 @@
     "enyo-ilib": "https://github.com/enyojs/enyo-ilib.git"
   },
   "targets": {
-    "enyo": "2.6.0-dev",
-    "garnet": "master",
-    "layout": "2.6.0-dev",
-    "canvas": "2.6.0-dev",
-    "svg": "master",
-    "onyx": "2.6.0-dev",
-    "spotlight": "2.6.0-dev",
-    "enyo-webos": "2.6.0-dev",
-    "enyo-cordova": "2.6.0-dev",
-    "enyo-ilib": "2.6.0-dev"
+    "enyo": "2.7.0",
+    "garnet": "2.7.0",
+    "layout": "2.7.0",
+    "canvas": "2.7.0",
+    "svg": "2.7.0",
+    "onyx": "2.7.0",
+    "spotlight": "2.7.0",
+    "enyo-webos": "2.7.0",
+    "enyo-cordova": "2.7.0",
+    "enyo-ilib": "2.7.0"
   },
   "links": [],
   "linkAllLibs": false,
@@ -58,10 +58,15 @@
   "outdir": "../../dist/garnet",
   "outDir": "../../dist/garnet",
   "outFile": "index.html",
-  "lessPlugins": [{
-    "name": "resolution-independence",
-    "options": {"baseSize":16, "minUnitSize":0}
-  }],
+  "lessPlugins": [
+    {
+      "name": "resolution-independence",
+      "options": {
+        "baseSize": 16,
+        "minUnitSize": 0
+      }
+    }
+  ],
   "assetRoots": [],
   "lessOnlyLess": false,
   "minifyCss": false,
