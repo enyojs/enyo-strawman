@@ -1,5 +1,3 @@
-//require('enyo/options').accessibility = true;
-
 var
 	ready = require('enyo/ready'),
 	Scroller = require('garnet/Scroller'),
@@ -12,12 +10,8 @@ var
 	samples = {
 		Enyo: require('../src/enyo-samples'),
 		Garnet: require('./src'),
-		//Layout: require('../src/layout-samples'),
-		//Spotlight: require('../src/spotlight-samples'),
-		iLib: require('../src/enyo-ilib-samples')
-		//Onyx: require('../src/onyx-samples'),
-		//Canvas: require('../src/canvas-samples'),
-		//Svg: require('../src/svg-samples')
+		iLib: require('../src/enyo-ilib-samples'),
+		Svg: require('../src/svg-samples')
 	};
 
 var
