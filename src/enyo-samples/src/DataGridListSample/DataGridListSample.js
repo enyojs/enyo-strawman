@@ -2,6 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
+	Highlightable = require('enyo/Highlightable');
+
+var
 	Collection = require('enyo/Collection'),
 	DataGridList = require('enyo/DataGridList');
 
@@ -111,8 +114,9 @@ var data = [
 module.exports = kind({
 	name: 'enyo.sample.DataGridListSample',
 	classes: 'data-grid-list-sample data-repeater-sample enyo-fit',
+	mixins: [Highlightable],
 	components: [
-		{name: 'repeater', kind: DataGridList, components: [
+		{name: 'repeater', kind: DataGridList, renderDelay: null, components: [
 			{components: [
 				{classes: 'name-wrapper', components: [
 					{name: 'firstName', classes: 'name', tag: 'span'},
@@ -123,7 +127,9 @@ module.exports = kind({
 				{from: '.model.firstName', to: '.$.firstName.content'},
 				{from: '.model.lastName', to: '.$.lastName.content'},
 				{from: '.model.lastName', to: '.$.lastNameLetter.content', transform: function (v) { return v && v.charAt(0); }},
-				{from: '.model.classes', to: '.classes'}
+				{from: '.model.classes', to: '.classes', transform: function (val) {
+					return val + ' highlightable';
+				}}
 			]}
 		], minWidth: 320, minHeight: 100, spacing: 10}
 	],
