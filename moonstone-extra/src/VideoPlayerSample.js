@@ -39,11 +39,11 @@ module.exports = kind({
 				{content: '&#42295;', accessibilityLabel: '16 by 9 Aspect Ratio', classes: 'font-lg-icons'}
 			],
 			leftComponents: [
-				{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
-				{kind: IconButton, icon: 'search', small: false, backgroundOpacity: 'translucent'}
+				{kind: IconButton, icon: 'list', accessibilityLabel: 'Return to main list', small: false, backgroundOpacity: 'translucent'},
+				{kind: IconButton, icon: 'search', accessibilityLabel: 'Search', small: false, backgroundOpacity: 'translucent'}
 			],
 			rightComponents: [
-				{kind: IconButton, icon: 'hollowstar', small: false, backgroundOpacity: 'translucent'}
+				{kind: IconButton, icon: 'hollowstar', accessibilityLabel: 'Rate this video', small: false, backgroundOpacity: 'translucent'}
 			],
 			components: [
 				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
