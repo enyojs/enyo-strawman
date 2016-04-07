@@ -17,21 +17,26 @@ var
 	VideoInfoHeader = require('moonstone/VideoInfoHeader'),
 	VideoPlayer = require('moonstone/VideoPlayer');
 
+var sources = [
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv', type: 'video/ogg'},
+	{src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm', type: 'video/webm'}
+];
+
 module.exports = kind({
     name: 'moon.sample.AlwaysViewingPanelsWithVideoSample',
     classes: 'moon enyo-fit enyo-unselectable',
     components: [
-        {name: 'player', kind: VideoPlayer, src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
+        {name: 'player', kind: VideoPlayer, sources: sources, poster: '@../assets/video-poster.png', autoplay: true, infoComponents: [
 			{kind: VideoInfoBackground, orient: 'left', background: true, fit: true, components: [
 				{
 					kind: ChannelInfo,
 					channelNo: '13',
 					channelName: 'AMC',
-					classes: 'moon-2h',
 					components: [
 						{content: '3D'},
 						{content: 'Live'},
-						{content: 'REC 08:22', classes: 'moon-video-player-info-redicon '}
+						{content: 'REC 08:22', classes: 'redicon'}
 					]
 				},
 				{
@@ -46,7 +51,7 @@ module.exports = kind({
 				{kind: Clock}
 			]}
 		], components: [
-			{kind: IconButton, backgroundOpacity: 'translucent'},
+			{kind: IconButton, icon: 'list', small: false, backgroundOpacity: 'translucent'},
 			{kind: TooltipDecorator, components: [
 				{kind: ContextualPopupDecorator, components: [
 					{kind: Button, content: 'Popup'},
@@ -62,18 +67,18 @@ module.exports = kind({
 				]},
 				{kind: Tooltip, floating:true, content: 'I\'m a tooltip for a button.'}
 			]},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'},
-			{kind: IconButton, small: false, classes: 'moon-icon-video-round-controls-style'}
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
+			{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
 		]},
         {name: 'panels', kind: Panels, pattern: 'alwaysviewing', classes: 'enyo-fit', showing: false, components: [
-            {title: 'First Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', classes: 'moon-7h', components: [
+            {title: 'First Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
@@ -87,35 +92,35 @@ module.exports = kind({
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-            {title: 'Third Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', classes: 'moon-7h', components: [
+            {title: 'Third Panel', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-            {title: 'Fourth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', classes: 'moon-7h', components: [
+            {title: 'Fourth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-            {title: 'Fifth', joinToPrev: true, titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', classes: 'moon-7h', components: [
+            {title: 'Fifth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-            {title: 'Sixth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', classes: 'moon-7h', components: [
+            {title: 'Sixth', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-            {title: 'Seventh', joinToPrev: true, titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', classes: 'moon-7h', components: [
+            {title: 'Seventh', titleBelow: 'Sub-title', subTitleBelow: 'Sub-sub title', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
@@ -132,3 +137,5 @@ module.exports = kind({
 		this.$.panels.setHandleShowing(sender.getChecked());
 	}
 });
+
+module.exports.badgeClasses = 'new';

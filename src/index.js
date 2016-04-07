@@ -8,22 +8,10 @@ var
 	SampleList = require('./strawman/SampleList');
 
 var
-	samples = {
-		Enyo: request('./enyo-samples'),
-		Moonstone: request('./moonstone-samples'), //router blocking
-		Layout: request('./layout-samples'),
-		Spotlight: request('./spotlight-samples'),
-		iLib: request('./enyo-ilib-samples'),
-		Onyx: request('./onyx-samples'),
-		Canvas: request('./canvas-samples'),
-		Svg: request('./svg-samples'),
-		Animation: request('./animation-samples')
-	},
-	webOS = request('./enyo-webos-samples');
+	samples = window.strawmanConfig || require('./strawman/default-config');
 
-if (platform.webos) {
-	require('enyo-webos');
-	samples.webOS = webOS;
+if(samples['enyo-webos'] && !platform.webos) {
+	delete samples['enyo-webos'];
 }
 
 var
@@ -32,7 +20,11 @@ var
 		title: 'Enyo Strawman - Samples Gallery',
 		classes: 'home',
 		listType: 'grid',
-		samples: samples
+		samples: samples,
+		components: [{
+			classes: 'warning',
+			content: 'Moonstone samples were meant to be rendered at TV resolutions. The samples may not render correctly at lower resolutions.'
+		}]
 	});
 
 module.exports = {

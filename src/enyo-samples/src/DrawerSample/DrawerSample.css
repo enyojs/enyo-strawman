@@ -19,6 +19,8 @@
 	padding: 4px;
 	white-space: nowrap;
 	overflow: hidden;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 }
 .drawer-sample-mtb {
 	margin-top: 3px;
@@ -30,4 +32,11 @@
 }
 .drawer-sample-o {
 	border-color: orange;
+	padding-left: 162px;
+}
+
+.drawer-sample-o > :first-child {
+	width: 150px;
+	float:left;
+	margin-left: -156px;
 }

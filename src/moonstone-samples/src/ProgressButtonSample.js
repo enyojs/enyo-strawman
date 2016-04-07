@@ -11,7 +11,7 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.ProgressButtonSample',
-	classes: 'moon enyo-unselectable enyo-fit',
+	classes: 'moon enyo-unselectable enyo-fit moon-progress-button-sample',
 	contentChange: false,
 	components: [
 		{kind: Divider, content: 'Progress Button with Auto Download'},
@@ -19,15 +19,15 @@ module.exports = kind({
 		{tag: 'br'},
 		{tag: 'br'},
 		{kind: Divider, content: 'Simple Progress Button'},
-		{name: 'progressButton', kind: ProgressButton, progress: 0, content: 'Download', postContent: 'Launch', barClasses: 'moon-sample-blue', ontap: 'changeValue'},
+		{name: 'progressButton', kind: ProgressButton, progress: 0, content: 'Download', postContent: 'Launch', barClasses: 'blue', ontap: 'changeValue'},
 		{tag: 'br'},
 		{tag: 'br'},
 		{kind: InputDecorator, style: 'margin-right:10px;', components: [
 			{kind: Input, value: 10}
 		]},
-		{kind: Button, content: 'Set', small: true, classes: 'moon-sample-spaced-button', ontap: 'changeValue'},
-		{kind: Button, content: '-', small: true, classes: 'moon-sample-spaced-button', ontap: 'decValue'},
-		{kind: Button, content: '+', small: true, classes: 'moon-sample-spaced-button', ontap: 'incValue'},
+		{kind: Button, content: 'Set', small: true, classes: 'spaced-button', ontap: 'changeValue'},
+		{kind: Button, content: '-', small: true, classes: 'spaced-button', ontap: 'decValue'},
+		{kind: Button, content: '+', small: true, classes: 'spaced-button', ontap: 'incValue'},
 		{tag: 'br'},
 		{tag: 'br'},
 		{style: 'width:240px;', components: [
@@ -38,6 +38,12 @@ module.exports = kind({
 		{from: '$.animateSetting.checked', to: '$.autoDownload.animated'},
 		{from: '$.animateSetting.checked', to: '$.progressButton.animated'}
 	],
+	destroy: kind.inherit(function (sup) {
+		return function () {
+			this.resetTimer();
+			sup.apply(this, arguments);
+		};
+	}),
 	changeValue: function (sender, ev) {
 		if (this.$.animateSetting.getChecked()) {
 			this.$.progressButton.animateProgressTo(this.$.input.getValue());
@@ -53,16 +59,22 @@ module.exports = kind({
 		this.$.input.setValue(Math.max(parseInt(this.$.input.getValue() || 0, 10) - 10, 0));
 		this.changeValue();
 	},
+	resetTimer: function () {
+		if (this._timerId) {
+			clearInterval(this._timerId);
+			this._timerId = null;
+		}
+	},
 	startDownloading: function () {
 		var _this = this;
 		if (_this.contentChange === false) {
 			_this.downloadProgress = 0;
 			_this.contentChange = true;
-			var timer = setInterval(function () {
+			this._timerId = setInterval(function () {
 				++_this.downloadProgress;
 				_this.$.autoDownload.animateProgressTo(_this.downloadProgress);
 				if (_this.downloadProgress >= 100) {
-					clearInterval(timer);
+					_this.resetTimer();
 				}
 			}, 100);
 		}

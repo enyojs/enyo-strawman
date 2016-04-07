@@ -9,6 +9,7 @@ var
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
 	Item = require('moonstone/Item'),
+	CheckboxItem = require('moonstone/CheckboxItem'),
 	RadioItem = require('moonstone/RadioItem'),
 	RadioItemGroup = require('moonstone/RadioItemGroup'),
 	Scroller = require('moonstone/Scroller'),
@@ -164,13 +165,12 @@ module.exports = kind({
 				kind: ContextualPopup,
 				name: 'buttonPopup',
 				classes: 'moon-10h moon-8v',
-				modal: true,
-				autoDismiss: false,
 				spotlightModal: true,
+				showCloseButton: true,
 				components: [
 					{kind: Scroller, horizontal: 'auto', classes: 'enyo-fill', components: [
 						{kind: Button, content: 'Button'},
-						{kind: ToggleButton, content: 'SpotlightModal', value: true, ontap: 'buttonToggled'},
+						{name: 'spotlightModalToggle', kind: ToggleButton, content: 'SpotlightModal'},
 						{tag: 'br'},
 						{tag: 'br'},
 						{kind: InputDecorator, spotlight: true, components: [
@@ -194,24 +194,30 @@ module.exports = kind({
 				]
 			}
 		]},
-		{style: 'position: absolute; left: 30%; top: 25%;', components: [
-			{kind: Divider, content: 'Button Position', classes: 'radioItemFont'},
+		{style: 'position: absolute; left: 30%; top: 5%;', components: [
+			{kind: Divider, content: 'Popup Options'},
+			{kind: CheckboxItem, content: 'Tap outside to close (autoDismiss)', name: 'autoDismissCheck'},
+			{kind: CheckboxItem, content: 'Lock 5-way inside popup (spotlightModal)', name: 'spotlightModalCheck'},
+			{kind: CheckboxItem, content: 'Show Close Button', name: 'showCloseButtonCheck'}
+		]},
+		{style: 'position: absolute; left: 30%; top: 30%;', components: [
+			{kind: Divider, content: 'Button Position'},
 			{kind: InputDecorator, components: [
-				{kind: Input, style: 'width: 120px', name: 'leftInput', placeholder: 'left (px or %)', classes: 'radioItemFont'}
+				{kind: Input, style: 'width: 120px', name: 'leftInput', placeholder: 'left (px or %)'}
 			]},
 			{kind: InputDecorator, components: [
-				{kind: Input, style: 'width: 120px', name: 'topInput', placeholder: 'top (px or %)', classes: 'radioItemFont'}
+				{kind: Input, style: 'width: 120px', name: 'topInput', placeholder: 'top (px or %)'}
 			]},
 			{kind: Button, small: true, content: 'Set Position', ontap: 'setPosition'}
 		]},
 		{style: 'position: absolute; left: 30%; top: 50%; ', components: [
-			{kind: Divider, content: 'Popup Direction', classes: 'radioItemFont'},
+			{kind: Divider, content: 'Popup Direction'},
 			{kind: RadioItemGroup, onActivate: 'groupChanged', components: [
-				{content: 'none', classes: 'radioItemFont'},
-				{content: 'left', classes: 'radioItemFont'},
-				{content: 'right', classes: 'radioItemFont'},
-				{content: 'top', classes: 'radioItemFont'},
-				{content: 'bottom', classes: 'radioItemFont'}
+				{content: 'none'},
+				{content: 'left'},
+				{content: 'right'},
+				{content: 'top'},
+				{content: 'bottom'}
 			]}
 		]},
 		{kind: ContextualPopupDecorator, name: 'directionButton', style: 'position: absolute; left: 40%; top: 70%;', components: [
@@ -221,10 +227,8 @@ module.exports = kind({
 				name: 'directionContext',
 				classes: 'moon-4v',
 				components: [
-					{kind: Scroller, horizontal: 'auto', classes: 'enyo-fill', components: [
-						{kind: Button, content: 'Button 1'},
-						{kind: Button, content: 'Button 2'}
-					]}
+					{kind: Button, content: 'Button 1'},
+					{kind: Button, content: 'Button 2'}
 				]
 			}
 		]}
@@ -233,12 +237,12 @@ module.exports = kind({
 		{from: '.$.nestedRadioGroup.active.content', to: '.$.nestedRadioValue.content', transform: function(val){
 			this.dismissRadioSelection();
 			return val;
-		}}
+		}},
+		{from: '$.buttonPopup.spotlightModal', to: '$.spotlightModalToggle.value', oneWay: false},
+		{from: '$.directionContext.autoDismiss', to: '$.autoDismissCheck.checked', oneWay: false},
+		{from: '$.directionContext.spotlightModal', to: '$.spotlightModalCheck.checked', oneWay: false},
+		{from: '$.directionContext.showCloseButton', to: '$.showCloseButtonCheck.checked', oneWay: false}
 	],
-	buttonToggled: function (sender, ev) {
-		this.$.buttonPopup.setSpotlightModal(sender.getActive());
-		this.$.buttonPopup.setAutoDismiss(!sender.getActive());
-	},
 	dismissRadioSelection: function () {
 		if(this.$.nestedRadioDismissButton.value) this.$.nestedRadioPopup.hide();
 	},

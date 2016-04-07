@@ -1,5 +1,8 @@
+require('enyo/options').accessibility = true;
+
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	ready = require('enyo/ready');
 
 var
 	Enyo = require('enyo');
@@ -45,6 +48,7 @@ var
 		RichTextSample					: require('./src/RichTextSample'),
 		ScrollerSample					: require('./src/ScrollerSample'),
 		SelectSample					: require('./src/SelectSample'),
+		ShowingTransitionSample			: require('./src/ShowingTransitionSample'),
 		SpriteAnimationSample			: require('./src/SpriteAnimationSample'),
 		StylesheetSupportSample			: require('./src/StylesheetSupportSample'),
 		TableSample						: require('./src/TableSample'),
@@ -53,10 +57,15 @@ var
 		WebServiceSample				: require('./src/WebServiceSample')
 	};
 
-module.exports = kind({
+var Sample = kind({
 	kind: ScrollingSampleList,
 	title: 'Enyo Samples',
 	version: Enyo.version,
 	libraryName: 'Enyo',
 	samples: samples
 });
+
+ready(function() {
+	new Sample().renderInto(document.body);
+});
+

@@ -35,7 +35,7 @@ module.exports = kind({
 				]}
 			]}
 		], components: [
-			{kind: Panels, pattern: 'activity', classes: 'enyo-fit', components: [
+			{kind: Panels, pattern: 'activity', components: [
 				{name: 'repeaterContainer', kind: Control}
 			]}
 		]},

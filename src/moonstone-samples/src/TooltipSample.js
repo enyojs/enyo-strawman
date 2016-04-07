@@ -6,6 +6,7 @@ var
 	Button = require('moonstone/Button'),
 	Divider = require('moonstone/Divider'),
 	IconButton = require('moonstone/IconButton'),
+	ExpandablePicker = require('moonstone/ExpandablePicker'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
 	Tooltip = require('moonstone/Tooltip'),
@@ -13,24 +14,33 @@ var
 
 module.exports = kind({
 	name: 'moon.sample.TooltipSample',
-	classes: 'moon enyo-unselectable',
+	classes: 'moon enyo-unselectable moon-tooltip-sample',
 	components: [
 		{name: 'dragContainer', kind: TooltipDecorator, classes: 'draggable',
 			ondragstart: 'dragstart', ondrag: 'drag', ondragfinish: 'dragfinish', components: [
 				{name: 'dragBtn', kind: Button, content: 'Draggble Tooltip'},
-				{kind: Tooltip, position: 'above', components: [
-					{name: 'dragTooltip', content: 'I\'m a Draggble tooltip.', style: 'white-space: normal'}
+				{name: 'dragTooltip', kind: Tooltip, position: 'above', components: [
+					{name: 'dragTooltipText', style: 'white-space: normal'}
 				]}
 			]
 		},
-		{style: 'position: absolute; left: 40%; top: 60%; z-index:1', components: [
-			{kind: Divider, content: 'Content'},
+		{classes: 'column-center', components: [
+			{kind: ExpandablePicker, content: 'Tooltip Position', onChange: 'changePosition', components: [
+				{content: 'auto', active: true},
+				{content: 'above'},
+				{content: 'below'},
+				{content: 'left top'},
+				{content: 'left bottom'},
+				{content: 'right top'},
+				{content: 'right bottom'}
+			]},
+			{classes: 'moon-1v'},
+			{kind: Divider, content: 'Set Content'},
 			{kind: InputDecorator, components: [
-				{name: 'dragInput', kind: Input, onchange: 'setContent'}
-			]}
-		]},
-		{style: 'position: absolute; left: 40%; top: 80%; z-index:1', components: [
-			{kind: Divider, content: 'Width'},
+				{name: 'dragInput', kind: Input, value: 'Hey look, a tooltip!'}
+			]},
+			{classes: 'moon-1v'},
+			{kind: Divider, content: 'Set Tooltip Width'},
 			{kind: InputDecorator, components: [
 				{name: 'widthInput', kind: Input, type: 'number', onchange: 'setWidth'}
 			]}
@@ -107,11 +117,14 @@ module.exports = kind({
 			]}
 		]}
 	],
-	setContent: function() {
-		this.$.dragTooltip.set('content', this.$.dragInput.getValue());
+	bindings: [
+		{from: '$.dragInput.value', to: '$.dragTooltipText.content'}
+	],
+	changePosition: function (sender, ev) {
+		this.$.dragTooltip.set('position', ev.content);
 	},
 	setWidth: function() {
-		this.$.dragTooltip.applyStyle('width', this.$.widthInput.getValue() + 'px');
+		this.$.dragTooltipText.applyStyle('width', this.$.widthInput.getValue() + 'px');
 	},
 	dragstart: function() {
 		this.$.dragBtn.spotlight = false;

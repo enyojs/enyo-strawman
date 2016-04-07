@@ -1,17 +1,24 @@
-.right {
+.moon-tooltip-sample .right {
 	float: right;
 }
-
-.enyo-locale-right-to-left .right {
+.enyo-locale-right-to-left .moon-tooltip-sample .right {
 	float: left;
 }
 
-.draggable {
+.moon-tooltip-sample .draggable {
 	position: absolute;
 	z-index: 2;
 
 	left: 50%;
-	top: 50%;
+	top: 20%;
 	-webkit-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 }
+
+.column-center {
+	position: absolute;
+	left: 40%;
+	top: 40%;
+	z-index: 1;
+}
+

@@ -1,34 +1,56 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	platform = require('enyo/platform');
 
 var
 	Link = require('../Link'),
 	List = require('../List'),
-	Title = require('../Title');
+	Title = require('../Title'),
+	AppRouter = require('../AppRouter');
 
 module.exports = kind({
 	title: 'Samples',
+	classes: 'strawman',
+	published: {
+		sample: null,
+		locale: 'local'
+	},
+	handlers: {
+		onRouteChange: 'handleRoute'
+	},
 	listComponents: [
 		{name: 'title', kind: Title},
-		{name: 'back', kind: Link, classes: 'back-button', content: 'Back', href: 'index.html'},
+		{name: 'back', kind: Link, classes: 'back-button', content: 'Back', href: '../index.html'},
 		{name: 'list', kind: List}
 	],
-	_libList: false,
 	create: function () {
 		this.inherited(arguments);
-
-		var names = window.document.location.search.substring(1).split('&'),
-			name = names[1] || names[0];
-
-		// Set whether we're looking at a list of libraries or the root
-		this._libList = !name;
-
-		if (this.samples[name]) {
-			global.sample = this.createComponent({kind: this.samples[name]});
+		this.createComponent({name: 'router', kind: AppRouter});
+		if (this.libraryName && this.version) {
+			// only display version information for individual libraries that are versioned
+ 			console.log('%c%s: %s', 'color:blue', this.libraryName, this.version);
+ 		}
+ 	},
+ 	handleRoute: function (sender, ev) {
+		this.set('locale', ev.locale);
+		this.set('sample', ev.sampleName);
+	},
+	sampleChanged: function (was, is) {
+		if (was) {
+			if(this.$[was]) { this.$[was].destroy(); }
 		} else {
-			name = null; // not a valid sample name
-
-			this.addClass('strawman');
+			if(this.$.title) { this.$.title.destroy(); }
+			if(this.$.back) { this.$.back.destroy(); }
+			if(this.$.list) { this.$.list.destroy(); }
+		}
+		if (is && this.samples[is]) {
+			if(platform.webos && global.screen.width<=400 && this.libraryName!=='Garnet') {
+				this.addClass('wearable-sample');
+			}
+			global.sample = this.createComponent({name:is, kind: this.samples[is], classes:'strawman-sample'});
+		} else {
+			// We have no sample, just render out the list.
+			this.removeClass('wearable-sample');
 			this.createComponents(this.listComponents);
 			this.binding({from: 'title',       to: '$.title.content'});
 			this.binding({from: 'samples',     to: '$.list.samples'});
@@ -36,11 +58,8 @@ module.exports = kind({
 			this.binding({from: 'libraryName', to: '$.list.libraryName'});
 
 			// Don't show back if we're at home.
-			this.$.back.set('showing', !this._libList);
+			this.$.back.set('showing', !!this.libraryName);
 		}
-
-		if (!this._libList && this.version) { // only display version information for individual libraries that are versioned
-			console.log('%c%s%s: %s', 'color:blue', (name ? name + ' - ' : ''), this.libraryName, this.version);
-		}
+		this.render();
 	}
 });

@@ -1,5 +1,8 @@
 var
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	Collection = require('enyo/Collection'),
+	DataRepeater = require('enyo/DataRepeater'),
+	Group = require('enyo/Group');
 
 var
 	BodyText = require('moonstone/BodyText'),
@@ -15,10 +18,7 @@ var
 	ToggleButton = require('moonstone/ToggleButton'),
 	ToggleItem = require('moonstone/ToggleItem'),
 	Tooltip = require('moonstone/Tooltip'),
-	TooltipDecorator = require('moonstone/TooltipDecorator'),
-	Collection = require('enyo/Collection'),
-	DataRepeater = require('enyo/DataRepeater'),
-	Group = require('enyo/Group');
+	TooltipDecorator = require('moonstone/TooltipDecorator');
 
 module.exports = kind({
 	name: 'moon.sample.ListActionsSample',
@@ -34,22 +34,25 @@ module.exports = kind({
 				{kind: Tooltip, position: 'above', content: 'Test Dynamic Lists'},
 
 				//* List actions with default width
-				{kind: ListActions, disabled: true, name: 'listActions', icon: 'drawer', listActions: [
+				{name: 'disabledListAction', kind: ListActions, disabled: true, icon: 'drawer', listActions: [
 					{action: 'category3', components: [
 						{kind: Divider, content: 'Category 3 (DataList)'},
-						{kind: DataList, name: 'list', fit:true, components: [
-							{kind: CheckboxItem, bindings: [{from: '.model.name', to: '.content'}]}
+						{kind: DataList, renderDelay: null, name: 'list', components: [
+							{kind: CheckboxItem, bindings: [
+								{from: 'model.name', to: 'content'},
+								{from: 'model.checked', to: 'checked'}
+							]}
 						]}
 					]},
 					{action: 'category2', components: [
 						{kind: Divider, content: 'Category 2 (DataRepeater)'},
-						{kind: DataRepeater, containerOptions:{kind: Scroller, classes: 'enyo-fill'}, name: 'repeater', fit:true, components: [
-							{kind: ToggleItem, bindings: [{from: '.model.name', to: '.content'}]}
+						{kind: DataRepeater, containerOptions:{kind: Scroller, classes: 'enyo-fill'}, name: 'repeater', components: [
+							{kind: ToggleItem, bindings: [{from: 'model.name', to: 'content'}]}
 						]}
 					]},
 					{action: 'category1', components: [
 						{kind: Divider, content: 'Category 1 (Static)'},
-						{kind: Scroller, fit: true, components: [
+						{kind: Scroller, components: [
 							{kind: Group, name: 'group', highlander: true, defaultKind: SelectableItem, components: [
 								{content: 'Just Released'},
 								{content: 'Recommended'},
@@ -59,31 +62,26 @@ module.exports = kind({
 					]}
 				]}
 			]},
-			{kind: TooltipDecorator, components: [
-				{kind: Tooltip, position: 'above', content: 'Dummy List Actions'},
-
-				//* List actions with proportional width
-				{kind: ListActions, proportionalWidth: true, iconSrc: '@../assets/icon-list.png', listActions: [
-					{action: 'Cost', components: [
-						{kind: Divider, content: 'Cost'},
-						{kind: Scroller, defaultKind: ToggleItem, fit: true, components: [
-							{content: '$'},
-							{content: '$$'},
-							{content: '$$$'}
-						]}
-					]},
-					{action: 'Flavor', components: [
-						{kind: Divider, content: 'Flavor'},
-						{kind: Scroller, defaultKind: CheckboxItem, fit: true, components: [
-							{content: 'Spicy'},
-							{content: 'Sweet'},
-							{content: 'Sour'},
-							{content: 'Salty', checked: true},
-							{content: 'Savory'},
-							{content: 'Bland'},
-							{content: 'Umami'},
-							{content: 'Bitter'}
-						]}
+			{kind: ListActions, icon: 'denselist', listActions: [
+				{action: 'Cost', components: [
+					{kind: Divider, content: 'Cost'},
+					{kind: Scroller, defaultKind: ToggleItem, components: [
+						{content: '$'},
+						{content: '$$'},
+						{content: '$$$'}
+					]}
+				]},
+				{action: 'Flavor', components: [
+					{kind: Divider, content: 'Flavor'},
+					{kind: Scroller, defaultKind: CheckboxItem, components: [
+						{content: 'Spicy'},
+						{content: 'Sweet'},
+						{content: 'Sour'},
+						{content: 'Salty', checked: true},
+						{content: 'Savory'},
+						{content: 'Bland'},
+						{content: 'Umami'},
+						{content: 'Bitter'}
 					]}
 				]}
 			]},
@@ -94,7 +92,7 @@ module.exports = kind({
 				{kind: ListActions, autoCollapse: true, iconSrc: '@../assets/icon-list.png', listActions: [
 					{action: 'AutoCollapseTest', components: [
 						{kind: Divider, content: 'Try Auto-collapse'},
-						{kind: Scroller, fit: true, components: [
+						{kind: Scroller, components: [
 							{kind: Group, highlander: true, defaultKind: CheckboxItem, components: [
 								{content: 'Select'},
 								{content: 'One'},
@@ -112,10 +110,12 @@ module.exports = kind({
 			]}
 		], components: [
 			{components: [
-				{kind: Button, small:true, content: 'Add Option to Category 1', ontap: 'addToStatic'},
-				{kind: Button, small:true, content: 'Add Option to Category 2', ontap: 'addToRepeater'},
-				{kind: Button, small:true, content: 'Add Option to Category 3', ontap: 'addToList'},
-				{classes: 'moon-1v'},
+				{kind: Divider, content: 'Add Option to:'},
+				{kind: Button, small:true, content: 'Category 1', ontap: 'addToStatic'},
+				{kind: Button, small:true, content: 'Category 2', ontap: 'addToRepeater'},
+				{kind: Button, small:true, content: 'Category 3', ontap: 'addToList'},
+				{classes: 'moon-2v'},
+				{kind: Divider, content: 'ListActions Modifications'},
 				{kind: Button, small:true, content: 'Breadcrumb Panel', ontap: 'toggleBreadcrumb'},
 				{kind: ToggleButton, small: true, toggleOnLabel: 'Header Type: Small', toggleOffLabel: 'Header Type: Medium', ontap: 'toggleHeaderSize'},
 				{name: 'toggleDisabledListActions', kind: ToggleButton, small: true, toggleOnLabel: 'ListActions: Disabled', toggleOffLabel: 'ListActions: Enabled', value: true}
@@ -129,7 +129,7 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '$.toggleDisabledListActions.value', to: '$.listActions.disabled'}
+		{from: '$.toggleDisabledListActions.value', to: '$.disabledListAction.disabled'}
 	],
 	activateHandler: function (sender, ev) {
 		if (ev && ev.action) {
@@ -174,7 +174,7 @@ module.exports = kind({
 	create: function () {
 		Panels.prototype.create.apply(this, arguments);
 		this.$.list.set('collection', new Collection([
-			{name: 'SAT 1'},
+			{name: 'SAT 1', checked: true},
 			{name: 'SAT 2'},
 			{name: 'SAT 3'},
 			{name: 'OTHER S1'},
@@ -190,3 +190,5 @@ module.exports = kind({
 		]));
 	}
 });
+
+module.exports.badgeClasses = 'new';

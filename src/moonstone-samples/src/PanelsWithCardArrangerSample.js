@@ -2,7 +2,9 @@ var
 	kind = require('enyo/kind');
 
 var
-	CardArranger = require('layout/CardArranger'),
+	CardArranger = require('layout/CardArranger');
+
+var
 	Panels = require('moonstone/Panels'),
 	Item = require('moonstone/Item');
 
@@ -18,7 +20,7 @@ module.exports = kind({
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-			{title: 'Second', joinToPrev: true, components: [
+			{title: 'Second', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
@@ -32,14 +34,14 @@ module.exports = kind({
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-			{title: 'Fourth', joinToPrev: true, components: [
+			{title: 'Fourth', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-			{title: 'Fifth', joinToPrev: true, components: [
+			{title: 'Fifth', components: [
 				{kind: Item, content: 'Item One', ontap: 'next'},
 				{kind: Item, content: 'Item Two', ontap: 'next'},
 				{kind: Item, content: 'Item Three', ontap: 'next'},
@@ -53,7 +55,7 @@ module.exports = kind({
 				{kind: Item, content: 'Item Four', ontap: 'next'},
 				{kind: Item, content: 'Item Five', ontap: 'next'}
 			]},
-			{title: 'Seventh', joinToPrev: true, components: [
+			{title: 'Seventh', components: [
 				{kind: Item, content: 'Item One'},
 				{kind: Item, content: 'Item Two'},
 				{kind: Item, content: 'Item Three'},
@@ -67,3 +69,5 @@ module.exports = kind({
 		return true;
 	}
 });
+
+module.exports.badgeClasses = 'new';

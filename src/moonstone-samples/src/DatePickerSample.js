@@ -96,9 +96,7 @@ module.exports = kind({
 		this.$.picker.set('value', new Date());
 	},
 	changed: function (sender, ev) {
-		if (this.$.result && ev.value){
-			this.$.result.setContent(ev.name + ' changed to ' + ev.value.toDateString());
-		}
+		this.$.result.setContent(ev.name + ' changed to ' + (ev.value && ev.value.toDateString()));
 	},
 	resetTapped: function (sender, ev) {
 		this.$.picker.set('value', null);
