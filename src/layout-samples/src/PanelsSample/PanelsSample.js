@@ -19,6 +19,9 @@ var
 	Input = require('enyo/Input');
 
 var
+	Highlightable = require('enyo/Highlightable');
+
+var
 	MyGridArranger = kind({
 		kind: GridArranger,
 		colHeight: '150',
@@ -28,7 +31,14 @@ var
 module.exports = kind({
 	name: 'enyo.sample.PanelsSample',
 	kind: FittableRows,
+	mixins: [Highlightable],
 	classes: 'enyo-sample-panelssample enyo-fit',
+	navigableSections: {
+		// want to target panel children (i.e. panels grandchildren) - potentially awkward, though
+		// we could just create a panel kind to use as a child of panels, that already mixes in
+		// Highlightable and specifies its children for the selector
+		panel: '.enyo-panels * *'
+	},
 	components: [
 		{classes: 'toolbar', components: [
 			{name: 'arrangerPicker', kind: Select, maxHeight: 360, floating: true, onchange: 'arrangerSelected', components: [
@@ -44,13 +54,34 @@ module.exports = kind({
 			{kind: Button, content: 'Delete', ontap: 'deletePanel'}
 		]},
 		{kind: Panels, name: 'samplePanels', fit: true, realtimeFit: true, classes: 'panels-sample-panels enyo-border-box', components: [
-			{content: 0, style: 'background:red;'},
-			{content: 1, style: 'background:orange;'},
-			{content: 2, style: 'background:yellow;'},
-			{content: 3, style: 'background:green;'},
-			{content: 4, style: 'background:blue;'},
-			{content: 5, style: 'background:indigo;'},
-			{content: 6, style: 'background:violet;'}
+			{content: 0, style: 'background:red;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]},
+			{content: 1, style: 'background:orange;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]},
+			{content: 2, style: 'background:yellow;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]},
+			{content: 3, style: 'background:green;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]},
+			{content: 4, style: 'background:blue;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]},
+			{content: 5, style: 'background:indigo;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]},
+			{content: 6, style: 'background:violet;', components: [
+				{kind: Button, content: 'I am functional', ontap: 'buttonTapped'},
+				{kind: Input, placeholder: 'I am non-functional'}
+			]}
 		]}
 	],
 	panelArrangers: [
@@ -120,5 +151,8 @@ module.exports = kind({
 		if (p) {
 			p.destroy();
 		}
+	},
+	buttonTapped: function () {
+		this.nextPanel();
 	}
 });
