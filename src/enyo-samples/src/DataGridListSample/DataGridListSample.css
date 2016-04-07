@@ -22,3 +22,4 @@
 .data-repeater-sample .repeater-item.class5.selected {background: #FFFFFF; color: #000000;}
 /* because there is some generic .item css applied with no scope in sampler */
 .data-repeater-sample .item {border-bottom: none;}
+.data-repeater-sample .disabled {opacity: 0.1}

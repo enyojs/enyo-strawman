@@ -124,12 +124,13 @@ module.exports = kind({
 					{name: 'lastNameLetter', classes: 'name last-letter', tag: 'span'}
 				]}
 			], bindings: [
-				{from: '.model.firstName', to: '.$.firstName.content'},
-				{from: '.model.lastName', to: '.$.lastName.content'},
-				{from: '.model.lastName', to: '.$.lastNameLetter.content', transform: function (v) { return v && v.charAt(0); }},
-				{from: '.model.classes', to: '.classes', transform: function (val) {
+				{from: 'model.firstName', to: '$.firstName.content'},
+				{from: 'model.lastName', to: '$.lastName.content'},
+				{from: 'model.lastName', to: '$.lastNameLetter.content', transform: function (v) { return v && v.charAt(0); }},
+				{from: 'model.classes', to: 'classes', transform: function (val) {
 					return val + ' highlightable';
-				}}
+				}},
+				{from: 'model.disabled', to: 'disabled'}
 			]}
 		], minWidth: 320, minHeight: 100, spacing: 10}
 	],
@@ -137,6 +138,16 @@ module.exports = kind({
 		{from: '.collection', to: '.$.repeater.collection'}
 	],
 	populateList: function () {
+		var i, item;
+		for (i = 0; i < data.length; i++) {
+			item = data[i];
+			if (Math.random() > 0.5) {
+				item.disabled = true;
+				item.classes += ' disabled';
+			} else {
+				item.disabled = false;
+			}
+		}
 		this.collection = new Collection(data);
 	},
 	create: kind.inherit(function (sup) {
