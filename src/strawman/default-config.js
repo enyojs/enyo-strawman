@@ -8,6 +8,7 @@ module.exports = {
 	'onyx': 'Onyx',
 	'canvas': 'Canvas',
 	'svg': 'Svg',
-	'enyo-webos': 'webOS'
+	'enyo-webos': 'webOS',
+	'animation': 'Animations'
 };
 
