@@ -1,37 +1,32 @@
 var
 	kind = require('enyo/kind'),
 	Control = require('enyo/Control'),
-	sceneActor = require('enyo/AnimationSupport/SceneActor'),
 	scene = require('enyo/AnimationSupport/Scene');
 
-var path = sceneActor({
+var path = scene({
 	animation: [{
-		path:[[0,0,0], [0,-200,0], [200,-200,0], [200,200,0], [0,200,0], [0,0,0]]
+		path:[[0,0,0], [0,-100,0], [100,-100,0], [100,100,0], [0,100,0], [0,0,0]],
+		duration: 1000
 	}],
-	duration: 1000,
-	actorCompleted: function(actor) {
-		this.stop(actor);
-		actor.delay = 0;
-		this.play(actor);
-	}
+	repeat: true
 });
 	
 module.exports = kind({
 	name: "pathsample",
 	kind: Control,
-	classes: "enyo-fit path-sample",
+	classes: "enyo-fit path-sample container",
 	components: [
-		{ name: 'dot1', classes: "dot", style: "background:black;", delay: 0   },
-		{ name: 'dot2', classes: "dot", style: "background:blue;",  delay: 200 },
-		{ name: 'dot3', classes: "dot", style: "background:red;",   delay: 400 },
-		{ name: 'dot4', classes: "dot", style: "background:green;", delay: 600 }
+		{ name: 'dot1', classes: "dot", style: "background:black;", scene: path },
+		{ name: 'dot2', classes: "dot", style: "background:blue;",  scene: path },
+		{ name: 'dot3', classes: "dot", style: "background:red;",   scene: path },
+		{ name: 'dot4', classes: "dot", style: "background:green;", scene: path }
 	],
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
 			for (var c, i = 0; (c = this.controls[i]); i++) {
-				scene.link(c, path);
-				path.play(c);
+				c.scene.delay = i * 200;
+				c.scene.play();
 			}
 		};
 	})

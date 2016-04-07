@@ -14,9 +14,10 @@ var
 var flyScene = scene({
 	//Path added as an animation, other animations can be added here.
 	animation: {
-		path:[[0,0,0], [400,-100,0],[-400,-200,0], [0,-300,0]]
+		path:[[0,0,0], [400,-100,0],[-400,-200,0], [0,-300,0]],
+		duration: 2000
 	},
-	duration: 2000,
+
 	showPath: false,
 	completed: function () {
 		console.log("Completed scene");
@@ -45,14 +46,10 @@ module.exports = kind({
 			kind: IMG,
 			classes: 'heart-icon heart-tick-icon heart-fly-icon',
 			src: '@../../assets/heart-fly.png',
-			ontap: "fly"
-		},
-		{
-			name: 'heartFlyIcon2',
-			kind: IMG,
-			classes: 'heart-icon heart-tick-icon heart-fly-icon',
-			style: 'left: 60%;',
-			src: '@../../assets/heart-fly.png',
+			scene: {
+				path:[[0,0,0], [400,-100,0],[-400,-200,0], [0,-300,0]],
+				duration: 2000
+			},
 			ontap: "fly"
 		},
 		{name:"playButton", kind:Button, content: "Start", ontap: "playAnimation"},
@@ -75,8 +72,20 @@ module.exports = kind({
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			this.createFlyAnimation();
-			this.$.slider.set('max', flyScene.totalSpan());
+			// this.createFlyAnimation();
+			this.$.slider.set('max', 2000);
+			this.$.heartFlyIcon.scene.step = function(actor) {
+				var parent = actor.parent;
+				if (this.showPath) {
+					var mat = actor.currentState.matrix,
+						s = actor.name == 'heartFlyIcon' ? "left: 30%;" : "left: 60%;";
+					parent.createComponent({
+						classes: "heart-dot",
+						style: "transform: matrix3d(" + mat + ");" + s
+					}).render();
+				}
+				parent.$.slider.set('value', this.timeline);
+			};
 		};
 	}),
 	createFlyAnimation: function (argument) {
@@ -84,33 +93,33 @@ module.exports = kind({
 		scene.link(this.$.heartFlyIcon2, flyScene);
 	},
 	playAnimation: function(sender, ev) {
-		flyScene.play();
+		this.$.heartFlyIcon.scene.play();
 	},
 	resumeAnimation: function (sender, ev){
-		flyScene.resume();
+		this.$.heartFlyIcon.scene.resume();
 	},
 	pauseAnimation: function(sender, ev) {
-		flyScene.pause();
+		this.$.heartFlyIcon.scene.pause();
 	},
 	stopAnimation: function(sender, ev) {
-		flyScene.stop();
+		this.$.heartFlyIcon.scene.stop();
 	},
 	reverseAnimation: function(sender, ev) {
-		flyScene.reverse();
+		this.$.heartFlyIcon.scene.reverse();
 	},
 	seekAnimation: function(sender, ev) {
-		flyScene.timeline = parseInt(this.$.seekInput.value, 10);
+		this.$.heartFlyIcon.scene.timeline = parseInt(this.$.seekInput.value, 10);
 	},
 	fastAnimation: function(sender, ev) {
-		flyScene.fast(2);
+		this.$.heartFlyIcon.scene.fast(2);
 	},
 	slowAnimation: function(sender, ev) {
-		flyScene.slow(0.2);
+		this.$.heartFlyIcon.scene.slow(0.2);
 	},
 	sliderChanging: function(inSender, inEvent) {
-		flyScene.timeline = parseInt(inSender.getValue(), 10);
+		this.$.heartFlyIcon.scene.timeline = parseInt(inSender.getValue(), 10);
 	},
 	pathChanged: function () {
-		flyScene.showPath = this.$.showPath.checked;
+		this.$.heartFlyIcon.scene.showPath = this.$.showPath.checked;
 	}
 });

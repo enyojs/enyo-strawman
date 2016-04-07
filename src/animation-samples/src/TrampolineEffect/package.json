@@ -1,0 +1,6 @@
+{
+  "main": "TrampolineEffect.js",
+  "styles": [
+    "TrampolineEffect.css"
+  ]
+}

@@ -1,0 +1,27 @@
+.trampoline-sample .smaller{
+	position: absolute;
+	top: 0;
+	left: 50px;
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+	transform: rotate(45deg);
+}
+.trampoline-sample .bigger {
+	position: absolute;
+	top: 200px;
+	left: 0;
+	width: 200px;
+	height: 200px;
+	background-color: red;
+}
+.trampoline-sample .container{
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	width: 300px;
+	height: 50%;
+}

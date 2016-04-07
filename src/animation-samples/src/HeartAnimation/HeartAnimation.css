@@ -5,15 +5,13 @@
     border-right:0;
 }
 .heart-sample .heart-icon{    
-  height: 40px;
   position: absolute;
-  left: 30%;
+  left: 45%;
   bottom: 10%;
 }
 
 .heart-sample .heart-tick-icon{
-    width: 38px;
-    right: 30px;
+  width: 70px;
 }
 
 .heart-sample .heart-dot{

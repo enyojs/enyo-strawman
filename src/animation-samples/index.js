@@ -6,11 +6,14 @@ var
 
 var
 	samples = {
-		HeartAnimation: require('./src/HeartAnimation'),
-		PathAnimation: require('./src/PathAnimation'),
 		EaseAnimation: require('./src/EaseAnimation'),
-		HierarchicalAnimation: require('./src/HierarchicalAnimation'),
-		EqualizerAnimation: require('./src/EqualizerAnimation')
+		ControlAnimation: require('./src/HeartAnimation'),
+		LinkedAnimation: require('./src/TrampolineEffect'),
+		ColorAnimation: require('./src/SolarEclipse'),
+		PerspectiveAnimation: require('./src/PerspectiveCube'),
+		PathAnimation: require('./src/PathAnimation')
+		// HierarchicalAnimation: require('./src/HierarchicalAnimation')
+		// EqualizerAnimation: require('./src/EqualizerAnimation')
 		// CanvasPrimitivesSample: require('./src/CanvasPrimitivesSample')
 	};
 

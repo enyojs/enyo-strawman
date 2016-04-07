@@ -1,0 +1,6 @@
+{
+  "main": "PerspectiveCube.js",
+  "styles": [
+    "PerspectiveCube.css"
+  ]
+}
