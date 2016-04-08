@@ -5,8 +5,10 @@ var
 	Highlightable = require('enyo/Highlightable');
 
 var
+	Button = require('enyo/Button'),
 	Collection = require('enyo/Collection'),
-	DataGridList = require('enyo/DataGridList');
+	DataGridList = require('enyo/DataGridList'),
+	Popup = require('enyo/Popup');
 
 var data = [
 	{ classes: 'repeater-item class1 item', firstName: 'Alejandra', lastName: 'Walsh' },
@@ -117,7 +119,7 @@ module.exports = kind({
 	mixins: [Highlightable],
 	components: [
 		{name: 'repeater', kind: DataGridList, renderDelay: null, components: [
-			{components: [
+			{ontap: 'showPopup', components: [
 				{classes: 'name-wrapper', components: [
 					{name: 'firstName', classes: 'name', tag: 'span'},
 					{name: 'lastName', classes: 'name last', tag: 'span'},
@@ -133,7 +135,26 @@ module.exports = kind({
 				{from: 'model.disabled', to: 'disabled'},
 				{from: 'model.disabled', to: 'attributes.data-disabled'}
 			]}
-		], minWidth: 320, minHeight: 100, spacing: 10}
+		], minWidth: 320, minHeight: 100, spacing: 10},
+		{
+			kind: Popup,
+			name: 'popup',
+			classes: 'popup',
+			mixins: [Highlightable],
+			navigableSections: {
+				popupButtons: '.popup .highlightable'
+			},
+			restrictNavigation: true,
+			components: [
+				{content: 'This is a focus restricted control'},
+				{kind: Button, classes: 'highlightable', content: 'Button A'},
+				{kind: Button, classes: 'highlightable', content: 'Button B'},
+				{kind: Button, classes: 'highlightable', content: 'Button C'},
+				{kind: Button, classes: 'highlightable', content: 'Button D'},
+				{kind: Button, classes: 'highlightable', content: 'Button E'},
+				{kind: Button, classes: 'highlightable', name: 'buttonClose', content: 'X', ontap: 'closeTapped'}
+			]
+		}
 	],
 	bindings: [
 		{from: '.collection', to: '.$.repeater.collection'}
@@ -156,7 +177,22 @@ module.exports = kind({
 			this.populateList();
 			sup.apply(this, arguments);
 		};
-	})
+	}),
+	showPopup: function (sender, ev) {
+		var popup;
+
+		if (!sender.disabled) {
+			popup = this.$.popup;
+			if (!popup.get('showing')) {
+				popup.showAtEvent(ev);
+			}
+			return true;
+		}
+	},
+	closeTapped: function () {
+		this.$.popup.set('showing', false);
+		return true;
+	}
 });
 
 module.exports.data = data;
