@@ -130,7 +130,8 @@ module.exports = kind({
 				{from: 'model.classes', to: 'classes', transform: function (val) {
 					return val + ' highlightable';
 				}},
-				{from: 'model.disabled', to: 'disabled'}
+				{from: 'model.disabled', to: 'disabled'},
+				{from: 'model.disabled', to: 'attributes.data-disabled'}
 			]}
 		], minWidth: 320, minHeight: 100, spacing: 10}
 	],
