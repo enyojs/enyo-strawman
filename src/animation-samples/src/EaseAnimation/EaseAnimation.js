@@ -1,11 +1,7 @@
 var
 	kind = require('enyo/kind'),
-	easings = require('enyo/AnimationSupport/Easings'),
-	scene = require('enyo/AnimationSupport/Scene'),
+	anim = require('enyo/animation'),
 	control = require('enyo/Control');
-
-
-var easeAnim = scene({ /*animation: [{ translate: "0,-500, 0" }], duration: 3000*/ });
 
 module.exports = kind({
 	name: "EasingSample",
@@ -17,7 +13,6 @@ module.exports = kind({
 	},
 	components: [
 		{
-			//No ease define, i.e. linear animation
 			name: "linear",
 			content: "linear",
 			style: "left: 2%;",
@@ -27,55 +22,55 @@ module.exports = kind({
 			name: "easeInBounce",
 			content: "easeInBounce",
 			style: "left: 11%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInBounce },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeInBounce },
 			classes: "balloon blue"
 		}, {
 			name: "easeOutBounce",
 			content: "easeOutBounce",
 			style: "left: 20%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeOutBounce },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeOutBounce },
 			classes: "balloon red"
 		}, {
 			name: "easeInOutBounce",
 			content: "easeInOutBounce",
 			style: "left: 29%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInOutBounce },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeInOutBounce },
 			classes: "balloon blue"
 		}, {
 			name: "easeInElastic",
 			content: "easeInElastic",
 			style: "left: 38%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInElastic },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeInElastic },
 			classes: "balloon red"
 		}, {
 			name: "easeOutElastic",
 			content: "easeOutElastic",
 			style: "left: 47%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeOutElastic },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeOutElastic },
 			classes: "balloon blue"
 		}, {
 			name: "easeInOutElastic",
 			content: "easeInOutElastic",
 			style: "left: 56%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInOutElastic },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeInOutElastic },
 			classes: "balloon red"
 		}, {
 			name: "easeInExpo",
 			content: "easeInExpo",
 			style: "left: 65%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInExpo },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeInExpo },
 			classes: "balloon blue"
 		}, {
 			name: "easeOutExpo",
 			content: "easeOutExpo",
 			style: "left: 74%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeOutExpo },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeOutExpo },
 			classes: "balloon red"
 		}, {
 			name: "easeInOutExpo",
 			content: "easeInOutExpo",
 			style: "left: 83%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easings.easeInOutExpo },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: anim.easing.easeInOutExpo },
 			classes: "balloon blue"
 		}, {
 			name: "cubicBezier",

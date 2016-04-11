@@ -2,17 +2,17 @@
 var kind = require('enyo/kind'),
 	image = require('enyo/Image'),
 	scene = require('enyo/AnimationSupport/Scene'),
-	Easings = require('enyo/AnimationSupport/Easings');
+	anim = require('enyo/animation');
 
 var spincube = scene({
 	repeat: true,
 	animation: [
-		{ rotate: "0, 90, 0", ease: Easings.easeInOutQuad, duration: 1920 },
-		{ rotate: "90, 90, 0", ease: Easings.easeInOutQuad, duration: 2040 },
-		{ rotate: "0, 180, 90", ease: Easings.easeInOutQuad, duration: 2040 },
-		{ rotate: "0, 270, 0", ease: Easings.easeInOutQuad, duration: 1920 },
-		{ rotate: "-90, 270, 0", ease: Easings.easeInOutQuad, duration: 2040 },
-		{ rotate: "0, 360, 0", ease: Easings.easeInOutQuad, duration: 2040}
+		{ rotate: "0, 90, 0", ease: anim.easing.easeInOutQuad, duration: 1920 },
+		{ rotate: "90, 90, 0", ease: anim.easing.easeInOutQuad, duration: 2040 },
+		{ rotate: "0, 180, 90", ease: anim.easing.easeInOutQuad, duration: 2040 },
+		{ rotate: "0, 270, 0", ease: anim.easing.easeInOutQuad, duration: 1920 },
+		{ rotate: "-90, 270, 0", ease: anim.easing.easeInOutQuad, duration: 2040 },
+		{ rotate: "0, 360, 0", ease: anim.easing.easeInOutQuad, duration: 2040}
 	]
 });
 
