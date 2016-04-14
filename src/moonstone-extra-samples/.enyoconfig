@@ -78,7 +78,9 @@
   "watchPaths": [],
   "polling": false,
   "pollingInterval": 100,
-  "headScripts": [],
+  "headScripts": [
+    "peer.js"
+  ],
   "tailScripts": [],
   "promisePolyfill": false,
   "styleOnly": false,

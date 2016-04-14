@@ -1,6 +1,8 @@
 var
+	dispatcher = require('enyo/dispatcher'),
 	i18n = require('enyo/i18n'),
-	kind = require('enyo/kind');
+	kind = require('enyo/kind'),
+	utils = require('enyo/utils');
 
 var
 	Enyo_iLib = require('enyo-ilib');
@@ -108,6 +110,7 @@ module.exports = kind({
 		}
 	},
 	components: [
+
 		{classes: 'moon-sample-persistent-hotspot', components: [
 			{classes: 'moon-sample-persistent-frame', spotlight: 'container', components: [
 				{kind: Button, content: 'Reload', small: true, spotlight: false, classes: 'moon-sample-persistent-locale-button', ontap: 'reload'},
@@ -128,6 +131,8 @@ module.exports = kind({
 			]}
 		]},
 		{name: 'home'},
+		{name: 'channelId', classes: 'channel-id'},
+    	{name: 'cursor', classes: 'cursor', tag: 'img', attributes: {src: 'https://dujrsrsgsd3nh.cloudfront.net/img/emoticons/43894/cursor-1421191312@2x.png'}},
 		{name: 'router', kind: AppRouter, history: true, triggerOnStart: true}
 	],
 	bindings: [
@@ -163,9 +168,90 @@ module.exports = kind({
 			this.locales = new Collection(locales);
 			this.samples = this.samples || this.ctor.samples;
 			console.log('%cMoonstone: %s', 'color:blue', this.version);
+			this.startPairing();
 			sup.apply(this, arguments);
 		};
 	}),
+	startPairing: function () {
+	  var tvPeer = new Peer(String(utils.irand(9000)+1000), {key: 's2iygrooxakedn29'});
+	  tvPeer.on('open', function (id) {
+	    this.$.channelId.set('content', id);
+	    this.log('ready to connnect to', id);
+	  }.bind(this));
+	  
+	  // Wait for a connection from the second peer.
+	  tvPeer.on('connection', function (connection) {
+	    // This `connection` is a DataConnection object with which we can send
+	    // data.
+	    // The `open` event firing means that the connection is now ready to
+	    // transmit data.
+	    connection.on('open', function() {
+	      this.$.channelId.hide();
+	    }.bind(this));
+	    
+	    var px = null, py = null;
+
+
+		function dispatch (name, ev, t) {
+			var target, e;
+			if (px !== null && py !== null) {
+				target = t || document.elementFromPoint(px-1, py-1) || document;
+
+				e = utils.mixin(ev || {}, {
+					target: target,
+					type: name,
+					clientX: px,
+					clientY: py,
+					preventDefault: function () {}
+				});
+
+				dispatcher.dispatch(e);
+
+				return target;
+			}
+		}
+
+
+    	function isInput (active) {
+    		var control;
+			if (active) {
+				control = dispatcher.$[active.id];
+				if (control && control.value !== undefined) {
+					return control;
+				}
+			}
+		}
+
+	    // The `data` event is fired when data is received on the connection.
+	    connection.on('data', function(data) {
+	    	var control,
+	    		active = document.activeElement,
+	    		cursor = this.$.cursor;
+
+			if(data.type == 'cursor') {
+				px = data.px;
+				py = data.py;
+				cursor.applyStyle('top', py + 'px');
+				cursor.applyStyle('left', px + 'px');
+				dispatch('mousemove');
+			}
+			else if (data.type == 'click') {
+				dispatch('mousedown', {which: 1});
+				active = dispatch('mouseup', {which: 1});
+
+				if (isInput(active)) active.focus();
+			}
+			else if (data.type == 'text') {
+				control = isInput(active);
+				if (control) {
+					control.set('value', data.text);
+					dispatch('input', null, active);
+				}
+			}
+	    }.bind(this));
+	  }.bind(this));
+	},
+
 	createList: function () {
 		var samples = this.get('samples'),
 			sorted = Object.keys(samples).sort(),
@@ -317,4 +403,4 @@ module.exports = kind({
 			this.localeChanged(Enyo_iLib.getLocale(), this.locale);
 		}
 	}
-});
+})
