@@ -1,0 +1,6 @@
+{
+  "main": "HeartAnimation.js",
+  "styles": [
+    "HeartAnimation.css"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "main": "SolarEclipse.js",
+  "styles": [
+    "SolarEclipse.css"
+  ]
+}

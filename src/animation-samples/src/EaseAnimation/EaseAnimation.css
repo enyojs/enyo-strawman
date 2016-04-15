@@ -1,0 +1,24 @@
+.ease-sample {
+	font-size: 40px;
+	height: 100%;
+	line-height: 500px;
+	position: relative;
+	text-align: center;
+	text-size: 200px;
+}
+.ease-sample .balloon {
+	bottom: 10%;
+	color: #fff;
+	font-size: 12px;
+	height: 160px;
+	line-height: 160px;
+	position: absolute;
+	text-align: center;
+	width: 100px;
+}
+.ease-sample .blue {
+	background: url('../../assets/balloon-blue.png');
+}
+.ease-sample .red {
+	background: url('../../assets/balloon.png');
+}

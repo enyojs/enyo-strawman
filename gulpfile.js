@@ -51,7 +51,7 @@ function init() {
 
 function build() {
 	return buildStrawman([
-		'enyo', 'moonstone', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos'
+		'enyo', 'moonstone', 'layout', 'spotlight', 'enyo-ilib', 'onyx', 'canvas', 'svg', 'enyo-webos', 'animation'
 	]);
 }
 

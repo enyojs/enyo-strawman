@@ -1,7 +1,7 @@
 {
-  "title": "enyo-strawman",
-  "name": "enyo-strawman",
-  "libDir": "lib",
+  "title": "Canvas Samples",
+  "name": "canvas-samples",
+  "libDir": "../../lib",
   "paths": [],
   "libraries": [
     "enyo",
@@ -26,7 +26,7 @@
     "enyo-ilib": "https://github.com/enyojs/enyo-ilib.git"
   },
   "targets": {
-    "enyo": "ENYO_2174-sceneapproach",
+    "enyo": "2.7.0",
     "layout": "2.7.0",
     "canvas": "2.7.0",
     "svg": "2.7.0",
@@ -52,7 +52,8 @@
   "skip": [],
   "library": false,
   "wip": false,
-  "outDir": "./dist",
+  "outdir": "../../dist/canvas",
+  "outDir": "../../dist/canvas",
   "outFile": "index.html",
   "lessPlugins": [],
   "assetRoots": [],

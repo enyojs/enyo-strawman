@@ -1,0 +1,23 @@
+.heart-sample .wrapper{
+    width:100%;
+    border-top:5px solid white;
+    border-left:0;
+    border-right:0;
+}
+.heart-sample .heart-icon{    
+  position: absolute;
+  left: 45%;
+  bottom: 10%;
+}
+
+.heart-sample .heart-tick-icon{
+  width: 70px;
+}
+
+.heart-sample .heart-dot{
+   width: 2px;
+   height: 2px;
+   background: gray;
+   bottom: 10%;
+   position:absolute;
+}
