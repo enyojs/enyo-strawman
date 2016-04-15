@@ -1,7 +1,7 @@
 var
 	kind = require('enyo/kind'),
 	Control = require('enyo/Control'),
-	scene = require('enyo/AnimationSupport/Scene');
+	scene = require('enyo/scene');
 
 var path = scene({
 	animation: [{
@@ -28,6 +28,7 @@ module.exports = kind({
 				c.scene.delay = i * 200;
 				c.scene.play();
 			}
+			// path.play();
 		};
 	})
 });

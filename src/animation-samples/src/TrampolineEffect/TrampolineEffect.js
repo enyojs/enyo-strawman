@@ -1,7 +1,7 @@
 var
 	kind = require("enyo/kind"),
 	anim = require('enyo/animation'),
-	scene = require('enyo/AnimationSupport/Scene'),
+	scene = require('enyo/scene'),
 	fittableRows = require("layout/FittableRows");
 
 var biggerBox = scene({

@@ -9,10 +9,10 @@ var
 	samples = {
 		EaseAnimation: require('./src/EaseAnimation'),
 		ControlAnimation: require('./src/HeartAnimation'),
-		LinkedAnimation: require('./src/TrampolineEffect'),
-		ColorAnimation: require('./src/SolarEclipse'),
-		PerspectiveAnimation: require('./src/PerspectiveCube'),
-		PathAnimation: require('./src/PathAnimation')
+		// LinkedAnimation: require('./src/TrampolineEffect'),
+		// ColorAnimation: require('./src/SolarEclipse'),
+		// PerspectiveAnimation: require('./src/PerspectiveCube'),
+		// PathAnimation: require('./src/PathAnimation')
 		//yet to be added 
 		// HierarchicalAnimation: require('./src/HierarchicalAnimation')
 		// EqualizerAnimation: require('./src/EqualizerAnimation')
