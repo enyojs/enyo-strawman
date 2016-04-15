@@ -8,6 +8,9 @@ var
 	Enyo_iLib = require('enyo-ilib');
 
 var
+	Spotlight = require('spotlight');
+
+var
 	Moonstone = require('moonstone');
 
 var
@@ -193,22 +196,22 @@ module.exports = kind({
 
 
 		function dispatch (name, ev, t) {
-			var target, e;
-			if (px !== null && py !== null) {
-				target = t || document.elementFromPoint(px-1, py-1) || document;
+			var e,
+				target = t ||
+					(px !== null && py !== null && document.elementFromPoint(px-1, py-1)) ||
+					document;
 
-				e = utils.mixin(ev || {}, {
-					target: target,
-					type: name,
-					clientX: px,
-					clientY: py,
-					preventDefault: function () {}
-				});
+			e = utils.mixin(ev || {}, {
+				target: target,
+				type: name,
+				clientX: px,
+				clientY: py,
+				preventDefault: function () {}
+			});
 
-				dispatcher.dispatch(e);
+			dispatcher.dispatch(e);
 
-				return target;
-			}
+			return target;
 		}
 
 
@@ -236,10 +239,19 @@ module.exports = kind({
 				dispatch('mousemove');
 			}
 			else if (data.type == 'click') {
-				dispatch('mousedown', {which: 1});
-				active = dispatch('mouseup', {which: 1});
+				if (Spotlight.getPointerMode()) {
+					dispatch('mousedown', {which: 1});
+					active = dispatch('mouseup', {which: 1});
+				} else {
+					dispatch('keydown', {keyCode: 13, which: 13}, active);
+					dispatch('keyup', {keyCode: 13, which: 13}, active);
+				}
 
-				if (isInput(active)) active.focus();
+				control = isInput(active);
+				if (control) control.focus();
+			}
+			else if (data.type == 'back') {
+				window.history.back();
 			}
 			else if (data.type == 'text') {
 				control = isInput(active);
@@ -247,6 +259,16 @@ module.exports = kind({
 					control.set('value', data.text);
 					dispatch('input', null, active);
 				}
+			}
+			else if (data.type == 'arrow') {
+				var codes = {
+					left: 37,
+					up: 38,
+					right: 39,
+					down: 40
+				};
+                
+                dispatch('keydown', {keyCode: codes[data.direction]}, document);
 			}
 	    }.bind(this));
 	  }.bind(this));
