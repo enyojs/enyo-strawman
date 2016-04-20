@@ -8,6 +8,12 @@ var
 
 // Define all of the extras samples
 var samples = {
+	BS_DataListSample                : require('./BSDataListSample.js'),
+	BS_DataGridListSample            : require('./BSDataGridListSample.js'),
+	BS_DataListwithCardsSample       : require('./BSDataListwithCardsSample.js'),
+	BS_CommandBarSample              : require('./BSCommandBarSample.js'),
+	BS_ConfirmPanelSample            : require('./BSConfirmPanelSample.js'),
+	BS_MultiPickerPanelSample        : require('./BSMultiPickerPanelSample.js'),
 	ArcSample                       : require('./ArcSample'),
 	ButtonSample                    : require('./ButtonSample'),
 	CheckboxSample                  : require('./CheckboxSample'),
