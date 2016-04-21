@@ -66,10 +66,12 @@ module.exports = kind({
 	classes: 'moon enyo-unselectable enyo-fit',
 	labelText : 'Label',
 	hintText : 'Hint',
+	preHintText: 'PreHint',
 	components: [
 		{kind: Header, name: 'header', content: 'Accessibility', titleBelow: 'Unusual case sample for Accessibility', type: 'small', components: [
 			{name: 'labelButton', kind: Button, small: true, minWidth: false, content: 'Set Label', ontap: 'labelButtonTapped'},
 			{name: 'hintButton', kind: Button, small: true, minWidth: false, content: 'Set Hint', ontap: 'hintButtonTapped'},
+			{name: 'preHintButton', kind: Button, small: true, minWidth: false, content: 'Set PreHint', ontap: 'preHintButtonTapped'},
 			{name: 'toggle', kind: ToggleButton, small: true, content: 'disabled', ontap: 'disabledTapped'}
 		]},
 		{name: 'container', kind: Scroller, fit: true, components: [
@@ -120,6 +122,16 @@ module.exports = kind({
 		for (i = 0; i < control.length; ++i) {
 			if (control[i].name) {
 				this.$[control[i].name].set('accessibilityHint', this.hintText);
+			}
+		}
+	},
+	preHintButtonTapped: function (sender, ev) {
+		this.$.header.setTitleBelow('Set all control\'s accessibilityPreHint to \'PreHint\'');
+		var i,
+			control = this.$.container.components;
+		for (i = 0; i < control.length; ++i) {
+			if (control[i].name) {
+				this.$[control[i].name].set('accessibilityPreHint', this.preHintText);
 			}
 		}
 	},
