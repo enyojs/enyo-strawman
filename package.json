@@ -36,13 +36,14 @@
     "url": "http://github.com/enyojs/enyo-strawman"
   },
   "devDependencies": {
+    "bluebird": "^3.2.2",
+    "enyo-dev": "enyojs/enyo-dev#1.0.0",
     "gulp": "^3.9.0",
     "gulp-jshint": "^2.0.0",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "nomnom": "^1.8.1",
-    "bluebird": "^3.2.2",
-    "enyo-dev": "enyojs/enyo-dev#1.0.0",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.2",
+    "sw-precache": "^3.1.1"
   }
 }

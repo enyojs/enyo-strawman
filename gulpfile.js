@@ -35,6 +35,7 @@ gulp.task('moonstone-extra', moonstone);
 gulp.task('garnet', garnet);
 gulp.task('sunstone', sunstone);
 gulp.task('clean', clean);
+gulp.task('serviceworker', swGenerate);
 gulp.task('jshint', lint);
 
 function init() {
@@ -134,6 +135,16 @@ function clean() {
 	return rimraf('./dist', {disableGlob:true});
 }
 
+function swGenerate() {
+	var path = require('path');
+	var swPrecache = require('sw-precache');
+	var rootDir = './dist';
+	var precacheP = Promise.promisify(swPrecache.write, {context:swPrecache});
+	return precacheP(path.join(rootDir, 'service-worker.js'), {
+			staticFileGlobs: [rootDir + '/**/*.{js,html,css,png,jpg,gif,ttf}'],
+			stripPrefix: rootDir});
+}
+
 function lint () {
 	return gulp
 		.src(['./src/**/*.js'])
@@ -159,7 +170,9 @@ function promiseStrawman(samples) {
 		console.log('Building ' + name + ' samples...');
 	});
 	var promiseOn = Promise.promisify(packager.on, {context:packager});
-	return promiseOn('end');
+	return promiseOn('end').then(function() {
+		return swGenerate();
+	});
 }
 
 function samplerOpts(item) {
@@ -173,7 +186,11 @@ function samplerOpts(item) {
 		title: 'Sampler',
 		logLevel: args['log-level'],
 		logJson: args['log-json'],
-		user: args.user
+		user: args.user,
+		inlineJs: false,
+		outJsFile: 'app.js',
+		inlineCss: false,
+		outCssFile: 'app.css'
 	};
 	if(item) {
 		target = './src/' + item.replace('-light', '') + '-samples';
@@ -182,7 +199,7 @@ function samplerOpts(item) {
 			opts.lessVars = [{name: '@moon-theme', value: 'light'}];
 		}
 	} else {
-		opts.headScripts = ['./config.js'];
+		opts.headScripts = ['./config.js', './service-worker-registration.js'];
 	}
 	return {name:target, options:opts};
 }
