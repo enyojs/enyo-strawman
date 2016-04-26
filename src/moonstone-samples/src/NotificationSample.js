@@ -3,7 +3,6 @@ var
 
 var
 	Notify = require('moonstone/Notification'),
-	BodyText = require('moonstone/BodyText'),
 	Button = require('moonstone/Button'),
 	Input = require('moonstone/Input'),
 	InputDecorator = require('moonstone/InputDecorator'),
@@ -36,7 +35,7 @@ module.exports = kind({
 			{kind: Divider, content: 'Customize Notifications\' Contents'},
 			{kind: InputDecorator, spotlight: true, components: [
 				{name: 'contentsField', kind: Input, placeholder: 'Notification Contents', value: 'I\'m a notification...'}
-			]},
+			]}
 		]},
 
 		{name: 'greetingNotification', kind: Notify, content: 'Hello', components: [
