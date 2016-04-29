@@ -21,7 +21,7 @@ module.exports = kind({
 			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Large Notifications'},
 			{classes: 'moon-hspacing moon-vspacing-s', components: [
-				{kind: Button, content: 'Many buttons', ontap: 'showPopup', popup: 'componentNotification'},
+				{kind: Button, content: 'Many buttons', ontap: 'showPopup', popup: 'componentNotification'}
 			]},
 			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Immediate Notifications'},
