@@ -13,5 +13,8 @@
 	"uiRevision": 2,
 	"class": {
 		"hidden": false
+	},
+	"accessibility": {
+		"supportsAudioGuidance": true
 	}
 }
