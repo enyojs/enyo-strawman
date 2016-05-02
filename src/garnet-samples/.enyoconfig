@@ -28,16 +28,16 @@
     "enyo-ilib": "https://github.com/enyojs/enyo-ilib.git"
   },
   "targets": {
-    "enyo": "2.7.0",
-    "garnet": "2.7.0",
-    "layout": "2.7.0",
-    "canvas": "2.7.0",
-    "svg": "2.7.0",
-    "onyx": "2.7.0",
-    "spotlight": "2.7.0",
-    "enyo-webos": "2.7.0",
-    "enyo-cordova": "2.7.0",
-    "enyo-ilib": "2.7.0"
+    "enyo": "master",
+    "garnet": "master",
+    "layout": "master",
+    "canvas": "master",
+    "svg": "master",
+    "onyx": "master",
+    "spotlight": "master",
+    "enyo-webos": "master",
+    "enyo-cordova": "master",
+    "enyo-ilib": "master"
   },
   "links": [],
   "linkAllLibs": false,
