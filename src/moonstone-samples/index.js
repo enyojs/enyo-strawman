@@ -51,6 +51,7 @@ var
 		ListActionsSample					: require('./src/ListActionsSample'),
 		MarqueeSample						: require('./src/MarqueeSample'),
 		NewDataListSample					: require('./src/NewDataListSample'),
+		NotificationSample					: require('./src/NotificationSample'),
 		ObjectActionHorizontalTypeSample	: require('./src/ObjectActionHorizontalTypeSample'),
 		ObjectActionVerticalTypeSample		: require('./src/ObjectActionVerticalTypeSample'),
 		OverlaySample						: require('./src/OverlaySample'),
