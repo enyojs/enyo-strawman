@@ -2,7 +2,8 @@ require('garnet');
 
 var
 	kind = require('enyo/kind'),
-	Collection = require('enyo/Collection');
+	Collection = require('enyo/Collection'),
+	Dom = require('enyo/dom');
 
 var
 	Button = require('garnet/Button'),
@@ -14,6 +15,9 @@ var SampleDataListPanel = require('./DataListSample').DataListPanel;
 
 var List = kind({
 	kind: SampleDataListPanel,
+	handlers: {
+		ondragstart: 'dragstart'
+	},
 	events: {
 		onShare: ''
 	},
@@ -29,10 +33,24 @@ var List = kind({
 	},
 	activated: function (event) {
 		this.log('List has been activated');
+		if (this.children[0].$.scroller) {
+			this.children[0].changeItemLayer(true);
+			Dom.transformValue(this.children[0].$.scroller.$.strategy.$.client, 'translateZ', '0');
+		}
+		if (this.$.commandBar) this.$.commandBar.addClass('g-command-bar-3d');
 	},
 	deactivated: function (event) {
 		this.log('List has been deactivated');
-	}
+	},
+	dragstart: function(sender, event) {
+		if ( !event.vertical  ) {
+			if (this.children[0].$.scroller) {
+				this.children[0].changeItemLayer(false);
+				Dom.transformValue(this.children[0].$.scroller.$.strategy.$.client, 'translateZ', null);
+			}
+			if (this.$.commandBar) this.$.commandBar.removeClass('g-command-bar-3d');
+		}
+	},
 });
 
 module.exports = kind({

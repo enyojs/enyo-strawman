@@ -18,8 +18,8 @@
     "enyo-ilib": "https://github.com/enyojs/enyo-ilib.git"
   },
   "targets": {
-    "enyo": "garnet-perf-exp",
-    "garnet": "garnet-perf-exp",
+    "enyo": "garnet-perf-exp-reduceLayer",
+    "garnet": "garnet-perf-exp-reduceLayer",
     "svg": "release-2.6.1-pre.6",
     "enyo-webos": "release-2.6.1-pre.6",
     "enyo-ilib": "release-2.6.1-pre.6"
