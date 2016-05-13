@@ -1,23 +1,20 @@
 /*jslint white: true*/
 var kind = require('enyo/kind'),
-	image = require('enyo/Image'),
-	scene = require('enyo/AnimationSupport/Scene'),
-	anim = require('enyo/animation');
+	Control = require('enyo/Control'),
+	ease = require("enyo/easing");
 
-var spincube = scene({
-	repeat: true,
-	animation: [
-		{ rotate: "0, 90, 0", ease: anim.easing.easeInOutQuad, duration: 1920 },
-		{ rotate: "90, 90, 0", ease: anim.easing.easeInOutQuad, duration: 2040 },
-		{ rotate: "0, 180, 90", ease: anim.easing.easeInOutQuad, duration: 2040 },
-		{ rotate: "0, 270, 0", ease: anim.easing.easeInOutQuad, duration: 1920 },
-		{ rotate: "-90, 270, 0", ease: anim.easing.easeInOutQuad, duration: 2040 },
-		{ rotate: "0, 360, 0", ease: anim.easing.easeInOutQuad, duration: 2040}
-	]
-});
+var spincube = [
+	{ rotate: "0, 90, 0", ease: ease.easeInOutQuad, duration: 1920 },
+	{ rotate: "90, 90, 0", ease: ease.easeInOutQuad, duration: 2040 },
+	{ rotate: "0, 180, 90", ease: ease.easeInOutQuad, duration: 2040 },
+	{ rotate: "0, 270, 0", ease: ease.easeInOutQuad, duration: 1920 },
+	{ rotate: "-90, 270, 0", ease: ease.easeInOutQuad, duration: 2040 },
+	{ rotate: "0, 360, 0", ease: ease.easeInOutQuad, duration: 2040}
+];
 
 module.exports = kind({
 	name: "cube",
+	kind: Control,
 	classes: "enyo-fit cube",
 	components: [{
 		name: "cubespinner",
@@ -64,6 +61,6 @@ module.exports = kind({
 		this.$.face4.scene.play();
 		this.$.face5.scene.play();
 		this.$.face6.scene.play();
-		spincube.play();
+		this.$.cubespinner.scene.play().repeat = true;
 	}
 });

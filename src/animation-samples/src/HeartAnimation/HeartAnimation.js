@@ -6,19 +6,21 @@ var
 	CheckBox = require('enyo/Checkbox'),
 	Slider = require('onyx/Slider');
 
+var flyPath = {
+	path:[[0,0,0], [400,-100,0],[-400,-200,0], [0,-300,0]],
+	duration: 2000
+};
+
 module.exports = kind({
 	name: "heartsample",
 	classes: "enyo-fit heart-sample",
+	flyScene: {},
 	components: [
 		{
 			name: 'heartFlyIcon',
 			kind: IMG,
 			classes: 'heart-icon heart-tick-icon heart-fly-icon',
 			src: '@../../assets/heart-fly.png',
-			scene: {
-				path:[[0,0,0], [400,-100,0],[-400,-200,0], [0,-300,0]],
-				duration: 2000
-			},
 			ontap: "fly"
 		},
 		{name:"playButton", kind:Button, content: "Start", ontap: "playAnimation"},
@@ -42,48 +44,51 @@ module.exports = kind({
 		return function() {
 			sup.apply(this, arguments);
 			this.$.slider.set('max', 2000);
-			this.$.heartFlyIcon.scene.step = function(actor) {
-				var parent = actor.parent;
-				if (this.showPath) {
-					var mat = actor.currentState.matrix,
-						s = actor.name == 'heartFlyIcon' ? "left: 30%;" : "left: 60%;";
-					parent.createComponent({
-						classes: "heart-dot",
-						style: "transform: matrix3d(" + mat + ");" + s
-					}).render();
-				}
-				parent.$.slider.set('value', this.timeline);
-			};
+
+			this.flyScene = kind.animate(this.$.heartFlyIcon, flyPath).play();
+			this.flyScene.step = this.showPath;
 		};
 	}),
+	showPath: function(actor) {
+		var parent = actor.parent;
+		if (this.showPath) {
+			var mat = actor.currentState.matrix,
+				s = actor.name == 'heartFlyIcon' ? "left: 30%;" : "left: 60%;";
+			parent.createComponent({
+				classes: "heart-dot",
+				style: "transform: matrix3d(" + mat + ");" + s
+			}).render();
+		}
+		parent.$.slider.set('value', this.timeline);
+	},
 	playAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.play();
+		this.flyScene.play();
 	},
 	resumeAnimation: function (sender, ev){
-		this.$.heartFlyIcon.scene.resume();
+		this.flyScene.resume();
 	},
 	pauseAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.pause();
+		this.flyScene.pause();
 	},
 	stopAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.stop();
+		this.flyScene.stop();
 	},
 	reverseAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.reverse();
+		this.flyScene.reverse();
 	},
 	seekAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.timeline = parseInt(this.$.seekInput.value, 10);
+		this.flyScene.timeline = parseInt(this.$.seekInput.value, 10);
 	},
 	fastAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.fast(2);
+		this.flyScene.speed = 2;
 	},
 	slowAnimation: function(sender, ev) {
-		this.$.heartFlyIcon.scene.slow(0.2);
+		this.flyScene.speed = 0.2;
 	},
 	sliderChanging: function(inSender, inEvent) {
-		this.$.heartFlyIcon.scene.timeline = parseInt(inSender.getValue(), 10);
+		this.flyScene.timeline = parseInt(inSender.getValue(), 10);
 	},
 	pathChanged: function () {
-		this.$.heartFlyIcon.scene.showPath = this.$.showPath.checked;
+		this.flyScene.showPath = this.$.showPath.checked;
 	}
 });

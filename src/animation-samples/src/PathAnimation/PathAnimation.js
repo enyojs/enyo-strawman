@@ -1,15 +1,11 @@
 var
 	kind = require('enyo/kind'),
-	Control = require('enyo/Control'),
-	scene = require('enyo/scene');
+	Control = require('enyo/Control');
 
-var path = scene({
-	animation: [{
-		path:[[0,0,0], [0,-100,0], [100,-100,0], [100,100,0], [0,100,0], [0,0,0]],
-		duration: 1000
-	}],
-	repeat: true
-});
+var path = {
+	path:[[0,0,0], [0,-100,0], [100,-100,0], [100,100,0], [0,100,0], [0,0,0]],
+	duration: 1000
+};
 	
 module.exports = kind({
 	name: "pathsample",
@@ -24,10 +20,11 @@ module.exports = kind({
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			for (var c, i = 0; (c = this.controls[i]); i++) {
-				c.scene.delay = i * 200;
-				c.scene.play();
-			}
+			kind.animate(this.controls, path, {delay: 200}).play();
+			// for (var c, i = 0; (c = this.controls[i]); i++) {
+			// 	c.scene.delay = i * 200;
+			// 	c.scene.play();
+			// }
 			// path.play();
 		};
 	})
