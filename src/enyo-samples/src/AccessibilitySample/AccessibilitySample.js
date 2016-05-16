@@ -20,10 +20,24 @@ module.exports = kind({
 			{name: 'cl', content: 'content', accessibilityLabel: 'the label'},
 			// content + hint
 			{name: 'ch', content: 'content', accessibilityHint: 'the hint'},
+			// prehint + content
+			{name: 'pc', accessibilityPreHint: 'the prehint', content: 'content'},
+			// prehint + content + label + hint
+			{name: 'pclh', accessibilityPreHint: 'the prehint', content: 'content', accessibilityLabel: 'the label', accessibilityHint: 'the hint'},
+			// prehint + content + label
+			{name: 'pcl', accessibilityPreHint: 'the prehint', content: 'content', accessibilityLabel: 'the label'},
+			// prehint + content + hint
+			{name: 'pch', accessibilityPreHint: 'the prehint', content: 'content', accessibilityHint: 'the hint'},
 			// content + label + hint
 			{name: 'clh', content: 'content', accessibilityLabel: 'the label', accessibilityHint: 'the hint'},
+			// prehint + label
+			{name: 'pl', accessibilityPreHint: 'the prehint', accessibilityLabel: 'the label'},
+			// prehint + hint
+			{name: 'ph', accessibilityPreHint: 'the prehint', accessibilityHint: 'the hint'},
 			// label + hint
 			{name: 'lh', accessibilityLabel: 'the label', accessibilityHint: 'the hint'},
+			// only prehint
+			{name: 'p', accessibilityPreHint: 'the prehint'},
 			// only label
 			{name: 'l', accessibilityLabel: 'the label'},
 			// only hint
