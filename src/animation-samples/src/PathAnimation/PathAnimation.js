@@ -20,12 +20,7 @@ module.exports = kind({
 	create: kind.inherit(function(sup) {
 		return function() {
 			sup.apply(this, arguments);
-			kind.animate(this.controls, path, {delay: 200}).play();
-			// for (var c, i = 0; (c = this.controls[i]); i++) {
-			// 	c.scene.delay = i * 200;
-			// 	c.scene.play();
-			// }
-			// path.play();
+			kind.animate(this.controls, path, {isSequence: true}).play();
 		};
 	})
 });
