@@ -1,0 +1,6 @@
+{
+  "main": "SequenceAnimation.js",
+  "styles": [
+    "SequenceAnimation.css"
+  ]
+}

@@ -1,0 +1,29 @@
+.imageClass {
+    width: 100%;
+    height: 100%;
+    border-radius: 6%;
+}
+
+.cardContainer {
+    height: 280px;
+    width: 200px;
+    position: absolute;
+}
+
+.jack {
+    left: 100px;
+}
+
+.queen {
+    left: 150px;
+}
+
+.king {
+    left: 200px;
+}
+
+.description {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+}

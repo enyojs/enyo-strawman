@@ -12,9 +12,12 @@ var
 		LinkedAnimation: require('./src/TrampolineEffect'),
 		ColorAnimation: require('./src/SolarEclipse'),
 		PerspectiveAnimation: require('./src/PerspectiveCube'),
-		PathAnimation: require('./src/PathAnimation')
-		//yet to be added 
-		// HierarchicalAnimation: require('./src/HierarchicalAnimation')
+		PathAnimation: require('./src/PathAnimation'),
+		WobbleAnimation: require('./src/WobbleAnimation'),
+		SequenceAnimation: require('./src/SequenceAnimation'),
+		SingleComponent: require('./src/SingleComponentAnimation')
+		//yet to be added
+		//HierarchicalAnimation: require('./src/HierarchicalAnimation')
 		// EqualizerAnimation: require('./src/EqualizerAnimation')
 	};
 

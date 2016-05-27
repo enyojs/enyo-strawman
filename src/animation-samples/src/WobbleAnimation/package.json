@@ -1,0 +1,6 @@
+{
+  "styles": [
+    "WobbleEffect.css"
+  ],
+  "main": "WobbleEffect.js"
+}

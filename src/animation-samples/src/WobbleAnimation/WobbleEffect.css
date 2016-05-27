@@ -1,0 +1,19 @@
+.wobble-sample {
+	background: linear-gradient(to bottom, #f6f7fc 0%,#d5e1e8 40%);
+}
+.wobble-sample .container {
+	display: inline-block;
+	margin: 50px;
+	overflow: visible;
+	transform-style: preserve-3d;
+	transform: perspective(800px);
+
+}
+.wobble-sample .image-container{
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0 45px 100px rgba(0, 0, 0, 0.4);
+	width:320px;
+	height: 500px;
+	overflow:hidden;
+}

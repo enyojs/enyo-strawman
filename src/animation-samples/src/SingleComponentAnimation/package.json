@@ -1,0 +1,6 @@
+{
+  "main": "SingleComponent.js",
+  "styles": [
+    "SingleComponent.css"
+  ]
+}
