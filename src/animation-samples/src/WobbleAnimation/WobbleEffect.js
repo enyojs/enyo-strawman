@@ -30,7 +30,7 @@ module.exports = kind({
         return function() {
             sup.apply(this, arguments);
             this.$.img.set("src", this.imagePath);
-            animate([this.$.imageHolder], wobble, { repeat: true});
+            animate([this.$.imageHolder], wobble, { repeat: true });
         };
     })
 });

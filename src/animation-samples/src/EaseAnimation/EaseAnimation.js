@@ -28,39 +28,39 @@ module.exports = kind({
 		}, {
 			kind: BlueBalloon,
 			content: "easeInBounce",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInBounce }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.bounceIn }
 		}, {
 			kind: RedBalloon,
 			content: "easeOutBounce",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutBounce }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.bounceOut }
 		}, {
 			kind: BlueBalloon,
 			content: "easeInOutBounce",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutBounce }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.bounceInOut }
 		}, {
 			kind: RedBalloon,
 			content: "easeInElastic",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInElastic }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.elasticIn }
 		}, {
 			kind: BlueBalloon,
 			content: "easeOutElastic",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutElastic }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.elasticOut }
 		}, {
 			kind: RedBalloon,
 			content: "easeInOutElastic",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutElastic }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.elasticInOut }
 		}, {
 			kind: BlueBalloon,
 			content: "easeInExpo",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInExpo }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.expoIn }
 		}, {
 			kind: RedBalloon,
 			content: "easeOutExpo",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutExpo }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.expoOut }
 		}, {
 			kind: BlueBalloon,
 			content: "easeInOutExpo",
-			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutExpo }
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.expoInOut }
 		}, {
 			kind: RedBalloon,
 			content: "custom",

@@ -49,7 +49,7 @@ module.exports = kind({
                 scale: "1," + randomVal + ",1",
                 "background-color": randCol,
                 duration: duration,
-                ease: easing.easeOutQuad
+                ease: easing.quadOut
             };
         animate([elem], propsObj, { autoPlay: true, completed: this.completedAnim });
     },
