@@ -1,6 +1,7 @@
 var
 	kind = require('enyo/kind'),
 	easing = require('enyo/easing'),
+	sceneSupport = require('enyo/sceneSupport'),
 	control = require('enyo/Control');
 
 module.exports = kind({
@@ -14,66 +15,77 @@ module.exports = kind({
 	components: [
 		{
 			name: "linear",
+			mixins:[sceneSupport],
 			content: "linear",
 			style: "left: 2%;",
 			scene: { translate: "0,-500, 0", duration: 3000 },
 			classes: "balloon red"
 		}, {
 			name: "easeInBounce",
+			mixins:[sceneSupport],
 			content: "easeInBounce",
 			style: "left: 11%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInBounce },
 			classes: "balloon blue"
 		}, {
 			name: "easeOutBounce",
+			mixins:[sceneSupport],
 			content: "easeOutBounce",
 			style: "left: 20%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutBounce },
 			classes: "balloon red"
 		}, {
 			name: "easeInOutBounce",
+			mixins:[sceneSupport],
 			content: "easeInOutBounce",
 			style: "left: 29%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutBounce },
 			classes: "balloon blue"
 		}, {
 			name: "easeInElastic",
+			mixins:[sceneSupport],
 			content: "easeInElastic",
 			style: "left: 38%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInElastic },
 			classes: "balloon red"
 		}, {
 			name: "easeOutElastic",
+			mixins:[sceneSupport],
 			content: "easeOutElastic",
 			style: "left: 47%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutElastic },
 			classes: "balloon blue"
 		}, {
 			name: "easeInOutElastic",
+			mixins:[sceneSupport],
 			content: "easeInOutElastic",
 			style: "left: 56%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutElastic },
 			classes: "balloon red"
 		}, {
 			name: "easeInExpo",
+			mixins:[sceneSupport],
 			content: "easeInExpo",
 			style: "left: 65%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInExpo },
 			classes: "balloon blue"
 		}, {
 			name: "easeOutExpo",
+			mixins:[sceneSupport],
 			content: "easeOutExpo",
 			style: "left: 74%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutExpo },
 			classes: "balloon red"
 		}, {
 			name: "easeInOutExpo",
+			mixins:[sceneSupport],
 			content: "easeInOutExpo",
 			style: "left: 83%;",
 			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutExpo },
 			classes: "balloon blue"
 		}, {
 			name: "cubicBezier",
+			mixins:[sceneSupport],
 			content: "custom",
 			style: "left: 92%;",
 			/**
@@ -97,11 +109,4 @@ module.exports = kind({
 			}
 		};
 	}),
-	/**
-	* Add duration and animation to each balloons to fly
-	* Ease property is already defined with each balloons
-	*/
-	easingAnim: function () {
-		
-	}
 });

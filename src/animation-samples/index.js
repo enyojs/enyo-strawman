@@ -15,10 +15,10 @@ var
 		PathAnimation: require('./src/PathAnimation'),
 		WobbleAnimation: require('./src/WobbleAnimation'),
 		SequenceAnimation: require('./src/SequenceAnimation'),
-		SingleComponent: require('./src/SingleComponentAnimation')
-		//yet to be added
-		//HierarchicalAnimation: require('./src/HierarchicalAnimation')
-		// EqualizerAnimation: require('./src/EqualizerAnimation')
+		SingleComponent: require('./src/SingleComponentAnimation'),
+		HierarchicalAnimation: require('./src/HierarchicalAnimation'),
+		//yet to be added		
+		EqualizerAnimation: require('./src/EqualizerAnimation')
 	};
 
 var Sample = kind({

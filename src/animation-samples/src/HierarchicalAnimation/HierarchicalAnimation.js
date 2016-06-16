@@ -3,8 +3,7 @@ var
 
 var
     Collection = require('enyo/Collection'),
-    scene = require('enyo/AnimationSupport/Scene'),
-    sceneActor = require('enyo/AnimationSupport/SceneActor'),
+    animate = require('enyo/scene'),
     DataGridList = require('enyo/DataGridList');
 
 var counter = 0;
@@ -111,73 +110,71 @@ var data = [
     { classes: "repeater-item class4 item", firstName: "Ayala", lastName: "Lawson" },
     { classes: "repeater-item class5 item", firstName: "Lori", lastName: "Nolan" }
 ];
-var  SceneOne = sceneActor({
-    animation: { scale  :"1.3,1.3,1.3" },
-    duration:1000
-});
-var SceneTwo = scene({
-    animation: { rotate : "0, 180, 0" },
-    duration:1000
-});
+var sceneOne = {
+    rotate: "0, 359, 0",
+    duration: 2500
+};
 var listItem = kind({
-    components: [
-        {classes: "name-wrapper", components: [
-            {name: "firstName", classes: "name", tag: "span"},
-            {name: "lastName", classes: "name last", tag: "span"},
-            {name: "lastNameLetter", classes: "name last-letter", tag: "span"}
-        ]}
-    ],
-    handlers: {
-        onenter : "hovered",
-        onleave : "removeActor"
-    },
-    hovered: function(inSender){
-        SceneOne.play(this);
-    },
-    removeActor:function(inSender){
-        SceneOne.reverse(this);
-    },
-    create: kind.inherit(function (sup) {
-        return function () {
+    components: [{
+        classes: "name-wrapper",
+        components: [
+            { name: "firstName", classes: "name", tag: "span" },
+            { name: "lastName", classes: "name last", tag: "span" },
+            { name: "lastNameLetter", classes: "name last-letter", tag: "span" }
+        ]
+    }],
+   
+    create: kind.inherit(function(sup) {
+        return function() {
             sup.apply(this, arguments);
-            scene.link(this,SceneOne);
-            scene.link(this, SceneTwo);
+            animate([this], sceneOne, { autoPlay: true, isSequence: false });
         };
     })
 
 });
 module.exports = kind({
     name: "enyo.sample.DataGridListSample",
+    animRef: null,
     classes: "data-grid-list-sample data-repeater-sample enyo-fit",
-    components: [
-        {name: "repeater", kind: DataGridList, components: [
-            { kind: listItem, bindings: [
-                {from: ".model.firstName", to: ".$.firstName.content"},
-                {from: ".model.lastName", to: ".$.lastName.content"},
-                {from: ".model.lastName", to: ".$.lastNameLetter.content", transform: function (v) { return v && v.charAt(0); }},
-                {from: ".model.classes", to: ".classes"}
-            ]}
-        ], minWidth: 320, minHeight: 100, spacing: 10}
-    ],
+    components: [{
+        name: "repeater",
+        kind: DataGridList,
+        components: [{
+            kind: listItem,
+            bindings: [
+                { from: ".model.firstName", to: ".$.firstName.content" },
+                { from: ".model.lastName", to: ".$.lastName.content" }, {
+                    from: ".model.lastName",
+                    to: ".$.lastNameLetter.content",
+                    transform: function(v) {
+                        return v && v.charAt(0);
+                    }
+                },
+                { from: ".model.classes", to: ".classes" }
+            ]
+        }],
+        minWidth: 320,
+        minHeight: 100,
+        spacing: 10
+    }],
     bindings: [
-        {from: ".collection", to: ".$.repeater.collection"}
+        { from: ".collection", to: ".$.repeater.collection" }
     ],
+
     handlers: {
-        onmousewheel : "scrolled"
+        onmousewheel: "scrolled"
     },
-    scrolled:function(inSender,inEvent){
-        ++counter;
-        if(counter%2 === 0){
-            SceneTwo.reverse();
-        }else{
-            SceneTwo.play();
-        }
+    scrolled: function() {
+        var pageOne = this.children[0].$.page1.children;
+        var pageTwo = this.children[0].$.page2.children;
+        animate(pageOne, sceneOne, { autoPlay: true, isSequence: false });
+        animate(pageTwo, sceneOne, { autoPlay: true, isSequence: false });
     },
-    populateList: function () {
+    populateList: function() {
         this.collection = new Collection(data);
     },
-    create: kind.inherit(function (sup) {
-        return function () {
+    create: kind.inherit(function(sup) {
+        return function() {
             this.populateList();
             sup.apply(this, arguments);
         };

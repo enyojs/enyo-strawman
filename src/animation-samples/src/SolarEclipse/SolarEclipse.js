@@ -1,23 +1,24 @@
 /*jslint white: true*/
 var kind = require('enyo/kind'),
-	control = require("enyo/Control");
+    animate = require('enyo/scene'),
+    control = require("enyo/Control");
 
 module.exports = kind({
-	name: "sampleApplication",
-	classes: "enyo-fit eclipse-sample",
-	kind: control,
-	components: [
-		{classes: "container", components:[{
-			name: "redInsideGreen",
-			scene: {"box-shadow": "200, 0, rgb(255, 255, 255)", duration: 5000},
-			classes: "eclipse"
-		}] 
-	}],
+    name: "sampleApplication",
+    classes: "enyo-fit eclipse-sample",
+    kind: control,
+    components: [{
+        classes: "container",
+        components: [{
+            name: "redInsideGreen",
+            classes: "eclipse"
+        }]
+    }],
 
-	create: kind.inherit(function (sup) {
-        return function () {
+    create: kind.inherit(function(sup) {
+        return function() {
             sup.apply(this, arguments);
-			this.$.redInsideGreen.scene.play();
+            animate([this.$.redInsideGreen], { "box-shadow": "200, 0, rgb(255, 255, 255)", duration: 5000 }, { autoPlay: true });
         };
     })
 });

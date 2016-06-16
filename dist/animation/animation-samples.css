@@ -1,0 +1,595 @@
+.cubespinner {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform-origin: 60px 60px 0;
+  -moz-transform-origin: 60px 60px 0;
+  -ms-transform-origin: 60px 60px 0;
+  transform-origin: 60px 60px 0;
+  width: 500px;
+  height: 500px;
+}
+.cubespinner div {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 100px;
+}
+
+.strawman h1 {
+  padding: 0 3%;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+@media only screen and (max-width: 400px) {
+  .strawman h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 4%;
+  }
+}
+
+.ease-sample {
+  font-size: 40px;
+  height: 100%;
+  overflow: hidden;
+  line-height: 500px;
+  position: relative;
+  text-align: center;
+  text-size: 200px;
+}
+.ease-sample .balloon {
+  bottom: 10%;
+  color: #fff;
+  font-size: 12px;
+  height: 160px;
+  line-height: 160px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+.ease-sample .blue {
+  background: url('assets/balloon-blue.png');
+}
+.ease-sample .red {
+  background: url('assets/balloon.png');
+}
+
+.trampoline-sample .smaller {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  transform: rotate(45deg);
+}
+.trampoline-sample .bigger {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background-color: red;
+}
+.trampoline-sample .container {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 50%;
+  right: 0;
+  width: 300px;
+  height: 50%;
+}
+
+.eclipse-sample {
+  background-color: black;
+}
+.eclipse-sample .eclipse {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  left: 100px;
+  position: absolute;
+  background-color: #000000;
+  box-shadow: -100px 0px #ffff00;
+}
+.eclipse-sample .container {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 55%;
+}
+
+.path-sample .dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50%;
+  transform-origin: 6% 28%;
+  background: red;
+  background-size: 100% 100%;
+  top: 50%;
+  position: absolute;
+  left: 22%;
+}
+.path-sample.container {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 50%;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.imageClass {
+  width: 100%;
+  height: 100%;
+  border-radius: 6%;
+}
+.cardContainer {
+  height: 280px;
+  width: 200px;
+  position: absolute;
+}
+.jack {
+  left: 100px;
+}
+.queen {
+  left: 150px;
+}
+.king {
+  left: 200px;
+}
+.description {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+* {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* prevent tap highlight color / shadow */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+/* Main.css */
+.equalizer {
+  background-color: #000;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.container {
+  position: absolute;
+  width: 250px;
+  height: 75%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.container-background {
+  background-color: #000;
+}
+.bar {
+  height: 1%;
+  width: 9%;
+  background-color: orange;
+  transform-origin: 50% 100%;
+}
+
+.wobble-sample {
+  background: linear-gradient(to bottom, #f6f7fc 0%, #d5e1e8 40%);
+}
+.wobble-sample .container {
+  display: inline-block;
+  margin: 50px;
+  overflow: visible;
+  transform-style: preserve-3d;
+  transform: perspective(800px);
+}
+.wobble-sample .image-container {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 45px 100px rgba(0, 0, 0, 0.4);
+  width: 320px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.heart-sample .wrapper {
+  width: 100%;
+  border-top: 5px solid white;
+  border-left: 0;
+  border-right: 0;
+}
+.heart-sample .heart-icon {
+  position: absolute;
+  left: 45%;
+  bottom: 10%;
+}
+.heart-sample .heart-tick-icon {
+  width: 70px;
+}
+.heart-sample .heart-dot {
+  width: 2px;
+  height: 2px;
+  background: gray;
+  bottom: 10%;
+  position: absolute;
+}
+
+.strawman .strawman-list {
+  top: 5em;
+}
+.strawman .strawman-list .link {
+  margin: 0.5em;
+  height: 2em;
+  line-height: 2em;
+  color: #08F;
+  background-color: rgba(0, 136, 255, 0.1);
+  display: block;
+  padding: 0 1.3em;
+  text-decoration: none;
+  overflow: hidden;
+  position: relative;
+}
+.strawman .strawman-list .link.spotlight {
+  background-color: rgba(0, 136, 255, 0.2);
+}
+.strawman .strawman-list .link.new:before,
+.strawman .strawman-list .link.wip:before,
+.strawman .strawman-list .link.deprecated:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #08F;
+  color: white;
+  -webkit-transform: translateY(100%) rotate(-90deg) scale(0.5);
+  -moz-transform: translateY(100%) rotate(-90deg) scale(0.5);
+  -ms-transform: translateY(100%) rotate(-90deg) scale(0.5);
+  transform: translateY(100%) rotate(-90deg) scale(0.5);
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  width: 4em;
+  text-align: center;
+}
+.strawman .strawman-list .link.new:before {
+  content: 'New!';
+  background-color: #E53935;
+}
+.strawman .strawman-list .link.wip:before {
+  content: 'WIP';
+  background-color: #2196F3;
+}
+.strawman .strawman-list .link.deprecated:before {
+  content: 'Dep ✕';
+  background-color: purple;
+}
+.strawman .strawman-list .grid .link {
+  display: inline-block;
+  background-color: #08F;
+  background-image: none;
+  height: 3em;
+  line-height: 3em;
+  color: #FFF;
+  border-radius: 0.2em;
+}
+.strawman .strawman-list .grid .link.spotlight {
+  background-color: #33a0ff;
+}
+@media only screen and (min-width: 1280px) {
+  .strawman .strawman-list .link {
+    font-size: 2em;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .strawman .strawman-list .grid .link {
+    height: 2.4em;
+    line-height: 2.4em;
+    margin: 0.2em;
+    padding: 0 0.8em;
+  }
+  .strawman .strawman-list .list-frame:not(.grid) .link {
+    font-size: 1.5rem;
+  }
+}
+
+.strawman .back-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 999px;
+  background-color: #08F;
+  margin: 10px;
+  line-height: 3.5em;
+  width: 3.5em;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  text-transform: lowercase;
+  opacity: 0.6;
+  transition: opacity 0.25s;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+.strawman .back-button.spotlight {
+  opacity: 1;
+}
+@media only screen and (max-width: 400px) {
+  .strawman .back-button {
+    opacity: 0.01;
+    width: 100%;
+    margin: 0;
+    line-height: 1.5em;
+    font-size: 3em;
+    border-radius: 0;
+  }
+}
+.strawman .strawman-sample-back {
+  display: none;
+}
+@media only screen and (max-width: 400px) {
+  .strawman.wearable-sample .strawman-sample {
+    background: white;
+    padding-bottom: 60px;
+  }
+  .strawman.wearable-sample .strawman-sample.platform-sample {
+    padding: 2rem;
+  }
+  .strawman.wearable-sample .strawman-sample.platform-sample > :last-child {
+    padding-bottom: 60px;
+  }
+  .strawman.wearable-sample .strawman-sample-back {
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 320px;
+    top: 260px;
+    left: 0;
+    right: 0;
+    color: white;
+    margin: 0;
+    padding: 0 130px;
+    border-radius: 9999px;
+    font-size: 60px;
+    line-height: 60px;
+    z-index: 9999;
+    font-weight: bold;
+    background-color: gray;
+    opacity: 0.8;
+    text-align: center;
+    overflow: hidden;
+  }
+}
+
+.data-repeater-sample,
+.data-repeater-sample .repeater-item,
+.data-repeater-sample .name-wrapper,
+.data-repeater-sample .repeater-item span {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+.data-repeater-sample .repeater-item {
+  width: 100%;
+  width: 320px;
+  height: 100px;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  position: relative;
+}
+.data-repeater-sample .name-wrapper {
+  position: absolute;
+  height: 50px;
+  top: 50%;
+  left: 0px;
+  margin-top: -25px;
+  width: 100%;
+}
+.data-repeater-sample .repeater-item .name {
+  padding: 4px;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 35px;
+}
+.data-repeater-sample .repeater-item .name.last {
+  font-weight: normal;
+  font-size: 20px;
+  font-style: italic;
+}
+.data-repeater-sample .repeater-item .name.last-letter {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -25px;
+  text-align: right;
+  font-weight: normal;
+  font-size: 30px;
+  background-color: #FFFFFF;
+  line-height: 42px;
+  height: 50px;
+  width: 40px;
+  padding: 5px;
+  border-radius: 25px 0 0 25px;
+}
+.data-repeater-sample .repeater-item.class1 .name.last-letter {
+  color: #FF7200;
+}
+.data-repeater-sample .repeater-item.class2 .name.last-letter {
+  color: #FBAA12;
+}
+.data-repeater-sample .repeater-item.class3 .name.last-letter {
+  color: #067AB5;
+}
+.data-repeater-sample .repeater-item.class4 .name.last-letter {
+  color: #2E92CE;
+}
+.data-repeater-sample .repeater-item.class5 .name.last-letter {
+  color: #333333;
+}
+.data-repeater-sample .repeater-item.class1 {
+  background: #FF7200;
+}
+.data-repeater-sample .repeater-item.class2 {
+  background: #FBAA12;
+}
+.data-repeater-sample .repeater-item.class3 {
+  background: #067AB5;
+}
+.data-repeater-sample .repeater-item.class4 {
+  background: #2E92CE;
+}
+.data-repeater-sample .repeater-item.class5 {
+  background: #333333;
+}
+.data-repeater-sample .repeater-item.class1.selected,
+.data-repeater-sample .repeater-item.class2.selected,
+.data-repeater-sample .repeater-item.class3.selected,
+.data-repeater-sample .repeater-item.class4.selected,
+.data-repeater-sample .repeater-item.class5.selected {
+  background: #FFFFFF;
+  color: #000000;
+}
+/* because there is some generic .item css applied with no scope in sampler */
+.data-repeater-sample .item {
+  border-bottom: none;
+}
+.sample-wrapper {
+  width: 100%;
+  border: 1px solid red;
+  border-top: 5px solid white;
+  border-left: 0;
+  border-right: 0;
+}
+
+/* ----- Enyo's Museo Sans ------ */
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Medium"), url('../fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Thin"), url('../fonts/MuseoSans/MuseoSans-Light.ttf') format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Light"), url('../fonts/MuseoSans/MuseoSans-Normal.ttf') format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Medium"), url('../fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Medium Italic"), url('../fonts/MuseoSans/MuseoSans-DemiBoldItalic.ttf') format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Bold"), url('../fonts/MuseoSans/MuseoSans-Bold.ttf') format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Bold Italic"), url('../fonts/MuseoSans/MuseoSans-BoldItalic.ttf') format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Black"), url('../fonts/MuseoSans/MuseoSans-Black.ttf') format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Black Italic"), url('../fonts/MuseoSans/MuseoSans-BlackItalic.ttf') format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+.strawman {
+  background-color: white;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+.strawman.home {
+  padding: 5%;
+  text-align: center;
+}
+.strawman.home .strawman-list {
+  top: auto;
+  top: initial;
+  bottom: auto;
+  bottom: initial;
+}
+@media only screen and (max-width: 400px) {
+  .strawman.home {
+    padding: 0;
+  }
+}
+.warning {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+@media only screen and (min-width: 1280px) {
+  .warning {
+    display: none;
+  }
+}
+

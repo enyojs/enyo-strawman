@@ -1,0 +1,148 @@
+/* Paths */
+/* application importing Onyx Less files will have to override this  */
+/* variable. Otherwise, Onyx image load will fail with a 404 error  */
+/* Fonts */
+/* ---------------------------------------*/
+/* Text Colors */
+/* ---------------------------------------*/
+/* Background Colors */
+/* ---------------------------------------*/
+/* Border Radius */
+/* ---------------------------------------*/
+/* Padding */
+/* ---------------------------------------*/
+/* Icon Sizes */
+/* ---------------------------------------*/
+/* Disabled Opacity */
+/* ---------------------------------------*/
+/* Gradient Overlays */
+/* ---------------------------------------*/
+/* Images */
+/* ---------------------------------------*/
+
+/* onyx-classes.less - combined CSS (less) files for all released Onyx controls
+   into single onyx.less file to avoid IE bug that allows
+   a maximum of 31 style sheets to be loaded before silently failing */
+.onyx {
+  color: #333333;
+  font-family: 'Helvetica Neue', 'Nimbus Sans L', Arial, sans-serif;
+  font-size: 20px;
+  cursor: default;
+  background-color: #EAEAEA;
+  /* remove automatic tap highlight color */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* prevent IE from inheriting line-height for these elements */
+  /* some default colors */
+}
+.onyx .onyx-button,
+.onyx .onyx label,
+.onyx .onyx input {
+  line-height: normal;
+}
+.onyx .onyx-selected {
+  background-color: #C4E3FE;
+}
+.onyx .onyx-dark {
+  background-color: #555656;
+}
+.onyx .onyx-light {
+  background-color: #cacaca;
+}
+.onyx .onyx-green {
+  background-color: #91BA07;
+}
+.onyx .onyx-red {
+  background-color: #C51616;
+}
+.onyx .onyx-blue {
+  background-color: #35A8EE;
+}
+/* LESS pre-calculations */
+
+/* ProgressBar.css */
+.onyx-progress-bar {
+  margin: 8px;
+  height: 8px;
+  border: 1px solid rgba(15, 15, 15, 0.2);
+  border-radius: 3px;
+  background: #B8B8B8 url('onyx/images/gradient-invert.png') repeat-x;
+  background-size: auto 100%;
+}
+.onyx-progress-bar-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: #58ABEF url('onyx/images/gradient.png') repeat-x;
+  background-size: auto 100%;
+}
+.onyx-progress-bar-bar.striped {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px;
+}
+.onyx-progress-bar-bar.striped.animated {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -moz-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+@-moz-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+
+/* Slider.css */
+.onyx-slider {
+  position: relative;
+  margin: 8px 20px;
+}
+.onyx-slider-taparea {
+  position: absolute;
+  top: -11px;
+  height: 28px;
+  width: 100%;
+}
+.onyx-slider-knob {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  background: url('onyx/images/slider-handle.png') left top no-repeat;
+  background-size: 100% auto;
+  margin: -23px -20px;
+}
+.onyx-slider-knob.active,
+.onyx-slider-knob.pressed {
+  background-position: 0 -40px;
+}
+
