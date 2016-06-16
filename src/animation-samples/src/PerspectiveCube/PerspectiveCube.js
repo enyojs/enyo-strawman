@@ -101,13 +101,13 @@ module.exports = kind({
 
     startAnimation: function() {
 
-        animate([this.$.face1], spincubeFace1, { autoPlay: true });
-        animate([this.$.face2], spincubeFace2, { autoPlay: true });
-        animate([this.$.face3], spincubeFace3, { autoPlay: true });
-        animate([this.$.face4], spincubeFace4, { autoPlay: true });
-        animate([this.$.face5], spincubeFace5, { autoPlay: true });
-        animate([this.$.face6], spincubeFace6, { autoPlay: true });
-        var cubeSpin = animate([this.$.cubespinner], spincube, { autoPlay: true });
+        animate([this.$.face1], spincubeFace1);
+        animate([this.$.face2], spincubeFace2);
+        animate([this.$.face3], spincubeFace3);
+        animate([this.$.face4], spincubeFace4);
+        animate([this.$.face5], spincubeFace5);
+        animate([this.$.face6], spincubeFace6);
+        var cubeSpin = animate([this.$.cubespinner], spincube);
         // cubeSpin.repeat = true;
     }
 });

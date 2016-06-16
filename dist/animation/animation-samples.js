@@ -184,13 +184,13 @@ module.exports = kind({
 
     startAnimation: function() {
 
-        animate([this.$.face1], spincubeFace1, { autoPlay: true });
-        animate([this.$.face2], spincubeFace2, { autoPlay: true });
-        animate([this.$.face3], spincubeFace3, { autoPlay: true });
-        animate([this.$.face4], spincubeFace4, { autoPlay: true });
-        animate([this.$.face5], spincubeFace5, { autoPlay: true });
-        animate([this.$.face6], spincubeFace6, { autoPlay: true });
-        var cubeSpin = animate([this.$.cubespinner], spincube, { autoPlay: true });
+        animate([this.$.face1], spincubeFace1);
+        animate([this.$.face2], spincubeFace2);
+        animate([this.$.face3], spincubeFace3);
+        animate([this.$.face4], spincubeFace4);
+        animate([this.$.face5], spincubeFace5);
+        animate([this.$.face6], spincubeFace6);
+        var cubeSpin = animate([this.$.cubespinner], spincube);
         // cubeSpin.repeat = true;
     }
 });
@@ -263,119 +263,6 @@ module.exports = kind({
 });
 
 
-}],'src/EaseAnimation':[function (module,exports,global,require,request){
-var
-	kind = require('enyo/kind'),
-	easing = require('enyo/easing'),
-	sceneSupport = require('enyo/sceneSupport'),
-	control = require('enyo/Control');
-
-module.exports = kind({
-	name: "EasingSample",
-	kind: control,
-	isAnimated: false,
-	classes: "enyo-fit ease-sample",
-	handlers: {
-		onmouseover: "easingAnim"
-	},
-	components: [
-		{
-			name: "linear",
-			mixins:[sceneSupport],
-			content: "linear",
-			style: "left: 2%;",
-			scene: { translate: "0,-500, 0", duration: 3000 },
-			classes: "balloon red"
-		}, {
-			name: "easeInBounce",
-			mixins:[sceneSupport],
-			content: "easeInBounce",
-			style: "left: 11%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInBounce },
-			classes: "balloon blue"
-		}, {
-			name: "easeOutBounce",
-			mixins:[sceneSupport],
-			content: "easeOutBounce",
-			style: "left: 20%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutBounce },
-			classes: "balloon red"
-		}, {
-			name: "easeInOutBounce",
-			mixins:[sceneSupport],
-			content: "easeInOutBounce",
-			style: "left: 29%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutBounce },
-			classes: "balloon blue"
-		}, {
-			name: "easeInElastic",
-			mixins:[sceneSupport],
-			content: "easeInElastic",
-			style: "left: 38%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInElastic },
-			classes: "balloon red"
-		}, {
-			name: "easeOutElastic",
-			mixins:[sceneSupport],
-			content: "easeOutElastic",
-			style: "left: 47%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutElastic },
-			classes: "balloon blue"
-		}, {
-			name: "easeInOutElastic",
-			mixins:[sceneSupport],
-			content: "easeInOutElastic",
-			style: "left: 56%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutElastic },
-			classes: "balloon red"
-		}, {
-			name: "easeInExpo",
-			mixins:[sceneSupport],
-			content: "easeInExpo",
-			style: "left: 65%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInExpo },
-			classes: "balloon blue"
-		}, {
-			name: "easeOutExpo",
-			mixins:[sceneSupport],
-			content: "easeOutExpo",
-			style: "left: 74%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutExpo },
-			classes: "balloon red"
-		}, {
-			name: "easeInOutExpo",
-			mixins:[sceneSupport],
-			content: "easeInOutExpo",
-			style: "left: 83%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutExpo },
-			classes: "balloon blue"
-		}, {
-			name: "cubicBezier",
-			mixins:[sceneSupport],
-			content: "custom",
-			style: "left: 92%;",
-			/**
-			* Points on bezier-curve as at x% of time y% of distance cover
-			* Here, the bezier-curve should be as defined
-			* On 30% of time, 50% of distance should cover
-			* On 80% of time, 10% of distance in opposite direction should cover
-			*/
-			scene: { translate: "0,-500, 0", duration: 3000, ease: { 30: 50, 80: -10 } },
-			classes: "balloon red"
-		}
-	],
-	create: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (!this.isAnimated) {
-				for (var c, i = 0; (c = this.controls[i]); i++) {
-					c.scene.play();
-				}
-				this.isAnimated = true;
-			}
-		};
-	}),
-});
 }],'src/TrampolineEffect':[function (module,exports,global,require,request){
 var
     kind = require("enyo/kind"),
@@ -401,17 +288,21 @@ module.exports = kind({
     kind: Control,
     classes: "trampoline-sample",
     components: [
-        { name: "smaller", classes: "smaller", scene: smallerBox, mixins: [sceneSupport] },
-        { name: "bigger", classes: "bigger", scene: biggerBox, mixins: [sceneSupport] }
-    ],
-    create: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
-            // kind.animate(this.$.smaller, smallerBox).play().repeat = true;
-            this.$.smaller.scene.play().repeat = true;
-            this.$.bigger.scene.play().repeat = true;
-        };
-    })
+        { 
+            name: "smaller",
+            classes: "smaller",
+            scene: smallerBox,
+            mixins: [sceneSupport],
+            sceneOptions: { repeat: true }
+        },
+        { 
+            name: "bigger",
+            classes: "bigger",
+            scene: biggerBox,
+            mixins: [sceneSupport],
+            sceneOptions: { repeat: true }
+        }
+    ]
 });
 
 }],'src/SolarEclipse':[function (module,exports,global,require,request){
@@ -463,15 +354,15 @@ module.exports = kind({
     kind: Control,
     classes: "enyo-fit path-sample container",
     components: [
-        { name: 'dot1', classes: "dot", style: "background:black;", scene: path },
-        { name: 'dot2', classes: "dot", style: "background:blue;", scene: path },
-        { name: 'dot3', classes: "dot", style: "background:red;", scene: path },
-        { name: 'dot4', classes: "dot", style: "background:green;", scene: path }
+        { name: 'dot1', classes: "dot", style: "background:black;"},
+        { name: 'dot2', classes: "dot", style: "background:blue;"},
+        { name: 'dot3', classes: "dot", style: "background:red;"},
+        { name: 'dot4', classes: "dot", style: "background:green;"}
     ],
     create: kind.inherit(function(sup) {
         return function() {
             sup.apply(this, arguments);
-            animate(this.controls, path, { isSequence: true, autoPlay: true });
+            animate(this.controls, path, { isSequence: true});
         };
     })
 });
@@ -588,18 +479,14 @@ module.exports = kind({
 }],'src/EqualizerAnimation':[function (module,exports,global,require,request){
 var
     kind = require('enyo/kind'),
-    sceneSupport = require('enyo/sceneSupport'),
     animate = require('enyo/scene'),
     easing = require('enyo/easing'),
     image = require('enyo/Image');
 
 var duration = 150,
-    laps = 10,
-    counter = 0,
-    interval = duration / laps;
+    counter = 0;
 
-var t, s, l = 1,
-    handle, kindRef;
+var kindRef;
 
 module.exports = kind({
     name: "equalizer",
@@ -614,7 +501,7 @@ module.exports = kind({
             sup.apply(this, arguments);
             for (var i = 0; i < 10; i++) {
                 this.$.container1.createComponent({ classes: "bar" });
-                this.$.container2.createComponent({ classes: "bar", /*mixins: [sceneSupport], scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } */ });
+                this.$.container2.createComponent({ classes: "bar" });
             }
         };
     }),
@@ -628,94 +515,31 @@ module.exports = kind({
     }),
     startAnimation: function() {
         var children = this.$.container2.children;
-        var currentActor, currentActorProps, that, compRandom;
-        var len = children.length,
-            i;
-        l = 1;
-        for (var i = 0; i < len; i++) {
+        var i, len = children.length;
+
+        for (i = 0; i < len; i++) {
             this.animateElem(children[i]);
         }
-        /* that = this;
-         for (i = 0; i < len; i++) {
-             t = (((l * interval) * 100) / duration);
-             s = this.getRandom();
-             currentActor = children[i];
-             currentActor.scene.poses[0].animate = {
-                 scale: "1," + s + ",1",
-                 duration: s
-             };
-             // currentActorProps = children[i].scene.poses[0].animate;
-             // currentActorProps.scale = "1," + s + ",1";
-             // currentActorProps.duration = s;
-             currentActor.scene.play();
-             currentActor.scene.completed = function() {
-                 console.dir(this);
-                 compRandom = that.getRandom();
-                 this.poses[0].animate = {
-                     scale: "1," + compRandom + ",1",
-                     duration: compRandom
-                 }
-                 console.log(this.poses[0].animate.scale);
-                 this.play();
-                 // children[i].scene.getAnimation(0).animate.ease[t] = s;
-                 // children[i].scene.stop();
-
-             }
-         }
-
-         l += 1;*/
-
-        //setTimeout(this.handleTimeout.bind(this), (interval / 2));
-        // handle = setInterval(this.handleInterval.bind(this), interval);
     },
     animateElem: function(elem) {
-        var randomVal, currentElem, propsObj, randCol;
-        currentElem = elem;
-        randomVal = this.getRandom();
-        randCol = this.randomColor();
-        propsObj = {
-            scale: "1," + randomVal + ",1",
-            "background-color": randCol,
-            duration: duration,
-            ease: easing.easeOutQuad
-        }
+        var randomVal = this.getRandom(),
+            randCol = this.randomColor(),
+            propsObj = {
+                scale: "1," + randomVal + ",1",
+                "background-color": randCol,
+                duration: duration,
+                ease: easing.easeOutQuad
+            };
         animate([elem], propsObj, { autoPlay: true, completed: this.completedAnim });
     },
 
     completedAnim: function() {
         ++counter;
         if (counter === 10) {
-            kindRef.startAnimation();
+            kindRef && kindRef.startAnimation();
             counter = 0;
         }
-
     },
-    /*  handleInterval: function() {
-          var children = this.$.container2.children;
-          var len = children.length,
-              i;
-          if (l === len) {
-              clearInterval(handle);
-              this.$.container2.destroyClientControls();
-              for (i = 0; i < 10; i++) {
-                  this.$.container2.createComponent({ classes: "bar", scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } });
-              }
-
-              this.render();
-          }
-
-          for (i = 0; i < len; i++) {
-              // Time between 1 to 100 (fixed interval)
-              t = (((l * interval) * 100) / duration);
-              // Scale between 40 to 100 (random interval)
-              s = this.getRandom();
-              children[i].scene.getAnimation(0).animate.ease[t] = s;
-              children[i].scene.stop();
-              children[i].scene.play();
-          }
-          l += 1;
-      },*/
-
     getRandom: function() {
         return Math.floor(30 + (Math.random() * 40));
     },
@@ -725,6 +549,7 @@ module.exports = kind({
     destroy: kind.inherit(function(sup) {
         return function() {
             sup.apply(this, arguments);
+            kindRef = undefined;
         };
     })
 });
@@ -762,11 +587,88 @@ module.exports = kind({
         return function() {
             sup.apply(this, arguments);
             this.$.img.set("src", this.imagePath);
-            animate([this.$.imageHolder], wobble, { autoPlay: true, isSequence: false }).repeat = true;
+            animate([this.$.imageHolder], wobble, { repeat: true});
         };
     })
 });
 
+}],'src/EaseAnimation':[function (module,exports,global,require,request){
+var
+	kind = require('enyo/kind'),
+	easing = require('enyo/easing'),
+	FittableColumns = require('layout/FittableColumns'),
+	SceneSupport = require('enyo/SceneSupport');
+
+var RedBalloon = kind({
+	classes: "balloon",
+	style: "background: url('./assets/balloon.png');",
+	mixins : [SceneSupport]
+});
+
+var BlueBalloon = kind({
+	classes: "balloon",
+	style: "background: url('./assets/balloon-blue.png');",
+	mixins : [SceneSupport]
+});
+
+module.exports = kind({
+	name: "EasingSample",
+	kind: FittableColumns,
+	classes: "ease-sample",
+	components: [
+		{
+			kind: RedBalloon,
+			content: "linear",
+			scene: { translate: "0,-480, 0", duration: 3000 }
+		}, {
+			kind: BlueBalloon,
+			content: "easeInBounce",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInBounce }
+		}, {
+			kind: RedBalloon,
+			content: "easeOutBounce",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutBounce }
+		}, {
+			kind: BlueBalloon,
+			content: "easeInOutBounce",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutBounce }
+		}, {
+			kind: RedBalloon,
+			content: "easeInElastic",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInElastic }
+		}, {
+			kind: BlueBalloon,
+			content: "easeOutElastic",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutElastic }
+		}, {
+			kind: RedBalloon,
+			content: "easeInOutElastic",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutElastic }
+		}, {
+			kind: BlueBalloon,
+			content: "easeInExpo",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInExpo }
+		}, {
+			kind: RedBalloon,
+			content: "easeOutExpo",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutExpo }
+		}, {
+			kind: BlueBalloon,
+			content: "easeInOutExpo",
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutExpo }
+		}, {
+			kind: RedBalloon,
+			content: "custom",
+			/**
+			* Points on bezier-curve as at x% of time y% of distance cover
+			* Here, the bezier-curve should be as defined
+			* On 30% of time, 50% of distance should cover
+			* On 80% of time, 10% of distance in opposite direction should cover
+			*/
+			scene: { translate: "0,-480, 0", duration: 3000, ease: { 30: 50, 80: -10 } }
+		}
+	]
+});
 }],'src/SingleComponentAnimation':[function (module,exports,global,require,request){
 /*jslint white: true*/
 var
@@ -843,116 +745,119 @@ module.exports = kind({
 
 }],'src/HeartAnimation':[function (module,exports,global,require,request){
 var
-    kind = require('enyo/kind'),
-    IMG = require('enyo/Image'),
-    Button = require('enyo/Button'),
-    Input = require('enyo/Input'),
-    CheckBox = require('enyo/Checkbox'),
-    animate = require('enyo/scene'),
-    Slider = require('onyx/Slider');
+	kind = require('enyo/kind'),
+	IMG = require('enyo/Image'),
+	Button = require('enyo/Button'),
+	Input = require('enyo/Input'),
+	CheckBox = require('enyo/Checkbox'),
+	animate = require('enyo/scene'),
+	Slider = require('onyx/Slider');
 
 var flyPath = {
-    path: [
-        [0, 0, 0],
-        [400, -100, 0],
-        [-400, -200, 0],
-        [0, -300, 0]
-    ],
-    duration: 2000
+	path: [
+		[0, 0, 0],
+		[400, -100, 0],
+		[-400, -200, 0],
+		[0, -300, 0]
+	],
+	duration: 2000
 };
 
 module.exports = kind({
-    name: "heartsample",
-    classes: "enyo-fit heart-sample",
-    flyScene: {},
-    components: [{
-            name: 'heartFlyIcon',
-            kind: IMG,
-            classes: 'heart-icon heart-tick-icon heart-fly-icon',
-            src: 'assets/heart-fly.png',
-            ontap: "fly"
-        },
-        { name: "playButton", kind: Button, content: "Start", ontap: "playAnimation" },
-        { name: "pauseButton", kind: Button, content: "Pause", ontap: "pauseAnimation" },
-        { name: "resumeButton", kind: Button, content: "Resume", ontap: "resumeAnimation" },
-        { name: "reverseButton", kind: Button, content: "Reverse", ontap: "reverseAnimation" },
-        { name: "stopButton", kind: Button, content: "Stop", ontap: "stopAnimation" },
-        { name: "fastButton", kind: Button, content: "Fast", ontap: "fastAnimation" },
-        { name: "slowButton", kind: Button, content: "Slow", ontap: "slowAnimation" },
-        { name: "repeatButton", kind: Button, content: "Repeat", ontap: "repeatAnimation" },
-        { name: "showPath", kind: CheckBox, content: "Show Animation Path", onchange: "pathChanged" }, {
-            components: [
-                { name: "seekInput", kind: Input, placeholder: "Seek" },
-                { name: "seekButton", kind: Button, content: "Jump to", ontap: "seekAnimation" }
-            ]
-        },
-        { name: "slider", kind: Slider, onChanging: "sliderChanging" }
-    ],
-    binding: [{
-        from: "$.slider.value",
-        to: "flyScene.timeline",
-        transform: function(v) {
-            return parseInt(v, 10);
-        }
-    }],
-    create: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
-            this.$.slider.set('max', 2000);
-            this.flyScene = animate(this.$.heartFlyIcon, flyPath, { isSequence: false, autoPlay: false, completed: this.completedAnimation });
-            this.flyScene.step = this.showPath;
-        };
-    }),
-    showPath: function(actor) {
-        var parent = actor.parent;
-        console.log(this.repeat);
-        if (this.showPath) {
-            var mat = this.poses[0].currentState.matrix,
-                s = actor.name == 'heartFlyIcon' ? "left: 45%;" : "left: 60%;";
-            parent.createComponent({
-                classes: "heart-dot",
-                style: "transform: matrix3d(" + mat + ");" + s
-            }).render();
-        }
-        parent.$.slider.set('value', this.timeline);
-    },
-    completedAnimation: function() {
-        console.log("completed");
-    },
-    playAnimation: function() {
-        this.flyScene.play();
-    },
-    resumeAnimation: function() {
-        this.flyScene.resume();
-    },
-    pauseAnimation: function() {
-        this.flyScene.pause();
-    },
-    stopAnimation: function() {
-        this.flyScene.stop();
-        this.flyScene.repeat = false;
-    },
-    reverseAnimation: function() {
-        this.flyScene.reverse();
-    },
-    seekAnimation: function() {
-        this.flyScene.timeline = parseInt(this.$.seekInput.value, 10);
-    },
-    fastAnimation: function() {
-        this.flyScene.speed = 2;
-    },
-    slowAnimation: function() {
-        this.flyScene.speed = 0.2;
-    },
-    repeatAnimation: function() {
-        this.flyScene.repeat = true;
-    },
-    sliderChanging: function(inSender) {
-        this.flyScene.timeline = parseInt(inSender.getValue(), 10);
-    },
-    pathChanged: function() {
-        this.flyScene.showPath = this.$.showPath.checked;
-    }
+	name: "heartsample",
+	classes: "enyo-fit heart-sample",
+	flyScene: {},
+	components: [
+		{
+			name: 'heartFlyIcon',
+			kind: IMG,
+			classes: 'heart-icon heart-tick-icon heart-fly-icon',
+			src: 'assets/heart-fly.png',
+			ontap: "fly"
+		},
+		{ name: "playButton", kind: Button, content: "Start", ontap: "playAnimation" },
+		{ name: "pauseButton", kind: Button, content: "Pause", ontap: "pauseAnimation" },
+		{ name: "resumeButton", kind: Button, content: "Resume", ontap: "resumeAnimation" },
+		{ name: "reverseButton", kind: Button, content: "Reverse", ontap: "reverseAnimation" },
+		{ name: "stopButton", kind: Button, content: "Stop", ontap: "stopAnimation" },
+		{ name: "fastButton", kind: Button, content: "Fast", ontap: "fastAnimation" },
+		{ name: "slowButton", kind: Button, content: "Slow", ontap: "slowAnimation" },
+		{ name: "repeatButton", kind: Button, content: "Repeat", ontap: "repeatAnimation" },
+		{ name: "showPath", kind: CheckBox, content: "Show Animation Path", onchange: "pathChanged" },
+		{
+			components: [
+				{ name: "seekInput", kind: Input, placeholder: "Seek" },
+				{ name: "seekButton", kind: Button, content: "Jump to", ontap: "seekAnimation" }
+			]
+		},
+		{ name: "slider", kind: Slider, onChanging: "sliderChanging" }
+	],
+	binding: [
+		{ from: "$.slider.value", to: "flyScene.timeline", transform: function(v) { return parseInt(v, 10);}}
+	],
+	create: kind.inherit(function(sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.$.slider.set('max', 2000);
+			this.flyScene = animate(this.$.heartFlyIcon, flyPath, {
+				isSequence: false,
+				autoPlay: false,
+				completed: this.completedAnimation,
+				step: this.showPath
+			});
+		};
+	}),
+	showPath: function(actor) {
+		var parent = actor.parent;
+
+		if(!parent) return;
+		if (this.showPath) {
+			var mat = this.poses[0].currentState.matrix,
+				s = actor.name == 'heartFlyIcon' ? "left: 45%;" : "left: 60%;";
+			parent.createComponent({
+				classes: "heart-dot",
+				style: "transform: matrix3d(" + mat + ");" + s
+			}).render();
+		}
+		parent.$.slider.set('value', this.timeline);
+	},
+	completedAnimation: function() {
+		console.log("completed");
+	},
+	playAnimation: function() {
+		this.flyScene.play();
+	},
+	resumeAnimation: function() {
+		this.flyScene.resume();
+	},
+	pauseAnimation: function() {
+		this.flyScene.pause();
+	},
+	stopAnimation: function() {
+		this.flyScene.stop();
+		this.flyScene.repeat = false;
+	},
+	reverseAnimation: function() {
+		this.flyScene.reverse();
+	},
+	seekAnimation: function() {
+		this.flyScene.timeline = parseInt(this.$.seekInput.value, 10);
+	},
+	fastAnimation: function() {
+		this.flyScene.speed = 2;
+	},
+	slowAnimation: function() {
+		this.flyScene.speed = 0.2;
+	},
+	repeatAnimation: function() {
+		this.flyScene.repeat = true;
+	},
+	sliderChanging: function(inSender) {
+		this.flyScene.timeline = parseInt(inSender.getValue(), 10);
+	},
+	pathChanged: function() {
+		this.flyScene.showPath = this.$.showPath.checked;
+	}
 });
 
 }],'../strawman/List':[function (module,exports,global,require,request){

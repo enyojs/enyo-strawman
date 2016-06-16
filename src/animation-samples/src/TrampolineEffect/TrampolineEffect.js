@@ -22,15 +22,19 @@ module.exports = kind({
     kind: Control,
     classes: "trampoline-sample",
     components: [
-        { name: "smaller", classes: "smaller", scene: smallerBox, mixins: [sceneSupport] },
-        { name: "bigger", classes: "bigger", scene: biggerBox, mixins: [sceneSupport] }
-    ],
-    create: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
-            // kind.animate(this.$.smaller, smallerBox).play().repeat = true;
-            this.$.smaller.scene.play().repeat = true;
-            this.$.bigger.scene.play().repeat = true;
-        };
-    })
+        { 
+            name: "smaller",
+            classes: "smaller",
+            scene: smallerBox,
+            mixins: [sceneSupport],
+            sceneOptions: { repeat: true }
+        },
+        { 
+            name: "bigger",
+            classes: "bigger",
+            scene: biggerBox,
+            mixins: [sceneSupport],
+            sceneOptions: { repeat: true }
+        }
+    ]
 });

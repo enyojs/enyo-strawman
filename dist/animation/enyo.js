@@ -91,6 +91,52 @@
 
 module.exports = (global.enyo && global.enyo.options) || {};
 
+}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
+
+
+var PathResolverFactory = module.exports = function() {
+	this.paths = {};
+	this.pathNames = [];
+};
+
+PathResolverFactory.prototype = {
+	addPath: function(inName, inPath) {
+		this.paths[inName] = inPath;
+		this.pathNames.push(inName);
+		this.pathNames.sort(function(a, b) {
+			return b.length - a.length;
+		});
+		return inPath;
+	},
+	addPaths: function(inPaths) {
+		if (inPaths) {
+			for (var n in inPaths) {
+				this.addPath(n, inPaths[n]);
+			}
+		}
+	},
+	includeTrailingSlash: function(inPath) {
+		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
+	},
+	// replace macros of the form $pathname with the mapped value of paths.pathname
+	rewrite: function (inPath) {
+		var working, its = this.includeTrailingSlash, paths = this.paths;
+		var fn = function(macro, name) {
+			working = true;
+			return its(paths[name]) || '';
+		};
+		var result = inPath;
+		do {
+			working = false;
+			for (var i=0; i<this.pathNames.length; i++) {
+				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
+				result = result.replace(regex, fn);
+			}
+		} while (working);
+		return result;
+	}
+};
+
 }],'enyo/easing':[function (module,exports,global,require,request){
 /**
 * Contains set of interpolation functions for animations, similar in function to CSS3 transitions.
@@ -500,52 +546,6 @@ var easing = module.exports = {
 		return 0.5 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2);
 	}
 };
-}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
-
-
-var PathResolverFactory = module.exports = function() {
-	this.paths = {};
-	this.pathNames = [];
-};
-
-PathResolverFactory.prototype = {
-	addPath: function(inName, inPath) {
-		this.paths[inName] = inPath;
-		this.pathNames.push(inName);
-		this.pathNames.sort(function(a, b) {
-			return b.length - a.length;
-		});
-		return inPath;
-	},
-	addPaths: function(inPaths) {
-		if (inPaths) {
-			for (var n in inPaths) {
-				this.addPath(n, inPaths[n]);
-			}
-		}
-	},
-	includeTrailingSlash: function(inPath) {
-		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
-	},
-	// replace macros of the form $pathname with the mapped value of paths.pathname
-	rewrite: function (inPath) {
-		var working, its = this.includeTrailingSlash, paths = this.paths;
-		var fn = function(macro, name) {
-			working = true;
-			return its(paths[name]) || '';
-		};
-		var result = inPath;
-		do {
-			working = false;
-			for (var i=0; i<this.pathNames.length; i++) {
-				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
-				result = result.replace(regex, fn);
-			}
-		} while (working);
-		return result;
-	}
-};
-
 }],'enyo':[function (module,exports,global,require,request){
 'use strict';
 
@@ -2032,6 +2032,408 @@ exports.addToRoots = function (view) {
 	}
 };
 
+}],'enyo/ModelList':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/ModelList~ModelList} Object.
+* @module enyo/ModelList
+*/
+
+/**
+* A special type of [array]{@glossary Array} used internally by data layer
+* [kinds]{@glossary kind}.
+*
+* @class ModelList
+* @protected
+*/
+function ModelList (args) {
+	Array.call(this);
+	this.table = {};
+	if (args) this.add(args, 0);
+}
+
+ModelList.prototype = Object.create(Array.prototype);
+
+module.exports = ModelList;
+
+/**
+* Adds [models]{@link module:enyo/Model~Model} to the [list]{@link module:enyo/ModelList~ModelList}, updating an
+* internal table by the model's [primaryKey]{@link module:enyo/Model~Model#primaryKey} (if
+* possible) and its [euid]{@glossary euid}.
+*
+* @name module:enyo/ModelList~ModelList#add
+* @method
+* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
+*	to add to the [list]{@link module:enyo/ModelList~ModelList}.
+* @param {Number} [idx] - If provided and valid, the models will be
+* [spliced]{@glossary Array.splice} into the list at this position.
+* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of models
+* that were actually added to the list.
+* @protected
+*/
+ModelList.prototype.add = function (models, idx) {
+	var table = this.table,
+		added = [],
+		model,
+		euid,
+		id,
+		i = 0;
+	
+	if (models && !(models instanceof Array)) models = [models];
+	
+	for (; (model = models[i]); ++i) {
+		euid = model.euid;
+		
+		// we only want to actually add models we haven't already seen...
+		if (!table[euid]) {
+			id = model.get(model.primaryKey);
+		
+			if (id != null) {
+			
+				// @TODO: For now if we already have an entry for a model by its supposed unique
+				// identifier but it isn't the instance we just found we can't just
+				// overwrite the previous instance so we mark the new one as headless
+				if (table[id] && table[id] !== model) model.headless = true;
+				// otherwise we do the normal thing and add the entry for it
+				else table[id] = model; 
+			}
+		
+			// nomatter what though the euid should be unique
+			table[euid] = model;
+			added.push(model);
+		}
+	}
+	
+	if (added.length) {
+		idx = !isNaN(idx) ? Math.min(Math.max(0, idx), this.length) : 0;
+		added.unshift(0);
+		added.unshift(idx);
+		this.splice.apply(this, added);
+	}
+	
+	if (added.length > 0) added = added.slice(2);
+	added.at = idx;
+	
+	return added;
+};
+
+/**
+* Removes the specified [models]{@link module:enyo/Model~Model} from the [list]{@link module:enyo/ModelList~ModelList}.
+*
+* @name module:enyo/ModelList~ModelList#remove
+* @method
+* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
+*	to remove from the [list]{@link module:enyo/ModelList~ModelList}.
+* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of
+*	models that were actually removed from the list.
+* @protected
+*/
+ModelList.prototype.remove = function (models) {
+	var table = this.table,
+		removed = [],
+		model,
+		idx,
+		id,
+		i,
+		
+		// these modifications are made to allow more performant logic to take place in
+		// views that may need to know this information
+		low = Infinity,
+		high = -1,
+		indices = [];
+	
+	if (models && !(models instanceof Array)) models = [models];
+	
+	// we start at the end to ensure that you could even pass the list itself
+	// and it will work
+	for (i = models.length - 1; (model = models[i]); --i) {
+		table[model.euid] = null;
+		id = model.get(model.primaryKey);
+		
+		if (id != null) table[id] = null;
+		
+		idx = models === this ? i : this.indexOf(model);
+		if (idx > -1) {				
+			if (idx < low) low = idx;
+			if (idx > high) high = idx;
+			
+			this.splice(idx, 1);
+			removed.push(model);
+			indices.push(idx);
+		}
+	}
+	
+	// since this is a separate array we will add this property to it for internal use only
+	removed.low = low;
+	removed.high = high;
+	removed.indices = indices;
+	
+	return removed;
+};
+
+/**
+* Determines whether the specified [model]{@link module:enyo/Model~Model} is present in the
+* [list]{@link module:enyo/ModelList~ModelList}. Will attempt to resolve a [string]{@glossary String}
+* or [number]{@glossary Number} to either a [primaryKey]{@link module:enyo/Model~Model#primaryKey}
+* or [euid]{@glossary euid}.
+*
+* @name module:enyo/ModelList~ModelList#has
+* @method
+* @param {(module:enyo/Model~Model|String|Number)} model An identifier representing either the
+*	[model]{@link module:enyo/Model~Model} instance, its [primaryKey]{@link module:enyo/Model~Model#primaryKey},
+* or its [euid]{@glossary euid}.
+* @returns {Boolean} Whether or not the model is present in the [list]{@link module:enyo/ModelList~ModelList}.
+* @protected
+*/
+ModelList.prototype.has = function (model) {
+	if (model === undefined || model === null) return false;
+	
+	if (typeof model == 'string' || typeof model == 'number') {
+		return !! this.table[model];
+	} else return this.indexOf(model) > -1;
+};
+
+/**
+* Given an identifier, attempts to return the associated [model]{@link module:enyo/Model~Model}.
+* The identifier should be a [string]{@glossary String} or [number]{@glossary Number}.
+*
+* @name module:enyo/ModelList~ModelList#resolve
+* @method
+* @param {(String|Number)} model - An identifier (either a
+*	[primaryKey]{@link module:enyo/Model~Model#primaryKey} or an [euid]{@glossary euid}).
+* @returns {(undefined|null|module:enyo/Model~Model)} If the identifier could be resolved, a
+*	[model]{@link module:enyo/Model~Model} instance is returned; otherwise, `undefined`, or
+* possibly `null` if the model once belonged to the [list]{@link module:enyo/ModelList~ModelList}.
+* @protected
+*/
+ModelList.prototype.resolve = function (model) {
+	if (typeof model == 'string' || typeof model == 'number') {
+		return this.table[model];
+	} else return model;
+};
+
+/**
+* Copies the current [list]{@link module:enyo/ModelList~ModelList} and returns an shallow copy. This
+* method differs from the [slice()]{@glossary Array.slice} method inherited from
+* native [Array]{@glossary Array} in that this returns an {@link module:enyo/ModelList~ModelList},
+* while `slice()` returns an array.
+* 
+* @name module:enyo/ModelList~ModelList#copy
+* @method
+* @returns {module:enyo/ModelList~ModelList} A shallow copy of the callee.
+* @protected
+*/
+ModelList.prototype.copy = function () {
+	return new ModelList(this);
+};
+
+}],'enyo/States':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Shared values for various [kinds]{@glossary kind} used to indicate a state or
+* (multiple, simultaneous) states. These flags are binary values represented by
+* hexadecimal numerals. They may be modified and compared (or even extended) using
+* [bitwise operations]{@glossary bitwise} or various
+* [API methods]{@link module:enyo/StateSupport~StateSupport} available to the kinds that support them.
+* Make sure to explore the documentation for individual kinds, as they may have
+* specific uses for a given flag.
+* 
+* As a cursory overview, here is a table of the values already declared by built-in flags.
+* Each hexadecimal numeral represents a unique power of 2 in binary, from which we can use
+* [bitwise masks]{@glossary bitwise} to determine if a particular value is present.
+* 
+* ```javascript
+* HEX             DEC             BIN
+* 0x0001             1            0000 0000 0000 0001
+* 0x0002             2            0000 0000 0000 0010
+* 0x0004             4            0000 0000 0000 0100
+* 0x0008             8            0000 0000 0000 1000
+* 0x0010            16            0000 0000 0001 0000
+* 0x0020            32            0000 0000 0010 0000
+* 0x0040            64            0000 0000 0100 0000
+* 0x0080           128            0000 0000 1000 0000
+* 0x0100           256            0000 0001 0000 0000
+* 0x0200           512            0000 0010 0000 0000
+* 0x0400          1024            0000 0100 0000 0000
+* 0x0800          2048            0000 1000 0000 0000
+* 
+* ...
+* 
+* 0x1000          4096            0001 0000 0000 0000
+* ```
+*
+* As a hint, converting (HEX) 0x0800 to DEC do:
+*
+* ```javascript
+* (0*16^3) + (8*16^2) + (0*16^1) + (0*16^0) = 2048
+* ```
+*
+* As a hint, converting (HEX) 0x0800 to BIN do:
+*
+* ```javascript
+* 0    8    0    0    (HEX)
+* ---- ---- ---- ----
+* 0000 1000 0000 0000 (BIN)
+* ```
+*
+* @module enyo/States
+* @public
+* @see module:enyo/StateSupport~StateSupport
+*/
+module.exports = {
+	
+	/**
+	* Only exists in the client and was created during the runtime of the
+	* [application]{@glossary application}.
+	*
+	* @type {Number}
+	* @default 1
+	*/
+	NEW: 0x0001,
+	
+	/**
+	* Has been modified locally only.
+	*
+	* @type {Number}
+	* @default 2
+	*/
+	DIRTY: 0x0002,
+	
+	/**
+	* Has not been modified locally.
+	*
+	* @type {Number}
+	* @default 4
+	*/
+	CLEAN: 0x0004,
+	
+	/**
+	* Can no longer be modified.
+	* @type {Number}
+	* @default 8
+	*/
+	DESTROYED: 0x0008,
+	
+	/**
+	* Currently attempting to fetch.
+	* 
+	* @see module:enyo/Model~Model#fetch
+	* @see module:enyo/RelationalModel~RelationalModel#fetch
+	* @see module:enyo/Collection~Collection#fetch
+	*
+	* @type {Number}
+	* @default 16
+	*/
+	FETCHING: 0x0010,
+	
+	/**
+	* Currently attempting to commit.
+	* 
+	* @see module:enyo/Model~Model#commit
+	* @see module:enyo/RelationalModel~RelationalModel#commit
+	* @see module:enyo/Collection~Collection#commit
+	*
+	* @type {Number}
+	* @default 32
+	*/
+	COMMITTING: 0x0020,
+	
+	/**
+	* Currently attempting to destroy.
+	* 
+	* @see module:enyo/Model~Model#destroy
+	* @see module:enyo/RelationalModel~RelationalModel#destroy
+	* @see module:enyo/Collection~Collection#destroy
+	*
+	* @type {Number}
+	* @default 64
+	*/
+	DESTROYING: 0x0040,
+	
+	/**
+	* There was an error during commit.
+	* 
+	* @see module:enyo/Model~Model#commit
+	* @see module:enyo/RelationalModel~RelationalModel#commit
+	* @see module:enyo/Collection~Collection#commit
+	*
+	* @type {Number}
+	* @default 128
+	*/
+	ERROR_COMMITTING: 0x0080,
+	
+	/**
+	* There was an error during fetch.
+	* 
+	* @see module:enyo/Model~Model#fetch
+	* @see module:enyo/RelationalModel~RelationalModel#fetch
+	* @see module:enyo/Collection~Collection#fetch
+	*
+	* @type {Number}
+	* @default 256
+	*/
+	ERROR_FETCHING: 0x0100,
+	
+	/**
+	* There was an error during destroy.
+	* 
+	* @see module:enyo/Model~Model#destroy
+	* @see module:enyo/RelationalModel~RelationalModel#destroy
+	* @see module:enyo/Collection~Collection#destroy
+	*
+	* @type {Number}
+	* @default 512
+	*/
+	ERROR_DESTROYING: 0x0200,
+	
+	/**
+	* An error was encountered for which there was no exact flag, or an invalid error was
+	* specified.
+	*
+	* @type {Number}
+	* @default 1024
+	*/
+	ERROR_UNKNOWN: 0x0400,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `BUSY`. By default, this is one of
+	* [FETCHING]{@link module:enyo/States.FETCHING}, [COMMITTING]{@link module:enyo/States.COMMITTING}, or
+	* [DESTROYING]{@link module:enyo/States.DESTROYING}. It may be extended to include additional
+	* values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
+	*
+	* @type {Number}
+	* @default 112
+	*/
+	BUSY: 0x0010 | 0x0020 | 0x0040,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `ERROR`. By default, this is one of
+	* [ERROR_FETCHING]{@link module:enyo/States.ERROR_FETCHING},
+	* [ERROR_COMMITTING]{@link module:enyo/States.ERROR_COMMITTING},
+	* [ERROR_DESTROYING]{@link module:enyo/States.ERROR_DESTROYING}, or
+	* [ERROR_UNKNOWN]{@link module:enyo/States.ERROR_UNKNOWN}. It may be extended to include
+	* additional values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
+	*
+	* @type {Number}
+	* @default 1920
+	*/
+	ERROR: 0x0080 | 0x0100 | 0x0200 | 0x0400,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `READY`. By default, this is the inverse of any
+	* values included in [BUSY]{@link module:enyo/States.BUSY} or [ERROR]{@link module:enyo/States.ERROR}.
+	*
+	* @type {Number}
+	* @default -2041
+	*/
+	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
+};
+
 }],'enyo/transform':[function (module,exports,global,require,request){
 /**
 * Contains the declaration for the {@link module:enyo/transform~transform} kind.
@@ -2768,408 +3170,6 @@ var quaternion = exports.Quaternion = {
 	}
 	//TODO: Acheive the same fucntionality for other 11 choices XYX, XZX, XZY, YXY, YXZ, YZX, YZY, ZXY, ZXZ, ZYX, ZYZ 
 };
-}],'enyo/ModelList':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/ModelList~ModelList} Object.
-* @module enyo/ModelList
-*/
-
-/**
-* A special type of [array]{@glossary Array} used internally by data layer
-* [kinds]{@glossary kind}.
-*
-* @class ModelList
-* @protected
-*/
-function ModelList (args) {
-	Array.call(this);
-	this.table = {};
-	if (args) this.add(args, 0);
-}
-
-ModelList.prototype = Object.create(Array.prototype);
-
-module.exports = ModelList;
-
-/**
-* Adds [models]{@link module:enyo/Model~Model} to the [list]{@link module:enyo/ModelList~ModelList}, updating an
-* internal table by the model's [primaryKey]{@link module:enyo/Model~Model#primaryKey} (if
-* possible) and its [euid]{@glossary euid}.
-*
-* @name module:enyo/ModelList~ModelList#add
-* @method
-* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
-*	to add to the [list]{@link module:enyo/ModelList~ModelList}.
-* @param {Number} [idx] - If provided and valid, the models will be
-* [spliced]{@glossary Array.splice} into the list at this position.
-* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of models
-* that were actually added to the list.
-* @protected
-*/
-ModelList.prototype.add = function (models, idx) {
-	var table = this.table,
-		added = [],
-		model,
-		euid,
-		id,
-		i = 0;
-	
-	if (models && !(models instanceof Array)) models = [models];
-	
-	for (; (model = models[i]); ++i) {
-		euid = model.euid;
-		
-		// we only want to actually add models we haven't already seen...
-		if (!table[euid]) {
-			id = model.get(model.primaryKey);
-		
-			if (id != null) {
-			
-				// @TODO: For now if we already have an entry for a model by its supposed unique
-				// identifier but it isn't the instance we just found we can't just
-				// overwrite the previous instance so we mark the new one as headless
-				if (table[id] && table[id] !== model) model.headless = true;
-				// otherwise we do the normal thing and add the entry for it
-				else table[id] = model; 
-			}
-		
-			// nomatter what though the euid should be unique
-			table[euid] = model;
-			added.push(model);
-		}
-	}
-	
-	if (added.length) {
-		idx = !isNaN(idx) ? Math.min(Math.max(0, idx), this.length) : 0;
-		added.unshift(0);
-		added.unshift(idx);
-		this.splice.apply(this, added);
-	}
-	
-	if (added.length > 0) added = added.slice(2);
-	added.at = idx;
-	
-	return added;
-};
-
-/**
-* Removes the specified [models]{@link module:enyo/Model~Model} from the [list]{@link module:enyo/ModelList~ModelList}.
-*
-* @name module:enyo/ModelList~ModelList#remove
-* @method
-* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
-*	to remove from the [list]{@link module:enyo/ModelList~ModelList}.
-* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of
-*	models that were actually removed from the list.
-* @protected
-*/
-ModelList.prototype.remove = function (models) {
-	var table = this.table,
-		removed = [],
-		model,
-		idx,
-		id,
-		i,
-		
-		// these modifications are made to allow more performant logic to take place in
-		// views that may need to know this information
-		low = Infinity,
-		high = -1,
-		indices = [];
-	
-	if (models && !(models instanceof Array)) models = [models];
-	
-	// we start at the end to ensure that you could even pass the list itself
-	// and it will work
-	for (i = models.length - 1; (model = models[i]); --i) {
-		table[model.euid] = null;
-		id = model.get(model.primaryKey);
-		
-		if (id != null) table[id] = null;
-		
-		idx = models === this ? i : this.indexOf(model);
-		if (idx > -1) {				
-			if (idx < low) low = idx;
-			if (idx > high) high = idx;
-			
-			this.splice(idx, 1);
-			removed.push(model);
-			indices.push(idx);
-		}
-	}
-	
-	// since this is a separate array we will add this property to it for internal use only
-	removed.low = low;
-	removed.high = high;
-	removed.indices = indices;
-	
-	return removed;
-};
-
-/**
-* Determines whether the specified [model]{@link module:enyo/Model~Model} is present in the
-* [list]{@link module:enyo/ModelList~ModelList}. Will attempt to resolve a [string]{@glossary String}
-* or [number]{@glossary Number} to either a [primaryKey]{@link module:enyo/Model~Model#primaryKey}
-* or [euid]{@glossary euid}.
-*
-* @name module:enyo/ModelList~ModelList#has
-* @method
-* @param {(module:enyo/Model~Model|String|Number)} model An identifier representing either the
-*	[model]{@link module:enyo/Model~Model} instance, its [primaryKey]{@link module:enyo/Model~Model#primaryKey},
-* or its [euid]{@glossary euid}.
-* @returns {Boolean} Whether or not the model is present in the [list]{@link module:enyo/ModelList~ModelList}.
-* @protected
-*/
-ModelList.prototype.has = function (model) {
-	if (model === undefined || model === null) return false;
-	
-	if (typeof model == 'string' || typeof model == 'number') {
-		return !! this.table[model];
-	} else return this.indexOf(model) > -1;
-};
-
-/**
-* Given an identifier, attempts to return the associated [model]{@link module:enyo/Model~Model}.
-* The identifier should be a [string]{@glossary String} or [number]{@glossary Number}.
-*
-* @name module:enyo/ModelList~ModelList#resolve
-* @method
-* @param {(String|Number)} model - An identifier (either a
-*	[primaryKey]{@link module:enyo/Model~Model#primaryKey} or an [euid]{@glossary euid}).
-* @returns {(undefined|null|module:enyo/Model~Model)} If the identifier could be resolved, a
-*	[model]{@link module:enyo/Model~Model} instance is returned; otherwise, `undefined`, or
-* possibly `null` if the model once belonged to the [list]{@link module:enyo/ModelList~ModelList}.
-* @protected
-*/
-ModelList.prototype.resolve = function (model) {
-	if (typeof model == 'string' || typeof model == 'number') {
-		return this.table[model];
-	} else return model;
-};
-
-/**
-* Copies the current [list]{@link module:enyo/ModelList~ModelList} and returns an shallow copy. This
-* method differs from the [slice()]{@glossary Array.slice} method inherited from
-* native [Array]{@glossary Array} in that this returns an {@link module:enyo/ModelList~ModelList},
-* while `slice()` returns an array.
-* 
-* @name module:enyo/ModelList~ModelList#copy
-* @method
-* @returns {module:enyo/ModelList~ModelList} A shallow copy of the callee.
-* @protected
-*/
-ModelList.prototype.copy = function () {
-	return new ModelList(this);
-};
-
-}],'enyo/States':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Shared values for various [kinds]{@glossary kind} used to indicate a state or
-* (multiple, simultaneous) states. These flags are binary values represented by
-* hexadecimal numerals. They may be modified and compared (or even extended) using
-* [bitwise operations]{@glossary bitwise} or various
-* [API methods]{@link module:enyo/StateSupport~StateSupport} available to the kinds that support them.
-* Make sure to explore the documentation for individual kinds, as they may have
-* specific uses for a given flag.
-* 
-* As a cursory overview, here is a table of the values already declared by built-in flags.
-* Each hexadecimal numeral represents a unique power of 2 in binary, from which we can use
-* [bitwise masks]{@glossary bitwise} to determine if a particular value is present.
-* 
-* ```javascript
-* HEX             DEC             BIN
-* 0x0001             1            0000 0000 0000 0001
-* 0x0002             2            0000 0000 0000 0010
-* 0x0004             4            0000 0000 0000 0100
-* 0x0008             8            0000 0000 0000 1000
-* 0x0010            16            0000 0000 0001 0000
-* 0x0020            32            0000 0000 0010 0000
-* 0x0040            64            0000 0000 0100 0000
-* 0x0080           128            0000 0000 1000 0000
-* 0x0100           256            0000 0001 0000 0000
-* 0x0200           512            0000 0010 0000 0000
-* 0x0400          1024            0000 0100 0000 0000
-* 0x0800          2048            0000 1000 0000 0000
-* 
-* ...
-* 
-* 0x1000          4096            0001 0000 0000 0000
-* ```
-*
-* As a hint, converting (HEX) 0x0800 to DEC do:
-*
-* ```javascript
-* (0*16^3) + (8*16^2) + (0*16^1) + (0*16^0) = 2048
-* ```
-*
-* As a hint, converting (HEX) 0x0800 to BIN do:
-*
-* ```javascript
-* 0    8    0    0    (HEX)
-* ---- ---- ---- ----
-* 0000 1000 0000 0000 (BIN)
-* ```
-*
-* @module enyo/States
-* @public
-* @see module:enyo/StateSupport~StateSupport
-*/
-module.exports = {
-	
-	/**
-	* Only exists in the client and was created during the runtime of the
-	* [application]{@glossary application}.
-	*
-	* @type {Number}
-	* @default 1
-	*/
-	NEW: 0x0001,
-	
-	/**
-	* Has been modified locally only.
-	*
-	* @type {Number}
-	* @default 2
-	*/
-	DIRTY: 0x0002,
-	
-	/**
-	* Has not been modified locally.
-	*
-	* @type {Number}
-	* @default 4
-	*/
-	CLEAN: 0x0004,
-	
-	/**
-	* Can no longer be modified.
-	* @type {Number}
-	* @default 8
-	*/
-	DESTROYED: 0x0008,
-	
-	/**
-	* Currently attempting to fetch.
-	* 
-	* @see module:enyo/Model~Model#fetch
-	* @see module:enyo/RelationalModel~RelationalModel#fetch
-	* @see module:enyo/Collection~Collection#fetch
-	*
-	* @type {Number}
-	* @default 16
-	*/
-	FETCHING: 0x0010,
-	
-	/**
-	* Currently attempting to commit.
-	* 
-	* @see module:enyo/Model~Model#commit
-	* @see module:enyo/RelationalModel~RelationalModel#commit
-	* @see module:enyo/Collection~Collection#commit
-	*
-	* @type {Number}
-	* @default 32
-	*/
-	COMMITTING: 0x0020,
-	
-	/**
-	* Currently attempting to destroy.
-	* 
-	* @see module:enyo/Model~Model#destroy
-	* @see module:enyo/RelationalModel~RelationalModel#destroy
-	* @see module:enyo/Collection~Collection#destroy
-	*
-	* @type {Number}
-	* @default 64
-	*/
-	DESTROYING: 0x0040,
-	
-	/**
-	* There was an error during commit.
-	* 
-	* @see module:enyo/Model~Model#commit
-	* @see module:enyo/RelationalModel~RelationalModel#commit
-	* @see module:enyo/Collection~Collection#commit
-	*
-	* @type {Number}
-	* @default 128
-	*/
-	ERROR_COMMITTING: 0x0080,
-	
-	/**
-	* There was an error during fetch.
-	* 
-	* @see module:enyo/Model~Model#fetch
-	* @see module:enyo/RelationalModel~RelationalModel#fetch
-	* @see module:enyo/Collection~Collection#fetch
-	*
-	* @type {Number}
-	* @default 256
-	*/
-	ERROR_FETCHING: 0x0100,
-	
-	/**
-	* There was an error during destroy.
-	* 
-	* @see module:enyo/Model~Model#destroy
-	* @see module:enyo/RelationalModel~RelationalModel#destroy
-	* @see module:enyo/Collection~Collection#destroy
-	*
-	* @type {Number}
-	* @default 512
-	*/
-	ERROR_DESTROYING: 0x0200,
-	
-	/**
-	* An error was encountered for which there was no exact flag, or an invalid error was
-	* specified.
-	*
-	* @type {Number}
-	* @default 1024
-	*/
-	ERROR_UNKNOWN: 0x0400,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `BUSY`. By default, this is one of
-	* [FETCHING]{@link module:enyo/States.FETCHING}, [COMMITTING]{@link module:enyo/States.COMMITTING}, or
-	* [DESTROYING]{@link module:enyo/States.DESTROYING}. It may be extended to include additional
-	* values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
-	*
-	* @type {Number}
-	* @default 112
-	*/
-	BUSY: 0x0010 | 0x0020 | 0x0040,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `ERROR`. By default, this is one of
-	* [ERROR_FETCHING]{@link module:enyo/States.ERROR_FETCHING},
-	* [ERROR_COMMITTING]{@link module:enyo/States.ERROR_COMMITTING},
-	* [ERROR_DESTROYING]{@link module:enyo/States.ERROR_DESTROYING}, or
-	* [ERROR_UNKNOWN]{@link module:enyo/States.ERROR_UNKNOWN}. It may be extended to include
-	* additional values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
-	*
-	* @type {Number}
-	* @default 1920
-	*/
-	ERROR: 0x0080 | 0x0100 | 0x0200 | 0x0400,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `READY`. By default, this is the inverse of any
-	* values included in [BUSY]{@link module:enyo/States.BUSY} or [ERROR]{@link module:enyo/States.ERROR}.
-	*
-	* @type {Number}
-	* @default -2041
-	*/
-	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
-};
-
 }],'enyo/job':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -3769,7 +3769,7 @@ exports.cancelAnimationFrame = function(id) {
 */
 exports.subscribe = function(ctx,callback) {
 	var id = utils.uid("rAF");
-	core.obs[id]=utils.bindSafely(ctx, callback);
+	core.obs[id] = utils.bindSafely(ctx, callback);
 	return id;
 };
 /**
@@ -5312,7 +5312,270 @@ var
         scaleZ: 1,
         perspective: 1
     };
-},{'./dom':'enyo/dom','./utils':'enyo/utils','./transform':'enyo/transform'}],'enyo/HTMLStringDelegate':[function (module,exports,global,require,request){
+},{'./dom':'enyo/dom','./utils':'enyo/utils','./transform':'enyo/transform'}],'enyo/resolution':[function (module,exports,global,require,request){
+require('enyo');
+
+var
+	Dom = require('./dom');
+
+var _baseScreenType = 'standard',
+	_riRatio,
+	_screenType,
+	_screenTypes = [ {name: 'standard', pxPerRem: 16, width: global.innerWidth,  height: global.innerHeight, aspectRatioName: 'standard'} ],	// Assign one sane value in case defineScreenTypes is never run.
+	_screenTypeObject,
+	_oldScreenType;
+
+var getScreenTypeObject = function (type) {
+	type = type || _screenType;
+	if (_screenTypeObject && _screenTypeObject.name == type) {
+		return _screenTypeObject;
+	}
+	return _screenTypes.filter(function (elem) {
+		return (type == elem.name);
+	})[0];
+};
+
+/**
+* Resolution independence methods
+* @module enyo/resolution
+*/
+var ri = module.exports = {
+	/**
+	* Sets up screen resolution scaling capabilities by defining an array of all the screens
+	* being used. These should be listed in order from smallest to largest, according to
+	* width.
+	*
+	* The `name`, `pxPerRem`, `width`, and `aspectRatioName` properties are required for
+	* each screen type in the array. Setting `base: true` on a screen type marks it as the
+	* default resolution, upon which everything else will be based.
+	*
+	* Executing this method also initializes the rest of the resolution-independence code.
+	*
+	* ```
+	* var resolution = require('enyo/resolution');
+	*
+	* resolution.defineScreenTypes([
+	* 	{name: 'vga',     pxPerRem: 8,  width: 640,  height: 480,  aspectRatioName: 'standard'},
+	* 	{name: 'xga',     pxPerRem: 16, width: 1024, height: 768,  aspectRatioName: 'standard'},
+	* 	{name: 'hd',      pxPerRem: 16, width: 1280, height: 720,  aspectRatioName: 'hdtv'},
+	* 	{name: 'fhd',     pxPerRem: 24, width: 1920, height: 1080, aspectRatioName: 'hdtv', base: true},
+	* 	{name: 'uw-uxga', pxPerRem: 24, width: 2560, height: 1080, aspectRatioName: 'cinema'},
+	* 	{name: 'uhd',     pxPerRem: 48, width: 3840, height: 2160, aspectRatioName: 'hdtv'}
+	* ]);
+	* ```
+	*
+	* @param {Array} types - An array of objects containing screen configuration data, as in the
+	* preceding example.
+	* @public
+	*/
+	defineScreenTypes: function (types) {
+		_screenTypes = types;
+		for (var i = 0; i < _screenTypes.length; i++) {
+			if (_screenTypes[i]['base']) _baseScreenType = _screenTypes[i].name;
+		}
+		ri.init();
+	},
+
+	/**
+	* Fetches the name of the screen type that best matches the current screen size. The best
+	* match is defined as the screen type that is the closest to the screen resolution without
+	* going over. ("The Price is Right" style.)
+	*
+	* @param {Object} [rez] - Optional measurement scheme. Must include `height` and `width` properties.
+	* @returns {String} Screen type (e.g., `'fhd'`, `'uhd'`, etc.)
+	* @public
+	*/
+	getScreenType: function (rez) {
+		rez = rez || {
+			height: global.innerHeight,
+			width: global.innerWidth
+		};
+		var i,
+			types = _screenTypes,
+			bestMatch = types[types.length - 1].name;
+
+		// loop thorugh resolutions
+		for (i = types.length - 1; i >= 0; i--) {
+			// find the one that matches our current size or is smaller. default to the first.
+			if (rez.width <= types[i].width) {
+				bestMatch = types[i].name;
+			}
+		}
+		// return the name of the resolution if we find one.
+		return bestMatch;
+	},
+
+	/**
+	* @private
+	*/
+	updateScreenBodyClasses: function (type) {
+		type = type || _screenType;
+		if (_oldScreenType) {
+			Dom.removeClass(document.body, 'enyo-res-' + _oldScreenType.toLowerCase());
+			var oldScrObj = getScreenTypeObject(_oldScreenType);
+			if (oldScrObj && oldScrObj.aspectRatioName) {
+				Dom.removeClass(document.body, 'enyo-aspect-ratio-' + oldScrObj.aspectRatioName.toLowerCase());
+			}
+		}
+		if (type) {
+			Dom.addBodyClass('enyo-res-' + type.toLowerCase());
+			var scrObj = getScreenTypeObject(type);
+			if (scrObj.aspectRatioName) {
+				Dom.addBodyClass('enyo-aspect-ratio-' + scrObj.aspectRatioName.toLowerCase());
+			}
+			return type;
+		}
+	},
+
+	/**
+	* @private
+	*/
+	getRiRatio: function (type) {
+		type = type || _screenType;
+		if (type) {
+			var ratio = this.getUnitToPixelFactors(type) / this.getUnitToPixelFactors(_baseScreenType);
+			if (type == _screenType) {
+				// cache this if it's for our current screen type.
+				_riRatio = ratio;
+			}
+			return ratio;
+		}
+		return 1;
+	},
+
+	/**
+	* @private
+	*/
+	getUnitToPixelFactors: function (type) {
+		type = type || _screenType;
+		if (type) {
+			return getScreenTypeObject(type).pxPerRem;
+		}
+		return 1;
+	},
+
+	/**
+	* Calculates the aspect ratio of the specified screen type. If no screen type is provided,
+	* the current screen type is used.
+	*
+	* @param {String} type - Screen type whose aspect ratio will be calculated. If no screen
+	* type is provided, the current screen type is used.
+	* @returns {Number} The calculated screen ratio (e.g., `1.333`, `1.777`, `2.333`, etc.)
+	* @public
+	*/
+	getAspectRatio: function (type) {
+		var scrObj = getScreenTypeObject(type);
+		if (scrObj.width && scrObj.height) {
+			return (scrObj.width / scrObj.height);
+		}
+		return 1;
+	},
+
+	/**
+	* Returns the name of the aspect ratio for a specified screen type, or for the default
+	* screen type if none is provided.
+	*
+	* @param {String} type - Screen type whose aspect ratio name will be returned. If no
+	* screen type is provided, the current screen type will be used.
+	* @returns {String} The name of the screen type's aspect ratio
+	* @public
+	*/
+	getAspectRatioName: function (type) {
+		var scrObj = getScreenTypeObject(type);
+		 return scrObj.aspectRatioName || 'standard';
+	},
+
+	/**
+	* Takes a provided pixel value and performs a scaling operation based on the current
+	* screen type.
+	*
+	* @param {Number} px - The quantity of standard-resolution pixels to scale to the
+	* current screen resolution.
+	* @returns {Number} The scaled value based on the current screen scaling factor
+	* @public
+	*/
+	scale: function (px) {
+		return (_riRatio || this.getRiRatio()) * px;
+	},
+
+	/**
+	* The default configurable [options]{@link module:enyo/resolution.selectSrc#options}.
+	*
+	* @typedef {Object} module:enyo/resolution.selectSrcSrc
+	* @property {String} hd - HD / 720p Resolution image asset source URI/URL
+	* @property {String} fhd - FHD / 1080p Resolution image asset source URI/URL
+	* @property {String} uhd - UHD / 4K Resolution image asset source URI/URL
+	*/
+
+	/**
+	* Selects the ideal image asset from a set of assets, based on various screen
+	* resolutions: HD (720p), FHD (1080p), UHD (4k). When a `src` argument is
+	* provided, `selectSrc()` will choose the best image with respect to the current
+	* screen resolution. `src` may be either the traditional string, which will pass
+	* straight through, or a hash/object of screen types and their asset sources
+	* (keys:screen and values:src). The image sources will be used when the screen
+	* resolution is less than or equal to the provided screen types.
+	*
+	* ```
+	* // Take advantage of the multi-res mode
+	* var
+	* 	kind = require('enyo/kind'),
+	* 	Image = require('enyo/Image');
+	*
+	* {kind: Image, src: {
+	* 	'hd': 'http://lorempixel.com/64/64/city/1/',
+	* 	'fhd': 'http://lorempixel.com/128/128/city/1/',
+	* 	'uhd': 'http://lorempixel.com/256/256/city/1/'
+	* }, alt: 'Multi-res'},
+	*
+	* // Standard string `src`
+	* {kind: Image, src: http://lorempixel.com/128/128/city/1/', alt: 'Large'},
+	* ```
+	*
+	* @param {(String|module:enyo/resolution~selectSrcSrc)} src - A string containing
+	* a single image source or a key/value hash/object containing keys representing screen
+	* types (`'hd'`, `'fhd'`, `'uhd'`, etc.) and values containing the asset source for
+	* that target screen resolution.
+	* @returns {String} The chosen source, given the string or hash provided
+	* @public
+	*/
+	selectSrc: function (src) {
+		if (typeof src != 'string' && src) {
+			var i, t,
+				newSrc = src.fhd || src.uhd || src.hd,
+				types = _screenTypes;
+
+			// loop through resolutions
+			for (i = types.length - 1; i >= 0; i--) {
+				t = types[i].name;
+				if (_screenType == t && src[t]) newSrc = src[t];
+			}
+
+			src = newSrc;
+		}
+		return src;
+	},
+
+	/**
+	* This will need to be re-run any time the screen size changes, so all the values can be
+	* re-cached.
+	*
+	* @public
+	*/
+	// Later we can wire this up to a screen resize event so it doesn't need to be called manually.
+	init: function () {
+		_oldScreenType = _screenType;
+		_screenType = this.getScreenType();
+		_screenTypeObject = getScreenTypeObject();
+		this.updateScreenBodyClasses();
+		Dom.unitToPixelFactors.rem = this.getUnitToPixelFactors();
+		_riRatio = this.getRiRatio();
+	}
+};
+
+ri.init();
+
+},{'./dom':'enyo/dom'}],'enyo/HTMLStringDelegate':[function (module,exports,global,require,request){
 require('enyo');
 
 var
@@ -5582,269 +5845,6 @@ module.exports = {
 		}
 	}
 };
-
-},{'./dom':'enyo/dom'}],'enyo/resolution':[function (module,exports,global,require,request){
-require('enyo');
-
-var
-	Dom = require('./dom');
-
-var _baseScreenType = 'standard',
-	_riRatio,
-	_screenType,
-	_screenTypes = [ {name: 'standard', pxPerRem: 16, width: global.innerWidth,  height: global.innerHeight, aspectRatioName: 'standard'} ],	// Assign one sane value in case defineScreenTypes is never run.
-	_screenTypeObject,
-	_oldScreenType;
-
-var getScreenTypeObject = function (type) {
-	type = type || _screenType;
-	if (_screenTypeObject && _screenTypeObject.name == type) {
-		return _screenTypeObject;
-	}
-	return _screenTypes.filter(function (elem) {
-		return (type == elem.name);
-	})[0];
-};
-
-/**
-* Resolution independence methods
-* @module enyo/resolution
-*/
-var ri = module.exports = {
-	/**
-	* Sets up screen resolution scaling capabilities by defining an array of all the screens
-	* being used. These should be listed in order from smallest to largest, according to
-	* width.
-	*
-	* The `name`, `pxPerRem`, `width`, and `aspectRatioName` properties are required for
-	* each screen type in the array. Setting `base: true` on a screen type marks it as the
-	* default resolution, upon which everything else will be based.
-	*
-	* Executing this method also initializes the rest of the resolution-independence code.
-	*
-	* ```
-	* var resolution = require('enyo/resolution');
-	*
-	* resolution.defineScreenTypes([
-	* 	{name: 'vga',     pxPerRem: 8,  width: 640,  height: 480,  aspectRatioName: 'standard'},
-	* 	{name: 'xga',     pxPerRem: 16, width: 1024, height: 768,  aspectRatioName: 'standard'},
-	* 	{name: 'hd',      pxPerRem: 16, width: 1280, height: 720,  aspectRatioName: 'hdtv'},
-	* 	{name: 'fhd',     pxPerRem: 24, width: 1920, height: 1080, aspectRatioName: 'hdtv', base: true},
-	* 	{name: 'uw-uxga', pxPerRem: 24, width: 2560, height: 1080, aspectRatioName: 'cinema'},
-	* 	{name: 'uhd',     pxPerRem: 48, width: 3840, height: 2160, aspectRatioName: 'hdtv'}
-	* ]);
-	* ```
-	*
-	* @param {Array} types - An array of objects containing screen configuration data, as in the
-	* preceding example.
-	* @public
-	*/
-	defineScreenTypes: function (types) {
-		_screenTypes = types;
-		for (var i = 0; i < _screenTypes.length; i++) {
-			if (_screenTypes[i]['base']) _baseScreenType = _screenTypes[i].name;
-		}
-		ri.init();
-	},
-
-	/**
-	* Fetches the name of the screen type that best matches the current screen size. The best
-	* match is defined as the screen type that is the closest to the screen resolution without
-	* going over. ("The Price is Right" style.)
-	*
-	* @param {Object} [rez] - Optional measurement scheme. Must include `height` and `width` properties.
-	* @returns {String} Screen type (e.g., `'fhd'`, `'uhd'`, etc.)
-	* @public
-	*/
-	getScreenType: function (rez) {
-		rez = rez || {
-			height: global.innerHeight,
-			width: global.innerWidth
-		};
-		var i,
-			types = _screenTypes,
-			bestMatch = types[types.length - 1].name;
-
-		// loop thorugh resolutions
-		for (i = types.length - 1; i >= 0; i--) {
-			// find the one that matches our current size or is smaller. default to the first.
-			if (rez.width <= types[i].width) {
-				bestMatch = types[i].name;
-			}
-		}
-		// return the name of the resolution if we find one.
-		return bestMatch;
-	},
-
-	/**
-	* @private
-	*/
-	updateScreenBodyClasses: function (type) {
-		type = type || _screenType;
-		if (_oldScreenType) {
-			Dom.removeClass(document.body, 'enyo-res-' + _oldScreenType.toLowerCase());
-			var oldScrObj = getScreenTypeObject(_oldScreenType);
-			if (oldScrObj && oldScrObj.aspectRatioName) {
-				Dom.removeClass(document.body, 'enyo-aspect-ratio-' + oldScrObj.aspectRatioName.toLowerCase());
-			}
-		}
-		if (type) {
-			Dom.addBodyClass('enyo-res-' + type.toLowerCase());
-			var scrObj = getScreenTypeObject(type);
-			if (scrObj.aspectRatioName) {
-				Dom.addBodyClass('enyo-aspect-ratio-' + scrObj.aspectRatioName.toLowerCase());
-			}
-			return type;
-		}
-	},
-
-	/**
-	* @private
-	*/
-	getRiRatio: function (type) {
-		type = type || _screenType;
-		if (type) {
-			var ratio = this.getUnitToPixelFactors(type) / this.getUnitToPixelFactors(_baseScreenType);
-			if (type == _screenType) {
-				// cache this if it's for our current screen type.
-				_riRatio = ratio;
-			}
-			return ratio;
-		}
-		return 1;
-	},
-
-	/**
-	* @private
-	*/
-	getUnitToPixelFactors: function (type) {
-		type = type || _screenType;
-		if (type) {
-			return getScreenTypeObject(type).pxPerRem;
-		}
-		return 1;
-	},
-
-	/**
-	* Calculates the aspect ratio of the specified screen type. If no screen type is provided,
-	* the current screen type is used.
-	*
-	* @param {String} type - Screen type whose aspect ratio will be calculated. If no screen
-	* type is provided, the current screen type is used.
-	* @returns {Number} The calculated screen ratio (e.g., `1.333`, `1.777`, `2.333`, etc.)
-	* @public
-	*/
-	getAspectRatio: function (type) {
-		var scrObj = getScreenTypeObject(type);
-		if (scrObj.width && scrObj.height) {
-			return (scrObj.width / scrObj.height);
-		}
-		return 1;
-	},
-
-	/**
-	* Returns the name of the aspect ratio for a specified screen type, or for the default
-	* screen type if none is provided.
-	*
-	* @param {String} type - Screen type whose aspect ratio name will be returned. If no
-	* screen type is provided, the current screen type will be used.
-	* @returns {String} The name of the screen type's aspect ratio
-	* @public
-	*/
-	getAspectRatioName: function (type) {
-		var scrObj = getScreenTypeObject(type);
-		 return scrObj.aspectRatioName || 'standard';
-	},
-
-	/**
-	* Takes a provided pixel value and performs a scaling operation based on the current
-	* screen type.
-	*
-	* @param {Number} px - The quantity of standard-resolution pixels to scale to the
-	* current screen resolution.
-	* @returns {Number} The scaled value based on the current screen scaling factor
-	* @public
-	*/
-	scale: function (px) {
-		return (_riRatio || this.getRiRatio()) * px;
-	},
-
-	/**
-	* The default configurable [options]{@link module:enyo/resolution.selectSrc#options}.
-	*
-	* @typedef {Object} module:enyo/resolution.selectSrcSrc
-	* @property {String} hd - HD / 720p Resolution image asset source URI/URL
-	* @property {String} fhd - FHD / 1080p Resolution image asset source URI/URL
-	* @property {String} uhd - UHD / 4K Resolution image asset source URI/URL
-	*/
-
-	/**
-	* Selects the ideal image asset from a set of assets, based on various screen
-	* resolutions: HD (720p), FHD (1080p), UHD (4k). When a `src` argument is
-	* provided, `selectSrc()` will choose the best image with respect to the current
-	* screen resolution. `src` may be either the traditional string, which will pass
-	* straight through, or a hash/object of screen types and their asset sources
-	* (keys:screen and values:src). The image sources will be used when the screen
-	* resolution is less than or equal to the provided screen types.
-	*
-	* ```
-	* // Take advantage of the multi-res mode
-	* var
-	* 	kind = require('enyo/kind'),
-	* 	Image = require('enyo/Image');
-	*
-	* {kind: Image, src: {
-	* 	'hd': 'http://lorempixel.com/64/64/city/1/',
-	* 	'fhd': 'http://lorempixel.com/128/128/city/1/',
-	* 	'uhd': 'http://lorempixel.com/256/256/city/1/'
-	* }, alt: 'Multi-res'},
-	*
-	* // Standard string `src`
-	* {kind: Image, src: http://lorempixel.com/128/128/city/1/', alt: 'Large'},
-	* ```
-	*
-	* @param {(String|module:enyo/resolution~selectSrcSrc)} src - A string containing
-	* a single image source or a key/value hash/object containing keys representing screen
-	* types (`'hd'`, `'fhd'`, `'uhd'`, etc.) and values containing the asset source for
-	* that target screen resolution.
-	* @returns {String} The chosen source, given the string or hash provided
-	* @public
-	*/
-	selectSrc: function (src) {
-		if (typeof src != 'string' && src) {
-			var i, t,
-				newSrc = src.fhd || src.uhd || src.hd,
-				types = _screenTypes;
-
-			// loop through resolutions
-			for (i = types.length - 1; i >= 0; i--) {
-				t = types[i].name;
-				if (_screenType == t && src[t]) newSrc = src[t];
-			}
-
-			src = newSrc;
-		}
-		return src;
-	},
-
-	/**
-	* This will need to be re-run any time the screen size changes, so all the values can be
-	* re-cached.
-	*
-	* @public
-	*/
-	// Later we can wire this up to a screen resize event so it doesn't need to be called manually.
-	init: function () {
-		_oldScreenType = _screenType;
-		_screenType = this.getScreenType();
-		_screenTypeObject = getScreenTypeObject();
-		this.updateScreenBodyClasses();
-		Dom.unitToPixelFactors.rem = this.getUnitToPixelFactors();
-		_riRatio = this.getRiRatio();
-	}
-};
-
-ri.init();
 
 },{'./dom':'enyo/dom'}],'enyo/gesture/util':[function (module,exports,global,require,request){
 var
@@ -6959,56 +6959,112 @@ var
 	utils = require('./utils'),
 	animation = require('./animation');
 /**
-* Contains the declaration for the {@link module:enyo/scene~scene} kind.
-* @module enyo/scene
-*/
+ * Contains the declaration for the {@link module:enyo/scene~scene} of an animation.
+ * @module enyo/scene
+ */
 
 var _ts, _framerate = 16.6;
 
 var AnimationSupport = {
 	/**
-	* @public
-	*/
-	span: 0,
-	/**
-	* @private
-	*/
-	timeline: 0,
-	/**
-	* @public
-	*/
+	 * Reiterates the animation applied to the component.
+	 * It could be;
+	 * true, for infinite iteration
+	 * [Number], for how many times animation should iterate.
+	 * false, for no repetition
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	repeat: false,
 	/**
-	* @public
-	*/
+	 * Reduces GPU layers when the animation is completed.
+	 * As most of the transform animations happens on 
+	 * GPU layer, ans stays there even after the animations 
+	 * is completed. However, need to be carefull while using this
+	 * feature as if the component tends to animate regularly, this 
+	 * feature would be an overhead.
+	 * when true, GPU memory is freed
+	 *      false, layer remain intact.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	handleLayers: false,
 	/**
-	* @public
-	*/
+	 * Indentifies whether the animation is in progress or not.
+	 * when true, animation is in progress
+	 *      false, otherwise.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	animating: false,
 	/**
-	* @public
-	*/
+	 * Specifies the rate at which animation should be played.
+	 * When 0, animation is still
+	 *      1, animation plays with normal speed
+	 *      2, animation plays with 2X fast speed
+	 *      0.5, animation plays with slow speed at half of normal speed.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	direction: 0,
 	/**
-	* @public
-	*/
+	 * Specifies the rate at which animation should be played.
+	 * When 0, animation is still
+	 *      1, animation plays with normal speed
+	 *      2, animation plays with 2X fast speed
+	 *      0.5, animation plays with slow speed at half of normal speed.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	speed: 0,
 	/**
-	* @public
-	*/
+	 * Moves animation to a particular point within the span of 
+	 * an animation. Its value could lie between 0 and total duration
+	 * of the animation.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	seekInterval: 0,
 	/**
-	* @public
-	*/
+	 * Plays animation in sequence when set to true else 
+	 * its a parallal animation. This could be applied for
+	 * animation properties as well as for scenes within a 
+	 * scene.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	isSequence: true,
-
+	/**
+	 * Starts animation when scene is initialized, 
+	 * when this property is set to true. When false scene instance has
+	 * to be explicity played using 'play' api.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	autoPlay: true,
+	/**
+	 * The limit for an animation, which could be an instance
+	 * of time as well as distance.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	span: 0,
+	/**
+	 * The current time state of animation. This represents the
+	 * time at which animation is progressed upon. As this property 
+	 * directly impacts the state of animation, updating this value  
+	 * have direct effect on animation unless its animation is halted.
+	 * The range lies between 0 to overall span of animation.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	timeline: 0,
 	/**
 	 * Starts the animation of scene.
 	 * @public
 	 * @memberOf module:enyo/scene
 	 */
-	play: function () {
+	play: function() {
 		this.direction = this.speed = 1;
 		if (isNaN(this.timeline) || !this.timeline) {
 			this.timeline = 0;
@@ -7032,7 +7088,7 @@ var AnimationSupport = {
 	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	pause: function () {
+	pause: function() {
 		this.direction = 0;
 		return this;
 	},
@@ -7042,7 +7098,7 @@ var AnimationSupport = {
 	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	reverse: function () {
+	reverse: function() {
 		this.direction = -1;
 	},
 
@@ -7051,7 +7107,7 @@ var AnimationSupport = {
 	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	stop: function () {
+	stop: function() {
 		this.speed = 0;
 		this.timeline = 0;
 	},
@@ -7075,11 +7131,11 @@ var AnimationSupport = {
 	 * @public
 	 */
 	seekAnimate: function(seek) {
-		if (seek >= 0 ) {
+		if (seek >= 0) {
 			if (!this.animating)
 				this.play();
 			this.speed = 1;
-		}else{
+		} else {
 			this.speed = -1;
 		}
 		this.seekInterval = this.timeline + seek;
@@ -7106,16 +7162,42 @@ var AnimationSupport = {
 };
 
 /**
-* {@link module:enyo/Scene~Scene}
-*
-* @class Scene
-* @extends module:enyo/Scene~Scene
-* @param  {Object} actor      component which has to be animated
-* @param  {Object} props      properties of the component
-* @param  {Object} opts       additional options
-* @public
-*/
-var scene = module.exports = function (actor, props, opts) {
+ * Interface which accepts the animation details and returns a scene object
+ * @param  {Object} actor      component which has to be animated
+ * @param  {Object} props      properties of the component
+ * @param  {Object} opts       additional options
+ * @return {Object}            A scene object
+ */
+module.exports = function (proto, properties, opts) {
+	var i, ctor, ps, s;
+
+	if (!utils.isArray(proto)) {
+		ps = new scene(proto, properties, opts);
+	} else {
+		ps = new scene();
+		if (opts) utils.mixin(ps, opts);
+		for (i = 0;
+			(ctor = proto[i]); i++) {
+			s = new scene(ctor, properties);
+			ps.addScene(s);
+		}
+	}
+
+	ps.autoPlay && ps.play();
+	return ps;
+};
+
+/**
+ * {@link module:enyo/Scene~Scene}
+ *
+ * @class Scene
+ * @extends module:enyo/Scene~Scene
+ * @param  {Object} actor      component which has to be animated
+ * @param  {Object} props      properties of the component
+ * @param  {Object} opts       additional options
+ * @public
+ */
+function scene(actor, props, opts) {
 	this.id = utils.uid("@");
 	this.poses = [];
 	this.rolePlays = [];
@@ -7133,89 +7215,20 @@ var scene = module.exports = function (actor, props, opts) {
 			this.addAnimation(anim, anim.duration || 0, actor.duration);
 		}
 	}
-};
+}
+
 /**
  * Checks whether the scene is in a active state, which then can be animated
  * @return {Boolean} generated value in true or false. true in case of the parent scene
  * @memberOf module:enyo/scene
  * @public
  */
-scene.prototype.isActive = function () {
+scene.prototype.isActive = function() {
 	if (this.actor)
-		return this.actor.generated;
+		return this.actor.generated && !this.actor.destroyed;
 
 	// making sure parent scenes are always active.
 	return true;
-};
-/**
- * @private
- */
-function modify(pose, currentTm) {
-	pose.span = currentTm;
-	delete pose._endAnim;
-	pose._endAnim = pose.currentState;
-	return pose;
-}
-/**
- * @private
- */
-function currPose(poseArr, tm, properties) {
-	var currentTime = tm;
-	for (var i = 0; i < poseArr.length; i++) {
-
-		if (poseArr[i].begin <= currentTime && poseArr[i].span >= currentTime) { // check the current Pose
-			modify(poseArr[i], currentTime);
-			poseArr.splice((i + 1), poseArr.length - (i + 1));
-			poseArr[(i + 1)] = {
-				animate: properties,
-				begin: currentTime,
-				span: currentTime + properties.duration
-			};
-			break;
-		}
-	}
-}
-/**
- * @private
- */
-function hasPropCheck(poseArr, propCheck) {
-    var bool;
-    if (!utils.isArray(poseArr)) {
-        bool = poseArr[propCheck] ? true : false;
-    } else {
-        for (var i = 0; i < poseArr.length; i++) {
-            bool = poseArr[i][propCheck] ? true : false;
-            if (bool) break;
-        }
-    }
-    return bool;
-}
-/**
- * @private
- */
-function loopPose(poseArr, propCheck) {
-    var parentNode, currNode = poseArr;
-    if (hasPropCheck(poseArr, propCheck)) {
-        if (utils.isArray(poseArr)) {
-            for (var i = 0; i < poseArr.length; i++) {
-            	parentNode = currNode[i];
-                currNode = loopPose(currNode[i].poses, propCheck);
-            }
-        } else {
-        	parentNode = currNode;
-            currNode = loopPose(currNode.poses, propCheck);
-        }
-    }
-    return parentNode ? parentNode[propCheck] : parentNode;
-}
-
-/**
- * @private
- */
-function addInitialStyle(node) {
-	node = node.actor ? node : loopPose(node.poses, "actor");
-	node = node.actor || node;
-	node.addStyles(node.initialState);
 };
 
 /**
@@ -7225,12 +7238,10 @@ function addInitialStyle(node) {
  * @public
  */
 scene.prototype.setAnimation = function(properties) {
-    var currentPose, currentTime, posesList;
-    currentTime = this.timeline;
-    posesList = this.poses;
-    currentPose = loopPose(posesList, "poses");
-    currPose(currentPose, currentTime, properties);
+	var currentPose = findScene(this.poses, "poses");
+	setScene(currentPose, this.timeline, properties);
 };
+
 /**
  * Gets the current animation pose.
  * @param {Number} index       animation index
@@ -7241,6 +7252,7 @@ scene.prototype.setAnimation = function(properties) {
 scene.prototype.getAnimation = function(index) {
 	return index < 0 || this.poses[index];
 };
+
 /**
  * addAnimation is used for adding new animation with the passed properties at run time.
  * @param {Object} newProp  animation properties for new animation
@@ -7250,76 +7262,22 @@ scene.prototype.getAnimation = function(index) {
  * @public
  */
 scene.prototype.addAnimation = function(newProp, span, dur) {
-    var l = this.poses.length,
-        old = 0,
-        spanCache = span.toString().match(/%$/) ? (span.replace(/%$/, '') * dur / 100) : span,
-        newSpan = newProp instanceof this.constructor ? newProp.span : spanCache;
+	dur = dur || this.span;
+	var l = this.poses.length,
+		old = 0,
+		spanCache = span.toString().match(/%$/) ? (span.replace(/%$/, '') * dur / 100) : span,
+		newSpan = newProp instanceof this.constructor ? newProp.span : spanCache;
 
 	if (l > 0 && this.isSequence) {
-		old = this.poses[l-1].span;
+		old = this.poses[l - 1].span;
 		newSpan += old;
 	}
-	this.poses.push({animate: newProp, span: newSpan, begin: old });
+	this.poses.push({
+		animate: newProp,
+		span: newSpan,
+		begin: old
+	});
 	this.span = newSpan;
-};
-/**
- * @private
- */
-scene.prototype.action = function(ts, pose) {
-	var tm, i, poses,
-		dur = this.span;
-
-	if (this.isActive()) {
-		tm = rolePlay(ts, this);
-		if (isNaN(tm) || tm < 0) return pose;
-		else if (tm <= dur) {
-			poses = posesAtTime(this.poses, tm);
-			for (i = 0, pose;
-				(pose = poses[i]); i++) {
-				if (pose instanceof this.constructor) {
-					this.toScene(pose).action(ts);
-				} else {
-					update(pose, this.actor, (tm - pose.begin), (pose.span - pose.begin));
-				}
-			}
-			this.step && this.step(this.actor);
-		} else {
-			this.repeat = REPEAT[this.repeat] || this.repeat;
-			this.timeline = --this.repeat ? 0 : this.span;
-			if (this.repeat > 0) {
-				addInitialStyle(this);
-			} else {
-				if (FILLMODE[this.fillmode]) {
-					addInitialStyle(this);
-				}
-				this.cut();
-			}
-		}
-	}
-	return pose;
-};
-/**
- * @private
- */
-scene.prototype.cut = function () {
-	if (this.handleLayers) {
-		this.speed = 0;
-		if (this.active) {
-			this.active = false;
-			tween.halt(this.actor);
-		}
-	}
-	this.animating = false;
-	this.completed && this.completed(this.actor);
-};
-/**
- * @private
- */
-scene.prototype.toScene = function (scene) {
-	scene.speed = this.speed;
-	scene.direction = this.direction;
-	scene.handleLayers = this.handleLayers;
-	return scene;
 };
 
 /**
@@ -7334,7 +7292,7 @@ scene.prototype.addScene = function(sc) {
 		newSpan = sc instanceof this.constructor ? sc.span : 0;
 
 	if (l > 0 && this.isSequence) {
-		old = this.poses[l-1].span;
+		old = this.poses[l - 1].span;
 		newSpan += old;
 		sc.span = newSpan;
 		sc.begin = old;
@@ -7347,26 +7305,84 @@ scene.prototype.addScene = function(sc) {
 /**
  * @private
  */
-function loop (was, is) {
+function action(ts, pose) {
+	var tm, i, poses,
+		dur = this.span,
+		actor = this.actor;
+
+	if (this.isActive()) {
+		tm = rolePlay(ts, this);
+		if (isNaN(tm) || tm < 0) return pose;
+
+		poses = posesAtTime(this.poses, tm > dur ? dur : tm);
+		for (i = 0, pose;
+			(pose = poses[i]); i++) {
+			if (pose instanceof this.constructor) {
+				pose.speed = this.speed;
+				pose.direction = this.direction;
+				pose.handleLayers = this.handleLayers;
+				action.call(pose, ts);
+			} else {
+				update(pose, actor, (tm - pose.begin), (pose.span - pose.begin));
+			}
+		}
+		this.step && this.step(actor);
+
+		if (tm > dur) cut.call(this, actor);
+	}
+	return pose;
+}
+
+/**
+ * @private
+ */
+function cut(actor) {
+	this.repeat = REPEAT[this.repeat] || this.repeat;
+	this.timeline = --this.repeat ? 0 : this.span;
+
+	if (this.repeat > 0) {
+		applyInitialStyle(this);
+		return;
+	} else {
+		if (FILLMODE[this.fillmode]) {
+			applyInitialStyle(this);
+		}
+	}
+
+	if (this.handleLayers) {
+		this.speed = 0;
+		if (this.active) {
+			this.active = false;
+			tween.halt(actor);
+		}
+	}
+	this.animating = false;
+	this.completed && this.completed(actor);
+}
+
+/**
+ * @private
+ */
+function loop(was, is) {
 	if (this.animating) {
 		_ts = is - (was || 0);
 		_ts = (_ts > _framerate) ? _framerate : _ts;
-		this.action(_ts);
+		action.call(this, _ts);
 	} else if (this.actor && this.actor.destroyed) {
 		animation.unsubscribe(this.rAFId);
 	}
 }
+
 /**
  * @private
  */
-function update (pose, actor, since, dur) {
+function update(pose, actor, since, dur) {
 	var t;
 	if (!pose._startAnim) tween.init(actor, pose);
-
 	if (since < 0) since = 0;
 	if (since <= dur && dur !== 0) {
 		t = since / dur;
-		tween.step(actor, pose, t, dur);
+		tween.step(actor, pose, t > 0.98 ? 1 : t, dur);
 	} else {
 		tween.step(actor, pose, 1, dur);
 	}
@@ -7379,13 +7395,13 @@ function update (pose, actor, since, dur) {
  * @return {Number}       Returns the updated timeline of the actor
  * @private
  */
-function rolePlay (t, actor) {
+function rolePlay(t, actor) {
 	actor = actor || this;
 	t = t * actor.speed * actor.direction;
 
 	actor.timeline += t;
-	if(actor.seekInterval !== 0) {
-		if((actor.seekInterval-actor.timeline)*actor.speed < 0) {
+	if (actor.seekInterval !== 0) {
+		if ((actor.seekInterval - actor.timeline) * actor.speed < 0) {
 			actor.seekInterval = 0;
 			actor.speed = 0;
 		}
@@ -7411,46 +7427,88 @@ function posesAtTime(anims, span) {
 	return anims.filter(doFilter);
 }
 
-var
-    REPEAT = {
-        'true': Infinity,
-        'false': 0
-    },
-    FILLMODE = {
-        'backwards': true,
-        'forwards': false,
-        'default': false,
-        'none': false
-    };
 /**
- * Interface which accepts the animation details and returns a scene object
- * @param  {Array} proto      Actors 
- * @param  {Object} properties Animation Properties
- * @param  {number} duration   Animation duration
- * @param  {String} completed  Callback function on completion
- * @return {Object}            A scene object
+ * @private
  */
-function animate(proto, properties, opts) {
-    var i, ctor, ps, s;
-
-    if (!utils.isArray(proto)) {
-        return new scene(proto, properties, opts);
-    }
-
-    ps = new scene();
-    if (opts) utils.mixin(ps, opts);
-    for (i = 0;
-        (ctor = proto[i]); i++) {
-        s = new scene(ctor, properties);
-        ps.addScene(s);
-    }
-    if (opts.autoPlay) {
-        ps.play();
-    }
-    return ps;
+function modify(pose, currentTm) {
+	pose.span = currentTm;
+	delete pose._endAnim;
+	pose._endAnim = pose.currentState;
+	return pose;
 }
-module.exports = animate;
+/**
+ * @private
+ */
+function setScene(poseArr, tm, properties) {
+	var currentTime = tm;
+	for (var i = 0; i < poseArr.length; i++) {
 
+		if (poseArr[i].begin <= currentTime && poseArr[i].span >= currentTime) { // check the current Pose
+			modify(poseArr[i], currentTime);
+			poseArr.splice((i + 1), poseArr.length - (i + 1));
+			poseArr[(i + 1)] = {
+				animate: properties,
+				begin: currentTime,
+				span: currentTime + properties.duration
+			};
+			break;
+		}
+	}
+}
+/**
+ * @private
+ */
+function hasScene(poseArr, propCheck) {
+	var bool;
+	if (!utils.isArray(poseArr)) {
+		bool = poseArr[propCheck] ? true : false;
+	} else {
+		for (var i = 0; i < poseArr.length; i++) {
+			bool = poseArr[i][propCheck] ? true : false;
+			if (bool) break;
+		}
+	}
+	return bool;
+}
+/**
+ * @private
+ */
+function findScene(poseArr, propCheck) {
+	var parentNode, currNode = poseArr;
+	if (hasScene(poseArr, propCheck)) {
+		if (utils.isArray(poseArr)) {
+			for (var i = 0; i < poseArr.length; i++) {
+				parentNode = currNode[i];
+				currNode = findScene(currNode[i].poses, propCheck);
+			}
+		} else {
+			parentNode = currNode;
+			currNode = findScene(currNode.poses, propCheck);
+		}
+	}
+	return parentNode ? parentNode[propCheck] : parentNode;
+}
+
+/**
+ * @private
+ */
+function applyInitialStyle(node) {
+	node = node.actor ? node : findScene(node.poses, "actor");
+	node = node.actor || node;
+	node.addStyles(node.initialState);
+}
+
+var
+	REPEAT = {
+		'true': Infinity,
+		'false': 0
+	},
+	FILLMODE = {
+		'backwards': true,
+		'forwards': false,
+		'default': false,
+		'none': false
+	};
 },{'./tween':'enyo/tween','./utils':'enyo/utils','./animation':'enyo/animation'}],'enyo/kind':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -7962,9 +8020,10 @@ exports.createFromKind = function (nom, param) {
 	}
 };
 
-},{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/sceneSupport':[function (module,exports,global,require,request){
+},{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/SceneSupport':[function (module,exports,global,require,request){
 var
     kind = require('./kind'),
+    utils = require('./utils'),
     scene = require('./scene');
 
 var SceneSupport = {
@@ -7973,9 +8032,10 @@ var SceneSupport = {
         var sctor;
         return function() {
             sup.apply(this, arguments);
-
-            if (this.scene) {
-                sctor = new scene(this, this.scene);
+            sctor = this.scene;
+            if (sctor) {
+                sctor = scene(this, sctor);
+                utils.mixin(sctor, this.sceneOptions);
                 this.scene = sctor;
             }
         };
@@ -7984,7 +8044,31 @@ var SceneSupport = {
 
 module.exports = SceneSupport;
 
-},{'./kind':'enyo/kind','./scene':'enyo/scene'}],'enyo/Control/floatingLayer':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/sceneSupport':[function (module,exports,global,require,request){
+var
+    kind = require('./kind'),
+    utils = require('./utils'),
+    scene = require('./scene');
+
+var SceneSupport = {
+
+    create: kind.inherit(function(sup) {
+        var sctor;
+        return function() {
+            sup.apply(this, arguments);
+            sctor = this.scene;
+            if (sctor) {
+                sctor = scene(this, sctor);
+                utils.mixin(sctor, this.sceneOptions);
+                this.scene = sctor;
+            }
+        };
+    })
+};
+
+module.exports = SceneSupport;
+
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/Control/floatingLayer':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/Control/floatingLayer~FloatingLayer} singleton instance.
 * @module enyo/Control/floatingLayer
@@ -8984,7 +9068,96 @@ kind.extendMethods(p, {
 
 module.exports = p;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/Layout':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
+* @module enyo/Layout
+*/
+
+var
+	kind = require('./kind');
+
+/**
+* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
+* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
+* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
+* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
+* 
+* Derived kinds will usually provide their own
+* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
+* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
+* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
+* during control rendering, while `reflow()` is called when the associated
+* control is resized.
+*
+* @class Layout
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Layout~Layout.prototype */ {
+
+	name: 'enyo.Layout',
+
+	/**
+	* @private
+	*/
+	kind: null,
+
+	/** 
+	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
+	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
+	*
+	* @type {String}
+	* @default ''
+	* @public
+	*/
+	layoutClass: '',
+	
+	/**
+	* @private
+	*/
+	constructor: function (container) {
+		this.container = container;
+		if (container) {
+			container.addClass(this.layoutClass);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	destroy: function () {
+		if (this.container) {
+			this.container.removeClass(this.layoutClass);
+		}
+	},
+	
+	/**
+	* Called during static property layout (i.e., during rendering).
+	*
+	* @public
+	*/
+	flow: function () {
+	},
+
+	/** 
+	* Called during dynamic measuring layout (i.e., during a resize).
+	*
+	* May short-circuit and return `true` if the layout needs to be
+	* redone when the associated Control is next shown. This is useful
+	* for cases where the Control itself has `showing` set to `true`
+	* but an ancestor is hidden, and the layout is therefore unable to
+	* get accurate measurements of the Control or its children.
+	*
+	* @public
+	*/
+	reflow: function () {
+	}
+});
+
+},{'./kind':'enyo/kind'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/ApplicationSupport~ApplicationSupport} mixin.
 * @module enyo/ApplicationSupport

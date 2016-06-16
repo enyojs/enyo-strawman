@@ -1,112 +1,76 @@
 var
 	kind = require('enyo/kind'),
 	easing = require('enyo/easing'),
-	sceneSupport = require('enyo/sceneSupport'),
-	control = require('enyo/Control');
+	FittableColumns = require('layout/FittableColumns'),
+	SceneSupport = require('enyo/SceneSupport');
+
+var RedBalloon = kind({
+	classes: "balloon",
+	style: "background: url('./assets/balloon.png');",
+	mixins : [SceneSupport]
+});
+
+var BlueBalloon = kind({
+	classes: "balloon",
+	style: "background: url('./assets/balloon-blue.png');",
+	mixins : [SceneSupport]
+});
 
 module.exports = kind({
 	name: "EasingSample",
-	kind: control,
-	isAnimated: false,
-	classes: "enyo-fit ease-sample",
-	handlers: {
-		onmouseover: "easingAnim"
-	},
+	kind: FittableColumns,
+	classes: "ease-sample",
 	components: [
 		{
-			name: "linear",
-			mixins:[sceneSupport],
+			kind: RedBalloon,
 			content: "linear",
-			style: "left: 2%;",
-			scene: { translate: "0,-500, 0", duration: 3000 },
-			classes: "balloon red"
+			scene: { translate: "0,-480, 0", duration: 3000 }
 		}, {
-			name: "easeInBounce",
-			mixins:[sceneSupport],
+			kind: BlueBalloon,
 			content: "easeInBounce",
-			style: "left: 11%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInBounce },
-			classes: "balloon blue"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInBounce }
 		}, {
-			name: "easeOutBounce",
-			mixins:[sceneSupport],
+			kind: RedBalloon,
 			content: "easeOutBounce",
-			style: "left: 20%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutBounce },
-			classes: "balloon red"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutBounce }
 		}, {
-			name: "easeInOutBounce",
-			mixins:[sceneSupport],
+			kind: BlueBalloon,
 			content: "easeInOutBounce",
-			style: "left: 29%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutBounce },
-			classes: "balloon blue"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutBounce }
 		}, {
-			name: "easeInElastic",
-			mixins:[sceneSupport],
+			kind: RedBalloon,
 			content: "easeInElastic",
-			style: "left: 38%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInElastic },
-			classes: "balloon red"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInElastic }
 		}, {
-			name: "easeOutElastic",
-			mixins:[sceneSupport],
+			kind: BlueBalloon,
 			content: "easeOutElastic",
-			style: "left: 47%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutElastic },
-			classes: "balloon blue"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutElastic }
 		}, {
-			name: "easeInOutElastic",
-			mixins:[sceneSupport],
+			kind: RedBalloon,
 			content: "easeInOutElastic",
-			style: "left: 56%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutElastic },
-			classes: "balloon red"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutElastic }
 		}, {
-			name: "easeInExpo",
-			mixins:[sceneSupport],
+			kind: BlueBalloon,
 			content: "easeInExpo",
-			style: "left: 65%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInExpo },
-			classes: "balloon blue"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInExpo }
 		}, {
-			name: "easeOutExpo",
-			mixins:[sceneSupport],
+			kind: RedBalloon,
 			content: "easeOutExpo",
-			style: "left: 74%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutExpo },
-			classes: "balloon red"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeOutExpo }
 		}, {
-			name: "easeInOutExpo",
-			mixins:[sceneSupport],
+			kind: BlueBalloon,
 			content: "easeInOutExpo",
-			style: "left: 83%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutExpo },
-			classes: "balloon blue"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: easing.easeInOutExpo }
 		}, {
-			name: "cubicBezier",
-			mixins:[sceneSupport],
+			kind: RedBalloon,
 			content: "custom",
-			style: "left: 92%;",
 			/**
 			* Points on bezier-curve as at x% of time y% of distance cover
 			* Here, the bezier-curve should be as defined
 			* On 30% of time, 50% of distance should cover
 			* On 80% of time, 10% of distance in opposite direction should cover
 			*/
-			scene: { translate: "0,-500, 0", duration: 3000, ease: { 30: 50, 80: -10 } },
-			classes: "balloon red"
+			scene: { translate: "0,-480, 0", duration: 3000, ease: { 30: 50, 80: -10 } }
 		}
-	],
-	create: kind.inherit(function(sup) {
-		return function() {
-			sup.apply(this, arguments);
-			if (!this.isAnimated) {
-				for (var c, i = 0; (c = this.controls[i]); i++) {
-					c.scene.play();
-				}
-				this.isAnimated = true;
-			}
-		};
-	}),
+	]
 });
