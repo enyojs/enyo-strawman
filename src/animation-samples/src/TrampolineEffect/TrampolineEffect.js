@@ -5,10 +5,10 @@ var
     ease = require("enyo/easing");
 
 var smallerBox = [
-    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: 1000 },
-    { translate: "0,425,0", scale: "2,0.5,1", duration: 500 },
-    { translate: "0,300,0", scale: "1,1,1", duration: 500 },
-    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: 1000 }
+    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: '33%' },
+    { translate: "0,425,0", scale: "2,0.5,1", duration: '17%' },
+    { translate: "0,300,0", scale: "1,1,1", duration: '17%' },
+    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: '33%' }
 ];
 
 var biggerBox = [
@@ -26,6 +26,7 @@ module.exports = kind({
             name: "smaller",
             classes: "smaller",
             scene: smallerBox,
+            duration: 3000,
             mixins: [sceneSupport],
             sceneOptions: { repeat: true }
         },

@@ -91,52 +91,6 @@
 
 module.exports = (global.enyo && global.enyo.options) || {};
 
-}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
-
-
-var PathResolverFactory = module.exports = function() {
-	this.paths = {};
-	this.pathNames = [];
-};
-
-PathResolverFactory.prototype = {
-	addPath: function(inName, inPath) {
-		this.paths[inName] = inPath;
-		this.pathNames.push(inName);
-		this.pathNames.sort(function(a, b) {
-			return b.length - a.length;
-		});
-		return inPath;
-	},
-	addPaths: function(inPaths) {
-		if (inPaths) {
-			for (var n in inPaths) {
-				this.addPath(n, inPaths[n]);
-			}
-		}
-	},
-	includeTrailingSlash: function(inPath) {
-		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
-	},
-	// replace macros of the form $pathname with the mapped value of paths.pathname
-	rewrite: function (inPath) {
-		var working, its = this.includeTrailingSlash, paths = this.paths;
-		var fn = function(macro, name) {
-			working = true;
-			return its(paths[name]) || '';
-		};
-		var result = inPath;
-		do {
-			working = false;
-			for (var i=0; i<this.pathNames.length; i++) {
-				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
-				result = result.replace(regex, fn);
-			}
-		} while (working);
-		return result;
-	}
-};
-
 }],'enyo/easing':[function (module,exports,global,require,request){
 /**
 * Contains set of interpolation functions for animations, similar in function to CSS3 transitions.
@@ -216,7 +170,7 @@ var easing = module.exports = {
 	* Halfway accelerating and then deaccelerating with fourth-degree polynomial
 	* @public
 	*/
-	easeInOutQuart: function(t) {
+	quartInOut: function(t) {
 		if ((t *= 2) < 1) return 0.5 * t * t * t * t;
 		return -0.5 * ((t -= 2) * t * t * t - 2);
 	},
@@ -419,6 +373,52 @@ var easing = module.exports = {
 		return 0.5 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2);
 	}
 };
+}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
+
+
+var PathResolverFactory = module.exports = function() {
+	this.paths = {};
+	this.pathNames = [];
+};
+
+PathResolverFactory.prototype = {
+	addPath: function(inName, inPath) {
+		this.paths[inName] = inPath;
+		this.pathNames.push(inName);
+		this.pathNames.sort(function(a, b) {
+			return b.length - a.length;
+		});
+		return inPath;
+	},
+	addPaths: function(inPaths) {
+		if (inPaths) {
+			for (var n in inPaths) {
+				this.addPath(n, inPaths[n]);
+			}
+		}
+	},
+	includeTrailingSlash: function(inPath) {
+		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
+	},
+	// replace macros of the form $pathname with the mapped value of paths.pathname
+	rewrite: function (inPath) {
+		var working, its = this.includeTrailingSlash, paths = this.paths;
+		var fn = function(macro, name) {
+			working = true;
+			return its(paths[name]) || '';
+		};
+		var result = inPath;
+		do {
+			working = false;
+			for (var i=0; i<this.pathNames.length; i++) {
+				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
+				result = result.replace(regex, fn);
+			}
+		} while (working);
+		return result;
+	}
+};
+
 }],'enyo':[function (module,exports,global,require,request){
 'use strict';
 
@@ -1905,6 +1905,408 @@ module.exports = {
 	}
 };
 
+}],'enyo/ModelList':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/ModelList~ModelList} Object.
+* @module enyo/ModelList
+*/
+
+/**
+* A special type of [array]{@glossary Array} used internally by data layer
+* [kinds]{@glossary kind}.
+*
+* @class ModelList
+* @protected
+*/
+function ModelList (args) {
+	Array.call(this);
+	this.table = {};
+	if (args) this.add(args, 0);
+}
+
+ModelList.prototype = Object.create(Array.prototype);
+
+module.exports = ModelList;
+
+/**
+* Adds [models]{@link module:enyo/Model~Model} to the [list]{@link module:enyo/ModelList~ModelList}, updating an
+* internal table by the model's [primaryKey]{@link module:enyo/Model~Model#primaryKey} (if
+* possible) and its [euid]{@glossary euid}.
+*
+* @name module:enyo/ModelList~ModelList#add
+* @method
+* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
+*	to add to the [list]{@link module:enyo/ModelList~ModelList}.
+* @param {Number} [idx] - If provided and valid, the models will be
+* [spliced]{@glossary Array.splice} into the list at this position.
+* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of models
+* that were actually added to the list.
+* @protected
+*/
+ModelList.prototype.add = function (models, idx) {
+	var table = this.table,
+		added = [],
+		model,
+		euid,
+		id,
+		i = 0;
+	
+	if (models && !(models instanceof Array)) models = [models];
+	
+	for (; (model = models[i]); ++i) {
+		euid = model.euid;
+		
+		// we only want to actually add models we haven't already seen...
+		if (!table[euid]) {
+			id = model.get(model.primaryKey);
+		
+			if (id != null) {
+			
+				// @TODO: For now if we already have an entry for a model by its supposed unique
+				// identifier but it isn't the instance we just found we can't just
+				// overwrite the previous instance so we mark the new one as headless
+				if (table[id] && table[id] !== model) model.headless = true;
+				// otherwise we do the normal thing and add the entry for it
+				else table[id] = model; 
+			}
+		
+			// nomatter what though the euid should be unique
+			table[euid] = model;
+			added.push(model);
+		}
+	}
+	
+	if (added.length) {
+		idx = !isNaN(idx) ? Math.min(Math.max(0, idx), this.length) : 0;
+		added.unshift(0);
+		added.unshift(idx);
+		this.splice.apply(this, added);
+	}
+	
+	if (added.length > 0) added = added.slice(2);
+	added.at = idx;
+	
+	return added;
+};
+
+/**
+* Removes the specified [models]{@link module:enyo/Model~Model} from the [list]{@link module:enyo/ModelList~ModelList}.
+*
+* @name module:enyo/ModelList~ModelList#remove
+* @method
+* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
+*	to remove from the [list]{@link module:enyo/ModelList~ModelList}.
+* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of
+*	models that were actually removed from the list.
+* @protected
+*/
+ModelList.prototype.remove = function (models) {
+	var table = this.table,
+		removed = [],
+		model,
+		idx,
+		id,
+		i,
+		
+		// these modifications are made to allow more performant logic to take place in
+		// views that may need to know this information
+		low = Infinity,
+		high = -1,
+		indices = [];
+	
+	if (models && !(models instanceof Array)) models = [models];
+	
+	// we start at the end to ensure that you could even pass the list itself
+	// and it will work
+	for (i = models.length - 1; (model = models[i]); --i) {
+		table[model.euid] = null;
+		id = model.get(model.primaryKey);
+		
+		if (id != null) table[id] = null;
+		
+		idx = models === this ? i : this.indexOf(model);
+		if (idx > -1) {				
+			if (idx < low) low = idx;
+			if (idx > high) high = idx;
+			
+			this.splice(idx, 1);
+			removed.push(model);
+			indices.push(idx);
+		}
+	}
+	
+	// since this is a separate array we will add this property to it for internal use only
+	removed.low = low;
+	removed.high = high;
+	removed.indices = indices;
+	
+	return removed;
+};
+
+/**
+* Determines whether the specified [model]{@link module:enyo/Model~Model} is present in the
+* [list]{@link module:enyo/ModelList~ModelList}. Will attempt to resolve a [string]{@glossary String}
+* or [number]{@glossary Number} to either a [primaryKey]{@link module:enyo/Model~Model#primaryKey}
+* or [euid]{@glossary euid}.
+*
+* @name module:enyo/ModelList~ModelList#has
+* @method
+* @param {(module:enyo/Model~Model|String|Number)} model An identifier representing either the
+*	[model]{@link module:enyo/Model~Model} instance, its [primaryKey]{@link module:enyo/Model~Model#primaryKey},
+* or its [euid]{@glossary euid}.
+* @returns {Boolean} Whether or not the model is present in the [list]{@link module:enyo/ModelList~ModelList}.
+* @protected
+*/
+ModelList.prototype.has = function (model) {
+	if (model === undefined || model === null) return false;
+	
+	if (typeof model == 'string' || typeof model == 'number') {
+		return !! this.table[model];
+	} else return this.indexOf(model) > -1;
+};
+
+/**
+* Given an identifier, attempts to return the associated [model]{@link module:enyo/Model~Model}.
+* The identifier should be a [string]{@glossary String} or [number]{@glossary Number}.
+*
+* @name module:enyo/ModelList~ModelList#resolve
+* @method
+* @param {(String|Number)} model - An identifier (either a
+*	[primaryKey]{@link module:enyo/Model~Model#primaryKey} or an [euid]{@glossary euid}).
+* @returns {(undefined|null|module:enyo/Model~Model)} If the identifier could be resolved, a
+*	[model]{@link module:enyo/Model~Model} instance is returned; otherwise, `undefined`, or
+* possibly `null` if the model once belonged to the [list]{@link module:enyo/ModelList~ModelList}.
+* @protected
+*/
+ModelList.prototype.resolve = function (model) {
+	if (typeof model == 'string' || typeof model == 'number') {
+		return this.table[model];
+	} else return model;
+};
+
+/**
+* Copies the current [list]{@link module:enyo/ModelList~ModelList} and returns an shallow copy. This
+* method differs from the [slice()]{@glossary Array.slice} method inherited from
+* native [Array]{@glossary Array} in that this returns an {@link module:enyo/ModelList~ModelList},
+* while `slice()` returns an array.
+* 
+* @name module:enyo/ModelList~ModelList#copy
+* @method
+* @returns {module:enyo/ModelList~ModelList} A shallow copy of the callee.
+* @protected
+*/
+ModelList.prototype.copy = function () {
+	return new ModelList(this);
+};
+
+}],'enyo/States':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Shared values for various [kinds]{@glossary kind} used to indicate a state or
+* (multiple, simultaneous) states. These flags are binary values represented by
+* hexadecimal numerals. They may be modified and compared (or even extended) using
+* [bitwise operations]{@glossary bitwise} or various
+* [API methods]{@link module:enyo/StateSupport~StateSupport} available to the kinds that support them.
+* Make sure to explore the documentation for individual kinds, as they may have
+* specific uses for a given flag.
+* 
+* As a cursory overview, here is a table of the values already declared by built-in flags.
+* Each hexadecimal numeral represents a unique power of 2 in binary, from which we can use
+* [bitwise masks]{@glossary bitwise} to determine if a particular value is present.
+* 
+* ```javascript
+* HEX             DEC             BIN
+* 0x0001             1            0000 0000 0000 0001
+* 0x0002             2            0000 0000 0000 0010
+* 0x0004             4            0000 0000 0000 0100
+* 0x0008             8            0000 0000 0000 1000
+* 0x0010            16            0000 0000 0001 0000
+* 0x0020            32            0000 0000 0010 0000
+* 0x0040            64            0000 0000 0100 0000
+* 0x0080           128            0000 0000 1000 0000
+* 0x0100           256            0000 0001 0000 0000
+* 0x0200           512            0000 0010 0000 0000
+* 0x0400          1024            0000 0100 0000 0000
+* 0x0800          2048            0000 1000 0000 0000
+* 
+* ...
+* 
+* 0x1000          4096            0001 0000 0000 0000
+* ```
+*
+* As a hint, converting (HEX) 0x0800 to DEC do:
+*
+* ```javascript
+* (0*16^3) + (8*16^2) + (0*16^1) + (0*16^0) = 2048
+* ```
+*
+* As a hint, converting (HEX) 0x0800 to BIN do:
+*
+* ```javascript
+* 0    8    0    0    (HEX)
+* ---- ---- ---- ----
+* 0000 1000 0000 0000 (BIN)
+* ```
+*
+* @module enyo/States
+* @public
+* @see module:enyo/StateSupport~StateSupport
+*/
+module.exports = {
+	
+	/**
+	* Only exists in the client and was created during the runtime of the
+	* [application]{@glossary application}.
+	*
+	* @type {Number}
+	* @default 1
+	*/
+	NEW: 0x0001,
+	
+	/**
+	* Has been modified locally only.
+	*
+	* @type {Number}
+	* @default 2
+	*/
+	DIRTY: 0x0002,
+	
+	/**
+	* Has not been modified locally.
+	*
+	* @type {Number}
+	* @default 4
+	*/
+	CLEAN: 0x0004,
+	
+	/**
+	* Can no longer be modified.
+	* @type {Number}
+	* @default 8
+	*/
+	DESTROYED: 0x0008,
+	
+	/**
+	* Currently attempting to fetch.
+	* 
+	* @see module:enyo/Model~Model#fetch
+	* @see module:enyo/RelationalModel~RelationalModel#fetch
+	* @see module:enyo/Collection~Collection#fetch
+	*
+	* @type {Number}
+	* @default 16
+	*/
+	FETCHING: 0x0010,
+	
+	/**
+	* Currently attempting to commit.
+	* 
+	* @see module:enyo/Model~Model#commit
+	* @see module:enyo/RelationalModel~RelationalModel#commit
+	* @see module:enyo/Collection~Collection#commit
+	*
+	* @type {Number}
+	* @default 32
+	*/
+	COMMITTING: 0x0020,
+	
+	/**
+	* Currently attempting to destroy.
+	* 
+	* @see module:enyo/Model~Model#destroy
+	* @see module:enyo/RelationalModel~RelationalModel#destroy
+	* @see module:enyo/Collection~Collection#destroy
+	*
+	* @type {Number}
+	* @default 64
+	*/
+	DESTROYING: 0x0040,
+	
+	/**
+	* There was an error during commit.
+	* 
+	* @see module:enyo/Model~Model#commit
+	* @see module:enyo/RelationalModel~RelationalModel#commit
+	* @see module:enyo/Collection~Collection#commit
+	*
+	* @type {Number}
+	* @default 128
+	*/
+	ERROR_COMMITTING: 0x0080,
+	
+	/**
+	* There was an error during fetch.
+	* 
+	* @see module:enyo/Model~Model#fetch
+	* @see module:enyo/RelationalModel~RelationalModel#fetch
+	* @see module:enyo/Collection~Collection#fetch
+	*
+	* @type {Number}
+	* @default 256
+	*/
+	ERROR_FETCHING: 0x0100,
+	
+	/**
+	* There was an error during destroy.
+	* 
+	* @see module:enyo/Model~Model#destroy
+	* @see module:enyo/RelationalModel~RelationalModel#destroy
+	* @see module:enyo/Collection~Collection#destroy
+	*
+	* @type {Number}
+	* @default 512
+	*/
+	ERROR_DESTROYING: 0x0200,
+	
+	/**
+	* An error was encountered for which there was no exact flag, or an invalid error was
+	* specified.
+	*
+	* @type {Number}
+	* @default 1024
+	*/
+	ERROR_UNKNOWN: 0x0400,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `BUSY`. By default, this is one of
+	* [FETCHING]{@link module:enyo/States.FETCHING}, [COMMITTING]{@link module:enyo/States.COMMITTING}, or
+	* [DESTROYING]{@link module:enyo/States.DESTROYING}. It may be extended to include additional
+	* values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
+	*
+	* @type {Number}
+	* @default 112
+	*/
+	BUSY: 0x0010 | 0x0020 | 0x0040,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `ERROR`. By default, this is one of
+	* [ERROR_FETCHING]{@link module:enyo/States.ERROR_FETCHING},
+	* [ERROR_COMMITTING]{@link module:enyo/States.ERROR_COMMITTING},
+	* [ERROR_DESTROYING]{@link module:enyo/States.ERROR_DESTROYING}, or
+	* [ERROR_UNKNOWN]{@link module:enyo/States.ERROR_UNKNOWN}. It may be extended to include
+	* additional values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
+	*
+	* @type {Number}
+	* @default 1920
+	*/
+	ERROR: 0x0080 | 0x0100 | 0x0200 | 0x0400,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `READY`. By default, this is the inverse of any
+	* values included in [BUSY]{@link module:enyo/States.BUSY} or [ERROR]{@link module:enyo/States.ERROR}.
+	*
+	* @type {Number}
+	* @default -2041
+	*/
+	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
+};
+
 }],'enyo/transform':[function (module,exports,global,require,request){
 /**
 * Contains the declaration for the {@link module:enyo/transform~transform} kind.
@@ -2641,408 +3043,6 @@ var quaternion = exports.Quaternion = {
 	}
 	//TODO: Acheive the same fucntionality for other 11 choices XYX, XZX, XZY, YXY, YXZ, YZX, YZY, ZXY, ZXZ, ZYX, ZYZ 
 };
-}],'enyo/ModelList':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/ModelList~ModelList} Object.
-* @module enyo/ModelList
-*/
-
-/**
-* A special type of [array]{@glossary Array} used internally by data layer
-* [kinds]{@glossary kind}.
-*
-* @class ModelList
-* @protected
-*/
-function ModelList (args) {
-	Array.call(this);
-	this.table = {};
-	if (args) this.add(args, 0);
-}
-
-ModelList.prototype = Object.create(Array.prototype);
-
-module.exports = ModelList;
-
-/**
-* Adds [models]{@link module:enyo/Model~Model} to the [list]{@link module:enyo/ModelList~ModelList}, updating an
-* internal table by the model's [primaryKey]{@link module:enyo/Model~Model#primaryKey} (if
-* possible) and its [euid]{@glossary euid}.
-*
-* @name module:enyo/ModelList~ModelList#add
-* @method
-* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
-*	to add to the [list]{@link module:enyo/ModelList~ModelList}.
-* @param {Number} [idx] - If provided and valid, the models will be
-* [spliced]{@glossary Array.splice} into the list at this position.
-* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of models
-* that were actually added to the list.
-* @protected
-*/
-ModelList.prototype.add = function (models, idx) {
-	var table = this.table,
-		added = [],
-		model,
-		euid,
-		id,
-		i = 0;
-	
-	if (models && !(models instanceof Array)) models = [models];
-	
-	for (; (model = models[i]); ++i) {
-		euid = model.euid;
-		
-		// we only want to actually add models we haven't already seen...
-		if (!table[euid]) {
-			id = model.get(model.primaryKey);
-		
-			if (id != null) {
-			
-				// @TODO: For now if we already have an entry for a model by its supposed unique
-				// identifier but it isn't the instance we just found we can't just
-				// overwrite the previous instance so we mark the new one as headless
-				if (table[id] && table[id] !== model) model.headless = true;
-				// otherwise we do the normal thing and add the entry for it
-				else table[id] = model; 
-			}
-		
-			// nomatter what though the euid should be unique
-			table[euid] = model;
-			added.push(model);
-		}
-	}
-	
-	if (added.length) {
-		idx = !isNaN(idx) ? Math.min(Math.max(0, idx), this.length) : 0;
-		added.unshift(0);
-		added.unshift(idx);
-		this.splice.apply(this, added);
-	}
-	
-	if (added.length > 0) added = added.slice(2);
-	added.at = idx;
-	
-	return added;
-};
-
-/**
-* Removes the specified [models]{@link module:enyo/Model~Model} from the [list]{@link module:enyo/ModelList~ModelList}.
-*
-* @name module:enyo/ModelList~ModelList#remove
-* @method
-* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
-*	to remove from the [list]{@link module:enyo/ModelList~ModelList}.
-* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of
-*	models that were actually removed from the list.
-* @protected
-*/
-ModelList.prototype.remove = function (models) {
-	var table = this.table,
-		removed = [],
-		model,
-		idx,
-		id,
-		i,
-		
-		// these modifications are made to allow more performant logic to take place in
-		// views that may need to know this information
-		low = Infinity,
-		high = -1,
-		indices = [];
-	
-	if (models && !(models instanceof Array)) models = [models];
-	
-	// we start at the end to ensure that you could even pass the list itself
-	// and it will work
-	for (i = models.length - 1; (model = models[i]); --i) {
-		table[model.euid] = null;
-		id = model.get(model.primaryKey);
-		
-		if (id != null) table[id] = null;
-		
-		idx = models === this ? i : this.indexOf(model);
-		if (idx > -1) {				
-			if (idx < low) low = idx;
-			if (idx > high) high = idx;
-			
-			this.splice(idx, 1);
-			removed.push(model);
-			indices.push(idx);
-		}
-	}
-	
-	// since this is a separate array we will add this property to it for internal use only
-	removed.low = low;
-	removed.high = high;
-	removed.indices = indices;
-	
-	return removed;
-};
-
-/**
-* Determines whether the specified [model]{@link module:enyo/Model~Model} is present in the
-* [list]{@link module:enyo/ModelList~ModelList}. Will attempt to resolve a [string]{@glossary String}
-* or [number]{@glossary Number} to either a [primaryKey]{@link module:enyo/Model~Model#primaryKey}
-* or [euid]{@glossary euid}.
-*
-* @name module:enyo/ModelList~ModelList#has
-* @method
-* @param {(module:enyo/Model~Model|String|Number)} model An identifier representing either the
-*	[model]{@link module:enyo/Model~Model} instance, its [primaryKey]{@link module:enyo/Model~Model#primaryKey},
-* or its [euid]{@glossary euid}.
-* @returns {Boolean} Whether or not the model is present in the [list]{@link module:enyo/ModelList~ModelList}.
-* @protected
-*/
-ModelList.prototype.has = function (model) {
-	if (model === undefined || model === null) return false;
-	
-	if (typeof model == 'string' || typeof model == 'number') {
-		return !! this.table[model];
-	} else return this.indexOf(model) > -1;
-};
-
-/**
-* Given an identifier, attempts to return the associated [model]{@link module:enyo/Model~Model}.
-* The identifier should be a [string]{@glossary String} or [number]{@glossary Number}.
-*
-* @name module:enyo/ModelList~ModelList#resolve
-* @method
-* @param {(String|Number)} model - An identifier (either a
-*	[primaryKey]{@link module:enyo/Model~Model#primaryKey} or an [euid]{@glossary euid}).
-* @returns {(undefined|null|module:enyo/Model~Model)} If the identifier could be resolved, a
-*	[model]{@link module:enyo/Model~Model} instance is returned; otherwise, `undefined`, or
-* possibly `null` if the model once belonged to the [list]{@link module:enyo/ModelList~ModelList}.
-* @protected
-*/
-ModelList.prototype.resolve = function (model) {
-	if (typeof model == 'string' || typeof model == 'number') {
-		return this.table[model];
-	} else return model;
-};
-
-/**
-* Copies the current [list]{@link module:enyo/ModelList~ModelList} and returns an shallow copy. This
-* method differs from the [slice()]{@glossary Array.slice} method inherited from
-* native [Array]{@glossary Array} in that this returns an {@link module:enyo/ModelList~ModelList},
-* while `slice()` returns an array.
-* 
-* @name module:enyo/ModelList~ModelList#copy
-* @method
-* @returns {module:enyo/ModelList~ModelList} A shallow copy of the callee.
-* @protected
-*/
-ModelList.prototype.copy = function () {
-	return new ModelList(this);
-};
-
-}],'enyo/States':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Shared values for various [kinds]{@glossary kind} used to indicate a state or
-* (multiple, simultaneous) states. These flags are binary values represented by
-* hexadecimal numerals. They may be modified and compared (or even extended) using
-* [bitwise operations]{@glossary bitwise} or various
-* [API methods]{@link module:enyo/StateSupport~StateSupport} available to the kinds that support them.
-* Make sure to explore the documentation for individual kinds, as they may have
-* specific uses for a given flag.
-* 
-* As a cursory overview, here is a table of the values already declared by built-in flags.
-* Each hexadecimal numeral represents a unique power of 2 in binary, from which we can use
-* [bitwise masks]{@glossary bitwise} to determine if a particular value is present.
-* 
-* ```javascript
-* HEX             DEC             BIN
-* 0x0001             1            0000 0000 0000 0001
-* 0x0002             2            0000 0000 0000 0010
-* 0x0004             4            0000 0000 0000 0100
-* 0x0008             8            0000 0000 0000 1000
-* 0x0010            16            0000 0000 0001 0000
-* 0x0020            32            0000 0000 0010 0000
-* 0x0040            64            0000 0000 0100 0000
-* 0x0080           128            0000 0000 1000 0000
-* 0x0100           256            0000 0001 0000 0000
-* 0x0200           512            0000 0010 0000 0000
-* 0x0400          1024            0000 0100 0000 0000
-* 0x0800          2048            0000 1000 0000 0000
-* 
-* ...
-* 
-* 0x1000          4096            0001 0000 0000 0000
-* ```
-*
-* As a hint, converting (HEX) 0x0800 to DEC do:
-*
-* ```javascript
-* (0*16^3) + (8*16^2) + (0*16^1) + (0*16^0) = 2048
-* ```
-*
-* As a hint, converting (HEX) 0x0800 to BIN do:
-*
-* ```javascript
-* 0    8    0    0    (HEX)
-* ---- ---- ---- ----
-* 0000 1000 0000 0000 (BIN)
-* ```
-*
-* @module enyo/States
-* @public
-* @see module:enyo/StateSupport~StateSupport
-*/
-module.exports = {
-	
-	/**
-	* Only exists in the client and was created during the runtime of the
-	* [application]{@glossary application}.
-	*
-	* @type {Number}
-	* @default 1
-	*/
-	NEW: 0x0001,
-	
-	/**
-	* Has been modified locally only.
-	*
-	* @type {Number}
-	* @default 2
-	*/
-	DIRTY: 0x0002,
-	
-	/**
-	* Has not been modified locally.
-	*
-	* @type {Number}
-	* @default 4
-	*/
-	CLEAN: 0x0004,
-	
-	/**
-	* Can no longer be modified.
-	* @type {Number}
-	* @default 8
-	*/
-	DESTROYED: 0x0008,
-	
-	/**
-	* Currently attempting to fetch.
-	* 
-	* @see module:enyo/Model~Model#fetch
-	* @see module:enyo/RelationalModel~RelationalModel#fetch
-	* @see module:enyo/Collection~Collection#fetch
-	*
-	* @type {Number}
-	* @default 16
-	*/
-	FETCHING: 0x0010,
-	
-	/**
-	* Currently attempting to commit.
-	* 
-	* @see module:enyo/Model~Model#commit
-	* @see module:enyo/RelationalModel~RelationalModel#commit
-	* @see module:enyo/Collection~Collection#commit
-	*
-	* @type {Number}
-	* @default 32
-	*/
-	COMMITTING: 0x0020,
-	
-	/**
-	* Currently attempting to destroy.
-	* 
-	* @see module:enyo/Model~Model#destroy
-	* @see module:enyo/RelationalModel~RelationalModel#destroy
-	* @see module:enyo/Collection~Collection#destroy
-	*
-	* @type {Number}
-	* @default 64
-	*/
-	DESTROYING: 0x0040,
-	
-	/**
-	* There was an error during commit.
-	* 
-	* @see module:enyo/Model~Model#commit
-	* @see module:enyo/RelationalModel~RelationalModel#commit
-	* @see module:enyo/Collection~Collection#commit
-	*
-	* @type {Number}
-	* @default 128
-	*/
-	ERROR_COMMITTING: 0x0080,
-	
-	/**
-	* There was an error during fetch.
-	* 
-	* @see module:enyo/Model~Model#fetch
-	* @see module:enyo/RelationalModel~RelationalModel#fetch
-	* @see module:enyo/Collection~Collection#fetch
-	*
-	* @type {Number}
-	* @default 256
-	*/
-	ERROR_FETCHING: 0x0100,
-	
-	/**
-	* There was an error during destroy.
-	* 
-	* @see module:enyo/Model~Model#destroy
-	* @see module:enyo/RelationalModel~RelationalModel#destroy
-	* @see module:enyo/Collection~Collection#destroy
-	*
-	* @type {Number}
-	* @default 512
-	*/
-	ERROR_DESTROYING: 0x0200,
-	
-	/**
-	* An error was encountered for which there was no exact flag, or an invalid error was
-	* specified.
-	*
-	* @type {Number}
-	* @default 1024
-	*/
-	ERROR_UNKNOWN: 0x0400,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `BUSY`. By default, this is one of
-	* [FETCHING]{@link module:enyo/States.FETCHING}, [COMMITTING]{@link module:enyo/States.COMMITTING}, or
-	* [DESTROYING]{@link module:enyo/States.DESTROYING}. It may be extended to include additional
-	* values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
-	*
-	* @type {Number}
-	* @default 112
-	*/
-	BUSY: 0x0010 | 0x0020 | 0x0040,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `ERROR`. By default, this is one of
-	* [ERROR_FETCHING]{@link module:enyo/States.ERROR_FETCHING},
-	* [ERROR_COMMITTING]{@link module:enyo/States.ERROR_COMMITTING},
-	* [ERROR_DESTROYING]{@link module:enyo/States.ERROR_DESTROYING}, or
-	* [ERROR_UNKNOWN]{@link module:enyo/States.ERROR_UNKNOWN}. It may be extended to include
-	* additional values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
-	*
-	* @type {Number}
-	* @default 1920
-	*/
-	ERROR: 0x0080 | 0x0100 | 0x0200 | 0x0400,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `READY`. By default, this is the inverse of any
-	* values included in [BUSY]{@link module:enyo/States.BUSY} or [ERROR]{@link module:enyo/States.ERROR}.
-	*
-	* @type {Number}
-	* @default -2041
-	*/
-	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
-};
-
 }],'enyo/job':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -7893,7 +7893,7 @@ exports.createFromKind = function (nom, param) {
 	}
 };
 
-},{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/SceneSupport':[function (module,exports,global,require,request){
+},{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/sceneSupport':[function (module,exports,global,require,request){
 var
     kind = require('./kind'),
     utils = require('./utils'),
@@ -7917,7 +7917,7 @@ var SceneSupport = {
 
 module.exports = SceneSupport;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/sceneSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/SceneSupport':[function (module,exports,global,require,request){
 var
     kind = require('./kind'),
     utils = require('./utils'),
@@ -8061,96 +8061,7 @@ module.exports = function (Control) {
 
 	return FloatingLayer;
 };
-},{'../kind':'enyo/kind','../platform':'enyo/platform'}],'enyo/Layout':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
-* @module enyo/Layout
-*/
-
-var
-	kind = require('./kind');
-
-/**
-* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
-* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
-* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
-* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
-* 
-* Derived kinds will usually provide their own
-* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
-* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
-* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
-* during control rendering, while `reflow()` is called when the associated
-* control is resized.
-*
-* @class Layout
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Layout~Layout.prototype */ {
-
-	name: 'enyo.Layout',
-
-	/**
-	* @private
-	*/
-	kind: null,
-
-	/** 
-	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
-	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
-	*
-	* @type {String}
-	* @default ''
-	* @public
-	*/
-	layoutClass: '',
-	
-	/**
-	* @private
-	*/
-	constructor: function (container) {
-		this.container = container;
-		if (container) {
-			container.addClass(this.layoutClass);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	destroy: function () {
-		if (this.container) {
-			this.container.removeClass(this.layoutClass);
-		}
-	},
-	
-	/**
-	* Called during static property layout (i.e., during rendering).
-	*
-	* @public
-	*/
-	flow: function () {
-	},
-
-	/** 
-	* Called during dynamic measuring layout (i.e., during a resize).
-	*
-	* May short-circuit and return `true` if the layout needs to be
-	* redone when the associated Control is next shown. This is useful
-	* for cases where the Control itself has `showing` set to `true`
-	* but an ancestor is hidden, and the layout is therefore unable to
-	* get accurate measurements of the Control or its children.
-	*
-	* @public
-	*/
-	reflow: function () {
-	}
-});
-
-},{'./kind':'enyo/kind'}],'enyo/EventEmitter':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../platform':'enyo/platform'}],'enyo/EventEmitter':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/EventEmitter~EventEmitter} mixin.
 * @module enyo/EventEmitter
@@ -9030,7 +8941,96 @@ kind.extendMethods(p, {
 
 module.exports = p;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/Layout':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
+* @module enyo/Layout
+*/
+
+var
+	kind = require('./kind');
+
+/**
+* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
+* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
+* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
+* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
+* 
+* Derived kinds will usually provide their own
+* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
+* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
+* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
+* during control rendering, while `reflow()` is called when the associated
+* control is resized.
+*
+* @class Layout
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Layout~Layout.prototype */ {
+
+	name: 'enyo.Layout',
+
+	/**
+	* @private
+	*/
+	kind: null,
+
+	/** 
+	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
+	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
+	*
+	* @type {String}
+	* @default ''
+	* @public
+	*/
+	layoutClass: '',
+	
+	/**
+	* @private
+	*/
+	constructor: function (container) {
+		this.container = container;
+		if (container) {
+			container.addClass(this.layoutClass);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	destroy: function () {
+		if (this.container) {
+			this.container.removeClass(this.layoutClass);
+		}
+	},
+	
+	/**
+	* Called during static property layout (i.e., during rendering).
+	*
+	* @public
+	*/
+	flow: function () {
+	},
+
+	/** 
+	* Called during dynamic measuring layout (i.e., during a resize).
+	*
+	* May short-circuit and return `true` if the layout needs to be
+	* redone when the associated Control is next shown. This is useful
+	* for cases where the Control itself has `showing` set to `true`
+	* but an ancestor is hidden, and the layout is therefore unable to
+	* get accurate measurements of the Control or its children.
+	*
+	* @public
+	*/
+	reflow: function () {
+	}
+});
+
+},{'./kind':'enyo/kind'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/ApplicationSupport~ApplicationSupport} mixin.
 * @module enyo/ApplicationSupport
@@ -23685,359 +23685,7 @@ Dom.requiresWindow(function() {
 	touchGesture.connect();
 });
 
-},{'./utils':'enyo/utils','./gesture':'enyo/gesture','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./dom':'enyo/dom','./job':'enyo/job'}],'enyo/image':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Image~Image} kind.
-* @module enyo/Image
-*/
-
-var
-	kind = require('../kind'),
-	ri = require('../resolution'),
-	dispatcher = require('../dispatcher'),
-	path = require('../pathResolver');
-var
-	Control = require('../Control');
-
-/**
-* Fires when the [image]{@link module:enyo/Image~Image} has loaded.
-*
-* @event module:enyo/Image~Image#onload
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* Fires when there has been an error while loading the [image]{@link module:enyo/Image~Image}.
-*
-* @event module:enyo/Image~Image#onerror
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* {@link module:enyo/Image~Image} implements an HTML [&lt;img&gt;]{@glossary img} element and, optionally,
-* [bubbles]{@link module:enyo/Component~Component#bubble} the [onload]{@link module:enyo/Image~Image#onload} and
-* [onerror]{@link module:enyo/Image~Image#onerror} [events]{@glossary event}. Image dragging is suppressed by
-* default, so as not to interfere with touch interfaces.
-*
-* When [sizing]{@link module:enyo/Image~Image#sizing} is used, the control will not have a natural size and must be
-* manually sized using CSS `height` and `width`. Also, when [placeholder]{@link module:enyo/Image~Image#placeholder} is used
-* without `sizing`, you may wish to specify the size, as the image will not have a
-* natural size until the image loads, causing the placeholder to not be visible.
-*
-* {@link module:enyo/Image~Image} also has support for multi-resolution images. If you are developing assets
-* for specific screen sizes, HD (720p), FHD (1080p), UHD (4k), for example, you may provide
-* specific image assets in a hash/object format to the `src` property, instead of the usual
-* string. The image sources will be used automatically when the screen resolution is less than
-* or equal to those screen types. For more informaton on our resolution support, and how to
-* enable this feature, see the documentation for {@link module:enyo/resolution}.
-*
-* ```
-* // Take advantage of the multi-rez mode
-* var
-* 	kind = require('enyo/kind'),
-* 	Image = require('enyo/Image');
-*
-* {kind: Image, src: {
-*	'hd': 'http://lorempixel.com/64/64/city/1/',
-*	'fhd': 'http://lorempixel.com/128/128/city/1/',
-*	'uhd': 'http://lorempixel.com/256/256/city/1/'
-* }, alt: 'Multi-rez'},
-*
-* // Standard string `src`
-* {kind: Image, src: 'http://lorempixel.com/128/128/city/1/', alt: 'Large'}
-* ```
-*
-* @class Image
-* @extends module:enyo/Control~Control
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Image~Image.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.Image',
-
-	/**
-	* @private
-	*/
-	kind: Control,
-
-	/**
-	* When `true`, no [onload]{@link module:enyo/Image~Image#onload} or
-	* [onerror]{@link module:enyo/Image~Image#onerror} {@glossary event} handlers will be
-	* created.
-	*
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	noEvents: false,
-
-	/**
-	* @private
-	*/
-	published:
-		/** @lends module:enyo/Image~Image.prototype */ {
-
-		/**
-		* Maps to the `src` attribute of an [&lt;img&gt; tag]{@glossary img}. This also supports
-		* a multi-resolution hash object. For more details and examples, see the description of
-		* {@link module:enyo/Image~Image} above, or the documentation for {@link module:enyo/resolution}.
-		*
-		* @type {String|module:enyo/resolution#selectSrc~src}
-		* @default ''
-		* @public
-		*/
-		src: '',
-
-		/**
-		* Maps to the `alt` attribute of an [&lt;img&gt; tag]{@glossary img}.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		alt: '',
-
-		/**
-		* By default, the [image]{@link module:enyo/Image~Image} is rendered using an `<img>` tag.
-		* When this property is set to `'cover'` or `'constrain'`, the image will be
-		* rendered using a `<div>`, utilizing `background-image` and `background-size`.
-		*
-		* Set this property to `'contain'` to letterbox the image in the available
-		* space, or `'cover'` to cover the available space with the image (cropping the
-		* larger dimension).  Note that when `sizing` is set, the control must be
-		* explicitly sized.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		sizing: '',
-
-		/**
-		* When [sizing]{@link module:enyo/Image~Image#sizing} is used, this property sets the positioning of
-		* the [image]{@link module:enyo/Image~Image} within the bounds, corresponding to the
-		* [`background-position`]{@glossary backgroundPosition} CSS property.
-		*
-		* @type {String}
-		* @default 'center'
-		* @public
-		*/
-		position: 'center',
-
-		/**
-		* Provides a default image displayed while the URL specified by `src` is loaded or when that
-		* image fails to load.
-		*
-		* Note that the placeholder feature is not designed for use with images that contain transparent
-		* or semi-transparent pixels. Specifically, for performance reasons, the placeholder image is not
-		* removed when the image itself loads, but is simply covered by the image. This means that the
-		* placeholder will show through any transparent or semi-transparent pixels in the image.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		placeholder: ''
-	},
-
-	/**
-	* @private
-	*/
-	tag: 'img',
-
-	/**
-	* @private
-	*/
-	classes: 'enyo-image',
-
-	/**
-	* `src` copied here to avoid overwriting the user-provided value when loading values
-	*
-	* @private
-	*/
-	_src: null,
-
-	/**
-	* @type {Object}
-	* @property {Boolean} draggable - This attribute will take one of the following
-	*	[String]{@glossary String} values: 'true', 'false' (the default), or 'auto'.
-	* Setting Boolean `false` will remove the attribute.
-	* @public
-	*/
-	attributes: {
-		draggable: 'false'
-	},
-
-	/**
-	* @private
-	*/
-	handlers: {
-		onerror: 'handleError'
-	},
-
-	/**
-	* @private
-	*/
-	observers: [
-		{method: 'updateSource', path: ['_src', 'placeholder']}
-	],
-
-	/**
-	* @method
-	* @private
-	*/
-	create: kind.inherit(function (sup) {
-		return function () {
-			if (this.noEvents) {
-				delete this.attributes.onload;
-				delete this.attributes.onerror;
-			}
-			sup.apply(this, arguments);
-			this.altChanged();
-			this.sizingChanged();
-			this.srcChanged();
-			this.positionChanged();
-		};
-	}),
-
-	/**
-	* Cache the value of user-provided `src` value in `_src`
-	*
-	* @private
-	*/
-	srcChanged: function () {
-		this.set('_src', this.src);
-	},
-
-	/**
-	* @private
-	*/
-	altChanged: function () {
-		this.setAttribute('alt', this.alt);
-	},
-
-	/**
-	* @private
-	*/
-	sizingChanged: function (was) {
-		this.tag = this.sizing ? 'div' : 'img';
-		this.addRemoveClass('sized', !!this.sizing);
-		if (was) {
-			this.removeClass(was);
-		}
-		if (this.sizing) {
-			this.addClass(this.sizing);
-		}
-		this.updateSource();
-		if (this.generated) {
-			this.render();
-		}
-	},
-
-	/**
-	* @private
-	*/
-	positionChanged: function () {
-		if (this.sizing) {
-			this.applyStyle('background-position', this.position);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	handleError: function () {
-		if (this.placeholder) {
-			this.set('_src', null);
-		}
-	},
-
-	/**
-	* Updates the Image's src or background-image based on the values of _src and placeholder
-	*
-	* @private
-	*/
-	updateSource: function (was, is, prop) {
-		var src = ri.selectSrc(this._src),
-			srcUrl = src ? 'url(\'' + path.rewrite(src) + '\')' : null,
-			plUrl = this.placeholder ? 'url(\'' + path.rewrite(this.placeholder) + '\')' : null,
-			url;
-
-		if (this.sizing) {
-			// use either both urls, src, placeholder, or 'none', in that order
-			url = srcUrl && plUrl && (srcUrl + ',' + plUrl) || srcUrl || plUrl || 'none';
-			this.applyStyle('background-image', url);
-		} else {
-			// when update source
-			if (!prop || prop == 'placeholder') {
-				this.applyStyle('background-image', plUrl);
-			}
-			this.setAttribute('src', src);
-		}
-	},
-
-	/**
-	* @fires module:enyo/Image~Image#onload
-	* @fires module:enyo/Image~Image#onerror
-	* @private
-	*/
-	rendered: kind.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			dispatcher.makeBubble(this, 'load', 'error');
-		};
-	}),
-
-	/**
-	* @lends module:enyo/Image~Image
-	* @private
-	*/
-	statics: {
-		/**
-		* A globally accessible data URL that describes a simple
-		* placeholder image that may be used in samples and applications
-		* until final graphics are provided. As an SVG image, it will
-		* expand to fill the desired width and height set in the style.
-		*
-		* @type {String}
-		* @public
-		*/
-		placeholder:
-			'data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC' +
-			'9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cmVjdCB3aWR0aD0iMTAw' +
-			'JSIgaGVpZ2h0PSIxMDAlIiBzdHlsZT0ic3Ryb2tlOiAjNDQ0OyBzdHJva2Utd2lkdGg6IDE7IGZpbGw6ICNhYW' +
-			'E7IiAvPjxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjEwMCUiIHkyPSIxMDAlIiBzdHlsZT0ic3Ryb2tlOiAjNDQ0' +
-			'OyBzdHJva2Utd2lkdGg6IDE7IiAvPjxsaW5lIHgxPSIxMDAlIiB5MT0iMCIgeDI9IjAiIHkyPSIxMDAlIiBzdH' +
-			'lsZT0ic3Ryb2tlOiAjNDQ0OyBzdHJva2Utd2lkdGg6IDE7IiAvPjwvc3ZnPg=='
-	},
-
-	// Accessibility
-
-	/**
-	* @default img
-	* @type {String}
-	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
-	* @public
-	*/
-	accessibilityRole: 'img'
-});
-
-},{'../kind':'enyo/kind','../resolution':'enyo/resolution','../dispatcher':'enyo/dispatcher','../pathResolver':'enyo/pathResolver','../Control':'enyo/Control'}],'enyo/Image':[function (module,exports,global,require,request){
+},{'./utils':'enyo/utils','./gesture':'enyo/gesture','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./dom':'enyo/dom','./job':'enyo/job'}],'enyo/Image':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -24731,7 +24379,359 @@ module.exports = kind(
 	]
 });
 
-},{'../kind':'enyo/kind','../utils':'enyo/utils','../dispatcher':'enyo/dispatcher','../platform':'enyo/platform','../Control':'enyo/Control'}],'enyo/ScrollStrategy':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../utils':'enyo/utils','../dispatcher':'enyo/dispatcher','../platform':'enyo/platform','../Control':'enyo/Control'}],'enyo/image':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Image~Image} kind.
+* @module enyo/Image
+*/
+
+var
+	kind = require('../kind'),
+	ri = require('../resolution'),
+	dispatcher = require('../dispatcher'),
+	path = require('../pathResolver');
+var
+	Control = require('../Control');
+
+/**
+* Fires when the [image]{@link module:enyo/Image~Image} has loaded.
+*
+* @event module:enyo/Image~Image#onload
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* Fires when there has been an error while loading the [image]{@link module:enyo/Image~Image}.
+*
+* @event module:enyo/Image~Image#onerror
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* {@link module:enyo/Image~Image} implements an HTML [&lt;img&gt;]{@glossary img} element and, optionally,
+* [bubbles]{@link module:enyo/Component~Component#bubble} the [onload]{@link module:enyo/Image~Image#onload} and
+* [onerror]{@link module:enyo/Image~Image#onerror} [events]{@glossary event}. Image dragging is suppressed by
+* default, so as not to interfere with touch interfaces.
+*
+* When [sizing]{@link module:enyo/Image~Image#sizing} is used, the control will not have a natural size and must be
+* manually sized using CSS `height` and `width`. Also, when [placeholder]{@link module:enyo/Image~Image#placeholder} is used
+* without `sizing`, you may wish to specify the size, as the image will not have a
+* natural size until the image loads, causing the placeholder to not be visible.
+*
+* {@link module:enyo/Image~Image} also has support for multi-resolution images. If you are developing assets
+* for specific screen sizes, HD (720p), FHD (1080p), UHD (4k), for example, you may provide
+* specific image assets in a hash/object format to the `src` property, instead of the usual
+* string. The image sources will be used automatically when the screen resolution is less than
+* or equal to those screen types. For more informaton on our resolution support, and how to
+* enable this feature, see the documentation for {@link module:enyo/resolution}.
+*
+* ```
+* // Take advantage of the multi-rez mode
+* var
+* 	kind = require('enyo/kind'),
+* 	Image = require('enyo/Image');
+*
+* {kind: Image, src: {
+*	'hd': 'http://lorempixel.com/64/64/city/1/',
+*	'fhd': 'http://lorempixel.com/128/128/city/1/',
+*	'uhd': 'http://lorempixel.com/256/256/city/1/'
+* }, alt: 'Multi-rez'},
+*
+* // Standard string `src`
+* {kind: Image, src: 'http://lorempixel.com/128/128/city/1/', alt: 'Large'}
+* ```
+*
+* @class Image
+* @extends module:enyo/Control~Control
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Image~Image.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.Image',
+
+	/**
+	* @private
+	*/
+	kind: Control,
+
+	/**
+	* When `true`, no [onload]{@link module:enyo/Image~Image#onload} or
+	* [onerror]{@link module:enyo/Image~Image#onerror} {@glossary event} handlers will be
+	* created.
+	*
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	noEvents: false,
+
+	/**
+	* @private
+	*/
+	published:
+		/** @lends module:enyo/Image~Image.prototype */ {
+
+		/**
+		* Maps to the `src` attribute of an [&lt;img&gt; tag]{@glossary img}. This also supports
+		* a multi-resolution hash object. For more details and examples, see the description of
+		* {@link module:enyo/Image~Image} above, or the documentation for {@link module:enyo/resolution}.
+		*
+		* @type {String|module:enyo/resolution#selectSrc~src}
+		* @default ''
+		* @public
+		*/
+		src: '',
+
+		/**
+		* Maps to the `alt` attribute of an [&lt;img&gt; tag]{@glossary img}.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		alt: '',
+
+		/**
+		* By default, the [image]{@link module:enyo/Image~Image} is rendered using an `<img>` tag.
+		* When this property is set to `'cover'` or `'constrain'`, the image will be
+		* rendered using a `<div>`, utilizing `background-image` and `background-size`.
+		*
+		* Set this property to `'contain'` to letterbox the image in the available
+		* space, or `'cover'` to cover the available space with the image (cropping the
+		* larger dimension).  Note that when `sizing` is set, the control must be
+		* explicitly sized.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		sizing: '',
+
+		/**
+		* When [sizing]{@link module:enyo/Image~Image#sizing} is used, this property sets the positioning of
+		* the [image]{@link module:enyo/Image~Image} within the bounds, corresponding to the
+		* [`background-position`]{@glossary backgroundPosition} CSS property.
+		*
+		* @type {String}
+		* @default 'center'
+		* @public
+		*/
+		position: 'center',
+
+		/**
+		* Provides a default image displayed while the URL specified by `src` is loaded or when that
+		* image fails to load.
+		*
+		* Note that the placeholder feature is not designed for use with images that contain transparent
+		* or semi-transparent pixels. Specifically, for performance reasons, the placeholder image is not
+		* removed when the image itself loads, but is simply covered by the image. This means that the
+		* placeholder will show through any transparent or semi-transparent pixels in the image.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		placeholder: ''
+	},
+
+	/**
+	* @private
+	*/
+	tag: 'img',
+
+	/**
+	* @private
+	*/
+	classes: 'enyo-image',
+
+	/**
+	* `src` copied here to avoid overwriting the user-provided value when loading values
+	*
+	* @private
+	*/
+	_src: null,
+
+	/**
+	* @type {Object}
+	* @property {Boolean} draggable - This attribute will take one of the following
+	*	[String]{@glossary String} values: 'true', 'false' (the default), or 'auto'.
+	* Setting Boolean `false` will remove the attribute.
+	* @public
+	*/
+	attributes: {
+		draggable: 'false'
+	},
+
+	/**
+	* @private
+	*/
+	handlers: {
+		onerror: 'handleError'
+	},
+
+	/**
+	* @private
+	*/
+	observers: [
+		{method: 'updateSource', path: ['_src', 'placeholder']}
+	],
+
+	/**
+	* @method
+	* @private
+	*/
+	create: kind.inherit(function (sup) {
+		return function () {
+			if (this.noEvents) {
+				delete this.attributes.onload;
+				delete this.attributes.onerror;
+			}
+			sup.apply(this, arguments);
+			this.altChanged();
+			this.sizingChanged();
+			this.srcChanged();
+			this.positionChanged();
+		};
+	}),
+
+	/**
+	* Cache the value of user-provided `src` value in `_src`
+	*
+	* @private
+	*/
+	srcChanged: function () {
+		this.set('_src', this.src);
+	},
+
+	/**
+	* @private
+	*/
+	altChanged: function () {
+		this.setAttribute('alt', this.alt);
+	},
+
+	/**
+	* @private
+	*/
+	sizingChanged: function (was) {
+		this.tag = this.sizing ? 'div' : 'img';
+		this.addRemoveClass('sized', !!this.sizing);
+		if (was) {
+			this.removeClass(was);
+		}
+		if (this.sizing) {
+			this.addClass(this.sizing);
+		}
+		this.updateSource();
+		if (this.generated) {
+			this.render();
+		}
+	},
+
+	/**
+	* @private
+	*/
+	positionChanged: function () {
+		if (this.sizing) {
+			this.applyStyle('background-position', this.position);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	handleError: function () {
+		if (this.placeholder) {
+			this.set('_src', null);
+		}
+	},
+
+	/**
+	* Updates the Image's src or background-image based on the values of _src and placeholder
+	*
+	* @private
+	*/
+	updateSource: function (was, is, prop) {
+		var src = ri.selectSrc(this._src),
+			srcUrl = src ? 'url(\'' + path.rewrite(src) + '\')' : null,
+			plUrl = this.placeholder ? 'url(\'' + path.rewrite(this.placeholder) + '\')' : null,
+			url;
+
+		if (this.sizing) {
+			// use either both urls, src, placeholder, or 'none', in that order
+			url = srcUrl && plUrl && (srcUrl + ',' + plUrl) || srcUrl || plUrl || 'none';
+			this.applyStyle('background-image', url);
+		} else {
+			// when update source
+			if (!prop || prop == 'placeholder') {
+				this.applyStyle('background-image', plUrl);
+			}
+			this.setAttribute('src', src);
+		}
+	},
+
+	/**
+	* @fires module:enyo/Image~Image#onload
+	* @fires module:enyo/Image~Image#onerror
+	* @private
+	*/
+	rendered: kind.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			dispatcher.makeBubble(this, 'load', 'error');
+		};
+	}),
+
+	/**
+	* @lends module:enyo/Image~Image
+	* @private
+	*/
+	statics: {
+		/**
+		* A globally accessible data URL that describes a simple
+		* placeholder image that may be used in samples and applications
+		* until final graphics are provided. As an SVG image, it will
+		* expand to fill the desired width and height set in the style.
+		*
+		* @type {String}
+		* @public
+		*/
+		placeholder:
+			'data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC' +
+			'9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48cmVjdCB3aWR0aD0iMTAw' +
+			'JSIgaGVpZ2h0PSIxMDAlIiBzdHlsZT0ic3Ryb2tlOiAjNDQ0OyBzdHJva2Utd2lkdGg6IDE7IGZpbGw6ICNhYW' +
+			'E7IiAvPjxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjEwMCUiIHkyPSIxMDAlIiBzdHlsZT0ic3Ryb2tlOiAjNDQ0' +
+			'OyBzdHJva2Utd2lkdGg6IDE7IiAvPjxsaW5lIHgxPSIxMDAlIiB5MT0iMCIgeDI9IjAiIHkyPSIxMDAlIiBzdH' +
+			'lsZT0ic3Ryb2tlOiAjNDQ0OyBzdHJva2Utd2lkdGg6IDE7IiAvPjwvc3ZnPg=='
+	},
+
+	// Accessibility
+
+	/**
+	* @default img
+	* @type {String}
+	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
+	* @public
+	*/
+	accessibilityRole: 'img'
+});
+
+},{'../kind':'enyo/kind','../resolution':'enyo/resolution','../dispatcher':'enyo/dispatcher','../pathResolver':'enyo/pathResolver','../Control':'enyo/Control'}],'enyo/ScrollStrategy':[function (module,exports,global,require,request){
 require('enyo');
 
 /**

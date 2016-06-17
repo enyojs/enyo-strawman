@@ -109,23 +109,29 @@
   cursor: pointer;
 }
 
-.wobble-sample {
-  background: linear-gradient(to bottom, #f6f7fc 0%, #d5e1e8 40%);
+.imageClass {
+  width: 100%;
+  height: 100%;
+  border-radius: 6%;
 }
-.wobble-sample .container {
-  display: inline-block;
-  margin: 50px;
-  overflow: visible;
-  transform-style: preserve-3d;
-  transform: perspective(800px);
+.cardContainer {
+  height: 280px;
+  width: 200px;
+  position: absolute;
 }
-.wobble-sample .image-container {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 45px 100px rgba(0, 0, 0, 0.4);
-  width: 320px;
-  height: 500px;
-  overflow: hidden;
+.jack {
+  left: 100px;
+}
+.queen {
+  left: 150px;
+}
+.king {
+  left: 200px;
+}
+.description {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 * {
@@ -170,29 +176,23 @@
   transform-origin: 50% 100%;
 }
 
-.imageClass {
-  width: 100%;
-  height: 100%;
-  border-radius: 6%;
+.wobble-sample {
+  background: linear-gradient(to bottom, #f6f7fc 0%, #d5e1e8 40%);
 }
-.cardContainer {
-  height: 280px;
-  width: 200px;
-  position: absolute;
+.wobble-sample .container {
+  display: inline-block;
+  margin: 50px;
+  overflow: visible;
+  transform-style: preserve-3d;
+  transform: perspective(800px);
 }
-.jack {
-  left: 100px;
-}
-.queen {
-  left: 150px;
-}
-.king {
-  left: 200px;
-}
-.description {
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
+.wobble-sample .image-container {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 45px 100px rgba(0, 0, 0, 0.4);
+  width: 320px;
+  height: 500px;
+  overflow: hidden;
 }
 
 .ease-sample {

@@ -271,10 +271,10 @@ var
     ease = require("enyo/easing");
 
 var smallerBox = [
-    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: 1000 },
-    { translate: "0,425,0", scale: "2,0.5,1", duration: 500 },
-    { translate: "0,300,0", scale: "1,1,1", duration: 500 },
-    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: 1000 }
+    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: '33%' },
+    { translate: "0,425,0", scale: "2,0.5,1", duration: '17%' },
+    { translate: "0,300,0", scale: "1,1,1", duration: '17%' },
+    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: '33%' }
 ];
 
 var biggerBox = [
@@ -292,6 +292,7 @@ module.exports = kind({
             name: "smaller",
             classes: "smaller",
             scene: smallerBox,
+            duration: 3000,
             mixins: [sceneSupport],
             sceneOptions: { repeat: true }
         },
@@ -396,40 +397,82 @@ module.exports = kind({
 	}
 });
 
-},{'../LinkSupport':'../strawman/LinkSupport'}],'src/WobbleAnimation':[function (module,exports,global,require,request){
-var
-    kind = require("enyo/kind"),
-    Control = require("enyo/Control"),
+},{'../LinkSupport':'../strawman/LinkSupport'}],'src/SequenceAnimation':[function (module,exports,global,require,request){
+/*jslint white: true*/
+var kind = require('enyo/kind'),
     animate = require('enyo/scene'),
-    image = require('enyo/image');
-var wobble = [
-    { translate: "-2,2,0", rotate: "-2,-4,0", duration: 0 },
-    { translate: "-2,-2,0", rotate: "2,-4,0", duration: 500 },
-    { translate: "2,-2,0", rotate: "2,4,0", duration: 500 },
-    { translate: "2,2,0", rotate: "-2,4,0", duration: 500 },
-    { translate: "0,0,0", rotate: "0,0,0", duration: 500 }
-];
+    Image = require('enyo/Image');
+
+var declaredAnimation = [{
+    translate: "150, 150,150",
+    rotate: "150, 150, 0",
+    duration: 500
+}, {
+    translate: "1000, 100, 300",
+    rotate: "100, 100, 10",
+    duration: 500
+}, {
+    translate: "150, 150,150",
+    rotate: "150, 150, 0",
+    duration: 500
+}];
+
 
 module.exports = kind({
-    name: "Wobble",
-    kind: Control,
-    imagePath: "assets/image.png",
-    classes: "enyo-fit wobble-sample",
+    name: "sampleApplication",
+    style: "background-color: black",
     components: [{
-        classes: "container",
+        name: "Description",
+        classes: "description",
+        content: "Sequence Animiation"
+    }, {
+        name: "circle",
+        classes: "cardContainer jack",
         components: [{
-            name: "imageHolder",
-            classes: "image-container",
-            components: [
-                { kind: image, name: "img" }
-            ]
+            kind: Image,
+            classes: "imageClass introImage",
+            src: "assets/jack.png",
+            alt: "Enyo Logo"
+        }]
+    }, {
+        name: "circle2",
+        classes: "cardContainer queen",
+        components: [{
+            kind: Image,
+            classes: "imageClass introImage",
+            src: "assets/queen.png",
+            alt: "Enyo Logo"
+        }]
+    }, {
+        name: "circle3",
+        classes: "cardContainer king",
+        components: [{
+            kind: Image,
+            classes: "imageClass introImage",
+            src: "assets/king.png",
+            alt: "Enyo Logo"
         }]
     }],
     create: kind.inherit(function(sup) {
         return function() {
             sup.apply(this, arguments);
-            this.$.img.set("src", this.imagePath);
-            animate([this.$.imageHolder], wobble, { repeat: true });
+            var ActorsList = [this.$.circle, this.$.circle2, this.$.circle3];
+            var that = this;
+            animate(ActorsList, declaredAnimation, { completed: completeFirst, autoPlay: true, isSequence: true });
+
+            function completeFirst() {
+                animate(ActorsList, {
+                    translate: "0,0,0",
+                    rotate: "0,0,0",
+                    duration: 500
+                }, { completed: completedDeclare, autoPlay: true, isSequence: true });
+            }
+
+            function completedDeclare() {
+                animate([that.$.circle], { translate: "0px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
+                animate([that.$.circle2], { translate: "300px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
+                animate([that.$.circle3], { translate: "600px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
+            }
         };
     })
 });
@@ -512,82 +555,40 @@ module.exports = kind({
     })
 });
 
-}],'src/SequenceAnimation':[function (module,exports,global,require,request){
-/*jslint white: true*/
-var kind = require('enyo/kind'),
+}],'src/WobbleAnimation':[function (module,exports,global,require,request){
+var
+    kind = require("enyo/kind"),
+    Control = require("enyo/Control"),
     animate = require('enyo/scene'),
-    Image = require('enyo/Image');
-
-var declaredAnimation = [{
-    translate: "150, 150,150",
-    rotate: "150, 150, 0",
-    duration: 500
-}, {
-    translate: "1000, 100, 300",
-    rotate: "100, 100, 10",
-    duration: 500
-}, {
-    translate: "150, 150,150",
-    rotate: "150, 150, 0",
-    duration: 500
-}];
-
+    image = require('enyo/image');
+var wobble = [
+    { translate: "-2,2,0", rotate: "-2,-4,0", duration: 0 },
+    { translate: "-2,-2,0", rotate: "2,-4,0", duration: 500 },
+    { translate: "2,-2,0", rotate: "2,4,0", duration: 500 },
+    { translate: "2,2,0", rotate: "-2,4,0", duration: 500 },
+    { translate: "0,0,0", rotate: "0,0,0", duration: 500 }
+];
 
 module.exports = kind({
-    name: "sampleApplication",
-    style: "background-color: black",
+    name: "Wobble",
+    kind: Control,
+    imagePath: "assets/image.png",
+    classes: "enyo-fit wobble-sample",
     components: [{
-        name: "Description",
-        classes: "description",
-        content: "Sequence Animiation"
-    }, {
-        name: "circle",
-        classes: "cardContainer jack",
+        classes: "container",
         components: [{
-            kind: Image,
-            classes: "imageClass introImage",
-            src: "assets/jack.png",
-            alt: "Enyo Logo"
-        }]
-    }, {
-        name: "circle2",
-        classes: "cardContainer queen",
-        components: [{
-            kind: Image,
-            classes: "imageClass introImage",
-            src: "assets/queen.png",
-            alt: "Enyo Logo"
-        }]
-    }, {
-        name: "circle3",
-        classes: "cardContainer king",
-        components: [{
-            kind: Image,
-            classes: "imageClass introImage",
-            src: "assets/king.png",
-            alt: "Enyo Logo"
+            name: "imageHolder",
+            classes: "image-container",
+            components: [
+                { kind: image, name: "img" }
+            ]
         }]
     }],
     create: kind.inherit(function(sup) {
         return function() {
             sup.apply(this, arguments);
-            var ActorsList = [this.$.circle, this.$.circle2, this.$.circle3];
-            var that = this;
-            animate(ActorsList, declaredAnimation, { completed: completeFirst, autoPlay: true, isSequence: true });
-
-            function completeFirst() {
-                animate(ActorsList, {
-                    translate: "0,0,0",
-                    rotate: "0,0,0",
-                    duration: 500
-                }, { completed: completedDeclare, autoPlay: true, isSequence: true });
-            }
-
-            function completedDeclare() {
-                animate([that.$.circle], { translate: "0px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
-                animate([that.$.circle2], { translate: "300px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
-                animate([that.$.circle3], { translate: "600px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
-            }
+            this.$.img.set("src", this.imagePath);
+            animate([this.$.imageHolder], wobble, { repeat: true });
         };
     })
 });
