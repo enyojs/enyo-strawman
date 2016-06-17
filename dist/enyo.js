@@ -3309,7 +3309,7 @@ exports.cancelAnimationFrame = function(id) {
 */
 exports.subscribe = function(ctx,callback) {
 	var id = utils.uid("rAF");
-	core.obs[id] = utils.bindSafely(ctx, callback);
+	core.obs[id]=utils.bindSafely(ctx, callback);
 	return id;
 };
 /**
@@ -5220,112 +5220,56 @@ var
 	utils = require('./utils'),
 	animation = require('./animation');
 /**
- * Contains the declaration for the {@link module:enyo/scene~scene} of an animation.
- * @module enyo/scene
- */
+* Contains the declaration for the {@link module:enyo/scene~scene} kind.
+* @module enyo/scene
+*/
 
 var _ts, _framerate = 16.6;
 
 var AnimationSupport = {
 	/**
-	 * Reiterates the animation applied to the component.
-	 * It could be;
-	 * true, for infinite iteration
-	 * [Number], for how many times animation should iterate.
-	 * false, for no repetition
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	repeat: false,
-	/**
-	 * Reduces GPU layers when the animation is completed.
-	 * As most of the transform animations happens on 
-	 * GPU layer, ans stays there even after the animations 
-	 * is completed. However, need to be carefull while using this
-	 * feature as if the component tends to animate regularly, this 
-	 * feature would be an overhead.
-	 * when true, GPU memory is freed
-	 *      false, layer remain intact.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	handleLayers: false,
-	/**
-	 * Indentifies whether the animation is in progress or not.
-	 * when true, animation is in progress
-	 *      false, otherwise.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	animating: false,
-	/**
-	 * Specifies the rate at which animation should be played.
-	 * When 0, animation is still
-	 *      1, animation plays with normal speed
-	 *      2, animation plays with 2X fast speed
-	 *      0.5, animation plays with slow speed at half of normal speed.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	direction: 0,
-	/**
-	 * Specifies the rate at which animation should be played.
-	 * When 0, animation is still
-	 *      1, animation plays with normal speed
-	 *      2, animation plays with 2X fast speed
-	 *      0.5, animation plays with slow speed at half of normal speed.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	speed: 0,
-	/**
-	 * Moves animation to a particular point within the span of 
-	 * an animation. Its value could lie between 0 and total duration
-	 * of the animation.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	seekInterval: 0,
-	/**
-	 * Plays animation in sequence when set to true else 
-	 * its a parallal animation. This could be applied for
-	 * animation properties as well as for scenes within a 
-	 * scene.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	isSequence: true,
-	/**
-	 * Starts animation when scene is initialized, 
-	 * when this property is set to true. When false scene instance has
-	 * to be explicity played using 'play' api.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
-	autoPlay: true,
-	/**
-	 * The limit for an animation, which could be an instance
-	 * of time as well as distance.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
+	* @public
+	*/
 	span: 0,
 	/**
-	 * The current time state of animation. This represents the
-	 * time at which animation is progressed upon. As this property 
-	 * directly impacts the state of animation, updating this value  
-	 * have direct effect on animation unless its animation is halted.
-	 * The range lies between 0 to overall span of animation.
-	 * @public
-	 * @memberOf module:enyo/scene
-	 */
+	* @private
+	*/
 	timeline: 0,
+	/**
+	* @public
+	*/
+	repeat: false,
+	/**
+	* @public
+	*/
+	handleLayers: false,
+	/**
+	* @public
+	*/
+	animating: false,
+	/**
+	* @public
+	*/
+	direction: 0,
+	/**
+	* @public
+	*/
+	speed: 0,
+	/**
+	* @public
+	*/
+	seekInterval: 0,
+	/**
+	* @public
+	*/
+	isSequence: true,
+
 	/**
 	 * Starts the animation of scene.
 	 * @public
 	 * @memberOf module:enyo/scene
 	 */
-	play: function() {
+	play: function () {
 		this.direction = this.speed = 1;
 		if (isNaN(this.timeline) || !this.timeline) {
 			this.timeline = 0;
@@ -5349,7 +5293,7 @@ var AnimationSupport = {
 	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	pause: function() {
+	pause: function () {
 		this.direction = 0;
 		return this;
 	},
@@ -5359,7 +5303,7 @@ var AnimationSupport = {
 	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	reverse: function() {
+	reverse: function () {
 		this.direction = -1;
 	},
 
@@ -5368,7 +5312,7 @@ var AnimationSupport = {
 	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	stop: function() {
+	stop: function () {
 		this.speed = 0;
 		this.timeline = 0;
 	},
@@ -5392,11 +5336,11 @@ var AnimationSupport = {
 	 * @public
 	 */
 	seekAnimate: function(seek) {
-		if (seek >= 0) {
+		if (seek >= 0 ) {
 			if (!this.animating)
 				this.play();
 			this.speed = 1;
-		} else {
+		}else{
 			this.speed = -1;
 		}
 		this.seekInterval = this.timeline + seek;
@@ -5423,42 +5367,16 @@ var AnimationSupport = {
 };
 
 /**
- * Interface which accepts the animation details and returns a scene object
- * @param  {Object} actor      component which has to be animated
- * @param  {Object} props      properties of the component
- * @param  {Object} opts       additional options
- * @return {Object}            A scene object
- */
-module.exports = function (proto, properties, opts) {
-	var i, ctor, ps, s;
-
-	if (!utils.isArray(proto)) {
-		ps = new scene(proto, properties, opts);
-	} else {
-		ps = new scene();
-		if (opts) utils.mixin(ps, opts);
-		for (i = 0;
-			(ctor = proto[i]); i++) {
-			s = new scene(ctor, properties);
-			ps.addScene(s);
-		}
-	}
-
-	ps.autoPlay && ps.play();
-	return ps;
-};
-
-/**
- * {@link module:enyo/Scene~Scene}
- *
- * @class Scene
- * @extends module:enyo/Scene~Scene
- * @param  {Object} actor      component which has to be animated
- * @param  {Object} props      properties of the component
- * @param  {Object} opts       additional options
- * @public
- */
-function scene(actor, props, opts) {
+* {@link module:enyo/Scene~Scene}
+*
+* @class Scene
+* @extends module:enyo/Scene~Scene
+* @param  {Object} actor      component which has to be animated
+* @param  {Object} props      properties of the component
+* @param  {Object} opts       additional options
+* @public
+*/
+var scene = module.exports = function (actor, props, opts) {
 	this.id = utils.uid("@");
 	this.poses = [];
 	this.rolePlays = [];
@@ -5476,20 +5394,89 @@ function scene(actor, props, opts) {
 			this.addAnimation(anim, anim.duration || 0, actor.duration);
 		}
 	}
-}
-
+};
 /**
  * Checks whether the scene is in a active state, which then can be animated
  * @return {Boolean} generated value in true or false. true in case of the parent scene
  * @memberOf module:enyo/scene
  * @public
  */
-scene.prototype.isActive = function() {
+scene.prototype.isActive = function () {
 	if (this.actor)
-		return this.actor.generated && !this.actor.destroyed;
+		return this.actor.generated;
 
 	// making sure parent scenes are always active.
 	return true;
+};
+/**
+ * @private
+ */
+function modify(pose, currentTm) {
+	pose.span = currentTm;
+	delete pose._endAnim;
+	pose._endAnim = pose.currentState;
+	return pose;
+}
+/**
+ * @private
+ */
+function currPose(poseArr, tm, properties) {
+	var currentTime = tm;
+	for (var i = 0; i < poseArr.length; i++) {
+
+		if (poseArr[i].begin <= currentTime && poseArr[i].span >= currentTime) { // check the current Pose
+			modify(poseArr[i], currentTime);
+			poseArr.splice((i + 1), poseArr.length - (i + 1));
+			poseArr[(i + 1)] = {
+				animate: properties,
+				begin: currentTime,
+				span: currentTime + properties.duration
+			};
+			break;
+		}
+	}
+}
+/**
+ * @private
+ */
+function hasPropCheck(poseArr, propCheck) {
+    var bool;
+    if (!utils.isArray(poseArr)) {
+        bool = poseArr[propCheck] ? true : false;
+    } else {
+        for (var i = 0; i < poseArr.length; i++) {
+            bool = poseArr[i][propCheck] ? true : false;
+            if (bool) break;
+        }
+    }
+    return bool;
+}
+/**
+ * @private
+ */
+function loopPose(poseArr, propCheck) {
+    var parentNode, currNode = poseArr;
+    if (hasPropCheck(poseArr, propCheck)) {
+        if (utils.isArray(poseArr)) {
+            for (var i = 0; i < poseArr.length; i++) {
+            	parentNode = currNode[i];
+                currNode = loopPose(currNode[i].poses, propCheck);
+            }
+        } else {
+        	parentNode = currNode;
+            currNode = loopPose(currNode.poses, propCheck);
+        }
+    }
+    return parentNode ? parentNode[propCheck] : parentNode;
+}
+
+/**
+ * @private
+ */
+function addInitialStyle(node) {
+	node = node.actor ? node : loopPose(node.poses, "actor");
+	node = node.actor || node;
+	node.addStyles(node.initialState);
 };
 
 /**
@@ -5499,10 +5486,12 @@ scene.prototype.isActive = function() {
  * @public
  */
 scene.prototype.setAnimation = function(properties) {
-	var currentPose = findScene(this.poses, "poses");
-	setScene(currentPose, this.timeline, properties);
+    var currentPose, currentTime, posesList;
+    currentTime = this.timeline;
+    posesList = this.poses;
+    currentPose = loopPose(posesList, "poses");
+    currPose(currentPose, currentTime, properties);
 };
-
 /**
  * Gets the current animation pose.
  * @param {Number} index       animation index
@@ -5513,7 +5502,6 @@ scene.prototype.setAnimation = function(properties) {
 scene.prototype.getAnimation = function(index) {
 	return index < 0 || this.poses[index];
 };
-
 /**
  * addAnimation is used for adding new animation with the passed properties at run time.
  * @param {Object} newProp  animation properties for new animation
@@ -5523,22 +5511,76 @@ scene.prototype.getAnimation = function(index) {
  * @public
  */
 scene.prototype.addAnimation = function(newProp, span, dur) {
-	dur = dur || this.span;
-	var l = this.poses.length,
-		old = 0,
-		spanCache = span.toString().match(/%$/) ? (span.replace(/%$/, '') * dur / 100) : span,
-		newSpan = newProp instanceof this.constructor ? newProp.span : spanCache;
+    var l = this.poses.length,
+        old = 0,
+        spanCache = span.toString().match(/%$/) ? (span.replace(/%$/, '') * dur / 100) : span,
+        newSpan = newProp instanceof this.constructor ? newProp.span : spanCache;
 
 	if (l > 0 && this.isSequence) {
-		old = this.poses[l - 1].span;
+		old = this.poses[l-1].span;
 		newSpan += old;
 	}
-	this.poses.push({
-		animate: newProp,
-		span: newSpan,
-		begin: old
-	});
+	this.poses.push({animate: newProp, span: newSpan, begin: old });
 	this.span = newSpan;
+};
+/**
+ * @private
+ */
+scene.prototype.action = function(ts, pose) {
+	var tm, i, poses,
+		dur = this.span;
+
+	if (this.isActive()) {
+		tm = rolePlay(ts, this);
+		if (isNaN(tm) || tm < 0) return pose;
+		else if (tm <= dur) {
+			poses = posesAtTime(this.poses, tm);
+			for (i = 0, pose;
+				(pose = poses[i]); i++) {
+				if (pose instanceof this.constructor) {
+					this.toScene(pose).action(ts);
+				} else {
+					update(pose, this.actor, (tm - pose.begin), (pose.span - pose.begin));
+				}
+			}
+			this.step && this.step(this.actor);
+		} else {
+			this.repeat = REPEAT[this.repeat] || this.repeat;
+			this.timeline = --this.repeat ? 0 : this.span;
+			if (this.repeat > 0) {
+				addInitialStyle(this);
+			} else {
+				if (FILLMODE[this.fillmode]) {
+					addInitialStyle(this);
+				}
+				this.cut();
+			}
+		}
+	}
+	return pose;
+};
+/**
+ * @private
+ */
+scene.prototype.cut = function () {
+	if (this.handleLayers) {
+		this.speed = 0;
+		if (this.active) {
+			this.active = false;
+			tween.halt(this.actor);
+		}
+	}
+	this.animating = false;
+	this.completed && this.completed(this.actor);
+};
+/**
+ * @private
+ */
+scene.prototype.toScene = function (scene) {
+	scene.speed = this.speed;
+	scene.direction = this.direction;
+	scene.handleLayers = this.handleLayers;
+	return scene;
 };
 
 /**
@@ -5553,7 +5595,7 @@ scene.prototype.addScene = function(sc) {
 		newSpan = sc instanceof this.constructor ? sc.span : 0;
 
 	if (l > 0 && this.isSequence) {
-		old = this.poses[l - 1].span;
+		old = this.poses[l-1].span;
 		newSpan += old;
 		sc.span = newSpan;
 		sc.begin = old;
@@ -5566,84 +5608,26 @@ scene.prototype.addScene = function(sc) {
 /**
  * @private
  */
-function action(ts, pose) {
-	var tm, i, poses,
-		dur = this.span,
-		actor = this.actor;
-
-	if (this.isActive()) {
-		tm = rolePlay(ts, this);
-		if (isNaN(tm) || tm < 0) return pose;
-
-		poses = posesAtTime(this.poses, tm > dur ? dur : tm);
-		for (i = 0, pose;
-			(pose = poses[i]); i++) {
-			if (pose instanceof this.constructor) {
-				pose.speed = this.speed;
-				pose.direction = this.direction;
-				pose.handleLayers = this.handleLayers;
-				action.call(pose, ts);
-			} else {
-				update(pose, actor, (tm - pose.begin), (pose.span - pose.begin));
-			}
-		}
-		this.step && this.step(actor);
-
-		if (tm > dur) cut.call(this, actor);
-	}
-	return pose;
-}
-
-/**
- * @private
- */
-function cut(actor) {
-	this.repeat = REPEAT[this.repeat] || this.repeat;
-	this.timeline = --this.repeat ? 0 : this.span;
-
-	if (this.repeat > 0) {
-		applyInitialStyle(this);
-		return;
-	} else {
-		if (FILLMODE[this.fillmode]) {
-			applyInitialStyle(this);
-		}
-	}
-
-	if (this.handleLayers) {
-		this.speed = 0;
-		if (this.active) {
-			this.active = false;
-			tween.halt(actor);
-		}
-	}
-	this.animating = false;
-	this.completed && this.completed(actor);
-}
-
-/**
- * @private
- */
-function loop(was, is) {
+function loop (was, is) {
 	if (this.animating) {
 		_ts = is - (was || 0);
 		_ts = (_ts > _framerate) ? _framerate : _ts;
-		action.call(this, _ts);
+		this.action(_ts);
 	} else if (this.actor && this.actor.destroyed) {
 		animation.unsubscribe(this.rAFId);
 	}
 }
-
 /**
  * @private
  */
-function update(pose, actor, since, dur) {
+function update (pose, actor, since, dur) {
 	var t;
 	if (!pose._startAnim) tween.init(actor, pose);
+
 	if (since < 0) since = 0;
 	if (since <= dur && dur !== 0) {
 		t = since / dur;
-		tween.step(actor, pose, t > 0.98 ? 1 : t, dur);
+		tween.step(actor, pose, t, dur);
 	} else {
 		tween.step(actor, pose, 1, dur);
 	}
@@ -5656,13 +5640,13 @@ function update(pose, actor, since, dur) {
  * @return {Number}       Returns the updated timeline of the actor
  * @private
  */
-function rolePlay(t, actor) {
+function rolePlay (t, actor) {
 	actor = actor || this;
 	t = t * actor.speed * actor.direction;
 
 	actor.timeline += t;
-	if (actor.seekInterval !== 0) {
-		if ((actor.seekInterval - actor.timeline) * actor.speed < 0) {
+	if(actor.seekInterval !== 0) {
+		if((actor.seekInterval-actor.timeline)*actor.speed < 0) {
 			actor.seekInterval = 0;
 			actor.speed = 0;
 		}
@@ -5688,88 +5672,46 @@ function posesAtTime(anims, span) {
 	return anims.filter(doFilter);
 }
 
-/**
- * @private
- */
-function modify(pose, currentTm) {
-	pose.span = currentTm;
-	delete pose._endAnim;
-	pose._endAnim = pose.currentState;
-	return pose;
-}
-/**
- * @private
- */
-function setScene(poseArr, tm, properties) {
-	var currentTime = tm;
-	for (var i = 0; i < poseArr.length; i++) {
-
-		if (poseArr[i].begin <= currentTime && poseArr[i].span >= currentTime) { // check the current Pose
-			modify(poseArr[i], currentTime);
-			poseArr.splice((i + 1), poseArr.length - (i + 1));
-			poseArr[(i + 1)] = {
-				animate: properties,
-				begin: currentTime,
-				span: currentTime + properties.duration
-			};
-			break;
-		}
-	}
-}
-/**
- * @private
- */
-function hasScene(poseArr, propCheck) {
-	var bool;
-	if (!utils.isArray(poseArr)) {
-		bool = poseArr[propCheck] ? true : false;
-	} else {
-		for (var i = 0; i < poseArr.length; i++) {
-			bool = poseArr[i][propCheck] ? true : false;
-			if (bool) break;
-		}
-	}
-	return bool;
-}
-/**
- * @private
- */
-function findScene(poseArr, propCheck) {
-	var parentNode, currNode = poseArr;
-	if (hasScene(poseArr, propCheck)) {
-		if (utils.isArray(poseArr)) {
-			for (var i = 0; i < poseArr.length; i++) {
-				parentNode = currNode[i];
-				currNode = findScene(currNode[i].poses, propCheck);
-			}
-		} else {
-			parentNode = currNode;
-			currNode = findScene(currNode.poses, propCheck);
-		}
-	}
-	return parentNode ? parentNode[propCheck] : parentNode;
-}
-
-/**
- * @private
- */
-function applyInitialStyle(node) {
-	node = node.actor ? node : findScene(node.poses, "actor");
-	node = node.actor || node;
-	node.addStyles(node.initialState);
-}
-
 var
-	REPEAT = {
-		'true': Infinity,
-		'false': 0
-	},
-	FILLMODE = {
-		'backwards': true,
-		'forwards': false,
-		'default': false,
-		'none': false
-	};
+    REPEAT = {
+        'true': Infinity,
+        'false': 0
+    },
+    FILLMODE = {
+        'backwards': true,
+        'forwards': false,
+        'default': false,
+        'none': false
+    };
+/**
+ * Interface which accepts the animation details and returns a scene object
+ * @param  {Array} proto      Actors 
+ * @param  {Object} properties Animation Properties
+ * @param  {number} duration   Animation duration
+ * @param  {String} completed  Callback function on completion
+ * @return {Object}            A scene object
+ */
+function animate(proto, properties, opts) {
+    var i, ctor, ps, s;
+
+    if (!utils.isArray(proto)) {
+        return new scene(proto, properties, opts);
+    }
+
+    ps = new scene();
+    if (opts) utils.mixin(ps, opts);
+    for (i = 0;
+        (ctor = proto[i]); i++) {
+        s = new scene(ctor, properties);
+        ps.addScene(s);
+    }
+    if (opts.autoPlay) {
+        ps.play();
+    }
+    return ps;
+}
+module.exports = animate;
+
 },{'./tween':'enyo/tween','./utils':'enyo/utils','./animation':'enyo/animation'}],'enyo/kind':[function (module,exports,global,require,request){
 require('enyo');
 

@@ -1,7 +1,7 @@
 var
 	kind = require('enyo/kind'),
 	easing = require('enyo/easing'),
-	SceneSupport = require('enyo/SceneSupport'),
+	sceneSupport = require('enyo/sceneSupport'),
 	control = require('enyo/Control');
 
 module.exports = kind({
@@ -15,77 +15,77 @@ module.exports = kind({
 	components: [
 		{
 			name: "linear",
-			mixins:[SceneSupport],
+			mixins:[sceneSupport],
 			content: "linear",
 			style: "left: 2%;",
 			scene: { translate: "0,-500, 0", duration: 3000 },
 			classes: "balloon red"
 		}, {
-			name: "bounceIn",
-			mixins:[SceneSupport],
-			content: "bounceIn",
+			name: "easeInBounce",
+			mixins:[sceneSupport],
+			content: "easeInBounce",
 			style: "left: 11%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.bounceIn },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInBounce },
 			classes: "balloon blue"
 		}, {
-			name: "bounceOut",
-			mixins:[SceneSupport],
-			content: "bounceOut",
+			name: "easeOutBounce",
+			mixins:[sceneSupport],
+			content: "easeOutBounce",
 			style: "left: 20%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.bounceOut },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutBounce },
 			classes: "balloon red"
 		}, {
-			name: "bounceInOut",
-			mixins:[SceneSupport],
-			content: "bounceInOut",
+			name: "easeInOutBounce",
+			mixins:[sceneSupport],
+			content: "easeInOutBounce",
 			style: "left: 29%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.bounceInOut },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutBounce },
 			classes: "balloon blue"
 		}, {
-			name: "elasticIn",
-			mixins:[SceneSupport],
-			content: "elasticIn",
+			name: "easeInElastic",
+			mixins:[sceneSupport],
+			content: "easeInElastic",
 			style: "left: 38%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.elasticIn },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInElastic },
 			classes: "balloon red"
 		}, {
-			name: "elasticOut",
-			mixins:[SceneSupport],
-			content: "elasticOut",
+			name: "easeOutElastic",
+			mixins:[sceneSupport],
+			content: "easeOutElastic",
 			style: "left: 47%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.elasticOut },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutElastic },
 			classes: "balloon blue"
 		}, {
-			name: "elasticInOut",
-			mixins:[SceneSupport],
-			content: "elasticInOut",
+			name: "easeInOutElastic",
+			mixins:[sceneSupport],
+			content: "easeInOutElastic",
 			style: "left: 56%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.elasticInOut },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutElastic },
 			classes: "balloon red"
 		}, {
-			name: "expoIn",
-			mixins:[SceneSupport],
-			content: "expoIn",
+			name: "easeInExpo",
+			mixins:[sceneSupport],
+			content: "easeInExpo",
 			style: "left: 65%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.expoIn },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInExpo },
 			classes: "balloon blue"
 		}, {
-			name: "expoOut",
-			mixins:[SceneSupport],
-			content: "expoOut",
+			name: "easeOutExpo",
+			mixins:[sceneSupport],
+			content: "easeOutExpo",
 			style: "left: 74%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.expoOut },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutExpo },
 			classes: "balloon red"
 		}, {
-			name: "expoInOut",
-			mixins:[SceneSupport],
-			content: "expoInOut",
+			name: "easeInOutExpo",
+			mixins:[sceneSupport],
+			content: "easeInOutExpo",
 			style: "left: 83%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.expoInOut },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutExpo },
 			classes: "balloon blue"
 		}, {
 			name: "cubicBezier",
-			mixins:[SceneSupport],
+			mixins:[sceneSupport],
 			content: "custom",
 			style: "left: 92%;",
 			/**

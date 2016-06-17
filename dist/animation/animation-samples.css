@@ -35,6 +35,32 @@
   }
 }
 
+.ease-sample {
+  font-size: 40px;
+  height: 100%;
+  overflow: hidden;
+  line-height: 500px;
+  position: relative;
+  text-align: center;
+  text-size: 200px;
+}
+.ease-sample .balloon {
+  bottom: 10%;
+  color: #fff;
+  font-size: 12px;
+  height: 160px;
+  line-height: 160px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+.ease-sample .blue {
+  background: url('assets/balloon-blue.png');
+}
+.ease-sample .red {
+  background: url('assets/balloon.png');
+}
+
 .trampoline-sample .smaller {
   position: absolute;
   top: 0;
@@ -61,32 +87,6 @@
   right: 0;
   width: 300px;
   height: 50%;
-}
-
-.ease-sample {
-  font-size: 40px;
-  height: 100%;
-  overflow: hidden;
-  line-height: 500px;
-  position: relative;
-  text-align: center;
-  text-size: 200px;
-}
-.ease-sample .balloon {
-  bottom: 10%;
-  color: #fff;
-  font-size: 12px;
-  height: 160px;
-  line-height: 160px;
-  position: absolute;
-  text-align: center;
-  width: 100px;
-}
-.ease-sample .blue {
-  background: url('assets/balloon-blue.png');
-}
-.ease-sample .red {
-  background: url('assets/balloon.png');
 }
 
 .eclipse-sample {
@@ -138,6 +138,31 @@
   cursor: pointer;
 }
 
+.imageClass {
+  width: 100%;
+  height: 100%;
+  border-radius: 6%;
+}
+.cardContainer {
+  height: 280px;
+  width: 200px;
+  position: absolute;
+}
+.jack {
+  left: 100px;
+}
+.queen {
+  left: 150px;
+}
+.king {
+  left: 200px;
+}
+.description {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 * {
   -webkit-touch-callout: none;
   /* prevent callout to copy image, etc when tap to hold */
@@ -178,31 +203,6 @@
   width: 9%;
   background-color: orange;
   transform-origin: 50% 100%;
-}
-
-.imageClass {
-  width: 100%;
-  height: 100%;
-  border-radius: 6%;
-}
-.cardContainer {
-  height: 280px;
-  width: 200px;
-  position: absolute;
-}
-.jack {
-  left: 100px;
-}
-.queen {
-  left: 150px;
-}
-.king {
-  left: 200px;
-}
-.description {
-  color: #fff;
-  font-size: 25px;
-  font-weight: bold;
 }
 
 .wobble-sample {
