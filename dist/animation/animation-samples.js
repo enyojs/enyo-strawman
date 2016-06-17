@@ -123,27 +123,27 @@ var spincubeFace6 = {
 
 var spincube = [{
     rotate: "0, 90, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 1920
 }, {
     rotate: "90, 90, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 180, 90",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 270, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 1920
 }, {
     rotate: "-90, 270, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 360, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }];
 
@@ -263,11 +263,49 @@ module.exports = kind({
 });
 
 
+}],'src/TrampolineEffect':[function (module,exports,global,require,request){
+var
+    kind = require("enyo/kind"),
+    Control = require("enyo/Control"),
+    SceneSupport = require('enyo/SceneSupport'),
+    ease = require("enyo/easing");
+
+var smallerBox = [
+    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: 1000 },
+    { translate: "0,425,0", scale: "2,0.5,1", duration: 500 },
+    { translate: "0,300,0", scale: "1,1,1", duration: 500 },
+    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: 1000 }
+];
+
+var biggerBox = [
+    { translate: "0,200,0", rotate: "0,0,180", ease: ease.quadIn, duration: 1000 },
+    { translate: "0,250,0", scale: "2,0.5,1", duration: 500 },
+    { translate: "0,200,0", scale: "1,1,1", duration: 500 },
+    { translate: "0,0,0", rotate: "0,0,360", ease: ease.quadOut, duration: 1000 }
+];
+module.exports = kind({
+    name: "outer",
+    kind: Control,
+    classes: "trampoline-sample",
+    components: [
+        { name: "smaller", classes: "smaller", scene: smallerBox, mixins: [SceneSupport] },
+        { name: "bigger", classes: "bigger", scene: biggerBox, mixins: [SceneSupport] }
+    ],
+    create: kind.inherit(function(sup) {
+        return function() {
+            sup.apply(this, arguments);
+            // kind.animate(this.$.smaller, smallerBox).play().repeat = true;
+            this.$.smaller.scene.play().repeat = true;
+            this.$.bigger.scene.play().repeat = true;
+        };
+    })
+});
+
 }],'src/EaseAnimation':[function (module,exports,global,require,request){
 var
 	kind = require('enyo/kind'),
 	easing = require('enyo/easing'),
-	sceneSupport = require('enyo/sceneSupport'),
+	SceneSupport = require('enyo/SceneSupport'),
 	control = require('enyo/Control');
 
 module.exports = kind({
@@ -281,77 +319,77 @@ module.exports = kind({
 	components: [
 		{
 			name: "linear",
-			mixins:[sceneSupport],
+			mixins:[SceneSupport],
 			content: "linear",
 			style: "left: 2%;",
 			scene: { translate: "0,-500, 0", duration: 3000 },
 			classes: "balloon red"
 		}, {
-			name: "easeInBounce",
-			mixins:[sceneSupport],
-			content: "easeInBounce",
+			name: "bounceIn",
+			mixins:[SceneSupport],
+			content: "bounceIn",
 			style: "left: 11%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInBounce },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.bounceIn },
 			classes: "balloon blue"
 		}, {
-			name: "easeOutBounce",
-			mixins:[sceneSupport],
-			content: "easeOutBounce",
+			name: "bounceOut",
+			mixins:[SceneSupport],
+			content: "bounceOut",
 			style: "left: 20%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutBounce },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.bounceOut },
 			classes: "balloon red"
 		}, {
-			name: "easeInOutBounce",
-			mixins:[sceneSupport],
-			content: "easeInOutBounce",
+			name: "bounceInOut",
+			mixins:[SceneSupport],
+			content: "bounceInOut",
 			style: "left: 29%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutBounce },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.bounceInOut },
 			classes: "balloon blue"
 		}, {
-			name: "easeInElastic",
-			mixins:[sceneSupport],
-			content: "easeInElastic",
+			name: "elasticIn",
+			mixins:[SceneSupport],
+			content: "elasticIn",
 			style: "left: 38%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInElastic },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.elasticIn },
 			classes: "balloon red"
 		}, {
-			name: "easeOutElastic",
-			mixins:[sceneSupport],
-			content: "easeOutElastic",
+			name: "elasticOut",
+			mixins:[SceneSupport],
+			content: "elasticOut",
 			style: "left: 47%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutElastic },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.elasticOut },
 			classes: "balloon blue"
 		}, {
-			name: "easeInOutElastic",
-			mixins:[sceneSupport],
-			content: "easeInOutElastic",
+			name: "elasticInOut",
+			mixins:[SceneSupport],
+			content: "elasticInOut",
 			style: "left: 56%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutElastic },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.elasticInOut },
 			classes: "balloon red"
 		}, {
-			name: "easeInExpo",
-			mixins:[sceneSupport],
-			content: "easeInExpo",
+			name: "expoIn",
+			mixins:[SceneSupport],
+			content: "expoIn",
 			style: "left: 65%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInExpo },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.expoIn },
 			classes: "balloon blue"
 		}, {
-			name: "easeOutExpo",
-			mixins:[sceneSupport],
-			content: "easeOutExpo",
+			name: "expoOut",
+			mixins:[SceneSupport],
+			content: "expoOut",
 			style: "left: 74%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeOutExpo },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.expoOut },
 			classes: "balloon red"
 		}, {
-			name: "easeInOutExpo",
-			mixins:[sceneSupport],
-			content: "easeInOutExpo",
+			name: "expoInOut",
+			mixins:[SceneSupport],
+			content: "expoInOut",
 			style: "left: 83%;",
-			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.easeInOutExpo },
+			scene: { translate: "0,-500, 0", duration: 3000, ease: easing.expoInOut },
 			classes: "balloon blue"
 		}, {
 			name: "cubicBezier",
-			mixins:[sceneSupport],
+			mixins:[SceneSupport],
 			content: "custom",
 			style: "left: 92%;",
 			/**
@@ -376,44 +414,6 @@ module.exports = kind({
 		};
 	}),
 });
-}],'src/TrampolineEffect':[function (module,exports,global,require,request){
-var
-    kind = require("enyo/kind"),
-    Control = require("enyo/Control"),
-    sceneSupport = require('enyo/sceneSupport'),
-    ease = require("enyo/easing");
-
-var smallerBox = [
-    { translate: "0,300,0", rotate: "0,0,180", ease: ease.easeInQuad, duration: 1000 },
-    { translate: "0,425,0", scale: "2,0.5,1", duration: 500 },
-    { translate: "0,300,0", scale: "1,1,1", duration: 500 },
-    { translate: "0,0,0", rotate: "0,0,405", ease: ease.easeOutQuad, duration: 1000 }
-];
-
-var biggerBox = [
-    { translate: "0,200,0", rotate: "0,0,180", ease: ease.easeInQuad, duration: 1000 },
-    { translate: "0,250,0", scale: "2,0.5,1", duration: 500 },
-    { translate: "0,200,0", scale: "1,1,1", duration: 500 },
-    { translate: "0,0,0", rotate: "0,0,360", ease: ease.easeOutQuad, duration: 1000 }
-];
-module.exports = kind({
-    name: "outer",
-    kind: Control,
-    classes: "trampoline-sample",
-    components: [
-        { name: "smaller", classes: "smaller", scene: smallerBox, mixins: [sceneSupport] },
-        { name: "bigger", classes: "bigger", scene: biggerBox, mixins: [sceneSupport] }
-    ],
-    create: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
-            // kind.animate(this.$.smaller, smallerBox).play().repeat = true;
-            this.$.smaller.scene.play().repeat = true;
-            this.$.bigger.scene.play().repeat = true;
-        };
-    })
-});
-
 }],'src/SolarEclipse':[function (module,exports,global,require,request){
 /*jslint white: true*/
 var kind = require('enyo/kind'),
@@ -505,7 +505,151 @@ module.exports = kind({
 	}
 });
 
-},{'../LinkSupport':'../strawman/LinkSupport'}],'src/SequenceAnimation':[function (module,exports,global,require,request){
+},{'../LinkSupport':'../strawman/LinkSupport'}],'src/EqualizerAnimation':[function (module,exports,global,require,request){
+var
+    kind = require('enyo/kind'),
+    SceneSupport = require('enyo/SceneSupport'),
+    animate = require('enyo/scene'),
+    easing = require('enyo/easing'),
+    image = require('enyo/Image');
+
+var duration = 150,
+    laps = 10,
+    counter = 0,
+    interval = duration / laps;
+
+var t, s, l = 1,
+    handle, kindRef;
+
+module.exports = kind({
+    name: "equalizer",
+    classes: "enyo-fit equalizer",
+    components: [
+        { name: "container1", classes: "container container-background" },
+        { name: "container2", classes: "container" }
+    ],
+
+    create: kind.inherit(function(sup) {
+        return function() {
+            sup.apply(this, arguments);
+            for (var i = 0; i < 10; i++) {
+                this.$.container1.createComponent({ classes: "bar" });
+                this.$.container2.createComponent({ classes: "bar", /*mixins: [SceneSupport], scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } */ });
+            }
+        };
+    }),
+
+    rendered: kind.inherit(function(sup) {
+        return function() {
+            sup.apply(this, arguments);
+            kindRef = this;
+            this.startAnimation();
+        };
+    }),
+    startAnimation: function() {
+        var children = this.$.container2.children;
+        var currentActor, currentActorProps, that, compRandom;
+        var len = children.length,
+            i;
+        l = 1;
+        for (var i = 0; i < len; i++) {
+            this.animateElem(children[i]);
+        }
+        /* that = this;
+         for (i = 0; i < len; i++) {
+             t = (((l * interval) * 100) / duration);
+             s = this.getRandom();
+             currentActor = children[i];
+             currentActor.scene.poses[0].animate = {
+                 scale: "1," + s + ",1",
+                 duration: s
+             };
+             // currentActorProps = children[i].scene.poses[0].animate;
+             // currentActorProps.scale = "1," + s + ",1";
+             // currentActorProps.duration = s;
+             currentActor.scene.play();
+             currentActor.scene.completed = function() {
+                 console.dir(this);
+                 compRandom = that.getRandom();
+                 this.poses[0].animate = {
+                     scale: "1," + compRandom + ",1",
+                     duration: compRandom
+                 }
+                 console.log(this.poses[0].animate.scale);
+                 this.play();
+                 // children[i].scene.getAnimation(0).animate.ease[t] = s;
+                 // children[i].scene.stop();
+
+             }
+         }
+
+         l += 1;*/
+
+        //setTimeout(this.handleTimeout.bind(this), (interval / 2));
+        // handle = setInterval(this.handleInterval.bind(this), interval);
+    },
+    animateElem: function(elem) {
+        var randomVal, currentElem, propsObj, randCol;
+        currentElem = elem;
+        randomVal = this.getRandom();
+        randCol = this.randomColor();
+        propsObj = {
+            scale: "1," + randomVal + ",1",
+            "background-color": randCol,
+            duration: duration,
+            ease: easing.quartOut
+        }
+        animate([elem], propsObj, { autoPlay: true, completed: this.completedAnim });
+    },
+
+    completedAnim: function() {
+        ++counter;
+        if (counter === 10) {
+            kindRef.startAnimation();
+            counter = 0;
+        }
+
+    },
+    /*  handleInterval: function() {
+          var children = this.$.container2.children;
+          var len = children.length,
+              i;
+          if (l === len) {
+              clearInterval(handle);
+              this.$.container2.destroyClientControls();
+              for (i = 0; i < 10; i++) {
+                  this.$.container2.createComponent({ classes: "bar", scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } });
+              }
+
+              this.render();
+          }
+
+          for (i = 0; i < len; i++) {
+              // Time between 1 to 100 (fixed interval)
+              t = (((l * interval) * 100) / duration);
+              // Scale between 40 to 100 (random interval)
+              s = this.getRandom();
+              children[i].scene.getAnimation(0).animate.ease[t] = s;
+              children[i].scene.stop();
+              children[i].scene.play();
+          }
+          l += 1;
+      },*/
+
+    getRandom: function() {
+        return Math.floor(30 + (Math.random() * 40));
+    },
+    randomColor: function() {
+        return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+    },
+    destroy: kind.inherit(function(sup) {
+        return function() {
+            sup.apply(this, arguments);
+        };
+    })
+});
+
+}],'src/SequenceAnimation':[function (module,exports,global,require,request){
 /*jslint white: true*/
 var kind = require('enyo/kind'),
     animate = require('enyo/scene'),
@@ -581,150 +725,6 @@ module.exports = kind({
                 animate([that.$.circle2], { translate: "300px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
                 animate([that.$.circle3], { translate: "600px,0,0", duration: 1000 }, { autoPlay: true, isSequence: false });
             }
-        };
-    })
-});
-
-}],'src/EqualizerAnimation':[function (module,exports,global,require,request){
-var
-    kind = require('enyo/kind'),
-    sceneSupport = require('enyo/sceneSupport'),
-    animate = require('enyo/scene'),
-    easing = require('enyo/easing'),
-    image = require('enyo/Image');
-
-var duration = 150,
-    laps = 10,
-    counter = 0,
-    interval = duration / laps;
-
-var t, s, l = 1,
-    handle, kindRef;
-
-module.exports = kind({
-    name: "equalizer",
-    classes: "enyo-fit equalizer",
-    components: [
-        { name: "container1", classes: "container container-background" },
-        { name: "container2", classes: "container" }
-    ],
-
-    create: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
-            for (var i = 0; i < 10; i++) {
-                this.$.container1.createComponent({ classes: "bar" });
-                this.$.container2.createComponent({ classes: "bar", /*mixins: [sceneSupport], scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } */ });
-            }
-        };
-    }),
-
-    rendered: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
-            kindRef = this;
-            this.startAnimation();
-        };
-    }),
-    startAnimation: function() {
-        var children = this.$.container2.children;
-        var currentActor, currentActorProps, that, compRandom;
-        var len = children.length,
-            i;
-        l = 1;
-        for (var i = 0; i < len; i++) {
-            this.animateElem(children[i]);
-        }
-        /* that = this;
-         for (i = 0; i < len; i++) {
-             t = (((l * interval) * 100) / duration);
-             s = this.getRandom();
-             currentActor = children[i];
-             currentActor.scene.poses[0].animate = {
-                 scale: "1," + s + ",1",
-                 duration: s
-             };
-             // currentActorProps = children[i].scene.poses[0].animate;
-             // currentActorProps.scale = "1," + s + ",1";
-             // currentActorProps.duration = s;
-             currentActor.scene.play();
-             currentActor.scene.completed = function() {
-                 console.dir(this);
-                 compRandom = that.getRandom();
-                 this.poses[0].animate = {
-                     scale: "1," + compRandom + ",1",
-                     duration: compRandom
-                 }
-                 console.log(this.poses[0].animate.scale);
-                 this.play();
-                 // children[i].scene.getAnimation(0).animate.ease[t] = s;
-                 // children[i].scene.stop();
-
-             }
-         }
-
-         l += 1;*/
-
-        //setTimeout(this.handleTimeout.bind(this), (interval / 2));
-        // handle = setInterval(this.handleInterval.bind(this), interval);
-    },
-    animateElem: function(elem) {
-        var randomVal, currentElem, propsObj, randCol;
-        currentElem = elem;
-        randomVal = this.getRandom();
-        randCol = this.randomColor();
-        propsObj = {
-            scale: "1," + randomVal + ",1",
-            "background-color": randCol,
-            duration: duration,
-            ease: easing.easeOutQuad
-        }
-        animate([elem], propsObj, { autoPlay: true, completed: this.completedAnim });
-    },
-
-    completedAnim: function() {
-        ++counter;
-        if (counter === 10) {
-            kindRef.startAnimation();
-            counter = 0;
-        }
-
-    },
-    /*  handleInterval: function() {
-          var children = this.$.container2.children;
-          var len = children.length,
-              i;
-          if (l === len) {
-              clearInterval(handle);
-              this.$.container2.destroyClientControls();
-              for (i = 0; i < 10; i++) {
-                  this.$.container2.createComponent({ classes: "bar", scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } });
-              }
-
-              this.render();
-          }
-
-          for (i = 0; i < len; i++) {
-              // Time between 1 to 100 (fixed interval)
-              t = (((l * interval) * 100) / duration);
-              // Scale between 40 to 100 (random interval)
-              s = this.getRandom();
-              children[i].scene.getAnimation(0).animate.ease[t] = s;
-              children[i].scene.stop();
-              children[i].scene.play();
-          }
-          l += 1;
-      },*/
-
-    getRandom: function() {
-        return Math.floor(30 + (Math.random() * 40));
-    },
-    randomColor: function() {
-        return 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-    },
-    destroy: kind.inherit(function(sup) {
-        return function() {
-            sup.apply(this, arguments);
         };
     })
 });

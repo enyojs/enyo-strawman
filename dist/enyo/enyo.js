@@ -145,40 +145,28 @@ PathResolverFactory.prototype = {
 
 var easing = module.exports = {
 	/**
-	* linear
-	*
+	* Linear ease with no acceleration
 	* @public
 	*/
 	linear: function(n) {
 		return n;
 	},
 	/**
-	* cubicIn
-	*
+	* Accelerating with second-degree polynomial.
 	* @public
 	*/
-	cubicIn: function(n) {
-		return Math.pow(n, 3);
+	quadIn: function(t) {
+		return t * t;
 	},
 	/**
-	* cubicOut
-	*
+	* Deaccelerating with second-degree polynomial.
 	* @public
 	*/
-	cubicOut: function(n) {
-		return Math.pow(n - 1, 3) + 1;
+	quadOut: function(t) {
+		return -1 * t * (t - 2);
 	},
 	/**
-	* expoOut
-	*
-	* @public
-	*/
-	expoOut: function(n) {
-		return (n == 1) ? 1 : (-1 * Math.pow(2, -10 * n) + 1);
-	},
-	/**
-	* quadInOut
-	*
+	* Halfway accelerating and then deaccelerating with second-degree polynomial.
 	* @public
 	*/
 	quadInOut: function(n) {
@@ -188,232 +176,174 @@ var easing = module.exports = {
 		}
 		return -1 * ((--n) * (n - 2) - 1) / 2;
 	},
-
 	/**
-	 * EaseInQuad
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number} - calculated time
-	 */
-	easeInQuad: function(t) {
-		return t * t;
+	* Accelerating with third-degree polynomial.
+	* @public
+	*/
+	cubicIn: function(n) {
+		return Math.pow(n, 3);
 	},
-
 	/**
-	 * EaseOutQuad 
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutQuad: function(t) {
-		return -1 * t * (t - 2);
+	* Deaccelerating with third-degree polynomial.
+	* @public
+	*/
+	cubicOut: function(n) {
+		return Math.pow(n - 1, 3) + 1;
 	},
-
 	/**
-	 * EaseInOutQuad 
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutQuad: function(t) {
-		if ((t *= 2) < 1) return 0.5 * t * t;
-		return -0.5 * ((--t) * (t - 2) - 1);
-	},
-
-	/**
-	 * EaseInCubic 
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInCubic: function(t) {
-		return t * t * t;
-	},
-
-	/**
-	 * EaseOutCubic 
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutCubic: function(t) {
-		return --t * t * t + 1;
-	},
-
-	/**
-	 * EaseInOutCubic
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutCubic: function(t) {
+	* Halfway accelerating and then deaccelerating with third-degree polynomial.
+	* @public
+	*/
+	cubicInOut: function(t) {
 		if ((t *= 2) < 1) return 0.5 * t * t * t;
 		return 0.5 * ((t -= 2) * t * t + 2);
 	},
-
 	/**
-	 * EaseInQuart
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInQuart: function(t) {
+	* Accelerating with fourth-degree polynomial
+	* @public
+	*/
+	quartIn: function(t) {
 		return t * t * t * t;
 	},
-
 	/**
-	 * EaseOutQuart
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutQuart: function(t) {
+	* Deaccelerating with fourth-degree polynomial
+	* @public
+	*/
+	quartOut: function(t) {
 		return -1 * (--t * t * t * t - 1);
 	},
-
 	/**
-	 * EaseInOutQuart
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
+	* Halfway accelerating and then deaccelerating with fourth-degree polynomial
+	* @public
+	*/
 	easeInOutQuart: function(t) {
 		if ((t *= 2) < 1) return 0.5 * t * t * t * t;
 		return -0.5 * ((t -= 2) * t * t * t - 2);
 	},
-
 	/**
-	 * EaseInQuint
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInQuint: function(t) {
+	* Accelerating with fifth-degree polynomial
+	* @public
+	*/
+	quintIn: function(t) {
 		return t * t * t * t * t;
 	},
 	/**
-	 * EaseOutQuint
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutQuint: function(t) {
+	* Deaccelerating with fifth-degree polynomial
+	* @public
+	*/
+	quintOut: function(t) {
 		return --t * t * t * t * t + 1;
 	},
-
 	/**
-	 * EaseInOutQuint
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutQuint: function(t, d) {
+	* Halfway accelerating and then deaccelerating with fifth-degree polynomial
+	* @public
+	*/
+	quintInOut: function(t, d) {
 		if ((t *= 2) < 1) return 0.5 * t * t * t * t * t;
 		return 0.5 * ((t -= 2) * t * t * t * t + 2);
 	},
-
 	/**
-	 * EaseInSine
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInSine: function(t) {
+	* Accelerating using a sine formula
+	* @public
+	*/
+	sineIn: function(t) {
 		return -1 * Math.cos(t * (Math.PI / 2)) + 1;
 	},
-
 	/**
-	 * EaseOutSine
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutSine: function(t) {
+	* Deaccelerating using a sine formula
+	* @public
+	*/
+	sineOut: function(t) {
 		return Math.sin(t * (Math.PI / 2));
 	},
-
 	/**
-	 * EaseInOutSine
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutSine: function(t) {
+	* Halfway accelerating and then deaccelerating using a sine formula
+	* @public
+	*/
+	sineInOut: function(t) {
 		return -0.5 * (Math.cos(Math.PI * t) - 1);
 	},
-
 	/**
-	 * EaseInExpo
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInExpo: function(t) {
+	* Accelerating using an exponential formula
+	* @public
+	*/
+	expoIn: function(t) {
 		return (t === 0) ? 0 : Math.pow(2, 10 * (t - 1));
 	},
-
 	/**
-	 * EaseOutExpo
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutExpo: function(t) {
-		return (t === 1) ? 1 : -Math.pow(2, -10 * t) + 1;
+	* Deaccelerating using an exponential formula
+	* @public
+	*/
+	expoOut: function(n) {
+		return (n == 1) ? 1 : (-1 * Math.pow(2, -10 * n) + 1);
 	},
-
 	/**
-	 * EaseInOutExpo
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutExpo: function(t) {
+	* Halfway accelerating and then deaccelerating using an exponential formula
+	* @public
+	*/
+	expoInOut: function(t) {
 		if (t === 0) return 0;
 		if (t === 1) return 1;
 		if ((t *= 2) < 1) return 0.5 * Math.pow(2, 10 * (t - 1));
 		return 0.5 * (-Math.pow(2, -10 * --t) + 2);
 	},
-
 	/**
-	 * EaseInCirc
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInCirc: function(t) {
+	* Accelerating using a circular function
+	* @public
+	*/
+	circIn: function(t) {
 		return -1 * (Math.sqrt(1 - t * t) - 1);
 	},
-
 	/**
-	 * EaseOutCirc
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutCirc: function(t) {
+	* Deaccelerating using a circular function
+	* @public
+	*/
+	circOut: function(t) {
 		return Math.sqrt(1 - (--t * t));
 	},
-
 	/**
-	 * EaseInOutCirc
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutCirc: function(t) {
+	* Halfway accelerating and then deaccelerating using a circular function
+	* @public
+	*/
+	circInOut: function(t) {
 		if ((t *= 2) < 1) return -0.5 * (Math.sqrt(1 - t * t) - 1);
 		return 0.5 * (Math.sqrt(1 - (t -= 2) * t) + 1);
 	},
-
 	/**
-	 * EaseInElastic
-	 * @public
-	 * @param  {number} t - current time 
-	 * @param  {number} d - duration
-	 * @return {number}   calculated time
-	 */
-	easeInElastic: function(t, d) {
+	* Accelerating with a bouncing effect
+	* @public
+	*/
+	bounceIn: function(t) {
+		return 1 - easing.bounceOut(1 - t);
+	},
+	/**
+	* Deaccelerating with a bouncing effect
+	* @public
+	*/
+	bounceOut: function(t) {
+		if (t < 0.363636) {
+			return 7.5625 * t * t;
+		} else if (t < 0.727272) {
+			return 7.5625 * (t -= 0.545454) * t + 0.75;
+		} else if (t < (2.5 / 2.75)) {
+			return 7.5625 * (t -= 0.818182) * t + 0.9375;
+		} else {
+			return 7.5625 * (t -= 0.954545) * t + 0.984375;
+		}
+	},
+	/**
+	* Halfway accelerating and then deaccelerating with a bouncing effect
+	* @public
+	*/
+	bounceInOut: function(t) {
+		if (t < 0.5) return easing.bounceIn(t * 2) * 0.5;
+		return easing.bounceOut(t * 2 - 1) * 0.5 + 0.5;
+	},
+	/**
+	* Accelerating as a spring oscillating back and forth until it comes to rest
+	* @public
+	*/
+	elasticIn: function(t, d) {
 		var a = 1,
 			p = 0,
 			s = 1.70158;
@@ -426,54 +356,11 @@ var easing = module.exports = {
 		} else s = p / (2 * Math.PI) * Math.asin(1 / a);
 		return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p));
 	},
-
 	/**
-	 * EaseInBounce
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInBounce: function(t) {
-		return 1 - easing.easeOutBounce(1 - t);
-	},
-
-	/**
-	 * EaseOutBounce
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeOutBounce: function(t) {
-		if (t < 0.363636) {
-			return 7.5625 * t * t;
-		} else if (t < 0.727272) {
-			return 7.5625 * (t -= 0.545454) * t + 0.75;
-		} else if (t < (2.5 / 2.75)) {
-			return 7.5625 * (t -= 0.818182) * t + 0.9375;
-		} else {
-			return 7.5625 * (t -= 0.954545) * t + 0.984375;
-		}
-	},
-
-	/**
-	 * EaseInOutBounce
-	 * @public
-	 * @param  {number} t - current time
-	 * @return {number}   calculated time
-	 */
-	easeInOutBounce: function(t) {
-		if (t < 0.5) return easing.easeInBounce(t * 2) * 0.5;
-		return easing.easeOutBounce(t * 2 - 1) * 0.5 + 0.5;
-	},
-
-	/**
-	 * EaseOutElastic
-	 * @public
-	 * @param  {number} t - current time 
-	 * @param  {number} d - duration
-	 * @return {number}   calculated time
-	 */
-	easeOutElastic: function(t, d) {
+	* Deaccelerating as a spring oscillating back and forth until it comes to rest
+	* @public
+	*/
+	elasticOut: function(t, d) {
 		var a = 1,
 			p = 0,
 			s = 1.70158;
@@ -486,15 +373,12 @@ var easing = module.exports = {
 		} else s = p / (2 * Math.PI) * Math.asin(1 / a);
 		return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + 1;
 	},
-
 	/**
-	 * EaseInOutElastic
-	 * @public
-	 * @param  {number} t - current time 
-	 * @param  {number} d - duration
-	 * @return {number}   calculated time
-	 */
-	easeInOutElastic: function(t, d) {
+	* Halfway accelerating and then deaccelerating as a spring 
+	* oscillating back and forth until it comes to rest
+	* @public
+	*/
+	elasticInOut: function(t, d) {
 		var a = 1,
 			p = 0,
 			s = 1.70158;
@@ -508,39 +392,28 @@ var easing = module.exports = {
 		if (t < 1) return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p));
 		return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + 1;
 	},
-
 	/**
-	 * EaseInBack
-	 * @public
-	 * @param  {number} t - current time 
-	 * @param  {number} d - duration
-	 * @return {number}   calculated time
-	 */
-	easeInBack: function(t, d, s) {
+	* Accelerating while retracting slightly before it begins to animate in the path indicated
+	* @public
+	*/
+	backIn: function(t, d, s) {
 		if (!s) s = 1.70158;
 		return t * t * ((s + 1) * t - s);
 	},
-
 	/**
-	 * EaseOutBack
-	 * @public
-	 * @param  {number} t - current time 
-	 * @param  {number} d - duration
-	 * @return {number}   calculated time
-	 */
-	easeOutBack: function(t, d, s) {
+	* Deaccelerating while retracting slightly before it begins to animate in the path indicated
+	* @public
+	*/
+	backOut: function(t, d, s) {
 		if (!s) s = 1.70158;
 		return --t * t * ((s + 1) * t + s) + 1;
 	},
-
 	/**
-	 * EaseInOutBack
-	 * @public
-	 * @param  {number} t - current time 
-	 * @param  {number} d - duration
-	 * @return {number}   calculated time
-	 */
-	easeInOutBack: function(t, d, s) {
+	* Halfway accelerating and then deaccelerating while retracting 
+	* slightly before it begins to animate in the path indicated
+	* @public
+	*/
+	backInOut: function(t, d, s) {
 		if (!s) s = 1.70158;
 		if ((t *= 2) < 1) return 0.5 * (t * t * (((s *= (1.525)) + 1) * t - s));
 		return 0.5 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2);
@@ -562,103 +435,7 @@ var PathResolverFactory = require('./PathResolverFactory');
 
 module.exports = new PathResolverFactory();
 
-},{'./PathResolverFactory':'enyo/PathResolverFactory'}],'enyo/ready':[function (module,exports,global,require,request){
-require('enyo');
-
-// we need to register appropriately to know when
-// the document is officially ready, to ensure that
-// client code is only going to execute at the
-// appropriate time
-
-var doc = global.document;
-var queue = [];
-var ready = ("complete" === doc.readyState);
-var run;
-var init;
-var remove;
-var add;
-var flush;
-var flushScheduled = false;
-
-/**
-* Registers a callback (and optional `this` context) to run after all the Enyo and library code
-* has loaded and the `DOMContentLoaded` event (or equivalent on older browsers) has been sent.
-* 
-* If called after the system is in a ready state, runs the supplied code asynchronously at the
-* earliest opportunity.
-*
-* @module enyo/ready
-* @param {Function} fn - The method to execute when the DOM is ready.
-* @param {Object} [context] - The optional context (`this`) under which to execute the
-*	callback method.
-* @public
-*/
-module.exports = function (fn, context) {
-	queue.push([fn, context]);
-	// schedule another queue flush if needed to run new ready calls
-	if (ready && !flushScheduled) {
-		setTimeout(flush, 0);
-		flushScheduled = true;
-	}
-};
-
-/**
-* @private
-*/
-run = function (fn, context) {
-	fn.call(context || global);
-};
-
-/**
-* @private
-*/
-init = function (event) {
-	// if we're interactive, it should be safe to move
-	// forward because the content has been parsed
-	if ((ready = ("interactive" === doc.readyState))) {
-		if ("DOMContentLoaded" !== event.type && "readystatechange" !== event.type) {
-			remove(event.type, init);
-			flush();
-		}
-	}
-	// for legacy WebKit (including webOS 3.x and less) and assurance
-	if ((ready = ("complete" === doc.readyState || "loaded" === doc.readyState))) {
-		remove(event.type, init);
-		flush();
-	}
-};
-
-/**
-* @private
-*/
-add = function (event, fn) {
-	doc.addEventListener(event, fn, false);
-};
-
-/**
-* @private
-*/
-remove = function (event, fn) {
-	doc.removeEventListener(event, fn, false);
-};
-
-/**
-* @private
-*/
-flush = function () {
-	if (ready && queue.length) {
-		while (queue.length) {
-			run.apply(global, queue.shift());
-		}
-	}
-	flushScheduled = false;
-};
-
-// ok, let's hook this up
-add("DOMContentLoaded", init);
-add("readystatechange", init);
-
-}],'enyo/utils':[function (module,exports,global,require,request){
+},{'./PathResolverFactory':'enyo/PathResolverFactory'}],'enyo/utils':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -1900,141 +1677,742 @@ var rtlPattern = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\u
 exports.isRtl = function (str) {
 	return rtlPattern.test(str);
 };
-}],'enyo/job':[function (module,exports,global,require,request){
+}],'enyo/transform':[function (module,exports,global,require,request){
+/**
+* Contains the declaration for the {@link module:enyo/transform~transform} kind.
+* @module enyo/transform
+*/
 require('enyo');
 
 /**
-* Contains methods for dealing with jobs.
-* @module enyo/job
-*/
-var _jobs = {};
+ * To create a Typed_array
+ * @param  {Number} size The size of the buffer required
+ * @return {Number[]}   Typed_array
+ */
+function typedArray (size) {
+	return new Float32Array(new ArrayBuffer(size));
+}
 
 /**
-* Runs a job after a specified amount of time has elapsed
-* since a job with the same name has run.
-* 
-* Jobs can be used to throttle behaviors.  If some event may occur one time or
-* multiple times, but we want a response to occur only once every `n` seconds,
-* we can use a job.
-*
-* ```
-* onscroll: function() {
-* 	// updateThumb will be called, but only when 1 second has elapsed since the
-* 	// last onscroll
-* 	exports("updateThumb", this.bindSafely("updateThumb"), 1000);
-* }
-* ```
-*
-* @param {String} nom - The name of the job to throttle.
-* @param {(Function|String)} job - Either the name of a method or a [function]{@glossary Function}
-*                                to execute as the requested job.
-* @param {Number} wait - The number of milliseconds to wait before executing the job again.
-* @function
-* @public
-*/
-exports = module.exports = function (nom, job, wait) {
-	exports.stop(nom);
-	_jobs[nom] = setTimeout(function() {
-		exports.stop(nom);
-		job();
-	}, wait);
-};
-
-/**
-* Cancels the named job, if it has not already fired.
-*
-* @param {String} nom - The name of the job to cancel.
-* @static
-* @public
-*/
-exports.stop = function (nom) {
-	if (_jobs[nom]) {
-		clearTimeout(_jobs[nom]);
-		delete _jobs[nom];
+ * To input the specified indices with value 1
+ * @param  {Number[]} matrix    typedArray sent
+ * @param  {Number[]} numberMat indices where value has to be 1
+ */
+function inputValues (matrix, numberMat) {
+	for (var i = 0; i < numberMat.length; i++) {
+		matrix[numberMat[i]] = 1;
 	}
-};
-
-/**
-* Immediately invokes the job and prevents any other calls
-* to `exports.throttle()` with the same job name from running for the
-* specified amount of time.
-* 
-* This is used for throttling user events when you want to provide an
-* immediate response, but later invocations might just be noise if they arrive
-* too often.
-* 
-* @param {String} nom - The name of the job to throttle.
-* @param {(Function|String)} job - Either the name of a method or a [function]{@glossary Function}
-*                                to execute as the requested job.
-* @param {Number} wait - The number of milliseconds to wait before executing the
-*                      job again.
-* @static
-* @public
-*/
-exports.throttle = function (nom, job, wait) {
-	// if we still have a job with this name pending, return immediately
-	if (_jobs[nom]) {
-		return;
-	}
-	job();
-	_jobs[nom] = setTimeout(function() {
-		exports.stop(nom);
-	}, wait);
-};
-
-}],'enyo/json':[function (module,exports,global,require,request){
-require('enyo');
+}
 
 
 /**
-* [JSON]{@glossary JSON} related methods and wrappers.
-*
-* @module enyo/json
-* @public
-*/
-module.exports = {
-	
+ * To translate in any dimension based on co-ordinates.
+ * @public
+ * @param  {Number}   x Translate value in X axis
+ * @param  {Number}   y Translate value in Y axis
+ * @param  {Number}   z Translate value in Z axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.translate = function(x, y, z) {
+	var translateMat, modifiedMat;
+	translateMat = typedArray(64);
+	modifiedMat = inputValues(translateMat, new Uint8Array([0, 5, 10, 15]));
+	translateMat[12] = x;
+	translateMat[13] = y ? y : 0;
+	translateMat[14] = z ? z : 0;
+	return translateMat;
+};
+
+/**
+ * To translate in x dimension
+ * @public
+ * @param  {Number}   x Translate value in X axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.translateX = function(x) {
+	var translateX, modifiedMat;
+	translateX = typedArray(64);
+	modifiedMat = inputValues(translateX, new Uint8Array([0, 5, 10, 15]));
+	translateX[12] = x ? x : 0;
+	return translateX;
+};
+
+/**
+ * To translate in y dimension
+ * @public
+ * @param  {Number}   y Translate value in Y axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.translateY = function(y) {
+	var translateY, modifiedMat;
+	translateY = typedArray(64);
+	modifiedMat = inputValues(translateY, new Uint8Array([0, 5, 10, 15]));
+	translateY[13] = y ? y : 0;
+	return translateY;
+};
+
+/**
+ * To translate in z dimension
+ * @public
+ * @param  {Number}   z Translate value in Z axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.translateZ = function(z) {
+	var translateZ, modifiedMat;
+	translateZ = typedArray(64);
+	modifiedMat = inputValues(translateZ, new Uint8Array([0, 5, 10, 15]));
+	translateZ[14] = z ? z : 0;
+	return translateZ;
+};
+
+/**
+ * To scale in any dimension
+ * @public
+ * @param  {Number}   x Scale value in X axis
+ * @param  {Number}   y Scale value in Y axis
+ * @param  {Number}   z Scale value in Z axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.scale = function(x, y, z) {
+	var scaleMat = typedArray(64);
+	scaleMat[0] = x;
+	scaleMat[5] = y ? y : 1;
+	scaleMat[10] = z ? z : 1;
+	scaleMat[15] = 1;
+	return scaleMat;
+};
+
+/**
+ * To skew in any dimension (skew can only happen in 2d)
+ * @public
+ * @param  {Number}   a Skew value in X axis
+ * @param  {Number}   b Skew value in Y axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.skew =function(a, b) {
+	var skewMat, modifiedMat;
+	a = a ? Math.tan(a * Math.PI / 180) : 0;
+	b = b ? Math.tan(b * Math.PI / 180) : 0;
+
+	skewMat = typedArray(64);
+	modifiedMat = inputValues(skewMat, new Uint8Array([0, 5, 10, 15]));
+	skewMat[1] = b;
+	skewMat[4] = a;
+	return skewMat;
+};
+
+/**
+ * To rotate in x-axis
+ * @public
+ * @param  {Number}   a Rotate value in X axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.rotateX = function(a) {
+	var cosa, sina, rotateXMat, modifiedMat;
+	a = a ? a * Math.PI / 180 : 0;
+	cosa = Math.cos(a);
+	sina = Math.sin(a);
+
+	rotateXMat = typedArray(64);
+	modifiedMat = inputValues(rotateXMat, new Uint8Array([0, 15]));
+	rotateXMat[5] = cosa;
+	rotateXMat[6] = -sina;
+	rotateXMat[9] = sina;
+	rotateXMat[10] = cosa;
+	return rotateXMat;
+};
+
+/**
+ * To rotate in y-axis
+ * @public
+ * @param  {Number}   b Rotate value in Y axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.rotateY = function(b) {
+	var cosb, sinb, rotateYMat, modifiedMat;
+	b = b ? b * Math.PI / 180 : 0;
+	cosb = Math.cos(b);
+	sinb = Math.sin(b);
+
+	rotateYMat = typedArray(64);
+	modifiedMat = inputValues(rotateYMat, new Uint8Array([5, 15]));
+	rotateYMat[0] = cosb;
+	rotateYMat[2] = sinb;
+	rotateYMat[8] = -sinb;
+	rotateYMat[10] = cosb;
+	return rotateYMat;
+};
+
+/**
+ * To rotate in z-axis
+ * @public
+ * @param  {Number}   g Rotate value in Z axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.rotateZ = function(g) {
+	var cosg, sing, rotateZMat;
+	g = g ? g * Math.PI / 180 : 0;
+	cosg = Math.cos(g);
+	sing = Math.sin(g);
+
+	rotateZMat = typedArray(64);
+	rotateZMat[0] = cosg;
+	rotateZMat[1] = -sing;
+	rotateZMat[4] = sing;
+	rotateZMat[5] = cosg;
+	rotateZMat[15] = 1;
+	return rotateZMat;
+};
+
+/**
+ * To rotate in any dimension
+ * @public
+ * @param  {Number}   a Rotate value in X axis
+ * @param  {Number}   b Rotate value in Y axis
+ * @param  {Number}   g Rotate value in Z axis
+ * @return {Number[]}   Matrix3d
+ */
+exports.rotate = function(a, b, g) {
+	var ca, sa, cb, sb, cg, sg, rotateMat;
+	a = a ? a * Math.PI / 180 : 0;
+	b = b ? b * Math.PI / 180 : 0;
+	g = g ? g * Math.PI / 180 : 0;
+	ca = Math.cos(a);
+	sa = Math.sin(a);
+	cb = Math.cos(b);
+	sb = Math.sin(b);
+	cg = Math.cos(g);
+	sg = Math.sin(g);
+
+	rotateMat = typedArray(64);
+	rotateMat[0] = cb * cg;
+	rotateMat[1] = ca * sg + sa * sb * cg;
+	rotateMat[2] = sa * sg - ca * sb * cg;
+	rotateMat[4] = -cb * sg;
+	rotateMat[5] = ca * cg - sa * sb * sg;
+	rotateMat[6] = sa * cg + ca * sb * sg;
+	rotateMat[8] = sb;
+	rotateMat[9] = -sa * cb;
+	rotateMat[10] = ca * cb;
+	rotateMat[15] = 1;
+	return rotateMat;
+};
+
+exports.Matrix = {
+
 	/**
-	* Wrapper for [JSON.stringify()]{@glossary JSON.stringify}. Creates a
-	* [JSON]{@glossary JSON} [string]{@glossary String} from an
-	* [object]{@glossary Object}.
-	*
-	* @see {@glossary JSON.stringify}
-	* @param {Object} value - The [object]{@glossary Object} to convert to a
-	*	[JSON]{@glossary JSON} [string]{@glossary String}.
-	* @param {(Function|String[])} [replacer] An optional parameter indicating either an
-	*	[array]{@glossary Array} of keys to include in the final output or a
-	*	[function]{@glossary Function} that will have the opportunity to dynamically return
-	*	values to include for keys.
-	* @param {(Number|String)} [space] - Determines the spacing (if any) for pretty-printed
-	*	output of the JSON string. A [number]{@glossary Number} indicates the number of
-	* spaces to use in the output, while a string will be used verbatim.
-	* @returns {String} The JSON string for the given object.
-	* @public
-	*/
-	stringify: function(value, replacer, space) {
-		return JSON.stringify(value, replacer, space);
+	 * To create Identity Matrix3d as array.
+	 * @public
+	 * @return {Number[]} Identity Matrix3d
+	 */
+	identity: function() {
+		var identityMatrix, modifiedMat;
+		identityMatrix = typedArray(64);
+		modifiedMat = inputValues(identityMatrix, new Uint8Array([0, 5, 10, 15]));
+		return identityMatrix;
 	},
-	
+
 	/**
-	* Wrapper for [JSON.parse()]{@glossary JSON.parse}. Parses a valid
-	* [JSON]{@glossary JSON} [string]{@glossary String} and returns an
-	* [object]{@glossary Object}, or `null` if the parameters are invalid.
-	*
-	* @see {@glossary JSON.parse}
-	* @param {String} json - The [JSON]{@glossary JSON} [string]{@glossary String} to
-	*	parse into an [object]{@glossary Object}.
-	* @param {Function} [reviver] - The optional [function]{@glossary Function} to use to
-	*	parse individual keys of the return object.
-	* @returns {(Object|null)} If parameters are valid, an [object]{@glossary Object}
-	* is returned; otherwise, `null`.
-	* @public
-	*/
-	parse: function(json, reviver) {
-		return json ? JSON.parse(json, reviver) : null;
+	 * To create Identity Matrix2d as array.
+	 * @public
+	 * @return {Number[]} Identity Matrix2d as array
+	 */
+	identity2D: function() {
+		var identity2D, modifiedMat;
+		identity2D = typedArray(36);
+		modifiedMat = inputValues(identity2D, new Uint8Array([0, 4, 8]));
+		return identity2D;
+	},
+
+
+	/**
+	 * To create Identity Matrix (NXN order).
+	 * @public
+	 * @param  {Number}   N Order of Identity Matrix
+	 * @return {Number[][]} Identity Matrix of order N
+	 */
+	identityMatrix: function(N) {
+		var i, j, row, result = [];
+		for (i = 0; i < N; i++) {
+			row = [];
+			for (j = 0; j < N; j++) {
+				if (i === j) {
+					row.push(1);
+				} else {
+					row.push(0);
+				}
+			}
+			result.push(row);
+		}
+		return result;
+	},
+	/**
+	 * To multiply 2 Martix3d (4x4 order)
+	 * @public
+	 * @param  {Number[]} m1 1st Matrix3d
+	 * @param  {Number[]} m2 2nd Matrix3d
+	 * @return {Number[]}    Resultant Matrix3d
+	 */
+	multiply: function(m1, m2) {
+		if (m1.length !== 16 || m2.length !== 16) return;
+		var multiplyMat = typedArray(64);
+		multiplyMat[0] = m1[0] * m2[0] + m1[4] * m2[1] + m1[8] * m2[2];
+		multiplyMat[1] = m1[1] * m2[0] + m1[5] * m2[1] + m1[9] * m2[2];
+		multiplyMat[2] = m1[2] * m2[0] + m1[6] * m2[1] + m1[10] * m2[2];
+		multiplyMat[4] = m1[0] * m2[4] + m1[4] * m2[5] + m1[8] * m2[6];
+		multiplyMat[5] = m1[1] * m2[4] + m1[5] * m2[5] + m1[9] * m2[6];
+		multiplyMat[6] = m1[2] * m2[4] + m1[6] * m2[5] + m1[10] * m2[6];
+		multiplyMat[8] = m1[0] * m2[8] + m1[4] * m2[9] + m1[8] * m2[10];
+		multiplyMat[9] = m1[1] * m2[8] + m1[5] * m2[9] + m1[9] * m2[10];
+		multiplyMat[10] = m1[2] * m2[8] + m1[6] * m2[9] + m1[10] * m2[10];
+		multiplyMat[12] = m1[0] * m2[12] + m1[4] * m2[13] + m1[8] * m2[14] + m1[12];
+		multiplyMat[13] = m1[1] * m2[12] + m1[5] * m2[13] + m1[9] * m2[14] + m1[13];
+		multiplyMat[14] = m1[2] * m2[12] + m1[6] * m2[13] + m1[10] * m2[14] + m1[14];
+		multiplyMat[15] = 1;
+		return multiplyMat;
+	},
+
+	/**
+	 * To multiply 2 Martix3d (n*n order)
+	 * @param  {Number[]} m1 1st Matrix3d
+	 * @param  {Number[]} m2 2nd Matrix3d
+	 * @return {Number[]}    Resultant Matrix3d
+	 */
+	multiplyN: function(m1, m2) {
+		var i, j, sum,
+			m = [],
+			l1 = m1.length,
+			l2 = m2.length;
+
+		for (i = 0; i < l1; i++) {
+			sum = 0;
+			for (j = 0; j < l2; j++) {
+				sum += m1[i][j] * m2[j];
+			}
+			m.push(sum);
+		}
+		return m;
+	},
+
+	/**
+	 * To inverse matrix of order N
+	 * @public
+	 * @param  {Number[]} matrix Matrix (NxN order)
+	 * @param  {Number}   n      Order of the matrix
+	 * @return {Number[]}        Inverted Matrix
+	 */
+	inverseN: function(matrix, n) {
+		var i, j, k, r, t,
+			result = this.identityMatrix(n);
+
+		for (i = 0; i < n; i++) {
+			for (j = 0; j < n; j++) {
+				if (i != j) {
+					r = matrix[j][i] / matrix[i][i];
+					for (k = 0; k < n; k++) {
+						matrix[j][k] -= r * matrix[i][k];
+						result[j][k] -= r * result[i][k];
+					}
+				}
+			}
+		}
+
+		for (i = 0; i < n; i++) {
+			t = matrix[i][i];
+			for (j = 0; j < n; j++) {
+				matrix[i][j] = matrix[i][j] / t;
+				result[i][j] = result[i][j] / t;
+			}
+		}
+
+		return result;
+	},
+
+	/**
+	 * Calculate matrix3d of a frame based on transformation vectors.
+	 * @public
+	 * @param  {Number[]} trns Translate vector
+	 * @param  {Number[]} rot  Rotate quaternion vector
+	 * @param  {Number[]} sc   Scale vector
+	 * @param  {Number[]} sq   Skew vector
+	 * @param  {Number[]} per  Perspective vector
+	 * @return {Number[]}      Final Matrix3d for particular frame
+	 */
+	recompose: function(trns, rot, sc, sq, per) {
+		var i,
+			x = rot[0],
+			y = rot[1],
+			z = rot[2],
+			w = rot[3],
+			m = this.identity(),
+			sM = this.identity(),
+			rM = this.identity();
+
+
+		// apply perspective
+		if (per) {
+			m[3] = per[0];
+			m[7] = per[1];
+			m[11] = per[2];
+			m[15] = per[3];
+		}
+
+		m[12] = trns[0];
+		m[13] = trns[1];
+		m[14] = trns[2];
+
+		// apply rotate
+		rM[0] = 1 - 2 * (y * y + z * z);
+		rM[1] = 2 * (x * y - z * w);
+		rM[2] = 2 * (x * z + y * w);
+		rM[4] = 2 * (x * y + z * w);
+		rM[5] = 1 - 2 * (x * x + z * z);
+		rM[6] = 2 * (y * z - x * w);
+		rM[8] = 2 * (x * z - y * w);
+		rM[9] = 2 * (y * z + x * w);
+		rM[10] = 1 - 2 * (x * x + y * y);
+
+		m = this.multiply(m, rM);
+
+		// apply skew
+		if (sq[2]) {
+			sM[9] = sq[2];
+			m = this.multiply(m, sM);
+		}
+
+		if (sq[1]) {
+			sM[9] = 0;
+			sM[8] = sq[1];
+			m = this.multiply(m, sM);
+		}
+
+		if (sq[0]) {
+			sM[8] = 0;
+			sM[4] = sq[0];
+			m = this.multiply(m, sM);
+		}
+
+		// apply scale
+		for (i = 0; i < 12; i += 4) {
+			m[0 + i] *= sc[0];
+			m[1 + i] *= sc[1];
+			m[2 + i] *= sc[2];
+		}
+		return m;
+	},
+
+	/**
+	 * Decompose transformation vectors into various properties out of matrix3d.
+	 * @public
+	 * @param  {Number[]} matrix Matrix3d
+	 * @param  {Object}   ret    To store various transformation properties like translate, rotate, scale, skew and perspective.
+	 * @return {Boolean}         true, if matrix exists else false.
+	 */
+	decompose: function(matrix, ret) {
+		if (matrix[15] === 0) return false;
+		var i,
+			tV = [],
+			rV = [],
+			pV = [],
+			skV = [],
+			scV = [],
+			row = [],
+			pdum3 = [];
+
+		for (i = 0; i < 16; i++)
+			matrix[i] /= matrix[15];
+
+		//TODO: decompose perspective
+		pV = [0, 0, 0, 0];
+
+		for (i = 0; i < 3; i++)
+			tV[i] = matrix[12 + i];
+
+		for (i = 0; i < 12; i += 4) {
+			row.push([
+				matrix[0 + i],
+				matrix[1 + i],
+				matrix[2 + i]
+			]);
+		}
+
+		scV[0] = vector.len(row[0]);
+		row[0] = quaternion.normalize(row[0]);
+		skV[0] = vector.dot(row[0], row[1]);
+		row[1] = vector.combine(row[1], row[0], 1.0, -skV[0]);
+
+		scV[1] = vector.len(row[1]);
+		row[1] = quaternion.normalize(row[1]);
+		skV[0] /= scV[1];
+
+		// Compute XZ and YZ shears, orthogonalized 3rd row
+		skV[1] = vector.dot(row[0], row[2]);
+		row[2] = vector.combine(row[2], row[0], 1.0, -skV[1]);
+		skV[2] = vector.dot(row[1], row[2]);
+		row[2] = vector.combine(row[2], row[1], 1.0, -skV[2]);
+
+		// Next, get Z scale and normalize 3rd row.
+		scV[2] = vector.len(row[2]);
+		row[2] = quaternion.normalize(row[2]);
+		skV[1] /= scV[2];
+		skV[2] /= scV[2];
+
+		pdum3 = vector.cross(row[1], row[2]);
+		if (vector.dot(row[0], pdum3) < 0) {
+			for (i = 0; i < 3; i++) {
+				scV[i] *= -1;
+				row[i][0] *= -1;
+				row[i][1] *= -1;
+				row[i][2] *= -1;
+			}
+		}
+
+		rV[0] = 0.5 * Math.sqrt(Math.max(1 + row[0][0] - row[1][1] - row[2][2], 0));
+		rV[1] = 0.5 * Math.sqrt(Math.max(1 - row[0][0] + row[1][1] - row[2][2], 0));
+		rV[2] = 0.5 * Math.sqrt(Math.max(1 - row[0][0] - row[1][1] + row[2][2], 0));
+		rV[3] = 0.5 * Math.sqrt(Math.max(1 + row[0][0] + row[1][1] + row[2][2], 0));
+
+		if (row[2][1] > row[1][2]) rV[0] = -rV[0];
+		if (row[0][2] > row[2][0]) rV[1] = -rV[1];
+		if (row[1][0] > row[0][1]) rV[2] = -rV[2];
+
+		ret.translate = tV;
+		ret.rotate = rV;
+		ret.scale = scV;
+		ret.skew = skV;
+		ret.perspective = pV;
+		return true;
+	},
+
+	/**
+	 * Decompose transformation matrix2d from matrix3d.
+	 * @public
+	 * @param  {Number[]} matrix Matrix3d
+	 * @param  {Object}   ret    To store various transformation properties like translate, angle and matrix.
+	 * @return {Boolean}  ret    To store various transformation properties like translate, angle and matrix.
+	 */
+	decompose2D: function(m, ret) {
+		var scale = [],
+			matrix = [],
+			row0x = m[0],
+			row0y = m[1],
+			row1x = m[4],
+			row1y = m[5],
+			det, angle, sn, cs,
+			m11, m12, m21, m22;
+
+		ret = ret || {};
+		scale = [
+			Math.sqrt(row0x * row0x + row0y * row0y),
+			Math.sqrt(row1x * row1x + row1y * row1y)
+		];
+
+		// If determinant is negative, one axis was flipped.
+		det = row0x * row1y - row0y * row1x;
+		if (det < 0)
+		// Flip axis with minimum unit vector dot product.
+			if (row0x < row1y)
+				scale[0] = -scale[0];
+			else
+				scale[1] = -scale[1];
+
+			// Renormalize matrix to remove scale. 
+		if (scale[0]) {
+			row0x *= 1 / scale[0];
+			row0y *= 1 / scale[0];
+		}
+
+		if (scale[1]) {
+			row1x *= 1 / scale[1];
+			row1y *= 1 / scale[1];
+		}
+		ret.scale = scale;
+
+
+		// Compute rotation and renormalize matrix. 
+		angle = Math.atan2(row0y, row0x);
+
+		if (angle) {
+			sn = -row0y;
+			cs = row0x;
+			m11 = row0x;
+			m12 = row0y;
+			m21 = row1x;
+			m22 = row1y;
+			row0x = cs * m11 + sn * m21;
+			row0y = cs * m12 + sn * m22;
+			row1x = -sn * m11 + cs * m21;
+			row1y = -sn * m12 + cs * m22;
+		}
+
+		// Rotate(-angle) = [cos(angle), sin(angle), -sin(angle), cos(angle)]
+		//                = [row0x, -row0y, row0y, row0x]
+		// Thanks to the normalization above.
+		matrix[0] = row0x;
+		matrix[1] = row0y;
+		matrix[2] = row1x;
+		matrix[3] = row1y;
+		matrix[4] = m[12];
+		matrix[5] = m[13];
+		ret.matrix2D = matrix;
+
+		// Convert into degrees because our rotation functions expect it.
+		ret.angle = angle * 180 / Math.PI;
+
+		return ret;
+	},
+
+	/**
+	 * Convert Matrix3d array to Matrix3d String
+	 * @public
+	 * @param  {Number[]} m Matrix3d Array
+	 * @return {String}     Matrix3d String
+	 */
+	toString: function(m) {
+		var i, ms = m.length > 10 ? 'matrix3d(' : 'matrix(';
+		for (i = 0; i < m.length - 1; i++) {
+			ms += (m[i] < 0.000001 && m[i] > -0.000001) ? '0,' : m[i] + ',';
+		}
+		ms += m[m.length - 1] + ')';
+		return ms;
 	}
 };
 
+var vector = exports.Vector = {
+	/**
+	 * Length of a vector
+	 * @param  {Number[]} v - vector
+	 * @return {Number} resultant length
+	 * @public
+	 */
+	len: function(v) {
+		return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+	},
+
+	/**
+	 * Divides vector with a scalar value.
+	 * @param  {Number[]} v - vector
+	 * @param  {Number} s - scalar value to divide
+	 * @return {Number[]} resultant vector
+	 * @public
+	 */
+	divide: function(v, s) {
+		var divideVector = new Float32Array([v[0] / s, v[1] / s, v[2] / s]);
+		return divideVector;
+	},
+
+	/**
+	 * Dot product of 3D vectors
+	 * @param  {Number[]} v1 - vector
+	 * @param  {Number[]} v2 - vector
+	 * @return {Number} resultant dot product
+	 * @public
+	 */
+	dot: function(v1, v2) {
+		return (v1[0] * v2[0]) + (v1[1] * v2[1]) + (v1[2] * v2[2]) + (v1[3] !== undefined && v2[3] !== undefined ? (v1[3] * v2[3]) : 0);
+	},
+
+	/**
+	 * Cross product of two vectors
+	 * @param  {Number[]} v1 - vector
+	 * @param  {Number[]} v2 - vector
+	 * @return {Number[]} resultant cross product
+	 * @public
+	 */
+	cross: function(v1, v2) {
+		var crossProdMat = new Float32Array([v1[1] * v2[2] - v1[2] * v2[1], v1[2] * v2[0] - v1[0] * v2[2], v1[0] * v2[1] - v1[1] * v2[0]]);
+		return crossProdMat;
+	},
+
+	/**
+	 * Combine scalar values with two vectors.
+	 * Required during parsing scaler values matrix.
+	 * @param  {Number[]} a - first vector
+	 * @param  {Number[]} b - second vector
+	 * @param  {Number[]} ascl - first vector scalar
+	 * @param  {Number[]} bscl - second vector scalar
+	 * @return {Number[]} resultant vector
+	 * @public
+	 */
+	combine: function(a, b, ascl, bscl) {
+		var combineMat = new Float32Array([(ascl * a[0]) + (bscl * b[0]), (ascl * a[1]) + (bscl * b[1]), (ascl * a[2]) + (bscl * b[2])]);
+		return combineMat;
+
+	}
+};
+
+var quaternion = exports.Quaternion = {
+	/**
+	 * Gives the direction of motion from one vector to other.
+	 * Returns true if moving towards positive direction.
+	 * @param  {Number[]} q1 - quant
+	 * @param  {Number[]} q2 - quant
+	 * @return {boolean} true if positive, false otherwise.
+	 * @public
+	 */
+	direction: function(q1, q2) {
+		return (q1[0] - q2[0]) < 0 || (q1[1] - q2[1]) < 0 || (q1[2] - q2[2]) < 0;
+	},
+
+	/**
+	 * Dot product of 3D quanterion
+	 * @param  {Number[]} q1 - quanterion
+	 * @param  {Number[]} q2 - quanterion
+	 * @return {Number} resultant dot product
+	 * @public
+	 */
+	quantDot: function(q1, q2) {
+		return (q1[0] * q2[0]) + (q1[1] * q2[1]) + (q1[2] * q2[2]) + (q1[3] * q2[3]);
+	},
+
+	multiplication: function(q1, q2) {
+		return [q2[0] * q1[0] - q2[1] * q1[1] - q2[2] * q1[2] - q2[3] * q1[3],
+				q2[0] * q1[1] + q2[1] * q1[0] - q2[2] * q1[3] + q2[3] * q1[2],
+				q2[0] * q1[2] + q2[1] * q1[3] + q2[2] * q1[0] - q2[3] * q1[1],
+				q2[0] * q1[3] - q2[1] * q1[2] + q2[2] * q1[1] + q2[3] * q1[0]];
+	},
+
+	/**
+	 * Normalizing a vector is obtaining another unit vector in the same direction.
+	 * To normalize a vector, divide the vector by its magnitude.
+	 * @param  {Number[]} q1 - quanterion
+	 * @return {Number[]} resultant quanterion
+	 * @public
+	 */
+	normalize: function(q) {
+		return vector.divide(q, vector.len(q));
+	},
+
+	/**
+	 * Converts a rotation vector to a quaternion vector.
+	 * @param  {Number[]} v - vector
+	 * @return {Number[]} resultant quaternion
+	 * @public
+	 */
+	toQuant: function(v) {
+		if (!v) v = [];
+		var p = parseFloat(v[1] || 0) * Math.PI / 360,
+			y = parseFloat(v[2] || 0) * Math.PI / 360,
+			r = parseFloat(v[0] || 0) * Math.PI / 360,
+			c1 = Math.cos(p),
+			c2 = Math.cos(y),
+			c3 = Math.cos(r),
+			s1 = Math.sin(p),
+			s2 = Math.sin(y),
+			s3 = Math.sin(r),
+			q;
+
+		q = new Float32Array([
+			Math.round((s1 * s2 * c3 + c1 * c2 * s3) * 100000) / 100000,
+			Math.round((s1 * c2 * c3 + c1 * s2 * s3) * 100000) / 100000,
+			Math.round((c1 * s2 * c3 - s1 * c2 * s3) * 100000) / 100000,
+			Math.round((c1 * c2 * c3 - s1 * s2 * s3) * 100000) / 100000
+		]);
+
+		return q;
+	}
+	//TODO: Acheive the same fucntionality for other 11 choices XYX, XZX, XZY, YXY, YXZ, YZX, YZY, ZXY, ZXZ, ZYX, ZYZ 
+};
 }],'enyo/roots':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -2117,6 +2495,237 @@ exports.addToRoots = function (view) {
 			destroy.apply(this, arguments);
 		};
 	}
+};
+
+}],'enyo/ready':[function (module,exports,global,require,request){
+require('enyo');
+
+// we need to register appropriately to know when
+// the document is officially ready, to ensure that
+// client code is only going to execute at the
+// appropriate time
+
+var doc = global.document;
+var queue = [];
+var ready = ("complete" === doc.readyState);
+var run;
+var init;
+var remove;
+var add;
+var flush;
+var flushScheduled = false;
+
+/**
+* Registers a callback (and optional `this` context) to run after all the Enyo and library code
+* has loaded and the `DOMContentLoaded` event (or equivalent on older browsers) has been sent.
+* 
+* If called after the system is in a ready state, runs the supplied code asynchronously at the
+* earliest opportunity.
+*
+* @module enyo/ready
+* @param {Function} fn - The method to execute when the DOM is ready.
+* @param {Object} [context] - The optional context (`this`) under which to execute the
+*	callback method.
+* @public
+*/
+module.exports = function (fn, context) {
+	queue.push([fn, context]);
+	// schedule another queue flush if needed to run new ready calls
+	if (ready && !flushScheduled) {
+		setTimeout(flush, 0);
+		flushScheduled = true;
+	}
+};
+
+/**
+* @private
+*/
+run = function (fn, context) {
+	fn.call(context || global);
+};
+
+/**
+* @private
+*/
+init = function (event) {
+	// if we're interactive, it should be safe to move
+	// forward because the content has been parsed
+	if ((ready = ("interactive" === doc.readyState))) {
+		if ("DOMContentLoaded" !== event.type && "readystatechange" !== event.type) {
+			remove(event.type, init);
+			flush();
+		}
+	}
+	// for legacy WebKit (including webOS 3.x and less) and assurance
+	if ((ready = ("complete" === doc.readyState || "loaded" === doc.readyState))) {
+		remove(event.type, init);
+		flush();
+	}
+};
+
+/**
+* @private
+*/
+add = function (event, fn) {
+	doc.addEventListener(event, fn, false);
+};
+
+/**
+* @private
+*/
+remove = function (event, fn) {
+	doc.removeEventListener(event, fn, false);
+};
+
+/**
+* @private
+*/
+flush = function () {
+	if (ready && queue.length) {
+		while (queue.length) {
+			run.apply(global, queue.shift());
+		}
+	}
+	flushScheduled = false;
+};
+
+// ok, let's hook this up
+add("DOMContentLoaded", init);
+add("readystatechange", init);
+
+}],'enyo/json':[function (module,exports,global,require,request){
+require('enyo');
+
+
+/**
+* [JSON]{@glossary JSON} related methods and wrappers.
+*
+* @module enyo/json
+* @public
+*/
+module.exports = {
+	
+	/**
+	* Wrapper for [JSON.stringify()]{@glossary JSON.stringify}. Creates a
+	* [JSON]{@glossary JSON} [string]{@glossary String} from an
+	* [object]{@glossary Object}.
+	*
+	* @see {@glossary JSON.stringify}
+	* @param {Object} value - The [object]{@glossary Object} to convert to a
+	*	[JSON]{@glossary JSON} [string]{@glossary String}.
+	* @param {(Function|String[])} [replacer] An optional parameter indicating either an
+	*	[array]{@glossary Array} of keys to include in the final output or a
+	*	[function]{@glossary Function} that will have the opportunity to dynamically return
+	*	values to include for keys.
+	* @param {(Number|String)} [space] - Determines the spacing (if any) for pretty-printed
+	*	output of the JSON string. A [number]{@glossary Number} indicates the number of
+	* spaces to use in the output, while a string will be used verbatim.
+	* @returns {String} The JSON string for the given object.
+	* @public
+	*/
+	stringify: function(value, replacer, space) {
+		return JSON.stringify(value, replacer, space);
+	},
+	
+	/**
+	* Wrapper for [JSON.parse()]{@glossary JSON.parse}. Parses a valid
+	* [JSON]{@glossary JSON} [string]{@glossary String} and returns an
+	* [object]{@glossary Object}, or `null` if the parameters are invalid.
+	*
+	* @see {@glossary JSON.parse}
+	* @param {String} json - The [JSON]{@glossary JSON} [string]{@glossary String} to
+	*	parse into an [object]{@glossary Object}.
+	* @param {Function} [reviver] - The optional [function]{@glossary Function} to use to
+	*	parse individual keys of the return object.
+	* @returns {(Object|null)} If parameters are valid, an [object]{@glossary Object}
+	* is returned; otherwise, `null`.
+	* @public
+	*/
+	parse: function(json, reviver) {
+		return json ? JSON.parse(json, reviver) : null;
+	}
+};
+
+}],'enyo/job':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains methods for dealing with jobs.
+* @module enyo/job
+*/
+var _jobs = {};
+
+/**
+* Runs a job after a specified amount of time has elapsed
+* since a job with the same name has run.
+* 
+* Jobs can be used to throttle behaviors.  If some event may occur one time or
+* multiple times, but we want a response to occur only once every `n` seconds,
+* we can use a job.
+*
+* ```
+* onscroll: function() {
+* 	// updateThumb will be called, but only when 1 second has elapsed since the
+* 	// last onscroll
+* 	exports("updateThumb", this.bindSafely("updateThumb"), 1000);
+* }
+* ```
+*
+* @param {String} nom - The name of the job to throttle.
+* @param {(Function|String)} job - Either the name of a method or a [function]{@glossary Function}
+*                                to execute as the requested job.
+* @param {Number} wait - The number of milliseconds to wait before executing the job again.
+* @function
+* @public
+*/
+exports = module.exports = function (nom, job, wait) {
+	exports.stop(nom);
+	_jobs[nom] = setTimeout(function() {
+		exports.stop(nom);
+		job();
+	}, wait);
+};
+
+/**
+* Cancels the named job, if it has not already fired.
+*
+* @param {String} nom - The name of the job to cancel.
+* @static
+* @public
+*/
+exports.stop = function (nom) {
+	if (_jobs[nom]) {
+		clearTimeout(_jobs[nom]);
+		delete _jobs[nom];
+	}
+};
+
+/**
+* Immediately invokes the job and prevents any other calls
+* to `exports.throttle()` with the same job name from running for the
+* specified amount of time.
+* 
+* This is used for throttling user events when you want to provide an
+* immediate response, but later invocations might just be noise if they arrive
+* too often.
+* 
+* @param {String} nom - The name of the job to throttle.
+* @param {(Function|String)} job - Either the name of a method or a [function]{@glossary Function}
+*                                to execute as the requested job.
+* @param {Number} wait - The number of milliseconds to wait before executing the
+*                      job again.
+* @static
+* @public
+*/
+exports.throttle = function (nom, job, wait) {
+	// if we still have a job with this name pending, return immediately
+	if (_jobs[nom]) {
+		return;
+	}
+	job();
+	_jobs[nom] = setTimeout(function() {
+		exports.stop(nom);
+	}, wait);
 };
 
 }],'enyo/AjaxProperties':[function (module,exports,global,require,request){
@@ -2657,738 +3266,6 @@ module.exports = {
 	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
 };
 
-}],'enyo/transform':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
- * To create a Typed_array
- * @param  {Number} size The size of the buffer required
- * @return {Number[]}   Typed_array
- */
-function typedArray (size) {
-	return new Float32Array(new ArrayBuffer(size));
-}
-
-/**
- * To input the specified indices with value 1
- * @param  {Number[]} matrix    typedArray sent
- * @param  {Number[]} numberMat indices where value has to be 1
- */
-function inputValues (matrix, numberMat) {
-	for (var i = 0; i < numberMat.length; i++) {
-		matrix[numberMat[i]] = 1;
-	}
-}
-
-
-/**
- * To translate in any dimension based on co-ordinates.
- * @public
- * @param  {Number}   x Translate value in X axis
- * @param  {Number}   y Translate value in Y axis
- * @param  {Number}   z Translate value in Z axis
- * @return {Number[]}   Matrix3d
- */
-exports.translate = function(x, y, z) {
-	var translateMat, modifiedMat;
-	translateMat = typedArray(64);
-	modifiedMat = inputValues(translateMat, new Uint8Array([0, 5, 10, 15]));
-	translateMat[12] = x;
-	translateMat[13] = y ? y : 0;
-	translateMat[14] = z ? z : 0;
-	return translateMat;
-};
-
-/**
- * To translate in x dimension
- * @public
- * @param  {Number}   x Translate value in X axis
- * @return {Number[]}   Matrix3d
- */
-exports.translateX = function(x) {
-	var translateX, modifiedMat;
-	translateX = typedArray(64);
-	modifiedMat = inputValues(translateX, new Uint8Array([0, 5, 10, 15]));
-	translateX[12] = x ? x : 0;
-	return translateX;
-};
-
-/**
- * To translate in y dimension
- * @public
- * @param  {Number}   y Translate value in Y axis
- * @return {Number[]}   Matrix3d
- */
-exports.translateY = function(y) {
-	var translateY, modifiedMat;
-	translateY = typedArray(64);
-	modifiedMat = inputValues(translateY, new Uint8Array([0, 5, 10, 15]));
-	translateY[13] = y ? y : 0;
-	return translateY;
-};
-
-/**
- * To translate in z dimension
- * @public
- * @param  {Number}   z Translate value in Z axis
- * @return {Number[]}   Matrix3d
- */
-exports.translateZ = function(z) {
-	var translateZ, modifiedMat;
-	translateZ = typedArray(64);
-	modifiedMat = inputValues(translateZ, new Uint8Array([0, 5, 10, 15]));
-	translateZ[14] = z ? z : 0;
-	return translateZ;
-};
-
-/**
- * To scale in any dimension
- * @public
- * @param  {Number}   x Scale value in X axis
- * @param  {Number}   y Scale value in Y axis
- * @param  {Number}   z Scale value in Z axis
- * @return {Number[]}   Matrix3d
- */
-exports.scale = function(x, y, z) {
-	var scaleMat = typedArray(64);
-	scaleMat[0] = x;
-	scaleMat[5] = y ? y : 1;
-	scaleMat[10] = z ? z : 1;
-	scaleMat[15] = 1;
-	return scaleMat;
-};
-
-/**
- * To skew in any dimension (skew can only happen in 2d)
- * @public
- * @param  {Number}   a Skew value in X axis
- * @param  {Number}   b Skew value in Y axis
- * @return {Number[]}   Matrix3d
- */
-exports.skew =function(a, b) {
-	var skewMat, modifiedMat;
-	a = a ? Math.tan(a * Math.PI / 180) : 0;
-	b = b ? Math.tan(b * Math.PI / 180) : 0;
-
-	skewMat = typedArray(64);
-	modifiedMat = inputValues(skewMat, new Uint8Array([0, 5, 10, 15]));
-	skewMat[1] = b;
-	skewMat[4] = a;
-	return skewMat;
-};
-
-/**
- * To rotate in x-axis
- * @public
- * @param  {Number}   a Rotate value in X axis
- * @return {Number[]}   Matrix3d
- */
-exports.rotateX = function(a) {
-	var cosa, sina, rotateXMat, modifiedMat;
-	a = a ? a * Math.PI / 180 : 0;
-	cosa = Math.cos(a);
-	sina = Math.sin(a);
-
-	rotateXMat = typedArray(64);
-	modifiedMat = inputValues(rotateXMat, new Uint8Array([0, 15]));
-	rotateXMat[5] = cosa;
-	rotateXMat[6] = -sina;
-	rotateXMat[9] = sina;
-	rotateXMat[10] = cosa;
-	return rotateXMat;
-};
-
-/**
- * To rotate in y-axis
- * @public
- * @param  {Number}   b Rotate value in Y axis
- * @return {Number[]}   Matrix3d
- */
-exports.rotateY = function(b) {
-	var cosb, sinb, rotateYMat, modifiedMat;
-	b = b ? b * Math.PI / 180 : 0;
-	cosb = Math.cos(b);
-	sinb = Math.sin(b);
-
-	rotateYMat = typedArray(64);
-	modifiedMat = inputValues(rotateYMat, new Uint8Array([5, 15]));
-	rotateYMat[0] = cosb;
-	rotateYMat[2] = sinb;
-	rotateYMat[8] = -sinb;
-	rotateYMat[10] = cosb;
-	return rotateYMat;
-};
-
-/**
- * To rotate in z-axis
- * @public
- * @param  {Number}   g Rotate value in Z axis
- * @return {Number[]}   Matrix3d
- */
-exports.rotateZ = function(g) {
-	var cosg, sing, rotateZMat;
-	g = g ? g * Math.PI / 180 : 0;
-	cosg = Math.cos(g);
-	sing = Math.sin(g);
-
-	rotateZMat = typedArray(64);
-	rotateZMat[0] = cosg;
-	rotateZMat[1] = -sing;
-	rotateZMat[4] = sing;
-	rotateZMat[5] = cosg;
-	rotateZMat[15] = 1;
-	return rotateZMat;
-};
-
-/**
- * To rotate in any dimension
- * @public
- * @param  {Number}   a Rotate value in X axis
- * @param  {Number}   b Rotate value in Y axis
- * @param  {Number}   g Rotate value in Z axis
- * @return {Number[]}   Matrix3d
- */
-exports.rotate = function(a, b, g) {
-	var ca, sa, cb, sb, cg, sg, rotateMat;
-	a = a ? a * Math.PI / 180 : 0;
-	b = b ? b * Math.PI / 180 : 0;
-	g = g ? g * Math.PI / 180 : 0;
-	ca = Math.cos(a);
-	sa = Math.sin(a);
-	cb = Math.cos(b);
-	sb = Math.sin(b);
-	cg = Math.cos(g);
-	sg = Math.sin(g);
-
-	rotateMat = typedArray(64);
-	rotateMat[0] = cb * cg;
-	rotateMat[1] = ca * sg + sa * sb * cg;
-	rotateMat[2] = sa * sg - ca * sb * cg;
-	rotateMat[4] = -cb * sg;
-	rotateMat[5] = ca * cg - sa * sb * sg;
-	rotateMat[6] = sa * cg + ca * sb * sg;
-	rotateMat[8] = sb;
-	rotateMat[9] = -sa * cb;
-	rotateMat[10] = ca * cb;
-	rotateMat[15] = 1;
-	return rotateMat;
-};
-
-exports.Matrix = {
-
-	/**
-	 * To create Identity Matrix3d as array.
-	 * @public
-	 * @return {Number[]} Identity Matrix3d
-	 */
-	identity: function() {
-		var identityMatrix, modifiedMat;
-		identityMatrix = typedArray(64);
-		modifiedMat = inputValues(identityMatrix, new Uint8Array([0, 5, 10, 15]));
-		return identityMatrix;
-	},
-
-	/**
-	 * To create Identity Matrix2d as array.
-	 * @public
-	 * @return {Number[]} Identity Matrix2d as array
-	 */
-	identity2D: function() {
-		var identity2D, modifiedMat;
-		identity2D = typedArray(36);
-		modifiedMat = inputValues(identity2D, new Uint8Array([0, 4, 8]));
-		return identity2D;
-	},
-
-
-	/**
-	 * To create Identity Matrix (NXN order).
-	 * @public
-	 * @param  {Number}   N Order of Identity Matrix
-	 * @return {Number[][]} Identity Matrix of order N
-	 */
-	identityMatrix: function(N) {
-		var i, j, row, result = [];
-		for (i = 0; i < N; i++) {
-			row = [];
-			for (j = 0; j < N; j++) {
-				if (i === j) {
-					row.push(1);
-				} else {
-					row.push(0);
-				}
-			}
-			result.push(row);
-		}
-		return result;
-	},
-	/**
-	 * To multiply 2 Martix3d (4x4 order)
-	 * @public
-	 * @param  {Number[]} m1 1st Matrix3d
-	 * @param  {Number[]} m2 2nd Matrix3d
-	 * @return {Number[]}    Resultant Matrix3d
-	 */
-	multiply: function(m1, m2) {
-		if (m1.length !== 16 || m2.length !== 16) return;
-		var multiplyMat = typedArray(64);
-		multiplyMat[0] = m1[0] * m2[0] + m1[4] * m2[1] + m1[8] * m2[2];
-		multiplyMat[1] = m1[1] * m2[0] + m1[5] * m2[1] + m1[9] * m2[2];
-		multiplyMat[2] = m1[2] * m2[0] + m1[6] * m2[1] + m1[10] * m2[2];
-		multiplyMat[4] = m1[0] * m2[4] + m1[4] * m2[5] + m1[8] * m2[6];
-		multiplyMat[5] = m1[1] * m2[4] + m1[5] * m2[5] + m1[9] * m2[6];
-		multiplyMat[6] = m1[2] * m2[4] + m1[6] * m2[5] + m1[10] * m2[6];
-		multiplyMat[8] = m1[0] * m2[8] + m1[4] * m2[9] + m1[8] * m2[10];
-		multiplyMat[9] = m1[1] * m2[8] + m1[5] * m2[9] + m1[9] * m2[10];
-		multiplyMat[10] = m1[2] * m2[8] + m1[6] * m2[9] + m1[10] * m2[10];
-		multiplyMat[12] = m1[0] * m2[12] + m1[4] * m2[13] + m1[8] * m2[14] + m1[12];
-		multiplyMat[13] = m1[1] * m2[12] + m1[5] * m2[13] + m1[9] * m2[14] + m1[13];
-		multiplyMat[14] = m1[2] * m2[12] + m1[6] * m2[13] + m1[10] * m2[14] + m1[14];
-		multiplyMat[15] = 1;
-		return multiplyMat;
-	},
-
-	/**
-	 * To multiply 2 Martix3d (n*n order)
-	 * @param  {Number[]} m1 1st Matrix3d
-	 * @param  {Number[]} m2 2nd Matrix3d
-	 * @return {[type]}    Resultant Matrix3d
-	 */
-	multiplyN: function(m1, m2) {
-		var i, j, sum,
-			m = [],
-			l1 = m1.length,
-			l2 = m2.length;
-
-		for (i = 0; i < l1; i++) {
-			sum = 0;
-			for (j = 0; j < l2; j++) {
-				sum += m1[i][j] * m2[j];
-			}
-			m.push(sum);
-		}
-		return m;
-	},
-
-	/**
-	 * To inverse matrix of order N
-	 * @public
-	 * @param  {Number[]} matrix Matrix (NxN order)
-	 * @param  {Number}   n      Order of the matrix
-	 * @return {Number[]}        Inverted Matrix
-	 */
-	inverseN: function(matrix, n) {
-		var i, j, k, r, t,
-			result = this.identityMatrix(n);
-
-		for (i = 0; i < n; i++) {
-			for (j = 0; j < n; j++) {
-				if (i != j) {
-					r = matrix[j][i] / matrix[i][i];
-					for (k = 0; k < n; k++) {
-						matrix[j][k] -= r * matrix[i][k];
-						result[j][k] -= r * result[i][k];
-					}
-				}
-			}
-		}
-
-		for (i = 0; i < n; i++) {
-			t = matrix[i][i];
-			for (j = 0; j < n; j++) {
-				matrix[i][j] = matrix[i][j] / t;
-				result[i][j] = result[i][j] / t;
-			}
-		}
-
-		return result;
-	},
-
-	/**
-	 * Calculate matrix3d of a frame based on transformation vectors.
-	 * @public
-	 * @param  {Number[]} trns Translate vector
-	 * @param  {Number[]} rot  Rotate quaternion vector
-	 * @param  {Number[]} sc   Scale vector
-	 * @param  {Number[]} sq   Skew vector
-	 * @param  {Number[]} per  Perspective vector
-	 * @return {Number[]}      Final Matrix3d for particular frame
-	 */
-	recompose: function(trns, rot, sc, sq, per) {
-		var i,
-			x = rot[0],
-			y = rot[1],
-			z = rot[2],
-			w = rot[3],
-			m = this.identity(),
-			sM = this.identity(),
-			rM = this.identity();
-
-
-		// apply perspective
-		if (per) {
-			m[3] = per[0];
-			m[7] = per[1];
-			m[11] = per[2];
-			m[15] = per[3];
-		}
-
-		m[12] = trns[0];
-		m[13] = trns[1];
-		m[14] = trns[2];
-
-		// apply rotate
-		rM[0] = 1 - 2 * (y * y + z * z);
-		rM[1] = 2 * (x * y - z * w);
-		rM[2] = 2 * (x * z + y * w);
-		rM[4] = 2 * (x * y + z * w);
-		rM[5] = 1 - 2 * (x * x + z * z);
-		rM[6] = 2 * (y * z - x * w);
-		rM[8] = 2 * (x * z - y * w);
-		rM[9] = 2 * (y * z + x * w);
-		rM[10] = 1 - 2 * (x * x + y * y);
-
-		m = this.multiply(m, rM);
-
-		// apply skew
-		if (sq[2]) {
-			sM[9] = sq[2];
-			m = this.multiply(m, sM);
-		}
-
-		if (sq[1]) {
-			sM[9] = 0;
-			sM[8] = sq[1];
-			m = this.multiply(m, sM);
-		}
-
-		if (sq[0]) {
-			sM[8] = 0;
-			sM[4] = sq[0];
-			m = this.multiply(m, sM);
-		}
-
-		// apply scale
-		for (i = 0; i < 12; i += 4) {
-			m[0 + i] *= sc[0];
-			m[1 + i] *= sc[1];
-			m[2 + i] *= sc[2];
-		}
-		return m;
-	},
-
-	/**
-	 * Decompose transformation vectors into various properties out of matrix3d.
-	 * @public
-	 * @param  {Number[]} matrix Matrix3d
-	 * @param  {Object}   ret    To store various transformation properties like translate, rotate, scale, skew and perspective.
-	 * @return {Boolean}         true, if matrix exists else false.
-	 */
-	decompose: function(matrix, ret) {
-		if (matrix[15] === 0) return false;
-		var i,
-			tV = [],
-			rV = [],
-			pV = [],
-			skV = [],
-			scV = [],
-			row = [],
-			pdum3 = [];
-
-		for (i = 0; i < 16; i++)
-			matrix[i] /= matrix[15];
-
-		//TODO: decompose perspective
-		pV = [0, 0, 0, 0];
-
-		for (i = 0; i < 3; i++)
-			tV[i] = matrix[12 + i];
-
-		for (i = 0; i < 12; i += 4) {
-			row.push([
-				matrix[0 + i],
-				matrix[1 + i],
-				matrix[2 + i]
-			]);
-		}
-
-		scV[0] = vector.len(row[0]);
-		row[0] = quaternion.normalize(row[0]);
-		skV[0] = vector.dot(row[0], row[1]);
-		row[1] = vector.combine(row[1], row[0], 1.0, -skV[0]);
-
-		scV[1] = vector.len(row[1]);
-		row[1] = quaternion.normalize(row[1]);
-		skV[0] /= scV[1];
-
-		// Compute XZ and YZ shears, orthogonalized 3rd row
-		skV[1] = vector.dot(row[0], row[2]);
-		row[2] = vector.combine(row[2], row[0], 1.0, -skV[1]);
-		skV[2] = vector.dot(row[1], row[2]);
-		row[2] = vector.combine(row[2], row[1], 1.0, -skV[2]);
-
-		// Next, get Z scale and normalize 3rd row.
-		scV[2] = vector.len(row[2]);
-		row[2] = quaternion.normalize(row[2]);
-		skV[1] /= scV[2];
-		skV[2] /= scV[2];
-
-		pdum3 = vector.cross(row[1], row[2]);
-		if (vector.dot(row[0], pdum3) < 0) {
-			for (i = 0; i < 3; i++) {
-				scV[i] *= -1;
-				row[i][0] *= -1;
-				row[i][1] *= -1;
-				row[i][2] *= -1;
-			}
-		}
-
-		rV[0] = 0.5 * Math.sqrt(Math.max(1 + row[0][0] - row[1][1] - row[2][2], 0));
-		rV[1] = 0.5 * Math.sqrt(Math.max(1 - row[0][0] + row[1][1] - row[2][2], 0));
-		rV[2] = 0.5 * Math.sqrt(Math.max(1 - row[0][0] - row[1][1] + row[2][2], 0));
-		rV[3] = 0.5 * Math.sqrt(Math.max(1 + row[0][0] + row[1][1] + row[2][2], 0));
-
-		if (row[2][1] > row[1][2]) rV[0] = -rV[0];
-		if (row[0][2] > row[2][0]) rV[1] = -rV[1];
-		if (row[1][0] > row[0][1]) rV[2] = -rV[2];
-
-		ret.translate = tV;
-		ret.rotate = rV;
-		ret.scale = scV;
-		ret.skew = skV;
-		ret.perspective = pV;
-		return true;
-	},
-
-	/**
-	 * Decompose transformation matrix2d from matrix3d.
-	 * @public
-	 * @param  {Number[]} matrix Matrix3d
-	 * @param  {Object}   ret    To store various transformation properties like translate, angle and matrix.
-	 * @return {Boolean}  ret    To store various transformation properties like translate, angle and matrix.
-	 */
-	decompose2D: function(m, ret) {
-		var scale = [],
-			matrix = [],
-			row0x = m[0],
-			row0y = m[1],
-			row1x = m[4],
-			row1y = m[5],
-			det, angle, sn, cs,
-			m11, m12, m21, m22;
-
-		ret = ret || {};
-		scale = [
-			Math.sqrt(row0x * row0x + row0y * row0y),
-			Math.sqrt(row1x * row1x + row1y * row1y)
-		];
-
-		// If determinant is negative, one axis was flipped.
-		det = row0x * row1y - row0y * row1x;
-		if (det < 0)
-		// Flip axis with minimum unit vector dot product.
-			if (row0x < row1y)
-				scale[0] = -scale[0];
-			else
-				scale[1] = -scale[1];
-
-			// Renormalize matrix to remove scale. 
-		if (scale[0]) {
-			row0x *= 1 / scale[0];
-			row0y *= 1 / scale[0];
-		}
-
-		if (scale[1]) {
-			row1x *= 1 / scale[1];
-			row1y *= 1 / scale[1];
-		}
-		ret.scale = scale;
-
-
-		// Compute rotation and renormalize matrix. 
-		angle = Math.atan2(row0y, row0x);
-
-		if (angle) {
-			sn = -row0y;
-			cs = row0x;
-			m11 = row0x;
-			m12 = row0y;
-			m21 = row1x;
-			m22 = row1y;
-			row0x = cs * m11 + sn * m21;
-			row0y = cs * m12 + sn * m22;
-			row1x = -sn * m11 + cs * m21;
-			row1y = -sn * m12 + cs * m22;
-		}
-
-		// Rotate(-angle) = [cos(angle), sin(angle), -sin(angle), cos(angle)]
-		//                = [row0x, -row0y, row0y, row0x]
-		// Thanks to the normalization above.
-		matrix[0] = row0x;
-		matrix[1] = row0y;
-		matrix[2] = row1x;
-		matrix[3] = row1y;
-		matrix[4] = m[12];
-		matrix[5] = m[13];
-		ret.matrix2D = matrix;
-
-		// Convert into degrees because our rotation functions expect it.
-		ret.angle = angle * 180 / Math.PI;
-
-		return ret;
-	},
-
-	/**
-	 * Convert Matrix3d array to Matrix3d String
-	 * @public
-	 * @param  {Number[]} m Matrix3d Array
-	 * @return {String}     Matrix3d String
-	 */
-	toString: function(m) {
-		var i, ms = m.length > 10 ? 'matrix3d(' : 'matrix(';
-		for (i = 0; i < m.length - 1; i++) {
-			ms += (m[i] < 0.000001 && m[i] > -0.000001) ? '0,' : m[i] + ',';
-		}
-		ms += m[m.length - 1] + ')';
-		return ms;
-	}
-};
-
-var vector = exports.Vector = {
-	/**
-	 * Length of a vector
-	 * @param  {Number[]} v - vector
-	 * @return {Number} resultant length
-	 * @public
-	 */
-	len: function(v) {
-		return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
-	},
-
-	/**
-	 * Divides vector with a scalar value.
-	 * @param  {Number[]} v - vector
-	 * @param  {Number} s - scalar value to divide
-	 * @return {Number[]} resultant vector
-	 * @public
-	 */
-	divide: function(v, s) {
-		var divideVector = new Float32Array([v[0] / s, v[1] / s, v[2] / s]);
-		return divideVector;
-	},
-
-	/**
-	 * Dot product of 3D vectors
-	 * @param  {Number[]} v1 - vector
-	 * @param  {Number[]} v2 - vector
-	 * @return {Number} resultant dot product
-	 * @public
-	 */
-	dot: function(v1, v2) {
-		return (v1[0] * v2[0]) + (v1[1] * v2[1]) + (v1[2] * v2[2]) + (v1[3] !== undefined && v2[3] !== undefined ? (v1[3] * v2[3]) : 0);
-	},
-
-	/**
-	 * Cross product of two vectors
-	 * @param  {Number[]} v1 - vector
-	 * @param  {Number[]} v2 - vector
-	 * @return {Number[]} resultant cross product
-	 * @public
-	 */
-	cross: function(v1, v2) {
-		var crossProdMat = new Float32Array([v1[1] * v2[2] - v1[2] * v2[1], v1[2] * v2[0] - v1[0] * v2[2], v1[0] * v2[1] - v1[1] * v2[0]]);
-		return crossProdMat;
-	},
-
-	/**
-	 * Combine scalar values with two vectors.
-	 * Required during parsing scaler values matrix.
-	 * @param  {Number[]} a - first vector
-	 * @param  {Number[]} b - second vector
-	 * @param  {Number[]} ascl - first vector scalar
-	 * @param  {Number[]} bscl - second vector scalar
-	 * @return {Number[]} resultant vector
-	 * @public
-	 */
-	combine: function(a, b, ascl, bscl) {
-		var combineMat = new Float32Array([(ascl * a[0]) + (bscl * b[0]), (ascl * a[1]) + (bscl * b[1]), (ascl * a[2]) + (bscl * b[2])]);
-		return combineMat;
-
-	}
-};
-
-var quaternion = exports.Quaternion = {
-	/**
-	 * Gives the direction of motion from one vector to other.
-	 * Returns true if moving towards positive direction.
-	 * @param  {Number[]} q1 - quant
-	 * @param  {Number[]} q2 - quant
-	 * @return {boolean} true if positive, false otherwise.
-	 * @public
-	 */
-	direction: function(q1, q2) {
-		return (q1[0] - q2[0]) < 0 || (q1[1] - q2[1]) < 0 || (q1[2] - q2[2]) < 0;
-	},
-
-	/**
-	 * Dot product of 3D quanterion
-	 * @param  {Number[]} q1 - quanterion
-	 * @param  {Number[]} q2 - quanterion
-	 * @return {Number} resultant dot product
-	 * @public
-	 */
-	quantDot: function(q1, q2) {
-		return (q1[0] * q2[0]) + (q1[1] * q2[1]) + (q1[2] * q2[2]) + (q1[3] * q2[3]);
-	},
-
-	multiplication: function(q1, q2) {
-		return [q2[0] * q1[0] - q2[1] * q1[1] - q2[2] * q1[2] - q2[3] * q1[3],
-				q2[0] * q1[1] + q2[1] * q1[0] - q2[2] * q1[3] + q2[3] * q1[2],
-				q2[0] * q1[2] + q2[1] * q1[3] + q2[2] * q1[0] - q2[3] * q1[1],
-				q2[0] * q1[3] - q2[1] * q1[2] + q2[2] * q1[1] + q2[3] * q1[0]];
-	},
-
-	/**
-	 * Normalizing a vector is obtaining another unit vector in the same direction.
-	 * To normalize a vector, divide the vector by its magnitude.
-	 * @param  {Number[]} q1 - quanterion
-	 * @return {Number[]} resultant quanterion
-	 * @public
-	 */
-	normalize: function(q) {
-		return vector.divide(q, vector.len(q));
-	},
-
-	/**
-	 * Converts a rotation vector to a quaternion vector.
-	 * @param  {Number[]} v - vector
-	 * @return {Number[]} resultant quaternion
-	 * @public
-	 */
-	toQuant: function(v) {
-		if (!v) v = [];
-		var p = parseFloat(v[1] || 0) * Math.PI / 360,
-			y = parseFloat(v[2] || 0) * Math.PI / 360,
-			r = parseFloat(v[0] || 0) * Math.PI / 360,
-			c1 = Math.cos(p),
-			c2 = Math.cos(y),
-			c3 = Math.cos(r),
-			s1 = Math.sin(p),
-			s2 = Math.sin(y),
-			s3 = Math.sin(r),
-			q;
-
-		q = new Float32Array([
-			Math.round((s1 * s2 * c3 + c1 * c2 * s3) * 100000) / 100000,
-			Math.round((s1 * c2 * c3 + c1 * s2 * s3) * 100000) / 100000,
-			Math.round((c1 * s2 * c3 - s1 * c2 * s3) * 100000) / 100000,
-			Math.round((c1 * c2 * c3 - s1 * s2 * s3) * 100000) / 100000
-		]);
-
-		return q;
-	}
-	//TODO: Acheive the same fucntionality for other 11 choices XYX, XZX, XZY, YXY, YXZ, YZX, YZY, ZXY, ZXZ, ZYX, ZYZ 
-};
 }],'enyo/platform':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -3690,395 +3567,7 @@ var StateSupport = {
 
 module.exports = StateSupport;
 
-},{'./States':'enyo/States'}],'enyo/logger':[function (module,exports,global,require,request){
-require('enyo');
-
-var
-	json = require('./json'),
-	utils = require('./utils'),
-	platform = require('./platform');
-
-/**
-* These platforms only allow one argument for [console.log()]{@glossary console.log}:
-*
-* * android
-* * ios
-* * webos
-*
-* @ignore
-*/
-var dumbConsole = Boolean(platform.android || platform.ios || platform.webos);
-
-/**
-* Internally used methods and properties associated with logging.
-*
-* @module enyo/logger
-* @public
-*/
-exports = module.exports = {
-
-	/**
-	* The log level to use. Can be a value from -1 to 99, where -1 disables all
-	* logging, 0 is 'error', 10 is 'warn', and 20 is 'log'. It is preferred that
-	* this value be set using the [setLogLevel()]{@link module:enyo/logger#setLogLevel}
-	* method.
-	*
-	* @type {Number}
-	* @default 99
-	* @public
-	*/
-	level: 99,
-
-	/**
-	* The known levels.
-	*
-	* @private
-	*/
-	levels: {log: 20, warn: 10, error: 0},
-
-	/**
-	* @private
-	*/
-	shouldLog: function (fn) {
-		var ll = parseInt(this.levels[fn], 0);
-		return (ll <= this.level);
-	},
-
-	/**
-	* @private
-	*/
-	validateArgs: function (args) {
-		// gracefully handle and prevent circular reference errors in objects
-		for (var i=0, l=args.length, item; (item=args[i]) || i<l; i++) {
-			try {
-				if (typeof item === 'object') {
-					args[i] = json.stringify(item);
-				}
-			} catch (e) {
-				args[i] = 'Error: ' + e.message;
-			}
-		}
-	},
-
-	/**
-	* @private
-	*/
-	_log: function (fn, args) {
-		// avoid trying to use console on IE instances where the object hasn't been
-		// created due to the developer tools being unopened
-		var console = global.console;
-		if (typeof console === 'undefined') {
-            return;
-        }
-		//var a$ = utils.logging.formatArgs(fn, args);
-		var a$ = utils.isArray(args) ? args : utils.cloneArray(args);
-		if (platform.androidFirefox) {
-			// Firefox for Android's console does not handle objects with circular references
-			this.validateArgs(a$);
-		}
-		if (dumbConsole) {
-			// at least in early versions of webos, console.* only accept a single argument
-			a$ = [a$.join(' ')];
-		}
-		var fn$ = console[fn];
-		if (fn$ && fn$.apply) {
-			// some consoles support 'warn', 'info', and so on
-			fn$.apply(console, a$);
-		} else if (console.log.apply) {
-			// some consoles support console.log.apply
-			console.log.apply(console, a$);
-		} else {
-			// otherwise, do our own formatting
-			console.log(a$.join(' '));
-		}
-	},
-
-	/**
-	* This is exposed elsewhere.
-	*
-	* @private
-	*/
-	log: function (fn, args) {
-
-		if (fn != 'log' && fn != 'warn' && fn != 'error') {
-			args = Array.prototype.slice.call(arguments);
-			fn = 'log';
-		}
-
-		var console = global.console;
-		if (typeof console !== 'undefined') {
-			if (this.shouldLog(fn)) {
-				this._log(fn, args);
-			}
-		}
-	}
-};
-
-/**
-* Sets the log level to the given value. This will restrict the amount of output depending on
-* the settings. The higher the value, the more output that will be allowed. The default is
-* 99. The value, -1, would silence all logging, even 'error' (0).
-* Without the 'see': {@link module:enyo/logger#log}.
-*
-* @see module:enyo/logger#level
-* @see module:enyo/logger#log
-* @see module:enyo/logger#warn
-* @see module:enyo/logger#error
-* @param {Number} level - The level to set logging to.
-*/
-exports.setLogLevel = function (level) {
-	var ll = parseInt(level, 0);
-	if (isFinite(ll)) {
-		this.level = ll;
-	}
-};
-
-/**
-* A wrapper for [console.log()]{@glossary console.log}, compatible
-* across supported platforms. Will output only if the current
-* [log level]{@link module:enyo/logger#level} allows it. [Object]{@glossary Object}
-* parameters will be serialized via [JSON.stringify()]{@glossary JSON.stringify}
-* automatically.
-*
-* @utility
-* @see {@glossary console.log}
-* @param {...*} - The arguments to be logged.
-* @public
-*/
-
-/**
-* A wrapper for [console.warn()]{@glossary console.warn}, compatible
-* across supported platforms. Will output only if the current
-* [log level]{@link module:enyo/logger#level} allows it. [Object]{@glossary Object}
-* parameters will be serialized via [JSON.stringify()]{@glossary JSON.stringify}
-* automatically.
-*
-* @utility
-* @see {@glossary console.warn}
-* @param {...*} - The arguments to be logged.
-* @public
-*/
-exports.warn = function () {
-	this.log('warn', arguments);
-};
-
-/**
-* A wrapper for [console.error()]{@glossary console.error}, compatible
-* across supported platforms. Will output only if the current
-* [log level]{@link module:enyo/logger#level} allows it. [Object]{@glossary Object}
-* parameters will be serialized via [JSON.stringify()]{@glossary JSON.stringify}
-* automatically.
-*
-* @utility
-* @see {@glossary console.error}
-* @param {...*} - The arguments to be logged.
-* @public
-*/
-exports.error = function () {
-	this.log('error', arguments);
-};
-
-},{'./json':'enyo/json','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/animation':[function (module,exports,global,require,request){
-/**
-* Contains methods useful for animations.
-* @module enyo/animation
-*/
-
-require('enyo');
-
-var
-	platform = require('./platform'),
-	utils = require('./utils');
-
-var ms = Math.round(1000/60),
-	prefix = ['', 'webkit', 'moz', 'ms', 'o'],
-	rAF = 'requestAnimationFrame',
-	cRAF = 'cancelRequestAnimationFrame',
-	cAF = 'cancelAnimationFrame',
-	i, pl, p, wcRAF, wrAF, wcAF,
-	_requestFrame, _cancelFrame, cancelFrame,
-	core = { ts: 0, obs: {}};
-
-
-/*
-* Fallback on setTimeout
-*
-* @private
-*/
-_requestFrame = function(callback) {
-	return global.setTimeout(callback, ms);
-};
-
-/*
-* Fallback on clearTimeout
-*
-* @private
-*/
-_cancelFrame = function(id) {
-	return global.clearTimeout(id);
-};
-
-for (i = 0, pl = prefix.length; (p = prefix[i]) || i < pl; i++) {
-	// if we're on ios 6 just use setTimeout, requestAnimationFrame has some kinks
-	if (platform.ios === 6) {
-		break;
-	}
-
-	// if prefixed, becomes Request and Cancel
-	wrAF = p ? (p + utils.cap(rAF)) : rAF;
-	wcRAF = p ? (p + utils.cap(cRAF)) : cRAF;
-	wcAF = p ? (p + utils.cap(cAF)) : cAF;
-
-	// Test for cancelRequestAnimationFrame, because some browsers (Firefix 4-10) have a request without a cancel
-	cancelFrame = global[wcAF] || global[wcRAF];
-	if (cancelFrame) {
-		_cancelFrame = cancelFrame;
-		_requestFrame = global[wrAF];
-		if (p == 'webkit') {
-			/*
-				Note: In Chrome, the first return value of webkitRequestAnimationFrame is 0.
-				We make 1 bogus call so the first used return value of webkitRequestAnimationFrame is > 0, as the spec requires.
-				This makes it so that the requestId is always truthy.
-				(we choose to do this rather than wrapping the native function to avoid the overhead)
-			*/
-			_cancelFrame(_requestFrame(utils.nop));
-		}
-		break;
-	}
-}
-/**
-* Requests an animation callback.
-*
-* On compatible browsers, if `node` is defined, the [callback]{@glossary callback} will
-* fire only if `node` is visible.
-*
-* @param {Function} callback - A [callback]{@glossary callback} to be executed on the
-*                            animation frame.
-* @param {Node} node - The DOM node to request the animation frame for.
-* @returns {Object} A request id to be used with
-*                     {@link module:enyo/animation#cancelRequestAnimationFrame}.
-* @public
-*/
-exports.requestAnimationFrame = function(callback, node) {
-	return _requestFrame(callback, node);
-};
-/**
-* Cancels a requested animation callback with the specified id.
-*
-* @param {Number} id - The identifier of an animation request we wish to cancel.
-* @deprecated since 2.7.0
-* @public
-*/
-exports.cancelRequestAnimationFrame = function(id) {
-	return _cancelFrame(id);
-};
-/**
-* Cancels a requested animation callback with the specified id.
-*
-* @param {Number} id - The identifier of an animation request we wish to cancel.
-* @public
-*/
-exports.cancelAnimationFrame = function(id) {
-	return _cancelFrame(id);
-};
-/**
-* Subcribes for animation frame ticks.
-*
-* @param {Object} ctx - The context on which callback is registered.
-* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
-* @public
-*/
-exports.subscribe = function(ctx,callback) {
-	var id = utils.uid("rAF");
-	core.obs[id]=utils.bindSafely(ctx, callback);
-	return id;
-};
-/**
-* Unsubcribes for animation frame ticks.
-*
-* @param {Object} node - The context on which callback is registered.
-* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
-* @public
-*/
-exports.unsubscribe = function(id) {
-	delete core.obs[id];
-};
-
-var startrAF = function(){
-	_requestFrame(function (time) {
-		startrAF();
-		core.ts = time;
-	}.bind(this));
-};
-startrAF();
-
-/**
-* Gives an interpolation of an animated transition's distance from 0 to 1.
-*
-* Given a start time (`t0`) and an animation duration (`duration`), this
-* method applies the `easing` function to the percentage of time elapsed
-* divided by duration, capped at 100%.
-*
-* @param {Number} t0 - Start time.
-* @param {Number} duration - Duration in milliseconds.
-* @param {Function} easing - An easing [function]{@glossary Function} reference from
-*	{@link module:enyo/animation#easing}.
-* @param {Boolean} reverse - Whether the animation will run in reverse.
-* @returns {Number} The resulting position, capped at a maximum of 100%.
-* @public
-*/
-exports.easedLerp = function(t0, duration, easing, reverse) {
-	var lerp = (utils.perfNow() - t0) / duration;
-	if (reverse) {
-		return lerp >= 1 ? 0 : (1 - easing(1 - lerp));
-	} else {
-		return lerp >= 1 ? 1 : easing(lerp);
-	}
-};
-
-/**
-* Gives an interpolation of an animated transition's distance from
-* `startValue` to `valueChange`.
-*
-* Applies the `easing` function with a wider range of variables to allow for
-* more complex animations.
-*
-* @param {Number} t0 - Start time.
-* @param {Number} duration - Duration in milliseconds.
-* @param {Function} easing - An easing [function]{@glossary Function} reference from
-*	{@link module:enyo/animation#easing}.
-* @param {Boolean} reverse - Whether the animation will run in reverse.
-* @param {Number} time
-* @param {Number} startValue - Starting value.
-* @param {Number} valueChange
-* @returns {Number} The resulting position, capped at a maximum of 100%.
-* @public
-*/
-exports.easedComplexLerp = function(t0, duration, easing, reverse, time, startValue, valueChange) {
-	var lerp = (utils.perfNow() - t0) / duration;
-	if (reverse) {
-		return easing(1 - lerp, time, startValue, valueChange, duration);
-	} else {
-		return easing(lerp, time, startValue, valueChange, duration);
-	}
-};
-
-
-//TODO: A temporary implementation for rAF with observers.
-Object.defineProperty(core, 'ts', {
-
-	get: function() { 
-		return this.value; 
-	},
-
-	set: function(newValue) {
-		for(var i in this.obs){
-			this.obs[i](this.value, newValue);
-		}
-		this.value = newValue;
-	}
-});
-},{'./platform':'enyo/platform','./utils':'enyo/utils'}],'enyo/dom':[function (module,exports,global,require,request){
+},{'./States':'enyo/States'}],'enyo/dom':[function (module,exports,global,require,request){
 /**
 * Contains methods for working with DOM
 * @module enyo/dom
@@ -4809,7 +4298,395 @@ dom.transition = (platform.ios || platform.android || platform.chrome || platfor
 		? '-moz-transition'
 		: 'transition';
 
-},{'./roots':'enyo/roots','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/xhr':[function (module,exports,global,require,request){
+},{'./roots':'enyo/roots','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/animation':[function (module,exports,global,require,request){
+/**
+* Contains methods useful for animations.
+* @module enyo/animation
+*/
+
+require('enyo');
+
+var
+	platform = require('./platform'),
+	utils = require('./utils');
+
+var ms = Math.round(1000/60),
+	prefix = ['', 'webkit', 'moz', 'ms', 'o'],
+	rAF = 'requestAnimationFrame',
+	cRAF = 'cancelRequestAnimationFrame',
+	cAF = 'cancelAnimationFrame',
+	i, pl, p, wcRAF, wrAF, wcAF,
+	_requestFrame, _cancelFrame, cancelFrame,
+	core = { ts: 0, obs: {}};
+
+
+/*
+* Fallback on setTimeout
+*
+* @private
+*/
+_requestFrame = function(callback) {
+	return global.setTimeout(callback, ms);
+};
+
+/*
+* Fallback on clearTimeout
+*
+* @private
+*/
+_cancelFrame = function(id) {
+	return global.clearTimeout(id);
+};
+
+for (i = 0, pl = prefix.length; (p = prefix[i]) || i < pl; i++) {
+	// if we're on ios 6 just use setTimeout, requestAnimationFrame has some kinks
+	if (platform.ios === 6) {
+		break;
+	}
+
+	// if prefixed, becomes Request and Cancel
+	wrAF = p ? (p + utils.cap(rAF)) : rAF;
+	wcRAF = p ? (p + utils.cap(cRAF)) : cRAF;
+	wcAF = p ? (p + utils.cap(cAF)) : cAF;
+
+	// Test for cancelRequestAnimationFrame, because some browsers (Firefix 4-10) have a request without a cancel
+	cancelFrame = global[wcAF] || global[wcRAF];
+	if (cancelFrame) {
+		_cancelFrame = cancelFrame;
+		_requestFrame = global[wrAF];
+		if (p == 'webkit') {
+			/*
+				Note: In Chrome, the first return value of webkitRequestAnimationFrame is 0.
+				We make 1 bogus call so the first used return value of webkitRequestAnimationFrame is > 0, as the spec requires.
+				This makes it so that the requestId is always truthy.
+				(we choose to do this rather than wrapping the native function to avoid the overhead)
+			*/
+			_cancelFrame(_requestFrame(utils.nop));
+		}
+		break;
+	}
+}
+/**
+* Requests an animation callback.
+*
+* On compatible browsers, if `node` is defined, the [callback]{@glossary callback} will
+* fire only if `node` is visible.
+*
+* @param {Function} callback - A [callback]{@glossary callback} to be executed on the
+*                            animation frame.
+* @param {Node} node - The DOM node to request the animation frame for.
+* @returns {Object} A request id to be used with
+*                     {@link module:enyo/animation#cancelRequestAnimationFrame}.
+* @public
+*/
+exports.requestAnimationFrame = function(callback, node) {
+	return _requestFrame(callback, node);
+};
+/**
+* Cancels a requested animation callback with the specified id.
+*
+* @param {Number} id - The identifier of an animation request we wish to cancel.
+* @deprecated since 2.7.0
+* @public
+*/
+exports.cancelRequestAnimationFrame = function(id) {
+	return _cancelFrame(id);
+};
+/**
+* Cancels a requested animation callback with the specified id.
+*
+* @param {Number} id - The identifier of an animation request we wish to cancel.
+* @public
+*/
+exports.cancelAnimationFrame = function(id) {
+	return _cancelFrame(id);
+};
+/**
+* Subcribes for animation frame ticks.
+*
+* @param {Object} ctx - The context on which callback is registered.
+* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
+* @public
+*/
+exports.subscribe = function(ctx,callback) {
+	var id = utils.uid("rAF");
+	core.obs[id] = utils.bindSafely(ctx, callback);
+	return id;
+};
+/**
+* Unsubcribes for animation frame ticks.
+*
+* @param {Object} node - The context on which callback is registered.
+* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
+* @public
+*/
+exports.unsubscribe = function(id) {
+	delete core.obs[id];
+};
+
+var startrAF = function(){
+	_requestFrame(function (time) {
+		startrAF();
+		core.ts = time;
+	}.bind(this));
+};
+startrAF();
+
+/**
+* Gives an interpolation of an animated transition's distance from 0 to 1.
+*
+* Given a start time (`t0`) and an animation duration (`duration`), this
+* method applies the `easing` function to the percentage of time elapsed
+* divided by duration, capped at 100%.
+*
+* @param {Number} t0 - Start time.
+* @param {Number} duration - Duration in milliseconds.
+* @param {Function} easing - An easing [function]{@glossary Function} reference from
+*	{@link module:enyo/animation#easing}.
+* @param {Boolean} reverse - Whether the animation will run in reverse.
+* @returns {Number} The resulting position, capped at a maximum of 100%.
+* @public
+*/
+exports.easedLerp = function(t0, duration, easing, reverse) {
+	var lerp = (utils.perfNow() - t0) / duration;
+	if (reverse) {
+		return lerp >= 1 ? 0 : (1 - easing(1 - lerp));
+	} else {
+		return lerp >= 1 ? 1 : easing(lerp);
+	}
+};
+
+/**
+* Gives an interpolation of an animated transition's distance from
+* `startValue` to `valueChange`.
+*
+* Applies the `easing` function with a wider range of variables to allow for
+* more complex animations.
+*
+* @param {Number} t0 - Start time.
+* @param {Number} duration - Duration in milliseconds.
+* @param {Function} easing - An easing [function]{@glossary Function} reference from
+*	{@link module:enyo/animation#easing}.
+* @param {Boolean} reverse - Whether the animation will run in reverse.
+* @param {Number} time
+* @param {Number} startValue - Starting value.
+* @param {Number} valueChange
+* @returns {Number} The resulting position, capped at a maximum of 100%.
+* @public
+*/
+exports.easedComplexLerp = function(t0, duration, easing, reverse, time, startValue, valueChange) {
+	var lerp = (utils.perfNow() - t0) / duration;
+	if (reverse) {
+		return easing(1 - lerp, time, startValue, valueChange, duration);
+	} else {
+		return easing(lerp, time, startValue, valueChange, duration);
+	}
+};
+
+
+//TODO: A temporary implementation for rAF with observers.
+Object.defineProperty(core, 'ts', {
+
+	get: function() { 
+		return this.value; 
+	},
+
+	set: function(newValue) {
+		for(var i in this.obs){
+			this.obs[i](this.value, newValue);
+		}
+		this.value = newValue;
+	}
+});
+},{'./platform':'enyo/platform','./utils':'enyo/utils'}],'enyo/logger':[function (module,exports,global,require,request){
+require('enyo');
+
+var
+	json = require('./json'),
+	utils = require('./utils'),
+	platform = require('./platform');
+
+/**
+* These platforms only allow one argument for [console.log()]{@glossary console.log}:
+*
+* * android
+* * ios
+* * webos
+*
+* @ignore
+*/
+var dumbConsole = Boolean(platform.android || platform.ios || platform.webos);
+
+/**
+* Internally used methods and properties associated with logging.
+*
+* @module enyo/logger
+* @public
+*/
+exports = module.exports = {
+
+	/**
+	* The log level to use. Can be a value from -1 to 99, where -1 disables all
+	* logging, 0 is 'error', 10 is 'warn', and 20 is 'log'. It is preferred that
+	* this value be set using the [setLogLevel()]{@link module:enyo/logger#setLogLevel}
+	* method.
+	*
+	* @type {Number}
+	* @default 99
+	* @public
+	*/
+	level: 99,
+
+	/**
+	* The known levels.
+	*
+	* @private
+	*/
+	levels: {log: 20, warn: 10, error: 0},
+
+	/**
+	* @private
+	*/
+	shouldLog: function (fn) {
+		var ll = parseInt(this.levels[fn], 0);
+		return (ll <= this.level);
+	},
+
+	/**
+	* @private
+	*/
+	validateArgs: function (args) {
+		// gracefully handle and prevent circular reference errors in objects
+		for (var i=0, l=args.length, item; (item=args[i]) || i<l; i++) {
+			try {
+				if (typeof item === 'object') {
+					args[i] = json.stringify(item);
+				}
+			} catch (e) {
+				args[i] = 'Error: ' + e.message;
+			}
+		}
+	},
+
+	/**
+	* @private
+	*/
+	_log: function (fn, args) {
+		// avoid trying to use console on IE instances where the object hasn't been
+		// created due to the developer tools being unopened
+		var console = global.console;
+		if (typeof console === 'undefined') {
+            return;
+        }
+		//var a$ = utils.logging.formatArgs(fn, args);
+		var a$ = utils.isArray(args) ? args : utils.cloneArray(args);
+		if (platform.androidFirefox) {
+			// Firefox for Android's console does not handle objects with circular references
+			this.validateArgs(a$);
+		}
+		if (dumbConsole) {
+			// at least in early versions of webos, console.* only accept a single argument
+			a$ = [a$.join(' ')];
+		}
+		var fn$ = console[fn];
+		if (fn$ && fn$.apply) {
+			// some consoles support 'warn', 'info', and so on
+			fn$.apply(console, a$);
+		} else if (console.log.apply) {
+			// some consoles support console.log.apply
+			console.log.apply(console, a$);
+		} else {
+			// otherwise, do our own formatting
+			console.log(a$.join(' '));
+		}
+	},
+
+	/**
+	* This is exposed elsewhere.
+	*
+	* @private
+	*/
+	log: function (fn, args) {
+
+		if (fn != 'log' && fn != 'warn' && fn != 'error') {
+			args = Array.prototype.slice.call(arguments);
+			fn = 'log';
+		}
+
+		var console = global.console;
+		if (typeof console !== 'undefined') {
+			if (this.shouldLog(fn)) {
+				this._log(fn, args);
+			}
+		}
+	}
+};
+
+/**
+* Sets the log level to the given value. This will restrict the amount of output depending on
+* the settings. The higher the value, the more output that will be allowed. The default is
+* 99. The value, -1, would silence all logging, even 'error' (0).
+* Without the 'see': {@link module:enyo/logger#log}.
+*
+* @see module:enyo/logger#level
+* @see module:enyo/logger#log
+* @see module:enyo/logger#warn
+* @see module:enyo/logger#error
+* @param {Number} level - The level to set logging to.
+*/
+exports.setLogLevel = function (level) {
+	var ll = parseInt(level, 0);
+	if (isFinite(ll)) {
+		this.level = ll;
+	}
+};
+
+/**
+* A wrapper for [console.log()]{@glossary console.log}, compatible
+* across supported platforms. Will output only if the current
+* [log level]{@link module:enyo/logger#level} allows it. [Object]{@glossary Object}
+* parameters will be serialized via [JSON.stringify()]{@glossary JSON.stringify}
+* automatically.
+*
+* @utility
+* @see {@glossary console.log}
+* @param {...*} - The arguments to be logged.
+* @public
+*/
+
+/**
+* A wrapper for [console.warn()]{@glossary console.warn}, compatible
+* across supported platforms. Will output only if the current
+* [log level]{@link module:enyo/logger#level} allows it. [Object]{@glossary Object}
+* parameters will be serialized via [JSON.stringify()]{@glossary JSON.stringify}
+* automatically.
+*
+* @utility
+* @see {@glossary console.warn}
+* @param {...*} - The arguments to be logged.
+* @public
+*/
+exports.warn = function () {
+	this.log('warn', arguments);
+};
+
+/**
+* A wrapper for [console.error()]{@glossary console.error}, compatible
+* across supported platforms. Will output only if the current
+* [log level]{@link module:enyo/logger#level} allows it. [Object]{@glossary Object}
+* parameters will be serialized via [JSON.stringify()]{@glossary JSON.stringify}
+* automatically.
+*
+* @utility
+* @see {@glossary console.error}
+* @param {...*} - The arguments to be logged.
+* @public
+*/
+exports.error = function () {
+	this.log('error', arguments);
+};
+
+},{'./json':'enyo/json','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/xhr':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -5065,13 +4942,13 @@ module.exports = {
      */
     init: function(actor, pose, initial) {
         var k;
-        actor.initalState = actor.initalState || {};
+        actor.initialState = actor.initialState || {};
         if (!(actor && pose && pose.animate)) return;
         node = actor.hasNode();
         utils.mixin(pose, getAnimatedProperty(node, pose.animate, initial));
         actor.currentState = pose.currentState;
-        for (k in pose.initalState) {
-            actor.initalState[k] = actor.initalState[k] || pose.initalState[k];
+        for (k in pose.initialState) {
+            actor.initialState[k] = actor.initialState[k] || pose.initialState[k];
         }
         return pose;
     },
@@ -5545,7 +5422,7 @@ function getAnimatedProperty(node, props, initial) {
         _endAnim: eP,
         _transform: dP,
         currentState: dP,
-        initalState: iP,
+        initialState: iP,
         matrix: m,
         props: props
     };
@@ -6297,7 +6174,98 @@ var ri = module.exports = {
 
 ri.init();
 
-},{'./dom':'enyo/dom'}],'enyo/VerticalDelegate':[function (module,exports,global,require,request){
+},{'./dom':'enyo/dom'}],'enyo/gesture/util':[function (module,exports,global,require,request){
+var
+	dom = require('../dom'),
+	platform = require('../platform'),
+	utils = require('../utils');
+
+/**
+* Used internally by {@link module:enyo/gesture}
+*
+* @module enyo/gesture/util
+* @private
+*/
+module.exports = {
+
+	/**
+	* @private
+	*/
+	eventProps: ['target', 'relatedTarget', 'clientX', 'clientY', 'pageX', 'pageY',
+		'screenX', 'screenY', 'altKey', 'ctrlKey', 'metaKey', 'shiftKey',
+		'detail', 'identifier', 'dispatchTarget', 'which', 'srcEvent'],
+
+	/**
+	* Creates an {@glossary event} of type `type` and returns it.
+	* `evt` should be an event [object]{@glossary Object}.
+	*
+	* @param {String} type - The type of {@glossary event} to make.
+	* @param {(Event|Object)} evt - The event you'd like to clone or an object that looks like it.
+	* @returns {Object} The new event [object]{@glossary Object}.
+	* @public
+	*/
+	makeEvent: function(type, evt) {
+		var e = {};
+		e.type = type;
+		for (var i=0, p; (p=this.eventProps[i]); i++) {
+			e[p] = evt[p];
+		}
+		e.srcEvent = e.srcEvent || evt;
+		e.preventDefault = this.preventDefault;
+		e.disablePrevention = this.disablePrevention;
+
+		if (dom._bodyScaleFactorX !== 1 || dom._bodyScaleFactorY !== 1) {
+			// Intercept only these events, not all events, like: hold, release, tap, etc,
+			// to avoid doing the operation again.
+			if (e.type == 'move' || e.type == 'up' || e.type == 'down' || e.type == 'enter' || e.type == 'leave') {
+				e.clientX *= dom._bodyScaleFactorX;
+				e.clientY *= dom._bodyScaleFactorY;
+			}
+		}
+		//
+		// normalize event.which and event.pageX/event.pageY
+		// Note that while 'which' works in IE9, it is broken for mousemove. Therefore,
+		// in IE, use global.event.button
+		if (platform.ie < 10) {
+			var b = global.event && global.event.button;
+			if (b) {
+				// multi-button not supported, priority: left, right, middle
+				// (note: IE bitmask is 1=left, 2=right, 4=center);
+				e.which = b & 1 ? 1 : (b & 2 ? 2 : (b & 4 ? 3 : 0));
+			}
+		} else if (platform.webos || global.PalmSystem) {
+			// Temporary fix for owos: it does not currently supply 'which' on move events
+			// and the user agent string doesn't identify itself so we test for PalmSystem
+			if (e.which === 0) {
+				e.which = 1;
+			}
+		}
+		return e;
+	},
+
+	/**
+	* Installed on [events]{@glossary event} and called in event context.
+	*
+	* @private
+	*/
+	preventDefault: function() {
+		if (this.srcEvent) {
+			this.srcEvent.preventDefault();
+		}
+	},
+
+	/**
+	* @private
+	*/
+	disablePrevention: function() {
+		this.preventDefault = utils.nop;
+		if (this.srcEvent) {
+			this.srcEvent.preventDefault = utils.nop;
+		}
+	}
+};
+
+},{'../dom':'enyo/dom','../platform':'enyo/platform','../utils':'enyo/utils'}],'enyo/VerticalDelegate':[function (module,exports,global,require,request){
 require('enyo');
 
 var
@@ -7313,150 +7281,118 @@ module.exports = {
 	}
 };
 
-},{'./utils':'enyo/utils','./logger':'enyo/logger','./dom':'enyo/dom'}],'enyo/gesture/util':[function (module,exports,global,require,request){
-var
-	dom = require('../dom'),
-	platform = require('../platform'),
-	utils = require('../utils');
-
-/**
-* Used internally by {@link module:enyo/gesture}
-*
-* @module enyo/gesture/util
-* @private
-*/
-module.exports = {
-
-	/**
-	* @private
-	*/
-	eventProps: ['target', 'relatedTarget', 'clientX', 'clientY', 'pageX', 'pageY',
-		'screenX', 'screenY', 'altKey', 'ctrlKey', 'metaKey', 'shiftKey',
-		'detail', 'identifier', 'dispatchTarget', 'which', 'srcEvent'],
-
-	/**
-	* Creates an {@glossary event} of type `type` and returns it.
-	* `evt` should be an event [object]{@glossary Object}.
-	*
-	* @param {String} type - The type of {@glossary event} to make.
-	* @param {(Event|Object)} evt - The event you'd like to clone or an object that looks like it.
-	* @returns {Object} The new event [object]{@glossary Object}.
-	* @public
-	*/
-	makeEvent: function(type, evt) {
-		var e = {};
-		e.type = type;
-		for (var i=0, p; (p=this.eventProps[i]); i++) {
-			e[p] = evt[p];
-		}
-		e.srcEvent = e.srcEvent || evt;
-		e.preventDefault = this.preventDefault;
-		e.disablePrevention = this.disablePrevention;
-
-		if (dom._bodyScaleFactorX !== 1 || dom._bodyScaleFactorY !== 1) {
-			// Intercept only these events, not all events, like: hold, release, tap, etc,
-			// to avoid doing the operation again.
-			if (e.type == 'move' || e.type == 'up' || e.type == 'down' || e.type == 'enter' || e.type == 'leave') {
-				e.clientX *= dom._bodyScaleFactorX;
-				e.clientY *= dom._bodyScaleFactorY;
-			}
-		}
-		//
-		// normalize event.which and event.pageX/event.pageY
-		// Note that while 'which' works in IE9, it is broken for mousemove. Therefore,
-		// in IE, use global.event.button
-		if (platform.ie < 10) {
-			var b = global.event && global.event.button;
-			if (b) {
-				// multi-button not supported, priority: left, right, middle
-				// (note: IE bitmask is 1=left, 2=right, 4=center);
-				e.which = b & 1 ? 1 : (b & 2 ? 2 : (b & 4 ? 3 : 0));
-			}
-		} else if (platform.webos || global.PalmSystem) {
-			// Temporary fix for owos: it does not currently supply 'which' on move events
-			// and the user agent string doesn't identify itself so we test for PalmSystem
-			if (e.which === 0) {
-				e.which = 1;
-			}
-		}
-		return e;
-	},
-
-	/**
-	* Installed on [events]{@glossary event} and called in event context.
-	*
-	* @private
-	*/
-	preventDefault: function() {
-		if (this.srcEvent) {
-			this.srcEvent.preventDefault();
-		}
-	},
-
-	/**
-	* @private
-	*/
-	disablePrevention: function() {
-		this.preventDefault = utils.nop;
-		if (this.srcEvent) {
-			this.srcEvent.preventDefault = utils.nop;
-		}
-	}
-};
-
-},{'../dom':'enyo/dom','../platform':'enyo/platform','../utils':'enyo/utils'}],'enyo/scene':[function (module,exports,global,require,request){
+},{'./utils':'enyo/utils','./logger':'enyo/logger','./dom':'enyo/dom'}],'enyo/scene':[function (module,exports,global,require,request){
 var
 	tween = require('./tween'),
 	utils = require('./utils'),
 	animation = require('./animation');
+/**
+ * Contains the declaration for the {@link module:enyo/scene~scene} of an animation.
+ * @module enyo/scene
+ */
 
 var _ts, _framerate = 16.6;
 
 var AnimationSupport = {
 	/**
-	* @public
-	*/
-	span: 0,
-	/**
-	* @private
-	*/
-	timeline: 0,
-	/**
-	* @public
-	*/
+	 * Reiterates the animation applied to the component.
+	 * It could be;
+	 * true, for infinite iteration
+	 * [Number], for how many times animation should iterate.
+	 * false, for no repetition
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	repeat: false,
 	/**
-	* @public
-	*/
+	 * Reduces GPU layers when the animation is completed.
+	 * As most of the transform animations happens on 
+	 * GPU layer, ans stays there even after the animations 
+	 * is completed. However, need to be carefull while using this
+	 * feature as if the component tends to animate regularly, this 
+	 * feature would be an overhead.
+	 * when true, GPU memory is freed
+	 *      false, layer remain intact.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	handleLayers: false,
 	/**
-	* @public
-	*/
+	 * Indentifies whether the animation is in progress or not.
+	 * when true, animation is in progress
+	 *      false, otherwise.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	animating: false,
 	/**
-	* @public
-	*/
+	 * Specifies the rate at which animation should be played.
+	 * When 0, animation is still
+	 *      1, animation plays with normal speed
+	 *      2, animation plays with 2X fast speed
+	 *      0.5, animation plays with slow speed at half of normal speed.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	direction: 0,
 	/**
-	* @public
-	*/
+	 * Specifies the rate at which animation should be played.
+	 * When 0, animation is still
+	 *      1, animation plays with normal speed
+	 *      2, animation plays with 2X fast speed
+	 *      0.5, animation plays with slow speed at half of normal speed.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	speed: 0,
 	/**
-	* @public
-	*/
+	 * Moves animation to a particular point within the span of 
+	 * an animation. Its value could lie between 0 and total duration
+	 * of the animation.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
 	seekInterval: 0,
 	/**
-	* @public
-	*/
-	isSequence: true,
-
-	/**
-	 * Starts the animation of the <code>actor</code> given in argument.
-	 * If actor is not provided, animation of all the components linked to the {@link module:enyo/AnimationSupport/Scene} will be started.
-	 * @param  [Component]{@link module:enyo/Component~Component} actor    The component to be animated
+	 * Plays animation in sequence when set to true else 
+	 * its a parallal animation. This could be applied for
+	 * animation properties as well as for scenes within a 
+	 * scene.
 	 * @public
+	 * @memberOf module:enyo/scene
 	 */
-	play: function () {
+	isSequence: true,
+	/**
+	 * Starts animation when scene is initialized, 
+	 * when this property is set to true. When false scene instance has
+	 * to be explicity played using 'play' api.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	autoPlay: true,
+	/**
+	 * The limit for an animation, which could be an instance
+	 * of time as well as distance.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	span: 0,
+	/**
+	 * The current time state of animation. This represents the
+	 * time at which animation is progressed upon. As this property 
+	 * directly impacts the state of animation, updating this value  
+	 * have direct effect on animation unless its animation is halted.
+	 * The range lies between 0 to overall span of animation.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	timeline: 0,
+	/**
+	 * Starts the animation of scene.
+	 * @public
+	 * @memberOf module:enyo/scene
+	 */
+	play: function() {
 		this.direction = this.speed = 1;
 		if (isNaN(this.timeline) || !this.timeline) {
 			this.timeline = 0;
@@ -7466,9 +7402,8 @@ var AnimationSupport = {
 	},
 
 	/**
-	 * Resumes the paused animation of the <code>actor</code> given in argument.
-	 * If actor is not provided, animation of all the components linked to the {@link module:enyo/AnimationSupport/Scene} will be resumed.
-	 * @param  [Component]{@link module:enyo/Component~Component} actor    The component to be animated
+	 * Resumes the paused animation of scene.
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
 	resume: function() {
@@ -7477,42 +7412,39 @@ var AnimationSupport = {
 	},
 
 	/**
-	 * Pauses the animation of the <code>actor</code> given in argument.
-	 * If actor is not provided, animation of all the components linked to the {@link module:enyo/AnimationSupport/Scene} will be paused.
-	 * @param  [Component]{@link module:enyo/Component~Component} actor    The component to be animated
+	 * Pauses the animation of scene.
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	pause: function () {
+	pause: function() {
 		this.direction = 0;
 		return this;
 	},
 
 	/**
-	 * Reverses the animation of the <code>actor</code> given in argument.
-	 * If actor is not provided, animation of all the components linked to the {@link module:enyo/AnimationSupport/Scene} will be reversed.
-	 * @param  [Component]{@link module:enyo/Component~Component} actor    The component to be animated
+	 * Reverses the animation of scene.
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	reverse: function () {
+	reverse: function() {
 		this.direction = -1;
 	},
 
 	/**
-	 * Stops the animation of the actor given in argument.
-	 * If actor is not provided, animation of all the components linked to the {@link module:enyo/AnimationSupport/Scene} will be stopped.
-	 * @param  [Component]{@link module:enyo/Component~Component} actor    The component to be animated
+	 * Stops the animation of scene.
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
-	stop: function () {
+	stop: function() {
 		this.speed = 0;
 		this.timeline = 0;
 	},
 
 	/**
-	 * Seeks the animation of the <code>actor</code> to the position provided in <code>seek</code>
+	 * Seeks the animation to the position provided in <code>seek</code>
 	 * The value of <code>seek</code> should be between <b>0</b> to <code>duration</code> of the animation.
-	 * @param  {Number}                                             seek    Value in seek where the animation has to be seeked
-	 * @param  [Component]{@link module:enyo/Component~Component}   actor       The component to be animated
+	 * @param  {Number} seek      where the animation has to be seeked
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
 	seek: function(seek) {
@@ -7520,18 +7452,18 @@ var AnimationSupport = {
 	},
 
 	/**
-	 * Seeks <code>actor</code> with animation to the position provided in <code>seek</code>
+	 * Seeks the animation to the position provided in <code>seek</code> with animation
 	 * The value of <code>seek</code> should be between <b>0</b> to <code>duration</code> of the animation.
-	 * @param  {Number}                                             seek    Value in seek where the animation has to be seeked
-	 * @param  [Component]{@link module:enyo/Component~Component}   actor       The component to be animated
+	 * @param  {Number} seek      where the animation has to be seeked
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
 	seekAnimate: function(seek) {
-		if (seek >= 0 ) {
+		if (seek >= 0) {
 			if (!this.animating)
 				this.play();
 			this.speed = 1;
-		}else{
+		} else {
 			this.speed = -1;
 		}
 		this.seekInterval = this.timeline + seek;
@@ -7544,28 +7476,56 @@ var AnimationSupport = {
 	//TODO: Move these events to Event Delegator
 	/**
 	 * Event to identify when the scene has done animating.
-	 * @memberOf module:enyo/AnimationSupport/Actor
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
 	completed: function() {},
 
 	/**
 	 * Event to identify when the scene has done a step(rAF updatation of time) in the animation.
-	 * @memberOf module:enyo/AnimationSupport/Actor
+	 * @memberOf module:enyo/scene
 	 * @public
 	 */
 	step: function() {}
 };
 
 /**
-* {@link module:enyo/Scene~Scene} is a work-in-progress module
-*
-* @class Scene
-* @extends module:enyo/Scene~Scene
-* @wip
-* @private
-*/
-var scene = module.exports = function (actor, props, opts) {
+ * Interface which accepts the animation details and returns a scene object
+ * @param  {Object} actor      component which has to be animated
+ * @param  {Object} props      properties of the component
+ * @param  {Object} opts       additional options
+ * @return {Object}            A scene object
+ */
+module.exports = function (proto, properties, opts) {
+	var i, ctor, ps, s;
+
+	if (!utils.isArray(proto)) {
+		ps = new scene(proto, properties, opts);
+	} else {
+		ps = new scene();
+		if (opts) utils.mixin(ps, opts);
+		for (i = 0;
+			(ctor = proto[i]); i++) {
+			s = new scene(ctor, properties);
+			ps.addScene(s);
+		}
+	}
+
+	ps.autoPlay && ps.play();
+	return ps;
+};
+
+/**
+ * {@link module:enyo/Scene~Scene}
+ *
+ * @class Scene
+ * @extends module:enyo/Scene~Scene
+ * @param  {Object} actor      component which has to be animated
+ * @param  {Object} props      properties of the component
+ * @param  {Object} opts       additional options
+ * @public
+ */
+function scene(actor, props, opts) {
 	this.id = utils.uid("@");
 	this.poses = [];
 	this.rolePlays = [];
@@ -7583,24 +7543,231 @@ var scene = module.exports = function (actor, props, opts) {
 			this.addAnimation(anim, anim.duration || 0, actor.duration);
 		}
 	}
-};
+}
 
-scene.prototype.isActive = function () {
+/**
+ * Checks whether the scene is in a active state, which then can be animated
+ * @return {Boolean} generated value in true or false. true in case of the parent scene
+ * @memberOf module:enyo/scene
+ * @public
+ */
+scene.prototype.isActive = function() {
 	if (this.actor)
-		return this.actor.generated;
+		return this.actor.generated && !this.actor.destroyed;
 
 	// making sure parent scenes are always active.
 	return true;
 };
 
+/**
+ * Sets the new animations with the properties passed.
+ * @param {Object} properties       Animation properties
+ * @memberOf module:enyo/scene
+ * @public
+ */
+scene.prototype.setAnimation = function(properties) {
+	var currentPose = findScene(this.poses, "poses");
+	setScene(currentPose, this.timeline, properties);
+};
+
+/**
+ * Gets the current animation pose.
+ * @param {Number} index       animation index
+ * @return {Object} pose       pose with the passed index
+ * @memberOf module:enyo/scene
+ * @public
+ */
+scene.prototype.getAnimation = function(index) {
+	return index < 0 || this.poses[index];
+};
+
+/**
+ * addAnimation is used for adding new animation with the passed properties at run time.
+ * @param {Object} newProp  animation properties for new animation
+ * @param {Number} span     span between the animation
+ * @param {Number} dur      duration for the new animation
+ * @memberOf module:enyo/scene
+ * @public
+ */
+scene.prototype.addAnimation = function(newProp, span, dur) {
+	dur = dur || this.span;
+	var l = this.poses.length,
+		old = 0,
+		spanCache = span.toString().match(/%$/) ? (span.replace(/%$/, '') * dur / 100) : span,
+		newSpan = newProp instanceof this.constructor ? newProp.span : spanCache;
+
+	if (l > 0 && this.isSequence) {
+		old = this.poses[l - 1].span;
+		newSpan += old;
+	}
+	this.poses.push({
+		animate: newProp,
+		span: newSpan,
+		begin: old
+	});
+	this.span = newSpan;
+};
+
+/**
+ * Add a new animation scene for the animation.
+ * @param {Object} sc scene which has to be added
+ * @memberOf module:enyo/scene
+ * @public
+ */
+scene.prototype.addScene = function(sc) {
+	var l = this.poses.length,
+		old = 0,
+		newSpan = sc instanceof this.constructor ? sc.span : 0;
+
+	if (l > 0 && this.isSequence) {
+		old = this.poses[l - 1].span;
+		newSpan += old;
+		sc.span = newSpan;
+		sc.begin = old;
+	}
+
+	this.poses.push(sc);
+	this.span = newSpan;
+};
+
+/**
+ * @private
+ */
+function action(ts, pose) {
+	var tm, i, poses,
+		dur = this.span,
+		actor = this.actor;
+
+	if (this.isActive()) {
+		tm = rolePlay(ts, this);
+		if (isNaN(tm) || tm < 0) return pose;
+
+		poses = posesAtTime(this.poses, tm > dur ? dur : tm);
+		for (i = 0, pose;
+			(pose = poses[i]); i++) {
+			if (pose instanceof this.constructor) {
+				pose.speed = this.speed;
+				pose.direction = this.direction;
+				pose.handleLayers = this.handleLayers;
+				action.call(pose, ts);
+			} else {
+				update(pose, actor, (tm - pose.begin), (pose.span - pose.begin));
+			}
+		}
+		this.step && this.step(actor);
+
+		if (tm > dur) cut.call(this, actor);
+	}
+	return pose;
+}
+
+/**
+ * @private
+ */
+function cut(actor) {
+	this.repeat = REPEAT[this.repeat] || this.repeat;
+	this.timeline = --this.repeat ? 0 : this.span;
+
+	if (this.repeat > 0) {
+		applyInitialStyle(this);
+		return;
+	} else {
+		if (FILLMODE[this.fillmode]) {
+			applyInitialStyle(this);
+		}
+	}
+
+	if (this.handleLayers) {
+		this.speed = 0;
+		if (this.active) {
+			this.active = false;
+			tween.halt(actor);
+		}
+	}
+	this.animating = false;
+	this.completed && this.completed(actor);
+}
+
+/**
+ * @private
+ */
+function loop(was, is) {
+	if (this.animating) {
+		_ts = is - (was || 0);
+		_ts = (_ts > _framerate) ? _framerate : _ts;
+		action.call(this, _ts);
+	} else if (this.actor && this.actor.destroyed) {
+		animation.unsubscribe(this.rAFId);
+	}
+}
+
+/**
+ * @private
+ */
+function update(pose, actor, since, dur) {
+	var t;
+	if (!pose._startAnim) tween.init(actor, pose);
+	if (since < 0) since = 0;
+	if (since <= dur && dur !== 0) {
+		t = since / dur;
+		tween.step(actor, pose, t > 0.98 ? 1 : t, dur);
+	} else {
+		tween.step(actor, pose, 1, dur);
+	}
+}
+
+/**
+ * <code>rolePlay</code> updated the timeline of the actor which is currently animating.
+ * @param  {Number} t     Elapsed time since the animation of this pose has started (ratio in factor of 1)
+ * @param  {@link module:enyo/Component~Component} actor The component which is animating
+ * @return {Number}       Returns the updated timeline of the actor
+ * @private
+ */
+function rolePlay(t, actor) {
+	actor = actor || this;
+	t = t * actor.speed * actor.direction;
+
+	actor.timeline += t;
+	if (actor.seekInterval !== 0) {
+		if ((actor.seekInterval - actor.timeline) * actor.speed < 0) {
+			actor.seekInterval = 0;
+			actor.speed = 0;
+		}
+	}
+
+	if (actor.timeline === undefined || actor.timeline < 0)
+		actor.timeline = 0;
+	return actor.timeline;
+}
+
+/**
+ * Returns animation pose index for a particular
+ * instance of time from the list of
+ * animations added to the scene.
+ * @param  {number} span - Time span from the animation timeline
+ * @return {number}      - index of the animation
+ * @private
+ */
+function posesAtTime(anims, span) {
+	function doFilter(val, idx, ar) {
+		return span > (val.begin || 0) && span <= val.span;
+	}
+	return anims.filter(doFilter);
+}
+
+/**
+ * @private
+ */
 function modify(pose, currentTm) {
 	pose.span = currentTm;
 	delete pose._endAnim;
 	pose._endAnim = pose.currentState;
 	return pose;
-};
-
-function currPose(poseArr, tm, properties) {
+}
+/**
+ * @private
+ */
+function setScene(poseArr, tm, properties) {
 	var currentTime = tm;
 	for (var i = 0; i < poseArr.length; i++) {
 
@@ -7615,197 +7782,54 @@ function currPose(poseArr, tm, properties) {
 			break;
 		}
 	}
-};
-
-function hasPosesCheck(poseArr) {
+}
+/**
+ * @private
+ */
+function hasScene(poseArr, propCheck) {
 	var bool;
-	for (var i = 0; i < poseArr.length; i++) {
-		bool = poseArr[i].poses ? true : false;
-		if (bool === true) {
-			break;
+	if (!utils.isArray(poseArr)) {
+		bool = poseArr[propCheck] ? true : false;
+	} else {
+		for (var i = 0; i < poseArr.length; i++) {
+			bool = poseArr[i][propCheck] ? true : false;
+			if (bool) break;
 		}
 	}
 	return bool;
-};
-
-function loopPose(poseArr, tm, properties) {
-	var isArrayCheck, hasPoses;
-	isArrayCheck = utils.isArray(poseArr);
-	hasPoses = hasPosesCheck(poseArr);
-
-	if (isArrayCheck === true && hasPoses === true) {
-		for (var i = 0; i < poseArr.length; i++) {
-			loopPose(poseArr[i].poses, tm, properties);
-		}
-	} else if (isArrayCheck === true && hasPoses === false) {
-		currPose(poseArr, tm, properties);
-	}
-};
-
-
-scene.prototype.setAnimation = function(properties) {
-	var currentTime, currentPose;
-	currentTime = this.timeline; // current time
-	posesList = this.poses; // gets the poses
-	loopPose(posesList, currentTime, properties);
-};
-
-scene.prototype.getAnimation = function(index) {
-	return index < 0 || this.poses[index];
-};
-
-scene.prototype.addAnimation = function(newProp, span, dur) {
-	var l = this.poses.length,
-		old = 0,
-		span = span.toString().match(/%$/) ? (span.replace(/%$/,'') * dur / 100) : span,
-		newSpan = newProp instanceof this.constructor ? newProp.span : span;
-
-	if (l > 0 && this.isSequence) {
-		old = this.poses[l-1].span;
-		newSpan += old;
-	}
-	this.poses.push({animate: newProp, span: newSpan, begin: old });
-	this.span = newSpan;
-};
-
-scene.prototype.action = function(ts, pose) {
-	var tm, i, poses,
-		dur = this.span;
-
-	if (this.isActive()) {
-		tm = rolePlay(ts, this);
-		if (isNaN(tm) || tm < 0) return pose;
-		else if (tm <= dur) {
-			poses = posesAtTime(this.poses, tm);
-			for (i = 0, pose;
-				(pose = poses[i]); i++) {
-				if (pose instanceof this.constructor) {
-					this.toScene(pose).action(ts);
-				} else {
-					update(pose, this.actor, (tm - pose.begin), (pose.span - pose.begin));
-				}
+}
+/**
+ * @private
+ */
+function findScene(poseArr, propCheck) {
+	var parentNode, currNode = poseArr;
+	if (hasScene(poseArr, propCheck)) {
+		if (utils.isArray(poseArr)) {
+			for (var i = 0; i < poseArr.length; i++) {
+				parentNode = currNode[i];
+				currNode = findScene(currNode[i].poses, propCheck);
 			}
-			this.step && this.step(this.actor);
 		} else {
-			this.repeat = REPEAT[this.repeat] || this.repeat;
-			this.timeline = --this.repeat ? 0 : this.span;
-			if (this.repeat) {
-				this.actor.addStyles(this.actor.initalState);
-			} else {
-				if (FILLMODE[this.fillmode]) {
-					this.actor.addStyles(this.actor.initalState);
-				}
-				this.cut();
-			}
+			parentNode = currNode;
+			currNode = findScene(currNode.poses, propCheck);
 		}
 	}
-	return pose;
-};
-
-scene.prototype.cut = function () {
-	if (this.handleLayers) {
-		this.speed = 0;
-		if (this.active) {
-			this.active = false;
-			tween.halt(this.actor);
-		}
-	}
-	this.animating = false;
-	this.completed && this.completed(this.actor);
-};
-
-scene.prototype.toScene = function (scene) {
-	scene.speed = this.speed;
-	scene.direction = this.direction;
-	scene.handleLayers = this.handleLayers;
-	return scene;
-};
-
-
-scene.prototype.addScene = function(sc) {
-	var l = this.poses.length,
-		old = 0,
-		newSpan = sc instanceof this.constructor ? sc.span : 0;
-
-	if (l > 0 && this.isSequence) {
-		old = this.poses[l-1].span;
-		newSpan += old;
-		sc.span = newSpan;
-		sc.begin = old;
-	}
-
-	this.poses.push(sc);
-	this.span = newSpan;
-};
-
-
-
-function loop (was, is) {
-	if (this.animating) {
-		_ts = is - (was || 0);
-		_ts = (_ts > _framerate) ? _framerate : _ts;
-		this.action(_ts);
-	} else if (this.actor && this.actor.destroyed) {
-		animation.unsubscribe(this.rAFId);  
-	}
-}
-
-function update (pose, actor, since, dur) {
-	var t;
-	if (!pose._startAnim) tween.init(actor, pose);
-
-	if (since < 0) since = 0;
-	if (since <= dur && dur !== 0) {
-		t = since / dur;
-		tween.step(actor, pose, t, dur);
-	} else {
-		tween.step(actor, pose, 1, dur);
-	}
+	return parentNode ? parentNode[propCheck] : parentNode;
 }
 
 /**
- * <code>rolePlay</code> updated the timeline of the actor which is currently animating.
- * @param  {Number} t     Elapsed time since the animation of this pose has started (ratio in factor of 1)
- * @param  {@link module:enyo/Component~Component} actor The component which is animating
- * @return {Number}       Returns the updated timeline of the actor
  * @private
  */
-function rolePlay (t, actor) {
-	actor = actor || this;
-	t = t * actor.speed * actor.direction;
-
-	actor.timeline += t;
-	if(actor.seekInterval !== 0) {
-		if((actor.seekInterval-actor.timeline)*actor.speed < 0) {
-			actor.seekInterval = 0;
-			actor.speed = 0;
-		}
-	}
-	
-	if (actor.timeline === undefined || actor.timeline < 0)
-		actor.timeline = 0;
-	return actor.timeline;
-}
-
-/**
- * Returns animation pose index for a particular 
- * instance of time from the list of 
- * animations added to the scene.
- * @param  {number} span - Time span from the animation timeline
- * @return {number}      - index of the animation
- * @private
- */
-function posesAtTime(anims, span) {
-	function doFilter(val, idx, ar) {
-		return span > (val.begin || 0) && span <= val.span;
-	}
-	return anims.filter(doFilter);
+function applyInitialStyle(node) {
+	node = node.actor ? node : findScene(node.poses, "actor");
+	node = node.actor || node;
+	node.addStyles(node.initialState);
 }
 
 var
 	REPEAT = {
 		'true': Infinity,
-		'false': 1
+		'false': 0
 	},
 	FILLMODE = {
 		'backwards': true,
@@ -8241,8 +8265,7 @@ kind.statics = {
 exports.concatHandler = function(ctor, props, instance) {
 
     var proto = ctor.prototype || ctor,
-        base = proto.ctor,
-        sctor;
+        base = proto.ctor;
 
     while (base) {
         if (base.concat) base.concat(ctor, props, instance);
@@ -8324,41 +8347,7 @@ exports.createFromKind = function (nom, param) {
 		return new Ctor(param);
 	}
 };
-/**
- * Interface which accepts the animation details and returns a scene object
- * @param  {Array} proto      Actors 
- * @param  {Object} properties Animation Properties
- * @param  {number} duration   Animation duration
- * @param  {String} completed  Callback function on completion
- * @return {Object}            A scene object
- */
-exports.animate = function(proto, properties, opts) {
-    var scene = scenePrepare(proto, properties, opts);
-    scene.play();
-    return scene;
-};
 
-exports.prepareAnimate = function(proto, properties, opts) {
-    var scene = scenePrepare(proto, properties, opts);
-    return scene;
-};
-
-function scenePrepare(proto, properties, opts) {
-    var i, ctor, ps, s;
-
-    if (!utils.isArray(proto)) {
-        return new scene(proto, properties, opts);
-    }
-
-    ps = new scene();
-    if (opts) utils.mixin(ps, opts);
-    for (i = 0;
-        (ctor = proto[i]); i++) {
-        s = new scene(ctor, properties);
-        ps.addScene(s);
-    }
-    return ps;
-};
 },{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/Binding':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -9053,7 +9042,97 @@ exports.defaultBindingKind = exports;
 */
 exports.PassiveBinding = PassiveBinding;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/ShowingTransitionSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
+/**
+* Exports the {@link module:enyo/ApplicationSupport~ApplicationSupport} mixin.
+* @module enyo/ApplicationSupport
+*/
+
+require('enyo');
+
+var kind = require('./kind');
+
+/**
+* An internally-used support {@glossary mixin} that is applied to all
+* [components]{@link module:enyo/Component~Component} of an {@link module:enyo/Application~Application} instance
+* (and to their components, recursively). This mixin adds an `app` property to
+* each component -- a local reference to the `Application` instance that
+* the component belongs to.
+* 
+* @mixin
+* @protected
+*/
+var ApplicationSupport = {
+
+	/**
+	* @private
+	*/
+	name: 'ApplicationSupport',
+
+	/**
+	* @private
+	*/
+	adjustComponentProps: kind.inherit(function (sup) {
+		return function (props) {
+			props.app = props.app || this.app;
+			sup.apply(this, arguments);
+		};
+	}),
+
+	/**
+	* @private
+	*/
+	destroy: kind.inherit(function (sup) {
+		return function () {
+			// release the reference to the application
+			this.app = null;
+			sup.apply(this, arguments);
+		};
+	})
+
+};
+
+module.exports = ApplicationSupport;
+
+},{'./kind':'enyo/kind'}],'enyo/ComponentBindingSupport':[function (module,exports,global,require,request){
+/**
+* Exports the {@link module:enyo/ComponentBindingSupport~ComponentBindingSupport} mixin.
+* @module enyo/ComponentBindingSupport
+*/
+
+require('enyo');
+
+var
+	kind = require('./kind');
+
+/**
+* An internally-used {@glossary mixin} applied to {@link module:enyo/Component~Component}
+* instances to better support [bindings]{@link module:enyo/Binding~Binding}.
+*
+* @mixin
+* @protected
+*/
+var ComponentBindingSupport = {
+	
+	/**
+	* @private
+	*/
+	name: 'ComponentBindingSupport',
+	
+	/**
+	* @private
+	*/
+	adjustComponentProps: kind.inherit(function (sup) {
+		return function (props) {
+			sup.apply(this, arguments);
+			props.bindingTransformOwner || (props.bindingTransformOwner = this.getInstanceOwner());
+		};
+	})
+};
+
+module.exports = ComponentBindingSupport;
+
+},{'./kind':'enyo/kind'}],'enyo/ShowingTransitionSupport':[function (module,exports,global,require,request){
 /**
 * This module exports the {@link module:enyo/ShowingTransitionSupport~ShowingTransitionSupport} mixin.
 *
@@ -10397,97 +10476,7 @@ kind.extendMethods(p, {
 
 module.exports = p;
 
-},{'./utils':'enyo/utils','./kind':'enyo/kind','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
-/**
-* Exports the {@link module:enyo/ApplicationSupport~ApplicationSupport} mixin.
-* @module enyo/ApplicationSupport
-*/
-
-require('enyo');
-
-var kind = require('./kind');
-
-/**
-* An internally-used support {@glossary mixin} that is applied to all
-* [components]{@link module:enyo/Component~Component} of an {@link module:enyo/Application~Application} instance
-* (and to their components, recursively). This mixin adds an `app` property to
-* each component -- a local reference to the `Application` instance that
-* the component belongs to.
-* 
-* @mixin
-* @protected
-*/
-var ApplicationSupport = {
-
-	/**
-	* @private
-	*/
-	name: 'ApplicationSupport',
-
-	/**
-	* @private
-	*/
-	adjustComponentProps: kind.inherit(function (sup) {
-		return function (props) {
-			props.app = props.app || this.app;
-			sup.apply(this, arguments);
-		};
-	}),
-
-	/**
-	* @private
-	*/
-	destroy: kind.inherit(function (sup) {
-		return function () {
-			// release the reference to the application
-			this.app = null;
-			sup.apply(this, arguments);
-		};
-	})
-
-};
-
-module.exports = ApplicationSupport;
-
-},{'./kind':'enyo/kind'}],'enyo/ComponentBindingSupport':[function (module,exports,global,require,request){
-/**
-* Exports the {@link module:enyo/ComponentBindingSupport~ComponentBindingSupport} mixin.
-* @module enyo/ComponentBindingSupport
-*/
-
-require('enyo');
-
-var
-	kind = require('./kind');
-
-/**
-* An internally-used {@glossary mixin} applied to {@link module:enyo/Component~Component}
-* instances to better support [bindings]{@link module:enyo/Binding~Binding}.
-*
-* @mixin
-* @protected
-*/
-var ComponentBindingSupport = {
-	
-	/**
-	* @private
-	*/
-	name: 'ComponentBindingSupport',
-	
-	/**
-	* @private
-	*/
-	adjustComponentProps: kind.inherit(function (sup) {
-		return function (props) {
-			sup.apply(this, arguments);
-			props.bindingTransformOwner || (props.bindingTransformOwner = this.getInstanceOwner());
-		};
-	})
-};
-
-module.exports = ComponentBindingSupport;
-
-},{'./kind':'enyo/kind'}],'enyo/MixinSupport':[function (module,exports,global,require,request){
+},{'./utils':'enyo/utils','./kind':'enyo/kind','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/MixinSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/MixinSupport~MixinSupport} mixin.
 * @module enyo/MixinSupport
@@ -10852,6 +10841,80 @@ kind.concatHandler = function (ctor, props, instance) {
 	}
 };
 
+},{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/LinkedListNode':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/LinkedListNode~LinkedListNode} kind.
+* @module enyo/LinkedListNode
+*/
+
+var
+	kind = require('./kind'),
+	utils = require('./utils');
+
+/**
+* An abstract linked-list node.
+*
+* @class LinkedListNode
+* @private
+*/
+module.exports = kind(
+	/** @lends module:enyo/LinkedListNode~LinkedListNode.prototype */ {
+	
+	/**
+	* @private
+	*/
+	kind: null,
+	
+	/**
+	* @private
+	*/
+
+	
+	/**
+	* @private
+	*/
+	prev: null,
+	
+	/**
+	* @private
+	*/
+	next: null,
+	
+	/**
+	* @private
+	*/
+	copy: function () {
+		var cpy = new this.ctor();
+		cpy.prev = this.prev;
+		cpy.next = this.next;
+		return cpy;
+	},
+	
+	/**
+	* @private
+	*/
+	constructor: function (props) {
+		props && utils.mixin(this, props);
+	},
+	
+	/**
+	* @private
+	*/
+	destroy: function () {
+		// clear reference to previous node
+		this.prev = null;
+		
+		// if we have a reference to our next node
+		// we continue down the chain
+		this.next && this.next.destroy();
+		
+		// clear our reference to the next node
+		this.next = null;
+	}
+});
+
 },{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/MultipleDispatchSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/MultipleDispatchSupport~MultipleDispatchSupport} mixin.
@@ -10965,81 +11028,191 @@ var MultipleDispatchSupport = {
 
 module.exports = MultipleDispatchSupport;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/LinkedListNode':[function (module,exports,global,require,request){
-require('enyo');
-
+},{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/BindingSupport':[function (module,exports,global,require,request){
 /**
-* Contains the declaration for the {@link module:enyo/LinkedListNode~LinkedListNode} kind.
-* @module enyo/LinkedListNode
+* Exports the {@link module:enyo/BindingSupport~BindingSupport} mixin
+* @module enyo/BindingSupport
 */
+
+require('enyo');
 
 var
 	kind = require('./kind'),
 	utils = require('./utils');
 
+var
+	Binding = require('./Binding');
+
+kind.concatenated.push('bindings');
+
 /**
-* An abstract linked-list node.
+* An internally-used {@glossary mixin} that is added to {@link module:enyo/CoreObject~Object}
+* and its [subkinds]{@glossary subkind}. It includes public and protected API
+* methods for working with [bindings]{@link module:enyo/Binding~Binding}.
 *
-* @class LinkedListNode
+* @mixin
+* @protected
+*/
+var BindingSupport = {
+	
+	/**
+	* @private
+	*/
+	name: 'BindingSupport',
+	
+	/**
+	* @private
+	*/
+	_bindingSupportInitialized: false,
+	
+	/**
+	* Imperatively creates a [binding]{@link module:enyo/Binding~Binding}. Merges a variable
+	* number of [hashes]{@glossary Object} and instantiates a binding that
+	* will have its [owner]{@link module:enyo/Binding~Binding#owner} property set to the callee
+	* (the current {@link module:enyo/CoreObject~Object}). Bindings created in this way will be
+	* [destroyed]{@link module:enyo/Binding~Binding#destroy} when their `owner` is
+	* [destroyed]{@link module:enyo/CoreObject~Object#destroy}.
+	*
+	* @param {...Object} props A variable number of [hashes]{@glossary Object} that will
+	*	be merged into the properties applied to the {@link module:enyo/Binding~Binding} instance.
+	* @returns {this} The callee for chaining.
+	* @public
+	*/
+	binding: function () {
+		var args = utils.toArray(arguments)
+			, props = utils.mixin(args)
+			, bindings = this.bindings || (this.bindings = [])
+			, passiveBindings = this.passiveBindings || (this.passiveBindings = [])
+			, PBCtor = Binding.PassiveBinding
+			, Ctor, bnd;
+			
+		props.owner = props.owner || this;
+		Ctor = props.kind = props.kind || this.defaultBindingKind || Binding.defaultBindingKind;
+		
+		if (this._bindingSupportInitialized) {
+			utils.isString(Ctor) && (Ctor = props.kind = kind.constructorForKind(Ctor));
+			bnd = new Ctor(props);
+			bindings.push(bnd);
+			if (Ctor === PBCtor) {
+				passiveBindings.push(bnd);
+			}
+			return bnd;
+		} else bindings.push(props);
+		
+		return this;
+	},
+	
+	/**
+	* Removes and [destroys]{@link module:enyo/Binding~Binding#destroy} all of, or a subset of,
+	* the [bindings]{@link module:enyo/Binding~Binding} belonging to the callee.
+	*
+	* @param {module:enyo/Binding~Binding[]} [subset] - The optional [array]{@glossary Array} of
+	*	[bindings]{@link module:enyo/Binding~Binding} to remove.
+	* @returns {this} The callee for chaining.
+	* @public
+	*/
+	clearBindings: function (subset) {
+		var bindings = subset || (this.bindings && this.bindings.slice());
+		bindings.forEach(function (bnd) {
+			bnd.destroy();
+		});
+		
+		return this;
+	},
+
+	syncBindings: function (opts) {
+		var all = opts && opts.all,
+			force = opts && opts.force,
+			bindings = all ? this.bindings : this.passiveBindings;
+
+		bindings.forEach(function (b) {
+			b.sync(force);
+		});
+	},
+	
+	/**
+	* Removes a single {@link module:enyo/Binding~Binding} from the callee. (This does not
+	* [destroy]{@link module:enyo/Binding~Binding#destroy} the binding.) Also removes the
+	* [owner]{@link module:enyo/Binding~Binding#owner} reference if it is the callee.
+	*
+	* It should be noted that when a binding is destroyed, it is automatically
+	* removed from its owner.
+	*
+	* @param {module:enyo/Binding~Binding} binding - The {@link module:enyo/Binding~Binding} instance to remove.
+	* @returns {this} The callee for chaining.
+	* @public
+	*/
+	removeBinding: function (binding) {
+		utils.remove(binding, this.bindings);
+		if (binding.ctor === Binding.PassiveBinding) {
+			utils.remove(binding, this.passiveBindings);
+		}
+		
+		if (binding.owner === this) binding.owner = null;
+		
+		return this;
+	},
+	
+	/**
+	* @private
+	*/
+	constructed: kind.inherit(function (sup) {
+		return function () {
+			var bindings = this.bindings;
+			this._bindingSupportInitialized = true;
+			if (bindings) {
+				this.bindings = [];
+				this.passiveBindings = [];
+				bindings.forEach(function (def) {
+					this.binding(def);
+				}, this);
+			}
+			sup.apply(this, arguments);
+		};
+	}),
+	
+	/**
+	* @private
+	*/
+	destroy: kind.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			this.bindings && this.bindings.length && this.clearBindings();
+			this.bindings = null;
+			this.passiveBindings = null;
+		};
+	})
+};
+
+module.exports = BindingSupport;
+
+/**
+	Hijack the original so we can add additional default behavior.
+*/
+var sup = kind.concatHandler
+	, flags = {ignore: true};
+
+/**
 * @private
 */
-module.exports = kind(
-	/** @lends module:enyo/LinkedListNode~LinkedListNode.prototype */ {
+kind.concatHandler = function (ctor, props, instance) {
+	var proto = ctor.prototype || ctor
+		, kind = props && (props.defaultBindingKind || Binding.defaultBindingKind)
+		, defaults = props && props.bindingDefaults;
 	
-	/**
-	* @private
-	*/
-	kind: null,
-	
-	/**
-	* @private
-	*/
-
-	
-	/**
-	* @private
-	*/
-	prev: null,
-	
-	/**
-	* @private
-	*/
-	next: null,
-	
-	/**
-	* @private
-	*/
-	copy: function () {
-		var cpy = new this.ctor();
-		cpy.prev = this.prev;
-		cpy.next = this.next;
-		return cpy;
-	},
-	
-	/**
-	* @private
-	*/
-	constructor: function (props) {
-		props && utils.mixin(this, props);
-	},
-	
-	/**
-	* @private
-	*/
-	destroy: function () {
-		// clear reference to previous node
-		this.prev = null;
+	sup.call(this, ctor, props, instance);
+	if (props.bindings) {
+		props.bindings.forEach(function (bnd) {
+			defaults && utils.mixin(bnd, defaults, flags);
+			bnd.kind || (bnd.kind = kind); 
+		});
 		
-		// if we have a reference to our next node
-		// we continue down the chain
-		this.next && this.next.destroy();
-		
-		// clear our reference to the next node
-		this.next = null;
+		proto.bindings = proto.bindings? proto.bindings.concat(props.bindings): props.bindings;
+		delete props.bindings;
 	}
-});
+};
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils'}],'enyo/RepeaterChildSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Binding':'enyo/Binding'}],'enyo/RepeaterChildSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/RepeaterChildSupport~RepeaterChildSupport} mixin
 * @module enyo/RepeaterChildSupport
@@ -11258,190 +11431,6 @@ var RepeaterChildSupport = {
 };
 
 module.exports = RepeaterChildSupport;
-
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Binding':'enyo/Binding'}],'enyo/BindingSupport':[function (module,exports,global,require,request){
-/**
-* Exports the {@link module:enyo/BindingSupport~BindingSupport} mixin
-* @module enyo/BindingSupport
-*/
-
-require('enyo');
-
-var
-	kind = require('./kind'),
-	utils = require('./utils');
-
-var
-	Binding = require('./Binding');
-
-kind.concatenated.push('bindings');
-
-/**
-* An internally-used {@glossary mixin} that is added to {@link module:enyo/CoreObject~Object}
-* and its [subkinds]{@glossary subkind}. It includes public and protected API
-* methods for working with [bindings]{@link module:enyo/Binding~Binding}.
-*
-* @mixin
-* @protected
-*/
-var BindingSupport = {
-	
-	/**
-	* @private
-	*/
-	name: 'BindingSupport',
-	
-	/**
-	* @private
-	*/
-	_bindingSupportInitialized: false,
-	
-	/**
-	* Imperatively creates a [binding]{@link module:enyo/Binding~Binding}. Merges a variable
-	* number of [hashes]{@glossary Object} and instantiates a binding that
-	* will have its [owner]{@link module:enyo/Binding~Binding#owner} property set to the callee
-	* (the current {@link module:enyo/CoreObject~Object}). Bindings created in this way will be
-	* [destroyed]{@link module:enyo/Binding~Binding#destroy} when their `owner` is
-	* [destroyed]{@link module:enyo/CoreObject~Object#destroy}.
-	*
-	* @param {...Object} props A variable number of [hashes]{@glossary Object} that will
-	*	be merged into the properties applied to the {@link module:enyo/Binding~Binding} instance.
-	* @returns {this} The callee for chaining.
-	* @public
-	*/
-	binding: function () {
-		var args = utils.toArray(arguments)
-			, props = utils.mixin(args)
-			, bindings = this.bindings || (this.bindings = [])
-			, passiveBindings = this.passiveBindings || (this.passiveBindings = [])
-			, PBCtor = Binding.PassiveBinding
-			, Ctor, bnd;
-			
-		props.owner = props.owner || this;
-		Ctor = props.kind = props.kind || this.defaultBindingKind || Binding.defaultBindingKind;
-		
-		if (this._bindingSupportInitialized) {
-			utils.isString(Ctor) && (Ctor = props.kind = kind.constructorForKind(Ctor));
-			bnd = new Ctor(props);
-			bindings.push(bnd);
-			if (Ctor === PBCtor) {
-				passiveBindings.push(bnd);
-			}
-			return bnd;
-		} else bindings.push(props);
-		
-		return this;
-	},
-	
-	/**
-	* Removes and [destroys]{@link module:enyo/Binding~Binding#destroy} all of, or a subset of,
-	* the [bindings]{@link module:enyo/Binding~Binding} belonging to the callee.
-	*
-	* @param {module:enyo/Binding~Binding[]} [subset] - The optional [array]{@glossary Array} of
-	*	[bindings]{@link module:enyo/Binding~Binding} to remove.
-	* @returns {this} The callee for chaining.
-	* @public
-	*/
-	clearBindings: function (subset) {
-		var bindings = subset || (this.bindings && this.bindings.slice());
-		bindings.forEach(function (bnd) {
-			bnd.destroy();
-		});
-		
-		return this;
-	},
-
-	syncBindings: function (opts) {
-		var all = opts && opts.all,
-			force = opts && opts.force,
-			bindings = all ? this.bindings : this.passiveBindings;
-
-		bindings.forEach(function (b) {
-			b.sync(force);
-		});
-	},
-	
-	/**
-	* Removes a single {@link module:enyo/Binding~Binding} from the callee. (This does not
-	* [destroy]{@link module:enyo/Binding~Binding#destroy} the binding.) Also removes the
-	* [owner]{@link module:enyo/Binding~Binding#owner} reference if it is the callee.
-	*
-	* It should be noted that when a binding is destroyed, it is automatically
-	* removed from its owner.
-	*
-	* @param {module:enyo/Binding~Binding} binding - The {@link module:enyo/Binding~Binding} instance to remove.
-	* @returns {this} The callee for chaining.
-	* @public
-	*/
-	removeBinding: function (binding) {
-		utils.remove(binding, this.bindings);
-		if (binding.ctor === Binding.PassiveBinding) {
-			utils.remove(binding, this.passiveBindings);
-		}
-		
-		if (binding.owner === this) binding.owner = null;
-		
-		return this;
-	},
-	
-	/**
-	* @private
-	*/
-	constructed: kind.inherit(function (sup) {
-		return function () {
-			var bindings = this.bindings;
-			this._bindingSupportInitialized = true;
-			if (bindings) {
-				this.bindings = [];
-				this.passiveBindings = [];
-				bindings.forEach(function (def) {
-					this.binding(def);
-				}, this);
-			}
-			sup.apply(this, arguments);
-		};
-	}),
-	
-	/**
-	* @private
-	*/
-	destroy: kind.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			this.bindings && this.bindings.length && this.clearBindings();
-			this.bindings = null;
-			this.passiveBindings = null;
-		};
-	})
-};
-
-module.exports = BindingSupport;
-
-/**
-	Hijack the original so we can add additional default behavior.
-*/
-var sup = kind.concatHandler
-	, flags = {ignore: true};
-
-/**
-* @private
-*/
-kind.concatHandler = function (ctor, props, instance) {
-	var proto = ctor.prototype || ctor
-		, kind = props && (props.defaultBindingKind || Binding.defaultBindingKind)
-		, defaults = props && props.bindingDefaults;
-	
-	sup.call(this, ctor, props, instance);
-	if (props.bindings) {
-		props.bindings.forEach(function (bnd) {
-			defaults && utils.mixin(bnd, defaults, flags);
-			bnd.kind || (bnd.kind = kind); 
-		});
-		
-		proto.bindings = proto.bindings? proto.bindings.concat(props.bindings): props.bindings;
-		delete props.bindings;
-	}
-};
 
 },{'./kind':'enyo/kind','./utils':'enyo/utils','./Binding':'enyo/Binding'}],'enyo/LinkedList':[function (module,exports,global,require,request){
 require('enyo');
@@ -13207,7 +13196,206 @@ module.exports = exports = kind(
 
 exports.Priorities = Priorities;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./CoreObject':'enyo/CoreObject'}],'enyo/Async':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./CoreObject':'enyo/CoreObject'}],'enyo/jobs':[function (module,exports,global,require,request){
+require('enyo');
+
+var
+	utils = require('./utils'),
+	kind = require('./kind');
+	
+var CoreObject = require('./CoreObject');
+
+/**
+* The {@link module:enyo/jobs} singleton provides a mechanism for queueing tasks
+* (i.e., functions) for execution in order of priority. The execution of the
+* current job stack may be blocked programmatically by setting a priority
+* level (run level) below which no jobs are executed.
+*
+* At the moment, only {@link module:enyo/Animator~Animator} uses this interface, setting a
+* priority of 4, which blocks all low priority tasks from executing during
+* animations. To maintain backward compatibility, jobs are assigned a priority
+* of 5 by default; thus they are not blocked by animations.
+*
+* Normally, application code will not use `enyo/jobs` directly, but will
+* instead use the [job()]{@link module:enyo/Component~Component#job} method of
+* {@link module:enyo/Component~Component}.
+*
+* @module enyo/jobs
+* @public
+*/
+module.exports = kind.singleton(
+	/** @lends module:enyo/jobs */ {
+	
+	kind: CoreObject,
+	
+	/**
+	* @private
+	*/
+	published: /** @lends module:enyo/jobs~jobs */ {
+		
+		/**
+		* The current priority level.
+		*
+		* @type {Number}
+		* @default 0
+		* @public
+		*/
+		priorityLevel: 0
+	},
+	
+	/**
+	* Prioritized by index.
+	*
+	* @private
+	*/
+	_jobs: [ [], [], [], [], [], [], [], [], [], [] ],
+	
+	/**
+	* @private
+	*/
+	_priorities: {},
+	
+	/**
+	* @private
+	*/
+	_namedJobs: {},
+	
+	/**
+	* @private
+	*/
+	_magicWords: {
+		'low': 3,
+		'normal': 5,
+		'high': 7
+	},
+	
+	/**
+	* Adds a [job]{@link module:enyo/job} to the job queue. If the current priority
+	* level is higher than this job's priority, this job gets deferred until the
+	* job level drops; if it is lower, this job is run immediately.
+	*
+	* @param {Function} job - The actual {@glossary Function} to execute as the
+	* [job]{@link module:enyo/job}.
+	* @param {Number} priority - The priority of the job.
+	* @param {String} nom - The name of the job for later reference.
+	* @public
+	*/
+	add: function (job, priority, nom) {
+		priority = priority || 5;
+
+		// magic words: low = 3, normal = 5, high = 7
+		priority = utils.isString(priority) ? this._magicWords[priority] : priority;
+
+		// if a job of the same name exists, remove it first (replace it)
+		if(nom){
+			this.remove(nom);
+			this._namedJobs[nom] = priority;
+		}
+
+		// if the job is of higher priority than the current priority level then
+		// there's no point in queueing it
+		if(priority >= this.priorityLevel){
+			job();
+		} else {
+			this._jobs[priority - 1].push({fkt: job, name: nom});
+		}
+	},
+	
+	/**
+	* Will remove the named [job]{@link module:enyo/job} from the queue.
+	*
+	* @param {String} nom - The name of the [job]{@link module:enyo/job} to remove.
+	* @returns {Array} An {@glossary Array} that will contain the removed job if
+	* it was found, or empty if it was not found.
+	* @public
+	*/
+	remove: function (nom) {
+		var jobs = this._jobs[this._namedJobs[nom] - 1];
+		if(jobs){
+			for(var j = jobs.length-1; j >= 0; j--){
+				if(jobs[j].name === nom){
+					return jobs.splice(j, 1);
+				}
+			}
+		}
+	},
+	
+	/**
+	* Adds a new priority level at which jobs will be executed. If it is higher than the
+	* highest current priority, the priority level rises. Newly added jobs below that priority
+	* level are deferred until the priority is removed (i.e., unregistered).
+	*
+	* @param {Number} priority - The priority value to register.
+	* @param {String} id - The name of the priority.
+	* @public
+	*/
+	registerPriority: function(priority, id) {
+		this._priorities[id] = priority;
+		this.setPriorityLevel( Math.max(priority, this.priorityLevel) );
+	},
+	
+	/**
+	* Removes a priority level. If the removed priority was previously the
+	* highest priority, the priority level drops to the next highest priority
+	* and queued jobs with a higher priority are executed.
+	*
+	* @param {String} id - The name of the priority level to remove.
+	* @public
+	*/
+	unregisterPriority: function (id) {
+		var highestPriority = 0;
+
+		// remove priority
+		delete this._priorities[id];
+
+		// find new highest current priority
+		for( var i in this._priorities ){
+			highestPriority = Math.max(highestPriority, this._priorities[i]);
+		}
+
+		this.setPriorityLevel( highestPriority );
+	},
+	
+	/**
+	* Tries to run next job if priority level has dropped.
+	*
+	* @type {module:enyo/ObserverSupport~ObserverSupport~Observer}
+	* @private
+	*/
+	priorityLevelChanged: function (was) {
+		if(was > this.priorityLevel){
+			this._doJob();
+		}
+	},
+	
+	/**
+	* Finds and executes the job of highest priority; in this way, all jobs with priority
+	* greater than or equal to the current level are run, in order of their priority (highest
+	* to lowest).
+	*
+	* @private
+	*/
+	_doJob: function () {
+		var job;
+		// find the job of highest priority above the current priority level
+		// and remove from the job list
+		for (var i = 9; i >= this.priorityLevel; i--){
+			if (this._jobs[i].length) {
+				job = this._jobs[i].shift();
+				break;
+			}
+		}
+
+		// allow other events to pass through
+		if (job) {
+			job.fkt();
+			delete this._namedJobs[job.name];
+			setTimeout(utils.bind(this, '_doJob'), 10);
+		}
+	}
+});
+
+},{'./utils':'enyo/utils','./kind':'enyo/kind','./CoreObject':'enyo/CoreObject'}],'enyo/Async':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -13514,206 +13702,7 @@ var Async = module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./CoreObject':'enyo/CoreObject'}],'enyo/jobs':[function (module,exports,global,require,request){
-require('enyo');
-
-var
-	utils = require('./utils'),
-	kind = require('./kind');
-	
-var CoreObject = require('./CoreObject');
-
-/**
-* The {@link module:enyo/jobs} singleton provides a mechanism for queueing tasks
-* (i.e., functions) for execution in order of priority. The execution of the
-* current job stack may be blocked programmatically by setting a priority
-* level (run level) below which no jobs are executed.
-*
-* At the moment, only {@link module:enyo/Animator~Animator} uses this interface, setting a
-* priority of 4, which blocks all low priority tasks from executing during
-* animations. To maintain backward compatibility, jobs are assigned a priority
-* of 5 by default; thus they are not blocked by animations.
-*
-* Normally, application code will not use `enyo/jobs` directly, but will
-* instead use the [job()]{@link module:enyo/Component~Component#job} method of
-* {@link module:enyo/Component~Component}.
-*
-* @module enyo/jobs
-* @public
-*/
-module.exports = kind.singleton(
-	/** @lends module:enyo/jobs */ {
-	
-	kind: CoreObject,
-	
-	/**
-	* @private
-	*/
-	published: /** @lends module:enyo/jobs~jobs */ {
-		
-		/**
-		* The current priority level.
-		*
-		* @type {Number}
-		* @default 0
-		* @public
-		*/
-		priorityLevel: 0
-	},
-	
-	/**
-	* Prioritized by index.
-	*
-	* @private
-	*/
-	_jobs: [ [], [], [], [], [], [], [], [], [], [] ],
-	
-	/**
-	* @private
-	*/
-	_priorities: {},
-	
-	/**
-	* @private
-	*/
-	_namedJobs: {},
-	
-	/**
-	* @private
-	*/
-	_magicWords: {
-		'low': 3,
-		'normal': 5,
-		'high': 7
-	},
-	
-	/**
-	* Adds a [job]{@link module:enyo/job} to the job queue. If the current priority
-	* level is higher than this job's priority, this job gets deferred until the
-	* job level drops; if it is lower, this job is run immediately.
-	*
-	* @param {Function} job - The actual {@glossary Function} to execute as the
-	* [job]{@link module:enyo/job}.
-	* @param {Number} priority - The priority of the job.
-	* @param {String} nom - The name of the job for later reference.
-	* @public
-	*/
-	add: function (job, priority, nom) {
-		priority = priority || 5;
-
-		// magic words: low = 3, normal = 5, high = 7
-		priority = utils.isString(priority) ? this._magicWords[priority] : priority;
-
-		// if a job of the same name exists, remove it first (replace it)
-		if(nom){
-			this.remove(nom);
-			this._namedJobs[nom] = priority;
-		}
-
-		// if the job is of higher priority than the current priority level then
-		// there's no point in queueing it
-		if(priority >= this.priorityLevel){
-			job();
-		} else {
-			this._jobs[priority - 1].push({fkt: job, name: nom});
-		}
-	},
-	
-	/**
-	* Will remove the named [job]{@link module:enyo/job} from the queue.
-	*
-	* @param {String} nom - The name of the [job]{@link module:enyo/job} to remove.
-	* @returns {Array} An {@glossary Array} that will contain the removed job if
-	* it was found, or empty if it was not found.
-	* @public
-	*/
-	remove: function (nom) {
-		var jobs = this._jobs[this._namedJobs[nom] - 1];
-		if(jobs){
-			for(var j = jobs.length-1; j >= 0; j--){
-				if(jobs[j].name === nom){
-					return jobs.splice(j, 1);
-				}
-			}
-		}
-	},
-	
-	/**
-	* Adds a new priority level at which jobs will be executed. If it is higher than the
-	* highest current priority, the priority level rises. Newly added jobs below that priority
-	* level are deferred until the priority is removed (i.e., unregistered).
-	*
-	* @param {Number} priority - The priority value to register.
-	* @param {String} id - The name of the priority.
-	* @public
-	*/
-	registerPriority: function(priority, id) {
-		this._priorities[id] = priority;
-		this.setPriorityLevel( Math.max(priority, this.priorityLevel) );
-	},
-	
-	/**
-	* Removes a priority level. If the removed priority was previously the
-	* highest priority, the priority level drops to the next highest priority
-	* and queued jobs with a higher priority are executed.
-	*
-	* @param {String} id - The name of the priority level to remove.
-	* @public
-	*/
-	unregisterPriority: function (id) {
-		var highestPriority = 0;
-
-		// remove priority
-		delete this._priorities[id];
-
-		// find new highest current priority
-		for( var i in this._priorities ){
-			highestPriority = Math.max(highestPriority, this._priorities[i]);
-		}
-
-		this.setPriorityLevel( highestPriority );
-	},
-	
-	/**
-	* Tries to run next job if priority level has dropped.
-	*
-	* @type {module:enyo/ObserverSupport~ObserverSupport~Observer}
-	* @private
-	*/
-	priorityLevelChanged: function (was) {
-		if(was > this.priorityLevel){
-			this._doJob();
-		}
-	},
-	
-	/**
-	* Finds and executes the job of highest priority; in this way, all jobs with priority
-	* greater than or equal to the current level are run, in order of their priority (highest
-	* to lowest).
-	*
-	* @private
-	*/
-	_doJob: function () {
-		var job;
-		// find the job of highest priority above the current priority level
-		// and remove from the job list
-		for (var i = 9; i >= this.priorityLevel; i--){
-			if (this._jobs[i].length) {
-				job = this._jobs[i].shift();
-				break;
-			}
-		}
-
-		// allow other events to pass through
-		if (job) {
-			job.fkt();
-			delete this._namedJobs[job.name];
-			setTimeout(utils.bind(this, '_doJob'), 10);
-		}
-	}
-});
-
-},{'./utils':'enyo/utils','./kind':'enyo/kind','./CoreObject':'enyo/CoreObject'}],'enyo/Loop':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./CoreObject':'enyo/CoreObject'}],'enyo/Loop':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -14085,413 +14074,7 @@ var Store = kind(
 */
 module.exports = new Store();
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./ModelList':'enyo/ModelList','./EventEmitter':'enyo/EventEmitter','./CoreObject':'enyo/CoreObject'}],'enyo/Ajax':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Ajax~Ajax} kind.
-* @module enyo/Ajax
-*/
-
-var
-	kind = require('./kind'),
-	utils = require('./utils'),
-	json = require('./json'),
-	logger = require('./logger');
-
-var
-	AjaxProperties = require('./AjaxProperties'),
-	Async = require('./Async'),
-	/*jshint -W079*/
-	// this defaults to providing the native FormData if it exists
-	FormData = require('./FormData'),
-	/*jshint +W079*/
-	Xhr = require('./xhr');
-	
-
-/**
-* A cache of response properties set on the {@link module:enyo/Ajax~Ajax} instance once it has completed
-* its request.
-*
-* @typedef {Object} module:enyo/Ajax~Ajax~xhrResponseType
-* @property {Number} status - The response status.
-* @property {Object} headers - The headers used for the request.
-* @property {String} body - The request body.
-* @public
-*/
-
-/**
-* A [kind]{@glossary kind} designed to expose the native
-* [XMLHttpRequest]{@glossary XMLHttpRequest} API. Available configuration options
-* are exposed by [enyo/AjaxProperties]{@link module:enyo/AjaxProperties}.
-*
-* This kind does not extend {@link module:enyo/Component~Component} and cannot be used
-* in the [components block]{@link module:enyo/Component~Component#components}.
-*
-* For more information, see the documentation on [Consuming Web
-* Services]{@linkplain $dev-guide/building-apps/managing-data/consuming-web-services.html}
-* in the Enyo Developer Guide.
-*
-* @class Ajax
-* @extends module:enyo/Async~Async
-* @public
-*/
-var Ajax = module.exports = kind(
-	/** @lends module:enyo/Ajax~Ajax.prototype */ {
-	
-	name: 'enyo.Ajax',
-	
-	/**
-	* @private
-	*/
-	kind: Async,
-	
-	/**
-	* @private
-	*/
-	published: AjaxProperties,
-	
-	/**
-	* @private
-	*/
-	constructor: kind.inherit(function (sup) {
-		return function (inParams) {
-			utils.mixin(this, inParams);
-			sup.apply(this, arguments);
-		};
-	}),
-	
-	/**
-	* @private
-	*/
-	destroy: kind.inherit(function (sup) {
-		return function () {
-			// explicilty release any XHR refs
-			this.xhr = null;
-			sup.apply(this, arguments);
-		};
-	}),
-	
-	/**
-	* This will be set once a request has completed (successfully or unsuccessfully).
-	* It is a cache of the response values.
-	*
-	* @type module:enyo/Ajax~Ajax~xhrResponseType
-	* @default null
-	* @public
-	*/
-	xhrResponse: null,
-	
-	/**
-	* Executes the request with the given options. The parameter may be a
-	* [hash]{@glossary Object} of properties or a [string]{@glossary String}. Both
-	* represent the query string, with the hash being serialized and the string
-	* being used directly.
-	*
-	* ```javascript
-	* var query = {q: 'searchTerm'}; // -> "?q=searchTerm"
-	* ```
-	*
-	* To provide a `POST` body, see {@link module:enyo/AjaxProperties#postBody}.
-	*
-	* When the request is completed, it will set the
-	* [xhrResponse]{@link module:enyo/Ajax~Ajax#xhrResponse} property.
-	*
-	* @see module:enyo/AjaxProperties
-	* @see module:enyo/Ajax~Ajax~xhrResponse
-	* @param {(Object|String)} [params] - A [string]{@glossary String} or
-	*	[hash]{@glossary Object} to be used as the query string.
-	* @returns {this} The callee for chaining.
-	* @public
-	*/
-	go: function (params) {
-		this.failed = false;
-		this.startTimer();
-		this.request(params);
-		return this;
-	},
-	
-	/**
-	* @private
-	*/
-	request: function (params) {
-		var parts = this.url.split('?');
-		var uri = parts.shift() || '';
-		var args = parts.length ? (parts.join('?').split('&')) : [];
-		//
-		var query = null;
-		//
-		if(utils.isString(params)){
-			//If params parameter is a string, use it as request body
-			query = params;
-		}
-		else{
-			//If params parameter is not a string, build a query from it
-			if(params){
-				query = Ajax.objectToQuery(params);
-			}
-		}
-		//
-		if (query) {
-			args.push(query);
-			query = null;
-		}
-		if (this.cacheBust) {
-			args.push(Math.random());
-		}
-		//
-		var url = args.length ? [uri, args.join('&')].join('?') : uri;
-		//
-		var xhr_headers = {};
-		var body;
-		if (this.method != 'GET') {
-			body = this.postBody;
-			if (this.method === 'POST' && body instanceof FormData) {
-				if (body.fake) {
-					xhr_headers['Content-Type'] = body.getContentType();
-					body = body.toString();
-				} else {
-					// Nothing to do as the
-					// content-type will be
-					// automagically set according
-					// to the FormData
-				}
-			} else {
-				xhr_headers['Content-Type'] = this.contentType;
-				if (body instanceof Object) {
-					if (this.contentType.match(/^application\/json(;.*)?$/) !== null) {
-						body = JSON.stringify(body);
-					} else if (this.contentType === 'application/x-www-form-urlencoded') {
-						body = Ajax.objectToQuery(body);
-					}
-					else {
-						body = body.toString();
-					}
-				}
-			}
-		}
-		utils.mixin(xhr_headers, this.headers);
-		// don't pass in headers structure if there are no headers defined as this messes
-		// up CORS code for IE9
-		if (utils.keys(xhr_headers).length === 0) {
-			xhr_headers = undefined;
-		}
-		//
-		try {
-			this.xhr = Xhr.request({
-				url: url,
-				method: this.method,
-				callback: this.bindSafely('receive'),
-				body: body,
-				headers: xhr_headers,
-				sync: this.sync,
-				username: this.username,
-				password: this.password,
-				xhrFields: utils.mixin({onprogress: this.bindSafely(this.updateProgress)}, this.xhrFields),
-				mimeType: this.mimeType
-			});
-		}
-		catch (e) {
-			// IE can throw errors here if the XHR would fail CORS checks,
-			// so catch and turn into a failure.
-			this.fail(e);
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	receive: function (inText, inXhr) {
-		if (!this.failed && !this.destroyed) {
-			var body;
-			if (inXhr.responseType === 'arraybuffer') {
-				body = inXhr.response;
-			} else if (typeof inXhr.responseText === 'string') {
-				body = inXhr.responseText;
-			} else {
-				// IE carrying a binary
-				body = inXhr.responseBody;
-			}
-			this.xhrResponse = {
-				status: inXhr.status,
-				headers: Ajax.parseResponseHeaders(inXhr),
-				body: body
-			};
-			if (this.isFailure(inXhr)) {
-				this.fail(inXhr.status);
-			} else {
-				this.respond(this.xhrToResponse(inXhr));
-			}
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	fail: kind.inherit(function (sup) {
-		return function (inError) {
-			// on failure, explicitly cancel the XHR to prevent
-			// further responses.  cancellation also resets the
-			// response headers & body,
-			if (this.xhr) {
-				Xhr.cancel(this.xhr);
-				this.xhr = null;
-			}
-			sup.apply(this, arguments);
-		};
-	}),
-	
-	/**
-	* @private
-	*/
-	xhrToResponse: function (inXhr) {
-		if (inXhr) {
-			return this[(this.handleAs || 'text') + 'Handler'](inXhr);
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	isFailure: function (inXhr) {
-		// if any exceptions are thrown while checking fields in the xhr,
-		// assume a failure.
-		try {
-			if (inXhr.responseType === 'arraybuffer') {
-				// if we are loading binary data, don't try to access inXhr.responseText
-				// because that throws an exception on webkit. Instead, just look for
-				// the response.
-				if (inXhr.status === 0 && !inXhr.response) {
-					return true;
-				}
-			} else {
-				var text = '';
-				// work around IE9 bug where accessing responseText will thrown error
-				// for binary requests.
-				if (typeof inXhr.responseText === 'string') {
-					text = inXhr.responseText;
-				}
-				// Follow same failure policy as jQuery's Ajax code
-				// CORS failures on FireFox will have status 0 and no responseText,
-				// so treat that as failure.
-				if (inXhr.status === 0 && text === '') {
-					return true;
-				}
-			}
-			// Otherwise, status 0 may be good for local file access.  We treat the range
-			// 1-199 and 300+ as failure (only 200-series code are OK).
-			return (inXhr.status !== 0) && (inXhr.status < 200 || inXhr.status >= 300);
-		}
-		catch (e) {
-			return true;
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	xmlHandler: function (inXhr) {
-		return inXhr.responseXML;
-	},
-	
-	/**
-	* @private
-	*/
-	textHandler: function (inXhr) {
-		return inXhr.responseText;
-	},
-	
-	/**
-	* @private
-	*/
-	jsonHandler: function (inXhr) {
-		var r = inXhr.responseText;
-		try {
-			return r && json.parse(r);
-		} catch (x) {
-			logger.warn('Ajax request set to handleAs JSON but data was not in JSON format');
-			return r;
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	binaryHandler: function (inXhr) {
-		return inXhr.response;
-	}, 
-	
-	/**
-	* @private
-	*/
-	updateProgress: function (event) {
-		// filter out 'input' as it causes exceptions on some Firefox versions
-		// due to unimplemented internal APIs
-		var ev = {};
-		for (var k in event) {
-			if (k !== 'input') {
-				ev[k] = event[k];
-			}
-		}
-		this.sendProgress(event.loaded, 0, event.total, ev);
-	},
-	
-	/**
-	* @private
-	*/
-	statics: /** @lends module:enyo/Ajax~Ajax */ {
-		/**
-		* Takes an object and converts it to an encoded URI string. NOTE: It does not traverse into
-		* objects or arrays, so nested objects will be rendered as the string 'object Object', which
-		* is not terribly useful.
-		* @public
-		*/
-		objectToQuery: function (/*Object*/ map) {
-			var enc = encodeURIComponent;
-			var pairs = [];
-			var backstop = {};
-			for (var name in map){
-				var value = map[name];
-				if (value != backstop[name]) {
-					var assign = enc(name) + '=';
-					if (utils.isArray(value)) {
-						for (var i=0; i < value.length; i++) {
-							pairs.push(assign + enc(value[i]));
-						}
-					} else {
-						pairs.push(assign + enc(value));
-					}
-				}
-			}
-			return pairs.join('&');
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	protectedStatics: {
-		parseResponseHeaders: function (xhr) {
-			var headers = {};
-			var headersStr = [];
-			if (xhr.getAllResponseHeaders) {
-				headersStr = xhr.getAllResponseHeaders().split(/\r?\n/);
-			}
-			for (var i = 0; i < headersStr.length; i++) {
-				var headerStr = headersStr[i];
-				var index = headerStr.indexOf(': ');
-				if (index > 0) {
-					var key = headerStr.substring(0, index).toLowerCase();
-					var val = headerStr.substring(index + 2);
-					headers[key] = val;
-				}
-			}
-			return headers;
-		}
-	}
-});
-
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./json':'enyo/json','./logger':'enyo/logger','./AjaxProperties':'enyo/AjaxProperties','./Async':'enyo/Async','./FormData':'enyo/FormData','./xhr':'enyo/xhr'}],'enyo/Component':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./ModelList':'enyo/ModelList','./EventEmitter':'enyo/EventEmitter','./CoreObject':'enyo/CoreObject'}],'enyo/Component':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -15689,7 +15272,413 @@ function prefixFromKindName (nom) {
 	return pre;
 }
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./logger':'enyo/logger','./CoreObject':'enyo/CoreObject','./ApplicationSupport':'enyo/ApplicationSupport','./ComponentBindingSupport':'enyo/ComponentBindingSupport','./jobs':'enyo/jobs'}],'enyo/NewAnimator':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./logger':'enyo/logger','./CoreObject':'enyo/CoreObject','./ApplicationSupport':'enyo/ApplicationSupport','./ComponentBindingSupport':'enyo/ComponentBindingSupport','./jobs':'enyo/jobs'}],'enyo/Ajax':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Ajax~Ajax} kind.
+* @module enyo/Ajax
+*/
+
+var
+	kind = require('./kind'),
+	utils = require('./utils'),
+	json = require('./json'),
+	logger = require('./logger');
+
+var
+	AjaxProperties = require('./AjaxProperties'),
+	Async = require('./Async'),
+	/*jshint -W079*/
+	// this defaults to providing the native FormData if it exists
+	FormData = require('./FormData'),
+	/*jshint +W079*/
+	Xhr = require('./xhr');
+	
+
+/**
+* A cache of response properties set on the {@link module:enyo/Ajax~Ajax} instance once it has completed
+* its request.
+*
+* @typedef {Object} module:enyo/Ajax~Ajax~xhrResponseType
+* @property {Number} status - The response status.
+* @property {Object} headers - The headers used for the request.
+* @property {String} body - The request body.
+* @public
+*/
+
+/**
+* A [kind]{@glossary kind} designed to expose the native
+* [XMLHttpRequest]{@glossary XMLHttpRequest} API. Available configuration options
+* are exposed by [enyo/AjaxProperties]{@link module:enyo/AjaxProperties}.
+*
+* This kind does not extend {@link module:enyo/Component~Component} and cannot be used
+* in the [components block]{@link module:enyo/Component~Component#components}.
+*
+* For more information, see the documentation on [Consuming Web
+* Services]{@linkplain $dev-guide/building-apps/managing-data/consuming-web-services.html}
+* in the Enyo Developer Guide.
+*
+* @class Ajax
+* @extends module:enyo/Async~Async
+* @public
+*/
+var Ajax = module.exports = kind(
+	/** @lends module:enyo/Ajax~Ajax.prototype */ {
+	
+	name: 'enyo.Ajax',
+	
+	/**
+	* @private
+	*/
+	kind: Async,
+	
+	/**
+	* @private
+	*/
+	published: AjaxProperties,
+	
+	/**
+	* @private
+	*/
+	constructor: kind.inherit(function (sup) {
+		return function (inParams) {
+			utils.mixin(this, inParams);
+			sup.apply(this, arguments);
+		};
+	}),
+	
+	/**
+	* @private
+	*/
+	destroy: kind.inherit(function (sup) {
+		return function () {
+			// explicilty release any XHR refs
+			this.xhr = null;
+			sup.apply(this, arguments);
+		};
+	}),
+	
+	/**
+	* This will be set once a request has completed (successfully or unsuccessfully).
+	* It is a cache of the response values.
+	*
+	* @type module:enyo/Ajax~Ajax~xhrResponseType
+	* @default null
+	* @public
+	*/
+	xhrResponse: null,
+	
+	/**
+	* Executes the request with the given options. The parameter may be a
+	* [hash]{@glossary Object} of properties or a [string]{@glossary String}. Both
+	* represent the query string, with the hash being serialized and the string
+	* being used directly.
+	*
+	* ```javascript
+	* var query = {q: 'searchTerm'}; // -> "?q=searchTerm"
+	* ```
+	*
+	* To provide a `POST` body, see {@link module:enyo/AjaxProperties#postBody}.
+	*
+	* When the request is completed, it will set the
+	* [xhrResponse]{@link module:enyo/Ajax~Ajax#xhrResponse} property.
+	*
+	* @see module:enyo/AjaxProperties
+	* @see module:enyo/Ajax~Ajax~xhrResponse
+	* @param {(Object|String)} [params] - A [string]{@glossary String} or
+	*	[hash]{@glossary Object} to be used as the query string.
+	* @returns {this} The callee for chaining.
+	* @public
+	*/
+	go: function (params) {
+		this.failed = false;
+		this.startTimer();
+		this.request(params);
+		return this;
+	},
+	
+	/**
+	* @private
+	*/
+	request: function (params) {
+		var parts = this.url.split('?');
+		var uri = parts.shift() || '';
+		var args = parts.length ? (parts.join('?').split('&')) : [];
+		//
+		var query = null;
+		//
+		if(utils.isString(params)){
+			//If params parameter is a string, use it as request body
+			query = params;
+		}
+		else{
+			//If params parameter is not a string, build a query from it
+			if(params){
+				query = Ajax.objectToQuery(params);
+			}
+		}
+		//
+		if (query) {
+			args.push(query);
+			query = null;
+		}
+		if (this.cacheBust) {
+			args.push(Math.random());
+		}
+		//
+		var url = args.length ? [uri, args.join('&')].join('?') : uri;
+		//
+		var xhr_headers = {};
+		var body;
+		if (this.method != 'GET') {
+			body = this.postBody;
+			if (this.method === 'POST' && body instanceof FormData) {
+				if (body.fake) {
+					xhr_headers['Content-Type'] = body.getContentType();
+					body = body.toString();
+				} else {
+					// Nothing to do as the
+					// content-type will be
+					// automagically set according
+					// to the FormData
+				}
+			} else {
+				xhr_headers['Content-Type'] = this.contentType;
+				if (body instanceof Object) {
+					if (this.contentType.match(/^application\/json(;.*)?$/) !== null) {
+						body = JSON.stringify(body);
+					} else if (this.contentType === 'application/x-www-form-urlencoded') {
+						body = Ajax.objectToQuery(body);
+					}
+					else {
+						body = body.toString();
+					}
+				}
+			}
+		}
+		utils.mixin(xhr_headers, this.headers);
+		// don't pass in headers structure if there are no headers defined as this messes
+		// up CORS code for IE9
+		if (utils.keys(xhr_headers).length === 0) {
+			xhr_headers = undefined;
+		}
+		//
+		try {
+			this.xhr = Xhr.request({
+				url: url,
+				method: this.method,
+				callback: this.bindSafely('receive'),
+				body: body,
+				headers: xhr_headers,
+				sync: this.sync,
+				username: this.username,
+				password: this.password,
+				xhrFields: utils.mixin({onprogress: this.bindSafely(this.updateProgress)}, this.xhrFields),
+				mimeType: this.mimeType
+			});
+		}
+		catch (e) {
+			// IE can throw errors here if the XHR would fail CORS checks,
+			// so catch and turn into a failure.
+			this.fail(e);
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	receive: function (inText, inXhr) {
+		if (!this.failed && !this.destroyed) {
+			var body;
+			if (inXhr.responseType === 'arraybuffer') {
+				body = inXhr.response;
+			} else if (typeof inXhr.responseText === 'string') {
+				body = inXhr.responseText;
+			} else {
+				// IE carrying a binary
+				body = inXhr.responseBody;
+			}
+			this.xhrResponse = {
+				status: inXhr.status,
+				headers: Ajax.parseResponseHeaders(inXhr),
+				body: body
+			};
+			if (this.isFailure(inXhr)) {
+				this.fail(inXhr.status);
+			} else {
+				this.respond(this.xhrToResponse(inXhr));
+			}
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	fail: kind.inherit(function (sup) {
+		return function (inError) {
+			// on failure, explicitly cancel the XHR to prevent
+			// further responses.  cancellation also resets the
+			// response headers & body,
+			if (this.xhr) {
+				Xhr.cancel(this.xhr);
+				this.xhr = null;
+			}
+			sup.apply(this, arguments);
+		};
+	}),
+	
+	/**
+	* @private
+	*/
+	xhrToResponse: function (inXhr) {
+		if (inXhr) {
+			return this[(this.handleAs || 'text') + 'Handler'](inXhr);
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	isFailure: function (inXhr) {
+		// if any exceptions are thrown while checking fields in the xhr,
+		// assume a failure.
+		try {
+			if (inXhr.responseType === 'arraybuffer') {
+				// if we are loading binary data, don't try to access inXhr.responseText
+				// because that throws an exception on webkit. Instead, just look for
+				// the response.
+				if (inXhr.status === 0 && !inXhr.response) {
+					return true;
+				}
+			} else {
+				var text = '';
+				// work around IE9 bug where accessing responseText will thrown error
+				// for binary requests.
+				if (typeof inXhr.responseText === 'string') {
+					text = inXhr.responseText;
+				}
+				// Follow same failure policy as jQuery's Ajax code
+				// CORS failures on FireFox will have status 0 and no responseText,
+				// so treat that as failure.
+				if (inXhr.status === 0 && text === '') {
+					return true;
+				}
+			}
+			// Otherwise, status 0 may be good for local file access.  We treat the range
+			// 1-199 and 300+ as failure (only 200-series code are OK).
+			return (inXhr.status !== 0) && (inXhr.status < 200 || inXhr.status >= 300);
+		}
+		catch (e) {
+			return true;
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	xmlHandler: function (inXhr) {
+		return inXhr.responseXML;
+	},
+	
+	/**
+	* @private
+	*/
+	textHandler: function (inXhr) {
+		return inXhr.responseText;
+	},
+	
+	/**
+	* @private
+	*/
+	jsonHandler: function (inXhr) {
+		var r = inXhr.responseText;
+		try {
+			return r && json.parse(r);
+		} catch (x) {
+			logger.warn('Ajax request set to handleAs JSON but data was not in JSON format');
+			return r;
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	binaryHandler: function (inXhr) {
+		return inXhr.response;
+	}, 
+	
+	/**
+	* @private
+	*/
+	updateProgress: function (event) {
+		// filter out 'input' as it causes exceptions on some Firefox versions
+		// due to unimplemented internal APIs
+		var ev = {};
+		for (var k in event) {
+			if (k !== 'input') {
+				ev[k] = event[k];
+			}
+		}
+		this.sendProgress(event.loaded, 0, event.total, ev);
+	},
+	
+	/**
+	* @private
+	*/
+	statics: /** @lends module:enyo/Ajax~Ajax */ {
+		/**
+		* Takes an object and converts it to an encoded URI string. NOTE: It does not traverse into
+		* objects or arrays, so nested objects will be rendered as the string 'object Object', which
+		* is not terribly useful.
+		* @public
+		*/
+		objectToQuery: function (/*Object*/ map) {
+			var enc = encodeURIComponent;
+			var pairs = [];
+			var backstop = {};
+			for (var name in map){
+				var value = map[name];
+				if (value != backstop[name]) {
+					var assign = enc(name) + '=';
+					if (utils.isArray(value)) {
+						for (var i=0; i < value.length; i++) {
+							pairs.push(assign + enc(value[i]));
+						}
+					} else {
+						pairs.push(assign + enc(value));
+					}
+				}
+			}
+			return pairs.join('&');
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	protectedStatics: {
+		parseResponseHeaders: function (xhr) {
+			var headers = {};
+			var headersStr = [];
+			if (xhr.getAllResponseHeaders) {
+				headersStr = xhr.getAllResponseHeaders().split(/\r?\n/);
+			}
+			for (var i = 0; i < headersStr.length; i++) {
+				var headerStr = headersStr[i];
+				var index = headerStr.indexOf(': ');
+				if (index > 0) {
+					var key = headerStr.substring(0, index).toLowerCase();
+					var val = headerStr.substring(index + 2);
+					headers[key] = val;
+				}
+			}
+			return headers;
+		}
+	}
+});
+
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./json':'enyo/json','./logger':'enyo/logger','./AjaxProperties':'enyo/AjaxProperties','./Async':'enyo/Async','./FormData':'enyo/FormData','./xhr':'enyo/xhr'}],'enyo/NewAnimator':[function (module,exports,global,require,request){
 /**
 * Contains the declaration for the {@link module:enyo/NewAnimator~NewAnimator} kind.
 * @wip
@@ -16666,230 +16655,7 @@ kind.features.push(function (ctor) {
 	}
 });
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./ObserverSupport':'enyo/ObserverSupport','./ComputedSupport':'enyo/ComputedSupport','./BindingSupport':'enyo/BindingSupport','./EventEmitter':'enyo/EventEmitter','./StateSupport':'enyo/StateSupport','./ModelList':'enyo/ModelList','./Source':'enyo/Source','./States':'enyo/States','./Store':'enyo/Store'}],'enyo/Jsonp':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Jsonp~JsonpRequest} kind.
-* @module enyo/Jsonp
-*/
-
-var
-	kind = require('./kind'),
-	utils = require('./utils');
-
-var
-	Async = require('./Async'),
-	Ajax = require('./Ajax');
-
-/**
-* {@link module:enyo/Jsonp~JsonpRequest} is an [Async]{@link module:enyo/Async~Async} task specifically designed
-* to wrap {@glossary JSONP} requests to a remote server. Be sure to read about the use
-* cases for JSONP requests, along with the documentation on [Consuming Web
-* Services]{@linkplain $dev-guide/building-apps/managing-data/consuming-web-services.html}
-* in the Enyo Developer Guide.
-*
-* @class JsonpRequest
-* @extends module:enyo/Async~Async
-* @public
-*/
-var JsonpRequest = module.exports = kind(
-	/** @lends module:enyo/Jsonp~JsonpRequest.prototype */ {
-	
-	name: 'enyo.JsonpRequest',
-	
-	/**
-	* @private
-	*/
-	kind: Async,
-	
-	/**
-	* @private
-	*/
-	published: {
-		/** @lends module:enyo/Jsonp~JsonpRequest.prototype */
-		
-		/**
-		* The URL for the service.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		url: '',
-		
-		/**
-		* The optional character set to use to interpret the return data.
-		*
-		* @type {String}
-		* @default null
-		* @public
-		*/
-		charset: null,
-		
-		/**
-		* The name of the [function]{@glossary Function} that is included in the
-		* encoded arguments and used to wrap the return value from the server.
-		* This may also be set to `null` in some cases.
-		*
-		* @see module:enyo/Jsonp~JsonpRequest.overrideCallback
-		* @type {String}
-		* @default 'callback'
-		* @public
-		*/
-		callbackName: 'callback',
-		
-		/**
-		* When `true`, a random number is appended as a parameter for GET requests
-		* to (attempt to) force a new fetch of the resource instead of reusing a
-		* local cache.
-		*
-		* @type {Boolean}
-		* @default true
-		* @public
-		*/
-		cacheBust: true,
-		
-		/**
-		* In cases where a backend is inflexible with regard to
-		* [callback]{@link module:enyo/Jsonp~JsonpRequest#callback} names, this property may be used to
-		* specify a global [function]{@glossary Function} instead. Note that when using
-		* this, it will replace any existing function with the given
-		* name and only one [JsonpRequest]{@link module:enyo/Jsonp~JsonpRequest} using this property may
-		* be active at a time.
-		*
-		* @type {String}
-		* @default null
-		* @public
-		*/
-		overrideCallback: null
-	},
-	
-	/**
-	* @private
-	*/
-	protectedStatics: {
-		// Counter to allow creation of unique name for each JSONP request
-		nextCallbackID: 0
-	},
-	
-	/**
-	* @private
-	*/
-	addScriptElement: function () {
-		var script = document.createElement('script');
-		script.src = this.src;
-		script.async = 'async';
-		if (this.charset) {
-			script.charset = this.charset;
-		}
-		// most modern browsers also have an onerror handler
-		script.onerror = this.bindSafely(function() {
-			// we don't get an error code, so we'll just use the generic 400 error status
-			this.fail(400);
-		});
-		// add script before existing script to make sure it's in a valid part of document
-		// http://www.jspatterns.com/the-ridiculous-case-of-adding-a-script-element/
-		var first = document.getElementsByTagName('script')[0];
-		first.parentNode.insertBefore(script, first);
-		this.scriptTag = script;
-	},
-	
-	/**
-	* @private
-	*/
-	removeScriptElement: function () {
-		var script = this.scriptTag;
-		this.scriptTag = null;
-		script.onerror = null;
-		if (script.parentNode) {
-			script.parentNode.removeChild(script);
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	constructor: kind.inherit(function (sup) {
-		return function (params) {
-			utils.mixin(this, params);
-			sup.apply(this, arguments);
-		};
-	}),
-	
-	/**
-	* Initiates the asynchronous routine and will supply the given value if it completes
-	* successfully. Overloaded from {@link module:enyo/Async~Async#go}.
-	*
-	* @param {*} value - The value to pass to responders.
-	* @returns {this} The callee for chaining.
-	* @public
-	*/
-	go: function (value) {
-		this.startTimer();
-		this.jsonp(value);
-		return this;
-	},
-	
-	/**
-	* @private
-	*/
-	jsonp: function (params) {
-		var callbackFunctionName = this.overrideCallback ||
-			'enyo_jsonp_callback_' + (JsonpRequest.nextCallbackID++);
-		//
-		this.src = this.buildUrl(params, callbackFunctionName);
-		this.addScriptElement();
-		//
-		global[callbackFunctionName] = this.bindSafely(this.respond);
-		//
-		// setup cleanup handlers for JSONP completion and failure
-		var cleanup = this.bindSafely(function() {
-			this.removeScriptElement();
-			global[callbackFunctionName] = null;
-		});
-		this.response(cleanup);
-		this.error(cleanup);
-	},
-	
-	/**
-	* @private
-	*/
-	buildUrl: function(params, fn) {
-		var parts = this.url.split('?');
-		var uri = parts.shift() || '';
-		var args = parts.length? parts.join('?').split('&'): [];
-		//
-		var bodyArgs = this.bodyArgsFromParams(params, fn);
-		args.push(bodyArgs);
-		if (this.cacheBust) {
-			args.push(Math.random());
-		}
-		//
-		return [uri, args.join('&')].join('?');
-	},
-	
-	/**
-	* If `params` is a string, we follow the convention of replacing the string
-	* `'=?'` with the callback name. If `params` is an object (the more common
-	* case), we add an argument using the `callbackName` published property.
-	*
-	* @private
-	*/
-	bodyArgsFromParams: function(params, fn) {
-		if (utils.isString(params)) {
-			return params.replace('=?', '=' + fn);
-		} else {
-			params = params ? utils.clone(params, true) : {};
-			if (this.callbackName) {
-				params[this.callbackName] = fn;
-			}
-			return Ajax.objectToQuery(params);
-		}
-	}
-});
-
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Async':'enyo/Async','./Ajax':'enyo/Ajax'}],'enyo/Animator':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./ObserverSupport':'enyo/ObserverSupport','./ComputedSupport':'enyo/ComputedSupport','./BindingSupport':'enyo/BindingSupport','./EventEmitter':'enyo/EventEmitter','./StateSupport':'enyo/StateSupport','./ModelList':'enyo/ModelList','./Source':'enyo/Source','./States':'enyo/States','./Store':'enyo/Store'}],'enyo/Animator':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -18181,7 +17947,230 @@ module.exports = kind(
 	mixins: [MultipleDispatchSupport]
 });
 
-},{'./kind':'enyo/kind','./Component':'enyo/Component','./MultipleDispatchSupport':'enyo/MultipleDispatchSupport'}],'enyo/Collection':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./Component':'enyo/Component','./MultipleDispatchSupport':'enyo/MultipleDispatchSupport'}],'enyo/Jsonp':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Jsonp~JsonpRequest} kind.
+* @module enyo/Jsonp
+*/
+
+var
+	kind = require('./kind'),
+	utils = require('./utils');
+
+var
+	Async = require('./Async'),
+	Ajax = require('./Ajax');
+
+/**
+* {@link module:enyo/Jsonp~JsonpRequest} is an [Async]{@link module:enyo/Async~Async} task specifically designed
+* to wrap {@glossary JSONP} requests to a remote server. Be sure to read about the use
+* cases for JSONP requests, along with the documentation on [Consuming Web
+* Services]{@linkplain $dev-guide/building-apps/managing-data/consuming-web-services.html}
+* in the Enyo Developer Guide.
+*
+* @class JsonpRequest
+* @extends module:enyo/Async~Async
+* @public
+*/
+var JsonpRequest = module.exports = kind(
+	/** @lends module:enyo/Jsonp~JsonpRequest.prototype */ {
+	
+	name: 'enyo.JsonpRequest',
+	
+	/**
+	* @private
+	*/
+	kind: Async,
+	
+	/**
+	* @private
+	*/
+	published: {
+		/** @lends module:enyo/Jsonp~JsonpRequest.prototype */
+		
+		/**
+		* The URL for the service.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		url: '',
+		
+		/**
+		* The optional character set to use to interpret the return data.
+		*
+		* @type {String}
+		* @default null
+		* @public
+		*/
+		charset: null,
+		
+		/**
+		* The name of the [function]{@glossary Function} that is included in the
+		* encoded arguments and used to wrap the return value from the server.
+		* This may also be set to `null` in some cases.
+		*
+		* @see module:enyo/Jsonp~JsonpRequest.overrideCallback
+		* @type {String}
+		* @default 'callback'
+		* @public
+		*/
+		callbackName: 'callback',
+		
+		/**
+		* When `true`, a random number is appended as a parameter for GET requests
+		* to (attempt to) force a new fetch of the resource instead of reusing a
+		* local cache.
+		*
+		* @type {Boolean}
+		* @default true
+		* @public
+		*/
+		cacheBust: true,
+		
+		/**
+		* In cases where a backend is inflexible with regard to
+		* [callback]{@link module:enyo/Jsonp~JsonpRequest#callback} names, this property may be used to
+		* specify a global [function]{@glossary Function} instead. Note that when using
+		* this, it will replace any existing function with the given
+		* name and only one [JsonpRequest]{@link module:enyo/Jsonp~JsonpRequest} using this property may
+		* be active at a time.
+		*
+		* @type {String}
+		* @default null
+		* @public
+		*/
+		overrideCallback: null
+	},
+	
+	/**
+	* @private
+	*/
+	protectedStatics: {
+		// Counter to allow creation of unique name for each JSONP request
+		nextCallbackID: 0
+	},
+	
+	/**
+	* @private
+	*/
+	addScriptElement: function () {
+		var script = document.createElement('script');
+		script.src = this.src;
+		script.async = 'async';
+		if (this.charset) {
+			script.charset = this.charset;
+		}
+		// most modern browsers also have an onerror handler
+		script.onerror = this.bindSafely(function() {
+			// we don't get an error code, so we'll just use the generic 400 error status
+			this.fail(400);
+		});
+		// add script before existing script to make sure it's in a valid part of document
+		// http://www.jspatterns.com/the-ridiculous-case-of-adding-a-script-element/
+		var first = document.getElementsByTagName('script')[0];
+		first.parentNode.insertBefore(script, first);
+		this.scriptTag = script;
+	},
+	
+	/**
+	* @private
+	*/
+	removeScriptElement: function () {
+		var script = this.scriptTag;
+		this.scriptTag = null;
+		script.onerror = null;
+		if (script.parentNode) {
+			script.parentNode.removeChild(script);
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	constructor: kind.inherit(function (sup) {
+		return function (params) {
+			utils.mixin(this, params);
+			sup.apply(this, arguments);
+		};
+	}),
+	
+	/**
+	* Initiates the asynchronous routine and will supply the given value if it completes
+	* successfully. Overloaded from {@link module:enyo/Async~Async#go}.
+	*
+	* @param {*} value - The value to pass to responders.
+	* @returns {this} The callee for chaining.
+	* @public
+	*/
+	go: function (value) {
+		this.startTimer();
+		this.jsonp(value);
+		return this;
+	},
+	
+	/**
+	* @private
+	*/
+	jsonp: function (params) {
+		var callbackFunctionName = this.overrideCallback ||
+			'enyo_jsonp_callback_' + (JsonpRequest.nextCallbackID++);
+		//
+		this.src = this.buildUrl(params, callbackFunctionName);
+		this.addScriptElement();
+		//
+		global[callbackFunctionName] = this.bindSafely(this.respond);
+		//
+		// setup cleanup handlers for JSONP completion and failure
+		var cleanup = this.bindSafely(function() {
+			this.removeScriptElement();
+			global[callbackFunctionName] = null;
+		});
+		this.response(cleanup);
+		this.error(cleanup);
+	},
+	
+	/**
+	* @private
+	*/
+	buildUrl: function(params, fn) {
+		var parts = this.url.split('?');
+		var uri = parts.shift() || '';
+		var args = parts.length? parts.join('?').split('&'): [];
+		//
+		var bodyArgs = this.bodyArgsFromParams(params, fn);
+		args.push(bodyArgs);
+		if (this.cacheBust) {
+			args.push(Math.random());
+		}
+		//
+		return [uri, args.join('&')].join('?');
+	},
+	
+	/**
+	* If `params` is a string, we follow the convention of replacing the string
+	* `'=?'` with the callback name. If `params` is an object (the more common
+	* case), we add an argument using the `callbackName` published property.
+	*
+	* @private
+	*/
+	bodyArgsFromParams: function(params, fn) {
+		if (utils.isString(params)) {
+			return params.replace('=?', '=' + fn);
+		} else {
+			params = params ? utils.clone(params, true) : {};
+			if (this.callbackName) {
+				params[this.callbackName] = fn;
+			}
+			return Ajax.objectToQuery(params);
+		}
+	}
+});
+
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Async':'enyo/Async','./Ajax':'enyo/Ajax'}],'enyo/Collection':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -19530,7 +19519,224 @@ exports.concat = function (ctor, props) {
 	}
 };
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Component':'enyo/Component','./EventEmitter':'enyo/EventEmitter','./Model':'enyo/Model','./ModelList':'enyo/ModelList','./StateSupport':'enyo/StateSupport','./Source':'enyo/Source','./Store':'enyo/Store','./States':'enyo/States'}],'enyo/WebService':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Component':'enyo/Component','./EventEmitter':'enyo/EventEmitter','./Model':'enyo/Model','./ModelList':'enyo/ModelList','./StateSupport':'enyo/StateSupport','./Source':'enyo/Source','./Store':'enyo/Store','./States':'enyo/States'}],'enyo/pageVisibility':[function (module,exports,global,require,request){
+var
+	utils = require('./utils'),
+	Signals = require('./Signals');
+
+/**
+* Support for the W3C Page Visibility API - http://www.w3.org/TR/page-visibility
+*
+* {@link module:enyo/pageVisibility.hidden} and {@link module:enyo/pageVisibility.visibilityState}
+* contain the same information as `document.hidden` and
+* `document.visibilityState` in supported browsers. The `visibilitychange`
+* event is channelled through the [Signals]{@link module:enyo/Signals~Signals} mechanism.
+*
+* Partly based on {@linkplain http://stackoverflow.com/a/1060034}.
+*
+* Example:
+*
+* ```javascript
+* var
+* 	kind = require('enyo/kind'),
+* 	Signals = require('enyo/Signals');
+*
+* module.exports = kind({
+* 	name: 'App',
+* 	components: [
+* 		{kind: Signals, onvisibilitychange: 'visibilitychanged'}
+* 	],
+* 	visibilitychanged: function() {
+* 		if(enyo.hidden){
+* 			// page hidden
+* 		} else {
+* 			// page visible
+* 		}
+* 	}
+* });
+* ```
+*
+* @module enyo/pageVisibility
+* @private
+*/
+var 
+	doc = global.document,
+	hidden = 'hidden',
+	visibilityState = 'visibilityState',
+	hiddenMap = {};
+
+var pageVisibility = module.exports = {
+	// set inital values for enyo.hidden and enyo.visibilityState it's probably save to assume
+	// that the current document is visible when loading the page
+	/**
+	* `true` if the document is hidden; otherwise, `false`.
+	*
+	* @readonly
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	hidden: typeof doc[hidden] !== 'undefined' ? doc[hidden] : false,
+
+	/**
+	* String indicating the document's visibility state.
+	*
+	* @readonly
+	* @type {String}
+	* @default 'visible'
+	* @public
+	*/
+	visibilityState: typeof doc[visibilityState] !== 'undefined' ? doc[visibilityState] : 'visible'
+};
+
+// map compatibility events to document.hidden state
+hiddenMap.blur = hiddenMap.focusout = hiddenMap.pagehide = true;
+hiddenMap.focus = hiddenMap.focusin = hiddenMap.pageshow = false;
+
+function onchange (event) {
+	event = event || global.event;
+	pageVisibility.hidden = (event.type in hiddenMap) ? hiddenMap[event.type] : doc[hidden];
+	pageVisibility.visibilityState = (event.type in hiddenMap) ? (hiddenMap[event.type] ? 'hidden' : 'visible' ) : doc[visibilityState];
+	Signals.send('onvisibilitychange', utils.mixin(event, {hidden: pageVisibility.hidden}));
+}
+
+// Standards:
+if (hidden in doc) {
+	doc.addEventListener('visibilitychange', onchange);
+} else if ((hidden = 'mozHidden') in doc) {
+	doc.addEventListener('mozvisibilitychange', onchange);
+	visibilityState = 'mozVisibilityState';
+} else if ((hidden = 'webkitHidden') in doc) {
+	doc.addEventListener('webkitvisibilitychange', onchange);
+	visibilityState = 'webkitVisibilityState';
+} else if ((hidden = 'msHidden') in doc) {
+	doc.addEventListener('msvisibilitychange', onchange);
+	visibilityState = 'msVisibilityState';
+} else if ('onfocusin' in doc) { // IE 9 and lower:
+	doc.onfocusin = doc.onfocusout = onchange;
+} else { // All others:
+	global.onpageshow = global.onpagehide = global.onfocus = global.onblur = onchange;
+}
+
+},{'./utils':'enyo/utils','./Signals':'enyo/Signals'}],'enyo/master':[function (module,exports,global,require,request){
+require('enyo');
+
+var
+	utils = require('./utils');
+var
+	Component = require('./Component'),
+	Signals = require('./Signals');
+
+/**
+* Default owner assigned to ownerless [UiComponents]{@link module:enyo/UiComponent~UiComponent},
+* to allow such UiComponents to be notified of important system events like window resize.
+*
+* NOTE: Ownerless [UiComponents]{@link module:enyo/UiComponent~UiComponent} will not be garbage collected unless 
+* explicitly destroyed, as they will be referenced by `master`.
+*
+* @module enyo/master
+* @private
+*/
+var master = module.exports = new Component({
+	name: 'master',
+	notInstanceOwner: true,
+	eventFlags: {showingOnly: true}, // don't waterfall these events into hidden controls
+	getId: function () {
+		return '';
+	},
+	isDescendantOf: utils.nop,
+	bubble: function (nom, event) {
+		//enyo.log('master event: ' + nom);
+		if (nom == 'onresize') {
+			// Resize is special; waterfall this message.
+			// This works because master is a Component, so it waterfalls
+			// to its owned Components (i.e., master has no children).
+			master.waterfallDown('onresize', this.eventFlags);
+			master.waterfallDown('onpostresize', this.eventFlags);
+		} else {
+			// All other top-level events are sent only to interested Signal
+			// receivers.
+			Signals.send(nom, event);
+		}
+	}
+});
+
+},{'./utils':'enyo/utils','./Component':'enyo/Component','./Signals':'enyo/Signals'}],'enyo/Controller':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Controller~Controller} kind.
+* @module enyo/Controller
+*/
+
+var
+	kind = require('./kind'),
+	utils = require('./utils');
+
+var
+	MultipleDispatchComponent = require('./MultipleDispatchComponent');
+
+/**
+* {@link module:enyo/Controller~Controller} is the base [kind]{@glossary kind} for all
+* controllers in Enyo. An abstract kind, `enyo/Controller` is a
+* [delegate]{@glossary delegate}/[component]{@link module:enyo/Component~Component} that
+* is designed to be a proxy for information.
+*
+* @class Controller
+* @extends module:enyo/MultipleDispatchComponent~MultipleDispatchComponent
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Controller~Controller.prototype */ {
+
+	name: 'enyo.Controller',
+
+	/**
+	* @private
+	*/
+	kind: MultipleDispatchComponent,
+
+	/**
+	* Set this flag to `true` to make this [controller]{@link module:enyo/Controller~Controller}
+	* available globally, when instanced. When set to `true`, even the
+	* [owner]{@link module:enyo/Component~Component#owner} (if any) cannot
+	* [destroy]{@link module:enyo/Component~Component#destroy} it.
+	*
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	global: false,
+
+	/**
+	* The default source of information for all instances of {@link module:enyo/Controller~Controller}
+	* and its [subkinds]{@glossary subkind}. In some cases, this will be a
+	* [computed property]{@link module:enyo/ComputedSupport} to facilitate overloading.
+	* It may contain any type of data.
+	*
+	* @type {*}
+	* @default null
+	* @public
+	*/
+	data: null,
+
+	/**
+	* @method
+	* @private
+	*/
+	constructor: kind.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			// don't attempt to set a controller globally without a name
+			if (this.global && this.name) {
+				utils.setPath.call(global, this.name, this);
+			}
+		};
+	}),
+	_isController: true
+});
+
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./MultipleDispatchComponent':'enyo/MultipleDispatchComponent'}],'enyo/WebService':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -19750,728 +19956,7 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Component':'enyo/Component','./Jsonp':'enyo/Jsonp','./AjaxProperties':'enyo/AjaxProperties','./Ajax':'enyo/Ajax'}],'enyo/pageVisibility':[function (module,exports,global,require,request){
-var
-	utils = require('./utils'),
-	Signals = require('./Signals');
-
-/**
-* Support for the W3C Page Visibility API - http://www.w3.org/TR/page-visibility
-*
-* {@link module:enyo/pageVisibility.hidden} and {@link module:enyo/pageVisibility.visibilityState}
-* contain the same information as `document.hidden` and
-* `document.visibilityState` in supported browsers. The `visibilitychange`
-* event is channelled through the [Signals]{@link module:enyo/Signals~Signals} mechanism.
-*
-* Partly based on {@linkplain http://stackoverflow.com/a/1060034}.
-*
-* Example:
-*
-* ```javascript
-* var
-* 	kind = require('enyo/kind'),
-* 	Signals = require('enyo/Signals');
-*
-* module.exports = kind({
-* 	name: 'App',
-* 	components: [
-* 		{kind: Signals, onvisibilitychange: 'visibilitychanged'}
-* 	],
-* 	visibilitychanged: function() {
-* 		if(enyo.hidden){
-* 			// page hidden
-* 		} else {
-* 			// page visible
-* 		}
-* 	}
-* });
-* ```
-*
-* @module enyo/pageVisibility
-* @private
-*/
-var 
-	doc = global.document,
-	hidden = 'hidden',
-	visibilityState = 'visibilityState',
-	hiddenMap = {};
-
-var pageVisibility = module.exports = {
-	// set inital values for enyo.hidden and enyo.visibilityState it's probably save to assume
-	// that the current document is visible when loading the page
-	/**
-	* `true` if the document is hidden; otherwise, `false`.
-	*
-	* @readonly
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	hidden: typeof doc[hidden] !== 'undefined' ? doc[hidden] : false,
-
-	/**
-	* String indicating the document's visibility state.
-	*
-	* @readonly
-	* @type {String}
-	* @default 'visible'
-	* @public
-	*/
-	visibilityState: typeof doc[visibilityState] !== 'undefined' ? doc[visibilityState] : 'visible'
-};
-
-// map compatibility events to document.hidden state
-hiddenMap.blur = hiddenMap.focusout = hiddenMap.pagehide = true;
-hiddenMap.focus = hiddenMap.focusin = hiddenMap.pageshow = false;
-
-function onchange (event) {
-	event = event || global.event;
-	pageVisibility.hidden = (event.type in hiddenMap) ? hiddenMap[event.type] : doc[hidden];
-	pageVisibility.visibilityState = (event.type in hiddenMap) ? (hiddenMap[event.type] ? 'hidden' : 'visible' ) : doc[visibilityState];
-	Signals.send('onvisibilitychange', utils.mixin(event, {hidden: pageVisibility.hidden}));
-}
-
-// Standards:
-if (hidden in doc) {
-	doc.addEventListener('visibilitychange', onchange);
-} else if ((hidden = 'mozHidden') in doc) {
-	doc.addEventListener('mozvisibilitychange', onchange);
-	visibilityState = 'mozVisibilityState';
-} else if ((hidden = 'webkitHidden') in doc) {
-	doc.addEventListener('webkitvisibilitychange', onchange);
-	visibilityState = 'webkitVisibilityState';
-} else if ((hidden = 'msHidden') in doc) {
-	doc.addEventListener('msvisibilitychange', onchange);
-	visibilityState = 'msVisibilityState';
-} else if ('onfocusin' in doc) { // IE 9 and lower:
-	doc.onfocusin = doc.onfocusout = onchange;
-} else { // All others:
-	global.onpageshow = global.onpagehide = global.onfocus = global.onblur = onchange;
-}
-
-},{'./utils':'enyo/utils','./Signals':'enyo/Signals'}],'enyo/master':[function (module,exports,global,require,request){
-require('enyo');
-
-var
-	utils = require('./utils');
-var
-	Component = require('./Component'),
-	Signals = require('./Signals');
-
-/**
-* Default owner assigned to ownerless [UiComponents]{@link module:enyo/UiComponent~UiComponent},
-* to allow such UiComponents to be notified of important system events like window resize.
-*
-* NOTE: Ownerless [UiComponents]{@link module:enyo/UiComponent~UiComponent} will not be garbage collected unless 
-* explicitly destroyed, as they will be referenced by `master`.
-*
-* @module enyo/master
-* @private
-*/
-var master = module.exports = new Component({
-	name: 'master',
-	notInstanceOwner: true,
-	eventFlags: {showingOnly: true}, // don't waterfall these events into hidden controls
-	getId: function () {
-		return '';
-	},
-	isDescendantOf: utils.nop,
-	bubble: function (nom, event) {
-		//enyo.log('master event: ' + nom);
-		if (nom == 'onresize') {
-			// Resize is special; waterfall this message.
-			// This works because master is a Component, so it waterfalls
-			// to its owned Components (i.e., master has no children).
-			master.waterfallDown('onresize', this.eventFlags);
-			master.waterfallDown('onpostresize', this.eventFlags);
-		} else {
-			// All other top-level events are sent only to interested Signal
-			// receivers.
-			Signals.send(nom, event);
-		}
-	}
-});
-
-},{'./utils':'enyo/utils','./Component':'enyo/Component','./Signals':'enyo/Signals'}],'enyo/Controller':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Controller~Controller} kind.
-* @module enyo/Controller
-*/
-
-var
-	kind = require('./kind'),
-	utils = require('./utils');
-
-var
-	MultipleDispatchComponent = require('./MultipleDispatchComponent');
-
-/**
-* {@link module:enyo/Controller~Controller} is the base [kind]{@glossary kind} for all
-* controllers in Enyo. An abstract kind, `enyo/Controller` is a
-* [delegate]{@glossary delegate}/[component]{@link module:enyo/Component~Component} that
-* is designed to be a proxy for information.
-*
-* @class Controller
-* @extends module:enyo/MultipleDispatchComponent~MultipleDispatchComponent
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Controller~Controller.prototype */ {
-
-	name: 'enyo.Controller',
-
-	/**
-	* @private
-	*/
-	kind: MultipleDispatchComponent,
-
-	/**
-	* Set this flag to `true` to make this [controller]{@link module:enyo/Controller~Controller}
-	* available globally, when instanced. When set to `true`, even the
-	* [owner]{@link module:enyo/Component~Component#owner} (if any) cannot
-	* [destroy]{@link module:enyo/Component~Component#destroy} it.
-	*
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	global: false,
-
-	/**
-	* The default source of information for all instances of {@link module:enyo/Controller~Controller}
-	* and its [subkinds]{@glossary subkind}. In some cases, this will be a
-	* [computed property]{@link module:enyo/ComputedSupport} to facilitate overloading.
-	* It may contain any type of data.
-	*
-	* @type {*}
-	* @default null
-	* @public
-	*/
-	data: null,
-
-	/**
-	* @method
-	* @private
-	*/
-	constructor: kind.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			// don't attempt to set a controller globally without a name
-			if (this.global && this.name) {
-				utils.setPath.call(global, this.name, this);
-			}
-		};
-	}),
-	_isController: true
-});
-
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./MultipleDispatchComponent':'enyo/MultipleDispatchComponent'}],'enyo/dispatcher':[function (module,exports,global,require,request){
-/**
-* Contains dispatcher methods
-* @module enyo/dispatcher
-* @private
-*/
-require('enyo');
-
-var
-	logger = require('./logger'),
-	master = require('./master'),
-	utils = require('./utils');
-
-var
-	Dom = require('./dom');
-
-/**
- * An [object]{@glossary Object} describing the the last known coordinates of the cursor or
- * user-interaction point in touch environments.
- *
- * @typedef {Object} module:enyo/dispatcher~CursorCoordinates
- * @property {Number} clientX - The horizontal coordinate within the application's client area.
- * @property {Number} clientY - The vertical coordinate within the application's client area.
- * @property {Number} pageX - The X coordinate of the cursor relative to the viewport, including any
- *   scroll offset.
- * @property {Number} pageY - The Y coordinate of the cursor relative to the viewport, including any
- *   scroll offset.
- * @property {Number} screenX - The X coordinate of the cursor relative to the screen, not including
- *   any scroll offset.
- * @property {Number} screenY - The Y coordinate of the cursor relative to the screen, not including
- *   any scroll offset.
- */
-
-/**
-* @private
-*/
-var dispatcher = module.exports = dispatcher = {
-
-	$: {},
-
-	/**
-	* These events come from document
-	*
-	* @private
-	*/
-	events: ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', 'mousewheel',
-		'click', 'dblclick', 'change', 'keydown', 'keyup', 'keypress', 'input',
-		'paste', 'copy', 'cut', 'webkitTransitionEnd', 'transitionend', 'webkitAnimationEnd', 'animationend',
-		'webkitAnimationStart', 'animationstart', 'webkitAnimationIteration', 'animationiteration'],
-
-	/**
-	* These events come from window
-	*
-	* @private
-	*/
-	windowEvents: ['resize', 'load', 'unload', 'message', 'hashchange', 'popstate', 'focus', 'blur'],
-
-	/**
-	* Feature plugins (aka filters)
-	*
-	* @private
-	*/
-	features: [],
-
-	/**
-	* @private
-	*/
-	connect: function() {
-		var d = dispatcher, i, n;
-		for (i=0; (n=d.events[i]); i++) {
-			d.listen(document, n);
-		}
-		for (i=0; (n=d.windowEvents[i]); i++) {
-			// Chrome Packaged Apps don't like "unload"
-			if(n === 'unload' &&
-				(typeof global.chrome === 'object') &&
-				global.chrome.app) {
-				continue;
-			}
-
-			d.listen(window, n);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	listen: function(inListener, inEventName, inHandler) {
-		inListener.addEventListener(inEventName, inHandler || dispatch, false);
-	},
-
-	/**
-	* @private
-	*/
-	stopListening: function(inListener, inEventName, inHandler) {
-		inListener.removeEventListener(inEventName, inHandler || dispatch, false);
-	},
-
-	/**
-	* Fires an event for Enyo to listen for.
-	*
-	* @private
-	*/
-	dispatch: function(e) {
-		// Find the control who maps to e.target, or the first control that maps to an ancestor of e.target.
-		var c = this.findDispatchTarget(e.target) || this.findDefaultTarget();
-		// Cache the original target
-		e.dispatchTarget = c;
-		// support pluggable features return true to abort immediately or set e.preventDispatch to avoid processing.
-		for (var i=0, fn; (fn=this.features[i]); i++) {
-			if (fn.call(this, e) === true) {
-				return;
-			}
-		}
-		if (c && !e.preventDispatch) {
-			return this.dispatchBubble(e, c);
-		}
-	},
-
-	/**
-	* Takes an event target and finds the corresponding Enyo control.
-	*
-	* @private
-	*/
-	findDispatchTarget: function(inNode) {
-		var t, n = inNode;
-		// FIXME: Mozilla: try/catch is here to squelch "Permission denied to access property xxx from a non-chrome context"
-		// which appears to happen for scrollbar nodes in particular. It's unclear why those nodes are valid targets if
-		// it is illegal to interrogate them. Would like to trap the bad nodes explicitly rather than using an exception block.
-		try {
-			while (n) {
-				if ((t = this.$[n.id])) {
-					// there could be multiple nodes with this id, the relevant node for this event is n
-					// we don't push this directly to t.node because sometimes we are just asking what
-					// the target 'would be' (aka, calling findDispatchTarget from handleMouseOverOut)
-					t.eventNode = n;
-					break;
-				}
-				n = n.parentNode;
-			}
-		} catch(x) {
-			logger.log(x, n);
-		}
-		return t;
-	},
-
-	/**
-	* Returns the default Enyo control for events.
-	*
-	* @private
-	*/
-	findDefaultTarget: function() {
-		return master;
-	},
-
-	/**
-	* @private
-	*/
-	dispatchBubble: function(e, c) {
-		var type = e.type;
-		type = e.customEvent ? type : 'on' + type;
-		return c.bubble(type, e, c);
-	}
-};
-
-/**
-* Called in the context of an event.
-*
-* @name module:enyo/dispatcher.iePreventDefault
-* @static
-* @method
-* @private
-*/
-dispatcher.iePreventDefault = function() {
-	try {
-		this.returnValue = false;
-	}
-	catch(e) {
-		// do nothing
-	}
-};
-
-/**
-* @private
-*/
-function dispatch (inEvent) {
-	return dispatcher.dispatch(inEvent);
-}
-
-/**
-* @name module:enyo/dispatcher.bubble
-* @static
-* @method
-* @private
-*/
-dispatcher.bubble = function(inEvent) {
-	if (inEvent) {
-		dispatcher.dispatch(inEvent);
-	}
-};
-
-// This string is set on event handlers attributes for DOM elements that
-// don't normally bubble (like onscroll) so that they can participate in the
-// Enyo event system.
-dispatcher.bubbler = 'enyo.bubble(arguments[0])';
-
-// The code below helps make Enyo compatible with Google Packaged Apps
-// Content Security Policy(http://developer.chrome.com/extensions/contentSecurityPolicy.html),
-// which, among other things, forbids the use of inline scripts.
-// We replace online scripting with equivalent means, leaving dispatcher.bubbler
-// for backward compatibility.
-(function() {
-	var bubbleUp = function() {
-		dispatcher.bubble(arguments[0]);
-	};
-
-	/**
-	* Makes given events bubble on a specified Enyo control.
-	*
-	* @name: module:enyo/dispatcher.makeBubble
-	* @method
-	* @private
-	*/
-	dispatcher.makeBubble = function() {
-		var args = Array.prototype.slice.call(arguments, 0),
-			control = args.shift();
-
-		if((typeof control === 'object') && (typeof control.hasNode === 'function')) {
-			utils.forEach(args, function(event) {
-				if(this.hasNode()) {
-					dispatcher.listen(this.node, event, bubbleUp);
-				}
-			}, control);
-		}
-	};
-
-	/**
-	* Removes the event listening and bubbling initiated by
-	* [makeBubble()]{@link module:enyo/dispatcher.makeBubble} on a specific control.
-	*
-	* @name: module:enyo/dispatcher.unmakeBubble
-	* @method
-	* @private
-	*/
-	dispatcher.unmakeBubble = function() {
-		var args = Array.prototype.slice.call(arguments, 0),
-			control = args.shift();
-
-		if((typeof control === 'object') && (typeof control.hasNode === 'function')) {
-			utils.forEach(args, function(event) {
-				if(this.hasNode()) {
-					dispatcher.stopListening(this.node, event, bubbleUp);
-				}
-			}, control);
-		}
-	};
-})();
-
-/**
-* @private
-*/
-// FIXME: we need to create and initialize dispatcher someplace else to allow overrides
-Dom.requiresWindow(dispatcher.connect);
-
-/**
-* Generates a tapped event for a raw-click event.
-*
-* @private
-*/
-dispatcher.features.push(
-	function (e) {
-		if ('click' === e.type) {
-			if (e.clientX === 0 && e.clientY === 0 && !e.detail) {
-				// this allows the click to dispatch as well
-				// but note the tap event will fire first
-				var cp = utils.clone(e);
-				cp.type = 'tap';
-				cp.preventDefault = utils.nop;
-				dispatcher.dispatch(cp);
-			}
-		}
-	}
-);
-
-/**
-* Instead of having multiple `features` pushed and handled in separate methods
-* for these events, we handle them uniformly here to expose the last known
-* interaction coordinates as accurately as possible.
-*
-* @private
-*/
-var _xy = {};
-dispatcher.features.push(
-	function (e) {
-		if (
-			(e.type == 'mousemove')  ||
-			(e.type == 'tap')        ||
-			(e.type == 'click')      ||
-			(e.type == 'touchmove')
-		) {
-			var evt = (e.type == 'touchmove') ? e.touches[0] : e;
-			_xy.clientX = evt.clientX;
-			_xy.clientY = evt.clientY;
-			// note only ie8 does not support pageX/pageY
-			_xy.pageX   = evt.pageX;
-			_xy.pageY   = evt.pageY;
-			// note ie8 and opera report these values incorrectly
-			_xy.screenX = evt.screenX;
-			_xy.screenY = evt.screenY;
-		}
-	}
-);
-
-/**
-* Retrieves the last known coordinates of the cursor or user-interaction point
-* in touch environments. Returns an immutable object with the `clientX`,
-* `clientY`, `pageX`, `pageY`, `screenX`, and `screenY` properties. It is
-* important to note that IE8 and Opera have improper reporting for the
-* `screenX` and `screenY` properties (they both use CSS pixels as opposed to
-* device pixels).
-*
-* @returns {module:enyo/dispatcher~CursorCoordinates} An [object]{@glossary Object} describing the
-*	the last known coordinates of the cursor or user-interaction point in touch environments.
-* @public
-*/
-dispatcher.getPosition = function () {
-	return utils.clone(_xy);
-};
-
-
-/**
-* Key mapping feature: Adds a `keySymbol` property to key [events]{@glossary event},
-* based on a global key mapping. Use
-* [registerKeyMap()]{@link module:enyo/dispatcher.registerKeyMap} to add
-* keyCode-to-keySymbol mappings via a simple hash. This method may be called
-* multiple times from different libraries to mix different maps into the global
-* mapping table; if conflicts arise, the last-in wins.
-*
-* ```
-* dispatcher.registerKeyMap({
-* 	415 : 'play',
-* 	413 : 'stop',
-* 	19  : 'pause',
-* 	412 : 'rewind',
-* 	417 : 'fastforward'
-* });
-* ```
-*
-* @private
-*/
-dispatcher.features.push(function(e) {
-	if ((e.type === 'keydown') || (e.type === 'keyup') || (e.type === 'keypress')) {
-		e.keySymbol = this.keyMap[e.keyCode];
-		// Dispatch key events to be sent via Signals
-		var c = this.findDefaultTarget();
-		if (e.dispatchTarget !== c) {
-			this.dispatchBubble(e, c);
-		}
-	}
-});
-
-utils.mixin(dispatcher, {
-	keyMap: {},
-	registerKeyMap: function(map) {
-		utils.mixin(this.keyMap, map);
-	}
-});
-
-
-/**
-* Event modal capture feature. Capture events to a specific control via
-* [capture(inControl, inShouldForward)]{@linkcode module:enyo/dispatcher.capture};
-* release events via [release()]{@link module:enyo/dispatcher.release}.
-*
-* @private
-*/
-dispatcher.features.push(function(e) {
-	if (this.captureTarget) {
-		var c = e.dispatchTarget;
-		var eventName = (e.customEvent ? '' : 'on') + e.type;
-		var handlerName = this.captureEvents[eventName];
-		var handlerScope = this.captureHandlerScope || this.captureTarget;
-		var handler = handlerName && handlerScope[handlerName];
-		var shouldCapture = handler && !(c && c.isDescendantOf && c.isDescendantOf(this.captureTarget));
-		if (shouldCapture) {
-			var c1 = e.captureTarget = this.captureTarget;
-			// NOTE: We do not want releasing capture while an event is being processed to alter
-			// the way the event propagates. Therefore decide if the event should forward
-			// before the capture target receives the event (since it may release capture).
-			e.preventDispatch = handler && handler.apply(handlerScope, [c1, e]) && !this.autoForwardEvents[e.type];
-		}
-	}
-});
-
-//
-//        NOTE: This object is a plug-in; these methods should
-//        be called on `enyo/dispatcher`, and not on the plug-in itself.
-//
-utils.mixin(dispatcher, {
-
-	/**
-	* @private
-	*/
-	autoForwardEvents: {leave: 1, resize: 1},
-
-	/**
-	* @private
-	*/
-	captures: [],
-
-	/**
-	* Captures [events]{@glossary event} for `inTarget`, where `inEvents` is specified as a
-	* hash of event names mapped to callback handler names to be called on `inTarget` (or,
-	* optionally, `inScope`). The callback is called when any of the captured events are
-	* dispatched outside of the capturing control. Returning `true` from the callback stops
-	* dispatch of the event to the original `dispatchTarget`.
-	*
-	* @private
-	*/
-	capture: function(inTarget, inEvents, inScope) {
-		var info = {target: inTarget, events: inEvents, scope: inScope};
-		this.captures.push(info);
-		this.setCaptureInfo(info);
-	},
-
-	/**
-	* Removes the specified target from the capture list.
-	*
-	* @private
-	*/
-	release: function(inTarget) {
-		for (var i = this.captures.length - 1; i >= 0; i--) {
-			if (this.captures[i].target === inTarget) {
-				this.captures.splice(i,1);
-				this.setCaptureInfo(this.captures[this.captures.length-1]);
-				break;
-			}
-		}
-	},
-
-	/**
-	* Sets the information for a captured {@glossary event}.
-	*
-	* @private
-	*/
-	setCaptureInfo: function(inInfo) {
-		this.captureTarget = inInfo && inInfo.target;
-		this.captureEvents = inInfo && inInfo.events;
-		this.captureHandlerScope = inInfo && inInfo.scope;
-	}
-});
-
-
-(function () {
-	/**
-	* Dispatcher preview feature
-	*
-	* Allows {@link module:enyo/Control~Control} ancestors of the {@glossary event} target
-	* a chance (eldest first) to react by implementing `previewDomEvent`.
-	*
-	* @todo Revisit how/if we document this
-	* @private
-	*/
-	var fn = 'previewDomEvent';
-	var preview = {
-
-		feature: function(e) {
-			preview.dispatch(e, e.dispatchTarget);
-		},
-
-		/*
-		* @returns {(Boolean|undefined)} Handlers return `true` to abort preview and prevent default
-		*	event processing.
-		*/
-		dispatch: function(evt, control) {
-			var i, l,
-			lineage = this.buildLineage(control);
-			for (i=0; (l=lineage[i]); i++) {
-				if (l[fn] && l[fn](evt) === true) {
-					evt.preventDispatch = true;
-					return;
-				}
-			}
-		},
-
-		/*
-		* We ascend, making a list of Enyo [controls]{@link module:enyo/Control~Control}.
-		*
-		* Note that a control is considered to be its own ancestor.
-		*/
-		buildLineage: function(control) {
-			var lineage = [],
-				c = control;
-			while (c) {
-				lineage.unshift(c);
-				c = c.parent;
-			}
-			return lineage;
-		}
-	};
-
-	dispatcher.features.push(preview.feature);
-})();
-
-},{'./logger':'enyo/logger','./master':'enyo/master','./utils':'enyo/utils','./dom':'enyo/dom'}],'enyo/UiComponent':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Component':'enyo/Component','./Jsonp':'enyo/Jsonp','./AjaxProperties':'enyo/AjaxProperties','./Ajax':'enyo/Ajax'}],'enyo/UiComponent':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -21195,7 +20680,511 @@ var UiComponent = module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./master':'enyo/master','./Component':'enyo/Component'}],'enyo/gesture/drag':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./master':'enyo/master','./Component':'enyo/Component'}],'enyo/dispatcher':[function (module,exports,global,require,request){
+/**
+* Contains dispatcher methods
+* @module enyo/dispatcher
+* @private
+*/
+require('enyo');
+
+var
+	logger = require('./logger'),
+	master = require('./master'),
+	utils = require('./utils');
+
+var
+	Dom = require('./dom');
+
+/**
+ * An [object]{@glossary Object} describing the the last known coordinates of the cursor or
+ * user-interaction point in touch environments.
+ *
+ * @typedef {Object} module:enyo/dispatcher~CursorCoordinates
+ * @property {Number} clientX - The horizontal coordinate within the application's client area.
+ * @property {Number} clientY - The vertical coordinate within the application's client area.
+ * @property {Number} pageX - The X coordinate of the cursor relative to the viewport, including any
+ *   scroll offset.
+ * @property {Number} pageY - The Y coordinate of the cursor relative to the viewport, including any
+ *   scroll offset.
+ * @property {Number} screenX - The X coordinate of the cursor relative to the screen, not including
+ *   any scroll offset.
+ * @property {Number} screenY - The Y coordinate of the cursor relative to the screen, not including
+ *   any scroll offset.
+ */
+
+/**
+* @private
+*/
+var dispatcher = module.exports = dispatcher = {
+
+	$: {},
+
+	/**
+	* These events come from document
+	*
+	* @private
+	*/
+	events: ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', 'mousewheel',
+		'click', 'dblclick', 'change', 'keydown', 'keyup', 'keypress', 'input',
+		'paste', 'copy', 'cut', 'webkitTransitionEnd', 'transitionend', 'webkitAnimationEnd', 'animationend',
+		'webkitAnimationStart', 'animationstart', 'webkitAnimationIteration', 'animationiteration'],
+
+	/**
+	* These events come from window
+	*
+	* @private
+	*/
+	windowEvents: ['resize', 'load', 'unload', 'message', 'hashchange', 'popstate', 'focus', 'blur'],
+
+	/**
+	* Feature plugins (aka filters)
+	*
+	* @private
+	*/
+	features: [],
+
+	/**
+	* @private
+	*/
+	connect: function() {
+		var d = dispatcher, i, n;
+		for (i=0; (n=d.events[i]); i++) {
+			d.listen(document, n);
+		}
+		for (i=0; (n=d.windowEvents[i]); i++) {
+			// Chrome Packaged Apps don't like "unload"
+			if(n === 'unload' &&
+				(typeof global.chrome === 'object') &&
+				global.chrome.app) {
+				continue;
+			}
+
+			d.listen(window, n);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	listen: function(inListener, inEventName, inHandler) {
+		inListener.addEventListener(inEventName, inHandler || dispatch, false);
+	},
+
+	/**
+	* @private
+	*/
+	stopListening: function(inListener, inEventName, inHandler) {
+		inListener.removeEventListener(inEventName, inHandler || dispatch, false);
+	},
+
+	/**
+	* Fires an event for Enyo to listen for.
+	*
+	* @private
+	*/
+	dispatch: function(e) {
+		// Find the control who maps to e.target, or the first control that maps to an ancestor of e.target.
+		var c = this.findDispatchTarget(e.target) || this.findDefaultTarget();
+		// Cache the original target
+		e.dispatchTarget = c;
+		// support pluggable features return true to abort immediately or set e.preventDispatch to avoid processing.
+		for (var i=0, fn; (fn=this.features[i]); i++) {
+			if (fn.call(this, e) === true) {
+				return;
+			}
+		}
+		if (c && !e.preventDispatch) {
+			return this.dispatchBubble(e, c);
+		}
+	},
+
+	/**
+	* Takes an event target and finds the corresponding Enyo control.
+	*
+	* @private
+	*/
+	findDispatchTarget: function(inNode) {
+		var t, n = inNode;
+		// FIXME: Mozilla: try/catch is here to squelch "Permission denied to access property xxx from a non-chrome context"
+		// which appears to happen for scrollbar nodes in particular. It's unclear why those nodes are valid targets if
+		// it is illegal to interrogate them. Would like to trap the bad nodes explicitly rather than using an exception block.
+		try {
+			while (n) {
+				if ((t = this.$[n.id])) {
+					// there could be multiple nodes with this id, the relevant node for this event is n
+					// we don't push this directly to t.node because sometimes we are just asking what
+					// the target 'would be' (aka, calling findDispatchTarget from handleMouseOverOut)
+					t.eventNode = n;
+					break;
+				}
+				n = n.parentNode;
+			}
+		} catch(x) {
+			logger.log(x, n);
+		}
+		return t;
+	},
+
+	/**
+	* Returns the default Enyo control for events.
+	*
+	* @private
+	*/
+	findDefaultTarget: function() {
+		return master;
+	},
+
+	/**
+	* @private
+	*/
+	dispatchBubble: function(e, c) {
+		var type = e.type;
+		type = e.customEvent ? type : 'on' + type;
+		return c.bubble(type, e, c);
+	}
+};
+
+/**
+* Called in the context of an event.
+*
+* @name module:enyo/dispatcher.iePreventDefault
+* @static
+* @method
+* @private
+*/
+dispatcher.iePreventDefault = function() {
+	try {
+		this.returnValue = false;
+	}
+	catch(e) {
+		// do nothing
+	}
+};
+
+/**
+* @private
+*/
+function dispatch (inEvent) {
+	return dispatcher.dispatch(inEvent);
+}
+
+/**
+* @name module:enyo/dispatcher.bubble
+* @static
+* @method
+* @private
+*/
+dispatcher.bubble = function(inEvent) {
+	if (inEvent) {
+		dispatcher.dispatch(inEvent);
+	}
+};
+
+// This string is set on event handlers attributes for DOM elements that
+// don't normally bubble (like onscroll) so that they can participate in the
+// Enyo event system.
+dispatcher.bubbler = 'enyo.bubble(arguments[0])';
+
+// The code below helps make Enyo compatible with Google Packaged Apps
+// Content Security Policy(http://developer.chrome.com/extensions/contentSecurityPolicy.html),
+// which, among other things, forbids the use of inline scripts.
+// We replace online scripting with equivalent means, leaving dispatcher.bubbler
+// for backward compatibility.
+(function() {
+	var bubbleUp = function() {
+		dispatcher.bubble(arguments[0]);
+	};
+
+	/**
+	* Makes given events bubble on a specified Enyo control.
+	*
+	* @name: module:enyo/dispatcher.makeBubble
+	* @method
+	* @private
+	*/
+	dispatcher.makeBubble = function() {
+		var args = Array.prototype.slice.call(arguments, 0),
+			control = args.shift();
+
+		if((typeof control === 'object') && (typeof control.hasNode === 'function')) {
+			utils.forEach(args, function(event) {
+				if(this.hasNode()) {
+					dispatcher.listen(this.node, event, bubbleUp);
+				}
+			}, control);
+		}
+	};
+
+	/**
+	* Removes the event listening and bubbling initiated by
+	* [makeBubble()]{@link module:enyo/dispatcher.makeBubble} on a specific control.
+	*
+	* @name: module:enyo/dispatcher.unmakeBubble
+	* @method
+	* @private
+	*/
+	dispatcher.unmakeBubble = function() {
+		var args = Array.prototype.slice.call(arguments, 0),
+			control = args.shift();
+
+		if((typeof control === 'object') && (typeof control.hasNode === 'function')) {
+			utils.forEach(args, function(event) {
+				if(this.hasNode()) {
+					dispatcher.stopListening(this.node, event, bubbleUp);
+				}
+			}, control);
+		}
+	};
+})();
+
+/**
+* @private
+*/
+// FIXME: we need to create and initialize dispatcher someplace else to allow overrides
+Dom.requiresWindow(dispatcher.connect);
+
+/**
+* Generates a tapped event for a raw-click event.
+*
+* @private
+*/
+dispatcher.features.push(
+	function (e) {
+		if ('click' === e.type) {
+			if (e.clientX === 0 && e.clientY === 0 && !e.detail) {
+				// this allows the click to dispatch as well
+				// but note the tap event will fire first
+				var cp = utils.clone(e);
+				cp.type = 'tap';
+				cp.preventDefault = utils.nop;
+				dispatcher.dispatch(cp);
+			}
+		}
+	}
+);
+
+/**
+* Instead of having multiple `features` pushed and handled in separate methods
+* for these events, we handle them uniformly here to expose the last known
+* interaction coordinates as accurately as possible.
+*
+* @private
+*/
+var _xy = {};
+dispatcher.features.push(
+	function (e) {
+		if (
+			(e.type == 'mousemove')  ||
+			(e.type == 'tap')        ||
+			(e.type == 'click')      ||
+			(e.type == 'touchmove')
+		) {
+			var evt = (e.type == 'touchmove') ? e.touches[0] : e;
+			_xy.clientX = evt.clientX;
+			_xy.clientY = evt.clientY;
+			// note only ie8 does not support pageX/pageY
+			_xy.pageX   = evt.pageX;
+			_xy.pageY   = evt.pageY;
+			// note ie8 and opera report these values incorrectly
+			_xy.screenX = evt.screenX;
+			_xy.screenY = evt.screenY;
+		}
+	}
+);
+
+/**
+* Retrieves the last known coordinates of the cursor or user-interaction point
+* in touch environments. Returns an immutable object with the `clientX`,
+* `clientY`, `pageX`, `pageY`, `screenX`, and `screenY` properties. It is
+* important to note that IE8 and Opera have improper reporting for the
+* `screenX` and `screenY` properties (they both use CSS pixels as opposed to
+* device pixels).
+*
+* @returns {module:enyo/dispatcher~CursorCoordinates} An [object]{@glossary Object} describing the
+*	the last known coordinates of the cursor or user-interaction point in touch environments.
+* @public
+*/
+dispatcher.getPosition = function () {
+	return utils.clone(_xy);
+};
+
+
+/**
+* Key mapping feature: Adds a `keySymbol` property to key [events]{@glossary event},
+* based on a global key mapping. Use
+* [registerKeyMap()]{@link module:enyo/dispatcher.registerKeyMap} to add
+* keyCode-to-keySymbol mappings via a simple hash. This method may be called
+* multiple times from different libraries to mix different maps into the global
+* mapping table; if conflicts arise, the last-in wins.
+*
+* ```
+* dispatcher.registerKeyMap({
+* 	415 : 'play',
+* 	413 : 'stop',
+* 	19  : 'pause',
+* 	412 : 'rewind',
+* 	417 : 'fastforward'
+* });
+* ```
+*
+* @private
+*/
+dispatcher.features.push(function(e) {
+	if ((e.type === 'keydown') || (e.type === 'keyup') || (e.type === 'keypress')) {
+		e.keySymbol = this.keyMap[e.keyCode];
+		// Dispatch key events to be sent via Signals
+		var c = this.findDefaultTarget();
+		if (e.dispatchTarget !== c) {
+			this.dispatchBubble(e, c);
+		}
+	}
+});
+
+utils.mixin(dispatcher, {
+	keyMap: {},
+	registerKeyMap: function(map) {
+		utils.mixin(this.keyMap, map);
+	}
+});
+
+
+/**
+* Event modal capture feature. Capture events to a specific control via
+* [capture(inControl, inShouldForward)]{@linkcode module:enyo/dispatcher.capture};
+* release events via [release()]{@link module:enyo/dispatcher.release}.
+*
+* @private
+*/
+dispatcher.features.push(function(e) {
+	if (this.captureTarget) {
+		var c = e.dispatchTarget;
+		var eventName = (e.customEvent ? '' : 'on') + e.type;
+		var handlerName = this.captureEvents[eventName];
+		var handlerScope = this.captureHandlerScope || this.captureTarget;
+		var handler = handlerName && handlerScope[handlerName];
+		var shouldCapture = handler && !(c && c.isDescendantOf && c.isDescendantOf(this.captureTarget));
+		if (shouldCapture) {
+			var c1 = e.captureTarget = this.captureTarget;
+			// NOTE: We do not want releasing capture while an event is being processed to alter
+			// the way the event propagates. Therefore decide if the event should forward
+			// before the capture target receives the event (since it may release capture).
+			e.preventDispatch = handler && handler.apply(handlerScope, [c1, e]) && !this.autoForwardEvents[e.type];
+		}
+	}
+});
+
+//
+//        NOTE: This object is a plug-in; these methods should
+//        be called on `enyo/dispatcher`, and not on the plug-in itself.
+//
+utils.mixin(dispatcher, {
+
+	/**
+	* @private
+	*/
+	autoForwardEvents: {leave: 1, resize: 1},
+
+	/**
+	* @private
+	*/
+	captures: [],
+
+	/**
+	* Captures [events]{@glossary event} for `inTarget`, where `inEvents` is specified as a
+	* hash of event names mapped to callback handler names to be called on `inTarget` (or,
+	* optionally, `inScope`). The callback is called when any of the captured events are
+	* dispatched outside of the capturing control. Returning `true` from the callback stops
+	* dispatch of the event to the original `dispatchTarget`.
+	*
+	* @private
+	*/
+	capture: function(inTarget, inEvents, inScope) {
+		var info = {target: inTarget, events: inEvents, scope: inScope};
+		this.captures.push(info);
+		this.setCaptureInfo(info);
+	},
+
+	/**
+	* Removes the specified target from the capture list.
+	*
+	* @private
+	*/
+	release: function(inTarget) {
+		for (var i = this.captures.length - 1; i >= 0; i--) {
+			if (this.captures[i].target === inTarget) {
+				this.captures.splice(i,1);
+				this.setCaptureInfo(this.captures[this.captures.length-1]);
+				break;
+			}
+		}
+	},
+
+	/**
+	* Sets the information for a captured {@glossary event}.
+	*
+	* @private
+	*/
+	setCaptureInfo: function(inInfo) {
+		this.captureTarget = inInfo && inInfo.target;
+		this.captureEvents = inInfo && inInfo.events;
+		this.captureHandlerScope = inInfo && inInfo.scope;
+	}
+});
+
+
+(function () {
+	/**
+	* Dispatcher preview feature
+	*
+	* Allows {@link module:enyo/Control~Control} ancestors of the {@glossary event} target
+	* a chance (eldest first) to react by implementing `previewDomEvent`.
+	*
+	* @todo Revisit how/if we document this
+	* @private
+	*/
+	var fn = 'previewDomEvent';
+	var preview = {
+
+		feature: function(e) {
+			preview.dispatch(e, e.dispatchTarget);
+		},
+
+		/*
+		* @returns {(Boolean|undefined)} Handlers return `true` to abort preview and prevent default
+		*	event processing.
+		*/
+		dispatch: function(evt, control) {
+			var i, l,
+			lineage = this.buildLineage(control);
+			for (i=0; (l=lineage[i]); i++) {
+				if (l[fn] && l[fn](evt) === true) {
+					evt.preventDispatch = true;
+					return;
+				}
+			}
+		},
+
+		/*
+		* We ascend, making a list of Enyo [controls]{@link module:enyo/Control~Control}.
+		*
+		* Note that a control is considered to be its own ancestor.
+		*/
+		buildLineage: function(control) {
+			var lineage = [],
+				c = control;
+			while (c) {
+				lineage.unshift(c);
+				c = c.parent;
+			}
+			return lineage;
+		}
+	};
+
+	dispatcher.features.push(preview.feature);
+})();
+
+},{'./logger':'enyo/logger','./master':'enyo/master','./utils':'enyo/utils','./dom':'enyo/dom'}],'enyo/gesture/drag':[function (module,exports,global,require,request){
 var
 	dispatcher = require('../dispatcher'),
 	utils = require('../utils');

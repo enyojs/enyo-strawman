@@ -40,27 +40,27 @@ var spincubeFace6 = {
 
 var spincube = [{
     rotate: "0, 90, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 1920
 }, {
     rotate: "90, 90, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 180, 90",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 270, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 1920
 }, {
     rotate: "-90, 270, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 360, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }];
 

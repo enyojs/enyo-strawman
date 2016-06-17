@@ -1,6 +1,6 @@
 var
     kind = require('enyo/kind'),
-    sceneSupport = require('enyo/sceneSupport'),
+    SceneSupport = require('enyo/SceneSupport'),
     animate = require('enyo/scene'),
     easing = require('enyo/easing'),
     image = require('enyo/Image');
@@ -26,7 +26,7 @@ module.exports = kind({
             sup.apply(this, arguments);
             for (var i = 0; i < 10; i++) {
                 this.$.container1.createComponent({ classes: "bar" });
-                this.$.container2.createComponent({ classes: "bar", /*mixins: [sceneSupport], scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } */ });
+                this.$.container2.createComponent({ classes: "bar", /*mixins: [SceneSupport], scene: { scale: "1,100,1", duration: duration, ease: { 1: 0 } } */ });
             }
         };
     }),
@@ -89,7 +89,7 @@ module.exports = kind({
             scale: "1," + randomVal + ",1",
             "background-color": randCol,
             duration: duration,
-            ease: easing.easeOutQuad
+            ease: easing.quartOut
         }
         animate([elem], propsObj, { autoPlay: true, completed: this.completedAnim });
     },
