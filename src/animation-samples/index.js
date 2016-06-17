@@ -7,6 +7,7 @@ var
 
 var
 	samples = {
+		BasicAnimations: require('./src/BasicAnimations'),
 		EaseAnimation: require('./src/EaseAnimation'),
 		ControlAnimation: require('./src/HeartAnimation'),
 		LinkedAnimation: require('./src/TrampolineEffect'),

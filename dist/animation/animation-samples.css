@@ -223,6 +223,13 @@
   border-radius: 50%;
 }
 
+.basic-sample .block {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  margin: 20px;
+}
+
 .heart-sample .wrapper {
   width: 100%;
   border-top: 5px solid white;

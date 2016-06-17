@@ -91,6 +91,52 @@
 
 module.exports = (global.enyo && global.enyo.options) || {};
 
+}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
+
+
+var PathResolverFactory = module.exports = function() {
+	this.paths = {};
+	this.pathNames = [];
+};
+
+PathResolverFactory.prototype = {
+	addPath: function(inName, inPath) {
+		this.paths[inName] = inPath;
+		this.pathNames.push(inName);
+		this.pathNames.sort(function(a, b) {
+			return b.length - a.length;
+		});
+		return inPath;
+	},
+	addPaths: function(inPaths) {
+		if (inPaths) {
+			for (var n in inPaths) {
+				this.addPath(n, inPaths[n]);
+			}
+		}
+	},
+	includeTrailingSlash: function(inPath) {
+		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
+	},
+	// replace macros of the form $pathname with the mapped value of paths.pathname
+	rewrite: function (inPath) {
+		var working, its = this.includeTrailingSlash, paths = this.paths;
+		var fn = function(macro, name) {
+			working = true;
+			return its(paths[name]) || '';
+		};
+		var result = inPath;
+		do {
+			working = false;
+			for (var i=0; i<this.pathNames.length; i++) {
+				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
+				result = result.replace(regex, fn);
+			}
+		} while (working);
+		return result;
+	}
+};
+
 }],'enyo/easing':[function (module,exports,global,require,request){
 /**
 * Contains set of interpolation functions for animations, similar in function to CSS3 transitions.
@@ -373,52 +419,6 @@ var easing = module.exports = {
 		return 0.5 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2);
 	}
 };
-}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
-
-
-var PathResolverFactory = module.exports = function() {
-	this.paths = {};
-	this.pathNames = [];
-};
-
-PathResolverFactory.prototype = {
-	addPath: function(inName, inPath) {
-		this.paths[inName] = inPath;
-		this.pathNames.push(inName);
-		this.pathNames.sort(function(a, b) {
-			return b.length - a.length;
-		});
-		return inPath;
-	},
-	addPaths: function(inPaths) {
-		if (inPaths) {
-			for (var n in inPaths) {
-				this.addPath(n, inPaths[n]);
-			}
-		}
-	},
-	includeTrailingSlash: function(inPath) {
-		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
-	},
-	// replace macros of the form $pathname with the mapped value of paths.pathname
-	rewrite: function (inPath) {
-		var working, its = this.includeTrailingSlash, paths = this.paths;
-		var fn = function(macro, name) {
-			working = true;
-			return its(paths[name]) || '';
-		};
-		var result = inPath;
-		do {
-			working = false;
-			for (var i=0; i<this.pathNames.length; i++) {
-				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
-				result = result.replace(regex, fn);
-			}
-		} while (working);
-		return result;
-	}
-};
-
 }],'enyo':[function (module,exports,global,require,request){
 'use strict';
 
@@ -1768,6 +1768,59 @@ var rtlPattern = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\u
 exports.isRtl = function (str) {
 	return rtlPattern.test(str);
 };
+}],'enyo/json':[function (module,exports,global,require,request){
+require('enyo');
+
+
+/**
+* [JSON]{@glossary JSON} related methods and wrappers.
+*
+* @module enyo/json
+* @public
+*/
+module.exports = {
+	
+	/**
+	* Wrapper for [JSON.stringify()]{@glossary JSON.stringify}. Creates a
+	* [JSON]{@glossary JSON} [string]{@glossary String} from an
+	* [object]{@glossary Object}.
+	*
+	* @see {@glossary JSON.stringify}
+	* @param {Object} value - The [object]{@glossary Object} to convert to a
+	*	[JSON]{@glossary JSON} [string]{@glossary String}.
+	* @param {(Function|String[])} [replacer] An optional parameter indicating either an
+	*	[array]{@glossary Array} of keys to include in the final output or a
+	*	[function]{@glossary Function} that will have the opportunity to dynamically return
+	*	values to include for keys.
+	* @param {(Number|String)} [space] - Determines the spacing (if any) for pretty-printed
+	*	output of the JSON string. A [number]{@glossary Number} indicates the number of
+	* spaces to use in the output, while a string will be used verbatim.
+	* @returns {String} The JSON string for the given object.
+	* @public
+	*/
+	stringify: function(value, replacer, space) {
+		return JSON.stringify(value, replacer, space);
+	},
+	
+	/**
+	* Wrapper for [JSON.parse()]{@glossary JSON.parse}. Parses a valid
+	* [JSON]{@glossary JSON} [string]{@glossary String} and returns an
+	* [object]{@glossary Object}, or `null` if the parameters are invalid.
+	*
+	* @see {@glossary JSON.parse}
+	* @param {String} json - The [JSON]{@glossary JSON} [string]{@glossary String} to
+	*	parse into an [object]{@glossary Object}.
+	* @param {Function} [reviver] - The optional [function]{@glossary Function} to use to
+	*	parse individual keys of the return object.
+	* @returns {(Object|null)} If parameters are valid, an [object]{@glossary Object}
+	* is returned; otherwise, `null`.
+	* @public
+	*/
+	parse: function(json, reviver) {
+		return json ? JSON.parse(json, reviver) : null;
+	}
+};
+
 }],'enyo/roots':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -1850,461 +1903,6 @@ exports.addToRoots = function (view) {
 			destroy.apply(this, arguments);
 		};
 	}
-};
-
-}],'enyo/json':[function (module,exports,global,require,request){
-require('enyo');
-
-
-/**
-* [JSON]{@glossary JSON} related methods and wrappers.
-*
-* @module enyo/json
-* @public
-*/
-module.exports = {
-	
-	/**
-	* Wrapper for [JSON.stringify()]{@glossary JSON.stringify}. Creates a
-	* [JSON]{@glossary JSON} [string]{@glossary String} from an
-	* [object]{@glossary Object}.
-	*
-	* @see {@glossary JSON.stringify}
-	* @param {Object} value - The [object]{@glossary Object} to convert to a
-	*	[JSON]{@glossary JSON} [string]{@glossary String}.
-	* @param {(Function|String[])} [replacer] An optional parameter indicating either an
-	*	[array]{@glossary Array} of keys to include in the final output or a
-	*	[function]{@glossary Function} that will have the opportunity to dynamically return
-	*	values to include for keys.
-	* @param {(Number|String)} [space] - Determines the spacing (if any) for pretty-printed
-	*	output of the JSON string. A [number]{@glossary Number} indicates the number of
-	* spaces to use in the output, while a string will be used verbatim.
-	* @returns {String} The JSON string for the given object.
-	* @public
-	*/
-	stringify: function(value, replacer, space) {
-		return JSON.stringify(value, replacer, space);
-	},
-	
-	/**
-	* Wrapper for [JSON.parse()]{@glossary JSON.parse}. Parses a valid
-	* [JSON]{@glossary JSON} [string]{@glossary String} and returns an
-	* [object]{@glossary Object}, or `null` if the parameters are invalid.
-	*
-	* @see {@glossary JSON.parse}
-	* @param {String} json - The [JSON]{@glossary JSON} [string]{@glossary String} to
-	*	parse into an [object]{@glossary Object}.
-	* @param {Function} [reviver] - The optional [function]{@glossary Function} to use to
-	*	parse individual keys of the return object.
-	* @returns {(Object|null)} If parameters are valid, an [object]{@glossary Object}
-	* is returned; otherwise, `null`.
-	* @public
-	*/
-	parse: function(json, reviver) {
-		return json ? JSON.parse(json, reviver) : null;
-	}
-};
-
-}],'enyo/ModelList':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/ModelList~ModelList} Object.
-* @module enyo/ModelList
-*/
-
-/**
-* A special type of [array]{@glossary Array} used internally by data layer
-* [kinds]{@glossary kind}.
-*
-* @class ModelList
-* @protected
-*/
-function ModelList (args) {
-	Array.call(this);
-	this.table = {};
-	if (args) this.add(args, 0);
-}
-
-ModelList.prototype = Object.create(Array.prototype);
-
-module.exports = ModelList;
-
-/**
-* Adds [models]{@link module:enyo/Model~Model} to the [list]{@link module:enyo/ModelList~ModelList}, updating an
-* internal table by the model's [primaryKey]{@link module:enyo/Model~Model#primaryKey} (if
-* possible) and its [euid]{@glossary euid}.
-*
-* @name module:enyo/ModelList~ModelList#add
-* @method
-* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
-*	to add to the [list]{@link module:enyo/ModelList~ModelList}.
-* @param {Number} [idx] - If provided and valid, the models will be
-* [spliced]{@glossary Array.splice} into the list at this position.
-* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of models
-* that were actually added to the list.
-* @protected
-*/
-ModelList.prototype.add = function (models, idx) {
-	var table = this.table,
-		added = [],
-		model,
-		euid,
-		id,
-		i = 0;
-	
-	if (models && !(models instanceof Array)) models = [models];
-	
-	for (; (model = models[i]); ++i) {
-		euid = model.euid;
-		
-		// we only want to actually add models we haven't already seen...
-		if (!table[euid]) {
-			id = model.get(model.primaryKey);
-		
-			if (id != null) {
-			
-				// @TODO: For now if we already have an entry for a model by its supposed unique
-				// identifier but it isn't the instance we just found we can't just
-				// overwrite the previous instance so we mark the new one as headless
-				if (table[id] && table[id] !== model) model.headless = true;
-				// otherwise we do the normal thing and add the entry for it
-				else table[id] = model; 
-			}
-		
-			// nomatter what though the euid should be unique
-			table[euid] = model;
-			added.push(model);
-		}
-	}
-	
-	if (added.length) {
-		idx = !isNaN(idx) ? Math.min(Math.max(0, idx), this.length) : 0;
-		added.unshift(0);
-		added.unshift(idx);
-		this.splice.apply(this, added);
-	}
-	
-	if (added.length > 0) added = added.slice(2);
-	added.at = idx;
-	
-	return added;
-};
-
-/**
-* Removes the specified [models]{@link module:enyo/Model~Model} from the [list]{@link module:enyo/ModelList~ModelList}.
-*
-* @name module:enyo/ModelList~ModelList#remove
-* @method
-* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
-*	to remove from the [list]{@link module:enyo/ModelList~ModelList}.
-* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of
-*	models that were actually removed from the list.
-* @protected
-*/
-ModelList.prototype.remove = function (models) {
-	var table = this.table,
-		removed = [],
-		model,
-		idx,
-		id,
-		i,
-		
-		// these modifications are made to allow more performant logic to take place in
-		// views that may need to know this information
-		low = Infinity,
-		high = -1,
-		indices = [];
-	
-	if (models && !(models instanceof Array)) models = [models];
-	
-	// we start at the end to ensure that you could even pass the list itself
-	// and it will work
-	for (i = models.length - 1; (model = models[i]); --i) {
-		table[model.euid] = null;
-		id = model.get(model.primaryKey);
-		
-		if (id != null) table[id] = null;
-		
-		idx = models === this ? i : this.indexOf(model);
-		if (idx > -1) {				
-			if (idx < low) low = idx;
-			if (idx > high) high = idx;
-			
-			this.splice(idx, 1);
-			removed.push(model);
-			indices.push(idx);
-		}
-	}
-	
-	// since this is a separate array we will add this property to it for internal use only
-	removed.low = low;
-	removed.high = high;
-	removed.indices = indices;
-	
-	return removed;
-};
-
-/**
-* Determines whether the specified [model]{@link module:enyo/Model~Model} is present in the
-* [list]{@link module:enyo/ModelList~ModelList}. Will attempt to resolve a [string]{@glossary String}
-* or [number]{@glossary Number} to either a [primaryKey]{@link module:enyo/Model~Model#primaryKey}
-* or [euid]{@glossary euid}.
-*
-* @name module:enyo/ModelList~ModelList#has
-* @method
-* @param {(module:enyo/Model~Model|String|Number)} model An identifier representing either the
-*	[model]{@link module:enyo/Model~Model} instance, its [primaryKey]{@link module:enyo/Model~Model#primaryKey},
-* or its [euid]{@glossary euid}.
-* @returns {Boolean} Whether or not the model is present in the [list]{@link module:enyo/ModelList~ModelList}.
-* @protected
-*/
-ModelList.prototype.has = function (model) {
-	if (model === undefined || model === null) return false;
-	
-	if (typeof model == 'string' || typeof model == 'number') {
-		return !! this.table[model];
-	} else return this.indexOf(model) > -1;
-};
-
-/**
-* Given an identifier, attempts to return the associated [model]{@link module:enyo/Model~Model}.
-* The identifier should be a [string]{@glossary String} or [number]{@glossary Number}.
-*
-* @name module:enyo/ModelList~ModelList#resolve
-* @method
-* @param {(String|Number)} model - An identifier (either a
-*	[primaryKey]{@link module:enyo/Model~Model#primaryKey} or an [euid]{@glossary euid}).
-* @returns {(undefined|null|module:enyo/Model~Model)} If the identifier could be resolved, a
-*	[model]{@link module:enyo/Model~Model} instance is returned; otherwise, `undefined`, or
-* possibly `null` if the model once belonged to the [list]{@link module:enyo/ModelList~ModelList}.
-* @protected
-*/
-ModelList.prototype.resolve = function (model) {
-	if (typeof model == 'string' || typeof model == 'number') {
-		return this.table[model];
-	} else return model;
-};
-
-/**
-* Copies the current [list]{@link module:enyo/ModelList~ModelList} and returns an shallow copy. This
-* method differs from the [slice()]{@glossary Array.slice} method inherited from
-* native [Array]{@glossary Array} in that this returns an {@link module:enyo/ModelList~ModelList},
-* while `slice()` returns an array.
-* 
-* @name module:enyo/ModelList~ModelList#copy
-* @method
-* @returns {module:enyo/ModelList~ModelList} A shallow copy of the callee.
-* @protected
-*/
-ModelList.prototype.copy = function () {
-	return new ModelList(this);
-};
-
-}],'enyo/States':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Shared values for various [kinds]{@glossary kind} used to indicate a state or
-* (multiple, simultaneous) states. These flags are binary values represented by
-* hexadecimal numerals. They may be modified and compared (or even extended) using
-* [bitwise operations]{@glossary bitwise} or various
-* [API methods]{@link module:enyo/StateSupport~StateSupport} available to the kinds that support them.
-* Make sure to explore the documentation for individual kinds, as they may have
-* specific uses for a given flag.
-* 
-* As a cursory overview, here is a table of the values already declared by built-in flags.
-* Each hexadecimal numeral represents a unique power of 2 in binary, from which we can use
-* [bitwise masks]{@glossary bitwise} to determine if a particular value is present.
-* 
-* ```javascript
-* HEX             DEC             BIN
-* 0x0001             1            0000 0000 0000 0001
-* 0x0002             2            0000 0000 0000 0010
-* 0x0004             4            0000 0000 0000 0100
-* 0x0008             8            0000 0000 0000 1000
-* 0x0010            16            0000 0000 0001 0000
-* 0x0020            32            0000 0000 0010 0000
-* 0x0040            64            0000 0000 0100 0000
-* 0x0080           128            0000 0000 1000 0000
-* 0x0100           256            0000 0001 0000 0000
-* 0x0200           512            0000 0010 0000 0000
-* 0x0400          1024            0000 0100 0000 0000
-* 0x0800          2048            0000 1000 0000 0000
-* 
-* ...
-* 
-* 0x1000          4096            0001 0000 0000 0000
-* ```
-*
-* As a hint, converting (HEX) 0x0800 to DEC do:
-*
-* ```javascript
-* (0*16^3) + (8*16^2) + (0*16^1) + (0*16^0) = 2048
-* ```
-*
-* As a hint, converting (HEX) 0x0800 to BIN do:
-*
-* ```javascript
-* 0    8    0    0    (HEX)
-* ---- ---- ---- ----
-* 0000 1000 0000 0000 (BIN)
-* ```
-*
-* @module enyo/States
-* @public
-* @see module:enyo/StateSupport~StateSupport
-*/
-module.exports = {
-	
-	/**
-	* Only exists in the client and was created during the runtime of the
-	* [application]{@glossary application}.
-	*
-	* @type {Number}
-	* @default 1
-	*/
-	NEW: 0x0001,
-	
-	/**
-	* Has been modified locally only.
-	*
-	* @type {Number}
-	* @default 2
-	*/
-	DIRTY: 0x0002,
-	
-	/**
-	* Has not been modified locally.
-	*
-	* @type {Number}
-	* @default 4
-	*/
-	CLEAN: 0x0004,
-	
-	/**
-	* Can no longer be modified.
-	* @type {Number}
-	* @default 8
-	*/
-	DESTROYED: 0x0008,
-	
-	/**
-	* Currently attempting to fetch.
-	* 
-	* @see module:enyo/Model~Model#fetch
-	* @see module:enyo/RelationalModel~RelationalModel#fetch
-	* @see module:enyo/Collection~Collection#fetch
-	*
-	* @type {Number}
-	* @default 16
-	*/
-	FETCHING: 0x0010,
-	
-	/**
-	* Currently attempting to commit.
-	* 
-	* @see module:enyo/Model~Model#commit
-	* @see module:enyo/RelationalModel~RelationalModel#commit
-	* @see module:enyo/Collection~Collection#commit
-	*
-	* @type {Number}
-	* @default 32
-	*/
-	COMMITTING: 0x0020,
-	
-	/**
-	* Currently attempting to destroy.
-	* 
-	* @see module:enyo/Model~Model#destroy
-	* @see module:enyo/RelationalModel~RelationalModel#destroy
-	* @see module:enyo/Collection~Collection#destroy
-	*
-	* @type {Number}
-	* @default 64
-	*/
-	DESTROYING: 0x0040,
-	
-	/**
-	* There was an error during commit.
-	* 
-	* @see module:enyo/Model~Model#commit
-	* @see module:enyo/RelationalModel~RelationalModel#commit
-	* @see module:enyo/Collection~Collection#commit
-	*
-	* @type {Number}
-	* @default 128
-	*/
-	ERROR_COMMITTING: 0x0080,
-	
-	/**
-	* There was an error during fetch.
-	* 
-	* @see module:enyo/Model~Model#fetch
-	* @see module:enyo/RelationalModel~RelationalModel#fetch
-	* @see module:enyo/Collection~Collection#fetch
-	*
-	* @type {Number}
-	* @default 256
-	*/
-	ERROR_FETCHING: 0x0100,
-	
-	/**
-	* There was an error during destroy.
-	* 
-	* @see module:enyo/Model~Model#destroy
-	* @see module:enyo/RelationalModel~RelationalModel#destroy
-	* @see module:enyo/Collection~Collection#destroy
-	*
-	* @type {Number}
-	* @default 512
-	*/
-	ERROR_DESTROYING: 0x0200,
-	
-	/**
-	* An error was encountered for which there was no exact flag, or an invalid error was
-	* specified.
-	*
-	* @type {Number}
-	* @default 1024
-	*/
-	ERROR_UNKNOWN: 0x0400,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `BUSY`. By default, this is one of
-	* [FETCHING]{@link module:enyo/States.FETCHING}, [COMMITTING]{@link module:enyo/States.COMMITTING}, or
-	* [DESTROYING]{@link module:enyo/States.DESTROYING}. It may be extended to include additional
-	* values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
-	*
-	* @type {Number}
-	* @default 112
-	*/
-	BUSY: 0x0010 | 0x0020 | 0x0040,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `ERROR`. By default, this is one of
-	* [ERROR_FETCHING]{@link module:enyo/States.ERROR_FETCHING},
-	* [ERROR_COMMITTING]{@link module:enyo/States.ERROR_COMMITTING},
-	* [ERROR_DESTROYING]{@link module:enyo/States.ERROR_DESTROYING}, or
-	* [ERROR_UNKNOWN]{@link module:enyo/States.ERROR_UNKNOWN}. It may be extended to include
-	* additional values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
-	*
-	* @type {Number}
-	* @default 1920
-	*/
-	ERROR: 0x0080 | 0x0100 | 0x0200 | 0x0400,
-	
-	/**
-	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
-	* included in the definition of `READY`. By default, this is the inverse of any
-	* values included in [BUSY]{@link module:enyo/States.BUSY} or [ERROR]{@link module:enyo/States.ERROR}.
-	*
-	* @type {Number}
-	* @default -2041
-	*/
-	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
 };
 
 }],'enyo/transform':[function (module,exports,global,require,request){
@@ -3043,6 +2641,408 @@ var quaternion = exports.Quaternion = {
 	}
 	//TODO: Acheive the same fucntionality for other 11 choices XYX, XZX, XZY, YXY, YXZ, YZX, YZY, ZXY, ZXZ, ZYX, ZYZ 
 };
+}],'enyo/ModelList':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/ModelList~ModelList} Object.
+* @module enyo/ModelList
+*/
+
+/**
+* A special type of [array]{@glossary Array} used internally by data layer
+* [kinds]{@glossary kind}.
+*
+* @class ModelList
+* @protected
+*/
+function ModelList (args) {
+	Array.call(this);
+	this.table = {};
+	if (args) this.add(args, 0);
+}
+
+ModelList.prototype = Object.create(Array.prototype);
+
+module.exports = ModelList;
+
+/**
+* Adds [models]{@link module:enyo/Model~Model} to the [list]{@link module:enyo/ModelList~ModelList}, updating an
+* internal table by the model's [primaryKey]{@link module:enyo/Model~Model#primaryKey} (if
+* possible) and its [euid]{@glossary euid}.
+*
+* @name module:enyo/ModelList~ModelList#add
+* @method
+* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
+*	to add to the [list]{@link module:enyo/ModelList~ModelList}.
+* @param {Number} [idx] - If provided and valid, the models will be
+* [spliced]{@glossary Array.splice} into the list at this position.
+* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of models
+* that were actually added to the list.
+* @protected
+*/
+ModelList.prototype.add = function (models, idx) {
+	var table = this.table,
+		added = [],
+		model,
+		euid,
+		id,
+		i = 0;
+	
+	if (models && !(models instanceof Array)) models = [models];
+	
+	for (; (model = models[i]); ++i) {
+		euid = model.euid;
+		
+		// we only want to actually add models we haven't already seen...
+		if (!table[euid]) {
+			id = model.get(model.primaryKey);
+		
+			if (id != null) {
+			
+				// @TODO: For now if we already have an entry for a model by its supposed unique
+				// identifier but it isn't the instance we just found we can't just
+				// overwrite the previous instance so we mark the new one as headless
+				if (table[id] && table[id] !== model) model.headless = true;
+				// otherwise we do the normal thing and add the entry for it
+				else table[id] = model; 
+			}
+		
+			// nomatter what though the euid should be unique
+			table[euid] = model;
+			added.push(model);
+		}
+	}
+	
+	if (added.length) {
+		idx = !isNaN(idx) ? Math.min(Math.max(0, idx), this.length) : 0;
+		added.unshift(0);
+		added.unshift(idx);
+		this.splice.apply(this, added);
+	}
+	
+	if (added.length > 0) added = added.slice(2);
+	added.at = idx;
+	
+	return added;
+};
+
+/**
+* Removes the specified [models]{@link module:enyo/Model~Model} from the [list]{@link module:enyo/ModelList~ModelList}.
+*
+* @name module:enyo/ModelList~ModelList#remove
+* @method
+* @param {(module:enyo/Model~Model|module:enyo/Model~Model[])} models The [model or models]{@link module:enyo/Model~Model}
+*	to remove from the [list]{@link module:enyo/ModelList~ModelList}.
+* @returns {module:enyo/Model~Model[]} An immutable [array]{@glossary Array} of
+*	models that were actually removed from the list.
+* @protected
+*/
+ModelList.prototype.remove = function (models) {
+	var table = this.table,
+		removed = [],
+		model,
+		idx,
+		id,
+		i,
+		
+		// these modifications are made to allow more performant logic to take place in
+		// views that may need to know this information
+		low = Infinity,
+		high = -1,
+		indices = [];
+	
+	if (models && !(models instanceof Array)) models = [models];
+	
+	// we start at the end to ensure that you could even pass the list itself
+	// and it will work
+	for (i = models.length - 1; (model = models[i]); --i) {
+		table[model.euid] = null;
+		id = model.get(model.primaryKey);
+		
+		if (id != null) table[id] = null;
+		
+		idx = models === this ? i : this.indexOf(model);
+		if (idx > -1) {				
+			if (idx < low) low = idx;
+			if (idx > high) high = idx;
+			
+			this.splice(idx, 1);
+			removed.push(model);
+			indices.push(idx);
+		}
+	}
+	
+	// since this is a separate array we will add this property to it for internal use only
+	removed.low = low;
+	removed.high = high;
+	removed.indices = indices;
+	
+	return removed;
+};
+
+/**
+* Determines whether the specified [model]{@link module:enyo/Model~Model} is present in the
+* [list]{@link module:enyo/ModelList~ModelList}. Will attempt to resolve a [string]{@glossary String}
+* or [number]{@glossary Number} to either a [primaryKey]{@link module:enyo/Model~Model#primaryKey}
+* or [euid]{@glossary euid}.
+*
+* @name module:enyo/ModelList~ModelList#has
+* @method
+* @param {(module:enyo/Model~Model|String|Number)} model An identifier representing either the
+*	[model]{@link module:enyo/Model~Model} instance, its [primaryKey]{@link module:enyo/Model~Model#primaryKey},
+* or its [euid]{@glossary euid}.
+* @returns {Boolean} Whether or not the model is present in the [list]{@link module:enyo/ModelList~ModelList}.
+* @protected
+*/
+ModelList.prototype.has = function (model) {
+	if (model === undefined || model === null) return false;
+	
+	if (typeof model == 'string' || typeof model == 'number') {
+		return !! this.table[model];
+	} else return this.indexOf(model) > -1;
+};
+
+/**
+* Given an identifier, attempts to return the associated [model]{@link module:enyo/Model~Model}.
+* The identifier should be a [string]{@glossary String} or [number]{@glossary Number}.
+*
+* @name module:enyo/ModelList~ModelList#resolve
+* @method
+* @param {(String|Number)} model - An identifier (either a
+*	[primaryKey]{@link module:enyo/Model~Model#primaryKey} or an [euid]{@glossary euid}).
+* @returns {(undefined|null|module:enyo/Model~Model)} If the identifier could be resolved, a
+*	[model]{@link module:enyo/Model~Model} instance is returned; otherwise, `undefined`, or
+* possibly `null` if the model once belonged to the [list]{@link module:enyo/ModelList~ModelList}.
+* @protected
+*/
+ModelList.prototype.resolve = function (model) {
+	if (typeof model == 'string' || typeof model == 'number') {
+		return this.table[model];
+	} else return model;
+};
+
+/**
+* Copies the current [list]{@link module:enyo/ModelList~ModelList} and returns an shallow copy. This
+* method differs from the [slice()]{@glossary Array.slice} method inherited from
+* native [Array]{@glossary Array} in that this returns an {@link module:enyo/ModelList~ModelList},
+* while `slice()` returns an array.
+* 
+* @name module:enyo/ModelList~ModelList#copy
+* @method
+* @returns {module:enyo/ModelList~ModelList} A shallow copy of the callee.
+* @protected
+*/
+ModelList.prototype.copy = function () {
+	return new ModelList(this);
+};
+
+}],'enyo/States':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Shared values for various [kinds]{@glossary kind} used to indicate a state or
+* (multiple, simultaneous) states. These flags are binary values represented by
+* hexadecimal numerals. They may be modified and compared (or even extended) using
+* [bitwise operations]{@glossary bitwise} or various
+* [API methods]{@link module:enyo/StateSupport~StateSupport} available to the kinds that support them.
+* Make sure to explore the documentation for individual kinds, as they may have
+* specific uses for a given flag.
+* 
+* As a cursory overview, here is a table of the values already declared by built-in flags.
+* Each hexadecimal numeral represents a unique power of 2 in binary, from which we can use
+* [bitwise masks]{@glossary bitwise} to determine if a particular value is present.
+* 
+* ```javascript
+* HEX             DEC             BIN
+* 0x0001             1            0000 0000 0000 0001
+* 0x0002             2            0000 0000 0000 0010
+* 0x0004             4            0000 0000 0000 0100
+* 0x0008             8            0000 0000 0000 1000
+* 0x0010            16            0000 0000 0001 0000
+* 0x0020            32            0000 0000 0010 0000
+* 0x0040            64            0000 0000 0100 0000
+* 0x0080           128            0000 0000 1000 0000
+* 0x0100           256            0000 0001 0000 0000
+* 0x0200           512            0000 0010 0000 0000
+* 0x0400          1024            0000 0100 0000 0000
+* 0x0800          2048            0000 1000 0000 0000
+* 
+* ...
+* 
+* 0x1000          4096            0001 0000 0000 0000
+* ```
+*
+* As a hint, converting (HEX) 0x0800 to DEC do:
+*
+* ```javascript
+* (0*16^3) + (8*16^2) + (0*16^1) + (0*16^0) = 2048
+* ```
+*
+* As a hint, converting (HEX) 0x0800 to BIN do:
+*
+* ```javascript
+* 0    8    0    0    (HEX)
+* ---- ---- ---- ----
+* 0000 1000 0000 0000 (BIN)
+* ```
+*
+* @module enyo/States
+* @public
+* @see module:enyo/StateSupport~StateSupport
+*/
+module.exports = {
+	
+	/**
+	* Only exists in the client and was created during the runtime of the
+	* [application]{@glossary application}.
+	*
+	* @type {Number}
+	* @default 1
+	*/
+	NEW: 0x0001,
+	
+	/**
+	* Has been modified locally only.
+	*
+	* @type {Number}
+	* @default 2
+	*/
+	DIRTY: 0x0002,
+	
+	/**
+	* Has not been modified locally.
+	*
+	* @type {Number}
+	* @default 4
+	*/
+	CLEAN: 0x0004,
+	
+	/**
+	* Can no longer be modified.
+	* @type {Number}
+	* @default 8
+	*/
+	DESTROYED: 0x0008,
+	
+	/**
+	* Currently attempting to fetch.
+	* 
+	* @see module:enyo/Model~Model#fetch
+	* @see module:enyo/RelationalModel~RelationalModel#fetch
+	* @see module:enyo/Collection~Collection#fetch
+	*
+	* @type {Number}
+	* @default 16
+	*/
+	FETCHING: 0x0010,
+	
+	/**
+	* Currently attempting to commit.
+	* 
+	* @see module:enyo/Model~Model#commit
+	* @see module:enyo/RelationalModel~RelationalModel#commit
+	* @see module:enyo/Collection~Collection#commit
+	*
+	* @type {Number}
+	* @default 32
+	*/
+	COMMITTING: 0x0020,
+	
+	/**
+	* Currently attempting to destroy.
+	* 
+	* @see module:enyo/Model~Model#destroy
+	* @see module:enyo/RelationalModel~RelationalModel#destroy
+	* @see module:enyo/Collection~Collection#destroy
+	*
+	* @type {Number}
+	* @default 64
+	*/
+	DESTROYING: 0x0040,
+	
+	/**
+	* There was an error during commit.
+	* 
+	* @see module:enyo/Model~Model#commit
+	* @see module:enyo/RelationalModel~RelationalModel#commit
+	* @see module:enyo/Collection~Collection#commit
+	*
+	* @type {Number}
+	* @default 128
+	*/
+	ERROR_COMMITTING: 0x0080,
+	
+	/**
+	* There was an error during fetch.
+	* 
+	* @see module:enyo/Model~Model#fetch
+	* @see module:enyo/RelationalModel~RelationalModel#fetch
+	* @see module:enyo/Collection~Collection#fetch
+	*
+	* @type {Number}
+	* @default 256
+	*/
+	ERROR_FETCHING: 0x0100,
+	
+	/**
+	* There was an error during destroy.
+	* 
+	* @see module:enyo/Model~Model#destroy
+	* @see module:enyo/RelationalModel~RelationalModel#destroy
+	* @see module:enyo/Collection~Collection#destroy
+	*
+	* @type {Number}
+	* @default 512
+	*/
+	ERROR_DESTROYING: 0x0200,
+	
+	/**
+	* An error was encountered for which there was no exact flag, or an invalid error was
+	* specified.
+	*
+	* @type {Number}
+	* @default 1024
+	*/
+	ERROR_UNKNOWN: 0x0400,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `BUSY`. By default, this is one of
+	* [FETCHING]{@link module:enyo/States.FETCHING}, [COMMITTING]{@link module:enyo/States.COMMITTING}, or
+	* [DESTROYING]{@link module:enyo/States.DESTROYING}. It may be extended to include additional
+	* values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
+	*
+	* @type {Number}
+	* @default 112
+	*/
+	BUSY: 0x0010 | 0x0020 | 0x0040,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `ERROR`. By default, this is one of
+	* [ERROR_FETCHING]{@link module:enyo/States.ERROR_FETCHING},
+	* [ERROR_COMMITTING]{@link module:enyo/States.ERROR_COMMITTING},
+	* [ERROR_DESTROYING]{@link module:enyo/States.ERROR_DESTROYING}, or
+	* [ERROR_UNKNOWN]{@link module:enyo/States.ERROR_UNKNOWN}. It may be extended to include
+	* additional values using the [bitwise]{@glossary bitwise} `OR` operator (`|`).
+	*
+	* @type {Number}
+	* @default 1920
+	*/
+	ERROR: 0x0080 | 0x0100 | 0x0200 | 0x0400,
+	
+	/**
+	* A multi-state [bitmask]{@glossary bitwise}. Compares a given flag to the states
+	* included in the definition of `READY`. By default, this is the inverse of any
+	* values included in [BUSY]{@link module:enyo/States.BUSY} or [ERROR]{@link module:enyo/States.ERROR}.
+	*
+	* @type {Number}
+	* @default -2041
+	*/
+	READY: ~(0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080 | 0x0100 | 0x0200 | 0x0400)
+};
+
 }],'enyo/job':[function (module,exports,global,require,request){
 require('enyo');
 
@@ -3530,7 +3530,207 @@ exports.error = function () {
 	this.log('error', arguments);
 };
 
-},{'./json':'enyo/json','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/dom':[function (module,exports,global,require,request){
+},{'./json':'enyo/json','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/animation':[function (module,exports,global,require,request){
+/**
+* Contains methods useful for animations.
+* @module enyo/animation
+*/
+
+require('enyo');
+
+var
+	platform = require('./platform'),
+	utils = require('./utils');
+
+var ms = Math.round(1000/60),
+	prefix = ['', 'webkit', 'moz', 'ms', 'o'],
+	rAF = 'requestAnimationFrame',
+	cRAF = 'cancelRequestAnimationFrame',
+	cAF = 'cancelAnimationFrame',
+	i, pl, p, wcRAF, wrAF, wcAF,
+	_requestFrame, _cancelFrame, cancelFrame,
+	core = { ts: 0, obs: {}};
+
+
+/*
+* Fallback on setTimeout
+*
+* @private
+*/
+_requestFrame = function(callback) {
+	return global.setTimeout(callback, ms);
+};
+
+/*
+* Fallback on clearTimeout
+*
+* @private
+*/
+_cancelFrame = function(id) {
+	return global.clearTimeout(id);
+};
+
+for (i = 0, pl = prefix.length; (p = prefix[i]) || i < pl; i++) {
+	// if we're on ios 6 just use setTimeout, requestAnimationFrame has some kinks
+	if (platform.ios === 6) {
+		break;
+	}
+
+	// if prefixed, becomes Request and Cancel
+	wrAF = p ? (p + utils.cap(rAF)) : rAF;
+	wcRAF = p ? (p + utils.cap(cRAF)) : cRAF;
+	wcAF = p ? (p + utils.cap(cAF)) : cAF;
+
+	// Test for cancelRequestAnimationFrame, because some browsers (Firefix 4-10) have a request without a cancel
+	cancelFrame = global[wcAF] || global[wcRAF];
+	if (cancelFrame) {
+		_cancelFrame = cancelFrame;
+		_requestFrame = global[wrAF];
+		if (p == 'webkit') {
+			/*
+				Note: In Chrome, the first return value of webkitRequestAnimationFrame is 0.
+				We make 1 bogus call so the first used return value of webkitRequestAnimationFrame is > 0, as the spec requires.
+				This makes it so that the requestId is always truthy.
+				(we choose to do this rather than wrapping the native function to avoid the overhead)
+			*/
+			_cancelFrame(_requestFrame(utils.nop));
+		}
+		break;
+	}
+}
+/**
+* Requests an animation callback.
+*
+* On compatible browsers, if `node` is defined, the [callback]{@glossary callback} will
+* fire only if `node` is visible.
+*
+* @param {Function} callback - A [callback]{@glossary callback} to be executed on the
+*                            animation frame.
+* @param {Node} node - The DOM node to request the animation frame for.
+* @returns {Object} A request id to be used with
+*                     {@link module:enyo/animation#cancelRequestAnimationFrame}.
+* @public
+*/
+exports.requestAnimationFrame = function(callback, node) {
+	return _requestFrame(callback, node);
+};
+/**
+* Cancels a requested animation callback with the specified id.
+*
+* @param {Number} id - The identifier of an animation request we wish to cancel.
+* @deprecated since 2.7.0
+* @public
+*/
+exports.cancelRequestAnimationFrame = function(id) {
+	return _cancelFrame(id);
+};
+/**
+* Cancels a requested animation callback with the specified id.
+*
+* @param {Number} id - The identifier of an animation request we wish to cancel.
+* @public
+*/
+exports.cancelAnimationFrame = function(id) {
+	return _cancelFrame(id);
+};
+/**
+* Subcribes for animation frame ticks.
+*
+* @param {Object} ctx - The context on which callback is registered.
+* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
+* @public
+*/
+exports.subscribe = function(ctx,callback) {
+	var id = utils.uid("rAF");
+	core.obs[id] = utils.bindSafely(ctx, callback);
+	return id;
+};
+/**
+* Unsubcribes for animation frame ticks.
+*
+* @param {Object} node - The context on which callback is registered.
+* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
+* @public
+*/
+exports.unsubscribe = function(id) {
+	delete core.obs[id];
+};
+
+var startrAF = function(){
+	_requestFrame(function (time) {
+		startrAF();
+		core.ts = time;
+	}.bind(this));
+};
+startrAF();
+
+/**
+* Gives an interpolation of an animated transition's distance from 0 to 1.
+*
+* Given a start time (`t0`) and an animation duration (`duration`), this
+* method applies the `easing` function to the percentage of time elapsed
+* divided by duration, capped at 100%.
+*
+* @param {Number} t0 - Start time.
+* @param {Number} duration - Duration in milliseconds.
+* @param {Function} easing - An easing [function]{@glossary Function} reference from
+*	{@link module:enyo/animation#easing}.
+* @param {Boolean} reverse - Whether the animation will run in reverse.
+* @returns {Number} The resulting position, capped at a maximum of 100%.
+* @public
+*/
+exports.easedLerp = function(t0, duration, easing, reverse) {
+	var lerp = (utils.perfNow() - t0) / duration;
+	if (reverse) {
+		return lerp >= 1 ? 0 : (1 - easing(1 - lerp));
+	} else {
+		return lerp >= 1 ? 1 : easing(lerp);
+	}
+};
+
+/**
+* Gives an interpolation of an animated transition's distance from
+* `startValue` to `valueChange`.
+*
+* Applies the `easing` function with a wider range of variables to allow for
+* more complex animations.
+*
+* @param {Number} t0 - Start time.
+* @param {Number} duration - Duration in milliseconds.
+* @param {Function} easing - An easing [function]{@glossary Function} reference from
+*	{@link module:enyo/animation#easing}.
+* @param {Boolean} reverse - Whether the animation will run in reverse.
+* @param {Number} time
+* @param {Number} startValue - Starting value.
+* @param {Number} valueChange
+* @returns {Number} The resulting position, capped at a maximum of 100%.
+* @public
+*/
+exports.easedComplexLerp = function(t0, duration, easing, reverse, time, startValue, valueChange) {
+	var lerp = (utils.perfNow() - t0) / duration;
+	if (reverse) {
+		return easing(1 - lerp, time, startValue, valueChange, duration);
+	} else {
+		return easing(lerp, time, startValue, valueChange, duration);
+	}
+};
+
+
+//TODO: A temporary implementation for rAF with observers.
+Object.defineProperty(core, 'ts', {
+
+	get: function() { 
+		return this.value; 
+	},
+
+	set: function(newValue) {
+		for(var i in this.obs){
+			this.obs[i](this.value, newValue);
+		}
+		this.value = newValue;
+	}
+});
+},{'./platform':'enyo/platform','./utils':'enyo/utils'}],'enyo/dom':[function (module,exports,global,require,request){
 /**
 * Contains methods for working with DOM
 * @module enyo/dom
@@ -4261,478 +4461,7 @@ dom.transition = (platform.ios || platform.android || platform.chrome || platfor
 		? '-moz-transition'
 		: 'transition';
 
-},{'./roots':'enyo/roots','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/animation':[function (module,exports,global,require,request){
-/**
-* Contains methods useful for animations.
-* @module enyo/animation
-*/
-
-require('enyo');
-
-var
-	platform = require('./platform'),
-	utils = require('./utils');
-
-var ms = Math.round(1000/60),
-	prefix = ['', 'webkit', 'moz', 'ms', 'o'],
-	rAF = 'requestAnimationFrame',
-	cRAF = 'cancelRequestAnimationFrame',
-	cAF = 'cancelAnimationFrame',
-	i, pl, p, wcRAF, wrAF, wcAF,
-	_requestFrame, _cancelFrame, cancelFrame,
-	core = { ts: 0, obs: {}};
-
-
-/*
-* Fallback on setTimeout
-*
-* @private
-*/
-_requestFrame = function(callback) {
-	return global.setTimeout(callback, ms);
-};
-
-/*
-* Fallback on clearTimeout
-*
-* @private
-*/
-_cancelFrame = function(id) {
-	return global.clearTimeout(id);
-};
-
-for (i = 0, pl = prefix.length; (p = prefix[i]) || i < pl; i++) {
-	// if we're on ios 6 just use setTimeout, requestAnimationFrame has some kinks
-	if (platform.ios === 6) {
-		break;
-	}
-
-	// if prefixed, becomes Request and Cancel
-	wrAF = p ? (p + utils.cap(rAF)) : rAF;
-	wcRAF = p ? (p + utils.cap(cRAF)) : cRAF;
-	wcAF = p ? (p + utils.cap(cAF)) : cAF;
-
-	// Test for cancelRequestAnimationFrame, because some browsers (Firefix 4-10) have a request without a cancel
-	cancelFrame = global[wcAF] || global[wcRAF];
-	if (cancelFrame) {
-		_cancelFrame = cancelFrame;
-		_requestFrame = global[wrAF];
-		if (p == 'webkit') {
-			/*
-				Note: In Chrome, the first return value of webkitRequestAnimationFrame is 0.
-				We make 1 bogus call so the first used return value of webkitRequestAnimationFrame is > 0, as the spec requires.
-				This makes it so that the requestId is always truthy.
-				(we choose to do this rather than wrapping the native function to avoid the overhead)
-			*/
-			_cancelFrame(_requestFrame(utils.nop));
-		}
-		break;
-	}
-}
-/**
-* Requests an animation callback.
-*
-* On compatible browsers, if `node` is defined, the [callback]{@glossary callback} will
-* fire only if `node` is visible.
-*
-* @param {Function} callback - A [callback]{@glossary callback} to be executed on the
-*                            animation frame.
-* @param {Node} node - The DOM node to request the animation frame for.
-* @returns {Object} A request id to be used with
-*                     {@link module:enyo/animation#cancelRequestAnimationFrame}.
-* @public
-*/
-exports.requestAnimationFrame = function(callback, node) {
-	return _requestFrame(callback, node);
-};
-/**
-* Cancels a requested animation callback with the specified id.
-*
-* @param {Number} id - The identifier of an animation request we wish to cancel.
-* @deprecated since 2.7.0
-* @public
-*/
-exports.cancelRequestAnimationFrame = function(id) {
-	return _cancelFrame(id);
-};
-/**
-* Cancels a requested animation callback with the specified id.
-*
-* @param {Number} id - The identifier of an animation request we wish to cancel.
-* @public
-*/
-exports.cancelAnimationFrame = function(id) {
-	return _cancelFrame(id);
-};
-/**
-* Subcribes for animation frame ticks.
-*
-* @param {Object} ctx - The context on which callback is registered.
-* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
-* @public
-*/
-exports.subscribe = function(ctx,callback) {
-	var id = utils.uid("rAF");
-	core.obs[id] = utils.bindSafely(ctx, callback);
-	return id;
-};
-/**
-* Unsubcribes for animation frame ticks.
-*
-* @param {Object} node - The context on which callback is registered.
-* @param {Function} callback - A [callback]{@glossary callback} to be executed on tick.
-* @public
-*/
-exports.unsubscribe = function(id) {
-	delete core.obs[id];
-};
-
-var startrAF = function(){
-	_requestFrame(function (time) {
-		startrAF();
-		core.ts = time;
-	}.bind(this));
-};
-startrAF();
-
-/**
-* Gives an interpolation of an animated transition's distance from 0 to 1.
-*
-* Given a start time (`t0`) and an animation duration (`duration`), this
-* method applies the `easing` function to the percentage of time elapsed
-* divided by duration, capped at 100%.
-*
-* @param {Number} t0 - Start time.
-* @param {Number} duration - Duration in milliseconds.
-* @param {Function} easing - An easing [function]{@glossary Function} reference from
-*	{@link module:enyo/animation#easing}.
-* @param {Boolean} reverse - Whether the animation will run in reverse.
-* @returns {Number} The resulting position, capped at a maximum of 100%.
-* @public
-*/
-exports.easedLerp = function(t0, duration, easing, reverse) {
-	var lerp = (utils.perfNow() - t0) / duration;
-	if (reverse) {
-		return lerp >= 1 ? 0 : (1 - easing(1 - lerp));
-	} else {
-		return lerp >= 1 ? 1 : easing(lerp);
-	}
-};
-
-/**
-* Gives an interpolation of an animated transition's distance from
-* `startValue` to `valueChange`.
-*
-* Applies the `easing` function with a wider range of variables to allow for
-* more complex animations.
-*
-* @param {Number} t0 - Start time.
-* @param {Number} duration - Duration in milliseconds.
-* @param {Function} easing - An easing [function]{@glossary Function} reference from
-*	{@link module:enyo/animation#easing}.
-* @param {Boolean} reverse - Whether the animation will run in reverse.
-* @param {Number} time
-* @param {Number} startValue - Starting value.
-* @param {Number} valueChange
-* @returns {Number} The resulting position, capped at a maximum of 100%.
-* @public
-*/
-exports.easedComplexLerp = function(t0, duration, easing, reverse, time, startValue, valueChange) {
-	var lerp = (utils.perfNow() - t0) / duration;
-	if (reverse) {
-		return easing(1 - lerp, time, startValue, valueChange, duration);
-	} else {
-		return easing(lerp, time, startValue, valueChange, duration);
-	}
-};
-
-
-//TODO: A temporary implementation for rAF with observers.
-Object.defineProperty(core, 'ts', {
-
-	get: function() { 
-		return this.value; 
-	},
-
-	set: function(newValue) {
-		for(var i in this.obs){
-			this.obs[i](this.value, newValue);
-		}
-		this.value = newValue;
-	}
-});
-},{'./platform':'enyo/platform','./utils':'enyo/utils'}],'enyo/HTMLStringDelegate':[function (module,exports,global,require,request){
-require('enyo');
-
-var
-	Dom = require('./dom');
-
-var selfClosing = {img: 1, hr: 1, br: 1, area: 1, base: 1, basefont: 1, input: 1, link: 1,
-	meta: 1, command: 1, embed: 1, keygen: 1, wbr: 1, param: 1, source: 1, track: 1, col: 1};
-
-/**
-* This is the default render delegate used by {@link module:enyo/Control~Control}. It
-* generates the HTML [string]{@glossary String} content and correctly inserts
-* it into the DOM. A string-concatenation technique is used to perform DOM
-* insertion in batches.
-*
-* @module enyo/HTMLStringDelegate
-* @public
-*/
-module.exports = {
-	
-	/**
-	* @private
-	*/
-	invalidate: function (control, item) {
-		switch (item) {
-		case 'content':
-			this.renderContent(control);
-			break;
-		default:
-			control.tagsValid = false;
-			break;
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	render: function (control) {
-		if (control.parent) {
-			control.parent.beforeChildRender(control);
-			
-			if (!control.parent.generated) return;
-			if (control.tag === null) return control.parent.render();
-		}
-		
-		if (!control.hasNode()) this.renderNode(control);
-		if (control.hasNode()) {
-			this.renderDom(control);
-			if (control.generated) control.rendered();
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	renderInto: function (control, parentNode) {
-		parentNode.innerHTML = this.generateHtml(control);
-		
-		if (control.generated) control.rendered();
-	},
-	
-	/**
-	* @private
-	*/
-	renderNode: function (control) {
-		this.teardownRender(control);
-		control.node = document.createElement(control.tag);
-		control.addNodeToParent();
-		control.set('generated', true);
-	},
-	
-	/**
-	* @private
-	*/
-	renderDom: function (control) {
-		this.renderAttributes(control);
-		this.renderStyles(control);
-		this.renderContent(control);
-	},
-	
-	/**
-	* @private
-	*/
-	renderStyles: function (control) {
-		var style = control.style;
-		
-		// we can safely do this knowing it will synchronize properly without a double
-		// set in the DOM because we're flagging the internal property
-		if (control.hasNode()) {
-			control.node.style.cssText = style;
-			// retrieve the parsed value for synchronization
-			control.cssText = style = control.node.style.cssText;
-			// now we set it knowing they will be synchronized and everybody that is listening
-			// will also be updated to know about the change
-			control.set('style', style);
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	renderAttributes: function (control) {
-		var attrs = control.attributes,
-			node = control.hasNode(),
-			key,
-			val;
-		
-		if (node) {
-			for (key in attrs) {
-				val = attrs[key];
-				if (val === null || val === false || val === "") {
-					node.removeAttribute(key);
-				} else {
-					node.setAttribute(key, val);
-				}
-			}
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	renderContent: function (control) {
-		if (control.generated) this.teardownChildren(control);
-		if (control.hasNode()) control.node.innerHTML = this.generateInnerHtml(control);
-	},
-	
-	/**
-	* @private
-	*/
-	generateHtml: function (control) {
-		var content,
-			html;
-		
-		if (control.canGenerate === false) {
-			return '';
-		}
-		// do this first in case content generation affects outer html (styles or attributes)
-		content = this.generateInnerHtml(control);
-		// generate tag, styles, attributes
-		html = this.generateOuterHtml(control, content);
-		// NOTE: 'generated' is used to gate access to findNodeById in
-		// hasNode, because findNodeById is expensive.
-		// NOTE: we typically use 'generated' to mean 'created in DOM'
-		// but that has not actually happened at this point.
-		// We set 'generated = true' here anyway to avoid having to walk the
-		// control tree a second time (to set it later).
-		// The contract is that insertion in DOM will happen synchronously
-		// to generateHtml() and before anybody should be calling hasNode().
-		control.set('generated', true);
-		return html;
-	},
-	
-	/**
-	* @private
-	*/
-	generateOuterHtml: function (control, content) {
-		if (!control.tag) return content;
-		if (!control.tagsValid) this.prepareTags(control);
-		return control._openTag + content + control._closeTag;
-	},
-	
-	/**
-	* @private
-	*/
-	generateInnerHtml: function (control) {
-		var allowHtml = control.allowHtml,
-			content;
-		
-		// flow can alter the way that html content is rendered inside
-		// the container regardless of whether there are children.
-		control.flow();
-		if (control.children.length) return this.generateChildHtml(control);
-		else {
-			content = control.get('content');
-			return allowHtml ? content : Dom.escape(content);
-		}
-	},
-	
-	/**
-	* @private
-	*/
-	generateChildHtml: function (control) {
-		var child,
-			html = '',
-			i = 0,
-			delegate;
-		
-		for (; (child = control.children[i]); ++i) {
-			delegate = child.renderDelegate || this;
-			html += delegate.generateHtml(child);
-		}
-		
-		return html;
-	},
-	
-	/**
-	* @private
-	*/
-	prepareTags: function (control) {
-		var html = '';
-		
-		// open tag
-		html += '<' + control.tag + (control.style ? ' style="' + control.style + '"' : '');
-		html += this.attributesToHtml(control.attributes);
-		if (selfClosing[control.tag]) {
-			control._openTag = html + '/>';
-			control._closeTag = '';
-		} else {
-			control._openTag = html + '>';
-			control._closeTag = '</' + control.tag + '>';
-		}
-		
-		control.tagsValid = true;
-	},
-	
-	/**
-	* @private
-	*/
-	attributesToHtml: function(attrs) {
-		var key,
-			val,
-			html = '';
-			
-		for (key in attrs) {
-			val = attrs[key];
-			if (val != null && val !== false && val !== '') {
-				html += ' ' + key + '="' + this.escapeAttribute(val) + '"';
-			}
-		}
-		
-		return html;
-	},
-	
-	/**
-	* @private
-	*/
-	escapeAttribute: function (text) {
-		if (typeof text != 'string') return text;
-	
-		return String(text).replace(/&/g, '&amp;').replace(/\"/g, '&quot;');
-	},
-	
-	/**
-	* @private
-	*/
-	teardownRender: function (control, cache) {
-		if (control.generated) {
-			if (typeof control.beforeTeardown === 'function') {
-				control.beforeTeardown();
-			}
-			this.teardownChildren(control, cache);
-		}
-			
-		control.node = null;
-		control.set('generated', false);
-	},
-	
-	/**
-	* @private
-	*/
-	teardownChildren: function (control, cache) {
-		var child,
-			i = 0;
-
-		for (; (child = control.children[i]); ++i) {
-			child.teardownRender(cache);
-		}
-	}
-};
-
-},{'./dom':'enyo/dom'}],'enyo/tween':[function (module,exports,global,require,request){
+},{'./roots':'enyo/roots','./utils':'enyo/utils','./platform':'enyo/platform'}],'enyo/tween':[function (module,exports,global,require,request){
 require('enyo');
 
 var
@@ -4847,7 +4576,7 @@ module.exports = {
 
     halt: function(actor, pose) {
         var matrix = pose.currentState && pose.currentState.matrix;
-        
+
         pose = transform.Matrix.decompose2D(matrix);
         domCSS = toTransformValue(pose.matrix2D);
         actor.addStyles(domCSS);
@@ -5395,7 +5124,7 @@ function toTransformValue (matrix, ret) {
  * @public
  * @param  {HTMLElement}  style Computed style of a DOM.
  * @param  {String}       key   Property name for which style has to be fetched.
- * @return {Number|HTMLElement} 
+ * @return {Number|HTMLElement}
  */
 function getStyleValue(style, key) {
     return style.getPropertyValue(key) || style[key];
@@ -5456,7 +5185,278 @@ var
         scaleZ: 1,
         perspective: 1
     };
-},{'./dom':'enyo/dom','./utils':'enyo/utils','./transform':'enyo/transform'}],'enyo/resolution':[function (module,exports,global,require,request){
+},{'./dom':'enyo/dom','./utils':'enyo/utils','./transform':'enyo/transform'}],'enyo/HTMLStringDelegate':[function (module,exports,global,require,request){
+require('enyo');
+
+var
+	Dom = require('./dom');
+
+var selfClosing = {img: 1, hr: 1, br: 1, area: 1, base: 1, basefont: 1, input: 1, link: 1,
+	meta: 1, command: 1, embed: 1, keygen: 1, wbr: 1, param: 1, source: 1, track: 1, col: 1};
+
+/**
+* This is the default render delegate used by {@link module:enyo/Control~Control}. It
+* generates the HTML [string]{@glossary String} content and correctly inserts
+* it into the DOM. A string-concatenation technique is used to perform DOM
+* insertion in batches.
+*
+* @module enyo/HTMLStringDelegate
+* @public
+*/
+module.exports = {
+	
+	/**
+	* @private
+	*/
+	invalidate: function (control, item) {
+		switch (item) {
+		case 'content':
+			this.renderContent(control);
+			break;
+		default:
+			control.tagsValid = false;
+			break;
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	render: function (control) {
+		if (control.parent) {
+			control.parent.beforeChildRender(control);
+			
+			if (!control.parent.generated) return;
+			if (control.tag === null) return control.parent.render();
+		}
+		
+		if (!control.hasNode()) this.renderNode(control);
+		if (control.hasNode()) {
+			this.renderDom(control);
+			if (control.generated) control.rendered();
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	renderInto: function (control, parentNode) {
+		parentNode.innerHTML = this.generateHtml(control);
+		
+		if (control.generated) control.rendered();
+	},
+	
+	/**
+	* @private
+	*/
+	renderNode: function (control) {
+		this.teardownRender(control);
+		control.node = document.createElement(control.tag);
+		control.addNodeToParent();
+		control.set('generated', true);
+	},
+	
+	/**
+	* @private
+	*/
+	renderDom: function (control) {
+		this.renderAttributes(control);
+		this.renderStyles(control);
+		this.renderContent(control);
+	},
+	
+	/**
+	* @private
+	*/
+	renderStyles: function (control) {
+		var style = control.style;
+		
+		// we can safely do this knowing it will synchronize properly without a double
+		// set in the DOM because we're flagging the internal property
+		if (control.hasNode()) {
+			control.node.style.cssText = style;
+			// retrieve the parsed value for synchronization
+			control.cssText = style = control.node.style.cssText;
+			// now we set it knowing they will be synchronized and everybody that is listening
+			// will also be updated to know about the change
+			control.set('style', style);
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	renderAttributes: function (control) {
+		var attrs = control.attributes,
+			node = control.hasNode(),
+			key,
+			val;
+		
+		if (node) {
+			for (key in attrs) {
+				val = attrs[key];
+				if (val === null || val === false || val === "") {
+					node.removeAttribute(key);
+				} else {
+					node.setAttribute(key, val);
+				}
+			}
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	renderContent: function (control) {
+		if (control.generated) this.teardownChildren(control);
+		if (control.hasNode()) control.node.innerHTML = this.generateInnerHtml(control);
+	},
+	
+	/**
+	* @private
+	*/
+	generateHtml: function (control) {
+		var content,
+			html;
+		
+		if (control.canGenerate === false) {
+			return '';
+		}
+		// do this first in case content generation affects outer html (styles or attributes)
+		content = this.generateInnerHtml(control);
+		// generate tag, styles, attributes
+		html = this.generateOuterHtml(control, content);
+		// NOTE: 'generated' is used to gate access to findNodeById in
+		// hasNode, because findNodeById is expensive.
+		// NOTE: we typically use 'generated' to mean 'created in DOM'
+		// but that has not actually happened at this point.
+		// We set 'generated = true' here anyway to avoid having to walk the
+		// control tree a second time (to set it later).
+		// The contract is that insertion in DOM will happen synchronously
+		// to generateHtml() and before anybody should be calling hasNode().
+		control.set('generated', true);
+		return html;
+	},
+	
+	/**
+	* @private
+	*/
+	generateOuterHtml: function (control, content) {
+		if (!control.tag) return content;
+		if (!control.tagsValid) this.prepareTags(control);
+		return control._openTag + content + control._closeTag;
+	},
+	
+	/**
+	* @private
+	*/
+	generateInnerHtml: function (control) {
+		var allowHtml = control.allowHtml,
+			content;
+		
+		// flow can alter the way that html content is rendered inside
+		// the container regardless of whether there are children.
+		control.flow();
+		if (control.children.length) return this.generateChildHtml(control);
+		else {
+			content = control.get('content');
+			return allowHtml ? content : Dom.escape(content);
+		}
+	},
+	
+	/**
+	* @private
+	*/
+	generateChildHtml: function (control) {
+		var child,
+			html = '',
+			i = 0,
+			delegate;
+		
+		for (; (child = control.children[i]); ++i) {
+			delegate = child.renderDelegate || this;
+			html += delegate.generateHtml(child);
+		}
+		
+		return html;
+	},
+	
+	/**
+	* @private
+	*/
+	prepareTags: function (control) {
+		var html = '';
+		
+		// open tag
+		html += '<' + control.tag + (control.style ? ' style="' + control.style + '"' : '');
+		html += this.attributesToHtml(control.attributes);
+		if (selfClosing[control.tag]) {
+			control._openTag = html + '/>';
+			control._closeTag = '';
+		} else {
+			control._openTag = html + '>';
+			control._closeTag = '</' + control.tag + '>';
+		}
+		
+		control.tagsValid = true;
+	},
+	
+	/**
+	* @private
+	*/
+	attributesToHtml: function(attrs) {
+		var key,
+			val,
+			html = '';
+			
+		for (key in attrs) {
+			val = attrs[key];
+			if (val != null && val !== false && val !== '') {
+				html += ' ' + key + '="' + this.escapeAttribute(val) + '"';
+			}
+		}
+		
+		return html;
+	},
+	
+	/**
+	* @private
+	*/
+	escapeAttribute: function (text) {
+		if (typeof text != 'string') return text;
+	
+		return String(text).replace(/&/g, '&amp;').replace(/\"/g, '&quot;');
+	},
+	
+	/**
+	* @private
+	*/
+	teardownRender: function (control, cache) {
+		if (control.generated) {
+			if (typeof control.beforeTeardown === 'function') {
+				control.beforeTeardown();
+			}
+			this.teardownChildren(control, cache);
+		}
+			
+		control.node = null;
+		control.set('generated', false);
+	},
+	
+	/**
+	* @private
+	*/
+	teardownChildren: function (control, cache) {
+		var child,
+			i = 0;
+
+		for (; (child = control.children[i]); ++i) {
+			child.teardownRender(cache);
+		}
+	}
+};
+
+},{'./dom':'enyo/dom'}],'enyo/resolution':[function (module,exports,global,require,request){
 require('enyo');
 
 var
@@ -7893,7 +7893,7 @@ exports.createFromKind = function (nom, param) {
 	}
 };
 
-},{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/sceneSupport':[function (module,exports,global,require,request){
+},{'./logger':'enyo/logger','./scene':'enyo/scene','./utils':'enyo/utils'}],'enyo/SceneSupport':[function (module,exports,global,require,request){
 var
     kind = require('./kind'),
     utils = require('./utils'),
@@ -7917,7 +7917,7 @@ var SceneSupport = {
 
 module.exports = SceneSupport;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/SceneSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/sceneSupport':[function (module,exports,global,require,request){
 var
     kind = require('./kind'),
     utils = require('./utils'),
@@ -7941,7 +7941,96 @@ var SceneSupport = {
 
 module.exports = SceneSupport;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/Control/floatingLayer':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/Layout':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
+* @module enyo/Layout
+*/
+
+var
+	kind = require('./kind');
+
+/**
+* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
+* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
+* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
+* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
+* 
+* Derived kinds will usually provide their own
+* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
+* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
+* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
+* during control rendering, while `reflow()` is called when the associated
+* control is resized.
+*
+* @class Layout
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Layout~Layout.prototype */ {
+
+	name: 'enyo.Layout',
+
+	/**
+	* @private
+	*/
+	kind: null,
+
+	/** 
+	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
+	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
+	*
+	* @type {String}
+	* @default ''
+	* @public
+	*/
+	layoutClass: '',
+	
+	/**
+	* @private
+	*/
+	constructor: function (container) {
+		this.container = container;
+		if (container) {
+			container.addClass(this.layoutClass);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	destroy: function () {
+		if (this.container) {
+			this.container.removeClass(this.layoutClass);
+		}
+	},
+	
+	/**
+	* Called during static property layout (i.e., during rendering).
+	*
+	* @public
+	*/
+	flow: function () {
+	},
+
+	/** 
+	* Called during dynamic measuring layout (i.e., during a resize).
+	*
+	* May short-circuit and return `true` if the layout needs to be
+	* redone when the associated Control is next shown. This is useful
+	* for cases where the Control itself has `showing` set to `true`
+	* but an ancestor is hidden, and the layout is therefore unable to
+	* get accurate measurements of the Control or its children.
+	*
+	* @public
+	*/
+	reflow: function () {
+	}
+});
+
+},{'./kind':'enyo/kind'}],'enyo/Control/floatingLayer':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/Control/floatingLayer~FloatingLayer} singleton instance.
 * @module enyo/Control/floatingLayer
@@ -8941,96 +9030,7 @@ kind.extendMethods(p, {
 
 module.exports = p;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/Layout':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
-* @module enyo/Layout
-*/
-
-var
-	kind = require('./kind');
-
-/**
-* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
-* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
-* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
-* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
-* 
-* Derived kinds will usually provide their own
-* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
-* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
-* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
-* during control rendering, while `reflow()` is called when the associated
-* control is resized.
-*
-* @class Layout
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Layout~Layout.prototype */ {
-
-	name: 'enyo.Layout',
-
-	/**
-	* @private
-	*/
-	kind: null,
-
-	/** 
-	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
-	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
-	*
-	* @type {String}
-	* @default ''
-	* @public
-	*/
-	layoutClass: '',
-	
-	/**
-	* @private
-	*/
-	constructor: function (container) {
-		this.container = container;
-		if (container) {
-			container.addClass(this.layoutClass);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	destroy: function () {
-		if (this.container) {
-			this.container.removeClass(this.layoutClass);
-		}
-	},
-	
-	/**
-	* Called during static property layout (i.e., during rendering).
-	*
-	* @public
-	*/
-	flow: function () {
-	},
-
-	/** 
-	* Called during dynamic measuring layout (i.e., during a resize).
-	*
-	* May short-circuit and return `true` if the layout needs to be
-	* redone when the associated Control is next shown. This is useful
-	* for cases where the Control itself has `showing` set to `true`
-	* but an ancestor is hidden, and the layout is therefore unable to
-	* get accurate measurements of the Control or its children.
-	*
-	* @public
-	*/
-	reflow: function () {
-	}
-});
-
-},{'./kind':'enyo/kind'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/ApplicationSupport~ApplicationSupport} mixin.
 * @module enyo/ApplicationSupport
@@ -16622,125 +16622,7 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./easing':'enyo/easing','./animation':'enyo/animation','./Component':'enyo/Component','./jobs':'enyo/jobs'}],'enyo/Signals':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Signals~Signals} kind.
-* @module enyo/Signals
-*/
-
-var
-	kind = require('./kind'),
-	utils = require('./utils');
-
-var
-	Component = require('./Component');
-
-/**
-* {@link module:enyo/Signals~Signals} is a [component]{@link module:enyo/Component~Component} used to listen
-* to global messages.
-* 
-* An object with a Signals component can listen to messages sent from anywhere
-* by declaring handlers for them.
-* 
-* DOM [events]{@glossary event} that have no node targets are broadcast as
-* signals. These events include Window events, such as `onload` and
-* `onbeforeunload`, as well as events that occur directly on `document`, such
-* as `onkeypress` if `document` has the focus.
-* 
-* For more information, see the documentation on [Event
-* Handling]{@linkplain $dev-guide/key-concepts/event-handling.html} in the
-* Enyo Developer Guide.
-*
-* @class Signals
-* @extends module:enyo/Component~Component
-* @public
-*/
-var Signals = module.exports = kind(
-	/** @lends module:enyo/Signals~Signals.prototype */ {
-
-	name: 'enyo.Signals',
-
-	/**
-	* @private
-	*/
-	kind: Component,
-
-	/**
-	* Needed because of early calls to bind DOM {@glossary event} listeners
-	* to the [enyo.Signals.send()]{@link module:enyo/Signals~Signals#send} call.
-	* 
-	* @private
-	*/
-
-
-	/**
-	* @method
-	* @private
-	*/
-	create: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			Signals.addListener(this);
-		};
-	}),
-
-	/**
-	* @method
-	* @private
-	*/
-	destroy: kind.inherit(function (sup) {
-		return function() {
-			Signals.removeListener(this);
-			sup.apply(this, arguments);
-		};
-	}),
-
-	/**
-	* @private
-	*/
-	notify: function (msg, load) {
-		this.dispatchEvent(msg, load);
-	},
-
-	/**
-	* @private
-	*/
-	protectedStatics: {
-		listeners: [],
-		addListener: function(listener) {
-			this.listeners.push(listener);
-		},
-		removeListener: function(listener) {
-			utils.remove(listener, this.listeners);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	statics: 
-		/** @lends module:enyo/Signals~Signals.prototype */ {
-
-		/**
-		* Broadcasts a global message to be consumed by subscribers.
-		* 
-		* @param {String} msg - The message to send; usually the name of the
-		*	{@glossary event}.
-		* @param {Object} load - An [object]{@glossary Object} containing any
-		*	associated event properties to be accessed by subscribers.
-		* @public
-		*/
-		send: function (msg, load) {
-			utils.forEach(this.listeners, function(l) {
-				l.notify(msg, load);
-			});
-		}
-	}
-});
-
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Component':'enyo/Component'}],'enyo/ScrollMath':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./easing':'enyo/easing','./animation':'enyo/animation','./Component':'enyo/Component','./jobs':'enyo/jobs'}],'enyo/ScrollMath':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -17529,7 +17411,125 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./platform':'enyo/platform','./animation':'enyo/animation','./Component':'enyo/Component'}],'enyo/MultipleDispatchComponent':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./platform':'enyo/platform','./animation':'enyo/animation','./Component':'enyo/Component'}],'enyo/Signals':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Signals~Signals} kind.
+* @module enyo/Signals
+*/
+
+var
+	kind = require('./kind'),
+	utils = require('./utils');
+
+var
+	Component = require('./Component');
+
+/**
+* {@link module:enyo/Signals~Signals} is a [component]{@link module:enyo/Component~Component} used to listen
+* to global messages.
+* 
+* An object with a Signals component can listen to messages sent from anywhere
+* by declaring handlers for them.
+* 
+* DOM [events]{@glossary event} that have no node targets are broadcast as
+* signals. These events include Window events, such as `onload` and
+* `onbeforeunload`, as well as events that occur directly on `document`, such
+* as `onkeypress` if `document` has the focus.
+* 
+* For more information, see the documentation on [Event
+* Handling]{@linkplain $dev-guide/key-concepts/event-handling.html} in the
+* Enyo Developer Guide.
+*
+* @class Signals
+* @extends module:enyo/Component~Component
+* @public
+*/
+var Signals = module.exports = kind(
+	/** @lends module:enyo/Signals~Signals.prototype */ {
+
+	name: 'enyo.Signals',
+
+	/**
+	* @private
+	*/
+	kind: Component,
+
+	/**
+	* Needed because of early calls to bind DOM {@glossary event} listeners
+	* to the [enyo.Signals.send()]{@link module:enyo/Signals~Signals#send} call.
+	* 
+	* @private
+	*/
+
+
+	/**
+	* @method
+	* @private
+	*/
+	create: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			Signals.addListener(this);
+		};
+	}),
+
+	/**
+	* @method
+	* @private
+	*/
+	destroy: kind.inherit(function (sup) {
+		return function() {
+			Signals.removeListener(this);
+			sup.apply(this, arguments);
+		};
+	}),
+
+	/**
+	* @private
+	*/
+	notify: function (msg, load) {
+		this.dispatchEvent(msg, load);
+	},
+
+	/**
+	* @private
+	*/
+	protectedStatics: {
+		listeners: [],
+		addListener: function(listener) {
+			this.listeners.push(listener);
+		},
+		removeListener: function(listener) {
+			utils.remove(listener, this.listeners);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	statics: 
+		/** @lends module:enyo/Signals~Signals.prototype */ {
+
+		/**
+		* Broadcasts a global message to be consumed by subscribers.
+		* 
+		* @param {String} msg - The message to send; usually the name of the
+		*	{@glossary event}.
+		* @param {Object} load - An [object]{@glossary Object} containing any
+		*	associated event properties to be accessed by subscribers.
+		* @public
+		*/
+		send: function (msg, load) {
+			utils.forEach(this.listeners, function(l) {
+				l.notify(msg, load);
+			});
+		}
+	}
+});
+
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Component':'enyo/Component'}],'enyo/MultipleDispatchComponent':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -23685,7 +23685,349 @@ Dom.requiresWindow(function() {
 	touchGesture.connect();
 });
 
-},{'./utils':'enyo/utils','./gesture':'enyo/gesture','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./dom':'enyo/dom','./job':'enyo/job'}],'enyo/Image':[function (module,exports,global,require,request){
+},{'./utils':'enyo/utils','./gesture':'enyo/gesture','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./dom':'enyo/dom','./job':'enyo/job'}],'enyo/Input':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Input~Input} kind.
+* @module enyo/Input
+*/
+
+var
+	kind = require('../kind'),
+	utils = require('../utils'),
+	dispatcher = require('../dispatcher'),
+	platform = require('../platform');
+var
+	Control = require('../Control');
+
+/**
+* Fires immediately when the text changes.
+*
+* @event module:enyo/Input~Input#oninput
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* Fires when the text has changed and the [input]{@link module:enyo/Input~Input} subsequently loses
+* focus.
+*
+* @event module:enyo/Input~Input#onchange
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* Fires when the [input]{@link module:enyo/Input~Input} is disabled or enabled.
+*
+* @event module:enyo/Input~Input#onDisabledChange
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* {@link module:enyo/Input~Input} implements an HTML [&lt;input&gt;]{@glossary input} element
+* with cross-platform support for change [events]{@glossary event}.
+*
+* You may listen for [oninput]{@link module:enyo/Input~Input#oninput} and
+* [onchange]{@link module:enyo/Input~Input#onchange} [DOM events]{@glossary DOMEvent} from
+* this [control]{@link module:enyo/Control~Control} to know when the text inside has been modified.
+*
+* For more information, see the documentation on
+* [Text Fields]{@linkplain $dev-guide/building-apps/controls/text-fields.html}
+* in the Enyo Developer Guide.
+*
+* @class Input
+* @extends module:enyo/Control~Control
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Input~Input.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.Input',
+
+	/**
+	* @private
+	*/
+	kind: Control,
+
+	/**
+	* @private
+	*/
+	published:
+		/** @lends module:enyo/Input~Input.prototype */ {
+
+		/**
+		* Value of the [input]{@link module:enyo/Input~Input}. Use this property only to initialize the
+		* value. Call `getValue()` and `setValue()` to manipulate the value at runtime.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		value: '',
+
+		/**
+		* Text to display when the [input]{@link module:enyo/Input~Input} is empty
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		placeholder: '',
+
+		/**
+		* Type of [input]{@link module:enyo/Input~Input}; if not specified, it's treated as `'text'`.
+		* This may be anything specified for the `type` attribute in the HTML
+		* specification, including `'url'`, `'email'`, `'search'`, or `'number'`.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		type: '',
+
+		/**
+		* When `true`, prevents input into the [control]{@link module:enyo/Control~Control}. This maps
+		* to the `disabled` DOM attribute.
+		*
+		* @type {Boolean}
+		* @default false
+		* @public
+		*/
+		disabled: false,
+
+		/**
+		* When `true`, the contents of the [input]{@link module:enyo/Input~Input} will be selected
+		* when the input gains focus.
+		*
+		* @type {Boolean}
+		* @default false
+		* @public
+		*/
+		selectOnFocus: false
+	},
+
+	/**
+	* @private
+	*/
+	events: {
+		onDisabledChange: ''
+	},
+
+	/**
+	* Set to `true` to focus this [control]{@link module:enyo/Control~Control} when it is rendered.
+	*
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	defaultFocus: false,
+
+	/**
+	* @private
+	*/
+	tag: 'input',
+
+	/**
+	* @private
+	*/
+	classes: 'enyo-input',
+
+	/**
+	* @private
+	*/
+	handlers: {
+		onfocus: 'focused',
+		oninput: 'input',
+		onclear: 'clear',
+		ondragstart: 'dragstart'
+	},
+
+	/**
+	* @method
+	* @private
+	*/
+	create: kind.inherit(function (sup) {
+		return function() {
+			if (platform.ie) {
+				this.handlers.onkeyup = 'iekeyup';
+			}
+			if (platform.windowsPhone) {
+				this.handlers.onkeydown = 'iekeydown';
+			}
+			sup.apply(this, arguments);
+			this.placeholderChanged();
+			// prevent overriding a custom attribute with null
+			if (this.type) {
+				this.typeChanged();
+			}
+		};
+	}),
+
+	/**
+	* @method
+	* @private
+	*/
+	rendered: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			dispatcher.makeBubble(this, 'focus', 'blur');
+			this.disabledChanged();
+			if (this.defaultFocus) {
+				this.focus();
+			}
+		};
+	}),
+
+	/**
+	* @private
+	*/
+	typeChanged: function () {
+		this.setAttribute('type', this.type);
+	},
+
+	/**
+	* @private
+	*/
+	placeholderChanged: function () {
+		this.setAttribute('placeholder', this.placeholder);
+		this.valueChanged();
+	},
+
+	/**
+	* @fires module:enyo/Input~Input#onDisabledChange
+	* @private
+	*/
+	disabledChanged: function () {
+		this.setAttribute('disabled', this.disabled);
+		this.bubble('onDisabledChange');
+	},
+
+	/**
+	* @private
+	*/
+	valueChanged: function () {
+		var node = this.hasNode(),
+			attrs = this.attributes;
+		if (node) {
+			if (node.value !== this.value) {
+				node.value = this.value;
+			}
+			// we manually update the cached value so that the next time the
+			// attribute is requested or the control is re-rendered it will
+			// have the correct value - this is because calling setAttribute()
+			// in some cases does not receive an appropriate response from the
+			// browser
+			attrs.value = this.value;
+		} else {
+			this.setAttribute('value', this.value);
+		}
+		this.detectTextDirectionality((this.value || this.value === 0) ? this.value : this.get('placeholder'));
+	},
+
+	/**
+	* @private
+	*/
+	iekeyup: function (sender, e) {
+		var ie = platform.ie, kc = e.keyCode;
+		// input event fails to fire on backspace and delete keys in ie 9
+		if (ie == 9 && (kc == 8 || kc == 46)) {
+			this.bubble('oninput', e);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	iekeydown: function (sender, e) {
+		var wp = platform.windowsPhone, kc = e.keyCode, dt = e.dispatchTarget;
+		// onchange event fails to fire on enter key for Windows Phone 8, so we force blur
+		if (wp <= 8 && kc == 13 && this.tag == 'input' && dt.hasNode()) {
+			dt.node.blur();
+		}
+	},
+
+	/**
+	* @private
+	*/
+	clear: function () {
+		this.setValue('');
+	},
+
+	// note: we disallow dragging of an input to allow text selection on all platforms
+	/**
+	* @private
+	*/
+	dragstart: function () {
+		return this.hasFocus();
+	},
+
+	/**
+	* @private
+	*/
+	focused: function () {
+		if (this.selectOnFocus) {
+			utils.asyncMethod(this, 'selectContents');
+		}
+	},
+
+	/**
+	* @private
+	*/
+	selectContents: function () {
+		var n = this.hasNode();
+
+		if (n && n.setSelectionRange) {
+			n.setSelectionRange(0, n.value.length);
+		} else if (n && n.createTextRange) {
+			var r = n.createTextRange();
+			r.expand('textedit');
+			r.select();
+		}
+	},
+
+	/**
+	* @private
+	*/
+	input: function () {
+		var val = this.getNodeProperty('value');
+		this.setValue(val);
+	},
+
+	// Accessibility
+
+	/**
+	* @default textbox
+	* @type {String}
+	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
+	* @public
+	*/
+	accessibilityRole: 'textbox',
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{path: 'disabled', to: 'aria-disabled'}
+	]
+});
+
+},{'../kind':'enyo/kind','../utils':'enyo/utils','../dispatcher':'enyo/dispatcher','../platform':'enyo/platform','../Control':'enyo/Control'}],'enyo/Image':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -24037,349 +24379,7 @@ module.exports = kind(
 	accessibilityRole: 'img'
 });
 
-},{'../kind':'enyo/kind','../resolution':'enyo/resolution','../dispatcher':'enyo/dispatcher','../pathResolver':'enyo/pathResolver','../Control':'enyo/Control'}],'enyo/Input':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Input~Input} kind.
-* @module enyo/Input
-*/
-
-var
-	kind = require('../kind'),
-	utils = require('../utils'),
-	dispatcher = require('../dispatcher'),
-	platform = require('../platform');
-var
-	Control = require('../Control');
-
-/**
-* Fires immediately when the text changes.
-*
-* @event module:enyo/Input~Input#oninput
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* Fires when the text has changed and the [input]{@link module:enyo/Input~Input} subsequently loses
-* focus.
-*
-* @event module:enyo/Input~Input#onchange
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* Fires when the [input]{@link module:enyo/Input~Input} is disabled or enabled.
-*
-* @event module:enyo/Input~Input#onDisabledChange
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* {@link module:enyo/Input~Input} implements an HTML [&lt;input&gt;]{@glossary input} element
-* with cross-platform support for change [events]{@glossary event}.
-*
-* You may listen for [oninput]{@link module:enyo/Input~Input#oninput} and
-* [onchange]{@link module:enyo/Input~Input#onchange} [DOM events]{@glossary DOMEvent} from
-* this [control]{@link module:enyo/Control~Control} to know when the text inside has been modified.
-*
-* For more information, see the documentation on
-* [Text Fields]{@linkplain $dev-guide/building-apps/controls/text-fields.html}
-* in the Enyo Developer Guide.
-*
-* @class Input
-* @extends module:enyo/Control~Control
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Input~Input.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.Input',
-
-	/**
-	* @private
-	*/
-	kind: Control,
-
-	/**
-	* @private
-	*/
-	published:
-		/** @lends module:enyo/Input~Input.prototype */ {
-
-		/**
-		* Value of the [input]{@link module:enyo/Input~Input}. Use this property only to initialize the
-		* value. Call `getValue()` and `setValue()` to manipulate the value at runtime.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		value: '',
-
-		/**
-		* Text to display when the [input]{@link module:enyo/Input~Input} is empty
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		placeholder: '',
-
-		/**
-		* Type of [input]{@link module:enyo/Input~Input}; if not specified, it's treated as `'text'`.
-		* This may be anything specified for the `type` attribute in the HTML
-		* specification, including `'url'`, `'email'`, `'search'`, or `'number'`.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		type: '',
-
-		/**
-		* When `true`, prevents input into the [control]{@link module:enyo/Control~Control}. This maps
-		* to the `disabled` DOM attribute.
-		*
-		* @type {Boolean}
-		* @default false
-		* @public
-		*/
-		disabled: false,
-
-		/**
-		* When `true`, the contents of the [input]{@link module:enyo/Input~Input} will be selected
-		* when the input gains focus.
-		*
-		* @type {Boolean}
-		* @default false
-		* @public
-		*/
-		selectOnFocus: false
-	},
-
-	/**
-	* @private
-	*/
-	events: {
-		onDisabledChange: ''
-	},
-
-	/**
-	* Set to `true` to focus this [control]{@link module:enyo/Control~Control} when it is rendered.
-	*
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	defaultFocus: false,
-
-	/**
-	* @private
-	*/
-	tag: 'input',
-
-	/**
-	* @private
-	*/
-	classes: 'enyo-input',
-
-	/**
-	* @private
-	*/
-	handlers: {
-		onfocus: 'focused',
-		oninput: 'input',
-		onclear: 'clear',
-		ondragstart: 'dragstart'
-	},
-
-	/**
-	* @method
-	* @private
-	*/
-	create: kind.inherit(function (sup) {
-		return function() {
-			if (platform.ie) {
-				this.handlers.onkeyup = 'iekeyup';
-			}
-			if (platform.windowsPhone) {
-				this.handlers.onkeydown = 'iekeydown';
-			}
-			sup.apply(this, arguments);
-			this.placeholderChanged();
-			// prevent overriding a custom attribute with null
-			if (this.type) {
-				this.typeChanged();
-			}
-		};
-	}),
-
-	/**
-	* @method
-	* @private
-	*/
-	rendered: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			dispatcher.makeBubble(this, 'focus', 'blur');
-			this.disabledChanged();
-			if (this.defaultFocus) {
-				this.focus();
-			}
-		};
-	}),
-
-	/**
-	* @private
-	*/
-	typeChanged: function () {
-		this.setAttribute('type', this.type);
-	},
-
-	/**
-	* @private
-	*/
-	placeholderChanged: function () {
-		this.setAttribute('placeholder', this.placeholder);
-		this.valueChanged();
-	},
-
-	/**
-	* @fires module:enyo/Input~Input#onDisabledChange
-	* @private
-	*/
-	disabledChanged: function () {
-		this.setAttribute('disabled', this.disabled);
-		this.bubble('onDisabledChange');
-	},
-
-	/**
-	* @private
-	*/
-	valueChanged: function () {
-		var node = this.hasNode(),
-			attrs = this.attributes;
-		if (node) {
-			if (node.value !== this.value) {
-				node.value = this.value;
-			}
-			// we manually update the cached value so that the next time the
-			// attribute is requested or the control is re-rendered it will
-			// have the correct value - this is because calling setAttribute()
-			// in some cases does not receive an appropriate response from the
-			// browser
-			attrs.value = this.value;
-		} else {
-			this.setAttribute('value', this.value);
-		}
-		this.detectTextDirectionality((this.value || this.value === 0) ? this.value : this.get('placeholder'));
-	},
-
-	/**
-	* @private
-	*/
-	iekeyup: function (sender, e) {
-		var ie = platform.ie, kc = e.keyCode;
-		// input event fails to fire on backspace and delete keys in ie 9
-		if (ie == 9 && (kc == 8 || kc == 46)) {
-			this.bubble('oninput', e);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	iekeydown: function (sender, e) {
-		var wp = platform.windowsPhone, kc = e.keyCode, dt = e.dispatchTarget;
-		// onchange event fails to fire on enter key for Windows Phone 8, so we force blur
-		if (wp <= 8 && kc == 13 && this.tag == 'input' && dt.hasNode()) {
-			dt.node.blur();
-		}
-	},
-
-	/**
-	* @private
-	*/
-	clear: function () {
-		this.setValue('');
-	},
-
-	// note: we disallow dragging of an input to allow text selection on all platforms
-	/**
-	* @private
-	*/
-	dragstart: function () {
-		return this.hasFocus();
-	},
-
-	/**
-	* @private
-	*/
-	focused: function () {
-		if (this.selectOnFocus) {
-			utils.asyncMethod(this, 'selectContents');
-		}
-	},
-
-	/**
-	* @private
-	*/
-	selectContents: function () {
-		var n = this.hasNode();
-
-		if (n && n.setSelectionRange) {
-			n.setSelectionRange(0, n.value.length);
-		} else if (n && n.createTextRange) {
-			var r = n.createTextRange();
-			r.expand('textedit');
-			r.select();
-		}
-	},
-
-	/**
-	* @private
-	*/
-	input: function () {
-		var val = this.getNodeProperty('value');
-		this.setValue(val);
-	},
-
-	// Accessibility
-
-	/**
-	* @default textbox
-	* @type {String}
-	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
-	* @public
-	*/
-	accessibilityRole: 'textbox',
-
-	/**
-	* @private
-	*/
-	ariaObservers: [
-		{path: 'disabled', to: 'aria-disabled'}
-	]
-});
-
-},{'../kind':'enyo/kind','../utils':'enyo/utils','../dispatcher':'enyo/dispatcher','../platform':'enyo/platform','../Control':'enyo/Control'}],'enyo/image':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../resolution':'enyo/resolution','../dispatcher':'enyo/dispatcher','../pathResolver':'enyo/pathResolver','../Control':'enyo/Control'}],'enyo/image':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -25166,7 +25166,99 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./Control':'enyo/Control'}],'enyo/Option':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./Control':'enyo/Control'}],'enyo/GroupItem':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/GroupItem~GroupItem} kind.
+* @module enyo/GroupItem
+*/
+
+var
+	kind = require('./kind');
+var
+	Control = require('./Control');
+
+/**
+* Fires when the [active state]{@link module:enyo/GroupItem~GroupItem#active} has changed.
+*
+* @event module:enyo/GroupItem~GroupItem#onActivate
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* {@link module:enyo/GroupItem~GroupItem} is the base [kind]{@glossary kind} for the
+* [Grouping]{@link module:enyo/Group~Group} API. It manages the
+* [active state]{@link module:enyo/GroupItem~GroupItem#active} of the [component]{@link module:enyo/Component~Component}
+* (or the [inheriting]{@glossary subkind} component). A subkind may call `setActive()` 
+* to set the [active]{@link module:enyo/GroupItem~GroupItem#active} property to the desired state; this
+* will additionally [bubble]{@link module:enyo/Component~Component#bubble} an 
+* [onActivate]{@link module:enyo/GroupItem~GroupItem#onActivate} {@glossary event}, which may
+* be handled as needed by the containing components. This is useful for creating
+* groups of items whose state should be managed collectively.
+*
+* For an example of how this works, see the {@link module:enyo/Group~Group} kind, which enables the
+* creation of radio groups from arbitrary components that	support the Grouping API.
+*
+* @class GroupItem
+* @extends module:enyo/Control~Control
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.GroupItem',
+
+	/**
+	* @private
+	*/
+	kind: Control,
+
+	/**
+	* @private
+	*/
+	published: 
+		/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
+
+		/**
+		* Will be `true` if the item is currently selected.
+		* 
+		* @type {Boolean}
+		* @default false
+		* @public
+		*/
+		active: false
+	},
+	
+	/**
+	* @method
+	* @private
+	*/
+	rendered: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.activeChanged();
+		};
+	}),
+
+	/**
+	* @fires module:enyo/GroupItem~GroupItem#onActivate
+	* @private
+	*/
+	activeChanged: function () {
+		this.bubble('onActivate');
+	}
+});
+
+},{'./kind':'enyo/kind','./Control':'enyo/Control'}],'enyo/Option':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -26292,99 +26384,7 @@ DataRepeater.concat = function (ctor, props) {
 	}
 };
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Control':'enyo/Control','./RepeaterChildSupport':'enyo/RepeaterChildSupport'}],'enyo/GroupItem':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/GroupItem~GroupItem} kind.
-* @module enyo/GroupItem
-*/
-
-var
-	kind = require('./kind');
-var
-	Control = require('./Control');
-
-/**
-* Fires when the [active state]{@link module:enyo/GroupItem~GroupItem#active} has changed.
-*
-* @event module:enyo/GroupItem~GroupItem#onActivate
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* {@link module:enyo/GroupItem~GroupItem} is the base [kind]{@glossary kind} for the
-* [Grouping]{@link module:enyo/Group~Group} API. It manages the
-* [active state]{@link module:enyo/GroupItem~GroupItem#active} of the [component]{@link module:enyo/Component~Component}
-* (or the [inheriting]{@glossary subkind} component). A subkind may call `setActive()` 
-* to set the [active]{@link module:enyo/GroupItem~GroupItem#active} property to the desired state; this
-* will additionally [bubble]{@link module:enyo/Component~Component#bubble} an 
-* [onActivate]{@link module:enyo/GroupItem~GroupItem#onActivate} {@glossary event}, which may
-* be handled as needed by the containing components. This is useful for creating
-* groups of items whose state should be managed collectively.
-*
-* For an example of how this works, see the {@link module:enyo/Group~Group} kind, which enables the
-* creation of radio groups from arbitrary components that	support the Grouping API.
-*
-* @class GroupItem
-* @extends module:enyo/Control~Control
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.GroupItem',
-
-	/**
-	* @private
-	*/
-	kind: Control,
-
-	/**
-	* @private
-	*/
-	published: 
-		/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
-
-		/**
-		* Will be `true` if the item is currently selected.
-		* 
-		* @type {Boolean}
-		* @default false
-		* @public
-		*/
-		active: false
-	},
-	
-	/**
-	* @method
-	* @private
-	*/
-	rendered: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.activeChanged();
-		};
-	}),
-
-	/**
-	* @fires module:enyo/GroupItem~GroupItem#onActivate
-	* @private
-	*/
-	activeChanged: function () {
-		this.bubble('onActivate');
-	}
-});
-
-},{'./kind':'enyo/kind','./Control':'enyo/Control'}],'enyo/Checkbox':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Control':'enyo/Control','./RepeaterChildSupport':'enyo/RepeaterChildSupport'}],'enyo/Checkbox':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -26583,7 +26583,50 @@ module.exports = kind(
 	]
 });
 
-},{'../kind':'enyo/kind','../utils':'enyo/utils','../Input':'enyo/Input'}],'enyo/Select':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../utils':'enyo/utils','../Input':'enyo/Input'}],'enyo/ToolDecorator':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/ToolDecorator~ToolDecorator} kind.
+* @module enyo/ToolDecorator
+*/
+
+
+
+var
+	kind = require('../kind');
+var
+	GroupItem = require('../GroupItem');
+
+/**
+* {@link module:enyo/ToolDecorator~ToolDecorator} lines up [components]{@link module:enyo/Component~Component} in a row,
+* centered vertically.
+*
+* @class ToolDecorator
+* @extends module:enyo/GroupItem~GroupItem
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/ToolDecorator~ToolDecorator.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.ToolDecorator',
+
+	/**
+	* @private
+	*/
+	kind: GroupItem,
+
+	/**
+	* @private
+	*/
+	classes: 'enyo-tool-decorator'
+});
+
+},{'../kind':'enyo/kind','../GroupItem':'enyo/GroupItem'}],'enyo/Select':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -27725,50 +27768,146 @@ module.exports = kind(
 	}
 });
 
-},{'./touch':'enyo/touch','./kind':'enyo/kind','./utils':'enyo/utils','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./ScrollMath':'enyo/ScrollMath','./ScrollStrategy':'enyo/ScrollStrategy','./ScrollThumb':'enyo/ScrollThumb','./dom':'enyo/dom'}],'enyo/ToolDecorator':[function (module,exports,global,require,request){
+},{'./touch':'enyo/touch','./kind':'enyo/kind','./utils':'enyo/utils','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./ScrollMath':'enyo/ScrollMath','./ScrollStrategy':'enyo/ScrollStrategy','./ScrollThumb':'enyo/ScrollThumb','./dom':'enyo/dom'}],'enyo/Button':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
-* Contains the declaration for the {@link module:enyo/ToolDecorator~ToolDecorator} kind.
-* @module enyo/ToolDecorator
+* Contains the declaration for the {@link module:enyo/Button~Button} kind.
+* @module enyo/Button
 */
-
-
 
 var
 	kind = require('../kind');
 var
-	GroupItem = require('../GroupItem');
+	ToolDecorator = require('../ToolDecorator');
 
 /**
-* {@link module:enyo/ToolDecorator~ToolDecorator} lines up [components]{@link module:enyo/Component~Component} in a row,
-* centered vertically.
+* {@link module:enyo/Button~Button} implements an HTML [button]{@glossary button}, with support
+* for grouping using {@link module:enyo/Group~Group}.
 *
-* @class ToolDecorator
-* @extends module:enyo/GroupItem~GroupItem
+* For more information, see the documentation on
+* [Buttons]{@linkplain $dev-guide/building-apps/controls/buttons.html} in the
+* Enyo Developer Guide.
+*
+* @class Button
+* @extends module:enyo/ToolDecorator~ToolDecorator
 * @ui
 * @public
 */
 module.exports = kind(
-	/** @lends module:enyo/ToolDecorator~ToolDecorator.prototype */ {
+	/** @lends module:enyo/Button~Button.prototype */ {
 
 	/**
 	* @private
 	*/
-	name: 'enyo.ToolDecorator',
+	name: 'enyo.Button',
+	
+	/**
+	* @private
+	*/
+	kind: ToolDecorator,
 
 	/**
 	* @private
 	*/
-	kind: GroupItem,
+	tag: 'button',
 
 	/**
 	* @private
 	*/
-	classes: 'enyo-tool-decorator'
+	attributes: {
+		/**
+		 * Set to `'button'`; otherwise, the default value would be `'submit'`, which
+		 * can cause unexpected problems when [controls]{@link module:enyo/Control~Control} are used
+		 * inside of a [form]{@glossary form}.
+		 * 
+		 * @type {String}
+		 * @private
+		 */
+		type: 'button'
+	},
+	
+	/**
+	* @private
+	*/
+	published: 
+		/** @lends module:enyo/Button~Button.prototype */ {
+		
+		/**
+		 * When `true`, the [button]{@glossary button} is shown as disabled and does not 
+		 * generate tap [events]{@glossary event}.
+		 * 
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: false
+	},
+	
+	/**
+	* @method
+	* @private
+	*/
+	create: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.disabledChanged();
+		};
+	}),
+
+	/**
+	* @private
+	*/
+	disabledChanged: function () {
+		this.setAttribute('disabled', this.disabled);
+	},
+
+	/**
+	* @private
+	*/
+	tap: function () {
+		if (this.disabled) {
+			// work around for platforms like Chrome on Android or Opera that send
+			// mouseup to disabled form controls
+			return true;
+		} else {
+			this.setActive(true);
+		}
+	},
+
+	// Accessibility
+
+	/**
+	* @default button
+	* @type {String}
+	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
+	* @public
+	*/
+	accessibilityRole: 'button',
+
+	/**
+	* When `true`, `aria-pressed` will reflect the state of
+	* {@link module:enyo/GroupItem~GroupItem#active}
+	*
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	accessibilityPressed: false,
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{from: 'disabled', to: 'aria-disabled'},
+		{path: ['active', 'accessibilityPressed'], method: function () {
+			this.setAriaAttribute('aria-pressed', this.accessibilityPressed ? String(this.active) : null);
+		}},
+		{from: 'accessibilityRole', to: 'role'}
+	]
 });
 
-},{'../kind':'enyo/kind','../GroupItem':'enyo/GroupItem'}],'enyo/TranslateScrollStrategy':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../ToolDecorator':'enyo/ToolDecorator'}],'enyo/TranslateScrollStrategy':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -28138,146 +28277,7 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./TouchScrollStrategy':'enyo/TouchScrollStrategy','./dom':'enyo/dom'}],'enyo/Button':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Button~Button} kind.
-* @module enyo/Button
-*/
-
-var
-	kind = require('../kind');
-var
-	ToolDecorator = require('../ToolDecorator');
-
-/**
-* {@link module:enyo/Button~Button} implements an HTML [button]{@glossary button}, with support
-* for grouping using {@link module:enyo/Group~Group}.
-*
-* For more information, see the documentation on
-* [Buttons]{@linkplain $dev-guide/building-apps/controls/buttons.html} in the
-* Enyo Developer Guide.
-*
-* @class Button
-* @extends module:enyo/ToolDecorator~ToolDecorator
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Button~Button.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.Button',
-	
-	/**
-	* @private
-	*/
-	kind: ToolDecorator,
-
-	/**
-	* @private
-	*/
-	tag: 'button',
-
-	/**
-	* @private
-	*/
-	attributes: {
-		/**
-		 * Set to `'button'`; otherwise, the default value would be `'submit'`, which
-		 * can cause unexpected problems when [controls]{@link module:enyo/Control~Control} are used
-		 * inside of a [form]{@glossary form}.
-		 * 
-		 * @type {String}
-		 * @private
-		 */
-		type: 'button'
-	},
-	
-	/**
-	* @private
-	*/
-	published: 
-		/** @lends module:enyo/Button~Button.prototype */ {
-		
-		/**
-		 * When `true`, the [button]{@glossary button} is shown as disabled and does not 
-		 * generate tap [events]{@glossary event}.
-		 * 
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		disabled: false
-	},
-	
-	/**
-	* @method
-	* @private
-	*/
-	create: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.disabledChanged();
-		};
-	}),
-
-	/**
-	* @private
-	*/
-	disabledChanged: function () {
-		this.setAttribute('disabled', this.disabled);
-	},
-
-	/**
-	* @private
-	*/
-	tap: function () {
-		if (this.disabled) {
-			// work around for platforms like Chrome on Android or Opera that send
-			// mouseup to disabled form controls
-			return true;
-		} else {
-			this.setActive(true);
-		}
-	},
-
-	// Accessibility
-
-	/**
-	* @default button
-	* @type {String}
-	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
-	* @public
-	*/
-	accessibilityRole: 'button',
-
-	/**
-	* When `true`, `aria-pressed` will reflect the state of
-	* {@link module:enyo/GroupItem~GroupItem#active}
-	*
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	accessibilityPressed: false,
-
-	/**
-	* @private
-	*/
-	ariaObservers: [
-		{from: 'disabled', to: 'aria-disabled'},
-		{path: ['active', 'accessibilityPressed'], method: function () {
-			this.setAriaAttribute('aria-pressed', this.accessibilityPressed ? String(this.active) : null);
-		}},
-		{from: 'accessibilityRole', to: 'role'}
-	]
-});
-
-},{'../kind':'enyo/kind','../ToolDecorator':'enyo/ToolDecorator'}],'enyo/Scroller':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./TouchScrollStrategy':'enyo/TouchScrollStrategy','./dom':'enyo/dom'}],'enyo/Scroller':[function (module,exports,global,require,request){
 require('enyo');
 
 /**

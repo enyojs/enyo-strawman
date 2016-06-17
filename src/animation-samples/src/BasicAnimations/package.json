@@ -1,0 +1,6 @@
+{
+  "main": "BasicAnimations.js",
+  "styles": [
+    "BasicAnimations.css"
+  ]
+}

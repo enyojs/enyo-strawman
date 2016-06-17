@@ -4243,7 +4243,7 @@ module.exports = {
 
     halt: function(actor, pose) {
         var matrix = pose.currentState && pose.currentState.matrix;
-        
+
         pose = transform.Matrix.decompose2D(matrix);
         domCSS = toTransformValue(pose.matrix2D);
         actor.addStyles(domCSS);
@@ -4791,7 +4791,7 @@ function toTransformValue (matrix, ret) {
  * @public
  * @param  {HTMLElement}  style Computed style of a DOM.
  * @param  {String}       key   Property name for which style has to be fetched.
- * @return {Number|HTMLElement} 
+ * @return {Number|HTMLElement}
  */
 function getStyleValue(style, key) {
     return style.getPropertyValue(key) || style[key];
