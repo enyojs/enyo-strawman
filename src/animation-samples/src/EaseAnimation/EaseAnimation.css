@@ -2,10 +2,8 @@
 	font-size: 40px;
 	height: 100%;
 	overflow: hidden;
-	line-height: 500px;
+	line-height: 16;
 	position: relative;
-	text-align: center;
-	text-size: 200px;
 }
 .ease-sample .balloon {
 	bottom: 10%;
@@ -13,8 +11,8 @@
 	font-size: 12px;
 	height: 160px;
 	line-height: 160px;
-	position: absolute;
 	text-align: center;
+    vertical-align: bottom;
 	width: 100px;
 }
 .ease-sample .blue {

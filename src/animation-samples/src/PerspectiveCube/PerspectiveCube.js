@@ -40,27 +40,27 @@ var spincubeFace6 = {
 
 var spincube = [{
     rotate: "0, 90, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 1920
 }, {
     rotate: "90, 90, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 180, 90",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 270, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 1920
 }, {
     rotate: "-90, 270, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }, {
     rotate: "0, 360, 0",
-    ease: Easings.easeInOutQuad,
+    ease: Easings.quadInOut,
     duration: 2040
 }];
 
@@ -101,13 +101,13 @@ module.exports = kind({
 
     startAnimation: function() {
 
-        animate([this.$.face1], spincubeFace1, { autoPlay: true });
-        animate([this.$.face2], spincubeFace2, { autoPlay: true });
-        animate([this.$.face3], spincubeFace3, { autoPlay: true });
-        animate([this.$.face4], spincubeFace4, { autoPlay: true });
-        animate([this.$.face5], spincubeFace5, { autoPlay: true });
-        animate([this.$.face6], spincubeFace6, { autoPlay: true });
-        var cubeSpin = animate([this.$.cubespinner], spincube, { autoPlay: true });
+        animate([this.$.face1], spincubeFace1);
+        animate([this.$.face2], spincubeFace2);
+        animate([this.$.face3], spincubeFace3);
+        animate([this.$.face4], spincubeFace4);
+        animate([this.$.face5], spincubeFace5);
+        animate([this.$.face6], spincubeFace6);
+        var cubeSpin = animate([this.$.cubespinner], spincube);
         // cubeSpin.repeat = true;
     }
 });
