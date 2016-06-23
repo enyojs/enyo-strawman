@@ -77,6 +77,7 @@ var moonstoneSamples = {
 	// ListActionsSample                    : require('../../src/moonstone-samples/lib/ListActionsSample'),
 	MarqueeSample                        : require('../../src/moonstone-samples/lib/MarqueeSample'),
 	NewDataListSample                    : require('../../src/moonstone-samples/lib/NewDataListSample'),
+	NotificationSample                   : require('../../src/moonstone-samples/lib/NotificationSample'),
 	ObjectActionHorizontalTypeSample     : require('../../src/moonstone-samples/lib/ObjectActionHorizontalTypeSample'),
 	ObjectActionVerticalTypeSample       : require('../../src/moonstone-samples/lib/ObjectActionVerticalTypeSample'),
 	OverlaySample                        : require('../../src/moonstone-samples/lib/OverlaySample'),
