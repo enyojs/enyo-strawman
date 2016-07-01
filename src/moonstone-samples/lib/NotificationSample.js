@@ -12,7 +12,7 @@ module.exports = kind({
 	name: 'moon.sample.NotificationSample',
 	classes: 'moon enyo-unselectable enyo-fit moon-notification-sample',
 	components: [
-		{name: 'menu', classes: 'button-container', components: [
+		{classes: 'button-container', components: [
 			{kind: Divider, content: 'Small Notifications'},
 			{classes: 'moon-hspacing moon-vspacing-s', components: [
 				{kind: Button, content: 'Say Hello', ontap: 'showPopup', popup: 'greetingNotification'},
