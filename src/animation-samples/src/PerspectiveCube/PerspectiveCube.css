@@ -1,3 +1,12 @@
+.stage {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    /*top: 120px; left: 120px;*/
+    top: 25%;
+    left: 45%;
+}
+
 .cubespinner {
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;

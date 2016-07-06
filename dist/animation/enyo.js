@@ -91,52 +91,6 @@
 
 module.exports = (global.enyo && global.enyo.options) || {};
 
-}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
-
-
-var PathResolverFactory = module.exports = function() {
-	this.paths = {};
-	this.pathNames = [];
-};
-
-PathResolverFactory.prototype = {
-	addPath: function(inName, inPath) {
-		this.paths[inName] = inPath;
-		this.pathNames.push(inName);
-		this.pathNames.sort(function(a, b) {
-			return b.length - a.length;
-		});
-		return inPath;
-	},
-	addPaths: function(inPaths) {
-		if (inPaths) {
-			for (var n in inPaths) {
-				this.addPath(n, inPaths[n]);
-			}
-		}
-	},
-	includeTrailingSlash: function(inPath) {
-		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
-	},
-	// replace macros of the form $pathname with the mapped value of paths.pathname
-	rewrite: function (inPath) {
-		var working, its = this.includeTrailingSlash, paths = this.paths;
-		var fn = function(macro, name) {
-			working = true;
-			return its(paths[name]) || '';
-		};
-		var result = inPath;
-		do {
-			working = false;
-			for (var i=0; i<this.pathNames.length; i++) {
-				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
-				result = result.replace(regex, fn);
-			}
-		} while (working);
-		return result;
-	}
-};
-
 }],'enyo/easing':[function (module,exports,global,require,request){
 /**
 * Contains set of interpolation functions for animations, similar in function to CSS3 transitions.
@@ -419,6 +373,52 @@ var easing = module.exports = {
 		return 0.5 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2);
 	}
 };
+}],'enyo/PathResolverFactory':[function (module,exports,global,require,request){
+
+
+var PathResolverFactory = module.exports = function() {
+	this.paths = {};
+	this.pathNames = [];
+};
+
+PathResolverFactory.prototype = {
+	addPath: function(inName, inPath) {
+		this.paths[inName] = inPath;
+		this.pathNames.push(inName);
+		this.pathNames.sort(function(a, b) {
+			return b.length - a.length;
+		});
+		return inPath;
+	},
+	addPaths: function(inPaths) {
+		if (inPaths) {
+			for (var n in inPaths) {
+				this.addPath(n, inPaths[n]);
+			}
+		}
+	},
+	includeTrailingSlash: function(inPath) {
+		return (inPath && inPath.slice(-1) !== "/") ? inPath + "/" : inPath;
+	},
+	// replace macros of the form $pathname with the mapped value of paths.pathname
+	rewrite: function (inPath) {
+		var working, its = this.includeTrailingSlash, paths = this.paths;
+		var fn = function(macro, name) {
+			working = true;
+			return its(paths[name]) || '';
+		};
+		var result = inPath;
+		do {
+			working = false;
+			for (var i=0; i<this.pathNames.length; i++) {
+				var regex = new RegExp("\\$(" + this.pathNames[i] + ")(\\/)?", "g");
+				result = result.replace(regex, fn);
+			}
+		} while (working);
+		return result;
+	}
+};
+
 }],'enyo':[function (module,exports,global,require,request){
 'use strict';
 
@@ -4483,7 +4483,12 @@ var fn, state, ease, points, path, oldState, newState, node, matrix, cState = []
 module.exports = {
 
     /**
-     * @private
+     * Indentifies initial pose of an element.
+     * @param  {Object} actor - Element to be animated
+     * @param  {Object} pose - Current behavior in the animation (at a given time)
+     * @param  {Object} pose - Current behavior in the animation (at a given time)
+     * @memberOf module:enyo/tween
+     * @public
      */
     init: function(actor, pose, initial) {
         var k;
@@ -4505,7 +4510,7 @@ module.exports = {
      * @param  {Number} t - Fraction which represents the animation (between 0 to 1)
      * @param  {Number} d - Duration of the current pose
      * @memberOf module:enyo/tween
-     * @private
+     * @public
      */
     step: function(actor, pose, t, d) {
         if (!(actor && pose && pose.animate)) return;
@@ -4574,9 +4579,16 @@ module.exports = {
         actor.addStyles(domCSS);
     },
 
+    /**
+     * This causes the stopped animation to be removed from GPU layer.
+     * @param  {Object} actor - Element to be animated
+     * @param  {Object} pose - Current behavior in the animation (at a given time)
+     * @memberOf module:enyo/tween
+     * @public
+     */
     halt: function(actor, pose) {
         var matrix = pose.currentState && pose.currentState.matrix;
-
+        
         pose = transform.Matrix.decompose2D(matrix);
         domCSS = toTransformValue(pose.matrix2D);
         actor.addStyles(domCSS);
@@ -4586,8 +4598,8 @@ module.exports = {
      * Overridden function for applying the default ease.
      * @param  {Number} t - Fraction which represents the animation (between 0 to 1)
      * @return {Number} t
-     * @memberOf module:enyo/AnimationSupport/Tween
-     * @private
+     * @memberOf module:enyo/tween
+     * @public
      * @override
      */
     ease: function(t) {
@@ -4601,8 +4613,8 @@ module.exports = {
      * @param  {Number} t - Fraction which represents the animation (between 0 to 1)
      * @param  {Number[]} vR - Resultant vector
      * @return {Number[]} vR
-     * @memberOf module:enyo/AnimationSupport/Tween
-     * @private
+     * @memberOf module:enyo/tween
+     * @public
      */
     lerp: function(vA, vB, t, vR) {
         if (!vA) return;
@@ -4622,8 +4634,8 @@ module.exports = {
      * @param  {Number} t - Fraction which represents the animation (between 0 to 1)
      * @param  {Number[]} qR - Resultant quaternion
      * @return {Number[]} qR
-     * @memberOf module:enyo/AnimationSupport/Tween
-     * @private
+     * @memberOf module:enyo/tween
+     * @public
      */
     slerp: function(qA, qB, t, qR) {
         if (!qA) return;
@@ -4654,7 +4666,8 @@ module.exports = {
      * @param  {Number[]} points - knot and control points
      * @param  {Number[]} vR - Resulting points
      * @return {Number[]} vR
-     * @memberOf module:enyo/AnimationSupport/Tween
+     * @memberOf module:enyo/tween
+     * @public
      */
     bezier: function(t, points, vR) {
         if (!points) return;
@@ -4688,7 +4701,8 @@ module.exports = {
      * @param  {Number[]} endPoint - End point of the curve
      * @param  {Number[]} points - control points
      * @return {Number[]} points
-     * @memberOf module:enyo/AnimationSupport/Tween
+     * @memberOf module:enyo/tween
+     * @public
      */
     bezierPoints: function(easeObj, startPoint, endPoint, points) {
         if (!easeObj) return;
@@ -4732,7 +4746,8 @@ module.exports = {
      * @param  {Number[]} path - Array of  points
      * @param  {Number[]} vR Resulatant Array
      * @return {Number[]} vR
-     * @memberOf module:enyo/AnimationSupport/Tween
+     * @memberOf module:enyo/tween
+     * @public
      */
     traversePath: function(t, path, vR) {
         if (!path) return;
@@ -4761,7 +4776,8 @@ module.exports = {
      * @param  {Number[]} endPoint - Final Destination point
      * @param  {Number[]} splinePoints - spline control points
      * @return {Number[]} splinePoints
-     * @memberOf module:enyo/AnimationSupport/Tween
+     * @memberOf module:enyo/tween
+     * @public
      */
     bezierSPoints: function(ease, startQuat, endQuat, endPoint, splinePoints) {
         if (!ease) return;
@@ -4812,7 +4828,8 @@ module.exports = {
      * @param  {Number[]} points - knot and control points
      * @param  {Number[]} vR - Resulting points
      * @return {Number[]} vR
-     * @memberOf module:enyo/AnimationSupport/Tween
+     * @memberOf module:enyo/tween
+     * @public
      */
     bezierSpline: function(t, points, vR) {
         if (!points) return;
@@ -4840,39 +4857,12 @@ module.exports = {
     },
 
     /**
-     * This function returns the coefficents based on the order and the current position
-     * @private
-     * @param  {number} n - order
-     * @param  {number} k - current position
-     * @return {object}   - coefficients
-     */
-    getCoeff: function(n, k) {
-        n = parseInt(n, 10);
-        k = parseInt(k, 10);
-        // Credits
-        // https://math.stackexchange.com/questions/202554/how-do-i-compute-binomial-coefficients-efficiently#answer-927064
-        if (isNaN(n) || isNaN(k))
-            return void 0;
-        if ((n < 0) || (k < 0))
-            return void 0;
-        if (k > n)
-            return void 0;
-        if (k === 0)
-            return 1;
-        if (k === n)
-            return 1;
-        if (k > n / 2)
-            return this.getCoeff(n, n - k);
-
-        return n * this.getCoeff(n - 1, k - 1) / k;
-    },
-
-    /**
      * Function to get the bezier coeffients based on the time and order
-     * @public
      * @param  {number} t - time
      * @param  {number} n - order
      * @return {object}   - bezier coefficients
+     * @memberOf module:enyo/tween
+     * @public
      */
     getBezierValues: function(t, n) {
         t = parseFloat(t, 10),
@@ -4894,7 +4884,7 @@ module.exports = {
         // Binomial theorem to expand (x+y)^n
         //
         for (var k = 0; k <= n; k++) {
-            c = this.getCoeff(n, k) * Math.pow(x, (n - k)) * Math.pow(y, k);
+            c = getCoeff(n, k) * Math.pow(x, (n - k)) * Math.pow(y, k);
             values.push(c);
         }
 
@@ -4903,17 +4893,47 @@ module.exports = {
 };
 
 /**
+ * This function returns the coefficents based on the order and the current position
+ * @param  {number} n - order
+ * @param  {number} k - current position
+ * @return {object}   - coefficients
+ * @private
+ */
+function getCoeff (n, k) {
+    n = parseInt(n, 10);
+    k = parseInt(k, 10);
+    // Credits
+    // https://math.stackexchange.com/questions/202554/how-do-i-compute-binomial-coefficients-efficiently#answer-927064
+    if (isNaN(n) || isNaN(k))
+        return void 0;
+    if ((n < 0) || (k < 0))
+        return void 0;
+    if (k > n)
+        return void 0;
+    if (k === 0)
+        return 1;
+    if (k === n)
+        return 1;
+    if (k > n / 2)
+        return getCoeff(n, n - k);
+
+    return n * getCoeff(n - 1, k - 1) / k;
+}
+
+/**
  * Get DOM node animation properties.
- * @public
  * @param  {HTMLElement} node    DOM node
  * @param  {Object}      props   Properties to fetch from DOM.
  * @param  {Object}      initial Default properties to be applied.
  * @return {Object}              Object with various animation properties.
+ * @private
  */
 function getAnimatedProperty(node, props, initial) {
     if (!node) return;
 
-    var eP = {},
+    var 
+        diff,
+        eP = {},
         sP = initial ? utils.mixin({}, initial) : {},
         tP = {},
         dP = {},
@@ -4927,7 +4947,15 @@ function getAnimatedProperty(node, props, initial) {
             v = v || getStyleValue(s || dom.getComputedStyle(node), k);
             iP[k] = v;
             sP[k] = formatCSSValues(v, k);
-            eP[k] = formatCSSValues(props[k], k, sP[k] ? sP[k].length : sP[k]);
+            eP[k] = formatCSSValues(props[k], k);
+            if (sP[k].length) {
+                diff = sP[k].length - eP[k].length;
+                if(diff > 0) {
+                    eP[k] = eP[k].concat(Array(diff).fill(0));
+                } else {
+                    sP[k] = sP[k].concat(Array(-1 * diff).fill(0));
+                }
+            }
         } else {
             v = formatTransformValues(props[k], k);
             if (k.match(/rotate/)) {
@@ -4973,6 +5001,9 @@ function getAnimatedProperty(node, props, initial) {
     };
 }
 
+/**
+* @private
+*/
 function merge (ar1, ar2) {
     ar1.map(function(num, id) {
         return num + ar2[id];
@@ -4983,14 +5014,12 @@ function merge (ar1, ar2) {
 
 /**
  * Converts comma separated values to array.
- * @public
- * @param  {String} val Value of required animation in any property.
- * @param  {Number} length [description]
- * @param  {[type]} prop [description]
+ * @private
+ * @param  {String} val  Value of required animation in any property.
+ * @param  {String} prop Property name of which value has been provided.
  * @return {Number[]}     Create array from val.
  */
-function formatCSSValues(val, prop, length) {
-    var res;
+function formatCSSValues(val, prop) {
     if (typeof val === 'function') {
         return val;
     }
@@ -5006,53 +5035,41 @@ function formatCSSValues(val, prop, length) {
             val = val.split('rgb(')[1].replace(')',',').concat(val.split('rgb(')[0]).replace(/, $/,'');
         }
     }
-    res = stringToMatrix(val);
-    return length ? res.concat(Array(length - res.length).fill(0)): res;
+    return stringToMatrix(val);
 }
 
+/**
+* @private
+*/
 function formatTransformValues(val, prop) {
-    var res;
-    switch (prop) {
-        case 'translateX':
-        case 'rotateX':
-        case 'skewX':
-            res = [parseFloat(val, 10), 0, 0];
-            break;
-        case 'translateY':
-        case 'rotateY':
-        case 'skewY':
-            res = [0, parseFloat(val, 10), 0];
-            break;
-        case 'translateZ':
-        case 'rotateZ':
-            res = [0, 0, parseFloat(val, 10)];
-            break;
-        case 'scaleX':
-            res = [parseFloat(val, 10), 1, 1];
-            break;
-        case 'scaleY':
-            res = [1, parseFloat(val, 10), 1];
-            break;
-        case 'scaleZ':
-            res = [1, 1, parseFloat(val, 10)];
-            break;
-        case 'matrix':
-            res = transform.Matrix.identity();
-            val = stringToMatrix(val.replace(/^\w*\(/, '').replace(')', ''));
-            if (val.length <= 6) {
-                res[0] = val[0];
-                res[1] = val[1];
-                res[4] = val[2];
-                res[5] = val[3];
-                res[12] = val[4];
-                res[13] = val[5];
-            }
-            if (val.length == 16) {
-                res = val;
-            }
-            break;
-        default:
-            res = stringToMatrix(val);
+    var 
+        res,
+        X, Y, Z,
+        last = prop.match(/[XYZ]$/),
+        defalt = prop.match(/scale/) ? 1 : 0;
+
+    if (prop === 'matrix') {
+        res = transform.Matrix.identity();
+        val = stringToMatrix(val.replace(/^\w*\(/, '').replace(')', ''));
+        if (val.length <= 6) {
+            res[0] = val[0];
+            res[1] = val[1];
+            res[4] = val[2];
+            res[5] = val[3];
+            res[12] = val[4];
+            res[13] = val[5];
+        }
+        if (val.length == 16) {
+            res = val;
+        }
+    } else if (last) {
+        val = parseFloat(val, 10);
+        X = (last[0] === 'X') ? val : defalt;
+        Y = (last[0] === 'Y') ? val : defalt;
+        Z = (last[0] === 'Z') ? val : defalt;
+        res = [X, Y, Z];
+    } else {
+        res = stringToMatrix(val);
     }
     return res;
 }
@@ -5067,6 +5084,9 @@ function isTransform(transform) {
     return TRANSFORM[transform];
 }
 
+/**
+* @private
+*/
 function stringToMatrix(val) {
     if (!val || val === "auto" || val === 'none') {
         return 0;
@@ -5076,6 +5096,9 @@ function stringToMatrix(val) {
     });
 }
 
+/**
+* @private
+*/
 function toPropertyValue(prop, val, ret) {
     if (!val) return;
     ret = ret || {};
@@ -5087,7 +5110,9 @@ function toPropertyValue(prop, val, ret) {
     } else if (INT_UNIT[prop]) {
         val = parseInt(val[0], 10);
     } else if (BORDER[prop]) {
-        val = val[0] + '%';
+        val = val.map(function(v) {
+            return v + '%';
+        }).join(' ');
     } else if (OPACITY[prop]) {
         val = val[0].toFixed(6);
         val = (val <= 0) ? '0.000001' : val;
@@ -5121,10 +5146,10 @@ function toTransformValue (matrix, ret) {
 
 /**
  * Gets a style property applied from the DOM element.
- * @public
+ * @private
  * @param  {HTMLElement}  style Computed style of a DOM.
  * @param  {String}       key   Property name for which style has to be fetched.
- * @return {Number|HTMLElement}
+ * @return {Number|HTMLElement} 
  */
 function getStyleValue(style, key) {
     return style.getPropertyValue(key) || style[key];
@@ -5185,7 +5210,270 @@ var
         scaleZ: 1,
         perspective: 1
     };
-},{'./dom':'enyo/dom','./utils':'enyo/utils','./transform':'enyo/transform'}],'enyo/HTMLStringDelegate':[function (module,exports,global,require,request){
+},{'./dom':'enyo/dom','./utils':'enyo/utils','./transform':'enyo/transform'}],'enyo/resolution':[function (module,exports,global,require,request){
+require('enyo');
+
+var
+	Dom = require('./dom');
+
+var _baseScreenType = 'standard',
+	_riRatio,
+	_screenType,
+	_screenTypes = [ {name: 'standard', pxPerRem: 16, width: global.innerWidth,  height: global.innerHeight, aspectRatioName: 'standard'} ],	// Assign one sane value in case defineScreenTypes is never run.
+	_screenTypeObject,
+	_oldScreenType;
+
+var getScreenTypeObject = function (type) {
+	type = type || _screenType;
+	if (_screenTypeObject && _screenTypeObject.name == type) {
+		return _screenTypeObject;
+	}
+	return _screenTypes.filter(function (elem) {
+		return (type == elem.name);
+	})[0];
+};
+
+/**
+* Resolution independence methods
+* @module enyo/resolution
+*/
+var ri = module.exports = {
+	/**
+	* Sets up screen resolution scaling capabilities by defining an array of all the screens
+	* being used. These should be listed in order from smallest to largest, according to
+	* width.
+	*
+	* The `name`, `pxPerRem`, `width`, and `aspectRatioName` properties are required for
+	* each screen type in the array. Setting `base: true` on a screen type marks it as the
+	* default resolution, upon which everything else will be based.
+	*
+	* Executing this method also initializes the rest of the resolution-independence code.
+	*
+	* ```
+	* var resolution = require('enyo/resolution');
+	*
+	* resolution.defineScreenTypes([
+	* 	{name: 'vga',     pxPerRem: 8,  width: 640,  height: 480,  aspectRatioName: 'standard'},
+	* 	{name: 'xga',     pxPerRem: 16, width: 1024, height: 768,  aspectRatioName: 'standard'},
+	* 	{name: 'hd',      pxPerRem: 16, width: 1280, height: 720,  aspectRatioName: 'hdtv'},
+	* 	{name: 'fhd',     pxPerRem: 24, width: 1920, height: 1080, aspectRatioName: 'hdtv', base: true},
+	* 	{name: 'uw-uxga', pxPerRem: 24, width: 2560, height: 1080, aspectRatioName: 'cinema'},
+	* 	{name: 'uhd',     pxPerRem: 48, width: 3840, height: 2160, aspectRatioName: 'hdtv'}
+	* ]);
+	* ```
+	*
+	* @param {Array} types - An array of objects containing screen configuration data, as in the
+	* preceding example.
+	* @public
+	*/
+	defineScreenTypes: function (types) {
+		_screenTypes = types;
+		for (var i = 0; i < _screenTypes.length; i++) {
+			if (_screenTypes[i]['base']) _baseScreenType = _screenTypes[i].name;
+		}
+		ri.init();
+	},
+
+	/**
+	* Fetches the name of the screen type that best matches the current screen size. The best
+	* match is defined as the screen type that is the closest to the screen resolution without
+	* going over. ("The Price is Right" style.)
+	*
+	* @param {Object} [rez] - Optional measurement scheme. Must include `height` and `width` properties.
+	* @returns {String} Screen type (e.g., `'fhd'`, `'uhd'`, etc.)
+	* @public
+	*/
+	getScreenType: function (rez) {
+		rez = rez || {
+			height: global.innerHeight,
+			width: global.innerWidth
+		};
+		var i,
+			types = _screenTypes,
+			bestMatch = types[types.length - 1].name;
+
+		// loop thorugh resolutions
+		for (i = types.length - 1; i >= 0; i--) {
+			// find the one that matches our current size or is smaller. default to the first.
+			if (rez.width <= types[i].width) {
+				bestMatch = types[i].name;
+			}
+		}
+		// return the name of the resolution if we find one.
+		return bestMatch;
+	},
+
+	/**
+	* @private
+	*/
+	updateScreenBodyClasses: function (type) {
+		type = type || _screenType;
+		if (_oldScreenType) {
+			Dom.removeClass(document.body, 'enyo-res-' + _oldScreenType.toLowerCase());
+			var oldScrObj = getScreenTypeObject(_oldScreenType);
+			if (oldScrObj && oldScrObj.aspectRatioName) {
+				Dom.removeClass(document.body, 'enyo-aspect-ratio-' + oldScrObj.aspectRatioName.toLowerCase());
+			}
+		}
+		if (type) {
+			Dom.addBodyClass('enyo-res-' + type.toLowerCase());
+			var scrObj = getScreenTypeObject(type);
+			if (scrObj.aspectRatioName) {
+				Dom.addBodyClass('enyo-aspect-ratio-' + scrObj.aspectRatioName.toLowerCase());
+			}
+			return type;
+		}
+	},
+
+	/**
+	* @private
+	*/
+	getRiRatio: function (type) {
+		type = type || _screenType;
+		if (type) {
+			var ratio = this.getUnitToPixelFactors(type) / this.getUnitToPixelFactors(_baseScreenType);
+			if (type == _screenType) {
+				// cache this if it's for our current screen type.
+				_riRatio = ratio;
+			}
+			return ratio;
+		}
+		return 1;
+	},
+
+	/**
+	* @private
+	*/
+	getUnitToPixelFactors: function (type) {
+		type = type || _screenType;
+		if (type) {
+			return getScreenTypeObject(type).pxPerRem;
+		}
+		return 1;
+	},
+
+	/**
+	* Calculates the aspect ratio of the specified screen type. If no screen type is provided,
+	* the current screen type is used.
+	*
+	* @param {String} type - Screen type whose aspect ratio will be calculated. If no screen
+	* type is provided, the current screen type is used.
+	* @returns {Number} The calculated screen ratio (e.g., `1.333`, `1.777`, `2.333`, etc.)
+	* @public
+	*/
+	getAspectRatio: function (type) {
+		var scrObj = getScreenTypeObject(type);
+		if (scrObj.width && scrObj.height) {
+			return (scrObj.width / scrObj.height);
+		}
+		return 1;
+	},
+
+	/**
+	* Returns the name of the aspect ratio for a specified screen type, or for the default
+	* screen type if none is provided.
+	*
+	* @param {String} type - Screen type whose aspect ratio name will be returned. If no
+	* screen type is provided, the current screen type will be used.
+	* @returns {String} The name of the screen type's aspect ratio
+	* @public
+	*/
+	getAspectRatioName: function (type) {
+		var scrObj = getScreenTypeObject(type);
+		 return scrObj.aspectRatioName || 'standard';
+	},
+
+	/**
+	* Takes a provided pixel value and performs a scaling operation based on the current
+	* screen type.
+	*
+	* @param {Number} px - The quantity of standard-resolution pixels to scale to the
+	* current screen resolution.
+	* @returns {Number} The scaled value based on the current screen scaling factor
+	* @public
+	*/
+	scale: function (px) {
+		return (_riRatio || this.getRiRatio()) * px;
+	},
+
+	/**
+	* The default configurable [options]{@link module:enyo/resolution.selectSrc#options}.
+	*
+	* @typedef {Object} module:enyo/resolution.selectSrcSrc
+	* @property {String} hd - HD / 720p Resolution image asset source URI/URL
+	* @property {String} fhd - FHD / 1080p Resolution image asset source URI/URL
+	* @property {String} uhd - UHD / 4K Resolution image asset source URI/URL
+	*/
+
+	/**
+	* Selects the ideal image asset from a set of assets, based on various screen
+	* resolutions: HD (720p), FHD (1080p), UHD (4k). When a `src` argument is
+	* provided, `selectSrc()` will choose the best image with respect to the current
+	* screen resolution. `src` may be either the traditional string, which will pass
+	* straight through, or a hash/object of screen types and their asset sources
+	* (keys:screen and values:src). The image sources will be used when the screen
+	* resolution is less than or equal to the provided screen types.
+	*
+	* ```
+	* // Take advantage of the multi-res mode
+	* var
+	* 	kind = require('enyo/kind'),
+	* 	Image = require('enyo/Image');
+	*
+	* {kind: Image, src: {
+	* 	'hd': 'http://lorempixel.com/64/64/city/1/',
+	* 	'fhd': 'http://lorempixel.com/128/128/city/1/',
+	* 	'uhd': 'http://lorempixel.com/256/256/city/1/'
+	* }, alt: 'Multi-res'},
+	*
+	* // Standard string `src`
+	* {kind: Image, src: http://lorempixel.com/128/128/city/1/', alt: 'Large'},
+	* ```
+	*
+	* @param {(String|module:enyo/resolution~selectSrcSrc)} src - A string containing
+	* a single image source or a key/value hash/object containing keys representing screen
+	* types (`'hd'`, `'fhd'`, `'uhd'`, etc.) and values containing the asset source for
+	* that target screen resolution.
+	* @returns {String} The chosen source, given the string or hash provided
+	* @public
+	*/
+	selectSrc: function (src) {
+		if (typeof src != 'string' && src) {
+			var i, t,
+				newSrc = src.fhd || src.uhd || src.hd,
+				types = _screenTypes;
+
+			// loop through resolutions
+			for (i = types.length - 1; i >= 0; i--) {
+				t = types[i].name;
+				if (_screenType == t && src[t]) newSrc = src[t];
+			}
+
+			src = newSrc;
+		}
+		return src;
+	},
+
+	/**
+	* This will need to be re-run any time the screen size changes, so all the values can be
+	* re-cached.
+	*
+	* @public
+	*/
+	// Later we can wire this up to a screen resize event so it doesn't need to be called manually.
+	init: function () {
+		_oldScreenType = _screenType;
+		_screenType = this.getScreenType();
+		_screenTypeObject = getScreenTypeObject();
+		this.updateScreenBodyClasses();
+		Dom.unitToPixelFactors.rem = this.getUnitToPixelFactors();
+		_riRatio = this.getRiRatio();
+	}
+};
+
+ri.init();
+
+},{'./dom':'enyo/dom'}],'enyo/HTMLStringDelegate':[function (module,exports,global,require,request){
 require('enyo');
 
 var
@@ -5455,269 +5743,6 @@ module.exports = {
 		}
 	}
 };
-
-},{'./dom':'enyo/dom'}],'enyo/resolution':[function (module,exports,global,require,request){
-require('enyo');
-
-var
-	Dom = require('./dom');
-
-var _baseScreenType = 'standard',
-	_riRatio,
-	_screenType,
-	_screenTypes = [ {name: 'standard', pxPerRem: 16, width: global.innerWidth,  height: global.innerHeight, aspectRatioName: 'standard'} ],	// Assign one sane value in case defineScreenTypes is never run.
-	_screenTypeObject,
-	_oldScreenType;
-
-var getScreenTypeObject = function (type) {
-	type = type || _screenType;
-	if (_screenTypeObject && _screenTypeObject.name == type) {
-		return _screenTypeObject;
-	}
-	return _screenTypes.filter(function (elem) {
-		return (type == elem.name);
-	})[0];
-};
-
-/**
-* Resolution independence methods
-* @module enyo/resolution
-*/
-var ri = module.exports = {
-	/**
-	* Sets up screen resolution scaling capabilities by defining an array of all the screens
-	* being used. These should be listed in order from smallest to largest, according to
-	* width.
-	*
-	* The `name`, `pxPerRem`, `width`, and `aspectRatioName` properties are required for
-	* each screen type in the array. Setting `base: true` on a screen type marks it as the
-	* default resolution, upon which everything else will be based.
-	*
-	* Executing this method also initializes the rest of the resolution-independence code.
-	*
-	* ```
-	* var resolution = require('enyo/resolution');
-	*
-	* resolution.defineScreenTypes([
-	* 	{name: 'vga',     pxPerRem: 8,  width: 640,  height: 480,  aspectRatioName: 'standard'},
-	* 	{name: 'xga',     pxPerRem: 16, width: 1024, height: 768,  aspectRatioName: 'standard'},
-	* 	{name: 'hd',      pxPerRem: 16, width: 1280, height: 720,  aspectRatioName: 'hdtv'},
-	* 	{name: 'fhd',     pxPerRem: 24, width: 1920, height: 1080, aspectRatioName: 'hdtv', base: true},
-	* 	{name: 'uw-uxga', pxPerRem: 24, width: 2560, height: 1080, aspectRatioName: 'cinema'},
-	* 	{name: 'uhd',     pxPerRem: 48, width: 3840, height: 2160, aspectRatioName: 'hdtv'}
-	* ]);
-	* ```
-	*
-	* @param {Array} types - An array of objects containing screen configuration data, as in the
-	* preceding example.
-	* @public
-	*/
-	defineScreenTypes: function (types) {
-		_screenTypes = types;
-		for (var i = 0; i < _screenTypes.length; i++) {
-			if (_screenTypes[i]['base']) _baseScreenType = _screenTypes[i].name;
-		}
-		ri.init();
-	},
-
-	/**
-	* Fetches the name of the screen type that best matches the current screen size. The best
-	* match is defined as the screen type that is the closest to the screen resolution without
-	* going over. ("The Price is Right" style.)
-	*
-	* @param {Object} [rez] - Optional measurement scheme. Must include `height` and `width` properties.
-	* @returns {String} Screen type (e.g., `'fhd'`, `'uhd'`, etc.)
-	* @public
-	*/
-	getScreenType: function (rez) {
-		rez = rez || {
-			height: global.innerHeight,
-			width: global.innerWidth
-		};
-		var i,
-			types = _screenTypes,
-			bestMatch = types[types.length - 1].name;
-
-		// loop thorugh resolutions
-		for (i = types.length - 1; i >= 0; i--) {
-			// find the one that matches our current size or is smaller. default to the first.
-			if (rez.width <= types[i].width) {
-				bestMatch = types[i].name;
-			}
-		}
-		// return the name of the resolution if we find one.
-		return bestMatch;
-	},
-
-	/**
-	* @private
-	*/
-	updateScreenBodyClasses: function (type) {
-		type = type || _screenType;
-		if (_oldScreenType) {
-			Dom.removeClass(document.body, 'enyo-res-' + _oldScreenType.toLowerCase());
-			var oldScrObj = getScreenTypeObject(_oldScreenType);
-			if (oldScrObj && oldScrObj.aspectRatioName) {
-				Dom.removeClass(document.body, 'enyo-aspect-ratio-' + oldScrObj.aspectRatioName.toLowerCase());
-			}
-		}
-		if (type) {
-			Dom.addBodyClass('enyo-res-' + type.toLowerCase());
-			var scrObj = getScreenTypeObject(type);
-			if (scrObj.aspectRatioName) {
-				Dom.addBodyClass('enyo-aspect-ratio-' + scrObj.aspectRatioName.toLowerCase());
-			}
-			return type;
-		}
-	},
-
-	/**
-	* @private
-	*/
-	getRiRatio: function (type) {
-		type = type || _screenType;
-		if (type) {
-			var ratio = this.getUnitToPixelFactors(type) / this.getUnitToPixelFactors(_baseScreenType);
-			if (type == _screenType) {
-				// cache this if it's for our current screen type.
-				_riRatio = ratio;
-			}
-			return ratio;
-		}
-		return 1;
-	},
-
-	/**
-	* @private
-	*/
-	getUnitToPixelFactors: function (type) {
-		type = type || _screenType;
-		if (type) {
-			return getScreenTypeObject(type).pxPerRem;
-		}
-		return 1;
-	},
-
-	/**
-	* Calculates the aspect ratio of the specified screen type. If no screen type is provided,
-	* the current screen type is used.
-	*
-	* @param {String} type - Screen type whose aspect ratio will be calculated. If no screen
-	* type is provided, the current screen type is used.
-	* @returns {Number} The calculated screen ratio (e.g., `1.333`, `1.777`, `2.333`, etc.)
-	* @public
-	*/
-	getAspectRatio: function (type) {
-		var scrObj = getScreenTypeObject(type);
-		if (scrObj.width && scrObj.height) {
-			return (scrObj.width / scrObj.height);
-		}
-		return 1;
-	},
-
-	/**
-	* Returns the name of the aspect ratio for a specified screen type, or for the default
-	* screen type if none is provided.
-	*
-	* @param {String} type - Screen type whose aspect ratio name will be returned. If no
-	* screen type is provided, the current screen type will be used.
-	* @returns {String} The name of the screen type's aspect ratio
-	* @public
-	*/
-	getAspectRatioName: function (type) {
-		var scrObj = getScreenTypeObject(type);
-		 return scrObj.aspectRatioName || 'standard';
-	},
-
-	/**
-	* Takes a provided pixel value and performs a scaling operation based on the current
-	* screen type.
-	*
-	* @param {Number} px - The quantity of standard-resolution pixels to scale to the
-	* current screen resolution.
-	* @returns {Number} The scaled value based on the current screen scaling factor
-	* @public
-	*/
-	scale: function (px) {
-		return (_riRatio || this.getRiRatio()) * px;
-	},
-
-	/**
-	* The default configurable [options]{@link module:enyo/resolution.selectSrc#options}.
-	*
-	* @typedef {Object} module:enyo/resolution.selectSrcSrc
-	* @property {String} hd - HD / 720p Resolution image asset source URI/URL
-	* @property {String} fhd - FHD / 1080p Resolution image asset source URI/URL
-	* @property {String} uhd - UHD / 4K Resolution image asset source URI/URL
-	*/
-
-	/**
-	* Selects the ideal image asset from a set of assets, based on various screen
-	* resolutions: HD (720p), FHD (1080p), UHD (4k). When a `src` argument is
-	* provided, `selectSrc()` will choose the best image with respect to the current
-	* screen resolution. `src` may be either the traditional string, which will pass
-	* straight through, or a hash/object of screen types and their asset sources
-	* (keys:screen and values:src). The image sources will be used when the screen
-	* resolution is less than or equal to the provided screen types.
-	*
-	* ```
-	* // Take advantage of the multi-res mode
-	* var
-	* 	kind = require('enyo/kind'),
-	* 	Image = require('enyo/Image');
-	*
-	* {kind: Image, src: {
-	* 	'hd': 'http://lorempixel.com/64/64/city/1/',
-	* 	'fhd': 'http://lorempixel.com/128/128/city/1/',
-	* 	'uhd': 'http://lorempixel.com/256/256/city/1/'
-	* }, alt: 'Multi-res'},
-	*
-	* // Standard string `src`
-	* {kind: Image, src: http://lorempixel.com/128/128/city/1/', alt: 'Large'},
-	* ```
-	*
-	* @param {(String|module:enyo/resolution~selectSrcSrc)} src - A string containing
-	* a single image source or a key/value hash/object containing keys representing screen
-	* types (`'hd'`, `'fhd'`, `'uhd'`, etc.) and values containing the asset source for
-	* that target screen resolution.
-	* @returns {String} The chosen source, given the string or hash provided
-	* @public
-	*/
-	selectSrc: function (src) {
-		if (typeof src != 'string' && src) {
-			var i, t,
-				newSrc = src.fhd || src.uhd || src.hd,
-				types = _screenTypes;
-
-			// loop through resolutions
-			for (i = types.length - 1; i >= 0; i--) {
-				t = types[i].name;
-				if (_screenType == t && src[t]) newSrc = src[t];
-			}
-
-			src = newSrc;
-		}
-		return src;
-	},
-
-	/**
-	* This will need to be re-run any time the screen size changes, so all the values can be
-	* re-cached.
-	*
-	* @public
-	*/
-	// Later we can wire this up to a screen resize event so it doesn't need to be called manually.
-	init: function () {
-		_oldScreenType = _screenType;
-		_screenType = this.getScreenType();
-		_screenTypeObject = getScreenTypeObject();
-		this.updateScreenBodyClasses();
-		Dom.unitToPixelFactors.rem = this.getUnitToPixelFactors();
-		_riRatio = this.getRiRatio();
-	}
-};
-
-ri.init();
 
 },{'./dom':'enyo/dom'}],'enyo/gesture/util':[function (module,exports,global,require,request){
 var
@@ -7255,7 +7280,7 @@ function update(pose, actor, since, dur) {
 	if (since < 0) since = 0;
 	if (since <= dur && dur !== 0) {
 		t = since / dur;
-		tween.step(actor, pose, t > 0.98 ? 1 : t, dur);
+		tween.step(actor, pose, t, dur);
 	} else {
 		tween.step(actor, pose, 1, dur);
 	}
@@ -7941,96 +7966,7 @@ var SceneSupport = {
 
 module.exports = SceneSupport;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/Layout':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
-* @module enyo/Layout
-*/
-
-var
-	kind = require('./kind');
-
-/**
-* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
-* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
-* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
-* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
-* 
-* Derived kinds will usually provide their own
-* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
-* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
-* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
-* during control rendering, while `reflow()` is called when the associated
-* control is resized.
-*
-* @class Layout
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Layout~Layout.prototype */ {
-
-	name: 'enyo.Layout',
-
-	/**
-	* @private
-	*/
-	kind: null,
-
-	/** 
-	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
-	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
-	*
-	* @type {String}
-	* @default ''
-	* @public
-	*/
-	layoutClass: '',
-	
-	/**
-	* @private
-	*/
-	constructor: function (container) {
-		this.container = container;
-		if (container) {
-			container.addClass(this.layoutClass);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	destroy: function () {
-		if (this.container) {
-			this.container.removeClass(this.layoutClass);
-		}
-	},
-	
-	/**
-	* Called during static property layout (i.e., during rendering).
-	*
-	* @public
-	*/
-	flow: function () {
-	},
-
-	/** 
-	* Called during dynamic measuring layout (i.e., during a resize).
-	*
-	* May short-circuit and return `true` if the layout needs to be
-	* redone when the associated Control is next shown. This is useful
-	* for cases where the Control itself has `showing` set to `true`
-	* but an ancestor is hidden, and the layout is therefore unable to
-	* get accurate measurements of the Control or its children.
-	*
-	* @public
-	*/
-	reflow: function () {
-	}
-});
-
-},{'./kind':'enyo/kind'}],'enyo/Control/floatingLayer':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./scene':'enyo/scene'}],'enyo/Control/floatingLayer':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/Control/floatingLayer~FloatingLayer} singleton instance.
 * @module enyo/Control/floatingLayer
@@ -9030,7 +8966,96 @@ kind.extendMethods(p, {
 
 module.exports = p;
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./VerticalDelegate':'enyo/VerticalDelegate'}],'enyo/Layout':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Layout~Layout} kind.
+* @module enyo/Layout
+*/
+
+var
+	kind = require('./kind');
+
+/**
+* {@link module:enyo/Layout~Layout} is the base [kind]{@glossary kind} for layout
+* kinds. Layout kinds are used by {@link module:enyo/UiComponent~UiComponent}-based
+* [controls]{@link module:enyo/Control~Control} to allow for arranging of child controls by
+* setting the [layoutKind]{@link module:enyo/UiComponent~UiComponent#layoutKind} property.
+* 
+* Derived kinds will usually provide their own
+* [layoutClass]{@link module:enyo/Layout~Layout#layoutClass} property to affect the CSS
+* rules used, and may also implement the [flow()]{@link module:enyo/Layout~Layout#flow}
+* and [reflow()]{@link module:enyo/Layout~Layout#reflow} methods. `flow()` is called
+* during control rendering, while `reflow()` is called when the associated
+* control is resized.
+*
+* @class Layout
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Layout~Layout.prototype */ {
+
+	name: 'enyo.Layout',
+
+	/**
+	* @private
+	*/
+	kind: null,
+
+	/** 
+	* CSS class that's added to the [control]{@link module:enyo/Control~Control} using this 
+	* [layout]{@link module:enyo/Layout~Layout} [kind]{@glossary kind}.
+	*
+	* @type {String}
+	* @default ''
+	* @public
+	*/
+	layoutClass: '',
+	
+	/**
+	* @private
+	*/
+	constructor: function (container) {
+		this.container = container;
+		if (container) {
+			container.addClass(this.layoutClass);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	destroy: function () {
+		if (this.container) {
+			this.container.removeClass(this.layoutClass);
+		}
+	},
+	
+	/**
+	* Called during static property layout (i.e., during rendering).
+	*
+	* @public
+	*/
+	flow: function () {
+	},
+
+	/** 
+	* Called during dynamic measuring layout (i.e., during a resize).
+	*
+	* May short-circuit and return `true` if the layout needs to be
+	* redone when the associated Control is next shown. This is useful
+	* for cases where the Control itself has `showing` set to `true`
+	* but an ancestor is hidden, and the layout is therefore unable to
+	* get accurate measurements of the Control or its children.
+	*
+	* @public
+	*/
+	reflow: function () {
+	}
+});
+
+},{'./kind':'enyo/kind'}],'enyo/ApplicationSupport':[function (module,exports,global,require,request){
 /**
 * Exports the {@link module:enyo/ApplicationSupport~ApplicationSupport} mixin.
 * @module enyo/ApplicationSupport
@@ -23685,349 +23710,7 @@ Dom.requiresWindow(function() {
 	touchGesture.connect();
 });
 
-},{'./utils':'enyo/utils','./gesture':'enyo/gesture','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./dom':'enyo/dom','./job':'enyo/job'}],'enyo/Input':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/Input~Input} kind.
-* @module enyo/Input
-*/
-
-var
-	kind = require('../kind'),
-	utils = require('../utils'),
-	dispatcher = require('../dispatcher'),
-	platform = require('../platform');
-var
-	Control = require('../Control');
-
-/**
-* Fires immediately when the text changes.
-*
-* @event module:enyo/Input~Input#oninput
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* Fires when the text has changed and the [input]{@link module:enyo/Input~Input} subsequently loses
-* focus.
-*
-* @event module:enyo/Input~Input#onchange
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* Fires when the [input]{@link module:enyo/Input~Input} is disabled or enabled.
-*
-* @event module:enyo/Input~Input#onDisabledChange
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* {@link module:enyo/Input~Input} implements an HTML [&lt;input&gt;]{@glossary input} element
-* with cross-platform support for change [events]{@glossary event}.
-*
-* You may listen for [oninput]{@link module:enyo/Input~Input#oninput} and
-* [onchange]{@link module:enyo/Input~Input#onchange} [DOM events]{@glossary DOMEvent} from
-* this [control]{@link module:enyo/Control~Control} to know when the text inside has been modified.
-*
-* For more information, see the documentation on
-* [Text Fields]{@linkplain $dev-guide/building-apps/controls/text-fields.html}
-* in the Enyo Developer Guide.
-*
-* @class Input
-* @extends module:enyo/Control~Control
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Input~Input.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.Input',
-
-	/**
-	* @private
-	*/
-	kind: Control,
-
-	/**
-	* @private
-	*/
-	published:
-		/** @lends module:enyo/Input~Input.prototype */ {
-
-		/**
-		* Value of the [input]{@link module:enyo/Input~Input}. Use this property only to initialize the
-		* value. Call `getValue()` and `setValue()` to manipulate the value at runtime.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		value: '',
-
-		/**
-		* Text to display when the [input]{@link module:enyo/Input~Input} is empty
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		placeholder: '',
-
-		/**
-		* Type of [input]{@link module:enyo/Input~Input}; if not specified, it's treated as `'text'`.
-		* This may be anything specified for the `type` attribute in the HTML
-		* specification, including `'url'`, `'email'`, `'search'`, or `'number'`.
-		*
-		* @type {String}
-		* @default ''
-		* @public
-		*/
-		type: '',
-
-		/**
-		* When `true`, prevents input into the [control]{@link module:enyo/Control~Control}. This maps
-		* to the `disabled` DOM attribute.
-		*
-		* @type {Boolean}
-		* @default false
-		* @public
-		*/
-		disabled: false,
-
-		/**
-		* When `true`, the contents of the [input]{@link module:enyo/Input~Input} will be selected
-		* when the input gains focus.
-		*
-		* @type {Boolean}
-		* @default false
-		* @public
-		*/
-		selectOnFocus: false
-	},
-
-	/**
-	* @private
-	*/
-	events: {
-		onDisabledChange: ''
-	},
-
-	/**
-	* Set to `true` to focus this [control]{@link module:enyo/Control~Control} when it is rendered.
-	*
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	defaultFocus: false,
-
-	/**
-	* @private
-	*/
-	tag: 'input',
-
-	/**
-	* @private
-	*/
-	classes: 'enyo-input',
-
-	/**
-	* @private
-	*/
-	handlers: {
-		onfocus: 'focused',
-		oninput: 'input',
-		onclear: 'clear',
-		ondragstart: 'dragstart'
-	},
-
-	/**
-	* @method
-	* @private
-	*/
-	create: kind.inherit(function (sup) {
-		return function() {
-			if (platform.ie) {
-				this.handlers.onkeyup = 'iekeyup';
-			}
-			if (platform.windowsPhone) {
-				this.handlers.onkeydown = 'iekeydown';
-			}
-			sup.apply(this, arguments);
-			this.placeholderChanged();
-			// prevent overriding a custom attribute with null
-			if (this.type) {
-				this.typeChanged();
-			}
-		};
-	}),
-
-	/**
-	* @method
-	* @private
-	*/
-	rendered: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			dispatcher.makeBubble(this, 'focus', 'blur');
-			this.disabledChanged();
-			if (this.defaultFocus) {
-				this.focus();
-			}
-		};
-	}),
-
-	/**
-	* @private
-	*/
-	typeChanged: function () {
-		this.setAttribute('type', this.type);
-	},
-
-	/**
-	* @private
-	*/
-	placeholderChanged: function () {
-		this.setAttribute('placeholder', this.placeholder);
-		this.valueChanged();
-	},
-
-	/**
-	* @fires module:enyo/Input~Input#onDisabledChange
-	* @private
-	*/
-	disabledChanged: function () {
-		this.setAttribute('disabled', this.disabled);
-		this.bubble('onDisabledChange');
-	},
-
-	/**
-	* @private
-	*/
-	valueChanged: function () {
-		var node = this.hasNode(),
-			attrs = this.attributes;
-		if (node) {
-			if (node.value !== this.value) {
-				node.value = this.value;
-			}
-			// we manually update the cached value so that the next time the
-			// attribute is requested or the control is re-rendered it will
-			// have the correct value - this is because calling setAttribute()
-			// in some cases does not receive an appropriate response from the
-			// browser
-			attrs.value = this.value;
-		} else {
-			this.setAttribute('value', this.value);
-		}
-		this.detectTextDirectionality((this.value || this.value === 0) ? this.value : this.get('placeholder'));
-	},
-
-	/**
-	* @private
-	*/
-	iekeyup: function (sender, e) {
-		var ie = platform.ie, kc = e.keyCode;
-		// input event fails to fire on backspace and delete keys in ie 9
-		if (ie == 9 && (kc == 8 || kc == 46)) {
-			this.bubble('oninput', e);
-		}
-	},
-
-	/**
-	* @private
-	*/
-	iekeydown: function (sender, e) {
-		var wp = platform.windowsPhone, kc = e.keyCode, dt = e.dispatchTarget;
-		// onchange event fails to fire on enter key for Windows Phone 8, so we force blur
-		if (wp <= 8 && kc == 13 && this.tag == 'input' && dt.hasNode()) {
-			dt.node.blur();
-		}
-	},
-
-	/**
-	* @private
-	*/
-	clear: function () {
-		this.setValue('');
-	},
-
-	// note: we disallow dragging of an input to allow text selection on all platforms
-	/**
-	* @private
-	*/
-	dragstart: function () {
-		return this.hasFocus();
-	},
-
-	/**
-	* @private
-	*/
-	focused: function () {
-		if (this.selectOnFocus) {
-			utils.asyncMethod(this, 'selectContents');
-		}
-	},
-
-	/**
-	* @private
-	*/
-	selectContents: function () {
-		var n = this.hasNode();
-
-		if (n && n.setSelectionRange) {
-			n.setSelectionRange(0, n.value.length);
-		} else if (n && n.createTextRange) {
-			var r = n.createTextRange();
-			r.expand('textedit');
-			r.select();
-		}
-	},
-
-	/**
-	* @private
-	*/
-	input: function () {
-		var val = this.getNodeProperty('value');
-		this.setValue(val);
-	},
-
-	// Accessibility
-
-	/**
-	* @default textbox
-	* @type {String}
-	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
-	* @public
-	*/
-	accessibilityRole: 'textbox',
-
-	/**
-	* @private
-	*/
-	ariaObservers: [
-		{path: 'disabled', to: 'aria-disabled'}
-	]
-});
-
-},{'../kind':'enyo/kind','../utils':'enyo/utils','../dispatcher':'enyo/dispatcher','../platform':'enyo/platform','../Control':'enyo/Control'}],'enyo/Image':[function (module,exports,global,require,request){
+},{'./utils':'enyo/utils','./gesture':'enyo/gesture','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./dom':'enyo/dom','./job':'enyo/job'}],'enyo/Image':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -24379,7 +24062,349 @@ module.exports = kind(
 	accessibilityRole: 'img'
 });
 
-},{'../kind':'enyo/kind','../resolution':'enyo/resolution','../dispatcher':'enyo/dispatcher','../pathResolver':'enyo/pathResolver','../Control':'enyo/Control'}],'enyo/image':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../resolution':'enyo/resolution','../dispatcher':'enyo/dispatcher','../pathResolver':'enyo/pathResolver','../Control':'enyo/Control'}],'enyo/Input':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Input~Input} kind.
+* @module enyo/Input
+*/
+
+var
+	kind = require('../kind'),
+	utils = require('../utils'),
+	dispatcher = require('../dispatcher'),
+	platform = require('../platform');
+var
+	Control = require('../Control');
+
+/**
+* Fires immediately when the text changes.
+*
+* @event module:enyo/Input~Input#oninput
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* Fires when the text has changed and the [input]{@link module:enyo/Input~Input} subsequently loses
+* focus.
+*
+* @event module:enyo/Input~Input#onchange
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* Fires when the [input]{@link module:enyo/Input~Input} is disabled or enabled.
+*
+* @event module:enyo/Input~Input#onDisabledChange
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* {@link module:enyo/Input~Input} implements an HTML [&lt;input&gt;]{@glossary input} element
+* with cross-platform support for change [events]{@glossary event}.
+*
+* You may listen for [oninput]{@link module:enyo/Input~Input#oninput} and
+* [onchange]{@link module:enyo/Input~Input#onchange} [DOM events]{@glossary DOMEvent} from
+* this [control]{@link module:enyo/Control~Control} to know when the text inside has been modified.
+*
+* For more information, see the documentation on
+* [Text Fields]{@linkplain $dev-guide/building-apps/controls/text-fields.html}
+* in the Enyo Developer Guide.
+*
+* @class Input
+* @extends module:enyo/Control~Control
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Input~Input.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.Input',
+
+	/**
+	* @private
+	*/
+	kind: Control,
+
+	/**
+	* @private
+	*/
+	published:
+		/** @lends module:enyo/Input~Input.prototype */ {
+
+		/**
+		* Value of the [input]{@link module:enyo/Input~Input}. Use this property only to initialize the
+		* value. Call `getValue()` and `setValue()` to manipulate the value at runtime.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		value: '',
+
+		/**
+		* Text to display when the [input]{@link module:enyo/Input~Input} is empty
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		placeholder: '',
+
+		/**
+		* Type of [input]{@link module:enyo/Input~Input}; if not specified, it's treated as `'text'`.
+		* This may be anything specified for the `type` attribute in the HTML
+		* specification, including `'url'`, `'email'`, `'search'`, or `'number'`.
+		*
+		* @type {String}
+		* @default ''
+		* @public
+		*/
+		type: '',
+
+		/**
+		* When `true`, prevents input into the [control]{@link module:enyo/Control~Control}. This maps
+		* to the `disabled` DOM attribute.
+		*
+		* @type {Boolean}
+		* @default false
+		* @public
+		*/
+		disabled: false,
+
+		/**
+		* When `true`, the contents of the [input]{@link module:enyo/Input~Input} will be selected
+		* when the input gains focus.
+		*
+		* @type {Boolean}
+		* @default false
+		* @public
+		*/
+		selectOnFocus: false
+	},
+
+	/**
+	* @private
+	*/
+	events: {
+		onDisabledChange: ''
+	},
+
+	/**
+	* Set to `true` to focus this [control]{@link module:enyo/Control~Control} when it is rendered.
+	*
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	defaultFocus: false,
+
+	/**
+	* @private
+	*/
+	tag: 'input',
+
+	/**
+	* @private
+	*/
+	classes: 'enyo-input',
+
+	/**
+	* @private
+	*/
+	handlers: {
+		onfocus: 'focused',
+		oninput: 'input',
+		onclear: 'clear',
+		ondragstart: 'dragstart'
+	},
+
+	/**
+	* @method
+	* @private
+	*/
+	create: kind.inherit(function (sup) {
+		return function() {
+			if (platform.ie) {
+				this.handlers.onkeyup = 'iekeyup';
+			}
+			if (platform.windowsPhone) {
+				this.handlers.onkeydown = 'iekeydown';
+			}
+			sup.apply(this, arguments);
+			this.placeholderChanged();
+			// prevent overriding a custom attribute with null
+			if (this.type) {
+				this.typeChanged();
+			}
+		};
+	}),
+
+	/**
+	* @method
+	* @private
+	*/
+	rendered: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			dispatcher.makeBubble(this, 'focus', 'blur');
+			this.disabledChanged();
+			if (this.defaultFocus) {
+				this.focus();
+			}
+		};
+	}),
+
+	/**
+	* @private
+	*/
+	typeChanged: function () {
+		this.setAttribute('type', this.type);
+	},
+
+	/**
+	* @private
+	*/
+	placeholderChanged: function () {
+		this.setAttribute('placeholder', this.placeholder);
+		this.valueChanged();
+	},
+
+	/**
+	* @fires module:enyo/Input~Input#onDisabledChange
+	* @private
+	*/
+	disabledChanged: function () {
+		this.setAttribute('disabled', this.disabled);
+		this.bubble('onDisabledChange');
+	},
+
+	/**
+	* @private
+	*/
+	valueChanged: function () {
+		var node = this.hasNode(),
+			attrs = this.attributes;
+		if (node) {
+			if (node.value !== this.value) {
+				node.value = this.value;
+			}
+			// we manually update the cached value so that the next time the
+			// attribute is requested or the control is re-rendered it will
+			// have the correct value - this is because calling setAttribute()
+			// in some cases does not receive an appropriate response from the
+			// browser
+			attrs.value = this.value;
+		} else {
+			this.setAttribute('value', this.value);
+		}
+		this.detectTextDirectionality((this.value || this.value === 0) ? this.value : this.get('placeholder'));
+	},
+
+	/**
+	* @private
+	*/
+	iekeyup: function (sender, e) {
+		var ie = platform.ie, kc = e.keyCode;
+		// input event fails to fire on backspace and delete keys in ie 9
+		if (ie == 9 && (kc == 8 || kc == 46)) {
+			this.bubble('oninput', e);
+		}
+	},
+
+	/**
+	* @private
+	*/
+	iekeydown: function (sender, e) {
+		var wp = platform.windowsPhone, kc = e.keyCode, dt = e.dispatchTarget;
+		// onchange event fails to fire on enter key for Windows Phone 8, so we force blur
+		if (wp <= 8 && kc == 13 && this.tag == 'input' && dt.hasNode()) {
+			dt.node.blur();
+		}
+	},
+
+	/**
+	* @private
+	*/
+	clear: function () {
+		this.setValue('');
+	},
+
+	// note: we disallow dragging of an input to allow text selection on all platforms
+	/**
+	* @private
+	*/
+	dragstart: function () {
+		return this.hasFocus();
+	},
+
+	/**
+	* @private
+	*/
+	focused: function () {
+		if (this.selectOnFocus) {
+			utils.asyncMethod(this, 'selectContents');
+		}
+	},
+
+	/**
+	* @private
+	*/
+	selectContents: function () {
+		var n = this.hasNode();
+
+		if (n && n.setSelectionRange) {
+			n.setSelectionRange(0, n.value.length);
+		} else if (n && n.createTextRange) {
+			var r = n.createTextRange();
+			r.expand('textedit');
+			r.select();
+		}
+	},
+
+	/**
+	* @private
+	*/
+	input: function () {
+		var val = this.getNodeProperty('value');
+		this.setValue(val);
+	},
+
+	// Accessibility
+
+	/**
+	* @default textbox
+	* @type {String}
+	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
+	* @public
+	*/
+	accessibilityRole: 'textbox',
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{path: 'disabled', to: 'aria-disabled'}
+	]
+});
+
+},{'../kind':'enyo/kind','../utils':'enyo/utils','../dispatcher':'enyo/dispatcher','../platform':'enyo/platform','../Control':'enyo/Control'}],'enyo/image':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -25166,99 +25191,7 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./Control':'enyo/Control'}],'enyo/GroupItem':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/GroupItem~GroupItem} kind.
-* @module enyo/GroupItem
-*/
-
-var
-	kind = require('./kind');
-var
-	Control = require('./Control');
-
-/**
-* Fires when the [active state]{@link module:enyo/GroupItem~GroupItem#active} has changed.
-*
-* @event module:enyo/GroupItem~GroupItem#onActivate
-* @type {Object}
-* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
-*	propagated the {@glossary event}.
-* @property {Object} event - An [object]{@glossary Object} containing event information.
-* @public
-*/
-
-/**
-* {@link module:enyo/GroupItem~GroupItem} is the base [kind]{@glossary kind} for the
-* [Grouping]{@link module:enyo/Group~Group} API. It manages the
-* [active state]{@link module:enyo/GroupItem~GroupItem#active} of the [component]{@link module:enyo/Component~Component}
-* (or the [inheriting]{@glossary subkind} component). A subkind may call `setActive()` 
-* to set the [active]{@link module:enyo/GroupItem~GroupItem#active} property to the desired state; this
-* will additionally [bubble]{@link module:enyo/Component~Component#bubble} an 
-* [onActivate]{@link module:enyo/GroupItem~GroupItem#onActivate} {@glossary event}, which may
-* be handled as needed by the containing components. This is useful for creating
-* groups of items whose state should be managed collectively.
-*
-* For an example of how this works, see the {@link module:enyo/Group~Group} kind, which enables the
-* creation of radio groups from arbitrary components that	support the Grouping API.
-*
-* @class GroupItem
-* @extends module:enyo/Control~Control
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.GroupItem',
-
-	/**
-	* @private
-	*/
-	kind: Control,
-
-	/**
-	* @private
-	*/
-	published: 
-		/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
-
-		/**
-		* Will be `true` if the item is currently selected.
-		* 
-		* @type {Boolean}
-		* @default false
-		* @public
-		*/
-		active: false
-	},
-	
-	/**
-	* @method
-	* @private
-	*/
-	rendered: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.activeChanged();
-		};
-	}),
-
-	/**
-	* @fires module:enyo/GroupItem~GroupItem#onActivate
-	* @private
-	*/
-	activeChanged: function () {
-		this.bubble('onActivate');
-	}
-});
-
-},{'./kind':'enyo/kind','./Control':'enyo/Control'}],'enyo/Option':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./Control':'enyo/Control'}],'enyo/Option':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -26384,7 +26317,99 @@ DataRepeater.concat = function (ctor, props) {
 	}
 };
 
-},{'./kind':'enyo/kind','./utils':'enyo/utils','./Control':'enyo/Control','./RepeaterChildSupport':'enyo/RepeaterChildSupport'}],'enyo/Checkbox':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./utils':'enyo/utils','./Control':'enyo/Control','./RepeaterChildSupport':'enyo/RepeaterChildSupport'}],'enyo/GroupItem':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/GroupItem~GroupItem} kind.
+* @module enyo/GroupItem
+*/
+
+var
+	kind = require('./kind');
+var
+	Control = require('./Control');
+
+/**
+* Fires when the [active state]{@link module:enyo/GroupItem~GroupItem#active} has changed.
+*
+* @event module:enyo/GroupItem~GroupItem#onActivate
+* @type {Object}
+* @property {Object} sender - The [component]{@link module:enyo/Component~Component} that most recently
+*	propagated the {@glossary event}.
+* @property {Object} event - An [object]{@glossary Object} containing event information.
+* @public
+*/
+
+/**
+* {@link module:enyo/GroupItem~GroupItem} is the base [kind]{@glossary kind} for the
+* [Grouping]{@link module:enyo/Group~Group} API. It manages the
+* [active state]{@link module:enyo/GroupItem~GroupItem#active} of the [component]{@link module:enyo/Component~Component}
+* (or the [inheriting]{@glossary subkind} component). A subkind may call `setActive()` 
+* to set the [active]{@link module:enyo/GroupItem~GroupItem#active} property to the desired state; this
+* will additionally [bubble]{@link module:enyo/Component~Component#bubble} an 
+* [onActivate]{@link module:enyo/GroupItem~GroupItem#onActivate} {@glossary event}, which may
+* be handled as needed by the containing components. This is useful for creating
+* groups of items whose state should be managed collectively.
+*
+* For an example of how this works, see the {@link module:enyo/Group~Group} kind, which enables the
+* creation of radio groups from arbitrary components that	support the Grouping API.
+*
+* @class GroupItem
+* @extends module:enyo/Control~Control
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.GroupItem',
+
+	/**
+	* @private
+	*/
+	kind: Control,
+
+	/**
+	* @private
+	*/
+	published: 
+		/** @lends module:enyo/Groupitem~Groupitem.prototype */ {
+
+		/**
+		* Will be `true` if the item is currently selected.
+		* 
+		* @type {Boolean}
+		* @default false
+		* @public
+		*/
+		active: false
+	},
+	
+	/**
+	* @method
+	* @private
+	*/
+	rendered: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.activeChanged();
+		};
+	}),
+
+	/**
+	* @fires module:enyo/GroupItem~GroupItem#onActivate
+	* @private
+	*/
+	activeChanged: function () {
+		this.bubble('onActivate');
+	}
+});
+
+},{'./kind':'enyo/kind','./Control':'enyo/Control'}],'enyo/Checkbox':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -26583,50 +26608,7 @@ module.exports = kind(
 	]
 });
 
-},{'../kind':'enyo/kind','../utils':'enyo/utils','../Input':'enyo/Input'}],'enyo/ToolDecorator':[function (module,exports,global,require,request){
-require('enyo');
-
-/**
-* Contains the declaration for the {@link module:enyo/ToolDecorator~ToolDecorator} kind.
-* @module enyo/ToolDecorator
-*/
-
-
-
-var
-	kind = require('../kind');
-var
-	GroupItem = require('../GroupItem');
-
-/**
-* {@link module:enyo/ToolDecorator~ToolDecorator} lines up [components]{@link module:enyo/Component~Component} in a row,
-* centered vertically.
-*
-* @class ToolDecorator
-* @extends module:enyo/GroupItem~GroupItem
-* @ui
-* @public
-*/
-module.exports = kind(
-	/** @lends module:enyo/ToolDecorator~ToolDecorator.prototype */ {
-
-	/**
-	* @private
-	*/
-	name: 'enyo.ToolDecorator',
-
-	/**
-	* @private
-	*/
-	kind: GroupItem,
-
-	/**
-	* @private
-	*/
-	classes: 'enyo-tool-decorator'
-});
-
-},{'../kind':'enyo/kind','../GroupItem':'enyo/GroupItem'}],'enyo/Select':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../utils':'enyo/utils','../Input':'enyo/Input'}],'enyo/Select':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -27768,146 +27750,50 @@ module.exports = kind(
 	}
 });
 
-},{'./touch':'enyo/touch','./kind':'enyo/kind','./utils':'enyo/utils','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./ScrollMath':'enyo/ScrollMath','./ScrollStrategy':'enyo/ScrollStrategy','./ScrollThumb':'enyo/ScrollThumb','./dom':'enyo/dom'}],'enyo/Button':[function (module,exports,global,require,request){
+},{'./touch':'enyo/touch','./kind':'enyo/kind','./utils':'enyo/utils','./dispatcher':'enyo/dispatcher','./platform':'enyo/platform','./ScrollMath':'enyo/ScrollMath','./ScrollStrategy':'enyo/ScrollStrategy','./ScrollThumb':'enyo/ScrollThumb','./dom':'enyo/dom'}],'enyo/ToolDecorator':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
-* Contains the declaration for the {@link module:enyo/Button~Button} kind.
-* @module enyo/Button
+* Contains the declaration for the {@link module:enyo/ToolDecorator~ToolDecorator} kind.
+* @module enyo/ToolDecorator
 */
+
+
 
 var
 	kind = require('../kind');
 var
-	ToolDecorator = require('../ToolDecorator');
+	GroupItem = require('../GroupItem');
 
 /**
-* {@link module:enyo/Button~Button} implements an HTML [button]{@glossary button}, with support
-* for grouping using {@link module:enyo/Group~Group}.
+* {@link module:enyo/ToolDecorator~ToolDecorator} lines up [components]{@link module:enyo/Component~Component} in a row,
+* centered vertically.
 *
-* For more information, see the documentation on
-* [Buttons]{@linkplain $dev-guide/building-apps/controls/buttons.html} in the
-* Enyo Developer Guide.
-*
-* @class Button
-* @extends module:enyo/ToolDecorator~ToolDecorator
+* @class ToolDecorator
+* @extends module:enyo/GroupItem~GroupItem
 * @ui
 * @public
 */
 module.exports = kind(
-	/** @lends module:enyo/Button~Button.prototype */ {
+	/** @lends module:enyo/ToolDecorator~ToolDecorator.prototype */ {
 
 	/**
 	* @private
 	*/
-	name: 'enyo.Button',
-	
-	/**
-	* @private
-	*/
-	kind: ToolDecorator,
+	name: 'enyo.ToolDecorator',
 
 	/**
 	* @private
 	*/
-	tag: 'button',
+	kind: GroupItem,
 
 	/**
 	* @private
 	*/
-	attributes: {
-		/**
-		 * Set to `'button'`; otherwise, the default value would be `'submit'`, which
-		 * can cause unexpected problems when [controls]{@link module:enyo/Control~Control} are used
-		 * inside of a [form]{@glossary form}.
-		 * 
-		 * @type {String}
-		 * @private
-		 */
-		type: 'button'
-	},
-	
-	/**
-	* @private
-	*/
-	published: 
-		/** @lends module:enyo/Button~Button.prototype */ {
-		
-		/**
-		 * When `true`, the [button]{@glossary button} is shown as disabled and does not 
-		 * generate tap [events]{@glossary event}.
-		 * 
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		disabled: false
-	},
-	
-	/**
-	* @method
-	* @private
-	*/
-	create: kind.inherit(function (sup) {
-		return function() {
-			sup.apply(this, arguments);
-			this.disabledChanged();
-		};
-	}),
-
-	/**
-	* @private
-	*/
-	disabledChanged: function () {
-		this.setAttribute('disabled', this.disabled);
-	},
-
-	/**
-	* @private
-	*/
-	tap: function () {
-		if (this.disabled) {
-			// work around for platforms like Chrome on Android or Opera that send
-			// mouseup to disabled form controls
-			return true;
-		} else {
-			this.setActive(true);
-		}
-	},
-
-	// Accessibility
-
-	/**
-	* @default button
-	* @type {String}
-	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
-	* @public
-	*/
-	accessibilityRole: 'button',
-
-	/**
-	* When `true`, `aria-pressed` will reflect the state of
-	* {@link module:enyo/GroupItem~GroupItem#active}
-	*
-	* @type {Boolean}
-	* @default false
-	* @public
-	*/
-	accessibilityPressed: false,
-
-	/**
-	* @private
-	*/
-	ariaObservers: [
-		{from: 'disabled', to: 'aria-disabled'},
-		{path: ['active', 'accessibilityPressed'], method: function () {
-			this.setAriaAttribute('aria-pressed', this.accessibilityPressed ? String(this.active) : null);
-		}},
-		{from: 'accessibilityRole', to: 'role'}
-	]
+	classes: 'enyo-tool-decorator'
 });
 
-},{'../kind':'enyo/kind','../ToolDecorator':'enyo/ToolDecorator'}],'enyo/TranslateScrollStrategy':[function (module,exports,global,require,request){
+},{'../kind':'enyo/kind','../GroupItem':'enyo/GroupItem'}],'enyo/TranslateScrollStrategy':[function (module,exports,global,require,request){
 require('enyo');
 
 /**
@@ -28277,7 +28163,146 @@ module.exports = kind(
 	}
 });
 
-},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./TouchScrollStrategy':'enyo/TouchScrollStrategy','./dom':'enyo/dom'}],'enyo/Scroller':[function (module,exports,global,require,request){
+},{'./kind':'enyo/kind','./dispatcher':'enyo/dispatcher','./TouchScrollStrategy':'enyo/TouchScrollStrategy','./dom':'enyo/dom'}],'enyo/Button':[function (module,exports,global,require,request){
+require('enyo');
+
+/**
+* Contains the declaration for the {@link module:enyo/Button~Button} kind.
+* @module enyo/Button
+*/
+
+var
+	kind = require('../kind');
+var
+	ToolDecorator = require('../ToolDecorator');
+
+/**
+* {@link module:enyo/Button~Button} implements an HTML [button]{@glossary button}, with support
+* for grouping using {@link module:enyo/Group~Group}.
+*
+* For more information, see the documentation on
+* [Buttons]{@linkplain $dev-guide/building-apps/controls/buttons.html} in the
+* Enyo Developer Guide.
+*
+* @class Button
+* @extends module:enyo/ToolDecorator~ToolDecorator
+* @ui
+* @public
+*/
+module.exports = kind(
+	/** @lends module:enyo/Button~Button.prototype */ {
+
+	/**
+	* @private
+	*/
+	name: 'enyo.Button',
+	
+	/**
+	* @private
+	*/
+	kind: ToolDecorator,
+
+	/**
+	* @private
+	*/
+	tag: 'button',
+
+	/**
+	* @private
+	*/
+	attributes: {
+		/**
+		 * Set to `'button'`; otherwise, the default value would be `'submit'`, which
+		 * can cause unexpected problems when [controls]{@link module:enyo/Control~Control} are used
+		 * inside of a [form]{@glossary form}.
+		 * 
+		 * @type {String}
+		 * @private
+		 */
+		type: 'button'
+	},
+	
+	/**
+	* @private
+	*/
+	published: 
+		/** @lends module:enyo/Button~Button.prototype */ {
+		
+		/**
+		 * When `true`, the [button]{@glossary button} is shown as disabled and does not 
+		 * generate tap [events]{@glossary event}.
+		 * 
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: false
+	},
+	
+	/**
+	* @method
+	* @private
+	*/
+	create: kind.inherit(function (sup) {
+		return function() {
+			sup.apply(this, arguments);
+			this.disabledChanged();
+		};
+	}),
+
+	/**
+	* @private
+	*/
+	disabledChanged: function () {
+		this.setAttribute('disabled', this.disabled);
+	},
+
+	/**
+	* @private
+	*/
+	tap: function () {
+		if (this.disabled) {
+			// work around for platforms like Chrome on Android or Opera that send
+			// mouseup to disabled form controls
+			return true;
+		} else {
+			this.setActive(true);
+		}
+	},
+
+	// Accessibility
+
+	/**
+	* @default button
+	* @type {String}
+	* @see enyo/AccessibilitySupport~AccessibilitySupport#accessibilityRole
+	* @public
+	*/
+	accessibilityRole: 'button',
+
+	/**
+	* When `true`, `aria-pressed` will reflect the state of
+	* {@link module:enyo/GroupItem~GroupItem#active}
+	*
+	* @type {Boolean}
+	* @default false
+	* @public
+	*/
+	accessibilityPressed: false,
+
+	/**
+	* @private
+	*/
+	ariaObservers: [
+		{from: 'disabled', to: 'aria-disabled'},
+		{path: ['active', 'accessibilityPressed'], method: function () {
+			this.setAriaAttribute('aria-pressed', this.accessibilityPressed ? String(this.active) : null);
+		}},
+		{from: 'accessibilityRole', to: 'role'}
+	]
+});
+
+},{'../kind':'enyo/kind','../ToolDecorator':'enyo/ToolDecorator'}],'enyo/Scroller':[function (module,exports,global,require,request){
 require('enyo');
 
 /**

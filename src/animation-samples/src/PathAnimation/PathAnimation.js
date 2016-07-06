@@ -20,15 +20,15 @@ module.exports = kind({
     kind: Control,
     classes: "enyo-fit path-sample container",
     components: [
-        { name: 'dot1', classes: "dot", style: "background:black;"},
-        { name: 'dot2', classes: "dot", style: "background:blue;"},
-        { name: 'dot3', classes: "dot", style: "background:red;"},
-        { name: 'dot4', classes: "dot", style: "background:green;"}
+        { name: 'dot1', classes: "dot", style: "background:black;" },
+        { name: 'dot2', classes: "dot", style: "background:blue;" },
+        { name: 'dot3', classes: "dot", style: "background:red;" },
+        { name: 'dot4', classes: "dot", style: "background:green;" }
     ],
     create: kind.inherit(function(sup) {
         return function() {
             sup.apply(this, arguments);
-            animate(this.controls, path, { isSequence: true});
+            animate(this.controls, path, { isSequence: true });
         };
     })
 });

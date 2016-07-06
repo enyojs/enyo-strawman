@@ -1,0 +1,503 @@
+.moon-sample-persistent-hotspot {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  height: 0.83333rem;
+  width: 0.83333rem;
+}
+.moon-sample-persistent-frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.83333rem 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0.625rem 0.41667rem rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 0.83333rem;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  -webkit-transform: translateY(-150%);
+  -moz-transition: -moz-transform 0.4s ease;
+  -moz-transform: translateY(-150%);
+  transition: transform 0.4s ease;
+  transform: translateY(-150%);
+}
+.moon-sample-persistent-hotspot:hover .moon-sample-persistent-frame,
+.moon-sample-persistent-frame:hover {
+  -webkit-transform: translateY(0%);
+  -moz-transform: translateY(0%);
+  transform: translateY(0%);
+}
+.moon-sample-persistent-frame .moon-button {
+  margin-bottom: 0.41667rem;
+}
+.moon-sample-persistent-frame .moon-button:hover {
+  /* Simulate spotlight for the mouse, even though we've intentionally disabled it */
+  background-color: #cf0652;
+  color: #fff;
+}
+.moon-sample-locale-popup .light {
+  font-family: 'MuseoSans 300';
+}
+.moon-sample-padded {
+  padding: 0.625rem;
+}
+.moon-sample-divider {
+  color: #F49200;
+  font-family: Segoe UI, Prelude Medium, Helvetica, Verdana, sans-serif;
+  font-size: 0.58333rem;
+  font-weight: bold;
+  margin-bottom: 0.33333rem;
+}
+.moon-sample-list-item {
+  text-decoration: none;
+  color: #4B4B4B;
+}
+.moon-sample-list-item.new,
+.moon-sample-list-item.wip,
+.moon-sample-list-item.deprecated {
+  padding-left: 2rem;
+}
+.moon-sample-list-item.new:before,
+.moon-sample-list-item.wip:before,
+.moon-sample-list-item.deprecated:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #cf0652;
+  color: #ffffff;
+  -webkit-transform: translateY(110%) translateX(-10%) scale(0.5) rotateZ(-45deg);
+  -moz-transform: translateY(110%) translateX(-10%) scale(0.5) rotateZ(-45deg);
+  -ms-transform: translateY(110%) translateX(-10%) scale(0.5) rotate(-45deg);
+  transform: translateY(110%) translateX(-10%) scale(0.5) rotateZ(-45deg);
+  padding: 0 3em;
+  border-radius: 0.375rem;
+  line-height: 1.4em;
+  -webkit-transform-origin: center left;
+  -moz-transform-origin: center left;
+  -ms-transform-origin: center left;
+  transform-origin: center left;
+  font-family: "MuseoSans 700 Italic";
+}
+.moon-sample-list-item.new.spotlight:before,
+.moon-sample-list-item.wip.spotlight:before,
+.moon-sample-list-item.deprecated.spotlight:before {
+  background-color: #ffffff;
+  color: #cf0652;
+}
+.moon-sample-list-item.new:before {
+  content: 'New';
+}
+.moon-sample-list-item.wip:before {
+  content: 'WIP';
+  background-color: #2196F3;
+}
+.moon-sample-list-item.wip.spotlight:before {
+  color: #2196F3;
+}
+.moon-sample-list-item.deprecated:before {
+  content: 'Dep ✕';
+  background-color: purple;
+}
+.moon-sample-list-item.deprecated.spotlight:before {
+  color: purple;
+}
+
+.sample-audio-playback .sample-audio-playback-queue-list,
+.sample-audio-playback .sample-audio-playback-queue-detail {
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+}
+.sample-audio-playback .sample-audio-playback-queue-detail-content {
+  padding: 1.25rem;
+}
+.sample-audio-playback .sample-audio-playback-queue-list .moon-imageitem {
+  height: 5.125rem;
+}
+.sample-audio-playback .sample-audio-playback-queue-list .moon-imageitem img {
+  height: 4.625rem;
+  width: 4.625rem;
+  margin-right: 0.5rem;
+}
+.sample-audio-playback .sample-audio-playback-queue-list .moon-imageitem.playing .moon-labeledtextitem .label,
+.sample-audio-playback .sample-audio-playback-queue-list .moon-imageitem.playing .moon-labeledtextitem .text {
+  color: #ffffff;
+}
+.sample-audio-playback .sample-audio-playback-queue-list .moon-labeledtextitem {
+  height: 4.625rem;
+}
+
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-item .moon-overlay-container {
+  width: 3.125rem;
+}
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-item > .caption,
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-item > .sub-caption {
+  position: relative;
+  top: 18%;
+  overflow: hidden;
+}
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-image-item {
+  padding: 0;
+}
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-image {
+  height: 100%;
+  width: auto;
+  margin-right: 0.5rem;
+  float: left;
+}
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-image img {
+  height: 100%;
+}
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-image-item .moon-overlay-container {
+  left: auto;
+}
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-image-item > .caption,
+.moon-datagridlist-sample .moon-gridlist-imageitem.horizontal-gridList-image-item > .sub-caption {
+  text-align: center;
+  width: auto;
+  overflow: hidden;
+}
+.moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem.horizontal-gridList-item {
+  padding-left: 4.125rem;
+  padding-right: 0.5rem;
+}
+.enyo-locale-right-to-left .moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem.horizontal-gridList-item {
+  padding-left: 0.5rem;
+  padding-right: 4.125rem;
+}
+.enyo-locale-right-to-left .moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem.horizontal-gridList-item {
+  padding-left: 0.5rem;
+  padding-right: 4.125rem;
+}
+.moon-datagridlist-sample .selection-enabled .moon-gridlist-imageitem.horizontal-gridList-image-item {
+  padding-left: 0;
+}
+
+.moon-button-sample-wrapper .moon-button-caption-decorator,
+.moon-button-sample-group .moon-button,
+.moon-button-sample-wrapper > .moon-button {
+  margin: 0.83333rem;
+}
+.moon-button-sample .moon-item.tap-area-toggle-container {
+  width: 13.33333rem;
+  margin: 0.83333rem 0rem 0rem 0.83333rem;
+}
+.moon-button-sample.visible-tap-area .moon-button:before {
+  background: rgba(0, 100, 200, 0.2);
+  border: 1px solid rgba(0, 100, 200, 0.4);
+}
+.moon-button-sample .image-background {
+  background: url(http://lorempixel.com/1920/480/nature/10/);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0.83333rem;
+}
+
+/* Calendar.css */
+.moon-calendar-dow-label-nodisplay {
+  display: none;
+}
+.moon-calendar-sample-input {
+  width: 100%;
+}
+
+.moon-date-picker-sample-input {
+  width: 100%;
+}
+
+.sample-drawers-partial .moon-drawer-partial-client {
+  height: 5.75rem;
+}
+
+.moon-font-sample table {
+  table-layout: fixed;
+}
+.moon-font-sample td {
+  padding: 0 1.25rem;
+}
+
+.moon-header-sample .moon-header {
+  margin-bottom: 0.83333rem;
+}
+
+.highlight-text-sample-red {
+  color: red;
+}
+.highlight-text-sample-blue {
+  background-color: blue;
+  color: white;
+}
+.highlight-text-sample-fancy {
+  -moz-box-shadow: 0rem 1px 0rem 0rem #fff6af;
+  -webkit-box-shadow: 0rem 1px 0rem 0rem #fff6af;
+  box-shadow: 0rem 1px 0rem 0rem #fff6af;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+  background: -moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+  background: -webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+  background: -o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+  background: -ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+  background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+  background-color: #ffec64;
+  -moz-border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ffaa22;
+  display: inline-block;
+  color: #333333;
+  padding: 0.16667rem 0.16667rem;
+  text-decoration: none;
+  text-shadow: 0rem 1px 0rem #ffee66;
+}
+
+.moon-icon-button-sample .image-background {
+  background: url(http://lorempixel.com/1920/480/nature/10/);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0.83333rem;
+}
+
+.image-badge-sample .image-badge-sample-divider {
+  margin-top: 0.83333rem;
+}
+.image-badge-sample .moon-image {
+  margin: 0rem 0.41667rem;
+}
+.image-badge-sample .float-right {
+  position: absolute;
+  right: 0;
+}
+.image-badge-sample .moon-item {
+  display: inline-block;
+  padding: 0.41667rem 0rem 0.08333rem 0rem;
+}
+
+.moon-input-header-sample .moon-input-header {
+  margin-bottom: 0.83333rem;
+}
+.moon-input-sample-result {
+  padding-top: 0.83333rem;
+}
+.moon-input-header-sample-result {
+  position: absolute;
+  right: 4rem;
+  bottom: 0.5rem;
+  left: 4rem;
+}
+
+.moon-input-sample .moon-input-decorator,
+.moon-input-sample .moon-textarea-decorator {
+  margin: 0.75rem;
+}
+.moon-input-sample-result {
+  padding-top: 0.83333rem;
+}
+.moon-input-sample-value-padding {
+  padding: 0rem 0.41667rem;
+}
+.moon-input-sample .range-inputs {
+  /* clamping width to force each input onto its own line */
+  width: 12.5rem;
+}
+
+.moon-item-overlay-sample-wrapper .moon-image {
+  margin: 0.41667rem 0;
+}
+.moon-item-overlay-sample-wrapper .spotlight .moon-body-text {
+  color: #fff;
+}
+
+.moon-item-sample-wrapper .moon-image {
+  margin: 0.41667rem 0;
+}
+.moon-item-sample-wrapper .spotlight .moon-body-text {
+  color: #fff;
+}
+
+.moon-light-panels-sample .control-container > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+.moon-light-panels-sample .control-panel {
+  position: static;
+  height: 2.5rem;
+  width: 16.66667rem;
+}
+.moon-light-panels-sample .panel-scroller {
+  height: 31.25rem;
+}
+
+.moon-marquee-start-on-render {
+  width: 25rem;
+}
+.moon-marquee-start-on-focus {
+  width: 25rem;
+}
+.moon-marquee-start-on-hover {
+  width: 25rem;
+}
+.moon-marquee-start-on-focus.spotlight {
+  background-color: yellow;
+}
+
+.samples-moon-overlay .moon-gridlist-imageitem {
+  height: 17rem;
+  width: 13rem;
+  margin: 0.41667rem;
+  position: relative;
+}
+.samples-moon-overlay .moon-gridlist-imageitem .moon-image {
+  height: 12.5rem;
+  width: 12.5rem;
+}
+
+.moon-progress-button-sample .blue {
+  background-color: #69cdff;
+}
+.moon-progress-button-sample .spaced-button {
+  margin: 0rem 0.25rem;
+}
+
+.moon-progress-sample .green {
+  background-color: #6fbe44;
+}
+.moon-progress-sample .red {
+  background-color: #ff4a4a;
+}
+.moon-progress-sample .spaced-button {
+  margin: 0rem 0.25rem;
+}
+
+.moon-scroller-sample-2d-scroller.spotlight {
+  border: 0.08333rem solid orange;
+}
+.moon-scroller-sample-2d-scroller .moon-button {
+  display: inline-block;
+  margin: 7.91667rem;
+}
+
+.moon-spinner-sample .absolute-container {
+  width: 80%;
+  height: 8.33333rem;
+  /* Please do not use this red border in your app. This is only to demonstrate centering in a container .*/
+  border: 0.08333rem red dashed;
+  position: relative;
+}
+
+.moon-toggle-button-sample-wrapper .moon-button-caption-decorator,
+.moon-toggle-button-sample-group .moon-button,
+.moon-toggle-button-sample-wrapper > .moon-button {
+  margin: 0.83333rem;
+}
+
+.moon-tooltip-sample .right {
+  float: right;
+}
+.enyo-locale-right-to-left .moon-tooltip-sample .right {
+  float: left;
+}
+.moon-tooltip-sample .draggable {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 20%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.column-center {
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  z-index: 1;
+}
+
+/* ----- Enyo's Museo Sans ------ */
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Medium"), url('../fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Thin"), url('../fonts/MuseoSans/MuseoSans-Light.ttf') format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Light"), url('../fonts/MuseoSans/MuseoSans-Normal.ttf') format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Medium"), url('../fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Medium Italic"), url('../fonts/MuseoSans/MuseoSans-DemiBoldItalic.ttf') format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Bold"), url('../fonts/MuseoSans/MuseoSans-Bold.ttf') format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Bold Italic"), url('../fonts/MuseoSans/MuseoSans-BoldItalic.ttf') format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Black"), url('../fonts/MuseoSans/MuseoSans-Black.ttf') format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Black Italic"), url('../fonts/MuseoSans/MuseoSans-BlackItalic.ttf') format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+.strawman {
+  background-color: white;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+.strawman.home {
+  padding: 5%;
+  text-align: center;
+}
+.strawman.home .strawman-list {
+  top: auto;
+  top: initial;
+  bottom: auto;
+  bottom: initial;
+}
+@media only screen and (max-width: 400px) {
+  .strawman.home {
+    padding: 0;
+  }
+}
+.warning {
+  position: absolute;
+  bottom: 0.20833rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+@media only screen and (min-width: 1280px) {
+  .warning {
+    display: none;
+  }
+}
+

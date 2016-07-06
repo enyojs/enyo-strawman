@@ -20,11 +20,11 @@ var declaredAnimation = [{
 
 module.exports = kind({
     name: "sampleApplication",
-    style: "background-color: black",
+    style: "background-color: #fff;padding:1%;",
     components: [{
         name: "Description",
         classes: "description",
-        content: "Sequence Animiation"
+        content: "Sequence Animation"
     }, {
         name: "circle",
         classes: "cardContainer jack",

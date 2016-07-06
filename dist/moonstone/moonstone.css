@@ -1,0 +1,5421 @@
+/* ----- MISO ------ */
+@font-face {
+  font-family: "Moonstone Miso";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Moonstone Miso";
+  src: local("Moon Miso Medium"), url('moonstone/fonts/Miso/Miso-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-107, U+10C-113, U+116-11B, U+11E-11F, U+122-123, U+128-12B, U+12E-133, U+136-137, U+139-148, U+14C-14D, U+150-15B, U+15E-165, U+168-16B, U+16E-173, U+178-17E, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+312, U+323, U+326-328, U+1E44-1E45, U+1E62-1E63, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+203E, U+20AC, U+2122, U+2205, U+2302;
+}
+@font-face {
+  font-family: "Moonstone Miso Bold";
+  src: local("LG Display-Regular");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Moonstone Miso Bold";
+  src: local("Moon Miso Bold"), url('moonstone/fonts/Miso/Miso-Bold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-107, U+10C-113, U+116-11B, U+11E-11F, U+122-123, U+128-12B, U+12E-133, U+136-137, U+139-148, U+14C-14D, U+150-15B, U+15E-165, U+168-16B, U+16E-173, U+178-17E, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+312, U+323, U+326-328, U+1E44-1E45, U+1E62-1E63, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+203E, U+20AC, U+2122, U+2205, U+2302;
+}
+@font-face {
+  font-family: "Moonstone Miso Light";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Moonstone Miso Light";
+  src: local("Moon Miso Light"), url('moonstone/fonts/Miso/Miso-Light.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-107, U+10C-113, U+116-11B, U+11E-11F, U+122-123, U+128-12B, U+12E-133, U+136-137, U+139-148, U+14C-14D, U+150-15B, U+15E-165, U+168-16B, U+16E-173, U+178-17E, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+312, U+323, U+326-328, U+1E44-1E45, U+1E62-1E63, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+203E, U+20AC, U+2122, U+2205, U+2302;
+}
+/* ----- Museo Sans ------ */
+@font-face {
+  font-family: "MuseoSans";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans";
+  src: local("Moon Museo Sans Medium"), url('moonstone/fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 100";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 100";
+  src: local("Moon Museo Sans Thin"), url('moonstone/fonts/MuseoSans/MuseoSans-Light.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 300";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 300";
+  src: local("Moon Museo Sans Light"), url('moonstone/fonts/MuseoSans/MuseoSans-Normal.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 500";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 500";
+  src: local("Moon Museo Sans Medium"), url('moonstone/fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 500 Italic";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 500 Italic";
+  src: local("Moon Museo Medium Italic"), url('moonstone/fonts/MuseoSans/MuseoSans-DemiBoldItalic.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 700";
+  src: local("LG Display-Regular");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 700";
+  src: local("Moon Museo Sans Bold"), url('moonstone/fonts/MuseoSans/MuseoSans-Bold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 700 Italic";
+  src: local("LG Display-Regular");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 700 Italic";
+  src: local("Moon Museo Sans Bold Italic"), url('moonstone/fonts/MuseoSans/MuseoSans-BoldItalic.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 900";
+  src: local("LG Display-Regular");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 900";
+  src: local("Moon Museo Sans Black"), url('moonstone/fonts/MuseoSans/MuseoSans-Black.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+@font-face {
+  font-family: "MuseoSans 900 Italic";
+  src: local("LG Display-Regular");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MuseoSans 900 Italic";
+  src: local("Moon Museo Sans Black Italic"), url('moonstone/fonts/MuseoSans/MuseoSans-BlackItalic.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+20-7E, U+A0-17F, U+18F, U+192, U+1C4-1DC, U+1F1, U+1F3, U+1F8-1F9, U+218-21B, U+259, U+2C6-2C7, U+2D8-2DD, U+300-304, U+306-308, U+30A-30C, U+323, U+326-328, U+3BC, U+1E44-1E45, U+1E62-1E63, U+1E9E, U+1EB8-1EB9, U+1ECA-1ECD, U+1EE4-1EE5, U+2009, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+2070, U+2074-2079, U+2080-2089, U+20AC, U+2122, U+2212, U+221E, U+2248, U+2260, U+2264-2265, U+FB00-FB04;
+}
+/* ----- Moonstone (Icons) ------ */
+@font-face {
+  font-family: "Moonstone Icons";
+  src: url('moonstone/fonts/Moonstone.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+/* ----- LG Dingbats (Icons) ------ */
+@font-face {
+  font-family: "LG Icons";
+  src: local("LG Display_Dingbat");
+  font-weight: normal;
+  font-style: normal;
+}
+/* ----- LG Display ------ */
+@font-face {
+  /* We want "LG Display" to map to the bold variant, since that was originally the only option */
+  font-family: "Moonstone LG Display";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Moonstone LG Display Bold";
+  src: local("LG Display-Regular");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Moonstone LG Display Light";
+  src: local("LG Display-Light");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ------- Horizontal Dimensioning (columns) ------- */
+.moon-1h {
+  width: 2.5rem;
+}
+.moon-2h {
+  width: 5.75rem;
+}
+.moon-3h {
+  width: 9rem;
+}
+.moon-4h {
+  width: 12.25rem;
+}
+.moon-5h {
+  width: 15.5rem;
+}
+.moon-6h {
+  width: 18.75rem;
+}
+.moon-7h {
+  width: 22rem;
+}
+.moon-8h {
+  width: 25.25rem;
+}
+.moon-9h {
+  width: 28.5rem;
+}
+.moon-10h {
+  width: 31.75rem;
+}
+.moon-11h {
+  width: 35rem;
+}
+.moon-12h {
+  width: 38.25rem;
+}
+.moon-13h {
+  width: 41.5rem;
+}
+.moon-14h {
+  width: 44.75rem;
+}
+.moon-15h {
+  width: 48rem;
+}
+.moon-16h {
+  width: 51.25rem;
+}
+.moon-17h {
+  width: 54.5rem;
+}
+.moon-18h {
+  width: 57.75rem;
+}
+.moon-19h {
+  width: 61rem;
+}
+.moon-20h {
+  width: 64.25rem;
+}
+/* ------- Vertical Dimensioning (columns) ------- */
+.moon-1v {
+  height: 1.75rem;
+}
+.moon-2v {
+  height: 3.5rem;
+}
+.moon-3v {
+  height: 5.25rem;
+}
+.moon-4v {
+  height: 7rem;
+}
+.moon-5v {
+  height: 8.75rem;
+}
+.moon-6v {
+  height: 10.5rem;
+}
+.moon-7v {
+  height: 12.25rem;
+}
+.moon-8v {
+  height: 14rem;
+}
+.moon-9v {
+  height: 15.75rem;
+}
+.moon-10v {
+  height: 17.5rem;
+}
+.moon-11v {
+  height: 19.25rem;
+}
+.moon-12v {
+  height: 21rem;
+}
+.moon-13v {
+  height: 22.75rem;
+}
+.moon-14v {
+  height: 24.5rem;
+}
+.moon-15v {
+  height: 26.25rem;
+}
+.moon-16v {
+  height: 28rem;
+}
+.moon-17v {
+  height: 29.75rem;
+}
+.moon-18v {
+  height: 31.5rem;
+}
+.moon-19v {
+  height: 33.25rem;
+}
+.moon-20v {
+  height: 35rem;
+}
+.moon-21v {
+  height: 36.75rem;
+}
+.moon-22v {
+  height: 38.5rem;
+}
+.moon-23v {
+  height: 40.25rem;
+}
+.moon-24v {
+  height: 42rem;
+}
+.moon-25v {
+  height: 43.75rem;
+}
+.moon-26v {
+  height: 45.5rem;
+}
+
+/* Text definitions */
+.moon-header-font {
+  font-family: "Moonstone Miso";
+}
+.moon-superscript {
+  font-size: 1rem;
+  vertical-align: top;
+  margin: 0 0 0 0.125rem;
+  padding: 0;
+}
+.moon-pre-text {
+  font-size: 1rem;
+  vertical-align: top;
+  height: 2rem;
+  line-height: 1rem;
+  margin: 0.5rem 0.125rem 0.375rem 0;
+  padding: 0rem;
+}
+.moon-large-text {
+  font-size: 2rem;
+  vertical-align: top;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.moon-header-text {
+  font-family: "Moonstone Miso";
+  font-size: 5rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+.moon-super-header-text {
+  font-family: "Moonstone Miso";
+  font-size: 1.375rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+.moon-sub-header-text {
+  font-family: "MuseoSans 700";
+  font-size: 1.25rem;
+}
+.moon-small-header .moon-sub-header-text {
+  font-size: 1.125rem;
+}
+.moon-header-sub-title-below {
+  font-family: "MuseoSans 300";
+  font-size: 1.125rem;
+}
+.moon-body-text {
+  font-family: "MuseoSans 300";
+  font-size: 1.375rem;
+  color: #a6a6a6;
+  line-height: 1.625rem;
+}
+.moon-body-text a:link {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-body-text a:visited {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-body-text a:hover {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-body-text a:active {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-body-large-text {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.moon-bold-text {
+  font-family: "MuseoSans 900";
+  font-size: 1.375rem;
+  color: #a6a6a6;
+  line-height: 1.625rem;
+}
+.moon-bold-text a:link {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-bold-text a:visited {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-bold-text a:hover {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-bold-text a:active {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-body-text-spacing {
+  margin: 0 0.5rem 1.75rem 0.5rem;
+}
+.moon-large-button-text {
+  font-family: "Moonstone Miso Bold";
+  font-size: 1.5rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+.moon-small-button-text {
+  font-family: "Moonstone Miso Bold";
+  font-size: 1.125rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+.moon-icon-text {
+  font-family: "Moonstone Icons";
+  font-size: 3rem;
+  color: #fff;
+}
+.moon-popup-header-text,
+.moon-dialog-title {
+  font-family: "Moonstone Miso";
+  font-size: 3rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+.moon-dialog-sub-title {
+  font-size: 1.125rem;
+}
+.moon-dialog-content {
+  font-size: 1.25rem;
+}
+.moon-divider-text {
+  font-family: "MuseoSans 700 Italic";
+  font-size: 1rem;
+  color: #a6a6a6;
+}
+.enyo-locale-non-latin .moon,
+.enyo-locale-non-latin .moon input,
+.enyo-locale-non-latin .moon textarea,
+.enyo-locale-non-latin .moon .moon-button,
+.enyo-locale-non-latin .moon-large-text,
+.enyo-locale-non-latin .moon-header-text,
+.enyo-locale-non-latin .moon-header-font,
+.enyo-locale-non-latin .moon-popup-header-text,
+.enyo-locale-non-latin .moon-super-header-text {
+  font-family: "Moonstone LG Display";
+}
+.enyo-locale-non-latin .moon-body-text,
+.enyo-locale-non-latin .moon-superscript,
+.enyo-locale-non-latin .moon-pre-text {
+  font-family: "Moonstone LG Display Light";
+}
+.enyo-locale-non-latin .moon-sub-header-text,
+.enyo-locale-non-latin .moon-divider-text,
+.enyo-locale-non-latin .moon-bold-text,
+.enyo-locale-non-latin .moon-large-button-text,
+.enyo-locale-non-latin .moon-small-button-text {
+  font-family: "Moonstone LG Display Bold";
+}
+.enyo-locale-non-latin .moon {
+  font-size: 1.375rem;
+}
+.enyo-locale-non-latin .moon-superscript {
+  font-size: 1rem;
+}
+.enyo-locale-non-latin .moon-pre-text {
+  font-size: 1rem;
+}
+.enyo-locale-non-latin .moon-large-text {
+  font-size: 2rem;
+}
+.enyo-locale-non-latin .moon-header-text {
+  font-size: 4.25rem;
+  line-height: 1.5em;
+}
+.enyo-locale-non-latin .moon-popup-header-text {
+  font-size: 2.75rem;
+}
+.enyo-locale-non-latin .moon-sub-header-text,
+.enyo-locale-non-latin .moon-small-header .moon-sub-header-text {
+  font-size: 1.375rem;
+}
+.enyo-locale-non-latin .moon-super-header-text {
+  font-size: 1.375rem;
+}
+.enyo-locale-non-latin .moon-divider-text {
+  font-size: 1.125rem;
+  font-style: normal;
+}
+.enyo-locale-non-latin .moon-body-text {
+  font-size: 1.125rem;
+  line-height: 1.7em;
+}
+.enyo-locale-non-latin .moon-body-large-text {
+  font-size: 1.25rem;
+  line-height: 10.7em;
+}
+.enyo-locale-non-latin .moon-bold-text {
+  font-size: 1.125rem;
+  line-height: 1.7em;
+}
+.enyo-locale-non-latin .moon-large-button-text {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+.enyo-locale-non-latin .moon-small-button-text {
+  font-size: 1.125rem;
+  font-weight: normal;
+}
+
+/* -------------------------- */
+/* Standard horizontal spacing */
+/* -------------------------- */
+.moon-hspacing {
+  white-space: nowrap;
+}
+.moon-hspacing > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.375rem;
+}
+.moon-hspacing.top > * {
+  vertical-align: top;
+}
+.moon-hspacing > :first-child,
+.moon-hspacing > :first-child.moon-contextual-popup-decorator :first-child {
+  margin-left: 0;
+}
+.enyo-locale-right-to-left .moon-hspacing > :first-child {
+  margin-left: 0.375rem;
+  margin-right: 0;
+}
+.moon-hspacing > :last-child,
+.moon-hspacing > :last-child.moon-contextual-popup-decorator :first-child {
+  margin-right: 0;
+}
+.enyo-locale-right-to-left .moon-hspacing > :last-child {
+  margin-right: 0.375rem;
+  margin-left: 0;
+}
+/* -------------------------- */
+/* Standard vertical spacing */
+/* -------------------------- */
+.moon-vspacing > * {
+  display: block;
+  margin: 0.375rem 0;
+}
+.moon-vspacing > :first-child {
+  margin-top: 0;
+}
+.moon-vspacing > :last-child {
+  margin-bottom: 0;
+}
+/* -------------------------- */
+/* Variable vertical spacing  */
+/* -------------------------- */
+.moon-vspacing-s > .moon-item:not(.moon-formcheckbox-item),
+.moon-vspacing-s > .moon-expandable-list-item:not(.open) .moon-item,
+.moon-vspacing-s > .moon-expandable-list-item.open {
+  padding-bottom: 0.375rem;
+}
+.moon-vspacing-s > .moon-button,
+.moon-vspacing-s > .moon-input-decorator,
+.moon-vspacing-s > .moon-formcheckbox-item {
+  margin-top: 0.1875rem;
+  margin-bottom: 0.375rem;
+}
+.moon-vspacing-m > .moon-item:not(.moon-formcheckbox-item),
+.moon-vspacing-m > .moon-expandable-list-item:not(.open) .moon-item,
+.moon-vspacing-m > .moon-expandable-list-item.open {
+  padding-bottom: 0.75rem;
+}
+.moon-vspacing-m > .moon-button,
+.moon-vspacing-m > .moon-input-decorator,
+.moon-vspacing-m > .moon-formcheckbox-item {
+  margin-top: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+.moon-vspacing-l > .moon-item:not(.moon-formcheckbox-item),
+.moon-vspacing-l > .moon-expandable-list-item:not(.open) .moon-item,
+.moon-vspacing-l > .moon-expandable-list-item.open {
+  padding-bottom: 1.75rem;
+}
+.moon-vspacing-l > .moon-button,
+.moon-vspacing-l > .moon-input-decorator,
+.moon-vspacing-l > .moon-formcheckbox-item {
+  margin-top: 0.875rem;
+  margin-bottom: 1.75rem;
+}
+
+html {
+  font-size: 1rem;
+  font-size: 24px;
+}
+/* 720p screen size */
+@media only screen and (max-width: 1280px) {
+  html {
+    font-size: 0.66667rem;
+    font-size: 16px;
+  }
+}
+@media only screen and (min-width: 2561px) {
+  html {
+    font-size: 2rem;
+    font-size: 48px;
+  }
+}
+/* Prevent browser's default focus treatment (at least in Chrome) */
+:focus {
+  outline: none;
+}
+/* Common classes applicable to multiple controls */
+.moon {
+  font-family: "MuseoSans 700";
+  font-size: 1.25rem;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  padding: 0.75rem;
+  color: #a6a6a6;
+  background-color: #000;
+}
+.enyo-locale-right-to-left .moon {
+  direction: rtl;
+}
+.moon-divider-border {
+  border-bottom: 0.125rem solid #595959;
+}
+.moon-neutral-divider-border {
+  border-bottom: 0.125rem solid #4d4d4d;
+}
+.moon-composite {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+.border-box {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.matrix3dsurface {
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+  -webkit-transform-style: flat;
+  transform-style: flat;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  -webkit-user-select: none;
+}
+/* Put this at the end because we want these to take precedence over others */
+.moon-neutral {
+  background-color: #ededed;
+  color: #4d4d4d;
+}
+.moon-neutral * {
+  color: #4d4d4d;
+}
+.moon-light-gray {
+  background-color: #ededed;
+  color: #4d4d4d;
+}
+.moon-light-gray * {
+  color: #4d4d4d;
+}
+
+.moon-highlight-text-highlighted {
+  color: #cf0652;
+}
+.moon-item.spotlight .moon-highlight-text-highlighted {
+  color: #3a0217;
+}
+
+/* Icon.css */
+.moon-icon,
+.moon-icon-toggle {
+  width: 2rem;
+  height: 2rem;
+  background-position: center -0.5rem;
+  background-size: 3rem 6rem;
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0.5rem;
+  font-family: "Moonstone", "Moonstone Icons";
+  font-size: 4rem;
+  line-height: 2rem;
+  text-align: center;
+  position: relative;
+  color: #ccc;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+}
+.moon-icon:before,
+.moon-icon-toggle:before {
+  content: '';
+  position: absolute;
+  top: -0.875rem;
+  right: -0.875rem;
+  bottom: -0.875rem;
+  left: -0.875rem;
+}
+.moon-icon.small,
+.moon-icon-toggle.small {
+  background-position: center -0.25rem;
+  background-size: 2rem 4rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 3rem;
+  line-height: 1.5rem;
+}
+.moon-icon.small:before,
+.moon-icon-toggle.small:before {
+  content: '';
+  position: absolute;
+  top: -1.125rem;
+  right: -1.125rem;
+  bottom: -1.125rem;
+  left: -1.125rem;
+}
+.moon-icon.font-lg-icons,
+.moon-icon-toggle.font-lg-icons {
+  font-family: "LG Icons";
+  font-size: 2rem;
+}
+.moon-icon.font-lg-icons.small,
+.moon-icon-toggle.font-lg-icons.small {
+  font-size: 1.5rem;
+}
+.moon-neutral .moon-icon,
+.moon-neutral .moon-icon-toggle {
+  color: inherit;
+}
+.moon-icon.disabled,
+.moon-icon-toggle.disabled,
+.disabled .moon-icon,
+.disabled .moon-icon-toggle {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+.spotlight .moon-icon,
+.spotlight .moon-icon-toggle {
+  color: #fff;
+  background-position: center -3.5rem;
+}
+.spotlight .moon-icon.small,
+.spotlight .moon-icon-toggle.small {
+  background-position: center -2.25rem;
+}
+
+/* Scrim.css */
+.moon-scrim {
+  z-index: 1;
+  /*
+		note: by using pointer-events we allow tapping on scrim
+		while it is fading out; however, this requires any showing classes
+		to set pointer events to auto or scrim will not function as expected.
+	*/
+  pointer-events: none;
+  -webkit-transform: translateZ(0rem);
+  transform: translateZ(0rem);
+}
+.moon-scrim.moon-scrim-translucent {
+  pointer-events: auto;
+  background-color: #000;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+.moon-scrim.moon-scrim-transparent {
+  pointer-events: auto;
+  background: transparent;
+}
+
+/* TODO: Retire this file after new scroller implementation is completely integrated. */
+.moon-thumb {
+  border: none;
+  background: #a6a6a6;
+  width: 0.125rem;
+  height: 0.125rem;
+  border-radius: 0;
+}
+.moon-thumb,
+.moon-thumb.matrix3dsurface {
+  -webkit-transform-origin: 0rem 0rem;
+  transform-origin: 0rem 0rem;
+}
+.moon-neutral .moon-thumb {
+  background: rgba(50, 50, 50, 0.8);
+}
+
+/* RichText.css */
+.moon-textarea-decorator > .moon-richtext {
+  background-image: none;
+  box-shadow: none;
+  text-transform: none;
+}
+.enyo-locale-right-to-left .moon-richtext {
+  text-align: right;
+}
+
+/* TextArea.css */
+.moon-textarea,
+.moon-richtext {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  height: 4.875rem;
+  width: 12.5rem;
+  color: #4d4d4d;
+  resize: none;
+  overflow: auto;
+}
+.moon-textarea::selection,
+.moon-richtext::selection {
+  color: #fff;
+  background-color: #cf0652;
+}
+.moon-textarea::-webkit-scrollbar,
+.moon-richtext::-webkit-scrollbar {
+  width: 0.125rem;
+}
+.moon-textarea::-webkit-scrollbar-track-piece,
+.moon-richtext::-webkit-scrollbar-track-piece {
+  border-radius: 0.375rem;
+}
+.moon-textarea::-webkit-scrollbar-thumb:vertical,
+.moon-richtext::-webkit-scrollbar-thumb:vertical {
+  background-color: #a6a6a6;
+  border-radius: 0.375rem;
+}
+.moon-textarea-decorator.moon-focused .moon-textarea,
+.moon-textarea-decorator .moon-focused .moon-richtext {
+  cursor: text;
+}
+.moon-textarea-decorator.moon-disabled .moon-textarea,
+.moon-textarea-decorator .moon-disabled .moon-richtext {
+  cursor: default;
+}
+.moon-textarea-decorator.moon-invalid .moon-textarea,
+.moon-textarea-decorator.moon-invalid .moon-richtext {
+  color: #ff0000;
+}
+.enyo-locale-right-to-left .moon-textarea {
+  text-align: right;
+}
+
+.moon-tooltip {
+  z-index: 20;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  pointer-events: none;
+}
+.moon-tooltip-label {
+  font-family: "Moonstone Miso Bold";
+  font-size: 1.125rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  color: #fff;
+  padding: 0.5rem 1.20833rem;
+  background-color: #4d4d4d;
+  border-radius: 1.41667rem;
+}
+.moon-tooltip.right-arrow .moon-tooltip-label {
+  text-align: right;
+}
+.moon-tooltip.left-arrow .moon-tooltip-label {
+  text-align: left;
+}
+.enyo-locale-right-to-left .moon-tooltip.left-arrow .moon-tooltip-label {
+  text-align: right;
+}
+.enyo-locale-non-latin .moon-tooltip-label {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.125rem;
+  font-weight: normal;
+}
+.moon-tooltip-point {
+  position: absolute;
+  height: 1.25rem;
+  width: 0.75rem;
+  transform-origin: top left;
+  fill: #4d4d4d;
+}
+.moon-tooltip.above.left-arrow .moon-tooltip-point {
+  transform: translateY(100%) rotate(-90deg) scaleX(-1);
+  bottom: 0;
+}
+.moon-tooltip.above.left-arrow .moon-tooltip-label {
+  border-bottom-left-radius: 0;
+}
+.moon-tooltip.above.right-arrow .moon-tooltip-point {
+  transform: translate(100%, 100%) rotate(90deg);
+  bottom: 0;
+  right: 0;
+}
+.moon-tooltip.above.right-arrow .moon-tooltip-label {
+  border-bottom-right-radius: 0;
+}
+.moon-tooltip.below.left-arrow .moon-tooltip-point {
+  transform: rotate(-90deg);
+}
+.moon-tooltip.below.left-arrow .moon-tooltip-label {
+  border-top-left-radius: 0;
+}
+.moon-tooltip.below.right-arrow .moon-tooltip-point {
+  transform: translateX(100%) rotate(-90deg) scaleY(-1);
+  right: 0;
+}
+.moon-tooltip.below.right-arrow .moon-tooltip-label {
+  border-top-right-radius: 0;
+}
+.moon-tooltip.left-arrow.top .moon-tooltip-point {
+  transform: translateY(100%) scale(-1);
+  bottom: 0;
+}
+.moon-tooltip.left-arrow.top .moon-tooltip-label {
+  border-bottom-left-radius: 0;
+}
+.moon-tooltip.left-arrow.bottom .moon-tooltip-point {
+  transform: scaleX(-1);
+}
+.moon-tooltip.left-arrow.bottom .moon-tooltip-label {
+  border-top-left-radius: 0;
+}
+.moon-tooltip.right-arrow.top .moon-tooltip-point {
+  transform: translate(100%, 100%) scaleY(-1);
+  bottom: 0;
+  right: 0;
+}
+.moon-tooltip.right-arrow.top .moon-tooltip-label {
+  border-bottom-right-radius: 0;
+}
+.moon-tooltip.right-arrow.bottom .moon-tooltip-point {
+  transform: translateX(100%);
+  right: 0;
+}
+.moon-tooltip.right-arrow.bottom .moon-tooltip-label {
+  border-top-right-radius: 0;
+}
+
+.moon-body-text-control {
+  text-align: left;
+}
+.enyo-locale-right-to-left .moon-body-text-control {
+  text-align: right;
+}
+
+.moon-clock {
+  margin: 1.25rem 0.75rem 1.25rem 1.5rem;
+}
+.moon-clock .moon-bold-text {
+  font-size: 2.25rem;
+  line-height: normal;
+  color: #fff;
+}
+
+.moon-video-player-info-background {
+  display: inline-block;
+  white-space: nowrap;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+.moon-video-player-info-background.left {
+  padding: 1rem 1.25rem 0 0;
+  width: 59.5rem;
+}
+.moon-video-player-info-background.right {
+  padding-top: 2rem;
+  text-align: right;
+  width: 14.5rem;
+}
+.moon-video-player-info-background > * + * {
+  border-top: 1px solid #777;
+}
+.moon-video-player-info-background .moon-clock {
+  margin: 0;
+}
+.enyo-locale-right-to-left .moon-video-player-info-background {
+  direction: rtl;
+}
+
+/* ProgressBar.css */
+.moon-progress-bar {
+  position: relative;
+  background-color: #262626;
+  direction: ltr;
+}
+.moon-progress-bar .moon-progress-bg-bar,
+.moon-progress-bar .moon-progress-bar-bar {
+  position: absolute;
+}
+.moon-progress-bar .moon-progress-bg-bar {
+  background-color: #a6a6a6;
+}
+.moon-progress-bar .moon-progress-bar-bar {
+  background-color: #fff;
+}
+.moon-progress-bar .moon-progress-bar-popup {
+  white-space: nowrap;
+  z-index: 20;
+}
+.moon-progress-bar .moon-progress-bar-popup > * {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.moon-progress-bar .moon-progress-bar-popup .moon-progress-bar-popup-left {
+  margin: 0 -2px 0 0;
+}
+.moon-progress-bar .moon-progress-bar-popup .moon-progress-bar-popup-center {
+  z-index: 21;
+}
+.moon-progress-bar .moon-progress-bar-popup .moon-progress-bar-popup-right {
+  margin: 0 0 0 -2px;
+}
+.moon-progress-bar .moon-progress-bar-popup .moon-progress-bar-popup-label {
+  color: #fff;
+  text-align: center;
+}
+.enyo-locale-non-latin .moon-progress-bar .moon-progress-bar-popup .moon-progress-bar-popup-label {
+  font-size: 1.25rem;
+}
+.moon-progress-bar .moon-progress-bar-popup.moon-progress-bar-popup-flip-h {
+  left: auto;
+  right: 50%;
+}
+.moon-progress-bar.moon-progress-bar-horizontal {
+  height: 0.5rem;
+  min-width: 5rem;
+  margin: 2rem 0.75rem;
+}
+.moon-progress-bar.moon-progress-bar-horizontal .moon-progress-bg-bar,
+.moon-progress-bar.moon-progress-bar-horizontal .moon-progress-bar-bar {
+  height: 100%;
+  top: 0;
+}
+.moon-progress-bar.moon-progress-bar-horizontal .moon-progress-bar-popup {
+  left: 50%;
+}
+.moon-progress-bar.moon-progress-bar-vertical {
+  width: 0.5rem;
+  min-height: 5rem;
+  margin: 2rem;
+  display: inline-block;
+}
+.moon-progress-bar.moon-progress-bar-vertical .moon-progress-bg-bar,
+.moon-progress-bar.moon-progress-bar-vertical .moon-progress-bar-bar {
+  width: 100%;
+  bottom: 0;
+}
+.moon-progress-bar.moon-progress-bar-vertical .moon-progress-bar-popup {
+  left: 50%;
+}
+/* Popup */
+.moon-progress-bar-popup-flip-h {
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+/* Caption Decorator */
+.moon-button-caption-decorator {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+.moon-button-caption-decorator .moon-caption {
+  display: inline-block;
+}
+.moon-caption-client {
+  display: inline-block;
+}
+.moon-caption-client > * {
+  display: block;
+  margin: auto;
+}
+/* Caption Decorator - Left/Right Captions */
+.moon-button-caption-decorator .moon-caption.left,
+.moon-button-caption-decorator .moon-caption.right {
+  height: 3.5rem;
+  line-height: 3.5rem;
+}
+.moon-button-caption-decorator .moon-caption.left {
+  float: left;
+  padding-right: 0.5rem;
+  text-align: left;
+}
+.moon-button-caption-decorator .moon-caption.right {
+  float: right;
+  padding-left: 0.5rem;
+  text-align: right;
+}
+/* Caption Decorator - Top/Bottom Captions */
+.moon-button-caption-decorator .moon-caption.top,
+.moon-button-caption-decorator .moon-caption.bottom {
+  display: block;
+  text-align: center;
+}
+.moon-button-caption-decorator .moon-caption.top {
+  padding-bottom: 0.125rem;
+}
+.moon-button-caption-decorator .moon-caption.bottom {
+  padding-top: 0.125rem;
+}
+/* Caption Decorator - Show On Focus Captions */
+.moon-button-caption-decorator.showOnFocus .moon-caption {
+  position: absolute;
+  z-index: 2;
+  white-space: nowrap;
+  float: none;
+  padding: 0rem;
+  margin: 0rem;
+  display: none;
+}
+.moon-button-caption-decorator.showOnFocus.spotlight .moon-caption {
+  display: block;
+}
+.moon-button-caption-decorator.showOnFocus .moon-caption.top {
+  margin-bottom: 0.125rem;
+}
+.moon-button-caption-decorator.showOnFocus .moon-caption.right {
+  margin-left: 0.5rem;
+}
+.moon-button-caption-decorator.showOnFocus .moon-caption.bottom {
+  margin-top: 0.125rem;
+}
+.moon-button-caption-decorator.showOnFocus .moon-caption.left {
+  margin-right: 0.5rem;
+}
+
+.moon-clamped-text {
+  display: -webkit-inline-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+/* ItemOverlay.less */
+.moon-item .moon-item-overlay {
+  float: left;
+  line-height: 1em;
+  margin-top: 0.3em;
+}
+.moon-item .moon-item-overlay.right {
+  float: right;
+}
+.moon-item .moon-item-overlay.beginning .moon-icon:first-child.small > .small-icon-tap-area,
+.moon-item .moon-item-overlay.ending .moon-icon:last-child.small > .small-icon-tap-area {
+  left: -0.5rem;
+  right: -0.5rem;
+}
+.moon-item .moon-item-overlay.beginning .moon-icon:first-child {
+  margin-left: 0;
+}
+.moon-item .moon-item-overlay.ending .moon-icon:last-child {
+  margin-right: 0;
+}
+.moon-item .moon-item-overlay .moon-icon {
+  margin-top: 0;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+.moon-item:not(.spotlight) .moon-item-overlay.auto-hide {
+  display: none;
+}
+.enyo-locale-right-to-left .moon-item .moon-item-overlay {
+  float: right;
+}
+.enyo-locale-right-to-left .moon-item .moon-item-overlay.right {
+  float: left;
+}
+.enyo-locale-right-to-left .moon-item .moon-item-overlay.beginning .moon-icon:first-child {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+.enyo-locale-right-to-left .moon-item .moon-item-overlay.ending .moon-icon:last-child {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* ObjectActionDecorator */
+.moon-objaction.vertical {
+  display: inline-block;
+  text-align: center;
+}
+.moon-objaction.vertical .moon-objaction-actions {
+  opacity: 0;
+  text-align: center;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+.moon-objaction.vertical .moon-objaction-actions > * {
+  display: block;
+  margin: 0.375rem 0;
+}
+.moon-objaction.vertical .moon-objaction-actions > :first-child {
+  margin-top: 0;
+}
+.moon-objaction.vertical .moon-objaction-actions > :last-child {
+  margin-bottom: 0;
+}
+.moon-objaction.vertical .moon-objaction-actions.stretch > * {
+  width: 100%;
+}
+.moon-objaction.horizontal {
+  display: block;
+}
+.moon-objaction.horizontal .moon-objaction-client {
+  display: table-cell;
+  width: 100%;
+  padding-right: 0.5rem;
+}
+.moon-objaction.horizontal .moon-objaction-actions {
+  display: table-cell;
+  opacity: 0;
+  vertical-align: middle;
+  padding-right: 0.5rem;
+  white-space: nowrap;
+}
+.moon-objaction.horizontal .moon-objaction-actions > * {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.375rem;
+}
+.moon-objaction.horizontal .moon-objaction-actions.top > * {
+  vertical-align: top;
+}
+.moon-objaction.horizontal .moon-objaction-actions > :first-child,
+.moon-objaction.horizontal .moon-objaction-actions > :first-child.moon-contextual-popup-decorator :first-child {
+  margin-left: 0;
+}
+.enyo-locale-right-to-left .moon-objaction.horizontal .moon-objaction-actions > :first-child {
+  margin-left: 0.375rem;
+  margin-right: 0;
+}
+.moon-objaction.horizontal .moon-objaction-actions > :last-child,
+.moon-objaction.horizontal .moon-objaction-actions > :last-child.moon-contextual-popup-decorator :first-child {
+  margin-right: 0;
+}
+.enyo-locale-right-to-left .moon-objaction.horizontal .moon-objaction-actions > :last-child {
+  margin-right: 0.375rem;
+  margin-left: 0;
+}
+.enyo-locale-right-to-left .moon-objaction-client.horizontal .moon-objaction-client {
+  padding-right: auto;
+  padding-left: 0.5rem;
+}
+.moon-objaction.vertical .moon-objaction-client .moon-item.spotlight {
+  background-color: transparent;
+}
+.moon-objaction.vertical .moon-objaction-client .moon-item > img {
+  padding: 0.5rem;
+}
+.moon-objaction.vertical .moon-objaction-client .moon-item.spotlight > img {
+  background-color: #cf0652;
+}
+
+/* Input.css */
+.moon-input {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: #4d4d4d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.moon-input::selection {
+  color: #fff;
+  background-color: #cf0652;
+}
+.moon-input[type=number] {
+  -moz-appearance: textfield;
+}
+.moon-input[type=number]:hover {
+  -moz-appearance: none;
+}
+.moon-input[type=number]::-webkit-inner-spin-button,
+.moon-input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.moon-input-decorator.spotlight {
+  color: #fff;
+}
+.moon-input-decorator.moon-invalid .moon-input {
+  color: #ff0000;
+}
+.moon-input-decorator .moon-focused .moon-input {
+  cursor: text;
+}
+.moon-input-decorator .moon-disabled .moon-input {
+  cursor: default;
+}
+.moon-input-decorator > input::-webkit-input-placeholder {
+  color: #868686;
+  opacity: 1;
+}
+.moon-input-decorator > input::-moz-placeholder {
+  color: #868686;
+  opacity: 1;
+}
+.moon-neutral .moon-input {
+  color: #4d4d4d;
+}
+.enyo-locale-right-to-left .moon-input {
+  text-align: right;
+}
+.enyo-locale-non-latin.enyo-locale-th .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-ar .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-fa .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-ur .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-ku .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-he .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-hi .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-ta .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-te .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-kn .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-ml .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-mr .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-bn .moon-input-decorator .moon-input,
+.enyo-locale-non-latin.enyo-locale-pa .moon-input-decorator .moon-input {
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+/* Table.css */
+.moon-table-row.spotlight {
+  background-color: #cf0652;
+  color: #fff;
+}
+.moon-table-row .moon-table-cell {
+  padding: 0.5rem;
+  white-space: nowrap;
+}
+
+.moon-marquee {
+  width: auto;
+  text-overflow: ellipsis;
+  white-space: pre !important;
+  overflow: hidden;
+  text-align: left;
+}
+.moon-marquee span {
+  pointer-events: none !important;
+}
+.moon-marquee .moon-marquee-text-wrapper {
+  width: 100%;
+  pointer-events: none;
+  width: auto;
+  overflow: hidden;
+}
+.moon-marquee .moon-marquee-text {
+  pointer-events: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: pre !important;
+  position: relative;
+  left: 0rem;
+}
+.moon-marquee .animate-marquee {
+  text-overflow: clip;
+  overflow: visible;
+}
+.enyo-locale-right-to-left .moon-marquee {
+  text-align: right;
+}
+.moon-marquee.allow-wrap {
+  white-space: normal !important;
+}
+
+/* IconButton.css */
+.moon-icon-button {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  color: #ccc;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1.75rem;
+  background-color: #4d4d4d;
+  background-size: 3rem 6rem;
+  border: 0.25rem solid transparent;
+  background-position: center 0;
+  margin: 0 0.5rem;
+  line-height: 3rem;
+}
+.moon-icon-button:before {
+  content: none;
+}
+.moon-icon-button.small {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.25rem;
+  background-size: 2rem 4rem;
+  background-position: center 0;
+  line-height: 2rem;
+}
+.moon-icon-button.small:before {
+  content: '';
+  position: absolute;
+  top: -0.625rem;
+  right: -0.625rem;
+  bottom: -0.625rem;
+  left: -0.625rem;
+}
+.moon-icon-button.small > .small-icon-tap-area {
+  line-height: 3.25rem;
+}
+.moon-icon-button.translucent {
+  background-color: rgba(77, 77, 77, 0.3);
+}
+.moon-icon-button.transparent {
+  background-color: transparent;
+}
+.moon-neutral .moon-icon-button {
+  color: #4d4d4d;
+  background-color: #fff;
+}
+.moon-neutral .moon-icon-button.translucent {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.moon-neutral .moon-icon-button.transparent {
+  background-color: transparent;
+}
+.moon-neutral .moon-icon-button * {
+  color: inherit;
+}
+.moon-neutral .moon-icon-button[disabled] {
+  color: #4d4d4d;
+  background-color: #fff;
+}
+.moon-icon-button.hover:hover:not(.disabled),
+.moon-icon-button.spotlight,
+.moon-icon-button.spotlight.translucent:not(.disabled),
+.moon-icon-button.spotlight.transparent:not(.disabled) {
+  color: #fff;
+  background-color: #cf0652;
+  background-position: center -3rem;
+}
+.moon-icon-button.hover:hover:not(.disabled).small,
+.moon-icon-button.spotlight.small,
+.moon-icon-button.spotlight.translucent:not(.disabled).small,
+.moon-icon-button.spotlight.transparent:not(.disabled).small {
+  background-position: center -2rem;
+}
+.moon-icon-button.active:not(.spotlight),
+.moon-icon-button:active.spotlight,
+.moon-icon-button.pressed,
+.moon-icon-button.hover:hover:not(.disabled):active {
+  color: #fff;
+  background-color: #4d4d4d;
+  background-position: center 0;
+  border-color: #cf0652;
+}
+.moon-neutral .moon-icon-button.active:not(.spotlight),
+.moon-neutral .moon-icon-button:active.spotlight,
+.moon-neutral .moon-icon-button.pressed,
+.moon-neutral .moon-icon-button.hover:hover:not(.disabled):active {
+  color: #4d4d4d;
+  background-color: #fff;
+}
+.moon-icon-button.active:not(.spotlight).small,
+.moon-icon-button:active.spotlight.small,
+.moon-icon-button.pressed.small,
+.moon-icon-button.hover:hover:not(.disabled):active.small {
+  background-position: center 0;
+}
+.moon-icon-button.active:not(.spotlight).translucent:not(.disabled),
+.moon-icon-button:active.spotlight.translucent:not(.disabled),
+.moon-icon-button.pressed.translucent:not(.disabled),
+.moon-icon-button.hover:hover:not(.disabled):active.translucent:not(.disabled) {
+  background-color: rgba(77, 77, 77, 0.3);
+}
+.moon-neutral .moon-icon-button.active:not(.spotlight).translucent:not(.disabled),
+.moon-neutral .moon-icon-button:active.spotlight.translucent:not(.disabled),
+.moon-neutral .moon-icon-button.pressed.translucent:not(.disabled),
+.moon-neutral .moon-icon-button.hover:hover:not(.disabled):active.translucent:not(.disabled) {
+  color: #4d4d4d;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.moon-icon-button.active:not(.spotlight).transparent:not(.disabled),
+.moon-icon-button:active.spotlight.transparent:not(.disabled),
+.moon-icon-button.pressed.transparent:not(.disabled),
+.moon-icon-button.hover:hover:not(.disabled):active.transparent:not(.disabled) {
+  background-color: transparent;
+}
+.moon-neutral .moon-icon-button.active:not(.spotlight).transparent:not(.disabled),
+.moon-neutral .moon-icon-button:active.spotlight.transparent:not(.disabled),
+.moon-neutral .moon-icon-button.pressed.transparent:not(.disabled),
+.moon-neutral .moon-icon-button.hover:hover:not(.disabled):active.transparent:not(.disabled) {
+  color: #4d4d4d;
+}
+.moon-icon-button.disabled,
+.disabled .moon-icon-button {
+  border-color: transparent;
+}
+.moon-icon-button.disabled.translucent,
+.disabled .moon-icon-button.translucent,
+.moon-icon-button.disabled.transparent,
+.disabled .moon-icon-button.transparent {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+.moon-icon-button.active.spotlight:not(.contextual-popup-button) {
+  border-color: #fff;
+  background-color: #4d4d4d;
+  color: #fff;
+}
+.moon-icon-button.active.spotlight:not(.contextual-popup-button):active,
+.moon-icon-button.active.spotlight:not(.contextual-popup-button).pressed {
+  border-color: #cf0652;
+  background-position: center -3rem;
+}
+.moon-icon-button.active.spotlight:not(.contextual-popup-button):active.small,
+.moon-icon-button.active.spotlight:not(.contextual-popup-button).pressed.small {
+  background-position: center -2rem;
+}
+.spotlight .moon-icon-button {
+  background-position: center -3rem;
+}
+.spotlight .moon-icon-button.small {
+  background-position: center -2rem;
+}
+
+/* Checkbox.css */
+.moon-checkbox {
+  cursor: pointer;
+}
+.moon-checkbox .moon-icon {
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+}
+.moon-checkbox[checked] .moon-icon {
+  visibility: visible;
+}
+.spotlight .moon-checkbox[checked]:after {
+  color: #fff;
+}
+.spotlight .moon-checkbox:not([checked]):not([disabled]) .moon-icon {
+  visibility: visible;
+  opacity: 0.3;
+}
+
+/* Feedback area */
+.moon-video-player-feedback {
+  margin-right: 0.5rem;
+}
+.moon-video-player-feedback .moon-video-feedback-text {
+  display: inline-block;
+  margin: 0;
+}
+.moon-video-player-feedback .moon-icon.small {
+  background-position: center -0.125rem;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-left,
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-right {
+  display: inline-block;
+  width: 1.5rem;
+  margin: 0;
+  font-size: 5rem;
+  line-height: 1.25rem;
+  /* use line-height to middle align the icon, the defaut 32px from moon-icon will make it too low */
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-left.moon-video-feedback-icon-only,
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-right.moon-video-feedback-icon-only {
+  margin: 0;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-left {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-left.moon-icon-pausejumpbackward {
+  width: 1.5rem;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-right {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-right.moon-icon-play {
+  font-size: 3rem;
+  width: 1rem;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-right.moon-icon-pause {
+  font-size: 3rem;
+  width: 1rem;
+}
+.moon-video-player-feedback .moon-icon.moon-video-feedback-icon-right.moon-icon-pausejumpforward {
+  width: 1.5rem;
+}
+
+/* ExpandableText */
+.moon-expandable-text {
+  overflow: hidden;
+}
+.moon-expandable-text .moon-expandable-text-content {
+  margin: 0 0.5rem;
+}
+.moon-expandable-text .moon-expandable-text-button {
+  float: right;
+  display: inline-block;
+  padding: 0.5rem 1.75rem 0.5rem 0.5rem;
+  position: relative;
+}
+.moon-expandable-text .moon-expandable-text-button:after {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.54167rem;
+  font-family: "Moonstone Icons";
+  content: "\0EFFEE";
+  font-size: 2rem;
+}
+.moon-expandable-text .moon-expandable-text-button.spotlight {
+  background-color: #cf0652;
+  color: #fff;
+}
+.moon-expandable-text .moon-expandable-text-button.collapsed:after {
+  content: "\0EFFED";
+}
+.moon-expandable-text .moon-expandable-text-button.hidden {
+  display: none;
+}
+.enyo-locale-non-latin .moon-expandable-text .moon-expandable-text-button:after {
+  top: 0.54167rem;
+}
+.enyo-locale-right-to-left .moon-expandable-text .moon-expandable-text-button {
+  float: left;
+  padding: 0.5rem 0.5rem 0.5rem 1.75rem;
+}
+.enyo-locale-right-to-left .moon-expandable-text .moon-expandable-text-button:after {
+  left: 0.54167rem;
+  right: auto;
+}
+
+/* InputDecorator.css */
+.moon-input-decorator:not(.moon-input-header-input-decorator),
+.moon-textarea-decorator {
+  margin: 0.25rem;
+  border: 0.25rem solid transparent;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.moon-input-decorator:not(.moon-input-header-input-decorator).spotlight,
+.moon-textarea-decorator.spotlight {
+  border-color: #cf0652;
+}
+.moon-input-decorator:not(.moon-input-header-input-decorator).moon-focused,
+.moon-textarea-decorator.moon-focused {
+  border-color: #a6a6a6;
+}
+.moon-input-decorator:not(.moon-input-header-input-decorator) .moon-icon.small,
+.moon-textarea-decorator .moon-icon.small,
+.moon-input-decorator:not(.moon-input-header-input-decorator) .spotlight .moon-icon.small,
+.moon-textarea-decorator .spotlight .moon-icon.small {
+  width: 0.75rem;
+  margin: 0;
+  color: #4d4d4d;
+}
+.moon-input-decorator,
+.moon-textarea-decorator {
+  position: relative;
+}
+.moon-input-decorator.moon-disabled,
+.moon-textarea-decorator.moon-disabled {
+  opacity: 0.6;
+}
+.moon-input-decorator:not(.moon-input-header-input-decorator) {
+  padding: 0.5rem 1.25rem;
+  border-radius: 42rem;
+}
+.moon-textarea-decorator {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+.moon-expandable-input .moon-input-decorator:not(.moon-input-header-input-decorator) {
+  margin: 0.25rem 0;
+}
+.enyo-locale-non-latin .moon-input-decorator:not(.moon-input-header-input-decorator) {
+  padding: 0.25rem 1.25rem 0.5rem;
+}
+.enyo-locale-non-latin.enyo-locale-th .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-ar .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-fa .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-ur .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-ku .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-he .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-hi .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-ta .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-te .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-kn .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-ml .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-mr .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-bn .moon-input-decorator:not(.moon-input-header-input-decorator),
+.enyo-locale-non-latin.enyo-locale-pa .moon-input-decorator:not(.moon-input-header-input-decorator) {
+  padding: 1px 1.25rem;
+}
+
+/* Button */
+@-webkit-keyframes moonButtonExpand {
+  60% {
+    -webkit-transform: translateZ(0) scale(1.05);
+    transform: translateZ(0) scale(1.05);
+  }
+}
+@-webkit-keyframes moonButtonContract {
+  60% {
+    -webkit-transform: translateZ(0) scale(0.95238095);
+    transform: translateZ(0) scale(0.95238095);
+  }
+}
+@keyframes moonButtonExpand {
+  60% {
+    transform: translateZ(0) scale(1.05);
+  }
+}
+@keyframes moonButtonContract {
+  60% {
+    transform: translateZ(0) scale(0.95238095);
+  }
+}
+.moon-button {
+  position: relative;
+  overflow: visible;
+  height: 3.5rem;
+  line-height: 3rem;
+  border-radius: 416.625rem;
+  background-color: #4d4d4d;
+  border: 0.25rem solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  width: auto;
+  min-width: 3.5rem;
+  max-width: 12.5rem;
+  padding: 0 1.125rem;
+  margin: 0 0.5rem;
+  color: #ccc;
+  box-sizing: border-box;
+  -webkit-transition: transform 0.2s ease-out;
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  transition: transform 0.2s ease-out;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+}
+.moon-button > * {
+  text-align: center;
+}
+.moon-button .moon-marquee {
+  width: 100%;
+  vertical-align: top;
+  text-align: center;
+}
+.moon-button:before {
+  content: none;
+}
+.moon-button .button-client {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: inherit;
+  animation: inherit;
+}
+.moon-button.min-width {
+  min-width: 7.5rem;
+}
+.moon-button.small {
+  height: 2.5rem;
+  min-width: 2.5rem;
+  line-height: 2rem;
+  padding: 0 0.75rem;
+  position: relative;
+  overflow: visible;
+}
+.moon-button.small.min-width {
+  min-width: 5.5rem;
+}
+.moon-button.small:before {
+  content: '';
+  position: absolute;
+  top: -0.625rem;
+  right: -0.625rem;
+  bottom: -0.625rem;
+  left: -0.625rem;
+}
+.moon-button.translucent {
+  background-color: rgba(77, 77, 77, 0.3);
+}
+.moon-button.transparent {
+  background-color: transparent;
+}
+.moon-button:not([disabled]).pressed,
+.moon-button:not([disabled]).spotlight:active {
+  -webkit-animation-name: moonButtonExpand;
+  animation-name: moonButtonExpand;
+}
+.moon-button:not([disabled]).pressed:before,
+.moon-button:not([disabled]).spotlight:active:before,
+.moon-button:not([disabled]).pressed:after,
+.moon-button:not([disabled]).spotlight:active:after,
+.moon-button:not([disabled]).pressed .button-client,
+.moon-button:not([disabled]).spotlight:active .button-client {
+  -webkit-animation-name: moonButtonContract;
+  animation-name: moonButtonContract;
+}
+.moon-button:not([disabled]).spotlight {
+  background-color: #cf0652;
+  color: #fff;
+}
+.moon-button:not([disabled]).active {
+  border-color: #cf0652;
+}
+.moon-button:not([disabled]).active.spotlight {
+  border-color: #fff;
+  background-color: #cf0652;
+  color: #fff;
+}
+.moon-button[disabled] {
+  cursor: default;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+.moon-neutral .moon-button {
+  color: #4d4d4d;
+  background-color: #fff;
+}
+.moon-neutral .moon-button * {
+  color: inherit;
+}
+.moon-neutral .moon-button[disabled] {
+  color: #4d4d4d;
+  background-color: #fff;
+}
+
+.moon-divider {
+  border-bottom: 0.125rem solid #595959;
+  margin: 0 0.5rem 0.75rem 0.5rem;
+  line-height: 1.6em;
+}
+.moon-neutral .moon-divider {
+  border-bottom: 0.125rem solid #4d4d4d;
+}
+
+/* Item.css */
+.moon-item {
+  font-family: "MuseoSans 700";
+  font-size: 1.375rem;
+  line-height: 2.25rem;
+  padding: 0.125rem 0.5rem;
+  position: relative;
+}
+.moon-item.spotlight {
+  background-color: #cf0652;
+  color: #fff;
+}
+.moon-item.spotlight * {
+  color: inherit;
+}
+.moon-item.allow-wrap {
+  white-space: normal !important;
+}
+.moon-item.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.moon-item > .moon-icon:first-child.small > .small-icon-tap-area,
+.moon-item > .moon-icon:last-child.small > .small-icon-tap-area {
+  left: -0.5rem;
+  right: -0.5rem;
+}
+.enyo-locale-non-latin .moon-item {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.375rem;
+}
+
+.moon-video-player-channel-info {
+  white-space: normal;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.moon-video-player-channel-info > * {
+  display: inline-block;
+  padding-right: 0.75rem;
+}
+.moon-video-player-channel-info:only-child {
+  padding: 2rem 0 2.5rem 0;
+}
+.moon-video-player-channel-info .moon-marquee {
+  text-align: right;
+  font-family: "MuseoSans 500";
+  font-size: 1.66667rem;
+  font-kerning: normal;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+.moon-video-player-channel-info .channel-info-text {
+  padding-left: 0.75rem;
+  border: 1px none #777;
+  border-left-style: solid;
+}
+.moon-video-player-channel-info .channel-info-badges {
+  vertical-align: super;
+}
+.moon-video-player-channel-info .channel-info-badges > * {
+  margin: 0.125rem 0 0.125rem 0.75rem;
+}
+.moon-video-player-channel-info .channel-info-badges .channel-info-text-icon {
+  font-family: "MuseoSans 900";
+  font-size: 0.625rem;
+  color: #777;
+  text-align: center;
+  white-space: nowrap;
+  display: inline-block;
+}
+.moon-video-player-channel-info .channel-info-badges .redicon {
+  background-color: transparent;
+  color: #fe4a4b;
+}
+.enyo-locale-right-to-left .moon-video-player-channel-info > * {
+  padding-right: 0;
+  padding-left: 0.75rem;
+}
+.enyo-locale-right-to-left .moon-video-player-channel-info .channel-info-text {
+  padding-right: 0.75rem;
+  border-left-style: none;
+  border-right-style: solid;
+}
+.enyo-locale-non-latin .moon-video-player-channel-info .channel-info-number {
+  line-height: 1.5em;
+  /* Clip the title box by just a bit to help it fit better */
+  height: 1.4em;
+}
+.enyo-locale-non-latin .moon-video-player-channel-info .channel-info-text,
+.enyo-locale-non-latin .moon-video-player-channel-info .channel-info-text-icon {
+  font-family: "Moonstone LG Display";
+}
+
+.moon-video-player-info-header {
+  padding-top: 0.75rem;
+}
+.moon-video-player-info-header:only-child {
+  padding-top: 1.5rem;
+}
+.moon-video-player-info-header .info-header-image.enyo-image {
+  vertical-align: top;
+  margin: 0.375rem 0.75rem 0 0;
+}
+.moon-video-player-info-header .info-header-text {
+  display: inline-block;
+  width: 53.25rem;
+  height: 100%;
+}
+.moon-video-player-info-header .info-header-text:only-child {
+  width: 100%;
+}
+.moon-video-player-info-header .info-header-title {
+  font-family: "MuseoSans 900";
+  font-size: 3rem;
+  line-height: 3rem;
+  padding: 0 0 1.5rem 0;
+  white-space: nowrap;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+}
+.moon-video-player-info-header .info-header-description {
+  font-family: "MuseoSans 500";
+  font-size: 1.5rem;
+  color: #a6a6a6;
+  white-space: normal;
+  -webkit-line-clamp: 3;
+  display: -webkit-inline-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  max-height: 3.75rem;
+}
+.moon-video-player-info-header .info-header-client {
+  display: inline-block;
+  margin: 0 0 0.5rem 0.75rem;
+}
+.moon-video-player-info-header .info-header-client > * {
+  display: inline-block;
+  margin: 0 0.25rem;
+}
+.enyo-locale-right-to-left .moon-video-player-info-header .info-header-image.enyo-image {
+  margin-left: 0.75rem;
+  margin-right: 0;
+}
+.enyo-locale-right-to-left .moon-video-player-info-header .info-header-client {
+  margin: 0 0.75rem 0.5rem 0;
+}
+.enyo-locale-non-latin .moon-video-player-info-header .info-header-title {
+  line-height: 1.5em;
+  /* Clip the title box by just a bit to help it fit better */
+  height: 1.4em;
+}
+.enyo-locale-non-latin .moon-video-player-info-header .info-header-description {
+  font-family: "Moonstone LG Display Light";
+  font-size: 1.125rem;
+  line-height: 1.7em;
+  color: #fff;
+}
+
+/* Spinner.css */
+@-webkit-keyframes spinBall {
+  0% {
+    -webkit-transform: rotateZ(13deg);
+  }
+  /* Slow down toward the top */
+  15% {
+    -webkit-transform: rotateZ(160deg);
+  }
+  25% {
+    -webkit-transform: rotateZ(200deg);
+  }
+  30% {
+    -webkit-transform: rotateZ(225deg);
+  }
+  /* Speed back up as the ball falls */
+  /* Impact at last ball */
+  33% {
+    -webkit-transform: rotateZ(321deg);
+  }
+  39%,
+  67% {
+    -webkit-transform: rotateZ(347deg);
+  }
+  /* Small bounce forward */
+  72% {
+    -webkit-transform: rotateZ(383deg);
+  }
+  79%,
+  100% {
+    -webkit-transform: rotateZ(373deg);
+  }
+}
+@-webkit-keyframes spinBall2 {
+  /* Small bounce forward */
+  0% {
+    -webkit-transform: rotateZ(347deg);
+  }
+  5% {
+    -webkit-transform: rotateZ(383deg);
+  }
+  12%,
+  33% {
+    -webkit-transform: rotateZ(373deg);
+  }
+  33.01% {
+    -webkit-transform: rotateZ(13deg);
+  }
+  /* Slow down toward the top */
+  48% {
+    -webkit-transform: rotateZ(160deg);
+  }
+  58% {
+    -webkit-transform: rotateZ(200deg);
+  }
+  63% {
+    -webkit-transform: rotateZ(225deg);
+  }
+  /* Speed back up as the ball falls */
+  /* Impact at last ball */
+  67% {
+    -webkit-transform: rotateZ(321deg);
+  }
+  72%,
+  100% {
+    -webkit-transform: rotateZ(347deg);
+  }
+}
+@-webkit-keyframes spinBall3 {
+  /* Impact at last ball */
+  0%,
+  100% {
+    -webkit-transform: rotateZ(321deg);
+  }
+  5%,
+  33% {
+    -webkit-transform: rotateZ(347deg);
+  }
+  /* Small bounce forward */
+  38% {
+    -webkit-transform: rotateZ(383deg);
+  }
+  45%,
+  66% {
+    -webkit-transform: rotateZ(373deg);
+  }
+  66.01% {
+    -webkit-transform: rotateZ(13deg);
+  }
+  /* Slow down toward the top */
+  81% {
+    -webkit-transform: rotateZ(160deg);
+  }
+  91% {
+    -webkit-transform: rotateZ(200deg);
+  }
+  97% {
+    -webkit-transform: rotateZ(225deg);
+  }
+  /* Speed back up as the ball falls */
+}
+@-webkit-keyframes propellerBall {
+  0% {
+    -webkit-transform: rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(360deg);
+  }
+}
+@-webkit-keyframes propellerBall2 {
+  0% {
+    -webkit-transform: rotateZ(120deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(480deg);
+  }
+}
+@-webkit-keyframes propellerBall3 {
+  0% {
+    -webkit-transform: rotateZ(240deg);
+  }
+  100% {
+    -webkit-transform: rotateZ(600deg);
+  }
+}
+@keyframes spinBall {
+  0% {
+    transform: rotateZ(13deg);
+  }
+  /* Slow down toward the top */
+  15% {
+    transform: rotateZ(160deg);
+  }
+  25% {
+    transform: rotateZ(200deg);
+  }
+  30% {
+    transform: rotateZ(225deg);
+  }
+  /* Speed back up as the ball falls */
+  /* Impact at last ball */
+  33% {
+    transform: rotateZ(321deg);
+  }
+  39%,
+  67% {
+    transform: rotateZ(347deg);
+  }
+  /* Small bounce forward */
+  72% {
+    transform: rotateZ(383deg);
+  }
+  79%,
+  100% {
+    transform: rotateZ(373deg);
+  }
+}
+@keyframes spinBall2 {
+  /* Small bounce forward */
+  0% {
+    transform: rotateZ(347deg);
+  }
+  5% {
+    transform: rotateZ(383deg);
+  }
+  12%,
+  33% {
+    transform: rotateZ(373deg);
+  }
+  33.01% {
+    transform: rotateZ(13deg);
+  }
+  /* Slow down toward the top */
+  48% {
+    transform: rotateZ(160deg);
+  }
+  58% {
+    transform: rotateZ(200deg);
+  }
+  63% {
+    transform: rotateZ(225deg);
+  }
+  /* Speed back up as the ball falls */
+  /* Impact at last ball */
+  67% {
+    transform: rotateZ(321deg);
+  }
+  72%,
+  100% {
+    transform: rotateZ(347deg);
+  }
+}
+@keyframes spinBall3 {
+  /* Impact at last ball */
+  0%,
+  100% {
+    transform: rotateZ(321deg);
+  }
+  5%,
+  33% {
+    transform: rotateZ(347deg);
+  }
+  /* Small bounce forward */
+  38% {
+    transform: rotateZ(383deg);
+  }
+  45%,
+  66% {
+    transform: rotateZ(373deg);
+  }
+  66.01% {
+    transform: rotateZ(13deg);
+  }
+  /* Slow down toward the top */
+  81% {
+    transform: rotateZ(160deg);
+  }
+  91% {
+    transform: rotateZ(200deg);
+  }
+  97% {
+    transform: rotateZ(225deg);
+  }
+  /* Speed back up as the ball falls */
+}
+@keyframes propellerBall {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+@keyframes propellerBall2 {
+  0% {
+    transform: rotateZ(120deg);
+  }
+  100% {
+    transform: rotateZ(480deg);
+  }
+}
+@keyframes propellerBall3 {
+  0% {
+    transform: rotateZ(240deg);
+  }
+  100% {
+    transform: rotateZ(600deg);
+  }
+}
+.moon-spinner {
+  min-height: 3rem;
+  min-width: 3rem;
+  line-height: 3rem;
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  background-color: #4d4d4d;
+  border-radius: 1.75rem;
+  margin: 0 0.5rem;
+}
+.moon-spinner > * {
+  display: inline-block;
+}
+.moon-spinner.center {
+  margin: 0;
+  margin-left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.moon-spinner.center.middle {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.moon-spinner.moon-spinner-transparent-background {
+  background-color: transparent;
+}
+.moon-spinner.content {
+  padding: 0.25rem;
+}
+.moon-spinner.content .moon-spinner-client {
+  max-width: 16.625rem;
+}
+.moon-spinner.running .moon-spinner-ball {
+  -webkit-animation-play-state: running;
+  animation-play-state: running;
+}
+.moon-spinner .moon-spinner-ball-decorator {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  float: left;
+}
+.moon-spinner .moon-spinner-ball {
+  position: absolute;
+  text-align: center;
+  font-size: 90%;
+  line-height: 0.4em;
+  -webkit-animation: none 1.25s linear infinite;
+  animation: none 1.25s linear infinite;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+  height: 15%;
+  width: 15%;
+  padding: 0 1px;
+  left: 42.5%;
+  bottom: 15%;
+  -webkit-transform-origin: center -133.33333333%;
+  transform-origin: center -133.33333333%;
+}
+.moon-spinner .moon-spinner-ball:after {
+  content: "\0EFFDB";
+  font-family: "Moonstone Icons";
+}
+.moon-spinner .moon-spinner-ball1 {
+  -webkit-animation-name: spinBall;
+  animation-name: spinBall;
+  color: #69cdff;
+  -webkit-transform: rotateZ(13deg);
+  transform: rotateZ(13deg);
+}
+.moon-spinner .moon-spinner-ball2 {
+  -webkit-animation-name: spinBall2;
+  animation-name: spinBall2;
+  color: #ff4a4a;
+  -webkit-transform: rotateZ(347deg);
+  transform: rotateZ(347deg);
+}
+.moon-spinner .moon-spinner-ball3 {
+  -webkit-animation-name: spinBall3;
+  animation-name: spinBall3;
+  color: #ffb80d;
+  -webkit-transform: rotateZ(321deg);
+  transform: rotateZ(321deg);
+}
+.moon-spinner .moon-spinner-client {
+  float: left;
+  line-height: 3rem;
+  margin: 0 2.6ex 0 0;
+}
+.enyo-locale-right-to-left .moon-spinner .moon-spinner-ball-decorator {
+  float: right;
+}
+.enyo-locale-right-to-left .moon-spinner .moon-spinner-client {
+  float: right;
+  margin-left: 2.6ex;
+  margin-right: 0;
+}
+.enyo-locale-right-to-left .moon-spinner.center {
+  margin: 0;
+  margin-right: 50%;
+  -webkit-transform: translateX(50%);
+  transform: translateX(50%);
+}
+.enyo-locale-right-to-left .moon-spinner.center.middle {
+  -webkit-transform: translateX(50%) translateY(-50%);
+  transform: translateX(50%) translateY(-50%);
+}
+
+.moon-overlay {
+  position: relative;
+}
+.moon-overlay-component {
+  display: inline-block;
+  pointer-events: auto;
+}
+.moon-overlay-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  display: none;
+}
+.moon-overlay-container.position-top {
+  bottom: auto;
+}
+.moon-overlay-container.position-bottom {
+  top: auto;
+}
+.moon-overlay-container.position-left {
+  right: auto;
+}
+.moon-overlay-container.position-right {
+  left: auto;
+}
+.moon-overlay-container.align-right {
+  text-align: right;
+}
+.moon-overlay-container.align-left {
+  text-align: left;
+}
+.moon-overlay-container.transparent {
+  background-color: transparent;
+}
+.moon-overlay-container.centered .moon-overlay-component {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+.moon-overlay-container.moon-overlay-selection .moon-icon {
+  display: block;
+  border: 0.25rem solid black;
+  background-color: white;
+  color: transparent;
+  margin: 0;
+  border-radius: 50%;
+  position: relative;
+  opacity: 0.5;
+}
+.moon-overlay-container.moon-overlay-selection .moon-icon:not(.small) {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+.selected .moon-overlay-container.moon-overlay-selection .moon-icon {
+  color: #cf0652;
+  border-color: #cf0652;
+  opacity: 1;
+}
+.moon-overlay-container.moon-overlay-text .moon-overlay-component {
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.25rem;
+}
+.moon-overlay-container.moon-overlay-text .moon-overlay-component .moon-overlay-text-title {
+  font-family: "MuseoSans 500";
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.125rem;
+}
+.moon-overlay-container.moon-overlay-text .moon-overlay-component .moon-overlay-text-subtitle {
+  font-family: "Moonstone Miso Bold";
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.spotlight .moon-overlay-container.show-on-spotlight,
+*:hover > .moon-overlay-container.show-on-hover,
+.selection-enabled .moon-overlay-container.moon-overlay-selection,
+.moon-overlay-container.show {
+  display: block;
+}
+
+/* ContextualPopup */
+.moon-contextual-popup {
+  min-height: 4rem;
+  min-width: 4rem;
+  border-radius: 0.625rem;
+  border: 0.25rem solid rgba(0, 0, 0, 0.5);
+  padding: 0.75rem;
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background-color: #ededed;
+}
+.moon-contextual-popup.reserve-close {
+  padding-right: 3rem;
+}
+.moon-contextual-popup:before,
+.moon-contextual-popup:after {
+  position: absolute;
+  content: '';
+}
+.moon-contextual-popup.left:before,
+.moon-contextual-popup.left:after,
+.moon-contextual-popup.right:before,
+.moon-contextual-popup.right:after {
+  top: 50%;
+}
+.moon-contextual-popup.below:before,
+.moon-contextual-popup.below:after,
+.moon-contextual-popup.above:before,
+.moon-contextual-popup.above:after {
+  left: 50%;
+  right: auto;
+}
+.moon-contextual-popup.high:before,
+.moon-contextual-popup.high:after {
+  top: 1.75rem;
+}
+.moon-contextual-popup.low:before,
+.moon-contextual-popup.low:after {
+  top: auto;
+  bottom: 1.75rem;
+}
+.moon-contextual-popup.left:before,
+.moon-contextual-popup.right:before {
+  width: 0;
+  height: 0;
+}
+.moon-contextual-popup.below:before,
+.moon-contextual-popup.above:before {
+  width: 0;
+  height: 0;
+}
+.moon-contextual-popup.left:after,
+.moon-contextual-popup.right:after,
+.moon-contextual-popup.below:after,
+.moon-contextual-popup.above:after {
+  width: 0;
+  height: 0;
+}
+.moon-contextual-popup.left {
+  margin: 0 0 0 1.5rem;
+}
+.moon-contextual-popup.left:before,
+.moon-contextual-popup.left:after {
+  left: 0;
+}
+.moon-contextual-popup.left:before {
+  margin: -0.75rem auto auto -1rem;
+  border-top: 0.625rem solid transparent;
+  border-bottom: 0.625rem solid transparent;
+  border-right: 0.75rem solid rgba(0, 0, 0, 0.5);
+}
+.moon-contextual-popup.left:after {
+  margin: -0.75rem auto auto -0.625rem;
+  border-top: 0.625rem solid transparent;
+  border-bottom: 0.625rem solid transparent;
+  border-right: 0.75rem solid #ededed;
+}
+.moon-contextual-popup.left.high:before {
+  margin: -1rem auto auto -1rem;
+}
+.moon-contextual-popup.left.high:after {
+  margin: -1rem auto auto -0.625rem;
+}
+.moon-contextual-popup.left.low:before {
+  margin: auto auto -1rem -1rem;
+}
+.moon-contextual-popup.left.low:after {
+  margin: auto auto -1rem -0.625rem;
+}
+.moon-contextual-popup.right {
+  margin: 0 0 0 -1.5rem;
+}
+.moon-contextual-popup.right:before,
+.moon-contextual-popup.right:after {
+  left: 100%;
+  right: auto;
+}
+.moon-contextual-popup.right:before {
+  margin: -0.625rem auto auto 0.25rem;
+  border-top: 0.625rem solid transparent;
+  border-bottom: 0.625rem solid transparent;
+  border-left: 0.75rem solid rgba(0, 0, 0, 0.5);
+}
+.moon-contextual-popup.right:after {
+  margin: -0.625rem auto auto -0.25rem;
+  border-top: 0.625rem solid transparent;
+  border-bottom: 0.625rem solid transparent;
+  border-left: 0.75rem solid #ededed;
+}
+.moon-contextual-popup.right.high:before {
+  margin: -1rem auto auto 0.25rem;
+}
+.moon-contextual-popup.right.high:after {
+  margin: -1rem auto auto -0.25rem;
+}
+.moon-contextual-popup.right.low:before {
+  margin: auto auto -1rem 0.25rem;
+}
+.moon-contextual-popup.right.low:after {
+  margin: auto auto -1rem -0.25rem;
+}
+.moon-contextual-popup.below.right:before,
+.moon-contextual-popup.above.right:before,
+.moon-contextual-popup.below.right:after,
+.moon-contextual-popup.above.right:after {
+  left: 20%;
+}
+.moon-contextual-popup.below.left:before,
+.moon-contextual-popup.above.left:before,
+.moon-contextual-popup.below.left:after,
+.moon-contextual-popup.above.left:after {
+  left: auto;
+  right: 10%;
+}
+.moon-contextual-popup.below {
+  margin: 1.5rem 0 0 0;
+}
+.moon-contextual-popup.below:before,
+.moon-contextual-popup.below:after {
+  top: 0;
+}
+.moon-contextual-popup.below:before {
+  margin: -1rem auto auto -0.625rem;
+  border-right: 0.625rem solid transparent;
+  border-left: 0.625rem solid transparent;
+  border-bottom: 0.75rem solid rgba(0, 0, 0, 0.5);
+}
+.moon-contextual-popup.below:after {
+  margin: -0.625rem auto auto -0.625rem;
+  border-right: 0.625rem solid transparent;
+  border-left: 0.625rem solid transparent;
+  border-bottom: 0.75rem solid #ededed;
+}
+.moon-contextual-popup.below.right:before {
+  margin: -1.625rem auto auto -0.625rem;
+}
+.moon-contextual-popup.below.right:after {
+  margin: -1.25rem auto auto -0.625rem;
+}
+.moon-contextual-popup.below.left:before {
+  margin: -1.625rem -0.625rem auto auto;
+}
+.moon-contextual-popup.below.left:after {
+  margin: -1.25rem -0.625rem auto auto;
+}
+.moon-contextual-popup.above {
+  margin: -1.5rem 0 0 0;
+}
+.moon-contextual-popup.above:before,
+.moon-contextual-popup.above:after {
+  top: 100%;
+}
+.moon-contextual-popup.above:before {
+  margin: 0.25rem auto auto -0.625rem;
+  border-right: 0.625rem solid transparent;
+  border-left: 0.625rem solid transparent;
+  border-top: 0.75rem solid rgba(0, 0, 0, 0.5);
+}
+.moon-contextual-popup.above:after {
+  margin: -0.125rem auto auto -0.625rem;
+  border-right: 0.625rem solid transparent;
+  border-left: 0.625rem solid transparent;
+  border-top: 0.75rem solid #ededed;
+}
+.moon-contextual-popup.above.right:before {
+  margin: 0.25rem auto auto -0.625rem;
+}
+.moon-contextual-popup.above.right:after {
+  margin: -0.125rem auto auto -0.625rem;
+}
+.moon-contextual-popup.above.left:before {
+  margin: 0.25rem -0.625rem auto auto;
+}
+.moon-contextual-popup.above.left:after {
+  margin: -0.125rem -0.625rem auto auto;
+}
+.enyo-locale-right-to-left .moon-contextual-popup {
+  direction: rtl;
+}
+.enyo-locale-right-to-left .moon-contextual-popup.reserve-close {
+  padding-right: 0.75rem;
+  padding-left: 3rem;
+}
+.moon-contextual-popup-client {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Slider */
+.moon-slider .moon-slider-knob {
+  position: absolute;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 2.5rem;
+  margin: -1.25rem;
+  background-color: #4d4d4d;
+  border: solid 0.25rem transparent;
+  box-sizing: border-box;
+}
+.moon-slider .moon-slider-knob:not(.spotselect).active,
+.moon-slider .moon-slider-knob:not(.spotselect).spotselect,
+.moon-slider .moon-slider-knob:not(.spotselect):active:not(.disabled) {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 1.875rem;
+  margin: -1.875rem;
+  border: solid 0.25rem transparent;
+  box-sizing: border-box;
+}
+.moon-slider .moon-progress-bar-bar.selected {
+  background-color: #cf0652;
+}
+.moon-slider.moon-progress-bar-horizontal {
+  margin: 2.5rem 2rem;
+}
+.moon-slider.moon-progress-bar-horizontal.incrementable {
+  margin-left: 4.5rem;
+  margin-right: 4.5rem;
+}
+.moon-slider.moon-progress-bar-horizontal.incrementable .moon-slider-button {
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+}
+.moon-slider.moon-progress-bar-horizontal.incrementable .moon-slider-button.left {
+  left: -4rem;
+}
+.moon-slider.moon-progress-bar-horizontal.incrementable .moon-slider-button.left:before {
+  left: -0.75rem;
+}
+.moon-slider.moon-progress-bar-horizontal.incrementable .moon-slider-button.right {
+  right: -4rem;
+}
+.moon-slider.moon-progress-bar-horizontal.incrementable .moon-slider-button.right:before {
+  right: -0.75rem;
+}
+.moon-slider.moon-progress-bar-horizontal .moon-slider-knob {
+  top: 0.25rem;
+}
+.moon-slider.moon-progress-bar-vertical {
+  margin: 2.5rem;
+}
+.moon-slider.moon-progress-bar-vertical.incrementable {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.moon-slider.moon-progress-bar-vertical.incrementable .moon-slider-button {
+  position: absolute;
+  left: 50%;
+  margin: 0;
+}
+.moon-slider.moon-progress-bar-vertical.incrementable .moon-slider-button.left {
+  bottom: 0;
+  transform: translateX(-50%) translateY(4rem);
+}
+.moon-slider.moon-progress-bar-vertical.incrementable .moon-slider-button.right {
+  top: 0;
+  transform: translateX(-50%) translateY(-4rem);
+}
+.moon-slider.moon-progress-bar-vertical.incrementable .moon-slider {
+  height: 100%;
+}
+.moon-slider.moon-progress-bar-vertical .moon-slider-knob {
+  left: 0.25rem;
+}
+.moon-slider.moon-progress-bar-vertical .moon-slider-knob .moon-progress-bar-popup-on-left {
+  transform: translateY(-50%) translateX(-0.5rem);
+  top: 50%;
+}
+.moon-slider.moon-progress-bar-vertical .moon-slider-knob .moon-progress-bar-popup-on-right {
+  transform: translateY(-50%) translateX(0.5rem);
+  top: 50%;
+}
+.moon-slider.spotlight > .moon-slider-knob {
+  background-color: #cf0652;
+}
+.moon-slider.spotlight > .moon-slider-knob.spotselect {
+  background-color: #4d4d4d;
+  border: 0.25rem solid #cf0652;
+}
+.moon-slider.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.moon-slider:before {
+  content: '';
+  position: absolute;
+  top: -1.625rem;
+  right: -1.625rem;
+  bottom: -1.625rem;
+  left: -1.625rem;
+}
+
+.moon-simple-picker {
+  display: inline-block;
+  max-width: 15rem;
+  box-sizing: border-box;
+  padding: 0 3rem;
+  position: relative;
+  height: 2.5rem;
+  vertical-align: middle;
+  direction: ltr;
+}
+.moon-simple-picker.block {
+  display: block;
+}
+.moon-simple-picker-button {
+  position: absolute;
+  top: 0;
+  margin: 0;
+}
+.moon-simple-picker-button.left {
+  left: 0;
+}
+.moon-simple-picker-button.right {
+  right: 0;
+}
+.moon-simple-picker-client-wrapper {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.moon-simple-picker-client {
+  white-space: nowrap;
+}
+.moon-simple-picker-client .moon-marquee {
+  text-align: center;
+}
+.moon-simple-picker-client.animated {
+  -webkit-transition: -webkit-transform ease-out 0.3s;
+  -moz-transition: -moz-transform ease-out 0.3s;
+  transition: transform ease-out 0.3s;
+}
+.moon-simple-picker-client > *,
+.moon-simple-picker-client .moon-marquee {
+  width: 100%;
+}
+.moon-simple-picker-client > * {
+  display: inline-block;
+  box-sizing: border-box;
+  line-height: 2.5rem;
+}
+.moon-simple-picker-client.disabled {
+  opacity: 0.6;
+}
+
+/* ToggleSwitch */
+.moon-checkbox.moon-toggle-switch {
+  border-radius: 0.625rem;
+  width: 2.5rem;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  background-color: #4d4d4d;
+  font-family: "Moonstone Icons";
+  position: relative;
+  text-align: left;
+  cursor: default;
+}
+.moon-checkbox.moon-toggle-switch:before {
+  content: '';
+  position: absolute;
+  top: -1.25rem;
+  right: -1.25rem;
+  bottom: -1.25rem;
+  left: -1.25rem;
+}
+.moon-checkbox.moon-toggle-switch .moon-icon {
+  visibility: visible;
+  background-color: transparent;
+  left: 0;
+  color: #a6a6a6;
+  width: 1.25rem;
+  height: inherit;
+  font-size: 2.5rem;
+  line-height: inherit;
+  vertical-align: top;
+}
+.moon-checkbox.moon-toggle-switch[checked] {
+  background-color: #fff;
+}
+.moon-checkbox.moon-toggle-switch[checked] .moon-icon {
+  left: 1.25rem;
+  color: #cf0652;
+}
+.moon-checkbox.moon-toggle-switch[disabled] {
+  background-color: #4d4d4d;
+}
+.moon-checkbox.moon-toggle-switch[disabled] .moon-icon {
+  color: #a6a6a6;
+}
+.moon-checkbox.moon-toggle-switch.animated {
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+.moon-checkbox.moon-toggle-switch.animated .moon-icon {
+  -webkit-transition: left 0.2s, color 0.2s;
+  transition: left 0.2s, color 0.2s;
+}
+.moon-toggle-item.spotlight .moon-checkbox.moon-toggle-switch .moon-icon {
+  opacity: 1;
+}
+
+.moon-header {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  color: #ccc;
+  border-top: 0.125rem solid #505050;
+  border-bottom: 0.25rem solid #404040;
+  position: relative;
+  max-width: 100%;
+  padding: 0 0 0.5rem 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: top left;
+  margin: 0 0.5rem;
+}
+.moon-header.full-bleed {
+  padding: 0 0.75rem 0.5rem 0.75rem;
+  border: 0;
+}
+.moon-header.full-bleed .moon-header-client {
+  left: 0.75rem;
+  right: 0.75rem;
+}
+.moon-header .moon-hspacing > * {
+  vertical-align: bottom;
+}
+.moon-header .moon-header-title-below {
+  margin-top: -0.125rem;
+}
+.moon-header.moon-large-header {
+  height: 15rem;
+}
+.moon-header.moon-large-header .moon-header-title-above {
+  margin-top: 0.25rem;
+  height: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.moon-header.moon-large-header .moon-header-title-above .no-border {
+  border: none;
+}
+.moon-header.moon-large-header .moon-header-title {
+  line-height: 1.3em;
+}
+.moon-header.moon-large-header .moon-header-title .moon-marquee-text {
+  white-space: nowrap;
+}
+.enyo-locale-non-latin .moon-header.moon-large-header .moon-header-title {
+  line-height: 1.5em;
+}
+.moon-header.moon-large-header .moon-header-title-below,
+.moon-header.moon-large-header .moon-header-sub-title-below {
+  line-height: 1.875rem;
+}
+.moon-header.moon-medium-header {
+  height: 10rem;
+}
+.moon-header.moon-medium-header .moon-header-title-above {
+  display: none;
+}
+.moon-header.moon-medium-header .moon-header-title {
+  line-height: 1.3em;
+}
+.enyo-locale-non-latin .moon-header.moon-medium-header .moon-header-title {
+  line-height: 1.5em;
+}
+.moon-header.moon-medium-header .moon-header-title-below,
+.moon-header.moon-medium-header .moon-header-sub-title-below {
+  line-height: 1.625rem;
+}
+.moon-header.moon-small-header {
+  height: 5rem;
+}
+.moon-header.moon-small-header .moon-header-title-above,
+.moon-header.moon-small-header .moon-header-title-below,
+.moon-header.moon-small-header .moon-header-sub-title-below {
+  display: none;
+}
+.moon-header.moon-small-header .moon-header-title {
+  padding: 1.25rem 0 0 0;
+  line-height: 1.3em;
+  font-size: 2.5rem;
+  height: 3.5rem;
+}
+.enyo-locale-non-latin .moon-header.moon-small-header .moon-header-title {
+  line-height: 1.5em;
+}
+.has-close-button .moon-header.moon-large-header .moon-header-title-wrapper,
+.has-close-button .moon-header.moon-medium-header .moon-header-title-wrapper,
+.has-close-button .moon-header.moon-small-header .moon-header-client {
+  margin-right: 3.25rem;
+}
+.enyo-locale-right-to-left .has-close-button .moon-header.moon-large-header .moon-header-title-wrapper,
+.enyo-locale-right-to-left .has-close-button .moon-header.moon-medium-header .moon-header-title-wrapper,
+.enyo-locale-right-to-left .has-close-button .moon-header.moon-small-header .moon-header-client {
+  margin-left: 3.25rem;
+  margin-right: 0;
+}
+.moon-header .moon-header-client {
+  position: absolute;
+  bottom: 0.5rem;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  text-align: right;
+  /* fallback in case text-align:end isn't supported */
+  text-align: end;
+  /* CSS3 for RTL support */
+}
+.moon-header.moon-medium-header .moon-header-client,
+.moon-header.moon-small-header .moon-header-client {
+  display: inline-block;
+  left: auto;
+}
+.moon-header .moon-header-client-text {
+  line-height: 2.5rem;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator {
+  margin: -1px 0rem 0rem;
+  padding: 0rem;
+  border: 0rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator.moon-focused {
+  color: #fff;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator .moon-input {
+  font-family: "Moonstone Miso";
+  font-size: 5rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  margin: 0rem;
+  padding-left: 1px;
+  padding-right: 1px;
+  display: inline-block;
+  box-sizing: border-box;
+  line-height: 1.25em;
+  color: inherit;
+  width: 100%;
+  text-overflow: ellipsis;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator .moon-input::-webkit-input-placeholder {
+  color: #595959;
+  margin-top: 0.5rem;
+  line-height: 1.25em;
+  opacity: 1;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator .moon-input::-moz-placeholder {
+  color: #595959;
+  margin-top: 0.5rem;
+  line-height: 1.25em;
+  opacity: 1;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator.spotlight:not(.moon-focused) .moon-input {
+  color: inherit;
+  background-color: #cf0652;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator.spotlight:not(.moon-focused) .moon-input::-webkit-input-placeholder {
+  color: inherit;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator.spotlight:not(.moon-focused) .moon-input::-moz-placeholder {
+  color: inherit;
+}
+.moon-header.moon-input-header .moon-input-header-input-decorator.spotlight.moon-focused .moon-input {
+  background: none;
+}
+.moon-header.moon-input-header .moon-header-title-below {
+  margin-top: 0;
+}
+.moon-neutral .moon-header {
+  border-top: 0.125rem solid #4d4d4d;
+  border-bottom: 0.25rem solid #4d4d4d;
+}
+.enyo-locale-non-latin.enyo-locale-ja .moon-header .moon-header-title,
+.enyo-locale-non-latin.enyo-locale-ja .moon-header.moon-input-header .moon-input-header-input-decorator > .moon-input {
+  line-height: 1.25em;
+}
+.enyo-locale-non-latin.enyo-locale-ja .moon-header .moon-header-title-below {
+  margin-top: 0;
+}
+.enyo-locale-non-latin .moon-input-header .moon-input-header-input-decorator > .moon-input {
+  font-family: "Moonstone LG Display";
+  font-size: 4.25rem;
+  line-height: 1.5em;
+}
+.enyo-locale-non-latin .moon-input-header .moon-input.moon-header-title::-webkit-input-placeholder {
+  line-height: 1.5em;
+}
+.enyo-locale-non-latin .moon-input-header .moon-input.moon-header-title::-moz-placeholder {
+  line-height: 1.5em;
+}
+.enyo-locale-right-to-left .moon-small-header .moon-header-client,
+.enyo-locale-right-to-left .moon-medium-header .moon-header-client {
+  right: auto;
+  left: 0;
+}
+.moon-header.moon-large-header .moon-header-left {
+  float: left;
+}
+.enyo-locale-right-to-left .moon-header.moon-large-header .moon-header-left {
+  float: right;
+}
+
+/* ContextualPopupDecorator.css */
+.moon-contextual-popup-decorator {
+  position: relative;
+  display: inline-block;
+}
+.moon-contextual-popup-decorator.block {
+  display: block;
+}
+
+/* TooltipDecorator.less */
+.moon-tooltip-decorator {
+  position: relative;
+}
+.moon-tooltip-decorator:not(.block) {
+  display: inline-block;
+}
+
+/* Toggle.css */
+.moon-button.moon-toggle-button {
+  text-align: center;
+  position: relative;
+  padding-right: 2.75rem;
+}
+.moon-button.moon-toggle-button:after {
+  position: absolute;
+  content: "";
+  top: 1.0625rem;
+  right: 1.125rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 416.625rem;
+  background-color: #4d4d4d;
+  border: solid 0.125rem #fff;
+}
+.moon-button.moon-toggle-button[disabled] {
+  border: 0.25rem solid transparent;
+}
+.moon-button.moon-toggle-button[disabled]:after {
+  background-color: #262626;
+  border: solid 0.125rem #6c6c6c;
+}
+.moon-button.moon-toggle-button.moon-toggle-button-on {
+  border: solid 0.25rem #cf0652;
+}
+.moon-button.moon-toggle-button.moon-toggle-button-on:after {
+  background-color: #cf0652;
+  border: solid 0.125rem #fff;
+}
+.moon-button.moon-toggle-button.small {
+  padding-right: 2.375rem;
+}
+.moon-button.moon-toggle-button.small:after {
+  top: 0.5625rem;
+  right: 0.75rem;
+}
+.enyo-locale-right-to-left .moon-button.moon-toggle-button {
+  padding-right: 1.125rem;
+  padding-left: 2.75rem;
+}
+.enyo-locale-right-to-left .moon-button.moon-toggle-button:after {
+  left: 1.125rem;
+  right: auto;
+}
+.enyo-locale-right-to-left .moon-button.moon-toggle-button.small {
+  padding-right: 0.75rem;
+  padding-left: 2.375rem;
+}
+.enyo-locale-right-to-left .moon-button.moon-toggle-button.small:after {
+  left: 0.75rem;
+  right: auto;
+}
+
+/* Button Animated */
+.moon-button.moon-button-animated {
+  overflow: hidden;
+  border-width: 0;
+  padding: 0.25rem 1.375rem;
+}
+.moon-button.moon-button-animated .button-client {
+  vertical-align: top;
+}
+.moon-button.moon-button-animated .button-client > * {
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+.moon-button.moon-button-animated .button-client > :first-child {
+  margin-left: 0;
+}
+.moon-button.moon-button-animated .button-client > :last-child {
+  margin-right: 0;
+}
+.moon-button.moon-button-animated .button-client > .moon-marquee-text-wrapper {
+  display: block;
+}
+.moon-button.moon-button-animated.nearly-spotlight,
+.moon-button.moon-button-animated.nearly-spotlight .moon-icon {
+  color: #fff;
+}
+.moon-button.moon-button-animated .moon-button-animated-frame {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+}
+.moon-button.moon-button-animated .moon-button-animated-root {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.moon-button.moon-button-animated .moon-button-animated-path {
+  fill: #cf0652;
+}
+.moon-button.moon-button-animated.active,
+.moon-button.moon-button-animated.pressed,
+.moon-button.moon-button-animated.spotlight.pressed,
+.moon-button.moon-button-animated.spotlight:active {
+  border-width: 0;
+  color: #fff;
+}
+
+/* Popup.css */
+.moon-popup {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.625rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-transform: translateY(100%) translateZ(0);
+  transform: translateY(100%) translateZ(0);
+  -webkit-transition: -webkit-transform 0.0001s ease;
+  transition: transform 0.0001s ease;
+}
+.moon-popup.animate {
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+}
+.moon-popup.showing {
+  -webkit-transform: translateY(0) translateZ(0);
+  transform: translateY(0) translateZ(0);
+}
+.moon-popup.reserve-close {
+  padding-right: 3.5rem;
+}
+.moon-popup-close {
+  right: 0.5rem;
+  top: 0.5rem;
+}
+.moon-popup-close.moon-icon {
+  position: absolute;
+}
+.moon-popup-close.moon-icon-button {
+  margin: 0;
+}
+.enyo-locale-right-to-left .moon-popup.reserve-close {
+  padding-right: 2rem;
+  padding-left: 3rem;
+}
+.enyo-locale-right-to-left .moon-popup-close {
+  right: auto;
+  left: 0.5rem;
+}
+
+/* ProgressButton.css */
+.moon-progress-button {
+  position: relative;
+  overflow: hidden;
+  border: 0.25rem solid transparent;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+.moon-progress-button.in-progress:active:hover:not([disabled]),
+.moon-progress-button.in-progress {
+  color: #fff;
+  padding: 0.25rem 1.375rem;
+  border-width: 0;
+}
+.moon-progress-button.completed .moon-progress-button-bar {
+  transform: translateX(103%);
+  -webkit-transform: translateX(103%);
+}
+.moon-progress-button.animated .moon-progress-button-bar {
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition: -webkit-transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.moon-progress-button.animated.completed {
+  transition: transform 0.2s ease-in;
+  -webkit-transition: -webkit-transform 0.2s ease-in;
+}
+.moon-progress-button-bar {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 416.625rem;
+  background-color: #cf0652;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+.moon-progress-button-progresspercent {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+}
+
+.moon-checkbox-item {
+  position: relative;
+  overflow: hidden;
+}
+.moon-checkbox-item .moon-checkbox {
+  position: absolute;
+  top: 0;
+  right: 0.375rem;
+}
+.moon-checkbox-item .moon-checkbox-item-label-wrapper {
+  line-height: inherit;
+  margin-right: 1.5rem;
+}
+.moon-checkbox-item.left-handed .moon-checkbox {
+  left: 0.375rem;
+  right: auto;
+}
+.moon-checkbox-item.left-handed .moon-checkbox-item-label-wrapper {
+  margin-right: 0rem;
+  margin-left: 1.5rem;
+}
+.moon-checkbox-item .moon-icon.small > .small-icon-tap-area {
+  left: 0;
+  right: 0;
+}
+.moon-neutral .moon-checkbox[checked]:after {
+  color: #fff;
+}
+/* Right to left */
+.enyo-locale-right-to-left .moon-checkbox-item .moon-checkbox {
+  left: 0.375rem;
+  right: auto;
+}
+.enyo-locale-right-to-left .moon-checkbox-item .moon-checkbox-item-label-wrapper {
+  margin-left: 1.5rem;
+  margin-right: 0rem;
+}
+.enyo-locale-right-to-left .moon-checkbox-item.left-handed .moon-checkbox {
+  left: auto;
+  right: 0.375rem;
+}
+.enyo-locale-right-to-left .moon-checkbox-item.left-handed .moon-checkbox-item-label-wrapper {
+  margin-right: 1.5rem;
+  margin-left: 0rem;
+}
+
+/* Labeled Text Item */
+.moon-labeledtextitem {
+  min-width: 14rem;
+}
+.moon-labeledtextitem .moon-labeledtextitem-header {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  position: relative;
+  vertical-align: top;
+}
+.moon-labeledtextitem .moon-labeledtextitem-text {
+  font-family: "MuseoSans 300";
+  font-size: 1.125rem;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.625rem;
+  text-transform: none;
+  color: #a6a6a6;
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+.enyo-locale-right-to-left .moon-labeledtextitem .moon-labeledtextitem-text {
+  padding-left: 0;
+}
+.enyo-locale-non-latin .moon-labeledtextitem .moon-labeledtextitem-text {
+  font-family: "Moonstone LG Display Light";
+  font-size: 1.125rem;
+  line-height: 1.7em;
+}
+.moon-neutral .moon-labeledtextitem .moon-labeledtextitem-text {
+  color: inherit;
+}
+.moon-labeledtextitem.with-text .moon-labeledtextitem-text {
+  padding-bottom: 0.125rem;
+}
+.moon-labeledtextitem.spotlight > .moon-labeledtextitem-header,
+.moon-labeledtextitem.spotlight > .moon-labeledtextitem-text {
+  color: inherit;
+}
+
+/* SelectableItem.css */
+.moon-selectable-item.selected {
+  padding-left: 2rem;
+}
+.moon-selectable-item.selected:before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: #cf0652;
+}
+.moon-selectable-item.selected.spotlight:before {
+  background-color: #fff;
+}
+.enyo-locale-right-to-left .moon-selectable-item.selected {
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+}
+.enyo-locale-right-to-left .moon-selectable-item.selected:before {
+  left: auto;
+  right: 0.5rem;
+}
+
+/* Drawers.css */
+.moon-drawer {
+  z-index: 10;
+}
+.moon-drawer.moon-drawer-rendered {
+  transition: transform 0.35s ease-out;
+  -webkit-transition: -webkit-transform 0.35s ease-out;
+}
+.moon-drawer-partial-client {
+  padding: 1.5rem 0.75rem 0.75rem;
+}
+.moon-drawer-client {
+  position: relative;
+  padding: 0.75rem;
+}
+.moon-drawers {
+  overflow: hidden;
+}
+.moon-drawers-activator {
+  z-index: 100;
+  font-family: "Moonstone Icons";
+  font-size: 1.75rem;
+  line-height: 1.375rem;
+  height: 0rem;
+  position: absolute;
+  width: 100%;
+  /* The activator & nub are white when a drawer is open */
+  /* Activator is spotlight focused */
+}
+.moon-drawers-activator:before {
+  content: '';
+  display: block;
+  height: 1rem;
+  background-color: #404040;
+}
+.moon-drawers-activator .moon-drawers-activator-icon {
+  margin: -0.625rem auto 0;
+  width: 2.5rem;
+  height: 1.5rem;
+  border-radius: 0 0 1.5rem 1.5rem;
+  display: block;
+  background-color: #404040;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  content: "\0EFFF2";
+  color: #a6a6a6;
+  text-align: center;
+  font-size: inherit;
+  line-height: inherit;
+}
+.moon-drawers-activator.open:before,
+.moon-drawers-activator.open .moon-drawers-activator-icon {
+  color: #4d4d4d;
+  background-color: #fff;
+}
+.moon-drawers-activator.spotlight:before,
+.moon-drawers-activator.spotlight .moon-drawers-activator-icon {
+  color: #fff;
+  background-color: #cf0652;
+}
+/* Drawer Handles */
+.moon-drawers-handle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.moon-drawers-handle-container .moon-drawers-handles {
+  text-align: center;
+  padding: 2rem 0 0.5rem;
+}
+.moon-drawers-handle-container .moon-drawers-handle {
+  display: inline-block;
+  text-align: start;
+  width: 10rem;
+}
+.moon-drawers-drawer-container {
+  transition: transform 0.35s ease-out;
+  -webkit-transition: -webkit-transform 0.35s ease-out;
+}
+.moon-drawers-client {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.35s ease-out;
+  -webkit-transition: -webkit-transform 0.35s ease-out;
+}
+/* If a video player or other controls are behind the drawers, let events pass straight through to them. */
+.moon-drawers > * {
+  pointer-events: all;
+}
+.moon-drawers,
+.moon-drawers-client {
+  pointer-events: none;
+}
+.moon-drawers-client > * {
+  pointer-events: all;
+}
+
+.moon-image {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+.moon-image > .enyo-image {
+  display: block;
+}
+.moon-image > .enyo-image.sized {
+  width: 100%;
+  height: 100%;
+}
+
+.moon-progress-bar.moon-video-player-transport-slider {
+  height: 3.5rem;
+  background-color: #323232;
+  margin: 0;
+}
+.moon-progress-bar.moon-video-player-transport-slider .moon-slider-popup {
+  pointer-events: none;
+}
+.moon-progress-bar.moon-video-player-transport-slider .moon-slider-popup.above {
+  padding-left: 0rem;
+}
+.moon-progress-bar.moon-video-player-transport-slider .knob {
+  position: absolute;
+  width: 4rem;
+  top: 0;
+  height: 2rem;
+  border-radius: 2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #fff;
+  display: none;
+  -webkit-transform-origin: top;
+  transform-origin: top;
+  -webkit-transform: translateZ(0) translateX(-50%) scale(0.5);
+  transform: translateZ(0) translateX(-50%) scale(0.5);
+  -webkit-transition: -webkit-transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s;
+  transition: transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s;
+}
+.moon-video-player.spotlight-5way-mode .moon-progress-bar.moon-video-player-transport-slider .knob {
+  -webkit-transition: -webkit-transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s, left cubic-bezier(0.15, 0.85, 0.53, 1.09) 0.2s;
+  transition: transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s, left cubic-bezier(0.15, 0.85, 0.53, 1.09) 0.2s;
+}
+.moon-progress-bar.moon-video-player-transport-slider .knob:before {
+  content: '';
+  position: absolute;
+  top: -2.875rem;
+  right: -2.875rem;
+  bottom: -2.875rem;
+  left: -2.875rem;
+}
+.moon-progress-bar.moon-video-player-transport-slider .knob::before {
+  left: -6rem;
+  right: -6rem;
+}
+.moon-progress-bar.moon-video-player-transport-slider.visible .knob {
+  display: block;
+}
+.moon-progress-bar.moon-video-player-transport-slider.pressed .knob {
+  -webkit-transform: translateZ(0) translateX(-50%) scale(0.75);
+  transform: translateZ(0) translateX(-50%) scale(0.75);
+}
+.moon-progress-bar.moon-video-player-transport-slider .status-indicator.moon-slider-popup {
+  position: relative;
+  display: table;
+  left: 0;
+  margin: 0 auto;
+}
+.moon-progress-bar.moon-video-player-transport-slider .status-indicator > * {
+  background-color: #4d4d4d;
+}
+.moon-progress-bar.moon-video-player-transport-slider .status-indicator .moon-slider-popup-center {
+  font-family: "Moonstone Miso";
+  font-size: 1.5rem;
+  color: #fff;
+  border-radius: 2rem;
+  line-height: 2rem;
+  padding: 0 1rem;
+}
+.moon-progress-bar.moon-video-player-transport-slider .status-indicator .moon-slider-popup-center .moon-icon {
+  color: inherit;
+}
+.moon-progress-bar.moon-video-player-transport-slider .bar-bar {
+  height: 100%;
+  background-color: #cf0652;
+  position: absolute;
+  top: 0;
+}
+.moon-progress-bar.moon-video-player-transport-slider .bg-bar {
+  height: 100%;
+  background-color: #4d4d4d;
+  position: absolute;
+  top: 0;
+}
+.moon-progress-bar.moon-video-player-transport-slider .popup-label {
+  font-family: "Moonstone Miso Bold";
+  font-size: 1.5rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.moon-progress-bar.moon-video-player-transport-slider .popup-label > * {
+  display: inline-block;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-wrapper {
+  height: 3.5rem;
+  line-height: 3.5rem;
+  top: 0;
+  position: absolute;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-wrapper.start {
+  left: 3rem;
+  text-align: left;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-wrapper.end {
+  right: 3rem;
+  text-align: right;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-bar {
+  width: 0.125rem;
+  height: 1.875rem;
+  margin-top: 0.75rem;
+  background-color: #fff;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-bar.left {
+  float: left;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-bar.right {
+  float: right;
+}
+.moon-progress-bar.moon-video-player-transport-slider .indicator-text {
+  font-size: 1.875rem;
+  font-family: "Moonstone Miso";
+  color: #fff;
+}
+.moon-progress-bar.moon-video-player-transport-slider::before {
+  top: 1px;
+  right: -3rem;
+  bottom: auto;
+  left: -3rem;
+  height: 3.375rem;
+}
+.enyo-locale-non-latin .moon-video-player-transport-slider .popup-label {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+.enyo-locale-non-latin .moon-video-player-transport-slider .indicator-text {
+  font-family: "Moonstone LG Display";
+}
+.enyo-locale-right-to-left .moon-video-player-transport-slider .indicator-text {
+  direction: rtl;
+}
+
+/* Calendar.css */
+.moon-calendar-picker {
+  display: inline-block;
+  text-align: center;
+  width: 24.5rem;
+  background-color: #ededed;
+  border-radius: 0.625rem;
+  margin: 0 0.75rem;
+  padding: 0.75rem 0;
+}
+.moon-calendar-picker > * {
+  display: inline-block;
+}
+.moon-calendar-picker .moon-simple-picker {
+  max-width: 10.5rem;
+}
+.moon-calendar-picker .moon-simple-picker .moon-simple-picker-client > * {
+  color: #fff;
+}
+.moon-calendar-picker .moon-calendar-picker-month {
+  margin: 0 0 0 1.25rem;
+  float: left;
+}
+.moon-calendar-picker .moon-calendar-picker-year {
+  margin: 0 1.25rem 0 0;
+  float: right;
+}
+.moon-calendar-picker .moon-calendar-picker-day {
+  font-family: "MuseoSans 700";
+  font-size: 1.25rem;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+.moon-small-header .moon-calendar-picker .moon-calendar-picker-day {
+  font-size: 1.125rem;
+}
+.moon-calendar-picker .moon-calendar-picker-day.small {
+  font-size: 0.875rem;
+}
+.moon-calendar-picker .moon-neutral .moon-calendar-picker-day-base {
+  width: 2.5rem;
+  color: #a2a2a2;
+  margin: 0.375rem;
+  border-color: #a2a2a2;
+  display: inline-block;
+}
+.enyo-locale-right-to-left .moon-calendar-picker-month {
+  margin: 0 1.25rem 0 0;
+  float: right;
+}
+.enyo-locale-right-to-left .moon-calendar-picker-year {
+  margin: 0 0 0 1.25rem;
+  float: left;
+}
+.moon-calendar-picker-date {
+  font-family: "MuseoSans 700";
+  font-size: 1.25rem;
+  color: #fff;
+  width: 2.5rem;
+  line-height: 2.5rem;
+  border-radius: 416.625rem;
+  border: solid 0.375rem transparent;
+  display: inline-block;
+}
+.moon-calendar-picker-date.spotlight,
+.moon-calendar-picker-date.active {
+  background-color: #cf0652;
+  border: solid 0.375rem #ededed;
+}
+.moon-calendar-picker-date.moon-calendar-picker-date-shadow {
+  color: #a2a2a2;
+}
+.moon-calendar-picker-date.moon-calendar-picker-date-shadow.spotlight {
+  color: #fff;
+}
+.enyo-locale-non-latin .moon-calendar-picker-day {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.375rem;
+}
+.enyo-locale-non-latin .moon-calendar-picker-date {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.375rem;
+}
+
+/* 
+	TODO: Clean up and move rules here from Scroller.less and PagingControl.less
+	when new scroller implementation (based on Scrollable mixin) is complete.
+
+	For now, to avoid copy-paste and redundant bug-fix work, we are directly
+	including those .less files from the ScrollControls package.json.
+*/
+/* ScrollControls.less */
+.moon-scroller-v-column,
+.moon-scroller-h-column {
+  z-index: 100;
+}
+
+/* 
+	TODO: Clean up and move rules here to ScrollControls.less
+	when new scroller implementation (based on Scrollable mixin) is complete.
+
+	For now, to avoid copy-paste and redundant bug-fix work, we are directly
+	including this .less file from the ScrollControls package.json.
+*/
+/* Scroller Page Controls */
+.moon-icon-button.moon-paging-button {
+  position: absolute;
+  margin: 0;
+  overflow: hidden;
+}
+.moon-icon-button.moon-paging-button.top {
+  top: 0;
+}
+.moon-icon-button.moon-paging-button.right {
+  right: 0;
+}
+.moon-icon-button.moon-paging-button.bottom {
+  bottom: 0;
+}
+.moon-icon-button.moon-paging-button.left {
+  left: 0;
+}
+.moon-neutral .moon-icon-button.moon-paging-button.disabled {
+  color: #4d4d4d;
+}
+
+.moon-panel {
+  overflow: hidden;
+  padding: 0;
+  padding: 0.75rem 0.5rem;
+  height: 100%;
+}
+.moon-panel.enyo-fit {
+  height: auto;
+}
+.moon-panel-body {
+  overflow: hidden;
+  position: relative;
+  padding-top: 0.5rem;
+  z-index: 1;
+}
+
+/* List Actions */
+.moon-list-actions .moon-icon-button {
+  margin: 0;
+}
+.moon-list-actions-popup .moon-list-actions-popup-width {
+  width: 17rem;
+}
+.moon-list-actions-popup .moon-list-actions-scroller .enyo-scroller,
+.moon-list-actions-popup .moon-list-actions-scroller .enyo-data-list {
+  height: 12.5rem;
+}
+.moon-list-actions-popup.left.list-actions-1h:before,
+.moon-list-actions-popup.left.list-actions-1h:after {
+  right: 1rem;
+}
+.moon-list-actions-popup.right.list-actions-1h:before,
+.moon-list-actions-popup.right.list-actions-1h:after {
+  left: 1rem;
+}
+.moon-list-actions-popup.left.list-actions-2h:before,
+.moon-list-actions-popup.left.list-actions-2h:after {
+  right: 4.25rem;
+}
+.moon-list-actions-popup.right.list-actions-2h:before,
+.moon-list-actions-popup.right.list-actions-2h:after {
+  left: 4.25rem;
+}
+.moon-list-actions-popup.left.list-actions-3h:before,
+.moon-list-actions-popup.left.list-actions-3h:after {
+  right: 7.5rem;
+}
+.moon-list-actions-popup.right.list-actions-3h:before,
+.moon-list-actions-popup.right.list-actions-3h:after {
+  left: 7.5rem;
+}
+.moon-list-actions-popup.left.list-actions-4h:before,
+.moon-list-actions-popup.left.list-actions-4h:after {
+  right: 10.75rem;
+}
+.moon-list-actions-popup.right.list-actions-4h:before,
+.moon-list-actions-popup.right.list-actions-4h:after {
+  left: 10.75rem;
+}
+.moon-list-actions-popup.left.list-actions-5h:before,
+.moon-list-actions-popup.left.list-actions-5h:after {
+  right: 14rem;
+}
+.moon-list-actions-popup.right.list-actions-5h:before,
+.moon-list-actions-popup.right.list-actions-5h:after {
+  left: 14rem;
+}
+
+.moon-application-close-button {
+  position: absolute;
+  top: 1.25rem;
+  right: 1rem;
+  left: auto;
+  z-index: 1;
+  -webkit-transition: -webkit-transform 0.1s ease-out, opacity 0.1s ease-out;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+.moon-application-close-button .moon-icon-button {
+  margin: 0;
+}
+.enyo-arranger-fit > .moon-application-close-button {
+  width: initial !important;
+  height: initial !important;
+}
+.enyo-locale-right-to-left .moon-application-close-button {
+  left: 1rem;
+  right: auto;
+}
+
+/* Dialog.css */
+.moon-dialog {
+  padding-bottom: 0;
+}
+.moon-dialog .moon-dialog-title-wrapper,
+.moon-dialog .moon-dialog-content,
+.moon-dialog .moon-dialog-client {
+  margin-bottom: 1.625rem;
+}
+.moon-dialog .moon-dialog-title-wrapper.use-divider {
+  padding-bottom: 1rem;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.moon-dialog .moon-dialog-title {
+  line-height: 1.3em;
+}
+.moon-dialog .moon-dialog-client {
+  text-align: end;
+}
+.moon-dialog.reserve-close {
+  padding-left: 1.625rem;
+  padding-right: 1.625rem;
+}
+.enyo-locale-right-to-left .moon-dialog.reserve-close {
+  padding-left: 1.625rem;
+  padding-right: 1.625rem;
+}
+.enyo-locale-right-to-left .moon-dialog.reserve-close {
+  padding-left: 1.625rem;
+  padding-right: 1.625rem;
+}
+.moon-dialog.reserve-close .moon-popup-close {
+  top: 1.625rem;
+  right: 1.625rem;
+}
+.enyo-locale-right-to-left .moon-dialog.reserve-close .moon-popup-close {
+  right: initial;
+  left: 1.625rem;
+}
+.moon-dialog.reserve-close .moon-dialog-title-wrapper,
+.moon-dialog.reserve-close .moon-dialog-content {
+  margin-left: 0;
+  margin-right: 3rem;
+}
+.enyo-locale-right-to-left .moon-dialog.reserve-close .moon-dialog-title-wrapper,
+.enyo-locale-right-to-left .moon-dialog.reserve-close .moon-dialog-content {
+  margin-left: 3rem;
+  margin-right: 0;
+}
+.enyo-locale-right-to-left .moon-dialog.reserve-close .moon-dialog-title-wrapper,
+.enyo-locale-right-to-left .moon-dialog.reserve-close .moon-dialog-content {
+  margin-left: 3rem;
+  margin-right: 0;
+}
+
+.moon-toggle-item {
+  display: block;
+  position: relative;
+}
+.moon-toggle-item .moon-checkbox.moon-toggle-switch {
+  top: 0.625rem;
+  /* To override top:10px set by .moon-checkbox-item .moon-checkbox so the indicator vertically middle align */
+  right: 0.5rem;
+}
+.moon-toggle-item .moon-toggle-item-label-wrapper {
+  margin-right: 3rem;
+}
+.enyo-locale-right-to-left .moon-toggle-item .moon-checkbox.moon-toggle-switch {
+  left: 0.5rem;
+  right: auto;
+}
+.enyo-locale-right-to-left .moon-toggle-item .moon-toggle-item-label-wrapper {
+  margin-left: 3rem;
+  margin-right: 0;
+}
+
+/* FormCheckbox.css */
+.moon-item.moon-formcheckbox-item {
+  padding: 0 0 0 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.moon-item.moon-formcheckbox-item .moon-checkbox-item-label-wrapper {
+  padding: 0.125rem 0.5rem;
+  margin-left: 2rem;
+}
+.moon-item.moon-formcheckbox-item,
+.moon-item.moon-formcheckbox-item.spotlight {
+  background-color: transparent;
+}
+.moon-item.moon-formcheckbox-item .moon-checkbox {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 416.625rem;
+  background-color: #404040;
+  line-height: 2rem;
+  text-align: center;
+}
+.moon-item.moon-formcheckbox-item .moon-checkbox .moon-icon {
+  padding-bottom: 0.125rem;
+}
+.moon-item.moon-formcheckbox-item.spotlight .moon-checkbox {
+  background-color: #cf0652;
+}
+.moon-item.moon-formcheckbox-item.spotlight .moon-checkbox-item-label-wrapper {
+  color: #a6a6a6;
+}
+.moon-neutral .moon-item.moon-formcheckbox-item.spotlight .moon-checkbox-item-label-wrapper {
+  color: #4d4d4d;
+}
+.enyo-locale-right-to-left .moon-item.moon-formcheckbox-item {
+  padding: 0 0.5rem 0 0;
+}
+.enyo-locale-right-to-left .moon-item.moon-formcheckbox-item .moon-checkbox-item-label-wrapper {
+  margin-left: auto;
+  margin-right: 2.5rem;
+}
+.enyo-locale-right-to-left .moon-item.moon-formcheckbox-item .moon-checkbox {
+  right: 0.5rem;
+}
+
+.moon-imageitem {
+  display: block;
+  clear: both;
+  min-width: 22.5rem;
+  margin-top: 0rem;
+  padding-top: 0rem;
+  padding-bottom: 0.5rem;
+  height: 8.5rem;
+  overflow: hidden;
+}
+.moon-imageitem img {
+  width: 5.5rem;
+  height: 8rem;
+  padding: 0rem;
+  margin: 0.5rem 2.5rem 0.5rem 0rem;
+  display: inline-block;
+  float: left;
+}
+.moon-imageitem.align-right img {
+  float: right;
+  margin-right: 0rem;
+  margin-left: 2.5rem;
+}
+.moon-imageitem.spotlight .moon-labeledtextitem-text {
+  color: inherit;
+}
+
+/* Radio Item */
+.moon-radio-item {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 10rem;
+  margin-right: 0.5rem;
+}
+.moon-radio-item,
+.moon-radio-item.moon-item {
+  padding-left: 2rem;
+}
+.moon-radio-item:before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  border: solid 0.125rem #fff;
+  border-radius: 0.375rem;
+  background-color: #4d4d4d;
+}
+.moon-radio-item.selected:before {
+  background-color: #cf0652;
+}
+.enyo-locale-right-to-left .moon-radio-item {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+.enyo-locale-right-to-left .moon-radio-item,
+.enyo-locale-right-to-left .moon-radio-item.moon-item {
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+}
+.enyo-locale-right-to-left .moon-radio-item:before {
+  left: auto;
+  right: 0.5rem;
+}
+
+/* AudioPlayback.less */
+.moon-audio-playback {
+  font-size: 1.25rem;
+}
+.moon-audio-playback .moon-drawer-partial-client {
+  padding: 1.08333rem 0 0 0;
+}
+.moon-audio-playback .moon-audio-playback-top {
+  background-color: rgba(0, 0, 0, 0.2);
+  direction: ltr;
+  padding: 1.5rem 1rem;
+}
+.moon-audio-playback .moon-audio-playback-bottom {
+  position: relative;
+}
+.moon-audio-playback .moon-audio-track-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0;
+}
+.moon-audio-playback .moon-audio-track-info {
+  max-width: 23.25rem;
+  padding: 0 0.5rem;
+}
+.moon-audio-playback .moon-audio-track-info > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.moon-audio-playback .moon-audio-control-buttons {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  margin: 0;
+}
+.moon-audio-playback .moon-audio-more-buttons {
+  float: right;
+  max-width: 30rem;
+  text-align: right;
+}
+.moon-audio-playback .moon-audio-play-time {
+  height: 3.5rem;
+  line-height: 3.5rem;
+  top: 0;
+  position: absolute;
+  font-size: 1.875rem;
+  font-family: "Moonstone Miso";
+  color: #fff;
+  pointer-events: none;
+}
+.moon-audio-playback .moon-audio-play-time.start {
+  left: 3rem;
+  text-align: left;
+}
+.moon-audio-playback .moon-audio-play-time.end {
+  right: 3rem;
+  text-align: right;
+}
+.moon-audio-playback .moon-audio-play-time.left {
+  left: 3rem;
+  text-align: left;
+}
+.moon-audio-playback .moon-audio-play-time.right {
+  right: 3rem;
+  text-align: right;
+}
+.moon-audio-playback .moon-audio-track-count.right {
+  float: right;
+}
+.moon-audio-playback .enyo-locale-right-to-left .moon-audio-track-info {
+  text-align: right;
+  direction: rtl;
+}
+.moon-audio-playback .moon-audio-icon-button {
+  margin: 0 0.16667rem;
+}
+.moon-audio-playback .moon-audio-slider {
+  height: 3.5rem;
+  background-color: #323232;
+  margin: 0;
+}
+.moon-audio-playback .moon-audio-slider .moon-slider-popup {
+  pointer-events: none;
+}
+.moon-audio-playback .moon-audio-slider .moon-slider-popup.above {
+  padding-left: 0rem;
+}
+.moon-audio-playback .moon-audio-slider .knob {
+  position: absolute;
+  width: 4rem;
+  top: 0;
+  height: 2rem;
+  border-radius: 2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #fff;
+  display: none;
+  -webkit-transform-origin: top;
+  transform-origin: top;
+  -webkit-transform: translateZ(0) translateX(-50%) scale(0.5);
+  transform: translateZ(0) translateX(-50%) scale(0.5);
+  -webkit-transition: -webkit-transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s;
+  transition: transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s;
+}
+.moon-video-player.spotlight-5way-mode .moon-audio-playback .moon-audio-slider .knob {
+  -webkit-transition: -webkit-transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s, left cubic-bezier(0.15, 0.85, 0.53, 1.09) 0.2s;
+  transition: transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s, left cubic-bezier(0.15, 0.85, 0.53, 1.09) 0.2s;
+}
+.moon-audio-playback .moon-audio-slider .knob:before {
+  content: '';
+  position: absolute;
+  top: -2.875rem;
+  right: -2.875rem;
+  bottom: -2.875rem;
+  left: -2.875rem;
+}
+.moon-audio-playback .moon-audio-slider .knob::before {
+  left: -6rem;
+  right: -6rem;
+}
+.moon-audio-playback .moon-audio-slider.visible .knob {
+  display: block;
+}
+.moon-audio-playback .moon-audio-slider.pressed .knob {
+  -webkit-transform: translateZ(0) translateX(-50%) scale(0.75);
+  transform: translateZ(0) translateX(-50%) scale(0.75);
+}
+.moon-audio-playback .moon-audio-slider .status-indicator.moon-slider-popup {
+  position: relative;
+  display: table;
+  left: 0;
+  margin: 0 auto;
+}
+.moon-audio-playback .moon-audio-slider .status-indicator > * {
+  background-color: #4d4d4d;
+}
+.moon-audio-playback .moon-audio-slider .status-indicator .moon-slider-popup-center {
+  font-family: "Moonstone Miso";
+  font-size: 1.5rem;
+  color: #fff;
+  border-radius: 2rem;
+  line-height: 2rem;
+  padding: 0 1rem;
+}
+.moon-audio-playback .moon-audio-slider .status-indicator .moon-slider-popup-center .moon-icon {
+  color: inherit;
+}
+.moon-audio-playback .moon-audio-slider .bar-bar {
+  height: 100%;
+  background-color: #cf0652;
+  position: absolute;
+  top: 0;
+}
+.moon-audio-playback .moon-audio-slider .bg-bar {
+  height: 100%;
+  background-color: #4d4d4d;
+  position: absolute;
+  top: 0;
+}
+.moon-audio-playback .moon-audio-slider .popup-label {
+  font-family: "Moonstone Miso Bold";
+  font-size: 1.5rem;
+  -webkit-font-kerning: normal;
+  font-kerning: normal;
+  -webkit-font-kerning: none;
+  font-kerning: none;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.moon-audio-playback .moon-audio-slider .popup-label > * {
+  display: inline-block;
+}
+.moon-audio-playback .moon-audio-slider .indicator-wrapper {
+  height: 3.5rem;
+  line-height: 3.5rem;
+  top: 0;
+  position: absolute;
+}
+.moon-audio-playback .moon-audio-slider .indicator-wrapper.start {
+  left: 3rem;
+  text-align: left;
+}
+.moon-audio-playback .moon-audio-slider .indicator-wrapper.end {
+  right: 3rem;
+  text-align: right;
+}
+.moon-audio-playback .moon-audio-slider .indicator-bar {
+  width: 0.125rem;
+  height: 1.875rem;
+  margin-top: 0.75rem;
+  background-color: #fff;
+}
+.moon-audio-playback .moon-audio-slider .indicator-bar.left {
+  float: left;
+}
+.moon-audio-playback .moon-audio-slider .indicator-bar.right {
+  float: right;
+}
+.moon-audio-playback .moon-audio-slider .indicator-text {
+  font-size: 1.875rem;
+  font-family: "Moonstone Miso";
+  color: #fff;
+}
+.moon-audio-playback .moon-audio-slider::before {
+  top: 1px;
+  right: -3rem;
+  bottom: auto;
+  left: -3rem;
+  height: 3.375rem;
+}
+.moon-audio-playback .moon-audio-slider.spotlight .moon-audio-slider-knob {
+  display: block;
+}
+.moon-audio-playback .moon-audio-slider-knob {
+  position: absolute;
+  width: 4rem;
+  top: 0;
+  height: 2rem;
+  border-radius: 2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #fff;
+  display: none;
+  -webkit-transform-origin: top;
+  transform-origin: top;
+  -webkit-transform: translateZ(0) translateX(-50%) scale(0.5);
+  transform: translateZ(0) translateX(-50%) scale(0.5);
+  -webkit-transition: -webkit-transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s;
+  transition: transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s;
+}
+.moon-video-player.spotlight-5way-mode .moon-audio-playback .moon-audio-slider-knob {
+  -webkit-transition: -webkit-transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s, left cubic-bezier(0.15, 0.85, 0.53, 1.09) 0.2s;
+  transition: transform cubic-bezier(0.15, 0.85, 0.6, 1.65) 0.2s, left cubic-bezier(0.15, 0.85, 0.53, 1.09) 0.2s;
+}
+.moon-audio-playback .moon-audio-slider-knob:before {
+  content: '';
+  position: absolute;
+  top: -2.875rem;
+  right: -2.875rem;
+  bottom: -2.875rem;
+  left: -2.875rem;
+}
+.moon-audio-playback .moon-audio-slider-knob::before {
+  left: -6rem;
+  right: -6rem;
+}
+.moon-audio-playback .moon-audio-slider-bar-bar {
+  height: 100%;
+  background-color: #cf0652;
+  position: absolute;
+  top: 0;
+}
+.moon-audio-playback .moon-audio-slider-bg-bar {
+  height: 100%;
+  background-color: #4d4d4d;
+  position: absolute;
+  top: 0;
+}
+.moon-audio-playback .moon-audio-slider-taparea {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.moon-audio-playback .moon-audio-slider-taparea.pressed {
+  position: fixed;
+  top: 0;
+}
+
+.moon-gridlist-imageitem {
+  display: inline-block;
+  overflow: hidden;
+  border: 0.25rem solid transparent;
+  /* Adding this to "reset" some of the styling applied to moon.Image. */
+}
+.moon-gridlist-imageitem .caption {
+  font-family: "MuseoSans 700";
+  font-size: 1.25rem;
+  color: #a6a6a6;
+}
+.moon-small-header .moon-gridlist-imageitem .caption {
+  font-size: 1.125rem;
+}
+.moon-gridlist-imageitem .sub-caption {
+  font-family: "MuseoSans 300";
+  font-size: 1.375rem;
+  line-height: 1.625rem;
+  color: #a6a6a6;
+}
+.moon-gridlist-imageitem .sub-caption a:link {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-gridlist-imageitem .sub-caption a:visited {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-gridlist-imageitem .sub-caption a:hover {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-gridlist-imageitem .sub-caption a:active {
+  color: #cf0652;
+  text-decoration: none;
+}
+.moon-gridlist-imageitem.selected {
+  border: 0.25rem solid #404040;
+  background-color: #404040;
+}
+.moon-gridlist-imageitem.spotlight {
+  border: 0.25rem solid #cf0652;
+  background-color: #cf0652;
+}
+.moon-gridlist-imageitem.selected .caption,
+.moon-gridlist-imageitem.selected .sub-caption,
+.moon-gridlist-imageitem.spotlight .caption,
+.moon-gridlist-imageitem.spotlight .sub-caption {
+  color: #fff;
+}
+.moon-gridlist-imageitem.sized-image.use-caption,
+.moon-gridlist-imageitem.sized-image.use-subcaption {
+  padding-bottom: 1.75rem;
+}
+.moon-gridlist-imageitem.sized-image > .caption,
+.moon-gridlist-imageitem.sized-image > .sub-caption {
+  position: absolute;
+  bottom: 0;
+}
+.moon-gridlist-imageitem.sized-image.use-caption.use-subcaption {
+  padding-bottom: 4rem;
+}
+.moon-gridlist-imageitem.sized-image.use-caption.use-subcaption > .caption {
+  position: absolute;
+  bottom: 2rem;
+}
+.moon-gridlist-imageitem .moon-image {
+  display: block;
+  margin: 0;
+}
+.moon-gridlist-imageitem:not(.sized-image) {
+  padding-bottom: 4rem;
+}
+.enyo-locale-non-latin .moon-gridlist-imageitem .caption {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.375rem;
+}
+.enyo-locale-non-latin .moon-gridlist-imageitem .sub-caption {
+  font-family: "Moonstone LG Display Light";
+  font-size: 1.125rem;
+  line-height: 1.7em;
+}
+
+/* 
+	TODO: Clean up and move rules here to ScrollControls.less
+	when new scroller implementation (based on Scrollable mixin) is complete.
+
+	For now, to avoid copy-paste and redundant bug-fix work, we are directly
+	including this .less file from the ScrollControls package.json.
+*/
+.moon-scroller-client-wrapper,
+.moon-scroller-viewport {
+  box-sizing: border-box;
+  height: 100%;
+}
+/* CSS for moon.ScrollStrategy */
+.matrix-scroll-client {
+  width: auto;
+  height: auto;
+  position: relative;
+  overflow: visible;
+}
+.moon-scroller-client-wrapper.v-scroll-enabled {
+  padding-right: 3rem;
+}
+.enyo-locale-right-to-left .moon-scroller-client-wrapper.v-scroll-enabled {
+  padding-right: 0;
+  padding-left: 3rem;
+}
+.moon-scroller-client-wrapper.h-scroll-enabled {
+  padding-bottom: 2.5rem;
+}
+/* Default states for horizontal and vertical scrollbars */
+.moon-scroller-v-column,
+.moon-scroller-h-column {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.1s linear;
+  -moz-transition: opacity 0.1s linear;
+  -webkit-transition: opacity 0.1s linear;
+  transform: translateZ(0);
+  -o-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+/* Flip the horizontal scroller for RTL mode */
+.enyo-locale-right-to-left .moon-scroller-h-column {
+  -webkit-transform: translateZ(1px) scale(-1);
+}
+/* Toggle opacity with .visible class */
+.moon-scroller-v-column.visible,
+.moon-scroller-h-column.visible {
+  opacity: 1;
+}
+/* Toggle opacity when enabled */
+.moon-scroller-v-column.v-scroll-enabled,
+.moon-scroller-h-column.h-scroll-enabled {
+  visibility: visible;
+}
+/* Default position for vertical scrollbar */
+.moon-scroller-v-column {
+  top: 0rem;
+  bottom: 0rem;
+  right: 0.5rem;
+  width: 2.5rem;
+}
+.enyo-locale-right-to-left .moon-scroller-v-column {
+  right: auto;
+  left: 0.5rem;
+}
+/* Default position for horizontal scrollbar */
+.moon-scroller-h-column {
+  left: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  height: 2.5rem;
+}
+/* Shorten vertical column when horizontal column is enabled */
+.moon-scroller-v-column.h-scroll-enabled {
+  bottom: 2.5rem;
+}
+/* Shorten horizontal column when vertical column is enabled */
+.moon-scroller-h-column.v-scroll-enabled {
+  right: 2.5rem;
+}
+.enyo-locale-right-to-left .moon-scroller-h-column.v-scroll-enabled {
+  right: 0;
+  left: 2.5rem;
+}
+.moon-scroller-thumb-container {
+  position: absolute;
+}
+.moon-scroller-hthumb-container {
+  left: 2.5rem;
+  right: 2.5rem;
+  bottom: 0rem;
+  height: 2.5rem;
+}
+.moon-scroller-vthumb-container {
+  top: 2.5rem;
+  bottom: 2.5rem;
+  right: 0rem;
+  width: 2.5rem;
+}
+.moon-scroller-hthumb,
+.moon-scroller-vthumb {
+  transition: opacity 0.1s linear;
+  -moz-transition: opacity 0.1s linear;
+  -webkit-transition: opacity 0.1s linear;
+}
+.moon-scroller-hthumb {
+  bottom: 1.16667rem;
+}
+.moon-scroller-vthumb {
+  right: 1.16667rem;
+}
+.moon-scroller-hthumb.hidden,
+.moon-scroller-vthumb.hidden {
+  opacity: 0;
+}
+.moon-scroller-client-wrapper .enyo-new-thumb {
+  background: #a6a6a6;
+}
+.moon-neutral .moon-scroller-client-wrapper .enyo-new-thumb {
+  background: rgba(50, 50, 50, 0.8);
+}
+
+/* IntegerPicker.css */
+.moon-scroll-picker-container {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  vertical-align: top;
+}
+/*disabled*/
+.moon-scroll-picker-container.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+.moon-scroll-picker {
+  direction: ltr;
+  height: 4rem;
+  border-top: solid 1.25rem transparent;
+  border-bottom: solid 1.25rem transparent;
+  border-radius: 2rem;
+}
+.spotlight .moon-scroll-picker {
+  background: #cf0652;
+  color: #fff;
+  pointer-events: none;
+}
+.moon-scroll-picker-item {
+  white-space: nowrap;
+  padding: 0 0.25rem 0.125rem 0.25rem;
+  min-width: 2rem;
+  height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  background: transparent;
+}
+.moon-scroll-picker-buffer {
+  white-space: nowrap;
+  padding: 0 0.25rem 0.125rem 0.25rem;
+  height: 0;
+  opacity: 0;
+}
+.moon-scroll-picker-overlay-container {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 1.25rem;
+  font-family: "Moonstone Icons";
+}
+.moon-scroll-picker-overlay-container.next {
+  top: 0;
+}
+.moon-scroll-picker-overlay-container.next:after {
+  content: "\0EFFF1";
+  font-size: 3rem;
+  line-height: 1.625rem;
+}
+.moon-scroll-picker-overlay-container.previous {
+  bottom: 0;
+}
+.moon-scroll-picker-overlay-container.previous:after {
+  content: "\0EFFF2";
+  font-size: 3rem;
+  line-height: 1.125rem;
+}
+.spotlight .moon-scroll-picker-overlay-container {
+  color: #fff;
+}
+.spotlight .moon-scroll-picker-overlay-container.next:after {
+  content: "\0EFFEE";
+  line-height: 1.875rem;
+}
+.spotlight .moon-scroll-picker-overlay-container.previous:after {
+  content: "\0EFFED";
+  line-height: 1rem;
+}
+.selected .moon-scroll-picker-overlay {
+  position: absolute;
+  height: 1.5rem;
+  width: 100%;
+  background-color: #cf0652;
+}
+.selected .moon-scroll-picker-overlay.next {
+  top: 0;
+  border-style: solid;
+  border-width: 0;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-top-width: 0.25rem;
+  border-radius: 2rem 2rem 0 0;
+}
+.selected .moon-scroll-picker-overlay.next:after {
+  content: "\0EFFF1";
+  font-size: 3rem;
+  line-height: 1.375rem;
+}
+.selected .moon-scroll-picker-overlay.previous {
+  bottom: 0;
+  border-style: solid;
+  border-width: 0;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-bottom-width: 0.25rem;
+  border-radius: 0 0 2rem 2rem;
+}
+.selected .moon-scroll-picker-overlay.previous:after {
+  content: "\0EFFF2";
+  font-size: 3rem;
+  line-height: 1.875rem;
+}
+.moon-scroll-picker-taparea {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  bottom: -0.5rem;
+  left: -0.5rem;
+}
+
+.moon-video-player {
+  position: relative;
+  display: inline-block;
+  background-color: #000;
+  /* Fullscreen CSS */
+}
+.moon-video-player.spotlight-5way-mode {
+  pointer-events: none;
+}
+.moon-video-player .moon-video-player-container {
+  display: block;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+.moon-video-player .moon-video-player-video {
+  position: absolute;
+  display: block;
+  margin: 0rem auto;
+  height: 100%;
+  width: 100%;
+}
+.moon-video-player .moon-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -1.5rem;
+  margin-left: -1.5rem;
+}
+.moon-video-player:-webkit-full-screen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-webkit-full-screen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-moz-full-screen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-moz-full-screen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-ms-fullscreen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-ms-fullscreen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-o-full-screen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-o-full-screen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:fullscreen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:fullscreen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-webkit-full-screen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-webkit-full-screen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-moz-full-screen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-moz-full-screen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-ms-fullscreen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-ms-fullscreen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:-o-full-screen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:-o-full-screen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:fullscreen {
+  position: static !important;
+  display: block !important;
+  margin: 0;
+}
+.moon-video-player:fullscreen .moon-video-player-video {
+  position: static;
+}
+.moon-video-player:not(.enyo-fullscreen) {
+  margin: 0 0.5rem;
+}
+.enyo-locale-right-to-left .moon-video-player .moon-video-player-premium-placeholder-right .moon-icon-button {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+/* --- Fullscreen Video UI --- */
+.moon-video-player-fullscreen {
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.1s linear;
+  -webkit-transition: background-color 0.1s linear;
+  -moz-transition: background-color 0.1s linear;
+}
+.moon-video-player-fullscreen.scrim {
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0);
+}
+.moon-video-player-fullscreen .moon-video-player-top {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  direction: ltr;
+  padding: 1rem 3rem;
+}
+.moon-video-player-fullscreen .moon-video-player-top.always {
+  display: block;
+}
+.moon-video-player-fullscreen .moon-video-player-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0);
+  direction: ltr;
+}
+.moon-video-player-fullscreen .moon-video-player-controls-frame {
+  padding: 1rem 3rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.moon-video-player-fullscreen .moon-video-player-controls-frame .moon-video-player-controls-frame-center {
+  position: relative;
+}
+.moon-video-player-fullscreen .moon-video-player-controls-frame .moon-video-player-controls-container {
+  height: 3.5rem;
+}
+.moon-video-player-fullscreen .moon-video-player-controls-frame .moon-video-player-more-controls {
+  border-left: 0.125rem solid white;
+  padding-left: 0.25rem;
+}
+.enyo-locale-right-to-left .moon-video-player-fullscreen .moon-video-player-controls-frame .moon-video-player-more-controls {
+  border-left-style: none;
+  border-right: 0.125rem solid white;
+  padding-left: 0;
+  padding-right: 0.25rem;
+  direction: rtl;
+}
+.moon-video-player-fullscreen .moon-video-player-controls-frame .moon-video-player-more-controls > * {
+  vertical-align: middle;
+}
+.moon-video-player-fullscreen .moon-video-player-control-buttons {
+  white-space: nowrap;
+  text-align: center;
+  direction: ltr;
+}
+.moon-video-player-fullscreen .moon-video-player-control-buttons .moon-icon-button {
+  margin: 0 0.75rem;
+}
+.moon-video-player-premium-placeholder-left,
+.moon-video-player-premium-placeholder-right {
+  height: 3.5rem;
+}
+
+.moon-video-player-inline {
+  padding-bottom: 3.5rem;
+}
+.moon-video-player-inline:-webkit-full-screen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-moz-full-screen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-ms-fullscreen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-o-full-screen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:fullscreen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-webkit-full-screen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-moz-full-screen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-ms-fullscreen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:-o-full-screen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline:fullscreen {
+  padding-bottom: 0;
+}
+.moon-video-player-inline-control {
+  position: relative;
+  height: 3.5rem;
+  background-color: #252525;
+}
+.moon-video-player-inline-control .moon-icon-fullscreen {
+  right: 0.5rem;
+}
+.moon-video-player-inline-control .moon-icon-playpause {
+  left: 0.5rem;
+}
+.moon-video-player-inline-control .moon-video-player-inline-control-fullscreen {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+.moon-video-player-inline-control .moon-icon-button {
+  position: absolute;
+  bottom: 0.5rem;
+  color: #fff;
+  background-color: transparent;
+}
+.moon-video-player-inline-control .moon-icon-button.active,
+.moon-video-player-inline-control .moon-icon-button.pressed,
+.moon-video-player-inline-control .moon-icon-button.spotlight,
+.moon-video-player-inline-control .moon-icon-button.spotlight.pressed,
+.moon-video-player-inline-control .moon-icon-button.spotlight:active {
+  color: #393939;
+  background-color: #fff;
+  background-position: 0rem -2rem;
+}
+.moon-video-player-inline-control-text {
+  font-family: "Moonstone Miso";
+  position: absolute;
+  line-height: 3.5rem;
+  left: 4rem;
+  background-color: transparent;
+  color: #fff;
+  font-size: 1.375rem;
+}
+.moon-video-player-inline-control-text > * {
+  display: inline;
+}
+.moon-video-player-inline-control-progress {
+  position: absolute;
+  bottom: 0rem;
+  left: 0rem;
+  width: 0%;
+  height: 3.5rem;
+  transition: width 0.1s linear;
+  -webkit-transition: width 0.1s linear;
+  -moz-transition: width 0.1s linear;
+}
+.moon-video-player-inline-control-progress {
+  background-color: #cf0652;
+}
+.moon-video-player-inline-control-bgprogress {
+  background-color: #393939;
+}
+
+.moon-light-panels:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.moon-light-panels.transitioning:after {
+  content: '';
+}
+.moon-light-panels.transitioning .panels-container > * {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.moon-light-panel .client {
+  opacity: 0;
+  padding-top: 0.5rem;
+}
+.moon-light-panel .client.populated {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+  opacity: 1;
+}
+
+/* Panels */
+.moon-panels.activity,
+.moon-panels.alwaysviewing {
+  pointer-events: none;
+}
+.moon-panels.activity.moon-composite .moon-panels-background-scrim,
+.moon-panels.alwaysviewing.moon-composite .moon-panels-background-scrim {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
+}
+.moon-panels.activity *,
+.moon-panels.alwaysviewing * {
+  pointer-events: auto;
+}
+.moon-panels.activity .moon-panels-breadcrumb,
+.moon-panels.alwaysviewing .moon-panels-breadcrumb {
+  position: absolute;
+  height: 100%;
+  width: 4rem;
+  right: -4rem;
+}
+.moon-panels.activity .moon-panels-breadcrumb .moon-panels-breadcrumb-header,
+.moon-panels.alwaysviewing .moon-panels-breadcrumb .moon-panels-breadcrumb-header {
+  border-top: 0.25rem solid #ccc;
+  padding-top: 0.125rem;
+  margin: 0.75rem;
+  font-family: "Moonstone Miso";
+  font-size: 1.5rem;
+}
+.moon-panels.activity .moon-panels-breadcrumb.spotlight,
+.moon-panels.alwaysviewing .moon-panels-breadcrumb.spotlight {
+  background: #cf0652;
+  color: #fff;
+}
+.moon-panels.activity .moon-panels-breadcrumb.spotlight .moon-panels-breadcrumb-header,
+.moon-panels.alwaysviewing .moon-panels-breadcrumb.spotlight .moon-panels-breadcrumb-header {
+  border-color: #fff;
+}
+.moon-panels.activity .moon-panel,
+.moon-panels.alwaysviewing .moon-panel {
+  box-sizing: border-box;
+  padding: 0.75rem 0.5rem;
+}
+.moon-panels.activity .moon-panels-breadcrumbs {
+  left: 0;
+  width: 4rem;
+}
+.moon-panels.activity .moon-panels-viewport {
+  left: 4rem;
+  right: 0;
+}
+.moon-panels.activity .moon-panels-viewport > *:not(:first-child) {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.moon-panels.activity .moon-panels-viewport > *:first-child {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
+.moon-panels.activity .moon-panels-panel-scrim {
+  left: 0;
+  width: 100%;
+  background-color: #000000;
+}
+.moon-panels.activity .moon-panels-panel-scrim .moon-panels-branding {
+  position: absolute;
+  top: 15.5rem;
+  width: 8.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  background-position: bottom center;
+}
+.moon-panels.activity .moon-panel {
+  padding-left: 0;
+}
+.moon-panels.activity.first .moon-panels-viewport {
+  overflow: visible;
+}
+.moon-panels.activity.first .moon-panels-viewport > *:first-child {
+  left: -4rem;
+  padding-left: 0.5rem;
+}
+.enyo-locale-right-to-left .moon-panels.activity:not(.first) .moon-application-close-button {
+  left: 4.5rem;
+}
+.moon-panels.alwaysviewing .moon-panels-breadcrumb-header {
+  color: white;
+  border-top: 0.25rem solid white;
+}
+.moon-panels.alwaysviewing .moon-panels-breadcrumbs {
+  left: 0;
+  width: 50%;
+}
+.moon-panels.alwaysviewing .moon-panels-viewport > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.moon-panels.alwaysviewing .moon-panels-viewport,
+.moon-panels.alwaysviewing .moon-panels-panel-scrim {
+  left: 50%;
+  width: 50%;
+}
+.moon-panels.alwaysviewing .moon-panels-panel-scrim {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.moon-panels .moon-panels-background-scrim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  -webkit-transition: opacity 0.5s linear;
+  -moz-transition: opacity 0.5s linear;
+}
+.moon-panels .moon-panels-background-scrim.visible {
+  opacity: 0.2;
+}
+.moon-panels-client-wrapper:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.moon-panels.transitioning .moon-panels-client-wrapper:after {
+  content: '';
+}
+.moon-panels:not(.activity):not(.alwaysviewing) .moon-panels-viewport > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.moon-panels-breadcrumbs,
+.moon-panels-viewport,
+.moon-panels-panel-scrim {
+  overflow: hidden;
+  position: absolute;
+  height: 100%;
+}
+/* Show/Hide Handle */
+.moon-panels-handle {
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: -5.5rem;
+  height: 100%;
+  width: 5.5rem;
+  z-index: 100;
+}
+.moon-panels-handle:before {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 100vh;
+  margin-left: -0.5rem;
+  margin-right: 0.5rem;
+  background-color: #4d4d4d;
+  font-family: "Moonstone Icons";
+  font-size: 6rem;
+  content: "\0EFFEF";
+  color: #fff;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition: -webkit-transform 0.2s linear, opacity 0.2s linear;
+  transition: transform 0.2s linear, opacity 0.2s linear;
+  opacity: 1;
+  text-align: center;
+}
+.moon-panels-handle.right:before {
+  content: "\0EFFF0";
+}
+.moon-panels-handle.spotlight:before {
+  background-color: #cf0652;
+  -webkit-transform: translate3d(-5rem, 0, 0);
+  transform: translate3d(-5rem, 0, 0);
+}
+.moon-panels-handle.stashed:before {
+  opacity: 0;
+}
+.moon-panels-handle.hidden {
+  display: none;
+}
+
+/* ExpandableListItem */
+.moon-expandable-list-item .moon-labeledtextitem-header {
+  display: inline-block;
+  padding-left: 0;
+  padding-right: 1.75rem;
+}
+.enyo-locale-right-to-left .moon-expandable-list-item .moon-labeledtextitem-header {
+  padding-left: 1.75rem;
+  padding-right: 0;
+}
+.enyo-locale-right-to-left .moon-expandable-list-item .moon-labeledtextitem-header {
+  padding-left: 1.75rem;
+  padding-right: 0;
+}
+.moon-expandable-list-item .moon-labeledtextitem-header:after {
+  position: absolute;
+  top: 0rem;
+  right: 0.54167rem;
+  font-family: "Moonstone Icons";
+  font-size: 2rem;
+  content: "\0EFFED";
+}
+.enyo-locale-right-to-left .moon-expandable-list-item .moon-labeledtextitem-header:after {
+  left: 0.54167rem;
+  right: initial;
+}
+.moon-expandable-list-item.open .moon-labeledtextitem-header:after {
+  content: "\0EFFEE";
+}
+.moon-expandable-list-item .moon-labeledtextitem .moon-labeledtextitem-text {
+  line-height: inherit;
+  margin-top: -0.5rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.moon-expandable-list-item .moon-expandable-list-item-client .moon-item {
+  font-family: "MuseoSans 300";
+  font-size: 1.125rem;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.875rem;
+}
+.enyo-locale-non-latin .moon-expandable-list-item .moon-expandable-list-item-client .moon-item {
+  font-family: "Moonstone LG Display Light";
+  line-height: 1.7em;
+  font-size: 1.125rem;
+}
+.moon-expandable-list-item .moon-expandable-list-item-client.indented {
+  padding-left: 2rem;
+  padding-right: 0;
+}
+.enyo-locale-right-to-left .moon-expandable-list-item .moon-expandable-list-item-client.indented {
+  padding-left: 0;
+  padding-right: 2rem;
+}
+.enyo-locale-right-to-left .moon-expandable-list-item .moon-expandable-list-item-client.indented {
+  padding-left: 0;
+  padding-right: 2rem;
+}
+.moon-expandable-list-item .moon-expandable-list-item-client > :last-child {
+  margin-bottom: 0.5rem;
+}
+
+/* Radio Item */
+.moon-radio-item-group {
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.moon-simple-integer-picker {
+  padding: 0 2.5rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-repeater {
+  width: 100%;
+  white-space: nowrap;
+}
+.moon-simple-integer-picker .moon-scroll-picker-repeater > * {
+  display: inline-block;
+}
+.moon-simple-integer-picker .moon-scroll-picker {
+  height: 2.5rem;
+  border-top: 0;
+  border-bottom: 0;
+  width: 100%;
+}
+.moon-simple-integer-picker .moon-scroll-picker-item {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding: 0;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container {
+  top: 0;
+  line-height: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.previous {
+  left: 0;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.previous:after {
+  content: "\0EFFF3";
+  line-height: 2.5rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.previous.selected .moon-scroll-picker-overlay {
+  border-bottom: 0;
+  border-left-width: 0.25rem;
+  border-radius: 2rem 0 0 2rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.previous.selected .moon-scroll-picker-overlay:after {
+  content: "\0EFFF3";
+  line-height: 2.5rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.next {
+  right: 0;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.next:after {
+  content: "\0EFFF4";
+  line-height: 2.5rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.next.selected .moon-scroll-picker-overlay {
+  border-top: 0;
+  border-right-width: 0.25rem;
+  border-radius: 0 2rem 2rem 0;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container.next.selected .moon-scroll-picker-overlay:after {
+  content: "\0EFFF4";
+  line-height: 2.5rem;
+}
+.moon-simple-integer-picker .moon-scroll-picker-overlay-container .moon-scroll-picker-overlay {
+  position: absolute;
+  height: 2.5rem;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.spotlight.moon-simple-integer-picker {
+  background: #cf0652;
+  border-radius: 2rem;
+}
+.spotlight.moon-simple-integer-picker .moon-scroll-picker-overlay-container.next:after {
+  content: "\0EFFF0";
+  line-height: 2.5rem;
+}
+.spotlight.moon-simple-integer-picker .moon-scroll-picker-overlay-container.previous:after {
+  content: "\0EFFEF";
+  line-height: 2.5rem;
+}
+.enyo-locale-right-to-left .moon-simple-integer-picker .moon-scroll-picker {
+  direction: ltr;
+}
+.enyo-locale-non-latin .moon-simple-integer-picker-item {
+  font-family: "Moonstone LG Display Bold";
+  font-size: 1.375rem;
+}
+
+.moon-date-time-picker-client {
+  display: inline-block;
+  direction: ltr;
+}
+.moon-date-time-picker-client > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+/* Time/date pickers should always be arranged according to the order of the formatter */
+.enyo-locale-right-to-left .moon-date-time-picker-client {
+  direction: rtl;
+}
+.moon-date-time-picker-wrap {
+  min-width: 4rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  vertical-align: top;
+}
+.moon-date-time-picker-label {
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  white-space: nowrap;
+}
+
+/* Help Text */
+.moon-expandable-picker-help-text {
+  color: #a6a6a6;
+}
+
+.moon-expandable-input .moon-input-decorator {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.moon-expandable-input .moon-input {
+  width: 100%;
+}
+.enyo-locale-non-latin.enyo-locale-th .moon-expandable-input .moon-expandable-picker-current-value {
+  line-height: 2.25rem;
+}
+
+/* DatePicker.css */
+.moon-date-time-picker-wrap.year {
+  min-width: 5rem;
+}
+
+.moon-time-picker-wrap {
+  direction: ltr;
+}
+.moon-time-picker-wrap .moon-date-time-picker-wrap {
+  display: inline-block;
+}
+

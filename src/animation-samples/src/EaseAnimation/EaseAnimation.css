@@ -1,23 +1,28 @@
 .ease-sample {
-	font-size: 40px;
-	height: 100%;
-	overflow: hidden;
-	line-height: 16;
-	position: relative;
+    font-size: 40px;
+    height: 100%;
+    overflow: hidden;
+    line-height: 16;
+    position: relative;
+    padding: 0 0.5% 0 0.5%;
 }
+
 .ease-sample .balloon {
-	bottom: 10%;
-	color: #fff;
-	font-size: 12px;
-	height: 160px;
-	line-height: 160px;
-	text-align: center;
+    bottom: 10%;
+    color: #fff;
+    font-size: 12px;
+    height: 160px;
+    line-height: 160px;
+    text-align: center;
     vertical-align: bottom;
-	width: 100px;
+    width: 100px;
+    margin-right: 1.5%;
 }
+
 .ease-sample .blue {
-	background: url('../../assets/balloon-blue.png');
+    background: url('../../assets/balloon-blue.png');
 }
+
 .ease-sample .red {
-	background: url('../../assets/balloon.png');
+    background: url('../../assets/balloon.png');
 }

@@ -150,7 +150,6 @@ var spincube = [{
 module.exports = kind({
     name: "stage",
     classes: "stage",
-    style: "position: absolute; width: 500px; height: 500px; top: 120px; left: 120px;",
     components: [{
         name: "cubespinner",
         classes: "cubespinner",
@@ -271,10 +270,10 @@ var
     ease = require("enyo/easing");
 
 var smallerBox = [
-    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: 1000 },
-    { translate: "0,425,0", scale: "2,0.5,1", duration: 500 },
-    { translate: "0,300,0", scale: "1,1,1", duration: 500 },
-    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: 1000 }
+    { translate: "0,300,0", rotate: "0,0,180", ease: ease.quadIn, duration: '33%' },
+    { translate: "0,425,0", scale: "2,0.5,1", duration: '17%' },
+    { translate: "0,300,0", scale: "1,1,1", duration: '17%' },
+    { translate: "0,0,0", rotate: "0,0,405", ease: ease.quadOut, duration: '33%' }
 ];
 
 var biggerBox = [
@@ -292,6 +291,7 @@ module.exports = kind({
             name: "smaller",
             classes: "smaller",
             scene: smallerBox,
+            duration: 3000,
             mixins: [sceneSupport],
             sceneOptions: { repeat: true }
         },
@@ -354,15 +354,15 @@ module.exports = kind({
     kind: Control,
     classes: "enyo-fit path-sample container",
     components: [
-        { name: 'dot1', classes: "dot", style: "background:black;"},
-        { name: 'dot2', classes: "dot", style: "background:blue;"},
-        { name: 'dot3', classes: "dot", style: "background:red;"},
-        { name: 'dot4', classes: "dot", style: "background:green;"}
+        { name: 'dot1', classes: "dot", style: "background:black;" },
+        { name: 'dot2', classes: "dot", style: "background:blue;" },
+        { name: 'dot3', classes: "dot", style: "background:red;" },
+        { name: 'dot4', classes: "dot", style: "background:green;" }
     ],
     create: kind.inherit(function(sup) {
         return function() {
             sup.apply(this, arguments);
-            animate(this.controls, path, { isSequence: true});
+            animate(this.controls, path, { isSequence: true });
         };
     })
 });
@@ -419,11 +419,11 @@ var declaredAnimation = [{
 
 module.exports = kind({
     name: "sampleApplication",
-    style: "background-color: black",
+    style: "background-color: #fff;padding:1%;",
     components: [{
         name: "Description",
         classes: "description",
-        content: "Sequence Animiation"
+        content: "Sequence Animation"
     }, {
         name: "circle",
         classes: "cardContainer jack",
@@ -689,10 +689,10 @@ var commonAnimation = {
 };
 module.exports = kind({
     name: "sampleApplication",
-    style: "background-color: black",
+    style: "background-color: #fff; padding: 1%;",
     components: [{
         name: "Description",
-        style: "color:#fff;font-size:25px;font-weight:bold;",
+        style: "color:#000;font-size:25px;font-weight:bold;",
         content: "Single component animation with parallel animation"
     }, {
         kind: Select,
@@ -708,15 +708,15 @@ module.exports = kind({
     }, {
         name: "circle",
         kind: colorCircle,
-        style: "height: 200px; width: 200px; left: 100px; position: absolute; background-color: rgb(255, 0, 0)"
+        style: "height: 200px; width: 200px; left:20%; position: absolute; background-color: rgb(255, 0, 0)" /*left: 100px;*/
     }, {
         name: "circle2",
         kind: colorCircle,
-        style: "height: 200px; width: 200px; left: 300px; position: absolute; background-color: rgb(0, 255, 0)"
+        style: "height: 200px; width: 200px;  left:35%; position: absolute; background-color: rgb(0, 255, 0)" /*left: 300px;*/
     }, {
         name: "circle3",
         kind: colorCircle,
-        style: "height: 200px; width: 200px; left: 500px; position: absolute; background-color: rgb(0, 0, 255)"
+        style: "height: 200px; width: 200px;  left:50%; position: absolute; background-color: rgb(0, 0, 255)" /*left: 500px; */
     }],
     selectChanged: function(inSender, inEvent) {
         var ActorsList = [this.$.circle, this.$.circle2, this.$.circle3];
@@ -827,8 +827,7 @@ module.exports = kind({
 	resetAnimation: function() {
 		console.log("resetAnimation");
 		if(this.scene)
-			this.scene.seek(0);
-			//this.scene.stop();
+			this.scene.stop();
 		this.$.translateCtrl.set("first",1);
 		this.$.translateCtrl.set("second",1);
 		this.$.translateCtrl.set("third",1);
@@ -1344,7 +1343,7 @@ var
 		SequenceAnimation: require('./src/SequenceAnimation'),
 		SingleComponent: require('./src/SingleComponentAnimation'),
 		HierarchicalAnimation: require('./src/HierarchicalAnimation'),
-		//yet to be added
+		//yet to be added		
 		EqualizerAnimation: require('./src/EqualizerAnimation')
 	};
 

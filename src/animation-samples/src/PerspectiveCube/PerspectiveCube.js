@@ -67,7 +67,6 @@ var spincube = [{
 module.exports = kind({
     name: "stage",
     classes: "stage",
-    style: "position: absolute; width: 500px; height: 500px; top: 120px; left: 120px;",
     components: [{
         name: "cubespinner",
         classes: "cubespinner",

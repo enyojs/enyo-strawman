@@ -17,10 +17,10 @@ var commonAnimation = {
 };
 module.exports = kind({
     name: "sampleApplication",
-    style: "background-color: black",
+    style: "background-color: #fff; padding: 1%;",
     components: [{
         name: "Description",
-        style: "color:#fff;font-size:25px;font-weight:bold;",
+        style: "color:#000;font-size:25px;font-weight:bold;",
         content: "Single component animation with parallel animation"
     }, {
         kind: Select,
@@ -36,15 +36,15 @@ module.exports = kind({
     }, {
         name: "circle",
         kind: colorCircle,
-        style: "height: 200px; width: 200px; left: 100px; position: absolute; background-color: rgb(255, 0, 0)"
+        style: "height: 200px; width: 200px; left:20%; position: absolute; background-color: rgb(255, 0, 0)" /*left: 100px;*/
     }, {
         name: "circle2",
         kind: colorCircle,
-        style: "height: 200px; width: 200px; left: 300px; position: absolute; background-color: rgb(0, 255, 0)"
+        style: "height: 200px; width: 200px;  left:35%; position: absolute; background-color: rgb(0, 255, 0)" /*left: 300px;*/
     }, {
         name: "circle3",
         kind: colorCircle,
-        style: "height: 200px; width: 200px; left: 500px; position: absolute; background-color: rgb(0, 0, 255)"
+        style: "height: 200px; width: 200px;  left:50%; position: absolute; background-color: rgb(0, 0, 255)" /*left: 500px; */
     }],
     selectChanged: function(inSender, inEvent) {
         var ActorsList = [this.$.circle, this.$.circle2, this.$.circle3];

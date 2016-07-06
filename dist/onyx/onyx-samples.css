@@ -1,0 +1,302 @@
+.strawman h1 {
+  padding: 0 3%;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+@media only screen and (max-width: 400px) {
+  .strawman h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 4%;
+  }
+}
+
+.link {
+  cursor: pointer;
+}
+
+.strawman .strawman-list {
+  top: 5em;
+}
+.strawman .strawman-list .link {
+  margin: 0.5em;
+  height: 2em;
+  line-height: 2em;
+  color: #08F;
+  background-color: rgba(0, 136, 255, 0.1);
+  display: block;
+  padding: 0 1.3em;
+  text-decoration: none;
+  overflow: hidden;
+  position: relative;
+}
+.strawman .strawman-list .link.spotlight {
+  background-color: rgba(0, 136, 255, 0.2);
+}
+.strawman .strawman-list .link.new:before,
+.strawman .strawman-list .link.wip:before,
+.strawman .strawman-list .link.deprecated:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #08F;
+  color: white;
+  -webkit-transform: translateY(100%) rotate(-90deg) scale(0.5);
+  -moz-transform: translateY(100%) rotate(-90deg) scale(0.5);
+  -ms-transform: translateY(100%) rotate(-90deg) scale(0.5);
+  transform: translateY(100%) rotate(-90deg) scale(0.5);
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  width: 4em;
+  text-align: center;
+}
+.strawman .strawman-list .link.new:before {
+  content: 'New!';
+  background-color: #E53935;
+}
+.strawman .strawman-list .link.wip:before {
+  content: 'WIP';
+  background-color: #2196F3;
+}
+.strawman .strawman-list .link.deprecated:before {
+  content: 'Dep ✕';
+  background-color: purple;
+}
+.strawman .strawman-list .grid .link {
+  display: inline-block;
+  background-color: #08F;
+  background-image: none;
+  height: 3em;
+  line-height: 3em;
+  color: #FFF;
+  border-radius: 0.2em;
+}
+.strawman .strawman-list .grid .link.spotlight {
+  background-color: #33a0ff;
+}
+@media only screen and (min-width: 1280px) {
+  .strawman .strawman-list .link {
+    font-size: 2em;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .strawman .strawman-list .grid .link {
+    height: 2.4em;
+    line-height: 2.4em;
+    margin: 0.2em;
+    padding: 0 0.8em;
+  }
+  .strawman .strawman-list .list-frame:not(.grid) .link {
+    font-size: 1.5rem;
+  }
+}
+
+.strawman .back-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 999px;
+  background-color: #08F;
+  margin: 10px;
+  line-height: 3.5em;
+  width: 3.5em;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  text-transform: lowercase;
+  opacity: 0.6;
+  transition: opacity 0.25s;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+.strawman .back-button.spotlight {
+  opacity: 1;
+}
+@media only screen and (max-width: 400px) {
+  .strawman .back-button {
+    opacity: 0.01;
+    width: 100%;
+    margin: 0;
+    line-height: 1.5em;
+    font-size: 3em;
+    border-radius: 0;
+  }
+}
+.strawman .strawman-sample-back {
+  display: none;
+}
+@media only screen and (max-width: 400px) {
+  .strawman.wearable-sample .strawman-sample {
+    background: white;
+    padding-bottom: 60px;
+  }
+  .strawman.wearable-sample .strawman-sample.platform-sample {
+    padding: 2rem;
+  }
+  .strawman.wearable-sample .strawman-sample.platform-sample > :last-child {
+    padding-bottom: 60px;
+  }
+  .strawman.wearable-sample .strawman-sample-back {
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 320px;
+    top: 260px;
+    left: 0;
+    right: 0;
+    color: white;
+    margin: 0;
+    padding: 0 130px;
+    border-radius: 9999px;
+    font-size: 60px;
+    line-height: 60px;
+    z-index: 9999;
+    font-weight: bold;
+    background-color: gray;
+    opacity: 0.8;
+    text-align: center;
+    overflow: hidden;
+  }
+}
+
+.onyx-sample {
+  padding: 10px;
+}
+.onyx-sample-tools {
+  padding-bottom: 10px;
+}
+.onyx-sample-tools > * {
+  margin: 3px;
+}
+.onyx-sample-divider {
+  color: #F49200;
+  text-transform: uppercase;
+  font-family: Segoe UI, Prelude Medium, Helvetica, Verdana, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.onyx-sample-result-box {
+  width: 100%;
+}
+.onyx-sample-result {
+  padding: 8px;
+}
+.onyx-sample-spaced-button {
+  margin: 3px;
+}
+.onyx-sample-animate-label {
+  vertical-align: middle;
+  padding-left: 5px;
+  margin-right: 15px;
+}
+.onyx-sample-label {
+  color: #1879CD;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+.onyx-sample-popup {
+  font-size: 30px;
+  text-align: center;
+}
+.onyx-contextualpopup-button-container {
+  padding: 10px;
+}
+
+/* ----- Enyo's Museo Sans ------ */
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Medium"), url('../fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Thin"), url('../fonts/MuseoSans/MuseoSans-Light.ttf') format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Light"), url('../fonts/MuseoSans/MuseoSans-Normal.ttf') format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Medium"), url('../fonts/MuseoSans/MuseoSans-DemiBold.ttf') format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Medium Italic"), url('../fonts/MuseoSans/MuseoSans-DemiBoldItalic.ttf') format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Bold"), url('../fonts/MuseoSans/MuseoSans-Bold.ttf') format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Bold Italic"), url('../fonts/MuseoSans/MuseoSans-BoldItalic.ttf') format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Black"), url('../fonts/MuseoSans/MuseoSans-Black.ttf') format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "EnyoMuseoSans";
+  src: local("Moon Museo Sans Black Italic"), url('../fonts/MuseoSans/MuseoSans-BlackItalic.ttf') format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+.strawman {
+  background-color: white;
+  font-family: "EnyoMuseoSans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+.strawman.home {
+  padding: 5%;
+  text-align: center;
+}
+.strawman.home .strawman-list {
+  top: auto;
+  top: initial;
+  bottom: auto;
+  bottom: initial;
+}
+@media only screen and (max-width: 400px) {
+  .strawman.home {
+    padding: 0;
+  }
+}
+.warning {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+@media only screen and (min-width: 1280px) {
+  .warning {
+    display: none;
+  }
+}
+

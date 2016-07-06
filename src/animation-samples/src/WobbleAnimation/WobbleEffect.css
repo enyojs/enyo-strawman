@@ -6,8 +6,9 @@
 	margin: 50px;
 	overflow: visible;
 	transform-style: preserve-3d;
-	transform: perspective(800px);
-
+	transform: perspective(800px);	
+    margin: 0 auto;
+    margin-top: 5%;
 }
 .wobble-sample .image-container{
 	background-color: white;
