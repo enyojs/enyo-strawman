@@ -26,7 +26,7 @@ module.exports = kind({
 			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Immediate Notifications'},
 			{classes: 'moon-hspacing moon-vspacing-s', components: [
-				{kind: Button, content: 'Basic', ontap: 'showPopup', popup: 'basicNotification', direct: true}
+				{kind: Button, content: 'Basic', ontap: 'showPopup', popup: 'immediateNotification', direct: true}
 			]},
 			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Customize Notifications\' Contents'},
@@ -43,15 +43,22 @@ module.exports = kind({
 		]},
 		{name: 'componentNotification', kind: Notify, content: 'Not to worry, this message isn\'t going to be very long. It just has to be long enough to show what a long message looks like. That\'s all; have a nice day.' , components: [
 			{kind: Button, content: 'First Button!', small: true},
-			{kind: Button, content: 'Kittens', small: true},
 			{kind: Button, content: 'Oh my yes, kittens', small: true},
+			{kind: Button, content: 'hide and show', small: true, ontap: 'hideshow'},
 			{kind: Button, content: 'Close', small: true, ontap: 'hidePopup', popup: 'componentNotification'}
+		]},
+		{name: 'immediateNotification', kind: Notify, content: 'Immediate notification', components: [
+			{kind: Button, content: 'Close', small: true, ontap: 'hidePopup', popup: 'immediateNotification', direct: true}
 		]}
 	],
 	bindings: [
 		{from: '$.contentsField.value', to: '$.basicNotification.content'},
 		{from: '$.contentsField.value', to: '$.bodyTextContent.content'}
 	],
+	hideshow: function () {
+		this.$.componentNotification.hide();
+		this.$.greetingNotification.show();
+	},
 	showPopup: function (sender) {
 		var p = this.$[sender.popup];
 		if (p) {
