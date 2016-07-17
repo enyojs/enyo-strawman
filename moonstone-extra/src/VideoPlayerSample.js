@@ -46,7 +46,6 @@ module.exports = kind({
 				{kind: IconButton, icon: 'hollowstar', accessibilityLabel: 'Rate this video', small: false, backgroundOpacity: 'translucent'}
 			],
 			components: [
-				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
 				{kind: ToggleButton, name: 'controlsToggleButton', content: 'Controls', backgroundOpacity: 'translucent'},
 				{kind: Button, content: 'Unload', backgroundOpacity: 'translucent', ontap: 'unload'},
 				{kind: Button, content: 'Reload', backgroundOpacity: 'translucent', ontap: 'load'},
@@ -67,9 +66,7 @@ module.exports = kind({
 						]
 					}
 				]},
-				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
-				{kind: IconButton, small: false, backgroundOpacity: 'translucent'},
-				{kind: IconButton, small: false, backgroundOpacity: 'translucent'}
+				{kind: ToggleButton, name: 'scrimToggleButton', content: 'Scrim', backgroundOpacity: 'translucent'}
 			]
 		},
 		{kind: Dialog, name: 'tapDialog', title: 'The controls were tapped.', message: 'Press OK to dismiss', components: [
@@ -77,8 +74,9 @@ module.exports = kind({
 		]}
 	],
 	bindings: [
-		{from: '$.player.disablePlaybackControls', to: '$.controlsToggleButton.value', oneWay:false},
-		{from: '$.player.showFFRewindControls', to: '$.ffrewToggleButton.value', oneWay:false}
+		{from: '$.player.highContrast', to: '$.scrimToggleButton.value', oneWay: false},
+		{from: '$.player.disablePlaybackControls', to: '$.controlsToggleButton.value', oneWay: false},
+		{from: '$.player.showFFRewindControls', to: '$.ffrewToggleButton.value', oneWay: false}
 	],
 	controlsTapped: function () {
 		this.$.tapDialog.show();
