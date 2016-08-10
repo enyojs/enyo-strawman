@@ -16,7 +16,6 @@ var
 		DataGridListSample					: require('./lib/DataGridListSample'),
 		DataListSample						: require('./lib/DataListSample'),
 		DatePickerSample					: require('./lib/DatePickerSample'),
-		DaySelectorSample					: require('./lib/DaySelectorSample'),
 		DialogSample						: require('./lib/DialogSample'),
 		DividerSample						: require('./lib/DividerSample'),
 		// DrawerSample						: require('./lib/DrawerSample'),

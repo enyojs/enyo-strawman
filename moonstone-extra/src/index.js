@@ -12,6 +12,7 @@ var samples = {
 	ActivityPanelsWithVideoSample        : require('./ActivityPanelsWithVideoSample'),
 	AlwaysViewingPanelsSample            : require('./AlwaysViewingPanelsSample'),
 	AlwaysViewingPanelsWithVideoSample   : require('./AlwaysViewingPanelsWithVideoSample'),
+	DaySelectorSample					 : require('./DaySelectorSample'),
 	DrawerSample                         : require('./DrawerSample'),
 	DynamicPanelsSample                  : require('./DynamicPanelsSample'),
 	HeaderAutoCollapsingSample           : require('./HeaderAutoCollapsingSample'),
