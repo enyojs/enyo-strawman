@@ -16,6 +16,7 @@ var samples = {
 	DynamicPanelsSample                  : require('./DynamicPanelsSample'),
 	HeaderAutoCollapsingSample           : require('./HeaderAutoCollapsingSample'),
 	HistorySample                        : require('./HistorySample'),
+	IntegerPickerWithInputSample		 : require('./IntegerPickerWithInput'),
 	ListActionsSample                    : require('./ListActionsSample'),
 	PanelsVideoPlayerSample              : require('./PanelsVideoPlayerSample'),
 	PanelsWithCardArrangerSample         : require('./PanelsWithCardArrangerSample'),
