@@ -6,7 +6,7 @@ var
 
 var
 	Scroller = require('moonstone/Scroller'),
-	DaySelector = require('moonstone/DaySelector'),
+	DaySelector = require('moonstone-extra/DaySelector'),
 	Divider = require('moonstone/Divider'),
 	BodyText = require('moonstone/BodyText');
 
@@ -21,9 +21,9 @@ module.exports = kind({
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No change yet'}
 	],
-	changed: function(sender, event) {
-		if(this.$.result && event.content){
-			this.$.result.setContent('Selection changed to \'' + event.content + '\'');
+	changed: function (sender, ev) {
+		if (this.$.result && ev.content){
+			this.$.result.setContent('Selection changed to "' + ev.content + '"');
 		}
 	}
 });
