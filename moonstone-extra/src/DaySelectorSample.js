@@ -20,7 +20,7 @@ module.exports = kind({
 			{kind: DaySelector, content: 'Normal Selector', noneText: 'Pick a Day', onChange: 'changed'},
 			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Pre-loaded Selector'},
-			{kind: DaySelector, content:'Pre-loaded Selector', noneText: 'Pick a Day', selectedIndex:[0,2,5], onChange: 'changed'}
+			{kind: DaySelector, content: 'Pre-loaded Selector', noneText: 'Pick a Day', selectedIndex: [0,2,5], onChange: 'changed'}
 		]},
 		{kind: Divider, content: 'Result'},
 		{kind: BodyText, name: 'result', content: 'No change yet'}
