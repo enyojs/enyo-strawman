@@ -20,6 +20,7 @@ var samples = {
 	PanelsVideoPlayerSample              : require('./PanelsVideoPlayerSample'),
 	PanelsWithCardArrangerSample         : require('./PanelsWithCardArrangerSample'),
 	PanelsWithCarouselArrangerSample     : require('./PanelsWithCarouselArrangerSample'),
+	SimpleIntegerPickerSample			 : require('./SimpleIntegerPickerSample'),
 	VideoPlayerInlineSample              : require('./VideoPlayerInlineSample'),
 	VideoPlayerSample                    : require('./VideoPlayerSample')
 };
