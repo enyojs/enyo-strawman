@@ -11,7 +11,7 @@ module.exports = kind({
 	classes: 'wrapperClass',
 	components: [
 		{kind: Divider, content: 'SimpleIntegerPicker'},
-		{kind: BodyText, content: 'Clicking the Enter/Ok button on the component enables "Input field" in the component.<br />After the value is inputted, confirm the number by pressing Enter/Ok button again.'},
+		{kind: BodyText, content: 'Clicking the Enter/Ok button or directly the number keys on the component will enable the "Input field" of the component.<br />After the value is inputted, confirm the number by pressing Enter/Ok button.'},
 		{components: [
 			{content: 'Audio offset:', tag: 'span'},
 			{kind: SimpleIntegerPicker, min: -10, value: -4, max: 10, onChange: 'change'}
