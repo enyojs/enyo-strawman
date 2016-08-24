@@ -24,6 +24,11 @@ module.exports = kind({
 				{kind: Button, content: 'Many buttons', ontap: 'showPopup', popup: 'componentNotification'}
 			]},
 			{classes: 'moon-1v'},
+			{kind: Divider, content: 'Animate Notifications'},
+			{classes: 'moon-hspacing moon-vspacing-s', components: [
+				{kind: Button, content: 'Basic', ontap: 'showPopup', popup: 'animateNotification'}
+			]},
+			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Immediate Notifications'},
 			{classes: 'moon-hspacing moon-vspacing-s', components: [
 				{kind: Button, content: 'Basic', ontap: 'showPopup', popup: 'immediateNotification', direct: true}
@@ -36,19 +41,22 @@ module.exports = kind({
 		]},
 
 		{name: 'greetingNotification', kind: Notify, content: 'Hello', components: [
-			{kind: Button, content: 'Howdy', small: true, ontap: 'hidePopup', popup: 'greetingNotification'}
+			{kind: Button, content: 'Howdy', ontap: 'hidePopup', popup: 'greetingNotification'}
 		]},
 		{name: 'basicNotification', kind: Notify, content: 'Small notification', components: [
-			{kind: Button, content: 'Close', small: true, ontap: 'hidePopup', popup: 'basicNotification'}
+			{kind: Button, content: 'Close', ontap: 'hidePopup', popup: 'basicNotification'}
 		]},
-		{name: 'componentNotification', kind: Notify, content: 'Not to worry, this message isn\'t going to be very long. It just has to be long enough to show what a long message looks like. That\'s all; have a nice day.' , components: [
-			{kind: Button, content: 'First Button!', small: true},
-			{kind: Button, content: 'Oh my yes, kittens', small: true},
-			{kind: Button, content: 'hide and show', small: true, ontap: 'hideshow'},
-			{kind: Button, content: 'Close', small: true, ontap: 'hidePopup', popup: 'componentNotification'}
+		{name: 'componentNotification', kind: Notify, wide: true, content: 'Not to worry, this message isn\'t going to be very long. It just has to be long enough to show what a long message looks like. That\'s all; have a nice day.' , components: [
+			{kind: Button, content: 'First Button!'},
+			{kind: Button, content: 'Oh my yes, kittens'},
+			{kind: Button, content: 'hide and show', ontap: 'hideshow'},
+			{kind: Button, content: 'Close', ontap: 'hidePopup', popup: 'componentNotification'}
+		]},
+		{name: 'animateNotification', kind: Notify, animate: true, content: 'Animate notification', components: [
+			{kind: Button, content: 'Close', ontap: 'hidePopup', popup: 'animateNotification'}
 		]},
 		{name: 'immediateNotification', kind: Notify, content: 'Immediate notification', components: [
-			{kind: Button, content: 'Close', small: true, ontap: 'hidePopup', popup: 'immediateNotification', direct: true}
+			{kind: Button, content: 'Close', ontap: 'hidePopup', popup: 'immediateNotification', direct: true}
 		]}
 	],
 	bindings: [
