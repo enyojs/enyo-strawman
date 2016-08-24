@@ -17,18 +17,32 @@ module.exports = kind({
 	components: [
 		{kind: Scroller, fit: true, components: [
 			{kind: Divider, content: 'Normal Selector'},
-			{kind: DaySelector, content: 'Normal Selector', noneText: 'Pick a Day', shortDayText: false, onChange: 'changed'},
+			{name: 'normal', kind: DaySelector, content: 'Normal Selector', noneText: 'Pick a Day', onChange: 'normalChanged'},
+			{classes: 'moon-1v'},
+			{kind: Divider, content: 'Result'},
+			{name: 'normalResult', kind: BodyText},
 			{classes: 'moon-1v'},
 			{kind: Divider, content: 'Pre-loaded Selector'},
-			{kind: DaySelector, content: 'Pre-loaded Selector', noneText: 'Pick a Day', selectedIndex: [0,2,5], onChange: 'changed'}
-		]},
-		{kind: Divider, content: 'Result'},
-		{kind: BodyText, name: 'result', content: 'No change yet'}
+			{name: 'pre', kind: DaySelector, content: 'Pre-loaded Selector', noneText: 'Pick a Day', selectedIndex: [0,2,5], onChange: 'preChanged'},
+			{classes: 'moon-1v'},
+			{kind: Divider, content: 'Result'},
+			{name: 'preResult', kind: BodyText}
+		]}
 	],
-	changed: function (sender, ev) {
-		var selector = ev.originator.getContent();
-		if (this.$.result && ev.content) {
-			this.$.result.setContent(selector + ' changed to "' + ev.content + '"');
-		}
+	create: kind.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			var content = DaySelector.formatDayString(this.$.pre.selectedIndex);
+			this.updateResult(this.$.preResult, this.$.pre, content);
+		};
+	}),
+	preChanged: function (sender, ev) {
+		this.updateResult(this.$.preResult, this.$.pre, ev.content);
+	},
+	normalChanged: function (sender, ev) {
+		this.updateResult(this.$.normalResult, this.$.normal, ev.content);
+	},
+	updateResult: function (result, selector, content) {
+		result.set('content', selector.content + ' changed to "' + content + '"');
 	}
 });
