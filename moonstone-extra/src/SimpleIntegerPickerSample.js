@@ -32,3 +32,5 @@ module.exports = kind({
 		this.$.result.setContent(sender.name + ' changed to ' + event.content + ' (' + event.value + ')');
 	}
 });
+
+module.exports.badgeClasses = 'new';
