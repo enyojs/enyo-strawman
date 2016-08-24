@@ -16,11 +16,12 @@ var samples = {
 	DynamicPanelsSample                  : require('./DynamicPanelsSample'),
 	HeaderAutoCollapsingSample           : require('./HeaderAutoCollapsingSample'),
 	HistorySample                        : require('./HistorySample'),
+	IntegerPickerSample                  : require('./IntegerPickerSample'),
 	ListActionsSample                    : require('./ListActionsSample'),
 	PanelsVideoPlayerSample              : require('./PanelsVideoPlayerSample'),
 	PanelsWithCardArrangerSample         : require('./PanelsWithCardArrangerSample'),
 	PanelsWithCarouselArrangerSample     : require('./PanelsWithCarouselArrangerSample'),
-	SimpleIntegerPickerSample			 : require('./SimpleIntegerPickerSample'),
+	SimpleIntegerPickerSample            : require('./SimpleIntegerPickerSample'),
 	VideoPlayerInlineSample              : require('./VideoPlayerInlineSample'),
 	VideoPlayerSample                    : require('./VideoPlayerSample')
 };
@@ -69,7 +70,7 @@ var moonstoneSamples = {
 	ImageSample                          : require('../../src/moonstone-samples/lib/ImageSample'),
 	InputHeaderSample                    : require('../../src/moonstone-samples/lib/InputHeaderSample'),
 	InputSample                          : require('../../src/moonstone-samples/lib/InputSample'),
-	IntegerPickerSample                  : require('../../src/moonstone-samples/lib/IntegerPickerSample'),
+	// IntegerPickerSample                  : require('../../src/moonstone-samples/lib/IntegerPickerSample'),
 	ItemSample                           : require('../../src/moonstone-samples/lib/ItemSample'),
 	ItemOverlaySample                    : require('../../src/moonstone-samples/lib/ItemOverlaySample'),
 	LabeledTextItemSample                : require('../../src/moonstone-samples/lib/LabeledTextItemSample'),
