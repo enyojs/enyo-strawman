@@ -28,6 +28,7 @@ var locales = [
 	{locale: 'local', title: '', selected: true},
 	{locale: 'en-US', title: '<span class="light">- US English</span>'},
 	{locale: 'ko-KR', title: '<span class="light">- Korean</span>'},
+	{locale: 'es-ES', title: '<span class="light">- Spanish, with alternate weekends</span>'},
 	{locale: 'th-TH', title: '<span class="light">- Thai, with tall characters</span>'},
 	{locale: 'ar-SA', title: '<span class="light">- Arabic, RTL and standard font</span>'},
 	{locale: 'ur-PK', title: '<span class="light">- Urdu, RTL and custom Urdu font</span>'},
