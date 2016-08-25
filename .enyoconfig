@@ -26,15 +26,15 @@
     "enyo-ilib": "https://github.com/enyojs/enyo-ilib.git"
   },
   "targets": {
-    "enyo": "2.6.4-rc.8",
-    "layout": "2.6.4-rc.8",
-    "canvas": "2.6.4-rc.8",
-    "svg": "2.6.4-rc.8",
-    "moonstone": "2.6.4-rc.8",
-    "onyx": "2.6.4-rc.8",
-    "spotlight": "2.6.4-rc.8",
-    "enyo-webos": "2.6.4-rc.8",
-    "enyo-ilib": "2.6.4-rc.8"
+    "enyo": "2.6.4-rc.8.1",
+    "layout": "2.6.4-rc.8.1",
+    "canvas": "2.6.4-rc.8.1",
+    "svg": "2.6.4-rc.8.1",
+    "moonstone": "2.6.4-rc.8.1",
+    "onyx": "2.6.4-rc.8.1",
+    "spotlight": "2.6.4-rc.8.1",
+    "enyo-webos": "2.6.4-rc.8.1",
+    "enyo-ilib": "2.6.4-rc.8.1"
   },
   "links": [],
   "linkAllLibs": false,
