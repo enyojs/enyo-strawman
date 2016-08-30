@@ -30,6 +30,7 @@ var locales = [
 	{locale: 'ko-KR', title: '<span class="light">- Korean</span>'},
 	{locale: 'th-TH', title: '<span class="light">- Thai, with tall characters</span>'},
 	{locale: 'ar-SA', title: '<span class="light">- Arabic, RTL and standard font</span>'},
+	{locale: 'fa-IR', title: '<span class="light">- Farisian, RTL and standard font</span>'},
 	{locale: 'ur-PK', title: '<span class="light">- Urdu, RTL and custom Urdu font</span>'},
 	{locale: 'zh-Hant-HK', title: '<span class="light">- Traditional Chinese, custom Hant font</span>'},
 	{locale: 'ja-JP', title: '<span class="light">- Japanese, custom Japanese font</span>'},
