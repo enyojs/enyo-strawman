@@ -46,6 +46,7 @@ var
 		// ListActionsSample					: require('./lib/ListActionsSample'),
 		MarqueeSample						: require('./lib/MarqueeSample'),
 		NewDataListSample					: require('./lib/NewDataListSample'),
+		NotificationSample					: require('./lib/NotificationSample'),
 		ObjectActionHorizontalTypeSample	: require('./lib/ObjectActionHorizontalTypeSample'),
 		ObjectActionVerticalTypeSample		: require('./lib/ObjectActionVerticalTypeSample'),
 		OverlaySample						: require('./lib/OverlaySample'),
