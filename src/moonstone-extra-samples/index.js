@@ -69,6 +69,7 @@ var moonstoneSamples = {
 	ListActionsSample                    : require('../moonstone-samples/src/ListActionsSample'),
 	MarqueeSample                        : require('../moonstone-samples/src/MarqueeSample'),
 	NewDataListSample                    : require('../moonstone-samples/src/NewDataListSample'),
+	NotificationSample                   : require('../moonstone-samples/src/NotificationSample'),
 	ObjectActionHorizontalTypeSample     : require('../moonstone-samples/src/ObjectActionHorizontalTypeSample'),
 	ObjectActionVerticalTypeSample       : require('../moonstone-samples/src/ObjectActionVerticalTypeSample'),
 	OverlaySample                        : require('../moonstone-samples/src/OverlaySample'),
