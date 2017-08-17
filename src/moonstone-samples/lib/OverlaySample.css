@@ -4,6 +4,7 @@
 		width: 312px;
 		margin: 10px;
 		position: relative;
+		vertical-align: middle;
 
 		.moon-image {
 			height: 300px;
